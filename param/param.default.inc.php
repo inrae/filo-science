@@ -8,7 +8,7 @@
 */
 $APPLI_version = "0.1";
 $APPLI_dbversion = "0.1";
-$APPLI_versiondate = _("4/7/2018");
+$APPLI_versiondate = _("5/4/2019");
 //$APPLI_versiondate = "3/7/2018";
 $language = "fr";
 $DEFAULT_formatdate = "fr";
@@ -148,8 +148,8 @@ $APPLI_notSSL = false;
  * Cles privee et publique utilisees 
  * pour la generation des jetons
  */
-$privateKey = "/etc/ssl/private/ssl-cert-snakeoil.key";
-$pubKey = "/etc/ssl/certs/ssl-cert-snakeoil.pem";
+$privateKey = "param/id_measfish";
+$pubKey = "param/id_measfish.pub";
 /*
  * Duree de validite du token d'identification
  */

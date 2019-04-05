@@ -1,18 +1,15 @@
--- Database generated with pgModeler (measfishQL Database Modeler).
+-- Database generated with pgModeler (postgreSQL Database Modeler).
 -- pgModeler  version: 0.9.2-beta
--- measfishQL version: 9.6
+-- postgreSQL version: 9.6
 -- Project Site: pgmodeler.io
 -- Model Author: ---
 
 -- object: measfish | type: ROLE --
 -- DROP ROLE IF EXISTS measfish;
-CREATE ROLE measfish WITH 
-	SUPERUSER
-	CREATEDB
-	CREATEROLE
+CREATE ROLE measfish 
 	INHERIT
 	LOGIN
-	PASSWORD "measfishPassword"
+	PASSWORD 'measfishPassword';
 -- ddl-end --
 
 
@@ -345,7 +342,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenopharyngodon idella', DEFAULT, E'Carpe amour', DEFAULT, E'CTI', DEFAULT, E'90.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (DEFAULT, DEFAULT, E'Cyprinidae indeterminé', DEFAULT, E'CYP', DEFAULT, E'5.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidae indeterminé', DEFAULT, E'CYP', DEFAULT, E'5.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus eperlanus', E'Linnaeus, 1758', E'Eperlan', E'2188', E'EPE', E'EPE', E'30.0', DEFAULT);
 -- ddl-end --
@@ -369,7 +366,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hucho hucho', DEFAULT, E'Huchon', DEFAULT, E'HUC', DEFAULT, E'150.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (DEFAULT, DEFAULT, E'Hybride', DEFAULT, E'HYB', DEFAULT, E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Hybride', DEFAULT, E'HYB', DEFAULT, E'100.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus idus', E'Linnaeus, 1758', E'Ide mélanote', E'2121', E'IDE', DEFAULT, E'90.0', DEFAULT);
 -- ddl-end --
@@ -2193,7 +2190,7 @@ INSERT INTO measfish.speed (speed_id, speed_name) VALUES (E'5', E'> 151 cm/s');
 -- DROP TABLE IF EXISTS measfish.shady CASCADE;
 CREATE TABLE measfish.shady (
 	shady_id integer NOT NULL,
-	shady_name smallint NOT NULL,
+	shady_name varchar NOT NULL,
 	CONSTRAINT shady_pk PRIMARY KEY (shady_id)
 
 );

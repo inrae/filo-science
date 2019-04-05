@@ -1,3 +1,4 @@
+{* Administration > Paramètres de l'application > *}
 <h2>{t}Paramètres pérennes de l'application{/t}</h2>
 	<div class="row">
 	<div class="col-md-6">
