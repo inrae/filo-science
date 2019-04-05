@@ -1,0 +1,70 @@
+<?php
+/** Fichier cree le 4 mai 07 par quinton
+*
+*UTF-8
+*/
+
+$APPLI_modeDeveloppement = true;
+//$APPLI_notSSL = true;
+$APPLI_modeDeveloppement == true ? $ERROR_display=1 : $_ERROR_display = 0;
+$ERROR_level = E_ERROR ;
+$OBJETBDD_debugmode = 1;
+$APPLI_utf8 = true;
+
+$GACL_aco = "appli";
+
+$ident_type = "BDD";
+/*
+ * Parametres concernant la base de donnees
+ */
+$BDD_login = "proto";
+$BDD_passwd = "proto";
+$BDD_dsn = "pgsql:host=localhost;dbname=proto;sslmode=require";
+$BDD_schema = "public";
+
+/*
+ * Rights management, logins and logs records database
+ */
+$GACL_dblogin = "proto";
+$GACL_dbpasswd = "proto";
+$GACL_aco = "col";
+$GACL_dsn = "pgsql:host=localhost;dbname=proto;sslmode=require";
+$GACL_schema = "gacl";
+
+/*
+ * Lien vers le site d'assistance
+ */
+$APPLI_mail = "https://monsite/assistance";
+
+$LDAP ["address" ] = "localhost";
+$LDAP ["port" ] = 389;
+$LDAP [ "basedn"] = "ou=people,ou=example,o=societe,c=fr";
+$LDAP [ "tls"] = false;
+
+/*
+ * Recherche des groupes dans l'annuaire LDAP
+ * Decommenter la premiere ligne pour activer la fonction
+ */
+ //$LDAP [ "groupSupport" ] = true;
+$LDAP [ "groupAttrib" ] = "supannentiteaffectation";
+$LDAP [ "commonNameAttrib" ] = "displayname";
+$LDAP [ "mailAttrib" ] = "mail";
+$LDAP [ 'attributgroupname' ] = "cn";
+$LDAP [ 'attributloginname' ] = "memberuid";
+$LDAP [ 'basedngroup' ] = 'ou=group,ou=example,o=societe,c=fr';
+
+
+/*
+ * Chemin d'acces au fichier param.ini
+ * Consultez la documentation pour plus d'informations
+ */
+$paramIniFile = "./param.ini";
+/*
+ * Traitement de param.ini dans un contexte multi-bases (cf. documentation)
+ */
+//$chemin = substr($_SERVER["DOCUMENT_ROOT"],0, strpos($_SERVER["DOCUMENT_ROOT"],"/bin"));
+//$paramIniFile = "$chemin/param.ini";
+
+$SMARTY_variables["melappli"] = $APPLI_mail;
+$SMARTY_variables["ident_type"] = $ident_type;
+?>

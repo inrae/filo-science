@@ -1,0 +1,1 @@
+<h1>{t}Page d'accueil de l'application{/t}</h1>

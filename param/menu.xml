@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:its="http://www.w3.org/2005/11/its" its:version="2.0">
+<its:rules version="2.0">
+	<its:translateRule selector="//item/@label" translate="yes"/>
+	<its:translateRule selector="//item/@tooltip" translate="yes"/> 
+</its:rules>
+
+<item module="gestion" label="Gestion" tooltip="Modules de l'application">
+	<item module="gestion" label="Gestion" tooltip="Modules de l'application"/>
+	<item module="exampleList" droits="consult" label="Exemple" tooltip="Exemple de module"  />
+</item>
+
+<item module="administration" label="Administration" tooltip="Administration de l'application" droits="admin">
+	<item module="loginList" menulevel="1" menuorder="9" droits="admin" label="Liste des comptes locaux" tooltip="Liste des logins - identification via la base de données"/>
+	<item module="appliList" droits="admin" label="ACL - droits" tooltip="applications et droits gérés"/>
+	<item module="aclloginList" droits="admin" label="ACL - logins" tooltip="Logins déclarés dans le module de gestion des droits"/>
+	<item module="groupList" droits="admin" label="ACL - groupes de logins" tooltip="Groupes de logins et logins rattachés aux groupes"/>
+	<item module="dbparamList" droits="admin" label="Paramètres de l'application" tooltip="Liste des paramètres pérennes de l'application" />
+	<item module="phpinfo" droits="admin" label="PHP info" tooltip="configuration générale du serveur PHP"/>
+</item>
+<item module="connexion" label="Connexion" tooltip="S'identifier dans l'application" onlynoconnect="1"/>
+<item module="disconnect" label="Déconnexion" tooltip="Déconnexion de l'application" loginrequis="1">
+	<item module="loginChangePassword" loginrequis="1" label="Modifier le mot de passe" tooltip="Modifiez votre mot de passe (identification locale uniquement)" />
+</item>
+<item module="aide" label="?" tooltip="Aide">
+	<item module="apropos" label="A propos" tooltip="A propos de Collec-Science"/>
+	<item module="quoideneuf" label="Nouveautés" tooltip="Quoi de neuf dans l'application ?"/>
+	<item module="lexique" label="Lexique" tooltip="Lexique des termes utilisés dans le logiciel" />
+	<item module="setlanguagefr" label="Français" tooltip="Libellés en français"/>
+	<item module="setlanguageen" label="English" tooltip="Labels in English"/>		
+</item>
+</menu>

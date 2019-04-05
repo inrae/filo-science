@@ -1,0 +1,165 @@
+@CHARSET "UTF-8";
+/*
+Couleurs IRSTEA :
+marine : 	#003A80; rgb(0,58,128)
+ocean:		#009EE0; rgb(0,158,224)
+prairie :	#A4C400; rgb(164,196,0)
+*/
+/* Wrapper for page content to push down footer */
+html,
+body {
+  height: 99%;
+}
+@media (max-width: 991px) {
+    .form-control, .btn, li, ul, .dropdown-menu, .center-block, 
+    #message, label, div {font-size: 1.1em;},
+	
+}
+@media (max-width: 991px) {
+	select {min-height: 2em;}
+}
+
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 99%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -80px;
+  /* Pad bottom by footer height */
+  padding: 0 0 80px;
+}
+#footer {
+  height: 80px;
+}
+.form-horizontal {
+	border-style: solid;
+	border-width: 1px;
+	/*background:  #98c1e9;*/
+	background-color: rgba(0,158,224, 0.3);
+}
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.red {
+	color: red;
+}
+.blue {
+	color: #003A80;;
+}
+.green {
+	color: #A4C400;
+}
+.message {
+	font-style: italic;
+	color: #003A80;
+}
+/* italique gris petit*/
+.messagebas {
+	color: #A4C400;
+	font-size: small;
+	font-style: italic;
+}
+h2 {
+	font-size:large;
+}
+legend {
+	font-size:large;
+	color:#003A80;
+}
+.textareaDisplay {
+	white-space:pre-wrap;
+}
+/*
+ * Affichage des informations dans un masque
+ */
+.form-display {
+	border-style: solid;
+	border-width: 1px;
+	/*background:  #98c1e9;*/
+	background-color: rgba(0,158,224, 0.3);
+}
+
+.form-display dd {
+	word-wrap: break-word;
+	border-style: solid;
+	border-width: 1px;
+	/*min-height: 20px;*/
+	border-radius: 0.4em;
+	background-color: white;
+}
+.form-display > row > label {
+	text-align: right;
+}
+.display {
+	word-wrap: break-word;
+	border-style: solid;
+	border-width: 1px;
+	min-height: 20px;
+	border-radius: 0.4em;
+	background-color: white;
+}
+/* Ajouts pour le composant datetimepicker */
+.datepicker {
+	background-image: url("images/calendar-small.gif");
+	background-size: 1em;
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+}
+
+.datetimepicker {
+	background-image: url("images/clock.png");
+	background-size: 1em;
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+}
+/* Ajouts pour le composant combobox */
+.ui-state-default, .ui-button {
+	background: white;
+}
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+	width:95%;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	padding: 0;
+	right: -1px;
+}
+/* Espacement entre deux lignes */
+.top5 { margin-top:5em; }
+.top10 { margin-top:10em; }
+
+
+.mapDisplay {
+	/*Affichage des cartes OSM*/
+	width: 400px;
+	height: 400px;
+}
+.map {
+	/*Affichage des cartes OSM*/
+	width: 100%;
+	height: 400px;
+}
+
+.scrolltotop {
+	position: fixed;
+    bottom: 5px;
+    right: 5px;
+}
+
+.lexique dd {
+	margin-bottom: 1em;
+}
+
+.lexique dt {
+  white-space: pre-wrap;
+}

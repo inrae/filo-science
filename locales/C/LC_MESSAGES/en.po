@@ -1,0 +1,951 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-04 16:09+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#. (itstool) path: menu/item@label
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:8 ../../../param/menu.xml:9
+msgid "Gestion"
+msgstr "Modules"
+
+#. (itstool) path: menu/item@tooltip
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:8 ../../../param/menu.xml:9
+msgid "Modules de l'application"
+msgstr "Application modules"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:10
+msgid "Exemple"
+msgstr "Example"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:10
+msgid "Exemple de module"
+msgstr "Module example"
+
+#. (itstool) path: menu/item@label
+#: ../../../param/menu.xml:13
+msgid "Administration"
+msgstr "Administration"
+
+#. (itstool) path: menu/item@tooltip
+#: ../../../param/menu.xml:13
+msgid "Administration de l'application"
+msgstr "Application administration"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:14
+msgid "Liste des comptes locaux"
+msgstr "local accounts list"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:14
+msgid "Liste des logins - identification via la base de données"
+msgstr "List of logins - identification via the database"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:15
+msgid "ACL - droits"
+msgstr "ACL - rights"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:15
+msgid "applications et droits gérés"
+msgstr "applications and rights managed"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:16
+msgid "ACL - logins"
+msgstr "ACL - logins"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:16
+msgid "Logins déclarés dans le module de gestion des droits"
+msgstr "Logins declared in the rights management module"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:17
+msgid "ACL - groupes de logins"
+msgstr "ACL - login groups"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:17
+#, fuzzy
+msgid "Groupes de logins et logins rattachés aux groupes"
+msgstr "Groups of logins and logins attached to groups"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:18
+msgid "Paramètres de l'application"
+msgstr "Application Settings"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:18
+#, fuzzy
+msgid "Liste des paramètres pérennes de l'application"
+msgstr "List of long-term parameters of the application"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:19 ../../../display/templates/phpinfo.tpl:1
+msgid "PHP info"
+msgstr "PHP info"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:19
+msgid "configuration générale du serveur PHP"
+msgstr "general configuration of the PHP server"
+
+#. (itstool) path: menu/item@label
+#: ../../../param/menu.xml:21 ../../../framework/common.inc.php:269
+#: ../../../framework/identification/disconnect.php:11
+#: ../../../display/templates/entete.tpl:21
+#: ../../../display/templates/entete.tpl:40
+#: ../../../display/templates/entete.tpl:41
+msgid "Connexion"
+msgstr "Sign in"
+
+#. (itstool) path: menu/item@tooltip
+#: ../../../param/menu.xml:21
+msgid "S'identifier dans l'application"
+msgstr "Sign in to the app"
+
+#. (itstool) path: menu/item@label
+#: ../../../param/menu.xml:22 ../../../display/templates/entete.tpl:36
+#: ../../../display/templates/entete.tpl:37
+msgid "Déconnexion"
+msgstr "Sign out"
+
+#. (itstool) path: menu/item@tooltip
+#: ../../../param/menu.xml:22
+msgid "Déconnexion de l'application"
+msgstr "Sign out of the app"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:23
+#: ../../../display/templates/ident/loginChangePassword.tpl:33
+#: ../../../display/templates/entete.tpl:32
+#: ../../../display/templates/entete.tpl:33
+msgid "Modifier le mot de passe"
+msgstr "Change your password"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:23
+msgid "Modifiez votre mot de passe (identification locale uniquement)"
+msgstr "Change your password (local identification only)"
+
+#. (itstool) path: menu/item@label
+#: ../../../param/menu.xml:25
+msgid "?"
+msgstr "?"
+
+#. (itstool) path: menu/item@tooltip
+#: ../../../param/menu.xml:25
+msgid "Aide"
+msgstr "Help"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:26
+msgid "A propos"
+msgstr "About"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:26
+msgid "A propos de Collec-Science"
+msgstr "A propos de"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:27
+msgid "Nouveautés"
+msgstr "What's new?"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:27
+msgid "Quoi de neuf dans l'application ?"
+msgstr "What's new in the app?"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:28
+msgid "Lexique"
+msgstr "Glossary"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:28
+msgid "Lexique des termes utilisés dans le logiciel"
+msgstr "Glossary of terms used in the software"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:29
+#, fuzzy
+msgid "Français"
+msgstr "French"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:29
+#, fuzzy
+msgid "Libellés en français"
+msgstr "Labels in French"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:30
+msgid "English"
+msgstr "English"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:30
+msgid "Labels in English"
+msgstr "Labels in English"
+
+#: ../../../framework/controller.php:16
+msgid ""
+"Problème dans les données fournies : l'encodage des caractères n'est pas "
+"celui attendu"
+msgstr ""
+"Problem in the provided data: the character encoding is not the one expected"
+
+#. traduction: bien conserver inchangées les chaînes %1$s, %2$s
+#: ../../../framework/controller.php:34
+#, php-format
+msgid ""
+"La base de données n'est pas dans la version attendue (%1$s). Version "
+"actuelle : %2$s"
+msgstr ""
+"The database is not in the expected version (%1$s). Current version: %2$s"
+
+#. traduction: conserver inchangée la chaîne %s
+#: ../../../framework/controller.php:156
+#, php-format
+msgid "Le module demandé n'existe pas (%s)"
+msgstr "The requested module does not exist (%s)"
+
+#: ../../../framework/controller.php:243
+msgid "Veuillez utiliser votre login du domaine pour vous identifier"
+msgstr "Please use your domain login to login"
+
+#: ../../../framework/controller.php:263
+msgid "L'identification par jeton n'a pas abouti"
+msgstr "Token identification was unsuccessful"
+
+#: ../../../framework/controller.php:285
+msgid "Identification réussie !"
+msgstr "Authentication successful!"
+
+#. traduction: bien conserver inchangées les chaînes %1$s, %2$s...
+#: ../../../framework/controller.php:297
+#, php-format
+msgid ""
+"Dernière connexion le %1$s depuis l'adresse IP %2$s. Si ce n'était pas vous, "
+"modifiez votre mot de passe ou contactez l'administrateur de l'application."
+msgstr ""
+"Last connection on %1$s from the IP address %2$s. If it was not you, change "
+"your password or contact the administrator of the application."
+
+#: ../../../framework/controller.php:351
+msgid "Identification refusée"
+msgstr "Authentication failed"
+
+#. traduction: conserver inchangée la chaîne %s
+#: ../../../framework/controller.php:403
+#, php-format
+msgid "Module précédent enregistré : %s"
+msgstr "Previous module: %s"
+
+#: ../../../framework/controller.php:437
+msgid ""
+"L'accès au module demandé nécessite une ré-identification. Veuillez saisir "
+"votre login et votre mot de passe"
+msgstr ""
+"Access to the requested module requires re-identification. Please enter your "
+"login and password"
+
+#: ../../../framework/controller.php:464
+msgid "Erreur d'écriture dans le fichier de traces"
+msgstr "Error writing to the log file"
+
+#. traduction: bien conserver inchangées les chaînes %1$s, %2$s
+#: ../../../framework/controller.php:560
+#, php-format
+msgid "Mode développement - base de données : %1$s - schema : %2$s"
+msgstr "Development mode - database: %1$s - schema: %2$s"
+
+#: ../../../framework/errorlogin.php:2
+msgid "Vous n'êtes pas identifié."
+msgstr "You are not signed in."
+
+#: ../../../framework/dbparam/dbparam.php:18
+#: ../../../framework/fonctions.php:61
+msgid "Enregistrement effectué"
+msgstr "Saved"
+
+#: ../../../framework/dbparam/dbparam.php:27
+msgid "Problème lors de la mise en fichier..."
+msgstr "Writing problem..."
+
+#: ../../../framework/droitko.php:2
+msgid ""
+"Vous n'avez pas accès à cette fonction. Veuillez vous identifier, le cas "
+"échéant"
+msgstr ""
+"You do not have access to this function. Please identify yourself, if "
+"applicable"
+
+#: ../../../framework/common.inc.php:235
+msgid "Echec de connexion à la base de données de gestion des droits (GACL)"
+msgstr "Failed to connect to rights management database (GACL)"
+
+#: ../../../framework/common.inc.php:238
+msgid "Echec de connexion à la base de données principale"
+msgstr "Failed to connect to the main database"
+
+#: ../../../framework/common.inc.php:252
+msgid ""
+"Vous avez été déconnecté, votre session était ouverte depuis trop longtemps"
+msgstr "You have been disconnected, your session has been open for too long"
+
+#: ../../../framework/common.inc.php:267
+#: ../../../framework/identification/disconnect.php:9
+msgid "Vous êtes maintenant déconnecté"
+msgstr "You are now signed off"
+
+#: ../../../framework/fonctions.php:31
+msgid "Erreur de lecture des informations dans la base de données"
+msgstr "Error reading information in the database"
+
+#. traduction: conserver inchangée la chaîne %s
+#: ../../../framework/fonctions.php:45
+#, php-format
+msgid "Erreur: type d'affichage non défini pour le module demandé : %s"
+msgstr "Error: display type not defined for the requested module: %s"
+
+#: ../../../framework/fonctions.php:70
+msgid "Problème lors de l'enregistrement..."
+msgstr "Problem when saving ..."
+
+#: ../../../framework/fonctions.php:104
+msgid "Suppression effectuée"
+msgstr "Deletion done"
+
+#: ../../../framework/fonctions.php:113
+msgid "Problème lors de la suppression"
+msgstr "Problem when deleting"
+
+#: ../../../framework/errorbefore.php:2
+msgid ""
+"L'accès au module que vous demandez ne respecte pas la cinématique de "
+"l'application. Peut-être avez-vous essayé de rafraîchir la page ?"
+msgstr ""
+"The access to the module does not respect the order of the sequences in the "
+"application. Maybe you tried to refresh the page?"
+
+#: ../../../framework/droits/droits.class.php:628
+msgid "Suppression du groupe impossible : d'autres groupes lui sont rattachés"
+msgstr "Can not delete group: other groups are attached to it"
+
+#. traduction: conserver inchangées les chaînes :keyword"
+#: ../../../framework/identification/passwordLost.php:31
+msgid ":appli - réinitialisation du mot de passe"
+msgstr ":appli - reset password"
+
+#. traduction: conserver inchangés les chaînes :keyword et les balises <tag>"
+#: ../../../framework/identification/passwordLost.php:33
+msgid ""
+":prenom :nom,<br>\n"
+"                            <br>Vous avez demandé à réinitialiser votre mot "
+"de passe pour l'application :appli. Si ce n'était pas le cas, contactez "
+"l'administrateur de l'application.\n"
+"                            <br>Pour réinitaliser votre mot de passe, "
+"recopiez le lien suivant dans votre navigateur :<br><a href=':"
+"adresse'>Réinitialisez votre mot de passe</a>\n"
+"                            <br>Ne répondez pas à ce mail, qui est généré "
+"automatiquement"
+msgstr ""
+":prenom :nom, <br>\n"
+"<br> You have asked to reset your password for the :appli application. If "
+"this is not the case, contact the administrator of the application.\n"
+"<br> To reinitialize your password, copy the following link into your "
+"browser: <br> <a href=':adresse'>Reset your password</a>\n"
+"<br> Do not reply to this mail, which was automatically generated."
+
+#: ../../../framework/identification/passwordLost.php:52
+msgid ""
+"Un mail vient de vous être envoyé. Veuillez copier le lien transmis dans "
+"votre navigateur pour pouvoir créer un nouveau mot de passe"
+msgstr ""
+"An email has just been sent to you. Please copy the link sent to your "
+"browser to create a new password"
+
+#: ../../../framework/identification/passwordLost.php:55
+#: ../../../framework/identification/passwordLost.php:60
+msgid "Impossible d'envoyer le mail"
+msgstr "Could not send email"
+
+#: ../../../framework/identification/passwordLost.php:86
+#: ../../../framework/identification/passwordLost.php:113
+#: ../../../framework/identification/identification.class.php:606
+#: ../../../framework/identification/identification.class.php:679
+#: ../../../framework/identification/login.php:57
+msgid ""
+"Le mode d'identification utilisé pour votre compte n'autorise pas la "
+"modification du mot de passe depuis cette application"
+msgstr ""
+"The login method used for your account does not allow changing the password "
+"from this app"
+
+#: ../../../framework/identification/passwordLost.php:89
+msgid "Le jeton fourni n'est pas valide"
+msgstr "Token provided is not valid"
+
+#: ../../../framework/identification/identification.class.php:600
+msgid "La modification du mot de passe a échoué"
+msgstr "Password change failed"
+
+#: ../../../framework/identification/identification.class.php:603
+msgid "L'ancien mot de passe est incorrect"
+msgstr "The old password is incorrect"
+
+#: ../../../framework/identification/identification.class.php:674
+msgid "Le mot de passe a été modifié"
+msgstr "The password has been changed"
+
+#: ../../../framework/identification/identification.class.php:676
+msgid ""
+"Echec de modification du mot de passe pour une raison inconnue. Si le "
+"problème persiste, contactez l'assistance"
+msgstr ""
+"Failed to change the password for an unknown reason. If the problem "
+"persists, contact support"
+
+#: ../../../framework/identification/identification.class.php:721
+msgid "Le mot de passe a déjà été utilisé"
+msgstr "The password has already been used"
+
+#: ../../../framework/identification/identification.class.php:724
+msgid "Le mot de passe n'est pas assez complexe"
+msgstr ""
+"The password is not complex enough (mix 3 character sets among lowercase, "
+"uppercase, numbers, and punctuation)"
+
+#: ../../../framework/identification/identification.class.php:727
+msgid "Le mot de passe est trop court"
+msgstr "The password is too short (minimum: 10 characters)"
+
+#: ../../../framework/identification/identification.class.php:730
+msgid "Le mot de passe n'est pas identique dans les deux zones"
+msgstr "Passwords don't match in both fields"
+
+#: ../../../framework/objetbdd/ObjetBDD.php:1436
+#, php-format
+msgid "le champ %1$s  n'est pas numerique. Valeur saisie : %2$s"
+msgstr "The field %1$s is not numeric. Entered value: %2$s"
+
+#: ../../../framework/objetbdd/ObjetBDD.php:1440
+#, php-format
+msgid ""
+"Le champ %1$s est trop grand. Longueur maximale autorisée : %2$s. Valeur "
+"saisie : %3$s (%4$s caracteres)"
+msgstr ""
+"The %1$s field is too big. Maximum length allowed: %2$s. Entered value: %3$s "
+"(%4$s characters)"
+
+#: ../../../framework/objetbdd/ObjetBDD.php:1444
+#, php-format
+msgid ""
+"Le contenu du champ %1$s ne correspond pas au format attendu. Masque "
+"autorisé : %2$s. Valeur saisie : %3$s"
+msgstr ""
+"The content of the field %1$s does not match the expected format. Authorized "
+"mask: %2$s. Entered value: %3$s"
+
+#: ../../../framework/objetbdd/ObjetBDD.php:1448
+#, php-format
+msgid "Le champ %s est obligatoire, mais n'a pas été renseigné."
+msgstr "The field %s is required, but has not been filled out."
+
+#: ../../../param/param.default.inc.php:11
+msgid "4/7/2018"
+msgstr "2018-07-04"
+
+#: ../../../display/templates/main.tpl:1
+msgid "Page d'accueil de l'application"
+msgstr "Application home page"
+
+#: ../../../display/templates/ident/loginliste.tpl:1
+msgid "Liste des logins déclarés dans la base de données"
+msgstr "List of logins declared in the database"
+
+#: ../../../display/templates/ident/loginliste.tpl:4
+msgid "Nouveau login"
+msgstr "New login"
+
+#: ../../../display/templates/ident/loginliste.tpl:8
+msgid "Login"
+msgstr "Login"
+
+#: ../../../display/templates/ident/loginliste.tpl:9
+msgid "Nom - Prénom"
+msgstr "Last name - First name"
+
+#: ../../../display/templates/ident/loginliste.tpl:10
+msgid "Adresse e-mail"
+msgstr "Email address"
+
+#: ../../../display/templates/ident/loginliste.tpl:11
+#: ../../../display/templates/ident/loginsaisie.tpl:164
+msgid "Actif"
+msgstr "Active"
+
+#: ../../../display/templates/ident/loginliste.tpl:12
+msgid "Compte utilisé pour service web"
+msgstr "Account used for web service"
+
+#: ../../../display/templates/ident/loginliste.tpl:21
+#: ../../../display/templates/ident/loginliste.tpl:22
+#: ../../../display/templates/ident/loginsaisie.tpl:104
+#: ../../../display/templates/ident/loginsaisie.tpl:167
+msgid "oui"
+msgstr "yes"
+
+#: ../../../display/templates/ident/loginAdmin.tpl:5
+#: ../../../display/templates/ident/login.tpl:5
+#: ../../../display/templates/ident/loginsaisie.tpl:70
+msgid "Login :"
+msgstr "Login:"
+
+#: ../../../display/templates/ident/loginAdmin.tpl:13
+#: ../../../display/templates/ident/login.tpl:13
+#: ../../../display/templates/ident/loginsaisie.tpl:125
+msgid "Mot de passe :"
+msgstr "Password:"
+
+#: ../../../display/templates/ident/loginAdmin.tpl:24
+#: ../../../display/templates/ident/loginChangePassword.tpl:67
+#: ../../../display/templates/ident/loginsaisie.tpl:175
+#: ../../../display/templates/droits/appliChange.tpl:25
+#: ../../../display/templates/droits/acoChange.tpl:16
+#: ../../../display/templates/droits/groupChange.tpl:13
+#: ../../../display/templates/droits/loginChange.tpl:23
+msgid "Valider"
+msgstr "Save and return"
+
+#: ../../../display/templates/ident/login.tpl:29
+msgid "Conserver la connexion pendant"
+msgstr "Keep me signed in for"
+
+#: ../../../display/templates/ident/login.tpl:29
+msgid "heures"
+msgstr "hours"
+
+#: ../../../display/templates/ident/login.tpl:35
+#: ../../../display/templates/ident/identMailInput.tpl:2
+msgid "Mot de passe oublié ?"
+msgstr "Forgot your password?"
+
+#: ../../../display/templates/ident/login.tpl:39
+msgid "Se connecter"
+msgstr "Sign in"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:13
+#: ../../../display/templates/ident/loginsaisie.tpl:14
+msgid "Les mots de passe ne sont pas identiques"
+msgstr "Passwords don't match"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:16
+#: ../../../display/templates/ident/loginsaisie.tpl:17
+msgid "Le mot de passe est trop court (minimum : 10 caractères)"
+msgstr "The password is too short (minimum: 10 characters)"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:19
+#: ../../../display/templates/ident/loginsaisie.tpl:20
+msgid ""
+"Le mot de passe n'est pas assez complexe (mixez 3 jeux de caractères parmi "
+"les minuscules, majuscules, chiffres et signes de ponctuation)"
+msgstr ""
+"The password is not complex enough (mix 3 character sets among lowercase, "
+"uppercase, numbers, and punctuation)"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:44
+msgid "Ancien mot de passe :"
+msgstr "Old password:"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:52
+msgid "Nouveau mot de passe :"
+msgstr "New Password:"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:60
+#: ../../../display/templates/ident/loginsaisie.tpl:131
+msgid "Répétez le mot de passe :"
+msgstr "Repeat password:"
+
+#: ../../../display/templates/ident/loginChangePassword.tpl:69
+msgid ""
+"Le mot de passe doit avoir une longueur minimale de 10 caractères\n"
+"Il doit comprendre au minimum 3 types de caractères différents\n"
+"(minuscule, majuscule, chiffre, ponctuation et autre symboles)"
+msgstr ""
+"The password must be at least 10 characters long\n"
+"It must include at least 3 different types of characters\n"
+"(lowercase, uppercase, number, punctuation and other symbols)"
+
+#: ../../../display/templates/ident/identMailInput.tpl:2
+msgid "lancement de la procédure de récupération"
+msgstr "start the recovery procedure"
+
+#: ../../../display/templates/ident/identMailInput.tpl:8
+msgid "Entrez votre adresse e-mail :"
+msgstr "Enter your email address:"
+
+#: ../../../display/templates/ident/identMailInput.tpl:15
+msgid "Recevoir un mail de récupération"
+msgstr "Receive a recovery email"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:58
+msgid "Saisie/modification d'un compte"
+msgstr "Add / edit an account"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:61
+#: ../../../display/templates/droits/loginChange.tpl:5
+msgid "Retour à la liste des logins"
+msgstr "Back to the list of logins"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:77
+msgid "Nom de famille :"
+msgstr "Last name :"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:82
+msgid "Prénom :"
+msgstr "First name:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:88
+msgid "Adresse e-mail :"
+msgstr "Email address:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:94
+msgid "Date :"
+msgstr "Date:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:100
+msgid "Compte utilisé pour service web :"
+msgstr "Account used for web service:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:108
+#: ../../../display/templates/ident/loginsaisie.tpl:170
+msgid "non"
+msgstr "no"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:113
+msgid "Jeton d'identification du service web :"
+msgstr "Identification token of the web service:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:118
+#: ../../../display/templates/ident/loginsaisie.tpl:144
+msgid "Copier dans le presse-papier"
+msgstr "Copy to clipboard"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:119
+msgid "Réinitialiser..."
+msgstr "Reset ..."
+
+#: ../../../display/templates/ident/loginsaisie.tpl:137
+msgid "Générez un mot de passe aléatoire"
+msgstr "Generate a random password"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:139
+msgid "Générez"
+msgstr "Generate"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:142
+msgid "Mot de passe généré"
+msgstr "Password generated"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:149
+msgid "Le mot de passe doit :"
+msgstr "The password must:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:151
+msgid "avoir une longueur minimale de 10 caractères"
+msgstr "have a minimum length of 10 characters"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:152
+msgid "être composé d'au minimum 3 types de caractères différents parmi :"
+msgstr "be composed of at least 3 different types of characters among:"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:154
+msgid "des minuscules"
+msgstr "lowercase characters"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:155
+msgid "des majuscules"
+msgstr "uppercase characters"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:156
+msgid "des chiffres"
+msgstr "numbers"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:157
+msgid "des caractères de ponctuation ou spéciaux"
+msgstr "punctuation or special characters"
+
+#: ../../../display/templates/ident/loginsaisie.tpl:177
+#: ../../../display/templates/droits/appliChange.tpl:27
+#: ../../../display/templates/droits/acoChange.tpl:18
+#: ../../../display/templates/droits/groupChange.tpl:15
+#: ../../../display/templates/droits/loginChange.tpl:25
+msgid "Supprimer"
+msgstr "Delete..."
+
+#: ../../../display/templates/ident/loginsaisie.tpl:188
+#: ../../../display/templates/droits/appliChange.tpl:35
+#: ../../../display/templates/droits/acoChange.tpl:47
+#: ../../../display/templates/droits/groupChange.tpl:45
+#: ../../../display/templates/droits/loginChange.tpl:31
+msgid "Donnée obligatoire"
+msgstr "Mandatory data"
+
+#: ../../../display/templates/enpied.tpl:3
+msgid ""
+"Copyright (c) 2016-2018 - Tous droits réservés. Auteur : Éric Quinton, pour "
+"IRSTEA - Logiciel diffusé sous licence AGPL"
+msgstr ""
+"Copyright (c) 2016-2018 - All rights reserved. Author: Eric Quinton, for "
+"IRSTEA - Software released under AGPL license"
+
+#: ../../../display/templates/enpied.tpl:5
+msgid "Pour tout problème :"
+msgstr "For any problem:"
+
+#: ../../../display/templates/dbparam/dbparamListChange.tpl:2
+msgid "Paramètres pérennes de l'application"
+msgstr "List of long-term parameters of the application"
+
+#: ../../../display/templates/dbparam/dbparamListChange.tpl:10
+msgid "Paramètre"
+msgstr "Setting"
+
+#: ../../../display/templates/dbparam/dbparamListChange.tpl:11
+msgid "Valeur"
+msgstr "Value"
+
+#: ../../../display/templates/dbparam/dbparamListChange.tpl:24
+msgid "Enregistrer"
+msgstr "Save"
+
+#: ../../../display/templates/droits/appliChange.tpl:2
+msgid "Modification d'une application (module de gestion des droits)"
+msgstr "Modify the application (rights management module)"
+
+#: ../../../display/templates/droits/appliChange.tpl:5
+#: ../../../display/templates/droits/acoChange.tpl:5
+#: ../../../display/templates/droits/appliDisplay.tpl:2
+msgid "Retour à la liste des applications"
+msgstr "Back to the list of applications"
+
+#: ../../../display/templates/droits/appliChange.tpl:12
+msgid "Nom de l'application :"
+msgstr "Name of the application:"
+
+#: ../../../display/templates/droits/appliChange.tpl:19
+msgid "Description :"
+msgstr "Description:"
+
+#: ../../../display/templates/droits/loginList.tpl:2
+msgid "Liste des logins déclarés dans le module de gestion des droits"
+msgstr "List of logins declared in the rights management module"
+
+#: ../../../display/templates/droits/loginList.tpl:6
+msgid "Nouveau login..."
+msgstr "New login"
+
+#: ../../../display/templates/droits/loginList.tpl:12
+msgid "Utilisateur"
+msgstr "User"
+
+#: ../../../display/templates/droits/loginList.tpl:13
+msgid "Login employé"
+msgstr "Login used"
+
+#: ../../../display/templates/droits/acoChange.tpl:2
+msgid "Modification du droit d'une application (module de gestion des droits)"
+msgstr "Modify the right of an application (rights management module)"
+
+#: ../../../display/templates/droits/acoChange.tpl:7
+msgid "Retour à"
+msgstr "Back to"
+
+#: ../../../display/templates/droits/acoChange.tpl:23
+msgid "Nom du droit utilisé dans l'application :"
+msgstr "Name of the right used in the application:"
+
+#: ../../../display/templates/droits/acoChange.tpl:28
+msgid "Groupes disposant du droit :"
+msgstr "Groups with the right:"
+
+#: ../../../display/templates/droits/groupChange.tpl:2
+msgid "Modification d'un groupe et rattachement des logins"
+msgstr "Edit the group and its attachments to the logins"
+
+#: ../../../display/templates/droits/groupChange.tpl:5
+msgid "Retour à la liste des groupes"
+msgstr "Back to the list of groups"
+
+#: ../../../display/templates/droits/groupChange.tpl:20
+msgid "Nom du groupe :"
+msgstr "Name of the group:"
+
+#: ../../../display/templates/droits/groupChange.tpl:27
+msgid "Logins rattachés"
+msgstr "Logins attached"
+
+#: ../../../display/templates/droits/appliList.tpl:2
+msgid "Liste des applications disponibles dans le module de gestion des droits"
+msgstr "List of applications available in the rights management module"
+
+#: ../../../display/templates/droits/appliList.tpl:6
+msgid "Nouvelle application..."
+msgstr "New application"
+
+#: ../../../display/templates/droits/appliList.tpl:11
+msgid "Modifier"
+msgstr "Edit"
+
+#: ../../../display/templates/droits/appliList.tpl:12
+msgid "Nom de l'application"
+msgstr "Name of the application"
+
+#: ../../../display/templates/droits/appliList.tpl:13
+msgid "Description"
+msgstr "Description"
+
+#: ../../../display/templates/droits/loginChange.tpl:2
+msgid "Modification d'un login (module de gestion des droits)"
+msgstr "Edit login (rights management module)"
+
+#: ../../../display/templates/droits/loginChange.tpl:12
+msgid "Nom de l'utilisateur :"
+msgstr "Username:"
+
+#: ../../../display/templates/droits/loginChange.tpl:17
+msgid "Login utilisé :"
+msgstr "Login used:"
+
+#: ../../../display/templates/droits/loginChange.tpl:35
+msgid "Droits attribués"
+msgstr "Rights granted"
+
+#: ../../../display/templates/droits/groupList.tpl:2
+msgid "Liste des groupes de logins"
+msgstr "List of groups of logins"
+
+#: ../../../display/templates/droits/groupList.tpl:6
+msgid "Nouveau groupe racine..."
+msgstr "New root group"
+
+#: ../../../display/templates/droits/groupList.tpl:12
+msgid "Nom du groupe"
+msgstr "Name of the group"
+
+#: ../../../display/templates/droits/groupList.tpl:13
+msgid "Nombre de logins déclarés"
+msgstr "Number of logins declared"
+
+#: ../../../display/templates/droits/groupList.tpl:14
+msgid "Rajouter un groupe fils"
+msgstr "Add a child group"
+
+#: ../../../display/templates/droits/appliDisplay.tpl:3
+msgid "Liste des droits disponibles pour l'application"
+msgstr "List of available rights for the application"
+
+#: ../../../display/templates/droits/appliDisplay.tpl:11
+msgid "Modifier..."
+msgstr "Edit"
+
+#: ../../../display/templates/droits/appliDisplay.tpl:15
+msgid "Nouveau droit..."
+msgstr "New right"
+
+#: ../../../display/templates/droits/appliDisplay.tpl:20
+msgid "Nom du droit d'accès"
+msgstr "Name of the access right"
+
+#: ../../../display/templates/main_js.tpl:71
+msgid "Traitement en cours..."
+msgstr "Processing..."
+
+#: ../../../display/templates/main_js.tpl:72
+msgid "Rechercher :"
+msgstr "Search:"
+
+#: ../../../display/templates/main_js.tpl:73
+msgid "Afficher _MENU_ éléments"
+msgstr "Show _MENU_ entries"
+
+#: ../../../display/templates/main_js.tpl:74
+msgid "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments"
+msgstr "Showing _START_ to _END_ of _TOTAL_ entries"
+
+#: ../../../display/templates/main_js.tpl:75
+msgid "Affichage de l'élément 0 à 0 sur 0 élément"
+msgstr "Showing 0 to 0 of 0 entries"
+
+#: ../../../display/templates/main_js.tpl:76
+msgid "(filtré de _MAX_ éléments au total)"
+msgstr "(filtered from _MAX_ total entries)"
+
+#: ../../../display/templates/main_js.tpl:78
+msgid "Chargement en cours..."
+msgstr "Loading..."
+
+#: ../../../display/templates/main_js.tpl:79
+msgid "Aucun élément à afficher"
+msgstr "No matching records found"
+
+#: ../../../display/templates/main_js.tpl:80
+msgid "Aucune donnée disponible dans le tableau"
+msgstr "No data available in table"
+
+#: ../../../display/templates/main_js.tpl:82
+msgid "Premier"
+msgstr "First"
+
+#: ../../../display/templates/main_js.tpl:83
+msgid "Précédent"
+msgstr "Previous"
+
+#: ../../../display/templates/main_js.tpl:84
+msgid "Suivant"
+msgstr "Next"
+
+#: ../../../display/templates/main_js.tpl:85
+msgid "Dernier"
+msgstr "Last"
+
+#: ../../../display/templates/main_js.tpl:88
+msgid ": activer pour trier la colonne par ordre croissant"
+msgstr ": activate to sort column ascending"
+
+#: ../../../display/templates/main_js.tpl:89
+msgid ": activer pour trier la colonne par ordre décroissant"
+msgstr ": activate to sort column descending"
+
+#: ../../../display/templates/main_js.tpl:145
+msgid "Valeur numérique..."
+msgstr "Numerical value..."
+
+#: ../../../display/templates/main_js.tpl:165
+msgid "Confirmez-vous la suppression ?"
+msgstr "Do you confirm the deletion?"
+
+#: ../../../display/templates/entete.tpl:34
+msgid "Mot de passe"
+msgstr "Password"
