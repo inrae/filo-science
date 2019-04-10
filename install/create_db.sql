@@ -1,17 +1,8 @@
--- Database generated with pgModeler (postgreSQL Database Modeler).
+-- Database generated with pgModeler (PostgreSQL Database Modeler).
 -- pgModeler  version: 0.9.2-beta
--- postgreSQL version: 9.6
+-- PostgreSQL version: 9.5
 -- Project Site: pgmodeler.io
 -- Model Author: ---
-
--- object: measfish | type: ROLE --
--- DROP ROLE IF EXISTS measfish;
-CREATE ROLE measfish 
-	INHERIT
-	LOGIN
-	PASSWORD 'measfishPassword';
--- ddl-end --
-
 
 
 -- Database creation must be done outside a multicommand file.
@@ -28,7 +19,7 @@ CREATE ROLE measfish
 -- DROP SCHEMA IF EXISTS measfish CASCADE;
 CREATE SCHEMA measfish;
 -- ddl-end --
-ALTER SCHEMA measfish OWNER TO measfish;
+ALTER SCHEMA measfish OWNER TO postgres;
 -- ddl-end --
 COMMENT ON SCHEMA measfish IS 'Scientific fisheries management - schema of data';
 -- ddl-end --
@@ -37,7 +28,7 @@ COMMENT ON SCHEMA measfish IS 'Scientific fisheries management - schema of data'
 -- DROP SCHEMA IF EXISTS gacl CASCADE;
 CREATE SCHEMA gacl;
 -- ddl-end --
-ALTER SCHEMA gacl OWNER TO measfish;
+ALTER SCHEMA gacl OWNER TO postgres;
 -- ddl-end --
 
 SET search_path TO pg_catalog,public,measfish,gacl;
@@ -54,7 +45,7 @@ CREATE SEQUENCE measfish.project_project_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.project_project_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.project_project_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.campaign_campaign_id_seq | type: SEQUENCE --
@@ -68,7 +59,7 @@ CREATE SEQUENCE measfish.campaign_campaign_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.campaign_campaign_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.campaign_campaign_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.project | type: TABLE --
@@ -84,7 +75,7 @@ COMMENT ON TABLE measfish.project IS 'List of projects. This table is used for g
 -- ddl-end --
 COMMENT ON COLUMN measfish.project.project_name IS 'Name of the project';
 -- ddl-end --
-ALTER TABLE measfish.project OWNER TO measfish;
+ALTER TABLE measfish.project OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.campaign | type: TABLE --
@@ -101,7 +92,7 @@ COMMENT ON TABLE measfish.campaign IS 'List of campaigns rattached to a project'
 -- ddl-end --
 COMMENT ON COLUMN measfish.campaign.campaign_name IS 'Name of the campaign';
 -- ddl-end --
-ALTER TABLE measfish.campaign OWNER TO measfish;
+ALTER TABLE measfish.campaign OWNER TO postgres;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
@@ -122,7 +113,7 @@ CREATE SEQUENCE measfish.station_station_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.station_station_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.station_station_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.operation_operation_id_seq | type: SEQUENCE --
@@ -136,7 +127,7 @@ CREATE SEQUENCE measfish.operation_operation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.operation_operation_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.operation_operation_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.place_place_id_seq | type: SEQUENCE --
@@ -150,7 +141,7 @@ CREATE SEQUENCE measfish.place_place_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.place_place_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.place_place_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.station | type: TABLE --
@@ -180,7 +171,7 @@ COMMENT ON COLUMN measfish.station.station_pk IS 'Kilometer point from source, i
 -- ddl-end --
 COMMENT ON COLUMN measfish.station.station_code IS 'Code of the station, according to the nomenclature sandre.eaufrance.fr';
 -- ddl-end --
-ALTER TABLE measfish.station OWNER TO measfish;
+ALTER TABLE measfish.station OWNER TO postgres;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
@@ -201,7 +192,7 @@ CREATE SEQUENCE measfish.taxon_taxon_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.taxon_taxon_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.taxon_taxon_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.sample_sample_id_seq | type: SEQUENCE --
@@ -215,7 +206,7 @@ CREATE SEQUENCE measfish.sample_sample_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.sample_sample_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.sample_sample_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.taxon | type: TABLE --
@@ -255,210 +246,204 @@ COMMENT ON COLUMN measfish.taxon.length_max IS 'Length maximum, in cm';
 -- ddl-end --
 COMMENT ON COLUMN measfish.taxon.weight_max IS 'weight maximum, in g';
 -- ddl-end --
-ALTER TABLE measfish.taxon OWNER TO measfish;
+ALTER TABLE measfish.taxon OWNER TO postgres;
 -- ddl-end --
 
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucaspius delineatus', E'Heckel 1843', E'Able de Heckel', E'2117', E'ABH', E'ABH', E'12.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucaspius delineatus', E'Heckel 1843', E'Able de Heckel', E'2117', E'ABH', E'ABH', E'10.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnus alburnus', E'Linnaeus, 1758', E'Ablette', E'2090', E'ABL', E'ABL', E'20.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnus alburnus', E'Linnaeus, 1758', E'Ablette', E'2090', E'ABL', E'ABL', E'25.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa', E'Linnaeus, 1758', E'Alose (Grande Alose)', E'2056', E'ALA', E'ALA', E'70.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa', E'Linnaeus, 1758', E'Alose (Grande Alose)', E'2056', E'ALA', E'ALA', E'83.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax fallax', DEFAULT, E'Alose feinte', DEFAULT, E'ALF', DEFAULT, E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax fallax', DEFAULT, E'Alose feinte', DEFAULT, DEFAULT, DEFAULT, E'50.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax rhodanensis', DEFAULT, E'Alose du Rhône', DEFAULT, E'ALR', DEFAULT, E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax rhodanensis', DEFAULT, E'Alose du Rhône', E'2058', E'ALR', DEFAULT, E'70.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla anguilla', E'Linnaeus, 1758', E'Anguille', E'2038', E'ANG', E'ANG', E'150.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla anguilla', E'Linnaeus, 1758', E'Anguille', E'2038', E'ANG', E'ANG', E'133.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius fasciatus', E'(Valenciennes), 1821', E'Aphanius de Corse', E'2142', E'APC', DEFAULT, E'6.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius iberus', E'Valenciennes, 1846', E'Aphanius d''Espagne', DEFAULT, E'APE', DEFAULT, E'6.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius iberus', E'Valenciennes, 1846', E'Aphanius d''Espagne', E'2143', E'APE', DEFAULT, E'5.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Austropotamobius pallipes', DEFAULT, E'Ecrevisse à pieds blancs', DEFAULT, E'APP', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Austropotamobius pallipes', DEFAULT, E'Ecrevisse à pieds blancs', E'868', E'APP', DEFAULT, E'12.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zingel asper', DEFAULT, E'Apron', DEFAULT, E'APR', DEFAULT, E'22.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zingel asper', DEFAULT, E'Apron', E'2197', E'APR', DEFAULT, E'22.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus astacus', DEFAULT, E'Ecrevisse à pieds rouges', DEFAULT, E'ASA', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus astacus', DEFAULT, E'Ecrevisse à pieds rouges', E'866', E'ASA', DEFAULT, E'18.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus leptodactylus', DEFAULT, E'Ecrevisse à pieds grêles', DEFAULT, E'ASL', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus leptodactylus', DEFAULT, E'Ecrevisse à pieds grêles', E'2963', E'ASL', DEFAULT, E'20.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aspius aspius', DEFAULT, E'Aspe', DEFAULT, E'ASP', DEFAULT, E'80.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aspius aspius', DEFAULT, E'Aspe', E'2094', E'ASP', DEFAULT, E'100.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina boyeri', E'Risso 1810', E'Joël', E'2041', E'ATH', E'ATB', E'12.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina boyeri', E'Risso 1810', E'Joël', E'2041', DEFAULT, E'ATB', E'12.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus barbus', E'Linnaeus, 1758', E'Barbeau fluviatile', E'2096', E'BAF', DEFAULT, E'80.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus barbus', E'Linnaeus, 1758', E'Barbeau fluviatile', E'2096', E'BAF', DEFAULT, E'120.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus meridionalis', DEFAULT, E'Barbeau méridional', DEFAULT, E'BAM', DEFAULT, E'40.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus meridionalis', DEFAULT, E'Barbeau méridional', E'2097', E'BAM', DEFAULT, E'30.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus labrax', E'Linnaeus, 1758', E'Loup', E'2234', E'BAR', E'LOU', E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus labrax', E'Linnaeus, 1758', E'Loup', E'2234', E'LOU', E'LOU', E'103.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus salmoides', E'Lacepède 1802', E'Achigan à grande bouche', E'2053', E'BBG', DEFAULT, E'60.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus salmoides', E'Lacepède 1802', E'Achigan à grande bouche', E'2053', E'BBG', DEFAULT, E'97.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus dolomieu', DEFAULT, E'Achigan à petite bouche', DEFAULT, E'BBP', DEFAULT, E'40.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus dolomieu', DEFAULT, E'Achigan à petite bouche', DEFAULT, DEFAULT, DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria fluviatilis', E'Asso, 1801', E'Blennie fluviatile', E'2045', E'BLE', DEFAULT, E'15.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria fluviatilis', E'Asso, 1801', E'Blennie fluviatile', E'2045', E'BLE', DEFAULT, E'25.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Telestes souffia', DEFAULT, E'Blageon', DEFAULT, E'BLN', DEFAULT, E'25.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Telestes souffia', DEFAULT, E'Blageon', E'25609', E'BLN', DEFAULT, E'36.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus amarus', E'Bloch 1782', E'Bouvière', E'2131', E'BOU', DEFAULT, E'13.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus amarus', E'Bloch 1782', E'Bouvière', E'2131', E'BOU', DEFAULT, E'11.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Blicca bjoerkna', E'Linnaeus, 1758', E'Brème bordelière', E'2099', E'BRB', E'BRB', E'45.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Blicca bjoerkna', E'Linnaeus, 1758', E'Brème bordelière', E'2099', E'BRB', E'BRB', E'36.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama', E'Linnaeus, 1758', E'Brème commune', E'2086', E'BRE', E'BRE', E'60.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama', E'Linnaeus, 1758', E'Brème commune', E'2086', E'BRE', E'BRE', E'82.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis sp.', DEFAULT, E'Brème (non identifiée)', DEFAULT, E'BRI', DEFAULT, E'60.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis sp.', DEFAULT, E'Brème (non identifiée)', DEFAULT, DEFAULT, DEFAULT, E'60.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Esox lucius', E'Linnaeus, 1758', E'Brochet', E'2151', E'BRO', E'BRO', E'150.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus', DEFAULT, E'Carassin doré', DEFAULT, E'CAA', DEFAULT, E'45.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus', DEFAULT, E'Carassin doré', E'20597', E'CAD', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius gibelio', DEFAULT, E'Carassin argenté', DEFAULT, E'CAG', DEFAULT, E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius gibelio', DEFAULT, E'Carassin argenté', E'20550', E'CAG', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hypophthalmichthys molitrix', DEFAULT, E'Carpe argentée', DEFAULT, E'CAR', DEFAULT, E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hypophthalmichthys molitrix', DEFAULT, E'Carpe argentée', E'2115', E'CAR', DEFAULT, E'105.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius carassius', E'Linnaeus, 1758', E'Carassin commun', E'2102', E'CAS', E'CAR', E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius carassius', E'Linnaeus, 1758', E'Carassin commun', E'2102', E'CAS', E'CAR', E'64.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus carpio', E'Linnaeus, 1758', E'Carpe commune', E'2110', E'CCO', E'CCO', E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus carpio', E'Linnaeus, 1758', E'Carpe commune', E'2109', E'CMI', E'CCO', E'134.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus carpio', E'Linnaeus, 1758', E'Carpe cuir', E'2110', E'CCU', E'CCO', E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ambloplites rupestris', DEFAULT, E'Crapet de roche', E'2048', E'CDR', DEFAULT, E'43.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ambloplites rupestris', DEFAULT, E'Crapet de roche', DEFAULT, E'CDR', DEFAULT, E'30.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus gobio', E'Linnaeus, 1758', E'Chabot', E'2080', E'CHA', DEFAULT, E'18.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus gobio', E'Linnaeus, 1758', E'Chabot', E'2080', E'CHA', DEFAULT, E'15.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalius cephalus', DEFAULT, E'Chevaine', E'31041', E'CHE', DEFAULT, E'72.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalius cephalus', DEFAULT, E'Chevaine', DEFAULT, E'CHE', DEFAULT, E'80.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus petiti', DEFAULT, E'Chabot du Lez', E'2354', E'CHP', DEFAULT, E'4.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus petiti', DEFAULT, E'Chabot du Lez', DEFAULT, E'CHL', DEFAULT, E'6.5', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma sp.', DEFAULT, E'Chondrostome', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma sp.', DEFAULT, E'Chondrostome', DEFAULT, E'CHO', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coregonus lavaretus', DEFAULT, E'Lavaret', DEFAULT, DEFAULT, DEFAULT, E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus carpio', E'Linnaeus, 1758', E'Carpe miroir', E'2110', E'CMI', E'CCO', E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Valencia hispanica', DEFAULT, E'Cyprinodonte de Valence', E'2145', E'CPV', DEFAULT, E'8.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coregonus lavaretus', DEFAULT, E'Lavaret', DEFAULT, E'COR', DEFAULT, E'60.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus namaycush', DEFAULT, E'Cristivomer', E'2228', E'CRI', DEFAULT, E'150.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Valencia hispanica', DEFAULT, E'Cyprinodonte de Valence', DEFAULT, E'CPV', DEFAULT, E'8.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenopharyngodon idella', DEFAULT, E'Carpe amour', E'31039', E'CTI', DEFAULT, E'150.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus namaycush', DEFAULT, E'Cristivomer', DEFAULT, E'CRI', DEFAULT, E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidae indeterminé', DEFAULT, DEFAULT, DEFAULT, E'5.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenopharyngodon idella', DEFAULT, E'Carpe amour', DEFAULT, E'CTI', DEFAULT, E'90.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus eperlanus', E'Linnaeus, 1758', E'Eperlan', E'2188', E'EPE', E'EPE', E'45.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidae indeterminé', DEFAULT, E'CYP', DEFAULT, E'5.0', DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus eperlanus', E'Linnaeus, 1758', E'Eperlan', E'2188', E'EPE', E'EPE', E'30.0', DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus gymnurus', DEFAULT, E'Epinoche', DEFAULT, E'EPI', DEFAULT, E'8.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus gymnurus', DEFAULT, E'Epinoche', DEFAULT, DEFAULT, DEFAULT, E'8.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pungitius pungitius', E'Linnaeus, 1758', E'Epinochette', E'2167', E'EPT', E'EPT', E'9.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser sturio', E'Linnaeus, 1758', E'Esturgeon', E'2032', E'EST', E'EST', E'350.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser sturio', E'Linnaeus, 1758', E'Esturgeon', E'2032', E'EST', E'EST', E'600.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus', E'Linnaeus, 1758', E'Flet', E'2203', E'FLE', E'FLE', E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus', E'Linnaeus, 1758', E'Flet', E'2203', E'FLE', E'FLE', E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia holbrooki', DEFAULT, E'Gambusie', DEFAULT, E'GAM', DEFAULT, E'7.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia holbrooki', DEFAULT, E'Gambusie', DEFAULT, DEFAULT, DEFAULT, E'7.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus rutilus', E'Linnaeus, 1758', E'Gardon', E'2133', E'GAR', E'GAR', E'45.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus rutilus', E'Linnaeus, 1758', E'Gardon', E'2133', E'GAR', E'GAR', E'60.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobio gobio', E'Linnaeus, 1758', E'Goujon', E'2113', E'GOU', E'GOU', E'20.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gymnocephalus cernuus', E'Linnaeus, 1758', E'Grémille', E'2191', E'GRE', E'GRE', E'30.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gymnocephalus cernuus', E'Linnaeus, 1758', E'Grémille', E'2191', E'GRE', E'GRE', E'25.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma nasus', E'Linnaeus, 1758', E'Hotu', E'2104', E'HOT', DEFAULT, E'60.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma nasus', E'Linnaeus, 1758', E'Hotu', E'2104', E'HOT', DEFAULT, E'50.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hucho hucho', DEFAULT, E'Huchon', DEFAULT, E'HUC', DEFAULT, E'150.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hucho hucho', DEFAULT, E'Huchon', E'2214', E'HUC', DEFAULT, E'150.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Hybride', DEFAULT, E'HYB', DEFAULT, E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus idus', E'Linnaeus, 1758', E'Ide mélanote', E'2121', E'IDE', DEFAULT, E'104.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus idus', E'Linnaeus, 1758', E'Ide mélanote', E'2121', E'IDE', DEFAULT, E'90.0', DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis bilineata', DEFAULT, E'Loche transalpine', DEFAULT, E'LOB', DEFAULT, E'12.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis bilineata', DEFAULT, E'Loche transalpine', E'34369', E'LOB', DEFAULT, E'12.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Misgurnus fossilis', E'Linnaeus, 1758', E'Loche d''étang', E'2069', E'LOE', DEFAULT, E'30.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbatula barbatula', E'Linnaeus, 1758', E'Loche franche', E'2071', E'LOF', E'LOF', E'18.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbatula barbatula', E'Linnaeus, 1758', E'Loche franche', E'2071', E'LOF', E'LOF', E'21.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis taenia', E'Ikeda 1936', E'Loche épineuse', E'2067', E'LOR', DEFAULT, E'12.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis taenia', E'Ikeda 1936', E'Loche épineuse', E'2067', E'LOR', DEFAULT, E'13.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lota lota', DEFAULT, E'Lote de rivière', DEFAULT, E'LOT', DEFAULT, E'120.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lota lota', DEFAULT, E'Lote de rivière', E'2156', E'LOT', DEFAULT, E'152.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'non identifiee', DEFAULT, E'Lamproie (ammocoete)', DEFAULT, E'LPA', DEFAULT, E'20.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'non identifiee', DEFAULT, E'Lamproie (ammocoete)', DEFAULT, DEFAULT, DEFAULT, E'20.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon marinus', E'Linnaeus, 1758', E'Lamproie marine', E'2014', E'LPM', E'LPM', E'90.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon marinus', E'Linnaeus, 1758', E'Lamproie marine', E'2014', E'LPM', E'LPM', E'120.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra planeri', E'Bloch 1784', E'Lamproie de Planer', E'2012', E'LPP', E'LPP', E'25.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra planeri', E'Bloch 1784', E'Lamproie de Planer', E'2012', E'LPP', E'LPP', E'20.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra fluviatilis', E'Linnaeus, 1758', E'Lamproie de rivière', E'2011', E'LPR', E'LPR', E'50.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelon labrosus', E'Risso 1827', E'Mulet à grosses lèvres', E'2180', E'MGL', E'MGL', E'80.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelon labrosus', E'Risso 1827', E'Mulet à grosses lèvres', E'2180', E'MGL', E'MGL', E'84.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil cephalus', E'Linnaeus, 1758', E'Mulet cabot', E'2185', E'MUC', DEFAULT, E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil cephalus', E'Linnaeus, 1758', E'Mulet cabot', E'2185', E'MUC', DEFAULT, E'114.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza aurata', E'Risso 1810', E'Mulet doré', E'2182', E'MUD', E'MUD', E'45.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza aurata', E'Risso 1810', E'Mulet doré', E'2182', E'MUD', E'MUD', E'59.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza ramada', E'Risso 1810', E'Mulet porc', E'2183', E'MUP', E'MUP', E'70.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Poissons non identifés', DEFAULT, E'Poissons non identifés', DEFAULT, E'NID', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Poissons non identifés', DEFAULT, E'Poissons non identifés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pas de poisson', DEFAULT, E'Pas de poisson', DEFAULT, E'NUL', DEFAULT, E'0.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pas de poisson', DEFAULT, E'Pas de poisson', DEFAULT, DEFAULT, DEFAULT, E'0.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus alpinus', DEFAULT, E'Omble chevalier', DEFAULT, E'OBL', DEFAULT, E'80.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus alpinus', DEFAULT, E'Omble chevalier', DEFAULT, DEFAULT, DEFAULT, E'80.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Thymallus thymallus', E'Linnaeus, 1758', E'Ombre commun', E'2247', E'OBR', DEFAULT, E'41.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Thymallus thymallus', E'Linnaeus, 1758', E'Ombre commun', E'2247', E'OBR', DEFAULT, E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Orconectes limosus', E'Rafinesque 1817', E'Ecrevisse américaine', DEFAULT, E'OCL', E'ORL', DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Orconectes limosus', E'Rafinesque 1817', E'Ecrevisse américaine', E'871', E'OCL', E'ORL', E'12.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Procambarus clarkii', E'Girard 1852', E'Ecrevisse de Louisiane', E'2028', E'PCC', E'ECL', DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Procambarus clarkii', E'Girard 1852', E'Ecrevisse de Louisiane', E'2028', E'PCC', E'ECL', E'15.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ameiurus melas', E'Rafinesque 1820', E'Poisson chat', E'2177', E'PCH', DEFAULT, E'40.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ameiurus melas', E'Rafinesque 1820', E'Poisson chat', E'2177', E'PCH', DEFAULT, E'66.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Perca fluviatilis', E'Linnaeus, 1758', E'Perche commune', E'2193', E'PER', E'PER', E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Perca fluviatilis', E'Linnaeus, 1758', E'Perche commune', E'2193', E'PER', E'PER', E'67.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepomis gibbosus', E'Linnaeus, 1758', E'Perche soleil', E'2050', E'PES', E'PES', E'25.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepomis gibbosus', E'Linnaeus, 1758', E'Perche soleil', E'2050', E'PES', E'PES', E'40.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pacifastacus leniusculus', DEFAULT, E'Ecrevisse signal', DEFAULT, E'PFL', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pacifastacus leniusculus', DEFAULT, E'Ecrevisse signal', E'873', E'PFL', DEFAULT, E'18.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pimephales promelas', DEFAULT, E'Tête de boule', DEFAULT, E'PIM', DEFAULT, E'7.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pimephales promelas', DEFAULT, E'Tête de boule', E'2127', E'PIM', DEFAULT, E'10.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectes platessa', E'Linnaeus, 1758', E'Plie', E'2205', E'PLI', E'PLI', E'90.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectes platessa', E'Linnaeus, 1758', E'Plie', E'2205', E'PLI', E'PLI', E'126.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pseudorasbora parva', E'Temminck & Schlegel, 1846', E'Pseudorasbora', E'2129', E'PSR', E'PSE', E'15.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pseudorasbora parva', E'Temminck & Schlegel, 1846', E'Pseudorasbora', E'2129', E'PSR', E'PSE', E'11.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scardinius erythrophthalmus', E'Linnaeus, 1758', E'Rotengle', E'2135', E'ROT', E'ROT', E'41.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scardinius erythrophthalmus', E'Linnaeus, 1758', E'Rotengle', E'2135', E'ROT', E'ROT', E'51.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander lucioperca', E'Linnaeus, 1758', E'Sandre', E'2195', E'SAN', DEFAULT, E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander lucioperca', E'Linnaeus, 1758', E'Sandre', E'2195', E'SAN', DEFAULT, E'127.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo salar', E'Linnaeus, 1758', E'Saumon Atlantique', E'2220', E'SAT', E'SAT', E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo salar', E'Linnaeus, 1758', E'Saumon Atlantique', E'2220', E'SAT', E'SAT', E'150.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus fontinalis', DEFAULT, E'Omble de fontaine', DEFAULT, E'SDF', DEFAULT, E'40.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus fontinalis', DEFAULT, E'Omble de fontaine', E'2227', E'SDF', DEFAULT, E'94.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Silurus glanis', E'Linnaeus, 1758', E'Silure', E'2238', E'SIL', E'SIL', E'150.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Silurus glanis', E'Linnaeus, 1758', E'Silure', E'2238', E'SIL', E'SIL', E'500.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnoides bipunctatus', E'Bloch 1782', E'Spirlin', E'2088', E'SPI', DEFAULT, E'16.5', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnoides bipunctatus', E'Bloch 1782', E'Spirlin', E'2088', E'SPI', DEFAULT, E'16.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser ruthenus', DEFAULT, E'Sterlet', DEFAULT, E'STL', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser ruthenus', DEFAULT, E'Sterlet', E'3217', E'STL', DEFAULT, E'125.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Oncorhynchus mykiss', E'Walbaum 1792', E'Truite arc en ciel', E'2216', E'TAC', DEFAULT, E'80.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Oncorhynchus mykiss', E'Walbaum 1792', E'Truite arc en ciel', E'2216', E'TAC', DEFAULT, E'120.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tinca tinca', E'Linnaeus, 1758', E'Tanche', E'2137', E'TAN', E'TAN', E'65.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tinca tinca', E'Linnaeus, 1758', E'Tanche', E'2137', E'TAN', E'TAN', E'82.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parachondrostoma toxostoma', DEFAULT, E'Toxostome', DEFAULT, E'TOX', DEFAULT, E'30.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parachondrostoma toxostoma', DEFAULT, E'Toxostome', E'31135', E'TOX', DEFAULT, E'30.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta', E'Berg 1908', E'Truite commune', DEFAULT, E'TRF', E'TRM', E'100.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta', E'Berg 1908', E'Truite commune', DEFAULT, DEFAULT, E'TRM', E'100.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbra pygmea', DEFAULT, E'Umbre pygmée', DEFAULT, E'UMP', DEFAULT, E'10.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbra pygmea', DEFAULT, E'Umbre pygmée', DEFAULT, DEFAULT, DEFAULT, E'10.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus phoxinus', E'Linnaeus, 1758', E'Vairon', E'2125', E'VAI', E'VAI', E'14.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus leuciscus', E'Linnaeus, 1758', E'Vandoise', E'2122', E'VAN', DEFAULT, E'30.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus leuciscus', E'Linnaeus, 1758', E'Vandoise', E'2122', E'VAN', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Vimba vimba', DEFAULT, E'Vimbe', DEFAULT, E'VIM', DEFAULT, E'50.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Vimba vimba', DEFAULT, E'Vimbe', E'2139', E'VIM', DEFAULT, E'50.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis', E'Cuvier 1817', E'Brèmes d''eau douce nca', E'2085', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis', E'Cuvier 1817', E'Brèmes d''eau douce nca', E'2085', E'BRX', DEFAULT, E'36.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama, Blicca bjoerkna', DEFAULT, E'Brèmes', E'19511', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser', E'Linnaeus, 1758', E'Esturgeons', E'2031', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser', E'Linnaeus, 1758', E'Esturgeons', E'2031', E'ES?', DEFAULT, E'600.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser baerii', E'Brandt, 1869', E'Esturgeon de Sibérie', E'3218', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser baerii', E'Brandt, 1869', E'Esturgeon de Sibérie', E'3218', E'BAE', DEFAULT, E'200.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenseridae', DEFAULT, E'Esturgeons nca', E'2030', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -472,19 +457,19 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa x fallax', DEFAULT, E'Aloses vraie et feinte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax', E'Lacepède 1803', E'Alose feinte', E'2057', DEFAULT, E'ALF', E'60.8', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax', E'Lacepède 1803', E'Alose feinte', E'2057', E'ALF', E'ALF', E'70.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa sp.', E'Linck 1790', E'Aloses nca', E'2055', DEFAULT, E'ALS', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes marinus', E'Raitt 1934', E'Lançon équille', E'3422', DEFAULT, DEFAULT, E'25.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes tobianus', E'Linnaeus, 1758', E'Equille', E'2035', DEFAULT, DEFAULT, E'20.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes tobianus', E'Linnaeus, 1758', E'Equille', E'2035', E'LAN', DEFAULT, E'30.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla', E'Schrank 1798', E'Anguilles nca', E'2037', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla', E'Schrank 1798', E'Anguilles nca', E'2037', E'AN?', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguillidae', DEFAULT, E'Anguilles', E'2036', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphia minuta', E'Risso 1810', E'Nonnat', E'2170', DEFAULT, DEFAULT, E'7.9', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphia minuta', E'Risso 1810', E'Nonnat', E'2170', E'APH', DEFAULT, E'7.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aplysia', E'Linnaeus, 1767', E'Aplysie nca', E'2143', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -492,7 +477,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Apogon imberbis', E'Linnaeus, 1758', E'Castagnole rouge', E'20736', DEFAULT, DEFAULT, E'15.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus regius', E'Asso 1801', E'Maigre commun', E'2231', DEFAULT, E'MAI', E'230.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus regius', E'Asso 1801', E'Maigre commun', E'2231', E'MAI', E'MAI', E'230.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus sp.', E'De La Pylaie 1835', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -510,7 +495,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Athanas nitescens', E'(Leach, 1814)', E'crevette athanas', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina', E'Linnaeus, 1758', E'Athérines nca', E'2040', DEFAULT, DEFAULT, E'20.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina', E'Linnaeus, 1758', E'Athérines nca', E'2040', E'AT?', DEFAULT, E'20.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina hepsetus', E'Linnaeus, 1758', E'Athèrine sauclet', E'3264', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -524,7 +509,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Balistes carolinensis', E'Gmelin, 1789', E'Baliste', E'19460', DEFAULT, DEFAULT, E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus', E'Cuvier 1817', E'Barbeaux nca', E'2095', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus', E'Cuvier 1817', E'Barbeaux nca', E'2095', E'BAX', DEFAULT, E'120.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Belone belone', E'Linnaeus 1761', E'Orphie', E'3378', DEFAULT, E'ORF', DEFAULT, DEFAULT);
 -- ddl-end --
@@ -554,9 +539,9 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cancer pagurus', E'Linnaeus, 1758', E'Tourteau', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius', E'Nilsson 1832', E'Carassins nca', E'2100', DEFAULT, DEFAULT, E'50.5', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius', E'Nilsson 1832', E'Carassins nca', E'2100', E'CAX', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus auratus', E'Linnaeus, 1758', E'Carassin doré', E'5208', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus auratus', E'Linnaeus, 1758', E'Carassin doré', E'5208', E'CAA', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus gibelio', E'Bloch, 1782', E'Carassin argenté', E'5207', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -578,17 +563,17 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata', E'Couch 1832', E'Motelle', E'2153', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata mustela', E'Linnaeus, 1758', E'Motelle à cinq barbillons', E'2154', DEFAULT, E'MOT', E'25.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata mustela', E'Linnaeus, 1758', E'Motelle à cinq barbillons', E'2154', E'MOT', E'MOT', E'25.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata septentrionalis', E'Collett 1875', E'Motelle à moustaches', E'3384', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea harengus', E'Linnaeus, 1758', E'Hareng de l''Atlantique', E'2060', DEFAULT, E'HER', E'39.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea harengus', E'Linnaeus, 1758', E'Hareng de l''Atlantique', E'2060', E'HAR', E'HER', E'45.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupeidae', DEFAULT, E'Harengs, sardines nca', E'2054', DEFAULT, DEFAULT, E'41.76', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupeidae', DEFAULT, E'Harengs, sardines nca', E'2054', E'CLU', DEFAULT, E'41.76', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Conger conger', E'Linnaeus, 1758', E'Congre d''Europe', E'2074', DEFAULT, E'CON', E'274.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Conger conger', E'Linnaeus, 1758', E'Congre d''Europe', E'2074', E'CGR', E'CON', E'300.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coris julis', E'Linnaeus, 1758', E'Girelle', E'19451', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -596,7 +581,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon', DEFAULT, E'Crevettes crangon nca', E'3281', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon crangon', E'Linnaeus, 1758', E'Crevette grise', E'3282', DEFAULT, E'CRG', DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon crangon', E'Linnaeus, 1758', E'Crevette grise', E'3282', E'CRG', E'CRG', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangonidae', DEFAULT, E'Crevettes crangonidés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -608,11 +593,11 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyclopterus lumpus', E'Linnaeus, 1758', E'Lompe', E'3551', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidés', E'2084', DEFAULT, E'CYP', DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidés', E'2084', E'CYP', E'CYP', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cypriniformes', DEFAULT, E'Cypriniformes', E'3362', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus', E'Linnaeus, 1758', E'Carpes nca', E'2108', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus', E'Linnaeus, 1758', E'Carpes nca', E'2108', E'CCX', DEFAULT, E'134.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dasyatis', E'Rafinesque 1810', E'Pastenagues nca', E'3588', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -622,7 +607,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus', E'Gill 1860', E'Bars nca', E'2233', DEFAULT, DEFAULT, E'86.5', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus punctatus', E'Bloch 1792', E'Bar tacheté', E'2235', DEFAULT, E'SPU', E'70.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus punctatus', E'Bloch 1792', E'Bar tacheté', E'2235', E'LOM', E'SPU', E'70.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicologlossa cuneata', E'Moreau 1881', E'Cèteau', E'3537', DEFAULT, DEFAULT, E'30.0', DEFAULT);
 -- ddl-end --
@@ -648,13 +633,13 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis', E'Cuvier 1817', E'Anchois nca', E'2147', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis encrasicolus', E'Linnaeus, 1758', E'Anchois', E'2148', DEFAULT, E'ANC', E'20.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis encrasicolus', E'Linnaeus, 1758', E'Anchois', E'2148', E'ANC', E'ANC', E'20.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Enophrys bubalis', E'Euphrasen, 1786', E'chabot buffle', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Entelurus aequoreus', E'Linnaeus, 1758', E'Entélure', E'3567', DEFAULT, DEFAULT, E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eriocheir sinensis', E'H. Milne Edwards 1853', E'Crabe chinois', E'879', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eriocheir sinensis', E'H. Milne Edwards 1853', E'Crabe chinois', E'879', E'CRC', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eupagurus bernhardus', E'Linnaeus, 1758', E'Bernard l’ermite commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -684,7 +669,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia', E'Poey 1854', E'Gambusie nca', E'2207', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia affinis', E'Baird & Girard 1853', E'Gambusie', E'2208', DEFAULT, E'GAM', DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia affinis', E'Baird & Girard 1853', E'Gambusie', E'2208', E'GAM', E'GAM', E'4.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gammaridae', DEFAULT, E'Gammares', E'887', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -704,7 +689,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius geniporus', E'Valenciennes 1837', E'Gobie à joues poreuses', E'19492', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius niger', E'Linnaeus, 1758', E'Gobie noir', E'2172', DEFAULT, DEFAULT, E'13.6', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius niger', E'Linnaeus, 1758', E'Gobie noir', E'2172', E'GBN', DEFAULT, E'18.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius paganellus', E'Linnaeus, 1758', E'Gobie paganel', E'19493', DEFAULT, DEFAULT, E'12.0', DEFAULT);
 -- ddl-end --
@@ -764,7 +749,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus viridis', E'Linnaeus,1758', E'Labre vert', E'19479', DEFAULT, DEFAULT, E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra', E'Gray 1851', E'Lamproie Lampetra', E'2010', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra', E'Gray 1851', E'Lamproie Lampetra', E'2010', E'LPX', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepadogaster candolii', E'Risso, 1810', E'Gluette petite queue', E'3417', DEFAULT, DEFAULT, E'7.5', DEFAULT);
 -- ddl-end --
@@ -798,7 +783,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis liparis', E'Linnaeus 1766', E'Limace de mer', E'3553', DEFAULT, DEFAULT, E'15.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis montagui', E'Donovan 1804', E'Limace anicotte', E'2083', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis montagui', E'Donovan 1804', E'Limace anicotte', E'2083', E'LIP', DEFAULT, E'12.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lipophrys dalmatinus', E'Steindachner & Kolombatovic, 1884', E'Blennie dalmate', E'20742', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -808,7 +793,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza', E'Jordan&Swain 1884', E'Mulets nca', E'2181', DEFAULT, DEFAULT, E'59.15', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza saliens', E'Risso 1810', E'Mulet sauteur', E'3267', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza saliens', E'Risso 1810', E'Mulet sauteur', E'3267', E'MUS', DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loliginidae', E'D''Orbigny, 1848', E'Calmars côtiers nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -836,7 +821,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Melanogrammus aeglefinus', E'Linnaeus, 1758', E'Eglefin', E'19467', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merlangius merlangus', E'Linnaeus, 1758', E'Merlan', E'2158', DEFAULT, E'WHG', E'70.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merlangius merlangus', E'Linnaeus, 1758', E'Merlan', E'2158', E'MER', E'WHG', E'7.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merluccius merluccius', E'Linnaeus, 1758', E'Merlu européen', E'3410', DEFAULT, E'HKE', E'140.0', DEFAULT);
 -- ddl-end --
@@ -918,23 +903,13 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemonidae', E'Rafinesque, 1815', E'Palaemonidés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris', E'H. Milne Edwards 1837', E'Crevette blanche', E'3280', DEFAULT, E'CRB', DEFAULT, DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris', E'H. Milne Edwards 1837', E'Crevette blanche', E'3280', DEFAULT, E'CRB', DEFAULT, DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris', E'H. Milne Edwards 1837', E'Crevette blanche', E'3280', DEFAULT, E'CRB', DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris', E'H. Milne Edwards 1837', E'Crevette blanche', E'3280', E'CRB', E'CRB', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris, P. serratus', DEFAULT, E'crevettes blanche et rose', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon macrodactylus', E'M.J. Rathbun 1902', E'Bouquet migrateur', DEFAULT, DEFAULT, E'CRM', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon macrodactylus', E'M.J. Rathbun 1902', E'Bouquet migrateur', DEFAULT, DEFAULT, E'CRM', DEFAULT, DEFAULT);
--- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon serratus', E'Pennant 1777', E'Bouquet commun', DEFAULT, DEFAULT, E'CRR', DEFAULT, DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon sp.', DEFAULT, E'Palaemon sp.', DEFAULT, DEFAULT, E'PAL', DEFAULT, DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon sp.', DEFAULT, E'Palaemon sp.', DEFAULT, DEFAULT, E'PAL', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon sp.', DEFAULT, E'Palaemon sp.', DEFAULT, DEFAULT, E'PAL', DEFAULT, DEFAULT);
 -- ddl-end --
@@ -968,9 +943,9 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Philocheras trispinosus', E'(Hailstone, 1835)', E'crevette philocheras', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pholis gunnellus', E'Linnaeus, 1758', E'Gonelle', E'2200', DEFAULT, DEFAULT, E'25.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pholis gunnellus', E'Linnaeus, 1758', E'Gonelle', E'2200', E'GON', DEFAULT, E'25.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus', E'Rafinesque 1820', E'Vairons nca', E'2124', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus', E'Rafinesque 1820', E'Vairons nca', E'2124', E'PHX', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pilumnus hirtellus', E'Linnaeus, 1758', E'Crabe rouge poilu', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -994,7 +969,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectidae', DEFAULT, E'Pleuronectidés', E'2201', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius pollachius', E'Linnaeus, 1758', E'Lieu jaune', E'2160', DEFAULT, E'POL', E'130.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius pollachius', E'Linnaeus, 1758', E'Lieu jaune', E'2160', E'LIJ', E'POL', E'130.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius virens', E'Linnaeus, 1758', E'Lieu noir', E'3398', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -1010,9 +985,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus microps', E'Kroeyer 1838', E'Gobie tacheté', E'3455', DEFAULT, DEFAULT, E'6.8', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus minutus', E'Pallas 1770', E'Gobie buhotte', E'2174', DEFAULT, E'GOB', E'9.9', DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus minutus', E'Pallas 1770', E'Gobie buhotte', E'2174', DEFAULT, E'GOB', E'9.9', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus minutus', E'Pallas 1770', E'Gobie buhotte', E'2174', E'GOB', E'GOB', E'11.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus pictus', E'Malm 1865', E'Gobie varié', E'3456', DEFAULT, DEFAULT, E'8.0', DEFAULT);
 -- ddl-end --
@@ -1042,7 +1015,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja brachyura', E'Lafont 1873', E'Raie lisse', E'3591', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja clavata', E'Linnaeus, 1758', E'Raie bouclée', E'2211', DEFAULT, E'RJC', E'104.4', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja clavata', E'Linnaeus, 1758', E'Raie bouclée', E'2211', E'RBC', E'RJC', E'105.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja microocellata', E'Montagu 1818', E'Raie mélée', E'3592', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -1060,8 +1033,6 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhithropanopeus harrisii', E'Gould, 1841', E'Crabe de vase', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhithropanopeus harrisii', E'Gould, 1841', E'Crabe estuarien americain', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
--- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus sericeus', E'Pallas 1776', E'Bouvière', DEFAULT, DEFAULT, E'BOU', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus', E'Rafinesque 1820', E'Gardons nca', E'2132', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
@@ -1072,15 +1043,15 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo', E'Linnaeus, 1758', E'Truites nca', E'2219', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmonidae', DEFAULT, E'Salmonidés', E'2212', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmonidae', DEFAULT, E'Salmonidés', E'2212', E'SAL', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta fario', E'Linnaeus, 1758', E'Truite fario', E'2221', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta fario', E'Linnaeus, 1758', E'Truite fario', E'2221', E'TRF', DEFAULT, E'100.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta trutta', E'Linnaeus, 1758', E'Truite de mer brune', E'2224', DEFAULT, DEFAULT, E'75.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta trutta', E'Linnaeus, 1758', E'Truite de mer brune', E'2224', E'TRM', DEFAULT, E'100.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander', DEFAULT, E'Sandres nca', E'5074', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardina pilchardus', E'Walbaum 1792', E'Sardine commune', E'2062', DEFAULT, E'SAR', E'27.5', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardina pilchardus', E'Walbaum 1792', E'Sardine commune', E'2062', E'SAR', E'SAR', E'27.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardinella aurita', E'Valenciennes 1847', E'Allache', E'19476', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
@@ -1126,7 +1097,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea senegalensis', E'Kaup 1858', E'Sole sénégalaise', E'3541', DEFAULT, E'SOX', E'60.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea solea', E'Linnaeus, 1758', E'Sole', E'2241', DEFAULT, DEFAULT, E'70.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea solea', E'Linnaeus, 1758', E'Sole', E'2241', E'SOL', DEFAULT, E'70.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea vulgaris', E'Quensel 1806', E'Sole commune', DEFAULT, DEFAULT, E'SOL', DEFAULT, DEFAULT);
 -- ddl-end --
@@ -1142,11 +1113,9 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sp.', E'Girgensohn 1846', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sprattus', E'Linnaeus, 1758', E'Sprat', E'2064', DEFAULT, E'SPT', E'16.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sprattus', E'Linnaeus, 1758', E'Sprat', E'2064', E'SPT', E'SPT', E'16.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalus acanthias', E'Linnaeus, 1758', E'Aiguillat commun', E'3614', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Stizostedion lucioperca', DEFAULT, E'Sandre', DEFAULT, DEFAULT, E'SAN', DEFAULT, DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Stizostedion lucioperca', DEFAULT, E'Sandre', DEFAULT, DEFAULT, E'SAN', DEFAULT, DEFAULT);
 -- ddl-end --
@@ -1172,9 +1141,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus abaster', E'Risso 1827', E'Syngnathe gorge claire', E'19444', DEFAULT, DEFAULT, E'21.0', DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus acus', E'Linnaeus, 1758', E'Syngnathe aiguille', E'2244', DEFAULT, DEFAULT, E'46.0', DEFAULT);
--- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus rostellatus', E'Nilsson 1855', E'Syngnathe de Duméril', E'3570', DEFAULT, E'SYN', E'20.5', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus acus', E'Linnaeus, 1758', E'Syngnathe aiguille', E'2244', E'SYN', DEFAULT, E'2.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus rostellatus', E'Nilsson 1855', E'Syngnathe de Duméril', E'3570', DEFAULT, E'SYN', E'20.5', DEFAULT);
 -- ddl-end --
@@ -1214,7 +1181,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus esmarkii', E'Nilsson 1855', E'Tacaud norvégien', E'3404', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus luscus', E'Linnaeus, 1758', E'Tacaud commun', E'2162', DEFAULT, E'BIB', E'46.0', DEFAULT);
+INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus luscus', E'Linnaeus, 1758', E'Tacaud commun', E'2162', E'TAD', E'BIB', E'46.0', DEFAULT);
 -- ddl-end --
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus minutus', E'Linnaeus, 1758', E'Capelan', E'3406', DEFAULT, DEFAULT, E'40.0', DEFAULT);
 -- ddl-end --
@@ -1246,9 +1213,7 @@ INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fr
 CREATE TABLE measfish.operation (
 	operation_id integer NOT NULL DEFAULT nextval('measfish.operation_operation_id_seq'::regclass),
 	campaign_id integer NOT NULL,
-	operation_template_id integer,
-	length_type_id integer,
-	station_id integer,
+	operation_name varchar,
 	date_start timestamp NOT NULL,
 	date_end timestamp,
 	freshwater boolean NOT NULL DEFAULT true,
@@ -1264,6 +1229,12 @@ CREATE TABLE measfish.operation (
 	altitude float,
 	tidal_coef float,
 	debit float,
+	surface integer,
+	operation_template_id integer,
+	length_type_id integer,
+	station_id integer,
+	measure_template_id integer,
+	analysis_template_id integer,
 	CONSTRAINT operation_id_pk PRIMARY KEY (operation_id)
 
 );
@@ -1271,6 +1242,8 @@ CREATE TABLE measfish.operation (
 COMMENT ON TABLE measfish.operation IS 'Description of operation';
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation.operation_id IS 'Operations rattached at a campaign';
+-- ddl-end --
+COMMENT ON COLUMN measfish.operation.operation_name IS 'Name of operation';
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation.date_start IS 'Start date of operation';
 -- ddl-end --
@@ -1302,7 +1275,9 @@ COMMENT ON COLUMN measfish.operation.tidal_coef IS 'Tidal coefficient or water h
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation.debit IS 'Debit of the river, in m³/s';
 -- ddl-end --
-ALTER TABLE measfish.operation OWNER TO measfish;
+COMMENT ON COLUMN measfish.operation.surface IS 'Surface parsed, in square meters';
+-- ddl-end --
+ALTER TABLE measfish.operation OWNER TO postgres;
 -- ddl-end --
 
 -- object: campaign_fk | type: CONSTRAINT --
@@ -1335,7 +1310,7 @@ COMMENT ON COLUMN measfish.sequence.date_end IS 'End time of fishing at this pla
 -- ddl-end --
 COMMENT ON COLUMN measfish.sequence.fishing_duration IS 'Fishing duration, in mn';
 -- ddl-end --
-ALTER TABLE measfish.sequence OWNER TO measfish;
+ALTER TABLE measfish.sequence OWNER TO postgres;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
@@ -1376,7 +1351,7 @@ COMMENT ON COLUMN measfish.sample.sample_size_min IS 'Minimal size of fishes in 
 -- ddl-end --
 COMMENT ON COLUMN measfish.sample.sample_size_max IS 'Maximal size of fishes in this sample, in cm';
 -- ddl-end --
-ALTER TABLE measfish.sample OWNER TO measfish;
+ALTER TABLE measfish.sample OWNER TO postgres;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
@@ -1404,7 +1379,7 @@ CREATE SEQUENCE measfish.item_item_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.item_item_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.item_item_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.individual | type: TABLE --
@@ -1412,8 +1387,6 @@ ALTER SEQUENCE measfish.item_item_id_seq OWNER TO measfish;
 CREATE TABLE measfish.individual (
 	individual_id integer NOT NULL DEFAULT nextval('measfish.item_item_id_seq'::regclass),
 	sample_id integer NOT NULL,
-	sexe_id integer,
-	pathology_id integer,
 	other_measure json,
 	sl float,
 	fl float,
@@ -1425,6 +1398,10 @@ CREATE TABLE measfish.individual (
 	age smallint,
 	measure_estimated boolean NOT NULL DEFAULT 'f',
 	pathology_code varchar,
+	tag varchar,
+	tag_posed varchar,
+	sexe_id integer,
+	pathology_id integer,
 	CONSTRAINT individual_id_pk PRIMARY KEY (individual_id)
 
 );
@@ -1451,7 +1428,11 @@ COMMENT ON COLUMN measfish.individual.measure_estimated IS 'Is the measure estim
 -- ddl-end --
 COMMENT ON COLUMN measfish.individual.pathology_code IS 'List of codes of pathologies or remarks';
 -- ddl-end --
-ALTER TABLE measfish.individual OWNER TO measfish;
+COMMENT ON COLUMN measfish.individual.tag IS 'Read tag';
+-- ddl-end --
+COMMENT ON COLUMN measfish.individual.tag_posed IS 'Tag posed on the fish';
+-- ddl-end --
+ALTER TABLE measfish.individual OWNER TO postgres;
 -- ddl-end --
 
 -- object: sample_fk | type: CONSTRAINT --
@@ -1472,7 +1453,7 @@ CREATE SEQUENCE measfish.measure_template_measure_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.measure_template_measure_template_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.measure_template_measure_template_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.measure_template | type: TABLE --
@@ -1489,7 +1470,7 @@ COMMENT ON COLUMN measfish.measure_template.measure_template_value IS 'List of a
 For each type : name, extended.
 By default : total_length and weight';
 -- ddl-end --
-ALTER TABLE measfish.measure_template OWNER TO measfish;
+ALTER TABLE measfish.measure_template OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.operation_template_operation_template_id_seq | type: SEQUENCE --
@@ -1503,7 +1484,7 @@ CREATE SEQUENCE measfish.operation_template_operation_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.operation_template_operation_template_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.operation_template_operation_template_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.operation_template | type: TABLE --
@@ -1521,7 +1502,7 @@ COMMENT ON TABLE measfish.operation_template IS 'List of taxons displayed on the
 COMMENT ON COLUMN measfish.operation_template.operation_template_taxa IS 'List of taxa and position on the screen
 Contains : taxon_id, posx and posy on the grid';
 -- ddl-end --
-ALTER TABLE measfish.operation_template OWNER TO measfish;
+ALTER TABLE measfish.operation_template OWNER TO postgres;
 -- ddl-end --
 
 -- object: operation_template_fk | type: CONSTRAINT --
@@ -1542,7 +1523,7 @@ CREATE SEQUENCE measfish.item_generated_item_generated_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.item_generated_item_generated_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.item_generated_item_generated_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.length_type | type: TABLE --
@@ -1558,7 +1539,7 @@ COMMENT ON TABLE measfish.length_type IS 'Types of length';
 -- ddl-end --
 COMMENT ON COLUMN measfish.length_type.length_type_name IS 'Name of the type of length measured';
 -- ddl-end --
-ALTER TABLE measfish.length_type OWNER TO measfish;
+ALTER TABLE measfish.length_type OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'1', E'sl');
@@ -1590,7 +1571,7 @@ CREATE SEQUENCE measfish.gear_gear_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.gear_gear_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.gear_gear_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.sequence_gear_sequence_gear_id_seq | type: SEQUENCE --
@@ -1604,7 +1585,7 @@ CREATE SEQUENCE measfish.sequence_gear_sequence_gear_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.sequence_gear_sequence_gear_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.sequence_gear_sequence_gear_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.gear | type: TABLE --
@@ -1627,19 +1608,19 @@ COMMENT ON COLUMN measfish.gear.gear_height IS 'Height of the net or other gear,
 -- ddl-end --
 COMMENT ON COLUMN measfish.gear.mesh_size IS 'Size of the mesh, in textual form';
 -- ddl-end --
-ALTER TABLE measfish.gear OWNER TO measfish;
+ALTER TABLE measfish.gear OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.sequence_gear | type: TABLE --
 -- DROP TABLE IF EXISTS measfish.sequence_gear CASCADE;
 CREATE TABLE measfish.sequence_gear (
 	sequence_gear_id integer NOT NULL DEFAULT nextval('measfish.sequence_gear_sequence_gear_id_seq'::regclass),
-	sequence_id integer NOT NULL,
-	gear_id integer NOT NULL,
 	voltage float,
 	amperage float,
 	gear_nb smallint NOT NULL DEFAULT 1,
 	depth float,
+	sequence_id integer NOT NULL,
+	gear_id integer NOT NULL,
 	CONSTRAINT sequence_gear_pk PRIMARY KEY (sequence_gear_id)
 
 );
@@ -1654,7 +1635,7 @@ COMMENT ON COLUMN measfish.sequence_gear.gear_nb IS 'Nb of gears';
 -- ddl-end --
 COMMENT ON COLUMN measfish.sequence_gear.depth IS 'Depth of the gear';
 -- ddl-end --
-ALTER TABLE measfish.sequence_gear OWNER TO measfish;
+ALTER TABLE measfish.sequence_gear OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.engine_engine_id_seq | type: SEQUENCE --
@@ -1668,7 +1649,7 @@ CREATE SEQUENCE measfish.engine_engine_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.engine_engine_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.engine_engine_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.river_river_id_seq | type: SEQUENCE --
@@ -1682,7 +1663,7 @@ CREATE SEQUENCE measfish.river_river_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.river_river_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.river_river_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.river | type: TABLE --
@@ -1696,7 +1677,7 @@ CREATE TABLE measfish.river (
 -- ddl-end --
 COMMENT ON TABLE measfish.river IS 'River, estuary, sea...';
 -- ddl-end --
-ALTER TABLE measfish.river OWNER TO measfish;
+ALTER TABLE measfish.river OWNER TO postgres;
 -- ddl-end --
 
 -- object: river_fk | type: CONSTRAINT --
@@ -1731,7 +1712,7 @@ CREATE SEQUENCE measfish.analysis_analysis_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.analysis_analysis_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.analysis_analysis_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.analysis | type: TABLE --
@@ -1747,6 +1728,7 @@ CREATE TABLE measfish.analysis (
 	salinity float,
 	conductivity float,
 	secchi float,
+	other_analysis json,
 	CONSTRAINT analysis_pk PRIMARY KEY (analysis_id)
 
 );
@@ -1769,7 +1751,9 @@ COMMENT ON COLUMN measfish.analysis.conductivity IS 'Conductivity, in µS/cm';
 -- ddl-end --
 COMMENT ON COLUMN measfish.analysis.secchi IS 'Secchi depth, in meter';
 -- ddl-end --
-ALTER TABLE measfish.analysis OWNER TO measfish;
+COMMENT ON COLUMN measfish.analysis.other_analysis IS 'Others analysis performed (cf. analysis_template)';
+-- ddl-end --
+ALTER TABLE measfish.analysis OWNER TO postgres;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
@@ -1793,7 +1777,7 @@ COMMENT ON TABLE measfish.sexe IS 'Sexe of fishs';
 -- ddl-end --
 COMMENT ON COLUMN measfish.sexe.sexe_code IS 'Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437';
 -- ddl-end --
-ALTER TABLE measfish.sexe OWNER TO measfish;
+ALTER TABLE measfish.sexe OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.sexe (sexe_id, sexe_name, sexe_code) VALUES (E'1', E'Femelle', E'F');
@@ -1823,7 +1807,7 @@ CREATE SEQUENCE measfish.pathology_pathology_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.pathology_pathology_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.pathology_pathology_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.pathology | type: TABLE --
@@ -1845,7 +1829,7 @@ COMMENT ON COLUMN measfish.pathology.pathology_code IS 'Code of the pathology, a
 -- ddl-end --
 COMMENT ON COLUMN measfish.pathology.pathology_description IS 'Description of the pathology';
 -- ddl-end --
-ALTER TABLE measfish.pathology OWNER TO measfish;
+ALTER TABLE measfish.pathology OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'1', E'00', E'Ni poux, ni traces de poux', E'Le poisson, généralement un salmonidé migrateur venu de la mer, n''héberge aucun pou de mer et ne présente aucune lésion visible consécutive à une colonisation par le pou de mer (qui est en fait un crustacé parasite des salmonidés migrateurs)');
@@ -1934,13 +1918,13 @@ INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pa
 -- ddl-end --
 INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'43', E'01', E'Traces de poux', E'Le poisson ne porte aucun pou mais présente des lésions cutanées consécutives à une colonisation par le pou de mer. La présence du poisson en eau douce a été suffisante pour obliger les poux à quitter leur hôte.');
 -- ddl-end --
-INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'44', E'11', E'10 poux , sans flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
+INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'44', E'11', E'<10 poux , sans flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
 -- ddl-end --
-INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'45', E'21', E'10 poux , avec flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
+INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'45', E'21', E'<10 poux , avec flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
 -- ddl-end --
-INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'46', E'31', E'10 poux, sans flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
+INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'46', E'31', E'>10 poux, sans flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
 -- ddl-end --
-INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'47', E'42', E'10 poux, avec flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
+INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'47', E'42', E'>10 poux, avec flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
 -- ddl-end --
 INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'48', E'NC', E'Signe pathologique d''origine inconnue', E'Signe pathologique d''origine inconnue');
 -- ddl-end --
@@ -1984,7 +1968,7 @@ CREATE SEQUENCE measfish.facies_facies_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.facies_facies_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.facies_facies_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.ambience_ambience_id_seq | type: SEQUENCE --
@@ -1998,7 +1982,7 @@ CREATE SEQUENCE measfish.ambience_ambience_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.ambience_ambience_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.ambience_ambience_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.situation_situation_id_seq | type: SEQUENCE --
@@ -2012,7 +1996,7 @@ CREATE SEQUENCE measfish.situation_situation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.situation_situation_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.situation_situation_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.facies | type: TABLE --
@@ -2026,7 +2010,7 @@ CREATE TABLE measfish.facies (
 -- ddl-end --
 COMMENT ON TABLE measfish.facies IS 'List of facies';
 -- ddl-end --
-ALTER TABLE measfish.facies OWNER TO measfish;
+ALTER TABLE measfish.facies OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.facies (facies_id, facies_name) VALUES (E'1', E'Rapide');
@@ -2055,6 +2039,13 @@ INSERT INTO measfish.facies (facies_id, facies_name) VALUES (E'10', E'Darse');
 CREATE TABLE measfish.ambience (
 	ambience_id integer NOT NULL DEFAULT nextval('measfish.ambience_ambience_id_seq'::regclass),
 	operation_id integer NOT NULL,
+	ambience_name varchar,
+	ambience_length float,
+	ambience_width float,
+	ambience_depth float,
+	ambience_comment varchar,
+	ambience_long double precision,
+	ambience_lat double precision,
 	facies_id integer,
 	situation_id integer,
 	speed_id integer,
@@ -2068,11 +2059,10 @@ CREATE TABLE measfish.ambience (
 	vegetation_cache_abundance_id integer,
 	subbank_cache_abundance_id integer,
 	granulometry_cache_abundance_id integer,
-	ambience_name varchar,
-	ambience_length float,
-	ambience_width float,
-	ambience_depth float,
-	ambience_comment varchar,
+	clogging_id integer,
+	sinuosity_id integer,
+	flow_trend_id integer,
+	turbidity_id_turbidity integer,
 	CONSTRAINT ambience_pk PRIMARY KEY (ambience_id)
 
 );
@@ -2087,7 +2077,11 @@ COMMENT ON COLUMN measfish.ambience.ambience_width IS 'Width of the point, in me
 -- ddl-end --
 COMMENT ON COLUMN measfish.ambience.ambience_depth IS 'Average depth of water, in meter';
 -- ddl-end --
-ALTER TABLE measfish.ambience OWNER TO measfish;
+COMMENT ON COLUMN measfish.ambience.ambience_long IS 'Longitude of the point of observation, in decimal WGS84';
+-- ddl-end --
+COMMENT ON COLUMN measfish.ambience.ambience_lat IS 'Latitude of the point of observation, in decimal WGS84';
+-- ddl-end --
+ALTER TABLE measfish.ambience OWNER TO postgres;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
@@ -2108,7 +2102,7 @@ CREATE TABLE measfish.situation (
 -- ddl-end --
 COMMENT ON TABLE measfish.situation IS 'List of situations';
 -- ddl-end --
-ALTER TABLE measfish.situation OWNER TO measfish;
+ALTER TABLE measfish.situation OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.situation (situation_id, situation_name) VALUES (E'3', E'Confluence ruisseau');
@@ -2139,7 +2133,7 @@ CREATE SEQUENCE measfish.localisation_localisation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.localisation_localisation_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.localisation_localisation_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.localisation | type: TABLE --
@@ -2153,7 +2147,7 @@ CREATE TABLE measfish.localisation (
 -- ddl-end --
 COMMENT ON TABLE measfish.localisation IS 'List of localisations of the ambience';
 -- ddl-end --
-ALTER TABLE measfish.localisation OWNER TO measfish;
+ALTER TABLE measfish.localisation OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.localisation (localisation_id, localisation_name) VALUES (E'1', E'Chenal');
@@ -2172,7 +2166,7 @@ CREATE TABLE measfish.speed (
 -- ddl-end --
 COMMENT ON TABLE measfish.speed IS 'Speed of current, in cm/s';
 -- ddl-end --
-ALTER TABLE measfish.speed OWNER TO measfish;
+ALTER TABLE measfish.speed OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.speed (speed_id, speed_name) VALUES (E'1', E'< 10 cm/s');
@@ -2197,7 +2191,7 @@ CREATE TABLE measfish.shady (
 -- ddl-end --
 COMMENT ON TABLE measfish.shady IS 'List of shaddies used for ambiences';
 -- ddl-end --
-ALTER TABLE measfish.shady OWNER TO measfish;
+ALTER TABLE measfish.shady OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.shady (shady_id, shady_name) VALUES (E'1', E'Rivière couverte (>90% d''ombrage)');
@@ -2220,7 +2214,7 @@ CREATE SEQUENCE measfish.granulometry_granulometry_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.granulometry_granulometry_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.granulometry_granulometry_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.granulometry | type: TABLE --
@@ -2234,7 +2228,7 @@ CREATE TABLE measfish.granulometry (
 -- ddl-end --
 COMMENT ON TABLE measfish.granulometry IS 'List of types of granulometry';
 -- ddl-end --
-ALTER TABLE measfish.granulometry OWNER TO measfish;
+ALTER TABLE measfish.granulometry OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.granulometry (granulometry_id, granulometry_name) VALUES (E'1', E'Argile (<3,9 µm)');
@@ -2273,7 +2267,7 @@ CREATE SEQUENCE measfish.vegetation_vegetation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.vegetation_vegetation_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.vegetation_vegetation_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.vegetation | type: TABLE --
@@ -2287,7 +2281,7 @@ CREATE TABLE measfish.vegetation (
 -- ddl-end --
 COMMENT ON TABLE measfish.vegetation IS 'List of types of vegetation';
 -- ddl-end --
-ALTER TABLE measfish.vegetation OWNER TO measfish;
+ALTER TABLE measfish.vegetation OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.vegetation (vegetation_id, vegetation_name) VALUES (E'1', E'Algues - microphytes');
@@ -2318,7 +2312,7 @@ CREATE SEQUENCE measfish.cache_abundance_cache_abundance_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.cache_abundance_cache_abundance_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.cache_abundance_cache_abundance_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: measfish.cache_abundance | type: TABLE --
@@ -2332,7 +2326,7 @@ CREATE TABLE measfish.cache_abundance (
 -- ddl-end --
 COMMENT ON TABLE measfish.cache_abundance IS 'Levels of abundance of caches';
 -- ddl-end --
-ALTER TABLE measfish.cache_abundance OWNER TO measfish;
+ALTER TABLE measfish.cache_abundance OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO measfish.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'1', E'Nulle');
@@ -2448,7 +2442,7 @@ CREATE SEQUENCE gacl.aclgroup_aclgroup_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.aclgroup_aclgroup_id_seq OWNER TO measfish;
+ALTER SEQUENCE gacl.aclgroup_aclgroup_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.aclacl | type: TABLE --
@@ -2462,7 +2456,7 @@ CREATE TABLE gacl.aclacl (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclacl IS 'Table des droits attribués';
 -- ddl-end --
-ALTER TABLE gacl.aclacl OWNER TO measfish;
+ALTER TABLE gacl.aclacl OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.aclacl (aclaco_id, aclgroup_id) VALUES (E'1', E'1');
@@ -2489,7 +2483,7 @@ CREATE SEQUENCE gacl.aclaco_aclaco_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.aclaco_aclaco_id_seq OWNER TO measfish;
+ALTER SEQUENCE gacl.aclaco_aclaco_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.aclaco | type: TABLE --
@@ -2504,7 +2498,7 @@ CREATE TABLE gacl.aclaco (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclaco IS 'Table des droits gérés';
 -- ddl-end --
-ALTER TABLE gacl.aclaco OWNER TO measfish;
+ALTER TABLE gacl.aclaco OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.aclaco (aclaco_id, aclappli_id, aco) VALUES (E'1', E'1', E'admin');
@@ -2531,7 +2525,7 @@ CREATE SEQUENCE gacl.aclappli_aclappli_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.aclappli_aclappli_id_seq OWNER TO measfish;
+ALTER SEQUENCE gacl.aclappli_aclappli_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.aclappli | type: TABLE --
@@ -2550,7 +2544,7 @@ COMMENT ON COLUMN gacl.aclappli.appli IS 'Nom de l''application pour la gestion 
 -- ddl-end --
 COMMENT ON COLUMN gacl.aclappli.applidetail IS 'Description de l''application';
 -- ddl-end --
-ALTER TABLE gacl.aclappli OWNER TO measfish;
+ALTER TABLE gacl.aclappli OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.aclappli (aclappli_id, appli, applidetail) VALUES (E'1', E'measfish', DEFAULT);
@@ -2568,7 +2562,7 @@ CREATE TABLE gacl.aclgroup (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclgroup IS 'Groupes des logins';
 -- ddl-end --
-ALTER TABLE gacl.aclgroup OWNER TO measfish;
+ALTER TABLE gacl.aclgroup OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.aclgroup (aclgroup_id, groupe, aclgroup_id_parent) VALUES (E'1', E'admin', DEFAULT);
@@ -2595,7 +2589,7 @@ CREATE SEQUENCE gacl.acllogin_acllogin_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.acllogin_acllogin_id_seq OWNER TO measfish;
+ALTER SEQUENCE gacl.acllogin_acllogin_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.acllogin | type: TABLE --
@@ -2612,7 +2606,7 @@ COMMENT ON TABLE gacl.acllogin IS 'Table des logins des utilisateurs autorisés'
 -- ddl-end --
 COMMENT ON COLUMN gacl.acllogin.logindetail IS 'Nom affiché';
 -- ddl-end --
-ALTER TABLE gacl.acllogin OWNER TO measfish;
+ALTER TABLE gacl.acllogin OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.acllogin (acllogin_id, login, logindetail) VALUES (E'1', E'admin', E'admin');
@@ -2629,7 +2623,7 @@ CREATE TABLE gacl.acllogingroup (
 -- ddl-end --
 COMMENT ON TABLE gacl.acllogingroup IS 'Table des relations entre les logins et les groupes';
 -- ddl-end --
-ALTER TABLE gacl.acllogingroup OWNER TO measfish;
+ALTER TABLE gacl.acllogingroup OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.acllogingroup (acllogin_id, aclgroup_id) VALUES (E'1', E'1');
@@ -2648,7 +2642,7 @@ CREATE SEQUENCE gacl.log_log_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.log_log_id_seq OWNER TO measfish;
+ALTER SEQUENCE gacl.log_log_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.log | type: TABLE --
@@ -2672,7 +2666,7 @@ COMMENT ON COLUMN gacl.log.commentaire IS 'Donnees complementaires enregistrees'
 -- ddl-end --
 COMMENT ON COLUMN gacl.log.ipaddress IS 'Adresse IP du client';
 -- ddl-end --
-ALTER TABLE gacl.log OWNER TO measfish;
+ALTER TABLE gacl.log OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.seq_logingestion_id | type: SEQUENCE --
@@ -2686,7 +2680,7 @@ CREATE SEQUENCE gacl.seq_logingestion_id
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.seq_logingestion_id OWNER TO measfish;
+ALTER SEQUENCE gacl.seq_logingestion_id OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.login_oldpassword_login_oldpassword_id_seq | type: SEQUENCE --
@@ -2700,7 +2694,7 @@ CREATE SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq OWNER TO measfish;
+ALTER SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.login_oldpassword | type: TABLE --
@@ -2715,7 +2709,7 @@ CREATE TABLE gacl.login_oldpassword (
 -- ddl-end --
 COMMENT ON TABLE gacl.login_oldpassword IS 'Table contenant les anciens mots de passe';
 -- ddl-end --
-ALTER TABLE gacl.login_oldpassword OWNER TO measfish;
+ALTER TABLE gacl.login_oldpassword OWNER TO postgres;
 -- ddl-end --
 
 -- object: gacl.logingestion | type: TABLE --
@@ -2735,45 +2729,10 @@ CREATE TABLE gacl.logingestion (
 
 );
 -- ddl-end --
-ALTER TABLE gacl.logingestion OWNER TO measfish;
+ALTER TABLE gacl.logingestion OWNER TO postgres;
 -- ddl-end --
 
 INSERT INTO gacl.logingestion (id, login, password, nom, prenom, mail, datemodif, actif, is_clientws, tokenws) VALUES (E'1', E'admin', E'cd916028a2d8a1b901e831246dd5b9b4d3832786ddc63bbf5af4b50d9fc98f50', E'Administrator', DEFAULT, DEFAULT, DEFAULT, E'1', DEFAULT, DEFAULT);
--- ddl-end --
-
--- object: gacl.passwordlost_passwordlost_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS gacl.passwordlost_passwordlost_id_seq CASCADE;
-CREATE SEQUENCE gacl.passwordlost_passwordlost_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 9223372036854775807
-	START WITH 1
-	CACHE 1
-	NO CYCLE
-	OWNED BY NONE;
--- ddl-end --
-ALTER SEQUENCE gacl.passwordlost_passwordlost_id_seq OWNER TO measfish;
--- ddl-end --
-
--- object: gacl.passwordlost | type: TABLE --
--- DROP TABLE IF EXISTS gacl.passwordlost CASCADE;
-CREATE TABLE gacl.passwordlost (
-	passwordlost_id integer NOT NULL DEFAULT nextval('gacl.passwordlost_passwordlost_id_seq'::regclass),
-	id integer NOT NULL,
-	token character varying NOT NULL,
-	expiration timestamp NOT NULL,
-	usedate timestamp,
-	CONSTRAINT passwordlost_pk PRIMARY KEY (passwordlost_id)
-
-);
--- ddl-end --
-COMMENT ON TABLE gacl.passwordlost IS 'Table de suivi des pertes de mots de passe';
--- ddl-end --
-COMMENT ON COLUMN gacl.passwordlost.token IS 'Jeton utilise pour le renouvellement';
--- ddl-end --
-COMMENT ON COLUMN gacl.passwordlost.expiration IS 'Date d''expiration du jeton';
--- ddl-end --
-ALTER TABLE gacl.passwordlost OWNER TO measfish;
 -- ddl-end --
 
 -- object: log_date_idx | type: INDEX --
@@ -2805,7 +2764,7 @@ CREATE TABLE measfish.project_group (
 
 );
 -- ddl-end --
-ALTER TABLE measfish.project_group OWNER TO measfish;
+ALTER TABLE measfish.project_group OWNER TO postgres;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
@@ -2822,59 +2781,306 @@ REFERENCES gacl.aclgroup (aclgroup_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: measfish.dbparam | type: TABLE --
--- DROP TABLE IF EXISTS measfish.dbparam CASCADE;
-CREATE TABLE measfish.dbparam (
-	dbparam_id integer NOT NULL,
-	dbparam_name character varying NOT NULL,
-	dbparam_value character varying,
-	CONSTRAINT dbparam_pk PRIMARY KEY (dbparam_id)
-
-);
--- ddl-end --
-COMMENT ON TABLE measfish.dbparam IS 'Table des parametres associes de maniere intrinseque a l''instance';
--- ddl-end --
-COMMENT ON COLUMN measfish.dbparam.dbparam_name IS 'Nom du parametre';
--- ddl-end --
-COMMENT ON COLUMN measfish.dbparam.dbparam_value IS 'Valeur du paramètre';
--- ddl-end --
-ALTER TABLE measfish.dbparam OWNER TO measfish;
--- ddl-end --
-
-INSERT INTO measfish.dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'1', E'title', E'Measures of fishes');
--- ddl-end --
-
--- object: measfish.dbversion_dbversion_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS measfish.dbversion_dbversion_id_seq CASCADE;
-CREATE SEQUENCE measfish.dbversion_dbversion_id_seq
+-- object: measfish.operator_operator_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.operator_operator_id_seq CASCADE;
+CREATE SEQUENCE measfish.operator_operator_id_seq
 	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 9223372036854775807
+	MINVALUE 0
+	MAXVALUE 2147483647
 	START WITH 1
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.dbversion_dbversion_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.operator_operator_id_seq OWNER TO postgres;
 -- ddl-end --
 
--- object: measfish.dbversion | type: TABLE --
--- DROP TABLE IF EXISTS measfish.dbversion CASCADE;
-CREATE TABLE measfish.dbversion (
-	dbversion_id integer NOT NULL DEFAULT nextval('measfish.dbversion_dbversion_id_seq'::regclass),
-	dbversion_number character varying NOT NULL,
-	dbversion_date timestamp NOT NULL,
-	CONSTRAINT dbversion_pk PRIMARY KEY (dbversion_id)
+-- object: measfish.operator | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.operator CASCADE;
+CREATE TABLE measfish.operator (
+	operator_id integer NOT NULL DEFAULT nextval('measfish.operator_operator_id_seq'::regclass),
+	firstname varchar,
+	name varchar NOT NULL,
+	is_active boolean NOT NULL DEFAULT 't',
+	CONSTRAINT operator_pk PRIMARY KEY (operator_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE measfish.dbversion IS 'Table des versions de la base de donnees';
+COMMENT ON TABLE measfish.operator IS 'List of operators';
 -- ddl-end --
-COMMENT ON COLUMN measfish.dbversion.dbversion_number IS 'Numero de la version';
+COMMENT ON COLUMN measfish.operator.firstname IS 'First name of the operator';
 -- ddl-end --
-COMMENT ON COLUMN measfish.dbversion.dbversion_date IS 'Date de la version';
+COMMENT ON COLUMN measfish.operator.name IS 'Last name of operator';
 -- ddl-end --
-ALTER TABLE measfish.dbversion OWNER TO measfish;
+COMMENT ON COLUMN measfish.operator.is_active IS 'Is the opérator actually active ?';
+-- ddl-end --
+ALTER TABLE measfish.operator OWNER TO postgres;
+-- ddl-end --
+
+-- object: measfish.operation_operator | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.operation_operator CASCADE;
+CREATE TABLE measfish.operation_operator (
+	is_responsible bool DEFAULT 't',
+	operation_id integer NOT NULL,
+	operator_id integer NOT NULL,
+	CONSTRAINT operation_operator_pk PRIMARY KEY (operation_id,operator_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.operation_operator IS 'Operators rattached to an operation';
+-- ddl-end --
+COMMENT ON COLUMN measfish.operation_operator.is_responsible IS 'True if the operator is responsible of the operation';
+-- ddl-end --
+ALTER TABLE measfish.operation_operator OWNER TO postgres;
+-- ddl-end --
+
+-- object: operation_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation_operator DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
+ALTER TABLE measfish.operation_operator ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
+REFERENCES measfish.operation (operation_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: operator_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation_operator DROP CONSTRAINT IF EXISTS operator_fk CASCADE;
+ALTER TABLE measfish.operation_operator ADD CONSTRAINT operator_fk FOREIGN KEY (operator_id)
+REFERENCES measfish.operator (operator_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measure_template_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS measure_template_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT measure_template_fk FOREIGN KEY (measure_template_id)
+REFERENCES measfish.measure_template (measure_template_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.analysis_template_analysis_template_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.analysis_template_analysis_template_id_seq CASCADE;
+CREATE SEQUENCE measfish.analysis_template_analysis_template_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.analysis_template_analysis_template_id_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: measfish.analysis_template | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.analysis_template CASCADE;
+CREATE TABLE measfish.analysis_template (
+	analysis_template_id integer NOT NULL DEFAULT nextval('measfish.analysis_template_analysis_template_id_seq'::regclass),
+	analysis_template_name varchar NOT NULL,
+	analysis_template_value json,
+	CONSTRAINT analysis_template_pk PRIMARY KEY (analysis_template_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.analysis_template IS 'Table of types of complementary analysis';
+-- ddl-end --
+COMMENT ON COLUMN measfish.analysis_template.analysis_template_name IS 'Name of the template';
+-- ddl-end --
+COMMENT ON COLUMN measfish.analysis_template.analysis_template_value IS 'Description of all parameters recorded, in Json format';
+-- ddl-end --
+ALTER TABLE measfish.analysis_template OWNER TO postgres;
+-- ddl-end --
+
+-- object: analysis_template_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS analysis_template_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT analysis_template_fk FOREIGN KEY (analysis_template_id)
+REFERENCES measfish.analysis_template (analysis_template_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.cloggging_clogging_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.cloggging_clogging_id_seq CASCADE;
+CREATE SEQUENCE measfish.cloggging_clogging_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 10
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.cloggging_clogging_id_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: measfish.clogging | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.clogging CASCADE;
+CREATE TABLE measfish.clogging (
+	clogging_id integer NOT NULL DEFAULT nextval('measfish.cloggging_clogging_id_seq'::regclass),
+	clogging_name varchar NOT NULL,
+	CONSTRAINT clogging_pk PRIMARY KEY (clogging_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.clogging IS 'List of types of cloggings';
+-- ddl-end --
+COMMENT ON COLUMN measfish.clogging.clogging_name IS 'Name of the type of clogging';
+-- ddl-end --
+ALTER TABLE measfish.clogging OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'1', E'Pas de colmatage');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'2', E'Sable');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'3', E'Vase');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'4', E'Sédiments fins');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'5', E'Recouvrements biologiques');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'6', E'Débris végétaux');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'7', E'Litières');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'8', E'Dépôts incrustants');
+-- ddl-end --
+INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'9', E'Autres');
+-- ddl-end --
+
+-- object: clogging_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.ambience DROP CONSTRAINT IF EXISTS clogging_fk CASCADE;
+ALTER TABLE measfish.ambience ADD CONSTRAINT clogging_fk FOREIGN KEY (clogging_id)
+REFERENCES measfish.clogging (clogging_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.sinuosity_sinuosity_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.sinuosity_sinuosity_id_seq CASCADE;
+CREATE SEQUENCE measfish.sinuosity_sinuosity_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 5
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.sinuosity_sinuosity_id_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: measfish.sinuosity | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.sinuosity CASCADE;
+CREATE TABLE measfish.sinuosity (
+	sinuosity_id integer NOT NULL DEFAULT nextval('measfish.sinuosity_sinuosity_id_seq'::regclass),
+	sinuosity_name varchar NOT NULL,
+	CONSTRAINT sinuosity_pk PRIMARY KEY (sinuosity_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.sinuosity IS 'List of types of sinuosities of the river';
+-- ddl-end --
+ALTER TABLE measfish.sinuosity OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO measfish.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'1', E'Cours d''eau rectiligne');
+-- ddl-end --
+INSERT INTO measfish.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'2', E'Cours d''eau sinueux');
+-- ddl-end --
+INSERT INTO measfish.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'3', E'Cours d''eau très sinueux');
+-- ddl-end --
+INSERT INTO measfish.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'4', E'Cours d''eau méandriforme');
+-- ddl-end --
+
+-- object: sinuosity_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.ambience DROP CONSTRAINT IF EXISTS sinuosity_fk CASCADE;
+ALTER TABLE measfish.ambience ADD CONSTRAINT sinuosity_fk FOREIGN KEY (sinuosity_id)
+REFERENCES measfish.sinuosity (sinuosity_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.flow_trend_flow_trend_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.flow_trend_flow_trend_id_seq CASCADE;
+CREATE SEQUENCE measfish.flow_trend_flow_trend_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 5
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.flow_trend_flow_trend_id_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: measfish.flow_trend | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.flow_trend CASCADE;
+CREATE TABLE measfish.flow_trend (
+	flow_trend_id integer NOT NULL DEFAULT nextval('measfish.flow_trend_flow_trend_id_seq'::regclass),
+	flow_trend_name varchar NOT NULL,
+	CONSTRAINT flow_trend_pk PRIMARY KEY (flow_trend_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.flow_trend IS 'List of trends of flow';
+-- ddl-end --
+ALTER TABLE measfish.flow_trend OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO measfish.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'1', E'Augmentation (en crue)');
+-- ddl-end --
+INSERT INTO measfish.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'2', E'Diminution (en décrue)');
+-- ddl-end --
+INSERT INTO measfish.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'3', E'Stabilité');
+-- ddl-end --
+INSERT INTO measfish.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'4', E'Irrégularité');
+-- ddl-end --
+
+-- object: flow_trend_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.ambience DROP CONSTRAINT IF EXISTS flow_trend_fk CASCADE;
+ALTER TABLE measfish.ambience ADD CONSTRAINT flow_trend_fk FOREIGN KEY (flow_trend_id)
+REFERENCES measfish.flow_trend (flow_trend_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.turbidity_id | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.turbidity_id CASCADE;
+CREATE SEQUENCE measfish.turbidity_id
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 5
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.turbidity_id OWNER TO postgres;
+-- ddl-end --
+
+-- object: measfish.turbidity | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.turbidity CASCADE;
+CREATE TABLE measfish.turbidity (
+	turbidity_id integer NOT NULL DEFAULT nextval('measfish.turbidity_id'::regclass),
+	turbidity_name varchar NOT NULL,
+	CONSTRAINT turbidity_pk PRIMARY KEY (turbidity_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.turbidity IS 'List of types of turbidity';
+-- ddl-end --
+ALTER TABLE measfish.turbidity OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO measfish.turbidity (turbidity_id, turbidity_name) VALUES (E'1', E'Nulle');
+-- ddl-end --
+INSERT INTO measfish.turbidity (turbidity_id, turbidity_name) VALUES (E'2', E'Faible');
+-- ddl-end --
+INSERT INTO measfish.turbidity (turbidity_id, turbidity_name) VALUES (E'3', E'Moyenne');
+-- ddl-end --
+INSERT INTO measfish.turbidity (turbidity_id, turbidity_name) VALUES (E'4', E'Forte');
+-- ddl-end --
+
+-- object: turbidity_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.ambience DROP CONSTRAINT IF EXISTS turbidity_fk CASCADE;
+ALTER TABLE measfish.ambience ADD CONSTRAINT turbidity_fk FOREIGN KEY (turbidity_id_turbidity)
+REFERENCES measfish.turbidity (turbidity_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: aclaco_aclacl_fk | type: CONSTRAINT --
@@ -2922,13 +3128,6 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: logingestion_login_oldpassword_fk | type: CONSTRAINT --
 -- ALTER TABLE gacl.login_oldpassword DROP CONSTRAINT IF EXISTS logingestion_login_oldpassword_fk CASCADE;
 ALTER TABLE gacl.login_oldpassword ADD CONSTRAINT logingestion_login_oldpassword_fk FOREIGN KEY (id)
-REFERENCES gacl.logingestion (id) MATCH SIMPLE
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: logingestion_passwordlost_fk | type: CONSTRAINT --
--- ALTER TABLE gacl.passwordlost DROP CONSTRAINT IF EXISTS logingestion_passwordlost_fk CASCADE;
-ALTER TABLE gacl.passwordlost ADD CONSTRAINT logingestion_passwordlost_fk FOREIGN KEY (id)
 REFERENCES gacl.logingestion (id) MATCH SIMPLE
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
