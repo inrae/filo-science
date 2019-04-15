@@ -1,0 +1,1517 @@
+<html>
+            <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <title>measfish</title>
+            <style type="text/css">
+                /* Affichage de la structure de la base de donnees */
+.tablename {
+	background: #003A80;
+	font-size: large;
+    color: white;
+    font-weight:bold;
+    margin-top: 1em;
+}
+.tablecomment {
+	color:#009EE0;
+}
+h1 {
+    color: #003A80;
+}
+h2 {
+    color: #009EE0;
+    padding-top: 1em;
+}
+h3 {
+    color: #003A80;
+    font-weight:normal;
+}
+.datatable {
+    padding-bottom: 1em;
+}
+.center {
+    text-align: center;
+}
+            </style>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+            <script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+            <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            </head>
+            <body>
+            <script>
+            $(document).ready( function () {
+                $(".datatable").DataTable( {
+                    "paging": false,
+                    "searching": false,
+                    "ordering": false,
+                    "info": false
+                });
+            } );
+            </script>
+            <h1>Structure of measfish database</h1><p>Date generation: 09/04/2019 10:04:50</p><h2>Schema gacl</h2><div id="gaclaclacl" class="tablename">aclacl</div><br><div class="tablecomment">Table des droits attribués</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>aclaco_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>aclgroup_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>aclaco_id: gacl.<a href="#gaclaclaco">aclaco</a> (aclaco_id)<br>aclgroup_id: gacl.<a href="#gaclaclgroup">aclgroup</a> (aclgroup_id)<br><div id="gaclaclaco" class="tablename">aclaco</div><br><div class="tablecomment">Table des droits gérés</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>aclaco_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>aclappli_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>aco</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>aclappli_id: gacl.<a href="#gaclaclappli">aclappli</a> (aclappli_id)<br><h3>Referenced by</h3>aclaco_id: gacl.<a href="#gaclaclacl">aclacl</a> (aclaco_id)<br><div id="gaclaclappli" class="tablename">aclappli</div><br><div class="tablecomment">Table des applications gérées</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>aclappli_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>appli</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Nom de l'application pour la gestion des droits</td>
+                </tr><tr>
+                <td>applidetail</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Description de l'application</td>
+                </tr></tbody></table><h3>Referenced by</h3>aclappli_id: gacl.<a href="#gaclaclaco">aclaco</a> (aclappli_id)<br><div id="gaclaclgroup" class="tablename">aclgroup</div><br><div class="tablecomment">Groupes des logins</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>aclgroup_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>groupe</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>aclgroup_id_parent</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>aclgroup_id_parent: gacl.<a href="#gaclaclgroup">aclgroup</a> (aclgroup_id)<br><h3>Referenced by</h3>aclgroup_id: gacl.<a href="#gaclaclacl">aclacl</a> (aclgroup_id)<br>aclgroup_id: gacl.<a href="#gaclaclgroup">aclgroup</a> (aclgroup_id_parent)<br>aclgroup_id: gacl.<a href="#gaclacllogingroup">acllogingroup</a> (aclgroup_id)<br>aclgroup_id: measfish.<a href="#measfishproject_group">project_group</a> (aclgroup_id)<br><div id="gaclacllogin" class="tablename">acllogin</div><br><div class="tablecomment">Table des logins des utilisateurs autorisés</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>acllogin_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>login</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>logindetail</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Nom affiché</td>
+                </tr></tbody></table><h3>Referenced by</h3>acllogin_id: gacl.<a href="#gaclacllogingroup">acllogingroup</a> (acllogin_id)<br><div id="gaclacllogingroup" class="tablename">acllogingroup</div><br><div class="tablecomment">Table des relations entre les logins et les groupes</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>acllogin_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>aclgroup_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>aclgroup_id: gacl.<a href="#gaclaclgroup">aclgroup</a> (aclgroup_id)<br>acllogin_id: gacl.<a href="#gaclacllogin">acllogin</a> (acllogin_id)<br><div id="gacllog" class="tablename">log</div><br><div class="tablecomment">Liste des connexions ou des actions enregistrées</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>log_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>login</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>nom_module</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>log_date</td>
+                <td>timestamp without time zone</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Heure de connexion</td>
+                </tr><tr>
+                <td>commentaire</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Donnees complementaires enregistrees</td>
+                </tr><tr>
+                <td>ipaddress</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Adresse IP du client</td>
+                </tr></tbody></table><div id="gacllogin_oldpassword" class="tablename">login_oldpassword</div><br><div class="tablecomment">Table contenant les anciens mots de passe</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>login_oldpassword_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>password</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>id: gacl.<a href="#gacllogingestion">logingestion</a> (id)<br><div id="gacllogingestion" class="tablename">logingestion</div><br><div class="tablecomment"></div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>login</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>password</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>nom</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>prenom</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>mail</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>datemodif</td>
+                <td>date</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>actif</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>is_clientws</td>
+                <td>boolean</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>tokenws</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>id: gacl.<a href="#gacllogin_oldpassword">login_oldpassword</a> (id)<br><h2>Schema measfish</h2><div id="measfishambience" class="tablename">ambience</div><br><div class="tablecomment">Description of the ambiences of the operation</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>ambience_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>operation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>ambience_name</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Name of the point</td>
+                </tr><tr>
+                <td>ambience_length</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Length of the point, in meter</td>
+                </tr><tr>
+                <td>ambience_width</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Width of the point, in meter</td>
+                </tr><tr>
+                <td>ambience_depth</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Average depth of water, in meter</td>
+                </tr><tr>
+                <td>ambience_comment</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>ambience_long</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Longitude of the point of observation, in decimal WGS84</td>
+                </tr><tr>
+                <td>ambience_lat</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Latitude of the point of observation, in decimal WGS84</td>
+                </tr><tr>
+                <td>facies_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>situation_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>speed_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>shady_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>localisation_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>vegetation_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>dominant_granulometry_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>secondary_granulometry_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>herbarium_cache_abundance_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>branch_cache_abundance_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>vegetation_cache_abundance_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>subbank_cache_abundance_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>granulometry_cache_abundance_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>herbarium_cache_abundance_id: measfish.<a href="#measfishcache_abundance">cache_abundance</a> (cache_abundance_id)<br>branch_cache_abundance_id: measfish.<a href="#measfishcache_abundance">cache_abundance</a> (cache_abundance_id)<br>vegetation_cache_abundance_id: measfish.<a href="#measfishcache_abundance">cache_abundance</a> (cache_abundance_id)<br>subbank_cache_abundance_id: measfish.<a href="#measfishcache_abundance">cache_abundance</a> (cache_abundance_id)<br>granulometry_cache_abundance_id: measfish.<a href="#measfishcache_abundance">cache_abundance</a> (cache_abundance_id)<br>facies_id: measfish.<a href="#measfishfacies">facies</a> (facies_id)<br>dominant_granulometry_id: measfish.<a href="#measfishgranulometry">granulometry</a> (granulometry_id)<br>secondary_granulometry_id: measfish.<a href="#measfishgranulometry">granulometry</a> (granulometry_id)<br>localisation_id: measfish.<a href="#measfishlocalisation">localisation</a> (localisation_id)<br>operation_id: measfish.<a href="#measfishoperation">operation</a> (operation_id)<br>shady_id: measfish.<a href="#measfishshady">shady</a> (shady_id)<br>situation_id: measfish.<a href="#measfishsituation">situation</a> (situation_id)<br>speed_id: measfish.<a href="#measfishspeed">speed</a> (speed_id)<br>vegetation_id: measfish.<a href="#measfishvegetation">vegetation</a> (vegetation_id)<br><div id="measfishanalysis" class="tablename">analysis</div><br><div class="tablecomment">Water analysis</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>analysis_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>sequence_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>analysis_date</td>
+                <td>timestamp without time zone</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Date/time of the sampling</td>
+                </tr><tr>
+                <td>ph</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>pH</td>
+                </tr><tr>
+                <td>temperature</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Temperature, in °C</td>
+                </tr><tr>
+                <td>o2_pc</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Percentage of oxygen saturation</td>
+                </tr><tr>
+                <td>o2_mg</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Oxygen level, in mg/l</td>
+                </tr><tr>
+                <td>salinity</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Salinity</td>
+                </tr><tr>
+                <td>conductivity</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Conductivity, in µS/cm</td>
+                </tr><tr>
+                <td>secchi</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Secchi depth, in meter</td>
+                </tr><tr>
+                <td>other_analysis</td>
+                <td>json</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Others analysis performed (cf. analysis_template)</td>
+                </tr></tbody></table><h3>References</h3>sequence_id: measfish.<a href="#measfishsequence">sequence</a> (sequence_id)<br><div id="measfishanalysis_template" class="tablename">analysis_template</div><br><div class="tablecomment">Table of types of complementary analysis</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>analysis_template_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>analysis_template_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the template</td>
+                </tr><tr>
+                <td>analysis_template_value</td>
+                <td>json</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Description of all parameters recorded, in Json format</td>
+                </tr></tbody></table><h3>Referenced by</h3>analysis_template_id: measfish.<a href="#measfishoperation">operation</a> (analysis_template_id)<br><div id="measfishcache_abundance" class="tablename">cache_abundance</div><br><div class="tablecomment">Levels of abundance of caches</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>cache_abundance_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>cache_abundance_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>cache_abundance_id: measfish.<a href="#measfishambience">ambience</a> (herbarium_cache_abundance_id)<br>cache_abundance_id: measfish.<a href="#measfishambience">ambience</a> (branch_cache_abundance_id)<br>cache_abundance_id: measfish.<a href="#measfishambience">ambience</a> (vegetation_cache_abundance_id)<br>cache_abundance_id: measfish.<a href="#measfishambience">ambience</a> (subbank_cache_abundance_id)<br>cache_abundance_id: measfish.<a href="#measfishambience">ambience</a> (granulometry_cache_abundance_id)<br><div id="measfishcampaign" class="tablename">campaign</div><br><div class="tablecomment">List of campaigns rattached to a project</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>campaign_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>project_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>campaign_name</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the campaign</td>
+                </tr></tbody></table><h3>References</h3>project_id: measfish.<a href="#measfishproject">project</a> (project_id)<br><h3>Referenced by</h3>campaign_id: measfish.<a href="#measfishoperation">operation</a> (campaign_id)<br><div id="measfishfacies" class="tablename">facies</div><br><div class="tablecomment">List of facies</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>facies_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>facies_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>facies_id: measfish.<a href="#measfishambience">ambience</a> (facies_id)<br><div id="measfishgear" class="tablename">gear</div><br><div class="tablecomment">Gear used for fishery</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>gear_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>gear_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>gear_length</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Length of the net or other gear, in metter</td>
+                </tr><tr>
+                <td>gear_height</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Height of the net or other gear, in metter</td>
+                </tr><tr>
+                <td>mesh_size</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Size of the mesh, in textual form</td>
+                </tr></tbody></table><h3>Referenced by</h3>gear_id: measfish.<a href="#measfishsequence_gear">sequence_gear</a> (gear_id)<br><div id="measfishgranulometry" class="tablename">granulometry</div><br><div class="tablecomment">List of types of granulometry</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>granulometry_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>granulometry_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>granulometry_id: measfish.<a href="#measfishambience">ambience</a> (dominant_granulometry_id)<br>granulometry_id: measfish.<a href="#measfishambience">ambience</a> (secondary_granulometry_id)<br><div id="measfishindividual" class="tablename">individual</div><br><div class="tablecomment">List of individuals measured</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>individual_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>sample_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>other_measure</td>
+                <td>json</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>List of others measures realized on an item</td>
+                </tr><tr>
+                <td>sl</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Standard length, in cm</td>
+                </tr><tr>
+                <td>fl</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Fork length, in cm</td>
+                </tr><tr>
+                <td>tl</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Total length, in cm</td>
+                </tr><tr>
+                <td>wd</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Width of disk, in cm</td>
+                </tr><tr>
+                <td>ot</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Other length, in cm</td>
+                </tr><tr>
+                <td>weight</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Weight, in g</td>
+                </tr><tr>
+                <td>individual_comment</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>age</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Age of fish, in year</td>
+                </tr><tr>
+                <td>measure_estimated</td>
+                <td>boolean</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Is the measure estimated ?</td>
+                </tr><tr>
+                <td>pathology_code</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>List of codes of pathologies or remarks</td>
+                </tr><tr>
+                <td>tag</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Read tag</td>
+                </tr><tr>
+                <td>tag_posed</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Tag posed on the fish</td>
+                </tr><tr>
+                <td>sexe_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>pathology_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>pathology_id: measfish.<a href="#measfishpathology">pathology</a> (pathology_id)<br>sample_id: measfish.<a href="#measfishsample">sample</a> (sample_id)<br>sexe_id: measfish.<a href="#measfishsexe">sexe</a> (sexe_id)<br><div id="measfishlength_type" class="tablename">length_type</div><br><div class="tablecomment">Types of length</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>length_type_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>length_type_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the type of length measured</td>
+                </tr></tbody></table><h3>Referenced by</h3>length_type_id: measfish.<a href="#measfishoperation">operation</a> (length_type_id)<br><div id="measfishlocalisation" class="tablename">localisation</div><br><div class="tablecomment">List of localisations of the ambience</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>localisation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>localisation_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>localisation_id: measfish.<a href="#measfishambience">ambience</a> (localisation_id)<br><div id="measfishmeasure_template" class="tablename">measure_template</div><br><div class="tablecomment"></div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>measure_template_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>measure_template_name</td>
+                <td>smallint</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>measure_template_value</td>
+                <td>json</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>List of all measures usable by a taxon.
+For each type : name, extended.
+By default : total_length and weight</td>
+                </tr></tbody></table><h3>Referenced by</h3>measure_template_id: measfish.<a href="#measfishoperation">operation</a> (measure_template_id)<br><div id="measfishoperation" class="tablename">operation</div><br><div class="tablecomment">Description of operation</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>operation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td>Operations rattached at a campaign</td>
+                </tr><tr>
+                <td>campaign_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>operation_name</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Name of operation</td>
+                </tr><tr>
+                <td>date_start</td>
+                <td>timestamp without time zone</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Start date of operation</td>
+                </tr><tr>
+                <td>date_end</td>
+                <td>timestamp without time zone</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Date of end of operation</td>
+                </tr><tr>
+                <td>freshwater</td>
+                <td>boolean</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Is the operation in fresh water ?</td>
+                </tr><tr>
+                <td>use_extended_measure</td>
+                <td>boolean</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>If true, all measures are recordable for the taxa</td>
+                </tr><tr>
+                <td>long_start</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Longitude of the first point, in wgs84 (decimal)</td>
+                </tr><tr>
+                <td>lat_start</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Latitude of the first point, in WGS84 (decimal)</td>
+                </tr><tr>
+                <td>long_end</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Longitude of the last point, in WGS84 (decimal)</td>
+                </tr><tr>
+                <td>lat_end</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Latitude of the last point, in WGS84 (decimal)</td>
+                </tr><tr>
+                <td>pk_source</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Distance from the source, in meter</td>
+                </tr><tr>
+                <td>pk_mouth</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Distance from the mouth, in meter</td>
+                </tr><tr>
+                <td>length</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Length of the sampled zone, in meter</td>
+                </tr><tr>
+                <td>side</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Position in the river (left side, central, right side, etc.)</td>
+                </tr><tr>
+                <td>altitude</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Altitude, in meter</td>
+                </tr><tr>
+                <td>tidal_coef</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Tidal coefficient or water high of the tidal</td>
+                </tr><tr>
+                <td>debit</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Debit of the river, in m³/s</td>
+                </tr><tr>
+                <td>surface</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Surface parsed, in square meters</td>
+                </tr><tr>
+                <td>operation_template_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>length_type_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>station_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>measure_template_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>analysis_template_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>analysis_template_id: measfish.<a href="#measfishanalysis_template">analysis_template</a> (analysis_template_id)<br>campaign_id: measfish.<a href="#measfishcampaign">campaign</a> (campaign_id)<br>length_type_id: measfish.<a href="#measfishlength_type">length_type</a> (length_type_id)<br>measure_template_id: measfish.<a href="#measfishmeasure_template">measure_template</a> (measure_template_id)<br>operation_template_id: measfish.<a href="#measfishoperation_template">operation_template</a> (operation_template_id)<br>station_id: measfish.<a href="#measfishstation">station</a> (station_id)<br><h3>Referenced by</h3>operation_id: measfish.<a href="#measfishambience">ambience</a> (operation_id)<br>operation_id: measfish.<a href="#measfishoperation_operator">operation_operator</a> (operation_id)<br>operation_id: measfish.<a href="#measfishsequence">sequence</a> (operation_id)<br><div id="measfishoperation_operator" class="tablename">operation_operator</div><br><div class="tablecomment">Operators rattached to an operation</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>is_responsible</td>
+                <td>boolean</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>True if the operator is responsible of the operation</td>
+                </tr><tr>
+                <td>operation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>operator_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>operation_id: measfish.<a href="#measfishoperation">operation</a> (operation_id)<br>operator_id: measfish.<a href="#measfishoperator">operator</a> (operator_id)<br><div id="measfishoperation_template" class="tablename">operation_template</div><br><div class="tablecomment">List of taxons displayed on the screen</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>operation_template_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>operation_template_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>operation_template_taxa</td>
+                <td>json</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>List of taxa and position on the screen
+Contains : taxon_id, posx and posy on the grid</td>
+                </tr></tbody></table><h3>Referenced by</h3>operation_template_id: measfish.<a href="#measfishoperation">operation</a> (operation_template_id)<br><div id="measfishoperator" class="tablename">operator</div><br><div class="tablecomment">List of operators</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>operator_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>firstname</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>First name of the operator</td>
+                </tr><tr>
+                <td>name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Last name of operator</td>
+                </tr><tr>
+                <td>is_active</td>
+                <td>boolean</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Is the opérator actually active ?</td>
+                </tr></tbody></table><h3>Referenced by</h3>operator_id: measfish.<a href="#measfishoperation_operator">operation_operator</a> (operator_id)<br><div id="measfishpathology" class="tablename">pathology</div><br><div class="tablecomment">List of pathologies</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>pathology_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>pathology_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the pathology</td>
+                </tr><tr>
+                <td>pathology_code</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Code of the pathology, according to the nomenclature sandre.eaufrance.fr 129</td>
+                </tr><tr>
+                <td>pathology_description</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Description of the pathology</td>
+                </tr></tbody></table><h3>Referenced by</h3>pathology_id: measfish.<a href="#measfishindividual">individual</a> (pathology_id)<br><div id="measfishproject" class="tablename">project</div><br><div class="tablecomment">List of projects. This table is used for grant rights</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>project_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>project_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the project</td>
+                </tr></tbody></table><h3>Referenced by</h3>project_id: measfish.<a href="#measfishcampaign">campaign</a> (project_id)<br>project_id: measfish.<a href="#measfishproject_group">project_group</a> (project_id)<br>project_id: measfish.<a href="#measfishstation">station</a> (project_id)<br><div id="measfishproject_group" class="tablename">project_group</div><br><div class="tablecomment"></div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>project_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>aclgroup_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>aclgroup_id: gacl.<a href="#gaclaclgroup">aclgroup</a> (aclgroup_id)<br>project_id: measfish.<a href="#measfishproject">project</a> (project_id)<br><div id="measfishriver" class="tablename">river</div><br><div class="tablecomment">River, estuary, sea...</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>river_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>river_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>river_id: measfish.<a href="#measfishstation">station</a> (river_id)<br><div id="measfishsample" class="tablename">sample</div><br><div class="tablecomment">List of samplings. One or many for a taxon</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>sample_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>sequence_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>taxon_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the taxon, issued from the table of taxa or created if a new taxon discovered</td>
+                </tr><tr>
+                <td>total_number</td>
+                <td>smallint</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Total number of catched elements</td>
+                </tr><tr>
+                <td>total_measured</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Number of elements measured</td>
+                </tr><tr>
+                <td>total_weight</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Total weight, in g</td>
+                </tr><tr>
+                <td>sample_size_min</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Minimal size of fishes in this sample, in cm</td>
+                </tr><tr>
+                <td>sample_size_max</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Maximal size of fishes in this sample, in cm</td>
+                </tr><tr>
+                <td>sample_comment</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>taxon_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>sequence_id: measfish.<a href="#measfishsequence">sequence</a> (sequence_id)<br>taxon_id: measfish.<a href="#measfishtaxon">taxon</a> (taxon_id)<br><h3>Referenced by</h3>sample_id: measfish.<a href="#measfishindividual">individual</a> (sample_id)<br><div id="measfishsequence" class="tablename">sequence</div><br><div class="tablecomment">Catching sequence</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>sequence_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>operation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>sequence_number</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Number of sequence in the operation</td>
+                </tr><tr>
+                <td>date_start</td>
+                <td>timestamp without time zone</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Start time of fishing at this place</td>
+                </tr><tr>
+                <td>date_end</td>
+                <td>timestamp without time zone</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>End time of fishing at this place</td>
+                </tr><tr>
+                <td>fishing_duration</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Fishing duration, in mn</td>
+                </tr></tbody></table><h3>References</h3>operation_id: measfish.<a href="#measfishoperation">operation</a> (operation_id)<br><h3>Referenced by</h3>sequence_id: measfish.<a href="#measfishanalysis">analysis</a> (sequence_id)<br>sequence_id: measfish.<a href="#measfishsample">sample</a> (sequence_id)<br>sequence_id: measfish.<a href="#measfishsequence_gear">sequence_gear</a> (sequence_id)<br><div id="measfishsequence_gear" class="tablename">sequence_gear</div><br><div class="tablecomment">List of gear used during operation</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>sequence_gear_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>voltage</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Voltage used during electric fishing, in volt</td>
+                </tr><tr>
+                <td>amperage</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Amperage used during electric fishing, in ampere</td>
+                </tr><tr>
+                <td>gear_nb</td>
+                <td>smallint</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Nb of gears</td>
+                </tr><tr>
+                <td>depth</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Depth of the gear</td>
+                </tr><tr>
+                <td>sequence_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>gear_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>gear_id: measfish.<a href="#measfishgear">gear</a> (gear_id)<br>sequence_id: measfish.<a href="#measfishsequence">sequence</a> (sequence_id)<br><div id="measfishsexe" class="tablename">sexe</div><br><div class="tablecomment">Sexe of fishs</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>sexe_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>sexe_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>sexe_code</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437</td>
+                </tr></tbody></table><h3>Referenced by</h3>sexe_id: measfish.<a href="#measfishindividual">individual</a> (sexe_id)<br><div id="measfishshady" class="tablename">shady</div><br><div class="tablecomment">List of shaddies used for ambiences</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>shady_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>shady_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>shady_id: measfish.<a href="#measfishambience">ambience</a> (shady_id)<br><div id="measfishsituation" class="tablename">situation</div><br><div class="tablecomment">List of situations</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>situation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>situation_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>situation_id: measfish.<a href="#measfishambience">ambience</a> (situation_id)<br><div id="measfishspeed" class="tablename">speed</div><br><div class="tablecomment">Speed of current, in cm/s</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>speed_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>speed_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>speed_id: measfish.<a href="#measfishambience">ambience</a> (speed_id)<br><div id="measfishstation" class="tablename">station</div><br><div class="tablecomment">List of the stations used for a project</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>station_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>station_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Name of the station</td>
+                </tr><tr>
+                <td>project_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr><tr>
+                <td>station_long</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Longitude of the station, in WGS84, numeric value</td>
+                </tr><tr>
+                <td>station_lat</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Latitude of the station, in WGS84, numeric value</td>
+                </tr><tr>
+                <td>station_pk</td>
+                <td>smallint</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Kilometer point from source, in meters</td>
+                </tr><tr>
+                <td>station_code</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Code of the station, according to the nomenclature sandre.eaufrance.fr</td>
+                </tr><tr>
+                <td>river_id</td>
+                <td>integer</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>References</h3>project_id: measfish.<a href="#measfishproject">project</a> (project_id)<br>river_id: measfish.<a href="#measfishriver">river</a> (river_id)<br><h3>Referenced by</h3>station_id: measfish.<a href="#measfishoperation">operation</a> (station_id)<br><div id="measfishtaxon" class="tablename">taxon</div><br><div class="tablecomment">List of taxons</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>taxon_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>scientific_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td>Scientific name of the taxon</td>
+                </tr><tr>
+                <td>author</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Author of the description of the taxon</td>
+                </tr><tr>
+                <td>common_name</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Common name of the taxon</td>
+                </tr><tr>
+                <td>taxon_code</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Code used for reference the taxon in national nomenclature</td>
+                </tr><tr>
+                <td>fresh_code</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>code mnemotechnic used for fishing operations in fresh water</td>
+                </tr><tr>
+                <td>sea_code</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Code mnemotechnic used for fishing operations in sea water</td>
+                </tr><tr>
+                <td>ecotype</td>
+                <td>character varying</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Specific ecotype used for this taxon</td>
+                </tr><tr>
+                <td>length_max</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>Length maximum, in cm</td>
+                </tr><tr>
+                <td>weight_max</td>
+                <td>double precision</td>
+                <td class="center"></td>
+                <td class="center"></td>
+                <td>weight maximum, in g</td>
+                </tr></tbody></table><h3>Referenced by</h3>taxon_id: measfish.<a href="#measfishsample">sample</a> (taxon_id)<br><div id="measfishvegetation" class="tablename">vegetation</div><br><div class="tablecomment">List of types of vegetation</div>.<br><table class="datatable row-border display"><thead><tr>
+                    <th>Column name</th>
+                    <th>Type</th>
+                    <th>Not null</th>
+                    <th>key</th>
+                    <th>Comment</th>
+                    </tr></thead><tbody><tr>
+                <td>vegetation_id</td>
+                <td>integer</td>
+                <td class="center">X</td>
+                <td class="center">X</td>
+                <td></td>
+                </tr><tr>
+                <td>vegetation_name</td>
+                <td>character varying</td>
+                <td class="center">X</td>
+                <td class="center"></td>
+                <td></td>
+                </tr></tbody></table><h3>Referenced by</h3>vegetation_id: measfish.<a href="#measfishambience">ambience</a> (vegetation_id)<br></body></html>

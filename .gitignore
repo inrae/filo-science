@@ -183,3 +183,4 @@ sympy-plots-for-*.tex/
 *.bak
 *.sav
 /param/id_measfish*
+/display/javascript/.Rhistory

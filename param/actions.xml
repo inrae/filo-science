@@ -73,5 +73,93 @@
 	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty" />
 	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" />
 
+	<!-- Parameters of the software -->
+
+
+	<granulometryList action="modules/param/param.php" param="list" droits="consult"  tablename="granulometry"  tabledescription="Classes de granulométrie" type="smarty"/>
+	<granulometryChange action="modules/param/param.php" param="change" droits="param" tablename="granulometry" tabledescription="Classes de granulométrie"   type="smarty"/>
+	<granulometryWrite action="modules/param/param.php" param="write" droits="param" tablename="granulometry"  retourok="granulometryList" retourko="granulometryChange" modulebefore="granulometryChange" />
+	<granulometryDelete action="modules/param/param.php" param="delete" droits="param" tablename="granulometry"  retourok="granulometryList" retourko="granulometryChange" modulebefore="granulometryChange" />
+
+	<speedList action="modules/param/param.php" param="list" droits="consult"  tablename="speed" tabledescription="Classes de vitesse de courant"   type="smarty"/>
+	<speedChange action="modules/param/param.php" param="change" droits="param" tablename="speed"  tabledescription="Classes de vitesse de courant"  type="smarty"/>
+	<speedWrite action="modules/param/param.php" param="write" droits="param" tablename="speed"  retourok="speedList" retourko="speedChange" modulebefore="speedChange" />
+	<speedDelete action="modules/param/param.php" param="delete" droits="param" tablename="speed"  retourok="speedList" retourko="speedChange"  modulebefore="speedChange" />
+
+	<shadyList action="modules/param/param.php" param="list" droits="consult"  tablename="shady" tabledescription="Types d'ombrage"  type="smarty"/>
+	<shadyChange action="modules/param/param.php" param="change" droits="param" tablename="shady"  tabledescription="Types d'ombrage"  type="smarty"/>
+	<shadyWrite action="modules/param/param.php" param="write" droits="param" tablename="shady"  retourok="shadyList" retourko="shadyChange" modulebefore="shadyChange" />
+	<shadyDelete action="modules/param/param.php" param="delete" droits="param" tablename="shady"  retourok="shadyList" retourko="shadyChange" modulebefore="shadyChange" />
+
+	<cloggingList action="modules/param/param.php" param="list" droits="consult"  tabledescription="Types de colmatages" tablename="clogging"  type="smarty"/>
+	<cloggingChange action="modules/param/param.php" param="change" droits="param" tablename="clogging"  tabledescription="Types de colmatages"  type="smarty"/>
+	<cloggingWrite action="modules/param/param.php" param="write" droits="param" tablename="clogging"  retourok="cloggingList" retourko="cloggingChange" modulebefore="cloggingChange" />
+	<cloggingDelete action="modules/param/param.php" param="delete" droits="param" tablename="clogging"  retourok="cloggingList" retourko="cloggingChange"  modulebefore="cloggingChange"/>
+
+	<faciesList action="modules/param/param.php" param="list" droits="consult"  tablename="facies" tabledescription="Types de faciès"  type="smarty"/>
+	<faciesChange action="modules/param/param.php" param="change" droits="param" tablename="facies"  tabledescription="Types de faciès" type="smarty"/>
+	<faciesWrite action="modules/param/param.php" param="write" droits="param" tablename="facies"  retourok="faciesList" retourko="faciesChange" modulebefore="faciesChange" />
+	<faciesDelete action="modules/param/param.php" param="delete" droits="param" tablename="facies"  retourok="faciesList" retourko="faciesChange"  modulebefore="faciesChange" />
+
+	<sinuosityList action="modules/param/param.php" param="list" droits="consult"  tablename="sinuosity" tabledescription="Types de sinuosités de la rivière"   type="smarty"/>
+	<sinuosityChange action="modules/param/param.php" param="change" droits="param" tablename="sinuosity" tabledescription="Types de sinuosités de la rivière" type="smarty"/>
+	<sinuosityWrite action="modules/param/param.php" param="write" droits="param" tablename="sinuosity"  retourok="sinuosityList" retourko="sinuosityChange" modulebefore="sinuosityChange" />
+	<sinuosityDelete action="modules/param/param.php" param="delete" droits="param" tablename="sinuosity"  retourok="sinuosityList" retourko="sinuosityChange" modulebefore="sinuosityChange"  />
+
+	<localisationList action="modules/param/param.php" param="list" droits="consult"  tablename="localisation"  tabledescription="Localisation de l'opération de pêche" type="smarty"/>
+	<localisationChange action="modules/param/param.php" param="change" droits="param" tablename="localisation"   tabledescription="Localisation de l'opération de pêche" type="smarty"/>
+	<localisationWrite action="modules/param/param.php" param="write" droits="param" tablename="localisation"  retourok="localisationList" retourko="localisationChange" modulebefore="localisationChange" />
+	<localisationDelete action="modules/param/param.php" param="delete" droits="param" tablename="localisation"  retourok="localisationList" retourko="localisationChange" modulebefore="localisationChange"  />
+
+	<situationList action="modules/param/param.php" param="list" droits="consult"  tablename="situation" tabledescription="Liste des emplacements particuliers"  type="smarty"/>
+	<situationChange action="modules/param/param.php" param="change" droits="param" tablename="situation"  tabledescription="Liste des emplacements particuliers"  type="smarty"/>
+	<situationWrite action="modules/param/param.php" param="write" droits="param" tablename="situation"  retourok="situationList" retourko="situationChange" modulebefore="situationChange" />
+	<situationDelete action="modules/param/param.php" param="delete" droits="param" tablename="situation"  retourok="situationList" retourko="situationChange" modulebefore="situationChange"/>
+
+	<vegetationList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de végétation"  tablename="vegetation"  type="smarty"/>
+	<vegetationChange action="modules/param/param.php" param="change" droits="param" tablename="vegetation"   tabledescription="Types de végétation"  type="smarty"/>
+	<vegetationWrite action="modules/param/param.php" param="write" droits="param" tablename="vegetation"  retourok="vegetationList" retourko="vegetationChange" modulebefore="vegetationChange" />
+	<vegetationDelete action="modules/param/param.php" param="delete" droits="param" tablename="vegetation"  retourok="vegetationList" retourko="vegetationChange"  modulebefore="vegetationChange" />
+
+	<turbidityList action="modules/param/param.php" param="list" droits="consult"  tablename="turbidity" tabledescription="Classes de turbidité"  type="smarty"/>
+	<turbidityChange action="modules/param/param.php" param="change" droits="param" tablename="turbidity" tabledescription="Classes de turbidité" type="smarty"/>
+	<turbidityWrite action="modules/param/param.php" param="write" droits="param" tablename="turbidity"  retourok="turbidityList" retourko="turbidityChange" modulebefore="turbidityChange" />
+	<turbidityDelete action="modules/param/param.php" param="delete" droits="param" tablename="turbidity"  retourok="turbidityList" retourko="turbidityChange"  modulebefore="turbidityChange"/>
+
+	<flow_trendList action="modules/param/param.php" param="list" droits="consult" tabledescription="Évolutions du débit"  tablename="flow_trend"  type="smarty"/>
+	<flow_trendChange action="modules/param/param.php" param="change" droits="param" tablename="flow_trend"   tabledescription="Évolutions du débit" type="smarty"/>
+	<flow_trendWrite action="modules/param/param.php" param="write" droits="param" tablename="flow_trend"  retourok="flow_trendList" retourko="flow_trendChange" modulebefore="flow_trendChange" />
+	<flow_trendDelete action="modules/param/param.php" param="delete" droits="param" tablename="flow_trend"  retourok="flow_trendList" retourko="flow_trendChange"  modulebefore="flow_trendChange"/>
+
+	<cache_abundanceList action="modules/param/param.php" param="list" droits="consult" tabledescription="Classes d'abondance des caches"  tablename="cache_abundance"  type="smarty"/>
+	<cache_abundanceChange action="modules/param/param.php" param="change" droits="param" tablename="cache_abundance"   tabledescription="Classes d'abondance des caches" type="smarty"/>
+	<cache_abundanceWrite action="modules/param/param.php" param="write" droits="param" tablename="cache_abundance"  retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange" />
+	<cache_abundanceDelete action="modules/param/param.php" param="delete" droits="param" tablename="cache_abundance"  retourok="cache_abundanceList" retourko="cache_abundanceChange"  modulebefore="cache_abundanceChange"/>
+
+	<water_heightList action="modules/param/param.php" param="list" droits="consult"  tablename="water_height"  tabledescription="Classes d'hauteur d'eau" type="smarty"/>
+	<water_heightChange action="modules/param/param.php" param="change" droits="param" tablename="water_height"  tabledescription="Classes d'hauteur d'eau" type="smarty"/>
+	<water_heightWrite action="modules/param/param.php" param="write" droits="param" tablename="water_height"  retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange" />
+	<water_heightDelete action="modules/param/param.php" param="delete" droits="param" tablename="water_height"  retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange"  />	
+
+	<fishing_strategyList action="modules/param/param.php" param="list" droits="consult"  tablename="fishing_strategy"  tabledescription="Stratégies d'échantillonnage" type="smarty"/>
+	<fishing_strategyChange action="modules/param/param.php" param="change" droits="param" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage"  type="smarty"/>
+	<fishing_strategyWrite action="modules/param/param.php" param="write" droits="param" tablename="fishing_strategy"  retourok="fishing_strategyList" retourko="fishing_strategyChange" modulebefore="fishing_strategyChange" />
+	<fishing_strategyDelete action="modules/param/param.php" param="delete" droits="param" tablename="fishing_strategy"  retourok="fishing_strategyList" retourko="fishing_strategyChange"  modulebefore="fishing_strategyChange" />	
+
+	<scaleList action="modules/param/param.php" param="list" droits="consult"  tablename="scale" tabledescription="Échelles d'échantillonnage"  type="smarty"/>
+	<scaleChange action="modules/param/param.php" param="change" droits="param" tablename="scale" tabledescription="Échelles d'échantillonnage"  type="smarty"/>
+	<scaleWrite action="modules/param/param.php" param="write" droits="param" tablename="scale"  retourok="scaleList" retourko="scaleChange" modulebefore="scaleChange" />
+	<scaleDelete action="modules/param/param.php" param="delete" droits="param" tablename="scale"  retourok="scaleList" retourko="scaleChange" modulebefore="scaleChange" />	
+
+	<electric_current_typeList action="modules/param/param.php" param="list" droits="consult"  tabledescription="Types de courant électrique" tablename="electric_current_type"  type="smarty"/>
+	<electric_current_typeChange action="modules/param/param.php" param="change" droits="param" tablename="electric_current_type"  tabledescription="Types de courant électrique" type="smarty"/>
+	<electric_current_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="electric_current_type"  retourok="electric_currentList" retourko="electric_currentChange" modulebefore="electric_currentChange" />
+	<electric_current_typeDelete action="modules/param/param.php" param="delete" droits="param" tablename="electric_current_type"  retourok="electric_currentList" retourko="electric_currentChange" modulebefore="electric_currentChange" />	
+
+	<gear_methodList action="modules/param/param.php" param="list" droits="consult"  tablename="gear_method"  tabledescription="Méthodes d'utilisation des engins" type="smarty"/>
+	<gear_methodChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="gear_method"   type="smarty"/>
+	<gear_methodWrite action="modules/param/param.php" param="write" droits="param" tablename="gear_method"  retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange" />
+	<gear_methodDelete action="modules/param/param.php" param="delete" droits="param" tablename="gear_method"  retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange"/>	
+
 </navigation>
 	

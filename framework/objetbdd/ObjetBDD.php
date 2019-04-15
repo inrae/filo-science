@@ -217,7 +217,7 @@ class ObjetBDD
      *             passees par les instructions htmlspecialchars et htmlspecialchars_decode
      *             Par defaut, a true
      */
-    public $codageHtml = true;
+    public $codageHtml = false;
 
     /**
      *

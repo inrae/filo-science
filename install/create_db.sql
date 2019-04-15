@@ -1,9 +1,14 @@
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
 -- pgModeler  version: 0.9.2-beta
--- PostgreSQL version: 9.5
+-- PostgreSQL version: 9.6
 -- Project Site: pgmodeler.io
 -- Model Author: ---
 
+-- -- object: measfish | type: ROLE --
+-- -- DROP ROLE IF EXISTS measfish;
+-- CREATE ROLE measfish WITH ;
+-- -- ddl-end --
+-- 
 
 -- Database creation must be done outside a multicommand file.
 -- These commands were put in this file only as a convenience.
@@ -19,7 +24,7 @@
 -- DROP SCHEMA IF EXISTS measfish CASCADE;
 CREATE SCHEMA measfish;
 -- ddl-end --
-ALTER SCHEMA measfish OWNER TO postgres;
+ALTER SCHEMA measfish OWNER TO measfish;
 -- ddl-end --
 COMMENT ON SCHEMA measfish IS 'Scientific fisheries management - schema of data';
 -- ddl-end --
@@ -28,7 +33,7 @@ COMMENT ON SCHEMA measfish IS 'Scientific fisheries management - schema of data'
 -- DROP SCHEMA IF EXISTS gacl CASCADE;
 CREATE SCHEMA gacl;
 -- ddl-end --
-ALTER SCHEMA gacl OWNER TO postgres;
+ALTER SCHEMA gacl OWNER TO measfish;
 -- ddl-end --
 
 SET search_path TO pg_catalog,public,measfish,gacl;
@@ -45,7 +50,7 @@ CREATE SEQUENCE measfish.project_project_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.project_project_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.project_project_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.campaign_campaign_id_seq | type: SEQUENCE --
@@ -59,7 +64,7 @@ CREATE SEQUENCE measfish.campaign_campaign_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.campaign_campaign_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.campaign_campaign_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.project | type: TABLE --
@@ -75,7 +80,7 @@ COMMENT ON TABLE measfish.project IS 'List of projects. This table is used for g
 -- ddl-end --
 COMMENT ON COLUMN measfish.project.project_name IS 'Name of the project';
 -- ddl-end --
-ALTER TABLE measfish.project OWNER TO postgres;
+ALTER TABLE measfish.project OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.campaign | type: TABLE --
@@ -92,7 +97,7 @@ COMMENT ON TABLE measfish.campaign IS 'List of campaigns rattached to a project'
 -- ddl-end --
 COMMENT ON COLUMN measfish.campaign.campaign_name IS 'Name of the campaign';
 -- ddl-end --
-ALTER TABLE measfish.campaign OWNER TO postgres;
+ALTER TABLE measfish.campaign OWNER TO measfish;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
@@ -113,7 +118,7 @@ CREATE SEQUENCE measfish.station_station_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.station_station_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.station_station_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.operation_operation_id_seq | type: SEQUENCE --
@@ -127,7 +132,7 @@ CREATE SEQUENCE measfish.operation_operation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.operation_operation_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.operation_operation_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.place_place_id_seq | type: SEQUENCE --
@@ -141,7 +146,7 @@ CREATE SEQUENCE measfish.place_place_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.place_place_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.place_place_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.station | type: TABLE --
@@ -171,7 +176,7 @@ COMMENT ON COLUMN measfish.station.station_pk IS 'Kilometer point from source, i
 -- ddl-end --
 COMMENT ON COLUMN measfish.station.station_code IS 'Code of the station, according to the nomenclature sandre.eaufrance.fr';
 -- ddl-end --
-ALTER TABLE measfish.station OWNER TO postgres;
+ALTER TABLE measfish.station OWNER TO measfish;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
@@ -192,7 +197,7 @@ CREATE SEQUENCE measfish.taxon_taxon_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.taxon_taxon_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.taxon_taxon_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.sample_sample_id_seq | type: SEQUENCE --
@@ -206,7 +211,7 @@ CREATE SEQUENCE measfish.sample_sample_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.sample_sample_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.sample_sample_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.taxon | type: TABLE --
@@ -246,7 +251,7 @@ COMMENT ON COLUMN measfish.taxon.length_max IS 'Length maximum, in cm';
 -- ddl-end --
 COMMENT ON COLUMN measfish.taxon.weight_max IS 'weight maximum, in g';
 -- ddl-end --
-ALTER TABLE measfish.taxon OWNER TO postgres;
+ALTER TABLE measfish.taxon OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucaspius delineatus', E'Heckel 1843', E'Able de Heckel', E'2117', E'ABH', E'ABH', E'10.0', DEFAULT);
@@ -1217,7 +1222,6 @@ CREATE TABLE measfish.operation (
 	date_start timestamp NOT NULL,
 	date_end timestamp,
 	freshwater boolean NOT NULL DEFAULT true,
-	use_extended_measure boolean DEFAULT false,
 	long_start double precision,
 	lat_start double precision,
 	long_end double precision,
@@ -1230,11 +1234,13 @@ CREATE TABLE measfish.operation (
 	tidal_coef float,
 	debit float,
 	surface integer,
-	operation_template_id integer,
 	length_type_id integer,
 	station_id integer,
-	measure_template_id integer,
-	analysis_template_id integer,
+	protocol_id integer,
+	water_height_id integer,
+	fishing_strategy_id integer,
+	scale_id integer,
+	taxa_template_id integer,
 	CONSTRAINT operation_id_pk PRIMARY KEY (operation_id)
 
 );
@@ -1250,8 +1256,6 @@ COMMENT ON COLUMN measfish.operation.date_start IS 'Start date of operation';
 COMMENT ON COLUMN measfish.operation.date_end IS 'Date of end of operation';
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation.freshwater IS 'Is the operation in fresh water ?';
--- ddl-end --
-COMMENT ON COLUMN measfish.operation.use_extended_measure IS 'If true, all measures are recordable for the taxa';
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation.long_start IS 'Longitude of the first point, in wgs84 (decimal)';
 -- ddl-end --
@@ -1277,7 +1281,7 @@ COMMENT ON COLUMN measfish.operation.debit IS 'Debit of the river, in m³/s';
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation.surface IS 'Surface parsed, in square meters';
 -- ddl-end --
-ALTER TABLE measfish.operation OWNER TO postgres;
+ALTER TABLE measfish.operation OWNER TO measfish;
 -- ddl-end --
 
 -- object: campaign_fk | type: CONSTRAINT --
@@ -1295,7 +1299,8 @@ CREATE TABLE measfish.sequence (
 	sequence_number smallint,
 	date_start timestamp NOT NULL,
 	date_end timestamp,
-	fishing_duration smallint,
+	fishing_duration float,
+	ambience_id integer,
 	CONSTRAINT place_id_pk PRIMARY KEY (sequence_id)
 
 );
@@ -1310,7 +1315,7 @@ COMMENT ON COLUMN measfish.sequence.date_end IS 'End time of fishing at this pla
 -- ddl-end --
 COMMENT ON COLUMN measfish.sequence.fishing_duration IS 'Fishing duration, in mn';
 -- ddl-end --
-ALTER TABLE measfish.sequence OWNER TO postgres;
+ALTER TABLE measfish.sequence OWNER TO measfish;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
@@ -1341,7 +1346,8 @@ COMMENT ON TABLE measfish.sample IS 'List of samplings. One or many for a taxon'
 -- ddl-end --
 COMMENT ON COLUMN measfish.sample.taxon_name IS 'Name of the taxon, issued from the table of taxa or created if a new taxon discovered';
 -- ddl-end --
-COMMENT ON COLUMN measfish.sample.total_number IS 'Total number of catched elements';
+COMMENT ON COLUMN measfish.sample.total_number IS 'Total number of catched elements
+0 : presence of the taxon, but number not estimated';
 -- ddl-end --
 COMMENT ON COLUMN measfish.sample.total_measured IS 'Number of elements measured';
 -- ddl-end --
@@ -1351,7 +1357,7 @@ COMMENT ON COLUMN measfish.sample.sample_size_min IS 'Minimal size of fishes in 
 -- ddl-end --
 COMMENT ON COLUMN measfish.sample.sample_size_max IS 'Maximal size of fishes in this sample, in cm';
 -- ddl-end --
-ALTER TABLE measfish.sample OWNER TO postgres;
+ALTER TABLE measfish.sample OWNER TO measfish;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
@@ -1379,7 +1385,7 @@ CREATE SEQUENCE measfish.item_item_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.item_item_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.item_item_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.individual | type: TABLE --
@@ -1432,7 +1438,7 @@ COMMENT ON COLUMN measfish.individual.tag IS 'Read tag';
 -- ddl-end --
 COMMENT ON COLUMN measfish.individual.tag_posed IS 'Tag posed on the fish';
 -- ddl-end --
-ALTER TABLE measfish.individual OWNER TO postgres;
+ALTER TABLE measfish.individual OWNER TO measfish;
 -- ddl-end --
 
 -- object: sample_fk | type: CONSTRAINT --
@@ -1453,7 +1459,7 @@ CREATE SEQUENCE measfish.measure_template_measure_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.measure_template_measure_template_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.measure_template_measure_template_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.measure_template | type: TABLE --
@@ -1462,6 +1468,7 @@ CREATE TABLE measfish.measure_template (
 	measure_template_id integer NOT NULL DEFAULT nextval('measfish.measure_template_measure_template_id_seq'::regclass),
 	measure_template_name smallint NOT NULL,
 	measure_template_value json,
+	taxon_id integer NOT NULL,
 	CONSTRAINT measure_template_pk PRIMARY KEY (measure_template_id)
 
 );
@@ -1470,7 +1477,7 @@ COMMENT ON COLUMN measfish.measure_template.measure_template_value IS 'List of a
 For each type : name, extended.
 By default : total_length and weight';
 -- ddl-end --
-ALTER TABLE measfish.measure_template OWNER TO postgres;
+ALTER TABLE measfish.measure_template OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.operation_template_operation_template_id_seq | type: SEQUENCE --
@@ -1484,32 +1491,7 @@ CREATE SEQUENCE measfish.operation_template_operation_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.operation_template_operation_template_id_seq OWNER TO postgres;
--- ddl-end --
-
--- object: measfish.operation_template | type: TABLE --
--- DROP TABLE IF EXISTS measfish.operation_template CASCADE;
-CREATE TABLE measfish.operation_template (
-	operation_template_id integer NOT NULL DEFAULT nextval('measfish.operation_template_operation_template_id_seq'::regclass),
-	operation_template_name varchar NOT NULL,
-	operation_template_taxa json,
-	CONSTRAINT operation_template_pk PRIMARY KEY (operation_template_id)
-
-);
--- ddl-end --
-COMMENT ON TABLE measfish.operation_template IS 'List of taxons displayed on the screen';
--- ddl-end --
-COMMENT ON COLUMN measfish.operation_template.operation_template_taxa IS 'List of taxa and position on the screen
-Contains : taxon_id, posx and posy on the grid';
--- ddl-end --
-ALTER TABLE measfish.operation_template OWNER TO postgres;
--- ddl-end --
-
--- object: operation_template_fk | type: CONSTRAINT --
--- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS operation_template_fk CASCADE;
-ALTER TABLE measfish.operation ADD CONSTRAINT operation_template_fk FOREIGN KEY (operation_template_id)
-REFERENCES measfish.operation_template (operation_template_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER SEQUENCE measfish.operation_template_operation_template_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.item_generated_item_generated_id_seq | type: SEQUENCE --
@@ -1523,7 +1505,7 @@ CREATE SEQUENCE measfish.item_generated_item_generated_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.item_generated_item_generated_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.item_generated_item_generated_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.length_type | type: TABLE --
@@ -1539,7 +1521,7 @@ COMMENT ON TABLE measfish.length_type IS 'Types of length';
 -- ddl-end --
 COMMENT ON COLUMN measfish.length_type.length_type_name IS 'Name of the type of length measured';
 -- ddl-end --
-ALTER TABLE measfish.length_type OWNER TO postgres;
+ALTER TABLE measfish.length_type OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'1', E'sl');
@@ -1571,7 +1553,7 @@ CREATE SEQUENCE measfish.gear_gear_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.gear_gear_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.gear_gear_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.sequence_gear_sequence_gear_id_seq | type: SEQUENCE --
@@ -1585,7 +1567,7 @@ CREATE SEQUENCE measfish.sequence_gear_sequence_gear_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.sequence_gear_sequence_gear_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.sequence_gear_sequence_gear_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.gear | type: TABLE --
@@ -1608,7 +1590,7 @@ COMMENT ON COLUMN measfish.gear.gear_height IS 'Height of the net or other gear,
 -- ddl-end --
 COMMENT ON COLUMN measfish.gear.mesh_size IS 'Size of the mesh, in textual form';
 -- ddl-end --
-ALTER TABLE measfish.gear OWNER TO postgres;
+ALTER TABLE measfish.gear OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.sequence_gear | type: TABLE --
@@ -1621,6 +1603,8 @@ CREATE TABLE measfish.sequence_gear (
 	depth float,
 	sequence_id integer NOT NULL,
 	gear_id integer NOT NULL,
+	gear_method_id_gear_method integer,
+	electric_current_type_id smallint,
 	CONSTRAINT sequence_gear_pk PRIMARY KEY (sequence_gear_id)
 
 );
@@ -1635,7 +1619,7 @@ COMMENT ON COLUMN measfish.sequence_gear.gear_nb IS 'Nb of gears';
 -- ddl-end --
 COMMENT ON COLUMN measfish.sequence_gear.depth IS 'Depth of the gear';
 -- ddl-end --
-ALTER TABLE measfish.sequence_gear OWNER TO postgres;
+ALTER TABLE measfish.sequence_gear OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.engine_engine_id_seq | type: SEQUENCE --
@@ -1649,7 +1633,7 @@ CREATE SEQUENCE measfish.engine_engine_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.engine_engine_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.engine_engine_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.river_river_id_seq | type: SEQUENCE --
@@ -1663,7 +1647,7 @@ CREATE SEQUENCE measfish.river_river_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.river_river_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.river_river_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.river | type: TABLE --
@@ -1677,7 +1661,7 @@ CREATE TABLE measfish.river (
 -- ddl-end --
 COMMENT ON TABLE measfish.river IS 'River, estuary, sea...';
 -- ddl-end --
-ALTER TABLE measfish.river OWNER TO postgres;
+ALTER TABLE measfish.river OWNER TO measfish;
 -- ddl-end --
 
 -- object: river_fk | type: CONSTRAINT --
@@ -1712,7 +1696,7 @@ CREATE SEQUENCE measfish.analysis_analysis_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.analysis_analysis_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.analysis_analysis_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.analysis | type: TABLE --
@@ -1753,7 +1737,7 @@ COMMENT ON COLUMN measfish.analysis.secchi IS 'Secchi depth, in meter';
 -- ddl-end --
 COMMENT ON COLUMN measfish.analysis.other_analysis IS 'Others analysis performed (cf. analysis_template)';
 -- ddl-end --
-ALTER TABLE measfish.analysis OWNER TO postgres;
+ALTER TABLE measfish.analysis OWNER TO measfish;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
@@ -1777,7 +1761,7 @@ COMMENT ON TABLE measfish.sexe IS 'Sexe of fishs';
 -- ddl-end --
 COMMENT ON COLUMN measfish.sexe.sexe_code IS 'Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437';
 -- ddl-end --
-ALTER TABLE measfish.sexe OWNER TO postgres;
+ALTER TABLE measfish.sexe OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.sexe (sexe_id, sexe_name, sexe_code) VALUES (E'1', E'Femelle', E'F');
@@ -1807,7 +1791,7 @@ CREATE SEQUENCE measfish.pathology_pathology_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.pathology_pathology_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.pathology_pathology_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.pathology | type: TABLE --
@@ -1829,7 +1813,7 @@ COMMENT ON COLUMN measfish.pathology.pathology_code IS 'Code of the pathology, a
 -- ddl-end --
 COMMENT ON COLUMN measfish.pathology.pathology_description IS 'Description of the pathology';
 -- ddl-end --
-ALTER TABLE measfish.pathology OWNER TO postgres;
+ALTER TABLE measfish.pathology OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'1', E'00', E'Ni poux, ni traces de poux', E'Le poisson, généralement un salmonidé migrateur venu de la mer, n''héberge aucun pou de mer et ne présente aucune lésion visible consécutive à une colonisation par le pou de mer (qui est en fait un crustacé parasite des salmonidés migrateurs)');
@@ -1968,7 +1952,7 @@ CREATE SEQUENCE measfish.facies_facies_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.facies_facies_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.facies_facies_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.ambience_ambience_id_seq | type: SEQUENCE --
@@ -1982,7 +1966,7 @@ CREATE SEQUENCE measfish.ambience_ambience_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.ambience_ambience_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.ambience_ambience_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.situation_situation_id_seq | type: SEQUENCE --
@@ -1996,7 +1980,7 @@ CREATE SEQUENCE measfish.situation_situation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.situation_situation_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.situation_situation_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.facies | type: TABLE --
@@ -2010,7 +1994,7 @@ CREATE TABLE measfish.facies (
 -- ddl-end --
 COMMENT ON TABLE measfish.facies IS 'List of facies';
 -- ddl-end --
-ALTER TABLE measfish.facies OWNER TO postgres;
+ALTER TABLE measfish.facies OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.facies (facies_id, facies_name) VALUES (E'1', E'Rapide');
@@ -2046,6 +2030,12 @@ CREATE TABLE measfish.ambience (
 	ambience_comment varchar,
 	ambience_long double precision,
 	ambience_lat double precision,
+	current_speed float,
+	current_speed_max float,
+	current_speed_min float,
+	water_height smallint,
+	water_height_max smallint,
+	water_height_min smallint,
 	facies_id integer,
 	situation_id integer,
 	speed_id integer,
@@ -2081,7 +2071,19 @@ COMMENT ON COLUMN measfish.ambience.ambience_long IS 'Longitude of the point of 
 -- ddl-end --
 COMMENT ON COLUMN measfish.ambience.ambience_lat IS 'Latitude of the point of observation, in decimal WGS84';
 -- ddl-end --
-ALTER TABLE measfish.ambience OWNER TO postgres;
+COMMENT ON COLUMN measfish.ambience.current_speed IS 'Speed measured of the current, in cm/s';
+-- ddl-end --
+COMMENT ON COLUMN measfish.ambience.current_speed_max IS 'Maximum value of the current, in cm/s';
+-- ddl-end --
+COMMENT ON COLUMN measfish.ambience.current_speed_min IS 'Minimum speed of the current, in cm/s';
+-- ddl-end --
+COMMENT ON COLUMN measfish.ambience.water_height IS 'Average height of water, in cm';
+-- ddl-end --
+COMMENT ON COLUMN measfish.ambience.water_height_max IS 'Max height of water, in cm';
+-- ddl-end --
+COMMENT ON COLUMN measfish.ambience.water_height_min IS 'Min of height of water, in cm';
+-- ddl-end --
+ALTER TABLE measfish.ambience OWNER TO measfish;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
@@ -2102,7 +2104,7 @@ CREATE TABLE measfish.situation (
 -- ddl-end --
 COMMENT ON TABLE measfish.situation IS 'List of situations';
 -- ddl-end --
-ALTER TABLE measfish.situation OWNER TO postgres;
+ALTER TABLE measfish.situation OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.situation (situation_id, situation_name) VALUES (E'3', E'Confluence ruisseau');
@@ -2133,7 +2135,7 @@ CREATE SEQUENCE measfish.localisation_localisation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.localisation_localisation_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.localisation_localisation_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.localisation | type: TABLE --
@@ -2147,7 +2149,7 @@ CREATE TABLE measfish.localisation (
 -- ddl-end --
 COMMENT ON TABLE measfish.localisation IS 'List of localisations of the ambience';
 -- ddl-end --
-ALTER TABLE measfish.localisation OWNER TO postgres;
+ALTER TABLE measfish.localisation OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.localisation (localisation_id, localisation_name) VALUES (E'1', E'Chenal');
@@ -2166,7 +2168,7 @@ CREATE TABLE measfish.speed (
 -- ddl-end --
 COMMENT ON TABLE measfish.speed IS 'Speed of current, in cm/s';
 -- ddl-end --
-ALTER TABLE measfish.speed OWNER TO postgres;
+ALTER TABLE measfish.speed OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.speed (speed_id, speed_name) VALUES (E'1', E'< 10 cm/s');
@@ -2191,7 +2193,7 @@ CREATE TABLE measfish.shady (
 -- ddl-end --
 COMMENT ON TABLE measfish.shady IS 'List of shaddies used for ambiences';
 -- ddl-end --
-ALTER TABLE measfish.shady OWNER TO postgres;
+ALTER TABLE measfish.shady OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.shady (shady_id, shady_name) VALUES (E'1', E'Rivière couverte (>90% d''ombrage)');
@@ -2214,7 +2216,7 @@ CREATE SEQUENCE measfish.granulometry_granulometry_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.granulometry_granulometry_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.granulometry_granulometry_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.granulometry | type: TABLE --
@@ -2228,7 +2230,7 @@ CREATE TABLE measfish.granulometry (
 -- ddl-end --
 COMMENT ON TABLE measfish.granulometry IS 'List of types of granulometry';
 -- ddl-end --
-ALTER TABLE measfish.granulometry OWNER TO postgres;
+ALTER TABLE measfish.granulometry OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.granulometry (granulometry_id, granulometry_name) VALUES (E'1', E'Argile (<3,9 µm)');
@@ -2267,7 +2269,7 @@ CREATE SEQUENCE measfish.vegetation_vegetation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.vegetation_vegetation_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.vegetation_vegetation_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.vegetation | type: TABLE --
@@ -2281,7 +2283,7 @@ CREATE TABLE measfish.vegetation (
 -- ddl-end --
 COMMENT ON TABLE measfish.vegetation IS 'List of types of vegetation';
 -- ddl-end --
-ALTER TABLE measfish.vegetation OWNER TO postgres;
+ALTER TABLE measfish.vegetation OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.vegetation (vegetation_id, vegetation_name) VALUES (E'1', E'Algues - microphytes');
@@ -2312,7 +2314,7 @@ CREATE SEQUENCE measfish.cache_abundance_cache_abundance_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.cache_abundance_cache_abundance_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.cache_abundance_cache_abundance_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.cache_abundance | type: TABLE --
@@ -2326,7 +2328,7 @@ CREATE TABLE measfish.cache_abundance (
 -- ddl-end --
 COMMENT ON TABLE measfish.cache_abundance IS 'Levels of abundance of caches';
 -- ddl-end --
-ALTER TABLE measfish.cache_abundance OWNER TO postgres;
+ALTER TABLE measfish.cache_abundance OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'1', E'Nulle');
@@ -2442,7 +2444,7 @@ CREATE SEQUENCE gacl.aclgroup_aclgroup_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.aclgroup_aclgroup_id_seq OWNER TO postgres;
+ALTER SEQUENCE gacl.aclgroup_aclgroup_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.aclacl | type: TABLE --
@@ -2456,7 +2458,7 @@ CREATE TABLE gacl.aclacl (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclacl IS 'Table des droits attribués';
 -- ddl-end --
-ALTER TABLE gacl.aclacl OWNER TO postgres;
+ALTER TABLE gacl.aclacl OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.aclacl (aclaco_id, aclgroup_id) VALUES (E'1', E'1');
@@ -2483,7 +2485,7 @@ CREATE SEQUENCE gacl.aclaco_aclaco_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.aclaco_aclaco_id_seq OWNER TO postgres;
+ALTER SEQUENCE gacl.aclaco_aclaco_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.aclaco | type: TABLE --
@@ -2498,7 +2500,7 @@ CREATE TABLE gacl.aclaco (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclaco IS 'Table des droits gérés';
 -- ddl-end --
-ALTER TABLE gacl.aclaco OWNER TO postgres;
+ALTER TABLE gacl.aclaco OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.aclaco (aclaco_id, aclappli_id, aco) VALUES (E'1', E'1', E'admin');
@@ -2525,7 +2527,7 @@ CREATE SEQUENCE gacl.aclappli_aclappli_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.aclappli_aclappli_id_seq OWNER TO postgres;
+ALTER SEQUENCE gacl.aclappli_aclappli_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.aclappli | type: TABLE --
@@ -2544,7 +2546,7 @@ COMMENT ON COLUMN gacl.aclappli.appli IS 'Nom de l''application pour la gestion 
 -- ddl-end --
 COMMENT ON COLUMN gacl.aclappli.applidetail IS 'Description de l''application';
 -- ddl-end --
-ALTER TABLE gacl.aclappli OWNER TO postgres;
+ALTER TABLE gacl.aclappli OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.aclappli (aclappli_id, appli, applidetail) VALUES (E'1', E'measfish', DEFAULT);
@@ -2562,7 +2564,7 @@ CREATE TABLE gacl.aclgroup (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclgroup IS 'Groupes des logins';
 -- ddl-end --
-ALTER TABLE gacl.aclgroup OWNER TO postgres;
+ALTER TABLE gacl.aclgroup OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.aclgroup (aclgroup_id, groupe, aclgroup_id_parent) VALUES (E'1', E'admin', DEFAULT);
@@ -2589,7 +2591,7 @@ CREATE SEQUENCE gacl.acllogin_acllogin_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.acllogin_acllogin_id_seq OWNER TO postgres;
+ALTER SEQUENCE gacl.acllogin_acllogin_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.acllogin | type: TABLE --
@@ -2606,7 +2608,7 @@ COMMENT ON TABLE gacl.acllogin IS 'Table des logins des utilisateurs autorisés'
 -- ddl-end --
 COMMENT ON COLUMN gacl.acllogin.logindetail IS 'Nom affiché';
 -- ddl-end --
-ALTER TABLE gacl.acllogin OWNER TO postgres;
+ALTER TABLE gacl.acllogin OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.acllogin (acllogin_id, login, logindetail) VALUES (E'1', E'admin', E'admin');
@@ -2623,7 +2625,7 @@ CREATE TABLE gacl.acllogingroup (
 -- ddl-end --
 COMMENT ON TABLE gacl.acllogingroup IS 'Table des relations entre les logins et les groupes';
 -- ddl-end --
-ALTER TABLE gacl.acllogingroup OWNER TO postgres;
+ALTER TABLE gacl.acllogingroup OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.acllogingroup (acllogin_id, aclgroup_id) VALUES (E'1', E'1');
@@ -2642,7 +2644,7 @@ CREATE SEQUENCE gacl.log_log_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.log_log_id_seq OWNER TO postgres;
+ALTER SEQUENCE gacl.log_log_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.log | type: TABLE --
@@ -2666,7 +2668,7 @@ COMMENT ON COLUMN gacl.log.commentaire IS 'Donnees complementaires enregistrees'
 -- ddl-end --
 COMMENT ON COLUMN gacl.log.ipaddress IS 'Adresse IP du client';
 -- ddl-end --
-ALTER TABLE gacl.log OWNER TO postgres;
+ALTER TABLE gacl.log OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.seq_logingestion_id | type: SEQUENCE --
@@ -2680,7 +2682,7 @@ CREATE SEQUENCE gacl.seq_logingestion_id
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.seq_logingestion_id OWNER TO postgres;
+ALTER SEQUENCE gacl.seq_logingestion_id OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.login_oldpassword_login_oldpassword_id_seq | type: SEQUENCE --
@@ -2694,7 +2696,7 @@ CREATE SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq OWNER TO postgres;
+ALTER SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.login_oldpassword | type: TABLE --
@@ -2709,7 +2711,7 @@ CREATE TABLE gacl.login_oldpassword (
 -- ddl-end --
 COMMENT ON TABLE gacl.login_oldpassword IS 'Table contenant les anciens mots de passe';
 -- ddl-end --
-ALTER TABLE gacl.login_oldpassword OWNER TO postgres;
+ALTER TABLE gacl.login_oldpassword OWNER TO measfish;
 -- ddl-end --
 
 -- object: gacl.logingestion | type: TABLE --
@@ -2729,7 +2731,7 @@ CREATE TABLE gacl.logingestion (
 
 );
 -- ddl-end --
-ALTER TABLE gacl.logingestion OWNER TO postgres;
+ALTER TABLE gacl.logingestion OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO gacl.logingestion (id, login, password, nom, prenom, mail, datemodif, actif, is_clientws, tokenws) VALUES (E'1', E'admin', E'cd916028a2d8a1b901e831246dd5b9b4d3832786ddc63bbf5af4b50d9fc98f50', E'Administrator', DEFAULT, DEFAULT, DEFAULT, E'1', DEFAULT, DEFAULT);
@@ -2764,7 +2766,7 @@ CREATE TABLE measfish.project_group (
 
 );
 -- ddl-end --
-ALTER TABLE measfish.project_group OWNER TO postgres;
+ALTER TABLE measfish.project_group OWNER TO measfish;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
@@ -2792,7 +2794,7 @@ CREATE SEQUENCE measfish.operator_operator_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.operator_operator_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.operator_operator_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.operator | type: TABLE --
@@ -2814,7 +2816,7 @@ COMMENT ON COLUMN measfish.operator.name IS 'Last name of operator';
 -- ddl-end --
 COMMENT ON COLUMN measfish.operator.is_active IS 'Is the opérator actually active ?';
 -- ddl-end --
-ALTER TABLE measfish.operator OWNER TO postgres;
+ALTER TABLE measfish.operator OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.operation_operator | type: TABLE --
@@ -2831,7 +2833,7 @@ COMMENT ON TABLE measfish.operation_operator IS 'Operators rattached to an opera
 -- ddl-end --
 COMMENT ON COLUMN measfish.operation_operator.is_responsible IS 'True if the operator is responsible of the operation';
 -- ddl-end --
-ALTER TABLE measfish.operation_operator OWNER TO postgres;
+ALTER TABLE measfish.operation_operator OWNER TO measfish;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
@@ -2848,13 +2850,6 @@ REFERENCES measfish.operator (operator_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: measure_template_fk | type: CONSTRAINT --
--- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS measure_template_fk CASCADE;
-ALTER TABLE measfish.operation ADD CONSTRAINT measure_template_fk FOREIGN KEY (measure_template_id)
-REFERENCES measfish.measure_template (measure_template_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
 -- object: measfish.analysis_template_analysis_template_id_seq | type: SEQUENCE --
 -- DROP SEQUENCE IF EXISTS measfish.analysis_template_analysis_template_id_seq CASCADE;
 CREATE SEQUENCE measfish.analysis_template_analysis_template_id_seq
@@ -2866,7 +2861,7 @@ CREATE SEQUENCE measfish.analysis_template_analysis_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.analysis_template_analysis_template_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.analysis_template_analysis_template_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.analysis_template | type: TABLE --
@@ -2885,14 +2880,7 @@ COMMENT ON COLUMN measfish.analysis_template.analysis_template_name IS 'Name of 
 -- ddl-end --
 COMMENT ON COLUMN measfish.analysis_template.analysis_template_value IS 'Description of all parameters recorded, in Json format';
 -- ddl-end --
-ALTER TABLE measfish.analysis_template OWNER TO postgres;
--- ddl-end --
-
--- object: analysis_template_fk | type: CONSTRAINT --
--- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS analysis_template_fk CASCADE;
-ALTER TABLE measfish.operation ADD CONSTRAINT analysis_template_fk FOREIGN KEY (analysis_template_id)
-REFERENCES measfish.analysis_template (analysis_template_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE measfish.analysis_template OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.cloggging_clogging_id_seq | type: SEQUENCE --
@@ -2906,7 +2894,7 @@ CREATE SEQUENCE measfish.cloggging_clogging_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.cloggging_clogging_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.cloggging_clogging_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.clogging | type: TABLE --
@@ -2922,7 +2910,7 @@ COMMENT ON TABLE measfish.clogging IS 'List of types of cloggings';
 -- ddl-end --
 COMMENT ON COLUMN measfish.clogging.clogging_name IS 'Name of the type of clogging';
 -- ddl-end --
-ALTER TABLE measfish.clogging OWNER TO postgres;
+ALTER TABLE measfish.clogging OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.clogging (clogging_id, clogging_name) VALUES (E'1', E'Pas de colmatage');
@@ -2962,7 +2950,7 @@ CREATE SEQUENCE measfish.sinuosity_sinuosity_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.sinuosity_sinuosity_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.sinuosity_sinuosity_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.sinuosity | type: TABLE --
@@ -2976,7 +2964,7 @@ CREATE TABLE measfish.sinuosity (
 -- ddl-end --
 COMMENT ON TABLE measfish.sinuosity IS 'List of types of sinuosities of the river';
 -- ddl-end --
-ALTER TABLE measfish.sinuosity OWNER TO postgres;
+ALTER TABLE measfish.sinuosity OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'1', E'Cours d''eau rectiligne');
@@ -3006,7 +2994,7 @@ CREATE SEQUENCE measfish.flow_trend_flow_trend_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.flow_trend_flow_trend_id_seq OWNER TO postgres;
+ALTER SEQUENCE measfish.flow_trend_flow_trend_id_seq OWNER TO measfish;
 -- ddl-end --
 
 -- object: measfish.flow_trend | type: TABLE --
@@ -3020,7 +3008,7 @@ CREATE TABLE measfish.flow_trend (
 -- ddl-end --
 COMMENT ON TABLE measfish.flow_trend IS 'List of trends of flow';
 -- ddl-end --
-ALTER TABLE measfish.flow_trend OWNER TO postgres;
+ALTER TABLE measfish.flow_trend OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'1', E'Augmentation (en crue)');
@@ -3064,7 +3052,7 @@ CREATE TABLE measfish.turbidity (
 -- ddl-end --
 COMMENT ON TABLE measfish.turbidity IS 'List of types of turbidity';
 -- ddl-end --
-ALTER TABLE measfish.turbidity OWNER TO postgres;
+ALTER TABLE measfish.turbidity OWNER TO measfish;
 -- ddl-end --
 
 INSERT INTO measfish.turbidity (turbidity_id, turbidity_name) VALUES (E'1', E'Nulle');
@@ -3080,6 +3068,397 @@ INSERT INTO measfish.turbidity (turbidity_id, turbidity_name) VALUES (E'4', E'Fo
 -- ALTER TABLE measfish.ambience DROP CONSTRAINT IF EXISTS turbidity_fk CASCADE;
 ALTER TABLE measfish.ambience ADD CONSTRAINT turbidity_fk FOREIGN KEY (turbidity_id_turbidity)
 REFERENCES measfish.turbidity (turbidity_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: ambience_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.sequence DROP CONSTRAINT IF EXISTS ambience_fk CASCADE;
+ALTER TABLE measfish.sequence ADD CONSTRAINT ambience_fk FOREIGN KEY (ambience_id)
+REFERENCES measfish.ambience (ambience_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.protocol_protocol_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.protocol_protocol_id_seq CASCADE;
+CREATE SEQUENCE measfish.protocol_protocol_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.protocol_protocol_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.protocol | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.protocol CASCADE;
+CREATE TABLE measfish.protocol (
+	protocol_id integer NOT NULL DEFAULT nextval('measfish.protocol_protocol_id_seq'::regclass),
+	protocol_name varchar NOT NULL,
+	protocol_url varchar,
+	protocol_description varchar,
+	protocol_pdf bytea,
+	measure_default varchar NOT NULL DEFAULT 'sl',
+	measure_default_only boolean NOT NULL DEFAULT false,
+	analysis_template_id integer,
+	CONSTRAINT protocol_pk PRIMARY KEY (protocol_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.protocol IS 'List of protocols used';
+-- ddl-end --
+COMMENT ON COLUMN measfish.protocol.protocol_name IS 'Name of the protocol';
+-- ddl-end --
+COMMENT ON COLUMN measfish.protocol.protocol_url IS 'Url where the description of the protocol can be found';
+-- ddl-end --
+COMMENT ON COLUMN measfish.protocol.protocol_description IS 'Synthetic description of the protocol';
+-- ddl-end --
+COMMENT ON COLUMN measfish.protocol.protocol_pdf IS 'Document attached in pdf format';
+-- ddl-end --
+COMMENT ON COLUMN measfish.protocol.measure_default IS 'Name of the prefered measure in the protocol
+Possible values : sl, fl, tl, wd, ot';
+-- ddl-end --
+COMMENT ON COLUMN measfish.protocol.measure_default_only IS 'If true, only the measure_default type is used during the protocol';
+-- ddl-end --
+ALTER TABLE measfish.protocol OWNER TO measfish;
+-- ddl-end --
+
+-- object: protocol_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS protocol_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT protocol_fk FOREIGN KEY (protocol_id)
+REFERENCES measfish.protocol (protocol_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: taxon_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.measure_template DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
+ALTER TABLE measfish.measure_template ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
+REFERENCES measfish.taxon (taxon_id) MATCH FULL
+ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.protocol_measure | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.protocol_measure CASCADE;
+CREATE TABLE measfish.protocol_measure (
+	protocol_id integer NOT NULL,
+	measure_template_id integer NOT NULL,
+	CONSTRAINT protocol_measure_pk PRIMARY KEY (protocol_id,measure_template_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.protocol_measure IS 'List of particular species measures used in the protocol';
+-- ddl-end --
+ALTER TABLE measfish.protocol_measure OWNER TO measfish;
+-- ddl-end --
+
+-- object: protocol_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.protocol_measure DROP CONSTRAINT IF EXISTS protocol_fk CASCADE;
+ALTER TABLE measfish.protocol_measure ADD CONSTRAINT protocol_fk FOREIGN KEY (protocol_id)
+REFERENCES measfish.protocol (protocol_id) MATCH FULL
+ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measure_template_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.protocol_measure DROP CONSTRAINT IF EXISTS measure_template_fk CASCADE;
+ALTER TABLE measfish.protocol_measure ADD CONSTRAINT measure_template_fk FOREIGN KEY (measure_template_id)
+REFERENCES measfish.measure_template (measure_template_id) MATCH FULL
+ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: analysis_template_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.protocol DROP CONSTRAINT IF EXISTS analysis_template_fk CASCADE;
+ALTER TABLE measfish.protocol ADD CONSTRAINT analysis_template_fk FOREIGN KEY (analysis_template_id)
+REFERENCES measfish.analysis_template (analysis_template_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.water_height_water_height_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.water_height_water_height_id_seq CASCADE;
+CREATE SEQUENCE measfish.water_height_water_height_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 5
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.water_height_water_height_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.water_height | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.water_height CASCADE;
+CREATE TABLE measfish.water_height (
+	water_height_id integer NOT NULL DEFAULT nextval('measfish.water_height_water_height_id_seq'::regclass),
+	water_height_name varchar NOT NULL,
+	CONSTRAINT water_height_pk PRIMARY KEY (water_height_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.water_height IS 'List of general water heights (low water, flood, etc.)';
+-- ddl-end --
+ALTER TABLE measfish.water_height OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'1', E'Étiage');
+-- ddl-end --
+INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'2', E'Niveau moyen');
+-- ddl-end --
+INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'3', E'Hautes eaux');
+-- ddl-end --
+INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'4', E'Crue');
+-- ddl-end --
+
+-- object: water_height_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS water_height_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT water_height_fk FOREIGN KEY (water_height_id)
+REFERENCES measfish.water_height (water_height_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.electric_current_type | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.electric_current_type CASCADE;
+CREATE TABLE measfish.electric_current_type (
+	electric_current_type_id smallint NOT NULL,
+	electric_current_type_name varchar NOT NULL,
+	CONSTRAINT electric_current_type_pk PRIMARY KEY (electric_current_type_id)
+
+);
+-- ddl-end --
+ALTER TABLE measfish.electric_current_type OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.electric_current_type (electric_current_type_id, electric_current_type_name) VALUES (E'1', E'Continu');
+-- ddl-end --
+INSERT INTO measfish.electric_current_type (electric_current_type_id, electric_current_type_name) VALUES (E'2', E'Ondulé');
+-- ddl-end --
+
+-- object: measfish.fishing_strategy_fishing_strategy_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.fishing_strategy_fishing_strategy_id_seq CASCADE;
+CREATE SEQUENCE measfish.fishing_strategy_fishing_strategy_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 3
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.fishing_strategy_fishing_strategy_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.fishing_strategy | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.fishing_strategy CASCADE;
+CREATE TABLE measfish.fishing_strategy (
+	fishing_strategy_id integer NOT NULL DEFAULT nextval('measfish.fishing_strategy_fishing_strategy_id_seq'::regclass),
+	fishing_strategy_name varchar NOT NULL,
+	CONSTRAINT fishing_strategy_pk PRIMARY KEY (fishing_strategy_id)
+
+);
+-- ddl-end --
+ALTER TABLE measfish.fishing_strategy OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'1', E'Inventaire');
+-- ddl-end --
+INSERT INTO measfish.fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'2', E'Sondage');
+-- ddl-end --
+INSERT INTO measfish.fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'3', E'EPA');
+-- ddl-end --
+
+-- object: fishing_strategy_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS fishing_strategy_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT fishing_strategy_fk FOREIGN KEY (fishing_strategy_id)
+REFERENCES measfish.fishing_strategy (fishing_strategy_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.scale_scale_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.scale_scale_id_seq CASCADE;
+CREATE SEQUENCE measfish.scale_scale_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 4
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.scale_scale_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.scale | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.scale CASCADE;
+CREATE TABLE measfish.scale (
+	scale_id integer NOT NULL DEFAULT nextval('measfish.scale_scale_id_seq'::regclass),
+	scale_name varchar NOT NULL,
+	CONSTRAINT scale_pk PRIMARY KEY (scale_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.scale IS 'Scale of the operation (global station, point, ambience)';
+-- ddl-end --
+ALTER TABLE measfish.scale OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.scale (scale_id, scale_name) VALUES (E'1', E'Global station');
+-- ddl-end --
+INSERT INTO measfish.scale (scale_id, scale_name) VALUES (E'2', E'Ambiances');
+-- ddl-end --
+INSERT INTO measfish.scale (scale_id, scale_name) VALUES (E'3', E'Points');
+-- ddl-end --
+
+-- object: scale_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS scale_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT scale_fk FOREIGN KEY (scale_id)
+REFERENCES measfish.scale (scale_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.gear_method_gear_method_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.gear_method_gear_method_id_seq CASCADE;
+CREATE SEQUENCE measfish.gear_method_gear_method_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 3
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.gear_method_gear_method_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.gear_method | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.gear_method CASCADE;
+CREATE TABLE measfish.gear_method (
+	gear_method_id integer NOT NULL DEFAULT nextval('measfish.gear_method_gear_method_id_seq'::regclass),
+	gear_method_name varchar NOT NULL,
+	CONSTRAINT gear_method_pk PRIMARY KEY (gear_method_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.gear_method IS 'Method of usage of the gear (in boat, walk fishing, etc.)';
+-- ddl-end --
+ALTER TABLE measfish.gear_method OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.gear_method (gear_method_id, gear_method_name) VALUES (E'1', E'À pied');
+-- ddl-end --
+INSERT INTO measfish.gear_method (gear_method_id, gear_method_name) VALUES (E'2', E'En bateau');
+-- ddl-end --
+INSERT INTO measfish.gear_method (gear_method_id, gear_method_name) VALUES (E'3', E'Autre');
+-- ddl-end --
+
+-- object: gear_method_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.sequence_gear DROP CONSTRAINT IF EXISTS gear_method_fk CASCADE;
+ALTER TABLE measfish.sequence_gear ADD CONSTRAINT gear_method_fk FOREIGN KEY (gear_method_id_gear_method)
+REFERENCES measfish.gear_method (gear_method_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: electric_current_type_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.sequence_gear DROP CONSTRAINT IF EXISTS electric_current_type_fk CASCADE;
+ALTER TABLE measfish.sequence_gear ADD CONSTRAINT electric_current_type_fk FOREIGN KEY (electric_current_type_id)
+REFERENCES measfish.electric_current_type (electric_current_type_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: measfish.dbparam | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.dbparam CASCADE;
+CREATE TABLE measfish.dbparam (
+	dbparam_id integer NOT NULL,
+	dbparam_name character varying NOT NULL,
+	dbparam_value character varying,
+	CONSTRAINT dbparam_pk PRIMARY KEY (dbparam_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.dbparam IS 'Table des parametres associes de maniere intrinseque a l''instance';
+-- ddl-end --
+COMMENT ON COLUMN measfish.dbparam.dbparam_name IS 'Nom du parametre';
+-- ddl-end --
+COMMENT ON COLUMN measfish.dbparam.dbparam_value IS 'Valeur du paramètre';
+-- ddl-end --
+ALTER TABLE measfish.dbparam OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'1', E'APPLI_title', E'Measfish');
+-- ddl-end --
+
+-- object: measfish.dbversion_dbversion_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.dbversion_dbversion_id_seq CASCADE;
+CREATE SEQUENCE measfish.dbversion_dbversion_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.dbversion_dbversion_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.dbversion | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.dbversion CASCADE;
+CREATE TABLE measfish.dbversion (
+	dbversion_id integer NOT NULL DEFAULT nextval('measfish.dbversion_dbversion_id_seq'::regclass),
+	dbversion_number character varying NOT NULL,
+	dbversion_date timestamp NOT NULL,
+	CONSTRAINT dbversion_pk PRIMARY KEY (dbversion_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.dbversion IS 'Table des versions de la base de donnees';
+-- ddl-end --
+COMMENT ON COLUMN measfish.dbversion.dbversion_number IS 'Numero de la version';
+-- ddl-end --
+COMMENT ON COLUMN measfish.dbversion.dbversion_date IS 'Date de la version';
+-- ddl-end --
+ALTER TABLE measfish.dbversion OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.dbversion (dbversion_number, dbversion_date) VALUES (E'0.1', E'2019-04-15');
+-- ddl-end --
+
+-- object: measfish.taxa_template_taxa_template_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.taxa_template_taxa_template_id_seq CASCADE;
+CREATE SEQUENCE measfish.taxa_template_taxa_template_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE measfish.taxa_template_taxa_template_id_seq OWNER TO measfish;
+-- ddl-end --
+
+-- object: measfish.taxa_template | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.taxa_template CASCADE;
+CREATE TABLE measfish.taxa_template (
+	taxa_template_id integer NOT NULL DEFAULT nextval('measfish.taxa_template_taxa_template_id_seq'::regclass),
+	taxa_template_name varchar NOT NULL,
+	taxa_model json,
+	CONSTRAINT taxa_template_pk PRIMARY KEY (taxa_template_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE measfish.taxa_template IS 'List of templates used to select taxa';
+-- ddl-end --
+COMMENT ON COLUMN measfish.taxa_template.taxa_model IS 'Model of emplacement of taxa on screen';
+-- ddl-end --
+ALTER TABLE measfish.taxa_template OWNER TO measfish;
+-- ddl-end --
+
+-- object: taxa_template_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS taxa_template_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT taxa_template_fk FOREIGN KEY (taxa_template_id)
+REFERENCES measfish.taxa_template (taxa_template_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
