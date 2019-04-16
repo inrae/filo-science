@@ -102,6 +102,12 @@ $(document).ready(function() {
 		"pageLength": pageLength,
 		"lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]]
 	});
+	$('.datatable-searching').DataTable({
+		"language" : dataTableLanguage,
+		"searching": true,
+		"pageLength": pageLength,
+		"lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]]
+	});
 	$('.datatable-nopaging').DataTable({
 		"language" : dataTableLanguage,
 		"paging" : false,
@@ -149,7 +155,7 @@ $(document).ready(function() {
        ]
 	});
 
-		$(".datatable, .datatable-export-paging").on('length.dt', function ( e, settings, len ) { 
+		$(".datatable, .datatable-export-paging, .datatable-searching").on('length.dt', function ( e, settings, len ) { 
 		Cookies.set('pageLength', len, { expires: 180});
 	});
 

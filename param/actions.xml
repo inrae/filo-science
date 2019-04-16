@@ -166,5 +166,10 @@
 	<sexeWrite action="modules/param/sexe.php" param="write" droits="param" tablename="sexe"  retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange" />
 	<sexeDelete action="modules/param/sexe.php" param="delete" droits="param" tablename="sexe"  retourok="sexeList" retourko="sexeChange"  modulebefore="sexeChange" />
 
+	<pathologyList action="modules/param/pathology.php" param="list" droits="consult"  type="smarty"/>
+	<pathologyChange action="modules/param/pathology.php" param="change" droits="param" tablename="pathology" type="smarty"/>
+	<pathologyWrite action="modules/param/pathology.php" param="write" droits="param" tablename="pathology"  retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange" />
+	<pathologyDelete action="modules/param/pathology.php" param="delete" droits="param" tablename="pathology"  retourok="pathologyList" retourko="pathologyChange"  modulebefore="pathologyChange" />
+
 </navigation>
 	
