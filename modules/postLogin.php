@@ -33,4 +33,18 @@ if (strlen ( $APPLI_temp ) > 0) {
 	}
 	closedir ( $dossier );
 }
+
+require_once 'modules/classes/project.class.php';
+$project = new Project($bdd, $ObjetBDDParam);
+/*
+ * Recuperation des projets attaches directement au login
+ */
+try {
+    $project->initprojects();
+} catch (Exception $e) {
+    if ($APPLI_modeDeveloppement) {
+        $message->set($e->getMessage());
+	}
+	$message->setSyslog($e->getMessage());
+}
 ?>
