@@ -176,6 +176,8 @@ $(document).ready(function() {
 		Cookies.set('pageLength', len, { expires: 180});
 	});
 
+	$(".datatable, .datatable-export-paging, .datatable-searching").DataTable().page.len(pageLength);
+
 	$('.taux,nombre').attr('title', '{t}Valeur numérique...{/t}');
 	$('.taux').attr({
 		'pattern' : '-?[0-9]+(\.[0-9]+)?',
