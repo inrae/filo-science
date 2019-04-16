@@ -75,6 +75,7 @@
 
 	<!-- Parameters of the software -->
 
+	<param action="framework/default.php" type="smarty"/>
 
 	<granulometryList action="modules/param/param.php" param="list" droits="consult"  tablename="granulometry"  tabledescription="Classes de granulométrie" type="smarty"/>
 	<granulometryChange action="modules/param/param.php" param="change" droits="param" tablename="granulometry" tabledescription="Classes de granulométrie"   type="smarty"/>
@@ -175,5 +176,10 @@
 	<gearChange action="modules/param/gear.php" param="change" droits="param" type="smarty"/>
 	<gearWrite action="modules/param/gear.php" param="write" droits="param"  retourok="gearList" retourko="gearChange" modulebefore="gearChange" />
 	<gearDelete action="modules/param/gear.php" param="delete" droits="param"  retourok="gearList" retourko="gearChange"  modulebefore="gearChange" />
+
+	<taxonList action="modules/param/taxon.php" param="list" droits="consult"  type="smarty"/>
+	<taxonChange action="modules/param/taxon.php" param="change" droits="param" type="smarty"/>
+	<taxonWrite action="modules/param/taxon.php" param="write" droits="param"  retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange" />
+	<taxonDelete action="modules/param/taxon.php" param="delete" droits="param"  retourok="taxonList" retourko="taxonChange"  modulebefore="taxonChange" />
 </navigation>
 	

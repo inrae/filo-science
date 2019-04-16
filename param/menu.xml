@@ -11,6 +11,7 @@
 <item module="param" label="Paramètres" tooltip="Paramètres généraux et tables de référence">
 	<item module="projectList" label="Projets" tooltip="Liste des projets"/>
 	<item divider="1"/>	
+	<item module="taxonList" label="Taxon" tooltip="Liste des taxons"/>
 	<item module="sexeList" label="Sexe" tooltip="Liste des sexes"/>
 	<item module="pathologyList" label="Pathologies" tooltip="Types de pathologie"/>
 	<item divider="1"/>
