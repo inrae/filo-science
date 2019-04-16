@@ -181,5 +181,11 @@
 	<taxonChange action="modules/param/taxon.php" param="change" droits="param" type="smarty"/>
 	<taxonWrite action="modules/param/taxon.php" param="write" droits="param"  retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange" />
 	<taxonDelete action="modules/param/taxon.php" param="delete" droits="param"  retourok="taxonList" retourko="taxonChange"  modulebefore="taxonChange" />
+
+	<projectList action="modules/param/project.php" param="list" droits="consult"  type="smarty"/>
+	<projectChange action="modules/param/project.php" param="change" droits="param" type="smarty"/>
+	<projectWrite action="modules/param/project.php" param="write" droits="param"  retourok="projectList" retourko="projectChange" modulebefore="projectChange" />
+	<projectDelete action="modules/param/project.php" param="delete" droits="param"  retourok="projectList" retourko="projectChange"  modulebefore="projectChange" />
+
 </navigation>
 	
