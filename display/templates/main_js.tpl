@@ -1,6 +1,8 @@
 <!-- Jquery -->
+<!--
 <script src="display/javascript/jquery-3.3.1.min.js"></script>
-
+-->
+<script src="display/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <link rel="stylesheet"	href="display/javascript/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"	href="display/javascript/bootstrap/css/bootstrap-theme.min.css">
@@ -18,15 +20,30 @@
 <script src="display/javascript/smartmenus-1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js" type="text/javascript"></script>
 
 <!-- Datatables -->
+<script src="display/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" />
+<!--
 <link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/media/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/media/css/dataTables.bootstrap.min.css" />
 <script type="text/javascript" src="display/javascript/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="display/javascript/DataTables-1.10.15/media/js/dataTables.bootstrap.min.js"></script>
+-->
+
 <!-- Boutons d'export associes aux datatables - classe datatable-export -->
+<script src="display/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="display/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="display/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="display/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
+
+<!--
+<script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="display/javascript/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="display/javascript/DataTables-1.10.15/extensions/Buttons/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="display/javascript/DataTables-1.10.15/extensions/Buttons/js/buttons.print.min.js"></script>
 <link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/extensions/Buttons/css/buttons.dataTables.min.css" />
+-->
 <!--  <script type="text/javascript" charset="utf-8" src="javascript/pdfmake.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="javascript/vfs_fonts.js"></script>
 <script type="text/javascript" charset="utf-8" src="javascript/jszip.min.js"></script>

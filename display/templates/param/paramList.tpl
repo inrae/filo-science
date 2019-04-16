@@ -21,6 +21,7 @@
 {if $droits.param == 1}
 <a href="index.php?module={$tablename}Change&{$tablename}_id={$row[$fieldid]}">
 {$row[$fieldname]}
+</a>
 {else}
 {$row[$fieldname]}
 {/if}

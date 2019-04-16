@@ -27,10 +27,12 @@
                 <td>
                     {if $droits.param == 1}
                     <a href="index.php?module=taxonChange&taxon_id={$row["taxon_id"]}">
-                    {$row["scientific_name"]} {$row["author"]}
+                    {$row["scientific_name"]}
+                    </a>
                     {else}
-                    {$row["taxon_name"]} {$row["author"]}
+                    {$row["taxon_name"]} 
                     {/if}
+                    {if strlen($row["author"])>0}&nbsp;({$row["author"]}){/if}
                 </td>
                 <td>
                     {$row["common_name"]}
