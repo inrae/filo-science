@@ -162,14 +162,18 @@
 	<gear_methodDelete action="modules/param/param.php" param="delete" droits="param" tablename="gear_method"  retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange"/>	
 
 	<sexeList action="modules/param/sexe.php" param="list" droits="consult"  type="smarty"/>
-	<sexeChange action="modules/param/sexe.php" param="change" droits="param" tablename="sexe" type="smarty"/>
-	<sexeWrite action="modules/param/sexe.php" param="write" droits="param" tablename="sexe"  retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange" />
-	<sexeDelete action="modules/param/sexe.php" param="delete" droits="param" tablename="sexe"  retourok="sexeList" retourko="sexeChange"  modulebefore="sexeChange" />
+	<sexeChange action="modules/param/sexe.php" param="change" droits="param" type="smarty"/>
+	<sexeWrite action="modules/param/sexe.php" param="write" droits="param"   retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange" />
+	<sexeDelete action="modules/param/sexe.php" param="delete" droits="param"  retourok="sexeList" retourko="sexeChange"  modulebefore="sexeChange" />
 
 	<pathologyList action="modules/param/pathology.php" param="list" droits="consult"  type="smarty"/>
-	<pathologyChange action="modules/param/pathology.php" param="change" droits="param" tablename="pathology" type="smarty"/>
-	<pathologyWrite action="modules/param/pathology.php" param="write" droits="param" tablename="pathology"  retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange" />
-	<pathologyDelete action="modules/param/pathology.php" param="delete" droits="param" tablename="pathology"  retourok="pathologyList" retourko="pathologyChange"  modulebefore="pathologyChange" />
+	<pathologyChange action="modules/param/pathology.php" param="change" droits="param"  type="smarty"/>
+	<pathologyWrite action="modules/param/pathology.php" param="write" droits="param"   retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange" />
+	<pathologyDelete action="modules/param/pathology.php" param="delete" droits="param"   retourok="pathologyList" retourko="pathologyChange"  modulebefore="pathologyChange" />
 
+	<gearList action="modules/param/gear.php" param="list" droits="consult"  type="smarty"/>
+	<gearChange action="modules/param/gear.php" param="change" droits="param" type="smarty"/>
+	<gearWrite action="modules/param/gear.php" param="write" droits="param"  retourok="gearList" retourko="gearChange" modulebefore="gearChange" />
+	<gearDelete action="modules/param/gear.php" param="delete" droits="param"  retourok="gearList" retourko="gearChange"  modulebefore="gearChange" />
 </navigation>
 	
