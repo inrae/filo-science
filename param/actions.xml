@@ -161,5 +161,10 @@
 	<gear_methodWrite action="modules/param/param.php" param="write" droits="param" tablename="gear_method"  retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange" />
 	<gear_methodDelete action="modules/param/param.php" param="delete" droits="param" tablename="gear_method"  retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange"/>	
 
+	<sexeList action="modules/param/sexe.php" param="list" droits="consult"  type="smarty"/>
+	<sexeChange action="modules/param/sexe.php" param="change" droits="param" tablename="sexe" type="smarty"/>
+	<sexeWrite action="modules/param/sexe.php" param="write" droits="param" tablename="sexe"  retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange" />
+	<sexeDelete action="modules/param/sexe.php" param="delete" droits="param" tablename="sexe"  retourok="sexeList" retourko="sexeChange"  modulebefore="sexeChange" />
+
 </navigation>
 	
