@@ -6,7 +6,8 @@
  * @author Eric Quinton
  *
  */
-class SearchParam {
+class SearchParam
+{
 	/**
 	 * Tableau des parametres geres par la classe
 	 * La liste des parametres doit etre declaree dans la fonction construct
@@ -26,13 +27,14 @@ class SearchParam {
 	 * Constructeur de la classe
 	 * A rappeler systematiquement pour initialiser isSearch
 	 */
-	function __construct() {
-		if (! is_array ( $this->param ))
-			$this->param = array ();
+	function __construct()
+	{
+		if (!is_array($this->param))
+			$this->param = array();
 		$this->isSearch = 0;
-		$this->param ["isSearch"] = 0;
-		if (is_array ( $this->paramNum ))
-			$this->paramNum = array_flip ( $this->paramNum );
+		$this->param["isSearch"] = 0;
+		if (is_array($this->paramNum))
+			$this->paramNum = array_flip($this->paramNum);
 	}
 	/**
 	 * Stocke les parametres fournis
@@ -42,48 +44,50 @@ class SearchParam {
 	 * @param string $valeur
 	 *        	: valeur a renseigner, dans le cas ou la donnee est unique
 	 */
-	function setParam($data, $valeur = NULL) {
-		if (is_array ( $data )) {
+	function setParam($data, $valeur = NULL)
+	{
+		if (is_array($data)) {
 			/*
 			 * Les donnees sont fournies sous forme de tableau
 			 */
-			foreach ( $this->param as $key => $value ) {
+			foreach ($this->param as $key => $value) {
 				/*
 				 * Recherche si une valeur de $data correspond a un parametre
 				 */
-				if (isset ( $data [$key] )) {
+				if (isset($data[$key])) {
 					/*
 					 * Recherche si la valeur doit etre numerique
 					 */
-					if (isset ( $this->paramNum [$key] )) {
-						if (! is_numeric ( $data [$key] ))
-							$data [$key] = "";
+					if (isset($this->paramNum[$key])) {
+						if (!is_numeric($data[$key]))
+							$data[$key] = "";
 					}
-					$this->param [$key] = $data [$key];
+					$this->param[$key] = $data[$key];
 				}
 			}
 		} else {
 			/*
 			 * Une donnee unique est fournie
 			 */
-			if (isset ( $this->param [$data] ) && ! is_null ( $valeur )) {
-				if (isset ( $this->paramNum [$data] )) {
-					if (! is_numeric ( $valeur ))
+			if (isset($this->param[$data]) && !is_null($valeur)) {
+				if (isset($this->paramNum[$data])) {
+					if (!is_numeric($valeur))
 						$valeur = "";
 				}
-				$this->param [$data] = $valeur;
+				$this->param[$data] = $valeur;
 			}
 		}
 		/*
 		 * Gestion de l'indicateur de recherche
 		 */
-		if ($data ["isSearch"] == 1)
+		if ($data["isSearch"] == 1)
 			$this->isSearch = 1;
 	}
 	/**
 	 * Retourne les parametres existants
 	 */
-	function getParam() {
+	function getParam()
+	{
 		// return $this->encodeData($this->param);
 		return $this->param;
 	}
@@ -92,27 +96,29 @@ class SearchParam {
 	 *
 	 * @return int
 	 */
-	function isSearch() {
+	function isSearch()
+	{
 		if ($this->isSearch == 1) {
 			return 1;
 		} else {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Encode les donnees avant de les envoyer au navigateur
 	 *
 	 * @param unknown $data        	
 	 * @return string|array
 	 */
-	function encodeData($data) {
-		if (is_array ( $data )) {
-			foreach ( $data as $key => $value ) {
-				$data [$key] = $this->encodeData ( $value );
+	function encodeData($data)
+	{
+		if (is_array($data)) {
+			foreach ($data as $key => $value) {
+				$data[$key] = $this->encodeData($value);
 			}
 		} else {
-			$data = htmlspecialchars ( $data );
+			$data = htmlspecialchars($data);
 		}
 		return $data;
 	}
@@ -123,20 +129,31 @@ class SearchParam {
  * @author Eric Quinton
  *        
  */
-class SearchExample extends SearchParam {
-	function __construct() {
-		$this->param = array (
-				"comment" => "",
-				"numero" => 0,
-				"numero1" => "",
-				"dateExample" => date ( 'd/m/Y' ) 
+class SearchExample extends SearchParam
+{
+	function __construct()
+	{
+		$this->param = array(
+			"comment" => "",
+			"numero" => 0,
+			"numero1" => "",
+			"dateExample" => date('d/m/Y')
 		);
-		$this->paramNum = array (
-				"numero",
-				"numero1" 
+		$this->paramNum = array(
+			"numero",
+			"numero1"
 		);
-		parent::__construct ();
+		parent::__construct();
 	}
 }
 
-?>
+class SearchCampaign extends SearchParam
+{
+	function __construct()
+	{
+		$this->param = array(
+			"project_id" => ""
+		);
+		$this->paramNum = array("project_id");
+	}
+}

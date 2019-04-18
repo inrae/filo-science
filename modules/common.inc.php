@@ -5,4 +5,9 @@
  * variables de session
  */
 
-?>
+if (!isset($_SESSION["ti_campaign"])) {
+          $_SESSION["ti_campaign"] = new TranslateId("campaign_id");
+}
+if (!isset($_SESSION["searchCampaign"])) {
+    $_SESSION["searchCampaign"] = new SearchCampaign();
+}
