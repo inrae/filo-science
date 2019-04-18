@@ -1,4 +1,4 @@
-<?
+<?php
 include_once 'modules/classes/protocol.class.php';
 $dataClass = new Protocol($bdd, $ObjetBDDParam);
 $keyName = "protocol_id";
@@ -11,15 +11,13 @@ switch ($t_module["param"]) {
         $vue->set("param/protocolList.tpl", "corps");
         break;
     case "change":
-        /*
-		 * open the form to modify the record
-		 * If is a new record, generate a new record with default value :
-		 * $_REQUEST["idParent"] contains the identifiant of the parent record 
-		 */
         dataRead($dataClass, $id, "param/protocolChange.tpl");
+        require_once "modules/classes/analysis_template.class.php";
+        $at = new Analysis_template($bdd, $ObjetBDDParam);
+        $vue->set($at->getListe(1), "dataat");
         break;
     case "display":
-        $vue->set($dataClass->getDetail($id), $data);
+        $vue->set($dataClass->getDetail($id), "data");
         $vue->set("param/protocolDisplay.tpl", "corps");
 
         /**

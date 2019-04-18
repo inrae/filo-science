@@ -3,6 +3,7 @@
 	<div class="col-md-12">
 {if $droits.param == 1}
 <a href="index.php?module=taxonChange&taxon_id=0">
+<img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
 {/if}

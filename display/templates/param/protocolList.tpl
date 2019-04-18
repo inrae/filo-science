@@ -1,8 +1,9 @@
 <h2>{t}Liste des protocoles{/t}</h2>
 	<div class="row">
 	<div class="col-md-6">
-{if $droits.param == 1}
+{if $droits.gestion == 1}
 <a href="index.php?module=protocolChange&protocol_id=0">
+<img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
 {/if}
@@ -22,22 +23,21 @@
             <tr>
                 <td class="center">{$row["protocol_id"]}</td>
                 <td>
-                    {if $droits.param == 1}
                     <a href="index.php?module=protocolDisplay&protocol_id={$row["protocol_id"]}">
                     {$row["protocol_name"]}
-                    {else}
-                    {$row["protocol_name"]}
-                    {/if}
                 </td>
                 <td class="textareaDisplay">{$row["protocol_description"]}</td>
                 <td>
                     {if strlen($row["protocol_url"]) > 0}
-                        <a href='{$row["protocol_url"]}'>{$row["protocol_url"]}</a>
+                        <a href='{$row["protocol_url"]}' target="_blank" >{$row["protocol_url"]}</a>
                     {/if}
                 </td>
                 <td> </td>
                 <td>
-                    {$row["measure_default"]}
+                   {if $row["measure_default"] == "sl"}{t}Longueur standard{/t}
+                    {elseif $row.measure_default == "fl"}{t}Longueur fourche{/t}
+                    {elseif $row.measure_default == "tl"}{t}Longueur totale{/t}
+                    {/if} 
                 </td>
             </tr>
         {/foreach}

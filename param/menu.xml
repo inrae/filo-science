@@ -10,6 +10,7 @@
 
 <item module="param" label="Paramètres" tooltip="Paramètres généraux et tables de référence">
 	<item module="projectList" label="Projets" tooltip="Liste des projets"/>
+	<item module="protocolList" label="Protocoles" tooltip="Liste des protocoles"/>
 	<item divider="1"/>	
 	<item module="taxonList" label="Taxon" tooltip="Liste des taxons"/>
 	<item module="sexeList" label="Sexe" tooltip="Liste des sexes"/>

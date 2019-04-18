@@ -187,5 +187,11 @@
 	<projectWrite action="modules/param/project.php" param="write" droits="param"  retourok="projectList" retourko="projectChange" modulebefore="projectChange" />
 	<projectDelete action="modules/param/project.php" param="delete" droits="param"  retourok="projectList" retourko="projectChange"  modulebefore="projectChange" />
 
+	<protocolList action="modules/param/protocol.php" param="list" droits="consult"  type="smarty"/>
+	<protocolDisplay action="modules/param/protocol.php" param="display" droits="consult" type="smarty"/>
+	<protocolChange action="modules/param/protocol.php" param="change" droits="gestion" type="smarty"/>
+	<protocolWrite action="modules/param/protocol.php" param="write" droits="gestion"   retourok="protocolDisplay" retourko="protocolChange" modulebefore="protocolChange" />
+	<protocolDelete action="modules/param/protocol.php" param="delete" droits="gestion"  retourok="protocolList" retourko="protocolChange"  modulebefore="protocolChange" />
+
 </navigation>
 	

@@ -85,6 +85,10 @@ legend {
 	background-color: rgba(0,158,224, 0.3);
 }
 
+
+.form-display dt {
+	white-space: pre-wrap;
+}
 .form-display dd {
 	word-wrap: break-word;
 	border-style: solid;
@@ -95,6 +99,7 @@ legend {
 }
 .form-display > row > label {
 	text-align: right;
+	word-wrap: break-word;
 }
 .display {
 	word-wrap: break-word;

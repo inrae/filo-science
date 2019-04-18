@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * ORM of the table measure_template
  */

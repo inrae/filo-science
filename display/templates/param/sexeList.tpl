@@ -2,6 +2,7 @@
 	<div class="row">
 	<div class="col-md-6">
 {if $droits.param == 1}
+<img src="display/images/new.png" height="25">
 <a href="index.php?module=sexeChange&sexe_id=0">
 {t}Nouveau...{/t}
 </a>

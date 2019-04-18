@@ -3,6 +3,7 @@
 	<div class="col-md-6">
 {if $droits.param == 1}
 <a href="index.php?module={$tablename}Change&{$tablename}_id=0">
+<img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
 {/if}
