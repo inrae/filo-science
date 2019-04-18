@@ -47,7 +47,7 @@ body {
 }
 
 .red {
-	color: red;
+	color: #78041D;
 }
 .blue {
 	color: #003A80;;
@@ -58,6 +58,9 @@ body {
 .message {
 	font-style: italic;
 	color: #003A80;
+}
+.messageError {
+	color: #78041D;
 }
 /* italique gris petit*/
 .messagebas {

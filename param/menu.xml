@@ -5,7 +5,8 @@
 	<its:translateRule selector="//item/@tooltip" translate="yes"/> 
 </its:rules>
 
-<item module="gestion" label="Gestion" tooltip="Modules de l'application">
+<item module="campaignList" label="Campagnes" tooltip="Campagnes de pêche">
+	<item module="campaignList" label="Campagnes" tooltip="Campagnes de pêche"/>
 </item>
 
 <item module="param" label="Paramètres" tooltip="Paramètres généraux et tables de référence">

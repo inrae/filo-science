@@ -29,13 +29,16 @@ switch ($t_module["param"]) {
             $message->set($e->getMessage(), true);
         }
         break;
-        case "display":
-        $vue->set ($_SESSION["ti_campaign"]->translateRow($dataClass->getDetail($id)), "data");
-        $vue->set ("gestion/campaignDisplay.tpl", "corps");
+    case "display":
+        $vue->set($_SESSION["ti_campaign"]->translateRow($dataClass->getDetail($id)), "data");
+        $vue->set("gestion/campaignDisplay.tpl", "corps");
         /**
          * Get list of operations
          */
-
+        require_once 'modules/classes/operation.class.php';
+        $operation = new Operation($bdd, $ObjetBDDParam);
+        $doperation = $_SESSION["ti_operation"]->translateList($operation->getListFromCampaign($id));
+        $vue->set($_SESSION["ti_campaign"]->translateList($doperation), "operations");
 
         break;
 
@@ -45,7 +48,9 @@ switch ($t_module["param"]) {
          * If is a new record, generate a new record with default value :
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
-        dataRead($dataClass, $id, "param/campaignChange.tpl");
+        $data = dataRead($dataClass, $id, "gestion/campaignChange.tpl");
+        $vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");
+        $vue->set($_SESSION["projects"], "projects");
         break;
     case "write":
         /*
@@ -54,7 +59,7 @@ switch ($t_module["param"]) {
         /**
          * Test if the project is authorized
          */
-        if (verifiyProject(_REQUEST["project_id"])) {
+        if (verifiyProject($_REQUEST["project_id"])) {
             $id = dataWrite($dataClass, $_REQUEST);
             if ($id > 0) {
                 $_REQUEST[$keyName] = $id;
@@ -68,7 +73,7 @@ switch ($t_module["param"]) {
         /*
          * delete record
          */
-        if (verifiyProject(_REQUEST["project_id"])) {
+        if (verifiyProject($_REQUEST["project_id"])) {
             dataDelete($dataClass, $id);
         } else {
             $message->set(_("Vous ne disposez pas des droits nécessaires pour le projet considéré pour réaliser cette opération"), true);

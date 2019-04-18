@@ -193,5 +193,14 @@
 	<protocolWrite action="modules/param/protocol.php" param="write" droits="gestion"   retourok="protocolDisplay" retourko="protocolChange" modulebefore="protocolChange" />
 	<protocolDelete action="modules/param/protocol.php" param="delete" droits="gestion"  retourok="protocolList" retourko="protocolChange"  modulebefore="protocolChange" />
 
+<!-- modules for projects -->
+	<campaignList action="modules/gestion/campaign.php" param="list" droits="consult"  type="smarty"/>
+	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty"/>
+	<campaignChange action="modules/gestion/campaign.php" param="change" droits="gestion" type="smarty"/>
+	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion"   retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange" />
+	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion"  retourok="campaignList" retourko="campaignChange"  modulebefore="campaignChange" />
+
+
+
 </navigation>
 	
