@@ -6,17 +6,16 @@ class Operation extends ObjetBDD
 {
     private $sql = "select o.*
                     ,campaign_name
-                    ,length_type_name, station_name
+                    , station_name
                     , protocol_name, measure_default, measure_default_only
-                    ,water_height_name, fishing_strategy_name
+                    ,water_regime_name, fishing_strategy_name
                     ,scale_id
                     , taxa_template_name, taxa_model
                     from operation o
                     join campaign using (campaign_id)
-                    left outer join length_type using (length_type_id)
                     left outer join station using (station_id)
                     left outer join protocol using (protocol_id)
-                    left outer join water_height using (water_height_id)
+                    left outer join water_regime using (water_regime_id)
                     left outer join fishing_strategy using (fishing_strategy_id)
                     left outer join scale using (scale_id)
                     left outer join taxa_template using (taxa_template_id)
@@ -63,12 +62,29 @@ class Operation extends ObjetBDD
             "length_type_id" => array("type" => 1),
             "station_id" => array("type" => 1),
             "protocol_id" => array("type" => 1),
-            "water_height_id" => array("type" => 1),
+            "water_regime_id" => array("type" => 1),
             "fishing_strategy_id" => array("type" => 1),
             "scale_id" => array("type" => 1),
             "taxa_template_id" => array("type" => 1)
         );
         parent::__construct($bdd, $param);
+    }
+    /**
+     * Overload of lire for insert campaign_name
+     *
+     * @param int $id
+     * @param boolean $getDefault
+     * @param integer $parent_id
+     * @return array
+     */
+    function lire($id, $getDefault = true, $parent_id = 0)
+    {
+        $data = parent::lire($id, $getDefault, $parent_id);
+        /* Recovery of campaign_name */
+        $sql = "select campaign_name from campaign where campaign_id = :campaign_id";
+        $dcamp = $this->lireParamAsPrepared($sql, array("campaign_id" => $data["campaign_id"]));
+        $data["campaign_name"] = $dcamp["campaign_name"];
+        return $data;
     }
 
     /**
