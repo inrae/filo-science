@@ -1,5 +1,5 @@
 <h2>{t}Création - Modification d'une opération{/t}</h2>
-<a href="index.php?module=operationList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
+<a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/list.png" height="25">{t}Retour à la campagne{/t}</a>
 <div class="row">
     <div class="col-md-6">
 
@@ -8,20 +8,20 @@
             <input type="hidden" name="action" value="Write">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
             <div class="form-group">
-                <label for="paramName"  class="control-label col-md-4"><span class="red">*</span> {t}Nom de l'opération :{/t}</label>
+                <label for="paramName"  class="control-label col-md-4"> {t}Nom de l'opération :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
                     <input id="paramName" type="text" class="form-control" name="operation_name" value="{$data.operation_name}" autofocus required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="campaign_id"  class="control-label col-md-4"><span class="red">*</span> {t}Campagne de rattachement :{/t}</label>
+                <label for="campaign_id"  class="control-label col-md-4"> {t}Campagne de rattachement :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
                     <input id="campaign_id" type="hidden" name="campaign_id" value="{$data.campaign_id}">
                     <input id="campaign_name" name="campaign_name" class="form-control" value="{$data.campaign_name}" disabled>
                 </div>
             </div>
             <div class="form-group">
-                <label for="station_id"  class="control-label col-md-4"><span class="red">*</span> {t}Projet :{/t}</label>
+                <label for="station_id"  class="control-label col-md-4">{t}Station :{/t}</label>
                 <div class="col-md-8">
                     <select id="station_id" name="station_id" class="form-control">
                         <option value ="" {if $row.station_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
@@ -34,10 +34,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="protocol_id"  class="control-label col-md-4"><span class="red">*</span> {t}Projet :{/t}</label>
+                <label for="protocol_id"  class="control-label col-md-4"> {t}Protocole utilisé :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
                     <select id="protocol_id" name="protocol_id" class="form-control">
-                        <option value ="" {if $row.protocol_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                         {foreach $protocols as $row}
                             <option value="{$row.protocol_id}" {if $row.protocol_id == $data.protocol_id}selected{/if}>
                             {$row.protocol_name}
@@ -48,12 +47,12 @@
             </div>
 
             <div class="form-group">
-                <label for="fishing_strategy_id"  class="control-label col-md-4"><span class="red">*</span> {t}Stratégie de pêche :{/t}</label>
+                <label for="fishing_strategy_id"  class="control-label col-md-4">{t}Stratégie de pêche :{/t}</label>
                 <div class="col-md-8">
                     <select id="fishing_strategy_id" name="fishing_strategy_id" class="form-control">
                         <option value ="" {if $row.fishing_strategy_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                         {foreach $fishing_strategys as $row}
-                            <option value="{$row.fishing_strategy_id}" {if $row.fishing_straegy_id == $data.fishing_strategy_id}selected{/if}>
+                            <option value="{$row.fishing_strategy_id}" {if $row.fishing_strategy_id == $data.fishing_strategy_id}selected{/if}>
                             {$row.fishing_strategy_name}
                             </option>
                         {/foreach}
@@ -62,19 +61,19 @@
             </div>
 
             <div class="form-group">
-                <label for="date_start"  class="control-label col-md-4"><span class="red">*</span> {t}Date/heure de début :{/t}</label>
+                <label for="date_start"  class="control-label col-md-4"> {t}Date/heure de début :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
-                    <input id="date_start" name="date_start" class="form-control datetimepicker" value="{$data.date_start}" >
+                    <input id="date_start" name="date_start" class="form-control datetimepicker" value="{$data.date_start}" required>
                 </div>   
             </div>        
             <div class="form-group">
-                <label for="date_end"  class="control-label col-md-4"><span class="red">*</span> {t}Date/heure de début :{/t}</label>
+                <label for="date_end"  class="control-label col-md-4"> {t}Date/heure de fin :{/t}</label>
                 <div class="col-md-8">
                     <input id="date_end" name="date_end" class="form-control datetimepicker" value="{$data.date_end}" >
                 </div>   
             </div>        
             <div class="form-group">
-                <label for="freshwater"  class="control-label col-md-4"><span class="red">*</span> {t}Date/heure de début :{/t}</label>
+                <label for="freshwater"  class="control-label col-md-4"> {t}Opération réalisée en eau douce ?{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
                       <label class="radio-inline">
                         <input  type="radio" name="freshwater" id="freshwater1" value="1" {if $data.freshwater == 1}checked{/if}>
@@ -159,7 +158,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="water_regime_id"  class="control-label col-md-4"><span class="red">*</span> {t}Régime d'eau :{/t}</label>
+                <label for="water_regime_id"  class="control-label col-md-4">{t}Régime d'eau :{/t}</label>
                 <div class="col-md-8">
                     <select id="water_regime_id" name="water_regime_id" class="form-control">
                         <option value ="" {if $row.water_regime_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
@@ -173,7 +172,7 @@
             </div>
 
             <div class="form-group">
-                <label for="taxa_template_id"  class="control-label col-md-4"><span class="red">*</span> {t}Projet :{/t}</label>
+                <label for="taxa_template_id"  class="control-label col-md-4">{t}Grille de sélection des taxons :{/t}</label>
                 <div class="col-md-8">
                     <select id="taxa_template_id" name="taxa_template_id" class="form-control">
                         <option value ="" {if $row.taxa_template_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>

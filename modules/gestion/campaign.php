@@ -62,7 +62,7 @@ switch ($t_module["param"]) {
         if (verifiyProject($_REQUEST["project_id"])) {
             $id = dataWrite($dataClass, $_SESSION["ti_campaign"]->translateFromRow($_REQUEST));
             if ($id > 0) {
-                $_REQUEST[$keyName] = $id;
+                $_REQUEST[$keyName] = $_SESSION["ti_campaign"]->setValue($id);
             }
         } else {
             $message->set(_("Vous ne disposez pas des droits nécessaires pour le projet considéré pour réaliser cette opération"), true);

@@ -200,6 +200,10 @@
 	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion"   retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange" />
 	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion"  retourok="campaignList" retourko="campaignChange"  modulebefore="campaignChange" />
 
+	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty"/>
+	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty"/>
+	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion"   retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" />
+	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion"  retourok="campaignList" retourko="operationChange"  modulebefore="operationChange" />
 
 
 </navigation>

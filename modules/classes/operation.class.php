@@ -44,7 +44,7 @@ class Operation extends ObjetBDD
                 "type" => 0,
                 "requis" => 1
             ),
-            "date_start" => array("type" => 3, "requis" => 1),
+            "date_start" => array("type" => 3, "requis" => 1, "defaultValue"=>$this->getDateHeure()),
             "date_end" => array("type" => 3),
             "freshwater" => array("type" => 1, "defaultValue" => 1, "requis" => 1),
             "long_start" => array("type" => 1),
@@ -59,7 +59,6 @@ class Operation extends ObjetBDD
             "tidal_coef" => array("type" => 1),
             "debit" => array("type" => 1),
             "surface" => array("type" => 1),
-            "length_type_id" => array("type" => 1),
             "station_id" => array("type" => 1),
             "protocol_id" => array("type" => 1),
             "water_regime_id" => array("type" => 1),

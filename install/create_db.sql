@@ -88,7 +88,7 @@ ALTER TABLE measfish.project OWNER TO measfish;
 CREATE TABLE measfish.campaign (
 	campaign_id integer NOT NULL DEFAULT nextval('measfish.campaign_campaign_id_seq'::regclass),
 	project_id integer NOT NULL,
-	campaign_name integer NOT NULL,
+	campaign_name varchar NOT NULL,
 	CONSTRAINT campaign_id_pk PRIMARY KEY (campaign_id)
 
 );
@@ -1228,16 +1228,15 @@ CREATE TABLE measfish.operation (
 	lat_end double precision,
 	pk_source smallint,
 	pk_mouth smallint,
-	length smallint,
+	length float,
 	side varchar,
 	altitude float,
 	tidal_coef float,
 	debit float,
-	surface integer,
-	length_type_id integer,
+	surface float,
 	station_id integer,
 	protocol_id integer,
-	water_height_id integer,
+	water_regime_id integer,
 	fishing_strategy_id integer,
 	scale_id integer,
 	taxa_template_id integer,
@@ -1506,40 +1505,6 @@ CREATE SEQUENCE measfish.item_generated_item_generated_id_seq
 	OWNED BY NONE;
 -- ddl-end --
 ALTER SEQUENCE measfish.item_generated_item_generated_id_seq OWNER TO measfish;
--- ddl-end --
-
--- object: measfish.length_type | type: TABLE --
--- DROP TABLE IF EXISTS measfish.length_type CASCADE;
-CREATE TABLE measfish.length_type (
-	length_type_id integer NOT NULL,
-	length_type_name varchar NOT NULL,
-	CONSTRAINT length_type_pk PRIMARY KEY (length_type_id)
-
-);
--- ddl-end --
-COMMENT ON TABLE measfish.length_type IS 'Types of length';
--- ddl-end --
-COMMENT ON COLUMN measfish.length_type.length_type_name IS 'Name of the type of length measured';
--- ddl-end --
-ALTER TABLE measfish.length_type OWNER TO measfish;
--- ddl-end --
-
-INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'1', E'sl');
--- ddl-end --
-INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'2', E'fl');
--- ddl-end --
-INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'3', E'tl');
--- ddl-end --
-INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'4', E'wd');
--- ddl-end --
-INSERT INTO measfish.length_type (length_type_id, length_type_name) VALUES (E'5', E'ot');
--- ddl-end --
-
--- object: length_type_fk | type: CONSTRAINT --
--- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS length_type_fk CASCADE;
-ALTER TABLE measfish.operation ADD CONSTRAINT length_type_fk FOREIGN KEY (length_type_id)
-REFERENCES measfish.length_type (length_type_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: measfish.gear_gear_id_seq | type: SEQUENCE --
@@ -3084,7 +3049,7 @@ CREATE SEQUENCE measfish.protocol_protocol_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
-	START WITH 1
+	START WITH 2
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
@@ -3123,6 +3088,9 @@ Possible values : sl, fl, tl, wd, ot';
 COMMENT ON COLUMN measfish.protocol.measure_default_only IS 'If true, only the measure_default type is used during the protocol';
 -- ddl-end --
 ALTER TABLE measfish.protocol OWNER TO measfish;
+-- ddl-end --
+
+INSERT INTO measfish.protocol (protocol_id, protocol_name, protocol_url, protocol_description, protocol_pdf, measure_default, measure_default_only, analysis_template_id) VALUES (E'1', E'Default', DEFAULT, E'Protocole par défaut', DEFAULT, E'lt', E'0', DEFAULT);
 -- ddl-end --
 
 -- object: protocol_fk | type: CONSTRAINT --
@@ -3174,9 +3142,9 @@ REFERENCES measfish.analysis_template (analysis_template_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: measfish.water_height_water_height_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS measfish.water_height_water_height_id_seq CASCADE;
-CREATE SEQUENCE measfish.water_height_water_height_id_seq
+-- object: measfish.water_regime_water_regime_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measfish.water_regime_water_regime_id_seq CASCADE;
+CREATE SEQUENCE measfish.water_regime_water_regime_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3185,36 +3153,32 @@ CREATE SEQUENCE measfish.water_height_water_height_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE measfish.water_height_water_height_id_seq OWNER TO measfish;
+ALTER SEQUENCE measfish.water_regime_water_regime_id_seq OWNER TO measfish;
 -- ddl-end --
 
--- object: measfish.water_height | type: TABLE --
--- DROP TABLE IF EXISTS measfish.water_height CASCADE;
-CREATE TABLE measfish.water_height (
-	water_height_id integer NOT NULL DEFAULT nextval('measfish.water_height_water_height_id_seq'::regclass),
-	water_height_name varchar NOT NULL,
-	CONSTRAINT water_height_pk PRIMARY KEY (water_height_id)
+-- object: measfish.water_regime | type: TABLE --
+-- DROP TABLE IF EXISTS measfish.water_regime CASCADE;
+CREATE TABLE measfish.water_regime (
+	water_regime_id integer NOT NULL DEFAULT nextval('measfish.water_regime_water_regime_id_seq'::regclass),
+	water_regime_name varchar NOT NULL,
+	CONSTRAINT water_regime_pk PRIMARY KEY (water_regime_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE measfish.water_height IS 'List of general water heights (low water, flood, etc.)';
+COMMENT ON TABLE measfish.water_regime IS 'List of water regimes';
 -- ddl-end --
-ALTER TABLE measfish.water_height OWNER TO measfish;
--- ddl-end --
-
-INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'1', E'Étiage');
--- ddl-end --
-INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'2', E'Niveau moyen');
--- ddl-end --
-INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'3', E'Hautes eaux');
--- ddl-end --
-INSERT INTO measfish.water_height (water_height_id, water_height_name) VALUES (E'4', E'Crue');
+ALTER TABLE measfish.water_regime OWNER TO measfish;
 -- ddl-end --
 
--- object: water_height_fk | type: CONSTRAINT --
--- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS water_height_fk CASCADE;
-ALTER TABLE measfish.operation ADD CONSTRAINT water_height_fk FOREIGN KEY (water_height_id)
-REFERENCES measfish.water_height (water_height_id) MATCH FULL
+
+
+
+
+
+-- object: water_regime_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS water_regime_fk CASCADE;
+ALTER TABLE measfish.operation ADD CONSTRAINT water_regime_fk FOREIGN KEY (water_regime_id)
+REFERENCES measfish.water_regime (water_regime_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 

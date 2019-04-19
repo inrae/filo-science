@@ -1,8 +1,7 @@
 <h2>{t}Détail d'une campagne{/t}</h2>
 <div class="row">
     <div class="col-md-12">
-        <a href="index.php?module=campaignList"><img src="display/images/list.png" height="25">{t}Retour à la
-            liste{/t}</a>
+        <a href="index.php?module=campaignList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
         {if $droits.gestion == 1}
         &nbsp;
         <a href="index.php?module=campaignChange&campaign_id=0">
@@ -37,8 +36,8 @@
         <legend>Opérations réalisées</legend>
         {if $droits.gestion == 1}
         <img src="display/images/new.png" height="25">
-        <a href="index.php?module=operationChange&operation_id=0">
-            {t}Nouveau...{/t}
+        <a href="index.php?module=operationChange&operation_id=0&campaign_id={$data.campaign_id}">
+            {t}Nouvelle opération...{/t}
         </a>
         {/if}
         <table class="datatable table table-bordered table-hover" data-order='[[1,"desc"]]'>
@@ -55,7 +54,7 @@
                 {foreach $operations as $row}
                 <td>
                     {if $droits.gestion == 1}
-                    <a href="index.php?module=operationChange&operation_id={$row.operation_id}">
+                    <a href="index.php?module=operationChange&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
                         {$row.operation_name}
                     </a>
                     {else}
