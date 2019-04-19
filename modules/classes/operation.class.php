@@ -44,7 +44,7 @@ class Operation extends ObjetBDD
                 "type" => 0,
                 "requis" => 1
             ),
-            "date_start" => array("type" => 3, "requis" => 1, "defaultValue"=>$this->getDateHeure()),
+            "date_start" => array("type" => 3, "requis" => 1, "defaultValue" => $this->getDateHeure()),
             "date_end" => array("type" => 3),
             "freshwater" => array("type" => 1, "defaultValue" => 1, "requis" => 1),
             "long_start" => array("type" => 1),
@@ -96,5 +96,16 @@ class Operation extends ObjetBDD
     {
         $where = " where campaign_id = :campaign_id";
         return $this->getListeParamAsPrepared($this->sql . $where, array("campaign_id" => $campaign_id));
+    }
+    /**
+     * Get the content of an operation with related tables
+     *
+     * @param int $operation_id
+     * @return array
+     */
+    function getDetail($operation_id)
+    {
+        $where = " where operation_id = :operation_id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("operation_id" => $operation_id));
     }
 }

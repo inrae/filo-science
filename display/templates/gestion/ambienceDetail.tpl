@@ -1,1 +1,2 @@
-Détail d'une ambiance
+Non disponible dans cette version !
+

@@ -1,6 +1,9 @@
 <div class="row">
     <fieldset class="col-md-6">
         <legend>{t}Informations générales{/t}</legend>
+        <a href="index.php?module=operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
+                <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+            </a>
         <div class="form-display">
             <dl class="dl-horizontal">
                 <dt>{t}Nom de l'opération :{/t}</dt>
@@ -41,7 +44,7 @@
             </dl>
             <dl class="dl-horizontal">
                 <dt>{t}Opération en eau douce ?{/t}</dt>
-                <dd>{if $data.freshwater == 1}{t}oui{/t}{else}{t]non{/t}{/if}</dd>
+                <dd>{if $data.freshwater == 1}{t}oui{/t}{else}{t}non{/t}{/if}</dd>
             </dl>
             <dl class="dl-horizontal">
                 <dt>{t}Longitude/latitude de début :{/t}</dt>
@@ -86,7 +89,7 @@
             </dl>
             <dl class="dl-horizontal">
                 <dt>{t}Régime d'eau :{/t}</dt>
-                <dd>{$data.water_height_name}</dd>
+                <dd>{$data.water_regime_name}</dd>
             </dl>
             <dl class="dl-horizontal">
                 <dt>{t}Modèle de saisie :{/t}</dt>

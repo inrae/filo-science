@@ -53,13 +53,10 @@
             <tbody>
                 {foreach $operations as $row}
                 <td>
-                    {if $droits.gestion == 1}
-                    <a href="index.php?module=operationChange&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
+                    <a href="index.php?module=operationDisplay&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
                         {$row.operation_name}
                     </a>
-                    {else}
-                    {$row.operation_name}
-                    {/if}
+                   
                 </td>
                 <td>{$row.date_start}</td>
                 <td>{$row.station_name}</td>
