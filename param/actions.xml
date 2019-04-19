@@ -205,6 +205,10 @@
 	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion"   retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" />
 	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion"  retourok="campaignList" retourko="operationChange"  modulebefore="operationChange" />
 
+	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty"/>
+	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty"/>
+	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion"   retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" />
+	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion"  retourok="operationDisplay" retourko="sequenceChange"  modulebefore="sequenceChange" />
 
 </navigation>
 	
