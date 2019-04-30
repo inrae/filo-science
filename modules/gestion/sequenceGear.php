@@ -15,8 +15,8 @@ switch ($t_module["param"]) {
          */
         $data = dataRead($dataClass, $id, "gestion/sequenceGearChange.tpl", $sequence_id);
 
-        $data["sequence_id"] = $sequence_id;
-        $vue->set($_SESSION["ti_sequenceGear"]->translateRow($data), "data");
+        $data["sequence_id"] = $_SESSION["ti_sequence"]->setValue($sequence_id);
+        $vue->set($data = $_SESSION["ti_sequenceGear"]->translateRow($data), "data");
         /**
          * Preparation of the parameters tables
          */
@@ -36,7 +36,7 @@ switch ($t_module["param"]) {
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_sequenceGear"]->setValue($id);
         }
-
+        $activeTab = "tab-gear";
         break;
     case "delete":
         /*
@@ -44,6 +44,7 @@ switch ($t_module["param"]) {
          */
 
         dataDelete($dataClass, $id);
+        $activeTab = "tab-gear";
 
         break;
 }

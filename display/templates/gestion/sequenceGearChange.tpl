@@ -49,7 +49,7 @@
                 <label for="gear_method_id"  class="control-label col-md-4"> {t}Méthode d'utilisation :{/t}</label>
                 <div class="col-md-8">
                     <select id="gear_method_id" name="gear_method_id" class="form-control">
-                        <option value ="" {if $row.fishing_strategy_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
+                        <option value ="" {if $row.gear_method_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                         {foreach $gear_methods as $row}
                             <option value="{$row.gear_method_id}" {if $row.gear_method_id == $data.gear_method_id}selected{/if}>
                             {$row.gear_method_name}
@@ -59,10 +59,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="electric_current_type_id"  class="control-label col-md-4"> {t}Méthode d'utilisation :{/t}</label>
+                <label for="electric_current_type_id"  class="control-label col-md-4"> {t}Type de courant électrique :{/t}</label>
                 <div class="col-md-8">
                     <select id="electric_current_type_id" name="electric_current_type_id" class="form-control">
-                        <option value ="" {if $row.fishing_strategy_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
+                        <option value ="" {if $row.electric_current_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                         {foreach $electric_current_types as $row}
                             <option value="{$row.electric_current_type_id}" {if $row.electric_current_type_id == $data.electric_current_type_id}selected{/if}>
                             {$row.electric_current_type_name}

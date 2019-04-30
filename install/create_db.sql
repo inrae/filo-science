@@ -1299,7 +1299,6 @@ CREATE TABLE measfish.sequence (
 	date_start timestamp NOT NULL,
 	date_end timestamp,
 	fishing_duration float,
-	ambience_id integer,
 	CONSTRAINT place_id_pk PRIMARY KEY (sequence_id)
 
 );
@@ -1568,7 +1567,7 @@ CREATE TABLE measfish.sequence_gear (
 	depth float,
 	sequence_id integer NOT NULL,
 	gear_id integer NOT NULL,
-	gear_method_id_gear_method integer,
+	gear_method_id integer,
 	electric_current_type_id smallint,
 	CONSTRAINT sequence_gear_pk PRIMARY KEY (sequence_gear_id)
 
@@ -2018,6 +2017,7 @@ CREATE TABLE measfish.ambience (
 	sinuosity_id integer,
 	flow_trend_id integer,
 	turbidity_id_turbidity integer,
+	sequence_id integer,
 	CONSTRAINT ambience_pk PRIMARY KEY (ambience_id)
 
 );
@@ -3036,13 +3036,6 @@ REFERENCES measfish.turbidity (turbidity_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: ambience_fk | type: CONSTRAINT --
--- ALTER TABLE measfish.sequence DROP CONSTRAINT IF EXISTS ambience_fk CASCADE;
-ALTER TABLE measfish.sequence ADD CONSTRAINT ambience_fk FOREIGN KEY (ambience_id)
-REFERENCES measfish.ambience (ambience_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
 -- object: measfish.protocol_protocol_id_seq | type: SEQUENCE --
 -- DROP SEQUENCE IF EXISTS measfish.protocol_protocol_id_seq CASCADE;
 CREATE SEQUENCE measfish.protocol_protocol_id_seq
@@ -3170,10 +3163,14 @@ COMMENT ON TABLE measfish.water_regime IS 'List of water regimes';
 ALTER TABLE measfish.water_regime OWNER TO measfish;
 -- ddl-end --
 
-
-
-
-
+INSERT INTO measfish.water_regime (water_regime_name, water_regime_id) VALUES (E'Étiage', E'1');
+-- ddl-end --
+INSERT INTO measfish.water_regime (water_regime_name, water_regime_id) VALUES (E'Niveau moyen', E'2');
+-- ddl-end --
+INSERT INTO measfish.water_regime (water_regime_name, water_regime_id) VALUES (E'Hautes eaux', E'3');
+-- ddl-end --
+INSERT INTO measfish.water_regime (water_regime_name, water_regime_id) VALUES (E'Crue', E'4');
+-- ddl-end --
 
 -- object: water_regime_fk | type: CONSTRAINT --
 -- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS water_regime_fk CASCADE;
@@ -3318,7 +3315,7 @@ INSERT INTO measfish.gear_method (gear_method_id, gear_method_name) VALUES (E'3'
 
 -- object: gear_method_fk | type: CONSTRAINT --
 -- ALTER TABLE measfish.sequence_gear DROP CONSTRAINT IF EXISTS gear_method_fk CASCADE;
-ALTER TABLE measfish.sequence_gear ADD CONSTRAINT gear_method_fk FOREIGN KEY (gear_method_id_gear_method)
+ALTER TABLE measfish.sequence_gear ADD CONSTRAINT gear_method_fk FOREIGN KEY (gear_method_id)
 REFERENCES measfish.gear_method (gear_method_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
@@ -3423,6 +3420,13 @@ ALTER TABLE measfish.taxa_template OWNER TO measfish;
 -- ALTER TABLE measfish.operation DROP CONSTRAINT IF EXISTS taxa_template_fk CASCADE;
 ALTER TABLE measfish.operation ADD CONSTRAINT taxa_template_fk FOREIGN KEY (taxa_template_id)
 REFERENCES measfish.taxa_template (taxa_template_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: sequence_fk | type: CONSTRAINT --
+-- ALTER TABLE measfish.ambience DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
+ALTER TABLE measfish.ambience ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
+REFERENCES measfish.sequence (sequence_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 

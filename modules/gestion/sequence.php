@@ -25,7 +25,12 @@ switch ($t_module["param"]) {
                 ),
                 "gears"
         );
-
+        /**
+         * select the good tab for display
+         */
+        if (isset($activeTab)) {
+            $vue->set($activeTab, "activeTab");
+        }
         break;
 
     case "change":

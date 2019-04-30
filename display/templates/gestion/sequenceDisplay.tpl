@@ -1,3 +1,15 @@
+<script>
+$(document).ready(function() {
+    /* select the current tab */
+    var activeTab = "{$activeTab}";
+    if (activeTab.length > 0) {
+        //console.log(activeTab);
+        $("#"+activeTab).tab('show');
+    }
+});
+
+</script>
+
 <h2>{t}Opération{/t} {$data.operation_name}, {t}séquence{/t}&nbsp;{$data.sequence_number}</h2>
 <div class="row">
     <div class="col-md-12">
