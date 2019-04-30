@@ -1,9 +1,11 @@
-<h2>{t}Opération{/t} {$operation.operation_name}, {t}séquence{/t}{$data.sequence_number}</h2>
+<h2>{t}Opération{/t} {$data.operation_name}, {t}séquence{/t}&nbsp;{$data.sequence_number}</h2>
 <div class="row">
     <div class="col-md-12">
         <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/list.png" height="25">{t}Retour à la campagne{/t}</a>
         &nbsp;
-        <a href="index.php?module=operationDisplay&campaign_id={$operation.campaign_id}&operation_id={$operation.operation_id}">{t}Retour à l'opération{/t} {$operation.operation_name}</a>
+
+        <a href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
+                <img src="display/images/new.png" height="25">   {t}Retour à l'opération{/t} {$operation.operation_name}</a>
     </div>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist" >

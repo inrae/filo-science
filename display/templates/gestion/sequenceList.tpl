@@ -6,7 +6,7 @@
                 </a>
         <legend>{t}Séquences{/t}</legend>
             <div class="col-md-12">
-                <table class="table table-bordered table-hover datatable ">
+                <table class="table table-bordered table-hover datatable" data-order='[[1,"desc"]]'>
                     <thead>
                         <tr>
                             <th>{t}Numéro d'ordre{/t}</th>
@@ -16,16 +16,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {foreach $sequences as $row}
+                        {foreach $sequences as $sequence}
                         <tr>
                             <td class="center">
-                                <a href="index.php?module=sequenceDisplay&sequence_id={$row.sequence_id}&operation_id={$data.operation_id}&campaign_id={$data.campaign_id}">
-                                    {$row.sequence_id}
+                                <a href="index.php?module=sequenceDisplay&sequence_id={$sequence.sequence_id}&operation_id={$data.operation_id}&campaign_id={$data.campaign_id}">
+                                    {$sequence.sequence_number}
                                 </a>
                             </td>
-                            <td>{$row.date_start}</td>
-                            <td>{$row.date_end}</td>
-                            <td class="center">{$row.fishing_duration}</td>
+                            <td>{$sequence.date_start}</td>
+                            <td>{$sequence.date_end}</td>
+                            <td class="center">{$sequence.fishing_duration}</td>
                         </tr>
                         {/foreach}
                     </tbody>

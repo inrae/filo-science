@@ -8,9 +8,18 @@ $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 switch ($t_module["param"]) {
 
     case "display":
-    $data = $_SESSION["ti_operation"]->translateRow($dataClass->getDetail($id));
+        $data = $_SESSION["ti_operation"]->translateRow($dataClass->getDetail($id));
         $vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");
         $vue->set("gestion/operationDisplay.tpl", "corps");
+        /**
+         * lists of related data
+         */
+        require_once 'modules/classes/sequence.class.php';
+        $sequence = new Sequence($bdd, $ObjetBDDParam);
+        $sequences =$sequence->getListFromParent($id);
+        $sequences = $_SESSION["ti_sequence"]->translateList($sequences);
+        $sequences = $_SESSION["ti_operation"]->translateList($sequences);
+        $vue->set($sequences, "sequences");
 
         break;
 
@@ -26,7 +35,7 @@ switch ($t_module["param"]) {
         /**
          * Preparation of the parameters tables
          */
-        $params = array ("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
+        $params = array("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
         foreach ($params as $tablename) {
             setParamToVue($vue, $tablename);
         }

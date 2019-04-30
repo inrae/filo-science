@@ -9,7 +9,7 @@ $operation_id = $_SESSION["ti_operation"]->getValue($_REQUEST["operation_id"]);
 switch ($t_module["param"]) {
 
     case "display":
-    $data = $_SESSION["ti_sequence"]->translateRow($dataClass->getDetail($id));
+        $data = $_SESSION["ti_sequence"]->translateRow($dataClass->getDetail($id));
         $vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");
         $vue->set("gestion/sequenceDisplay.tpl", "corps");
 
@@ -21,13 +21,21 @@ switch ($t_module["param"]) {
          * If is a new record, generate a new record with default value :
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
-        $data = dataRead($dataClass, $id, "gestion/sequenceChange.tpl", $campaign_id);
+        $data = dataRead($dataClass, $id, "gestion/sequenceChange.tpl", $operation_id);
+        if ($data["sequence_id"] == 0) {
+            /**
+             * New sequence
+             */
+            $data["sequence_number"] = $dataClass->getLastSequenceNumber($operation_id);
+        }
+        $data["campaign_id"] = $campaign_id;
         $data = $_SESSION["ti_campaign"]->translateRow($data);
+        $data = $_SESSION["ti_operation"]->translateRow($data);
         $vue->set($_SESSION["ti_sequence"]->translateRow($data), "data");
         /**
          * Preparation of the parameters tables
          */
-        $params = array ("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
+        $params = array("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
         foreach ($params as $tablename) {
             setParamToVue($vue, $tablename);
         }
@@ -36,11 +44,9 @@ switch ($t_module["param"]) {
         /*
          * write record in database
          */
-        /**
-         * Test if the project is authorized
-         */
         $data = $_SESSION["ti_campaign"]->translateFromRow($_REQUEST);
-        $data = $_SESSION["ti_sequence"]->translateFromRow($data);
+        $data = $_SESSION["ti_operation"]->translateFromRow($data);
+        $data ["sequence_id"] = $id;
         $id = dataWrite($dataClass, $data);
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_sequence"]->setValue($id);

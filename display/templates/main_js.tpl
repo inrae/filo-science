@@ -194,7 +194,7 @@ $(document).ready(function() {
 	$('.timepicker').attr('pattern', '[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9]');
 	$.timepicker.setDefaults($.timepicker.regional['{$LANG["date"]["locale"]}']);
 	$('.datetimepicker').datetimepicker({ 
-		dateFormat: "{$LANG["date"]["formatdatecourt"]}",
+		dateFormat: '{$LANG["date"]["formatdatecourt"]}',
 		timeFormat: 'HH:mm:ss',
 		timeInput: true
 	});
