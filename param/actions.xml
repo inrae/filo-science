@@ -210,5 +210,9 @@
 	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion"   retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" />
 	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion"  retourok="operationDisplay" retourko="sequenceChange"  modulebefore="sequenceChange" />
 
+	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty"/>
+	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion"   retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" />
+	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion"  retourok="sequenceDisplay" retourko="sequenceGearChange"  modulebefore="sequenceGearChange" />
+
 </navigation>
 	

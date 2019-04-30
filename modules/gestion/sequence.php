@@ -12,6 +12,19 @@ switch ($t_module["param"]) {
         $data = $_SESSION["ti_sequence"]->translateRow($dataClass->getDetail($id));
         $vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");
         $vue->set("gestion/sequenceDisplay.tpl", "corps");
+        /**
+         * related lists
+         */
+        require_once 'modules/classes/sequence_gear.class.php';
+        $sg = new SequenceGear($bdd, $ObjetBDDParam);
+        $vue->set(
+            $_SESSION["ti_sequenceGear"]->translateList(
+                $_SESSION["ti_sequence"]->translateList(
+                    $sg->getListFromSequence($id)
+                )
+                ),
+                "gears"
+        );
 
         break;
 
@@ -46,7 +59,7 @@ switch ($t_module["param"]) {
          */
         $data = $_SESSION["ti_campaign"]->translateFromRow($_REQUEST);
         $data = $_SESSION["ti_operation"]->translateFromRow($data);
-        $data ["sequence_id"] = $id;
+        $data["sequence_id"] = $id;
         $id = dataWrite($dataClass, $data);
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_sequence"]->setValue($id);

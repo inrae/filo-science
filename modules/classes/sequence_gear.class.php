@@ -1,0 +1,47 @@
+<?php
+class SequenceGear extends ObjetBDD
+{
+    private $sql = "select sequence_gear_id, voltage, amperage, gear_nb, depth
+                    ,sequence_id
+                    ,gear_id, gear_name
+                    ,gear_method_id, gear_method_name
+                    ,electric_current_type_id, electric_current_type_name
+                    from sequence_gear
+                    join gear using (gear_id)
+                    left outer join gear_method using (gear_method_id)
+                    left outer join electric_current_type using (electric_current_type_id)
+                    ";
+    /**
+     * Constructor
+     *
+     * @param pdo $bdd
+     * @param array $param
+     */
+    function __construct($bdd, $param = array())
+    {
+        $this->table = "sequence_gear";
+        $this->colonnes = array(
+            "sequence_gear_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
+            "sequence_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
+            "gear_id" => array("type" => 1, "requis" => 1),
+            "gear_method_id" => array("type" => 1),
+            "electric_current_type_id" => array("type" => 1),
+            "gear_nb" => array("type" => 1, "requis" => 1, "defaultValue" => 1),
+            "voltage" => array("type" => 1),
+            "amperage" => array("type" => 1),
+            "depth" => array("type" => 1)
+        );
+        parent::__construct($bdd, $param);
+    }
+    /**
+     * Get the list from a sequence
+     *
+     * @param int $sequence_id
+     * @return array
+     */
+    function getListFromSequence($sequence_id)
+    {
+        $where = " where sequence_id = :sequence_id";
+        return ($this->getListeParamAsPrepared($this->sql . $where, array("sequence_id" => $sequence_id)));
+    }
+}

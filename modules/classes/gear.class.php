@@ -2,7 +2,7 @@
 /**
  * ORM for the table gear
  */
-class gear extends ObjetBDD
+class Gear extends ObjetBDD
 {
     /**
      * Constructor

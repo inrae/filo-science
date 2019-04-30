@@ -14,6 +14,9 @@ if (!isset($_SESSION["ti_operation"])) {
 if (!isset($_SESSION["ti_sequence"])) {
     $_SESSION["ti_sequence"] = new TranslateId("sequence_id");
 }
+if (!isset($_SESSION["ti_sequenceGear"])) {
+    $_SESSION["ti_sequenceGear"] = new TranslateId("sequence_gear_id");
+}
 if (!isset($_SESSION["searchCampaign"])) {
     $_SESSION["searchCampaign"] = new SearchCampaign();
 }
