@@ -1,5 +1,7 @@
 <h2>{t}Rattachement d'un engin à une séquence{/t}</h2>
-<a href="index.php?module=sequenceDisplay&sequence_id={$data.sequence_id}"><img src="display/images/new.png" height="25">{t}Retour à la séquence{/t}</a>
+<a href="index.php?module=sequenceDisplay&sequence_id={$data.sequence_id}&activeTab=tab-gear">
+    <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}
+</a>
 <div class="row">
     <div class="col-md-6">
 

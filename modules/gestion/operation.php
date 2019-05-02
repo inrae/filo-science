@@ -4,6 +4,9 @@ $dataClass = new Operation($bdd, $ObjetBDDParam);
 $keyName = "operation_id";
 $id = $_SESSION["ti_operation"]->getValue($_REQUEST[$keyName]);
 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
+if (isset($_REQUEST["activeTab"])) {
+    $activeTab = $_REQUEST["activeTab"];
+}
 
 switch ($t_module["param"]) {
 
@@ -20,6 +23,12 @@ switch ($t_module["param"]) {
         $sequences = $_SESSION["ti_sequence"]->translateList($sequences);
         $sequences = $_SESSION["ti_operation"]->translateList($sequences);
         $vue->set($sequences, "sequences");
+        /**
+         * select the good tab for display
+         */
+        if (isset($activeTab)) {
+            $vue->set($activeTab, "activeTab");
+        }
 
         break;
 

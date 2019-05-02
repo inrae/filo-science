@@ -5,6 +5,9 @@ $keyName = "sequence_id";
 $id = $_SESSION["ti_sequence"]->getValue($_REQUEST[$keyName]);
 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 $operation_id = $_SESSION["ti_operation"]->getValue($_REQUEST["operation_id"]);
+if (isset($_REQUEST["activeTab"])) {
+    $activeTab = $_REQUEST["activeTab"];
+}
 
 switch ($t_module["param"]) {
 
@@ -69,7 +72,7 @@ switch ($t_module["param"]) {
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_sequence"]->setValue($id);
         }
-
+        $activeTab = "tab-sequence";
         break;
     case "delete":
         /*
@@ -77,6 +80,6 @@ switch ($t_module["param"]) {
          */
 
         dataDelete($dataClass, $id);
-
+        $activeTab = "tab-sequence";
         break;
 }
