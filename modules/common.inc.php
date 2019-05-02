@@ -17,6 +17,12 @@ if (!isset($_SESSION["ti_sequence"])) {
 if (!isset($_SESSION["ti_sequenceGear"])) {
     $_SESSION["ti_sequenceGear"] = new TranslateId("sequence_gear_id");
 }
+if (!isset($_SESSION["ti_sample"])) {
+    $_SESSION["ti_sample"] = new TranslateId("sample_id");
+}
+if (!isset($_SESSION["ti_individual"])) {
+    $_SESSION["ti_individual"] = new TranslateId("individual_id");
+}
 if (!isset($_SESSION["searchCampaign"])) {
     $_SESSION["searchCampaign"] = new SearchCampaign();
 }
