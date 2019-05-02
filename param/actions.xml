@@ -181,6 +181,8 @@
 	<taxonChange action="modules/param/taxon.php" param="change" droits="param" type="smarty"/>
 	<taxonWrite action="modules/param/taxon.php" param="write" droits="param"  retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange" />
 	<taxonDelete action="modules/param/taxon.php" param="delete" droits="param"  retourok="taxonList" retourko="taxonChange"  modulebefore="taxonChange" />
+	<taxonSearchAjax action="modules/param/taxon.php" param="searchAjax" droits="consult"  type="ajax"/>
+	<taxonGetName action="modules/param/taxon.php" param="lireAjax" droits="consult"  type="ajax"/>
 
 	<projectList action="modules/param/project.php" param="list" droits="consult"  type="smarty"/>
 	<projectChange action="modules/param/project.php" param="change" droits="param" type="smarty"/>

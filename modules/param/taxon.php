@@ -33,4 +33,12 @@ switch ($t_module["param"]) {
 		 */
 		dataDelete($dataClass, $id);
 		break;
+
+	case "searchAjax":
+		$vue->set($dataClass->search($_REQUEST["name"]));
+		break;
+
+	case "lireAjax":
+		$vue->set($dataClass->lire($_REQUEST["taxon_id"]));
+		break;
 }

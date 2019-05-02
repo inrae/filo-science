@@ -1,3 +1,52 @@
+<script>
+$(document).ready(function() {
+    /* Taxon search */
+    $("#taxon-search").keyup(function() { 
+        var name = $(this).val();
+        if (nom.length > 2) {
+            var options = "";
+            var url = "index.php";
+            $.getJSON(url, {
+                "module" : "taxonSearchAjax",
+                "name" : name
+            }, function(data) {
+                //options = '<option value="" selected></option>';			
+                for (var i = 0; i < data.length; i++) {
+                    options += '<option value="' + data[i].taxon_id + '">'
+                            + data[i].scientific_name;
+                    if (data[i].common_name.length > 0) {
+                        options += ' (' + data[i].common_name + ')';
+                    }
+                    options += '</option>';
+                }
+                ;
+                $("#taxon_id").html(options);
+            });
+            $("#taxon_id").change();
+        }
+    });
+    $("#taxon_id").change(function () { 
+        /* Get the name of the taxon */
+        var taxonId = $("#taxon_id").val();
+        if (taxonId.length>0) {
+            $.ajax( {
+                url: "index.php",
+                data: { "module": "taxonGetName", "taxon_id":taxonId}
+            })
+            .done (function(value) { 
+                if (value) {
+                    var name = JSON.parse(value);
+                    $("#taxon_name").val(name.scientific_name);
+                }
+            });
+        }
+    });
+
+
+
+});
+</script>
+
 <h2>{t}Opération{/t} {$sequence.operation_name}, {t}séquence{/t}&nbsp;{$sequence.sequence_number}</h2>
 <div class="row">
     <div class="col-md-12">
@@ -31,9 +80,9 @@
                         <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
                         <input type="hidden" name="sample_id" value="{$data.sample_id}">
                         <div class="form-group">
-                                <label for="sample-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
+                                <label for="taxon-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
                                 <div class="col-md-8">
-                                    <input id="sample-search" type="text" class="form-control" name="sample-search" value="">
+                                    <input id="taxon-search" type="text" class="form-control" name="taxon-search" value="">
                                 </div>
                         </div>
                         <div class="form-group">

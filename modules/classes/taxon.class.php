@@ -27,4 +27,22 @@ class Taxon extends ObjetBDD
         );
         parent::__construct($bdd, $param);
     }
+    /**
+     * Search the taxa corresponding to $val
+     *
+     * @param string $val
+     * @return array
+     */
+    function search($val)
+    {
+        $val = strtoupper($this->encodeData($val));
+        $sql = "select taxon_id, scientific_name, common_name, fresh_code, sea_code, length_max, weight_max
+                from taxon";
+        $where = " where upper(scientific_name) like '%" . $val . "%'
+                    or upper (common_name) like '%" . $val . "%'
+                    or upper(fresh_code) = '" . $val . "'
+                    or upper(sea_code) = '" . $val . "'";
+        $order = " order by scientific_name";
+        return $this->getListeParam($sql . $where . $order);
+    }
 }
