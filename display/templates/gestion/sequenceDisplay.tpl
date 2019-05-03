@@ -10,14 +10,14 @@ $(document).ready(function() {
 
 </script>
 
-<h2>{t}Opération{/t} {$data.operation_name}, {t}séquence{/t}&nbsp;{$data.sequence_number}</h2>
+<h2>{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
 <div class="row">
     <div class="col-md-12">
-        <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
+        <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$data.campaign_name}</a>
         &nbsp;
 
         <a href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
-                <img src="display/images/display-green.png" height="25">   {t}Retour à l'opération{/t} {$operation.operation_name}</a>
+                <img src="display/images/display-green.png" height="25">   {t}Retour à l'opération{/t} {$data.operation_name}</a>
     </div>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist" >

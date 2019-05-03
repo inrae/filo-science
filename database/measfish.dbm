@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,640" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,639" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres">
 <role name="measfish"
       sql-disabled="true">
@@ -1024,7 +1024,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 		<type name="boolean" length="0"/>
 		<comment><![CDATA[Is the measure estimated ?]]></comment>
 	</column>
-	<column name="pathology_code">
+	<column name="pathology_codes">
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[List of codes of pathologies or remarks]]></comment>
 	</column>
@@ -1041,11 +1041,15 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="pathology_id" index="16"/>
 		<object name="sample_id" index="1"/>
+		<object name="sexe_id" index="15"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="pathology_fk" index="3"/>
 		<object name="sample_fk" index="1"/>
+		<object name="sexe_fk" index="2"/>
 	</customidxs>
 </table>
 

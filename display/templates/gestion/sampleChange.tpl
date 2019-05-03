@@ -63,11 +63,11 @@ $(document).ready(function() {
             {t}Retour à la campagne{/t} {$sequence.campaign_name}
         </a>
         &nbsp;
-        <a href="index.php?module=operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}">
+        <a href="index.php?module=operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
             <img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t} {$sequence.operation_name}
         </a>
         &nbsp;
-        <a href="index.php?module=sequenceDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$sequence.sequence_id}&activeTab=tab-sequence">
+        <a href="index.php?module=sequenceDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$sequence.sequence_id}&activeTab=tab-sample">
             <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t} {$sequence.sequence_number}
         </a>
     </div>
@@ -162,22 +162,34 @@ $(document).ready(function() {
         {/if}
     </div>
     <div class="col-md-8">
-        <fieldset>
-            <legend>{t}Poissons mesurés{/t}</legend>
-            <table class="table table-bordered table-hover datatable-nopaging" data-order='[[0,"desc"]]'>
-                <thead>
-                    <th>{t}Id{/t}</th>
-                    <th>{t}standard{/t}</th>
-                    <th>{t}Fourche{/t}</th>
-                    <th>{t}Totale{/t}</th>
-                    <th>{t}Disque{/t}</th>
-                    <th>{t}Autre{/t}</th>
-                    <th>{t}Poids{/t}</th>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </fieldset>
+        {if $data.sample_id > 0}
+            <fieldset>
+                <legend>{t}Poissons mesurés{/t}</legend>
+                <table class="table table-bordered table-hover datatable-nopaging" data-order='[[0,"desc"]]'>
+                    <thead>
+                        <th>{t}Id{/t}</th>
+                        <th>{t}standard{/t}</th>
+                        <th>{t}Fourche{/t}</th>
+                        <th>{t}Totale{/t}</th>
+                        <th>{t}Disque{/t}</th>
+                        <th>{t}Autre{/t}</th>
+                        <th>{t}Poids{/t}</th>
+                    </thead>
+                    <tbody>
+                        {foreach $indivduals as $individual}
+                            <tr>
+                                <td class="center">{$individual.individual_id}</td>
+                                <td class="center">{$individual.sl}</td>
+                                <td class="center">{$individual.fl}</td>
+                                <td class="center">{$individual.tl}</td>
+                                <td class="center">{$individual.wd}</td>
+                                <td class="center">{$individual.ot}</td>
+                                <td class="center">{$individual.weight}</td>  
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </fieldset>
+        {/if}
     </div>
 </div>

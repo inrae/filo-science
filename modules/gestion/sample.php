@@ -20,7 +20,38 @@ switch ($t_module["param"]) {
         $ds = $_SESSION["ti_campaign"]->translateRow($ds);
         $ds = $_SESSION["ti_operation"]->translateRow($ds);
         $vue->set($ds, "sequence");
-
+        /**
+         * Get the list of individuals
+         */
+        require_once 'modules/classes/individual.class.php';
+        $ind = new Individual($bdd, $ObjetBDDParam);
+        $vue->set(
+            $_SESSION["ti_individual"]->translateRow(
+                $_SESSION["ti_sample"]->translateRow(
+                    $ind->getListFromSample($id)
+                )
+            ),
+            "individuals"
+        );
+        /**
+         * Get an individual, if necessary, for change
+         */
+        if ($id > 0) {
+            if ($_REQUEST["individual_id"] > 0) {
+                $individual_id = $_SESSION["ti_individual"]->getValue($_REQUEST["individual_id"]);
+            } else {
+                $individual_id = 0;
+            }
+            $dataIndiv = $ind->lire($individual_id, true, $id);
+            $vue->set(
+                $_SESSION["ti_individual"]->translateFromRow(
+                    $_SESSION["ti_sample"]->translateFromRow(
+                        $dataIndiv
+                    ),
+                    "individual"
+                )
+            );
+        }
         break;
     case "write":
         /*
