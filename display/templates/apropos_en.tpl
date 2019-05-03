@@ -1,35 +1,13 @@
-<h2>About Collec-Science
+<h2>About MeasFish
 </h2>
 <p>
 Version {$version} of {$versiondate}.
 </p>
 
-The application keeps track of samples stored in containers.<br />
-Each sample or container is identified by a unique number, the UID.<br />
-From a technical point of view, the samples and containers are, inherited from a class called Object.<br />
-The objects carry the following information:
-<ul>
-<li>movements: move into container or stock removal (they can not be deleted)</li>
-<li>the events.
-</ul>
 
-Other information is specific to either samples or containers.
-For the latter, the storage conditions (product used, standardized associated risk) can be described.
-<br>
-Visit the project site:<a href="https://www.collec-science.org" target="_blank">https://www.collec-science.org</a>
 
 <h3>List of contributors to the project (alphabetical order)</h3>
 <ul>
-<li>Julien Ancelin (INRA)</li>
-<li>Isabelle Billy (Université Bordeaux 1)</li>
-<li>Arnaud Caillo (OASU - UMS 2567 POREA / EPOC)</li>
-<li>Oton Copi (University of Grenoble-Alpes)</li>
-<li>Sylvie Damy (University of Franche-Comté)</li>
-<li>Hector Linyer (University of La Rochelle)</li>
-<li>Alexandre Maindron (University of Franche-Comté)</li>
-<li>Cécile Pignol (University of Savoie Mont-Blanc)
-<li>Christine Plumejeaud (University of La Rochelle)</li>
-<li>Marie-Claude Quidoz (CEFE - CNRS Montpellier)</li>
 <li>Éric Quinton (IRSTEA)</li>
 </ul>
 
@@ -49,3 +27,9 @@ Version 1.0 of the software has been registered with the Agency for the Protecti
 <br>
     You should have received a copy of the GNU Affero General Public License<br>
     along with this program.  If not, see <a href=http://www.gnu.org/licenses>http://www.gnu.org/licenses</a>
+
+<h3>Attributions</h3>
+<ul>
+    <li>Iconof the software: by <a href="http://lorcblog.blogspot.com/">Lorc</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
+    <li><a href="https://pixabay.com/photos/fisherman-fishing-boat-boat-fishing-2739115/">Image of the home page</a>: <a href="https://pixabay.com/service/license/">Pixabay License</a></li>
+</ul>

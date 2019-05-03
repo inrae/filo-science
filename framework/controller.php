@@ -539,7 +539,7 @@ if ($isHtml) {
     /*
      * Affichage du menu
      */
-    $vue->set($_SESSION["title"], "APPLI_title");
+    $vue->set($_SESSION["APPLI_title"], "APPLI_title");
     if (!isset($_SESSION["menu"])) {
         include_once 'framework/navigation/menu.class.php';
         $menu = new Menu($APPLI_menufile);
