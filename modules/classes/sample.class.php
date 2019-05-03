@@ -97,6 +97,9 @@ class Sample extends ObjetBDD
             }
         }
         $data["total_measured"] = $nb;
+        if ($data["total_number"] < $nb) {
+            $data["total_number"] = $nb;
+        }
         $data["total_weight"] = $weight;
         if ($min == 999999) {
             $min = 0;

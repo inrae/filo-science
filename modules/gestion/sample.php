@@ -77,12 +77,17 @@ switch ($t_module["param"]) {
                     $data["individual_id"] = $_SESSION["ti_individual"]->getValue($data["individual_id"]);
                     $ind->ecrire($data);
                 }
+                /**
+                 * Inhibition of display of the individu
+                 */
+                unset($_REQUEST["individual_id"]);
             }
             /**
              * Update sample from individuals
              */
             $dataClass->setCalculatedData($id);
             $bdd->commit();
+            $module_coderetour = -1;
         } catch (Exception $e) {
             $bdd->rollback();
             $message->setSyslog($e->getMessage());
@@ -98,5 +103,18 @@ switch ($t_module["param"]) {
 
         dataDelete($dataClass, $id);
         $activeTab = "tab-sample";
+        break;
+    case "deleteIndividual":
+        if ($_REQUEST["individual_id"] > 0) {
+            $individual_id = $_SESSION["ti_individual"]->getValue($_REQUEST["individual_id"]);
+            try {
+                $bdd->beginTransaction();
+                datadelete($ind, $individual_id, true);
+                $dataClass->setCalculatedData($id);
+                $bdd->commit;
+            } catch (Exception $e) {
+                $bdd->rollback;
+            }
+        }
         break;
 }

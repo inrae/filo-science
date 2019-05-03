@@ -35,7 +35,7 @@ class Individual extends ObjetBDD
             "ot" => array("type" => 1),
             "weight" => array("type" => 1),
             "age" => array("type" => 1),
-            "measure_estimated" => array("type" => 1, "defaultValue" => 0),
+            "measure_estimated" => array("type" => 1,  "requis"=>1, "defaultValue" => 0),
             "other_measure" => array("type" => 0),
             "individual_comment" => array("type" => 0),
             "pathology_codes" => array("type" => 0),

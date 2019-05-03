@@ -69,6 +69,17 @@ $(document).ready(function() {
         $("#individualChange").val(1);
     });
 
+    /* Delete an individual */
+    $("#delete-individual").on('keyup click', function () { 
+        var lib = "{t}Confirmez-vous la suppression ?{/t}" ;
+        if (confirm(lib) == true) {
+			$(this.form).find("input[name='action']").val("DeleteIndividual");
+			$(this.form).submit();
+		} else {
+			return false;
+		}
+    });
+
 });
 </script>
 
@@ -89,6 +100,10 @@ $(document).ready(function() {
     <div class="col-md-12">
         <a href="index.php?module=sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id=0">
             <img src="display/images/new.png" height="25">{t}Nouveau lot{/t}
+        </a>
+        &nbsp;
+        <a href="index.php?module=sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id={$data.sample_id}&individual_id=0">
+            <img src="display/images/fish.png" height="25">{t}Nouvelle capture{/t}
         </a>
 
     </div>
@@ -112,7 +127,10 @@ $(document).ready(function() {
                 <div class="form-group">
                         <label for="taxon_id"  class="control-label col-md-4"> {t}Taxon correspondant :{/t}</label>
                     <div class="col-md-8">
-                        <select id="taxon_id" class="form-control">
+                        <select id="taxon_id" class="form-control" name="taxon_id">
+                            {if $data.taxon_id > 0}
+                                <option value="{$data.taxon_id}" selected>{$data.taxon_name}</option>
+                            {/if}
                         </select>
                     </div>
                 </div>
@@ -143,17 +161,17 @@ $(document).ready(function() {
                 <div class="form-group">
                     <label for="sample_size_min"  class="control-label col-md-4"> {t}Longueur minimale mesurée (cm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="sample_size_min" type="text" class="form-control nombre" name="sample_size_min" value="{$data.sample_size_min}">
+                        <input id="sample_size_min" type="text" class="form-control taux" name="sample_size_min" value="{$data.sample_size_min}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="sample_size_max"  class="control-label col-md-4"> {t}Longueur maximale mesurée (cm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="sample_size_max" type="text" class="form-control nombre" name="sample_size_max" value="{$data.sample_size_max}">
+                        <input id="sample_size_max" type="text" class="form-control taux" name="sample_size_max" value="{$data.sample_size_max}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="sample_comment"  class="control-label col-md-4"> {t}Commentaire :{/t}</label>
+                    <label for="sample_comment"  class="control-label col-md-4"> {t}Commentaires :{/t}</label>
                     <div class="col-md-8">
                         <textarea id="sample_comment" type="text" class="form-control" name="sample_comment">{$data.sample_comment}</textarea>
                     </div>
@@ -207,11 +225,11 @@ $(document).ready(function() {
                         <label for="measure_estimated"  class="control-label col-md-4">{t}Mesure estimée ?{/t}</label>
                         <div class="col-md-8" id="measure_estimated">
                             <label class="radio-inline">
-                                <input  type="radio" name="measure_estimated" id="measure_estimated0" value="0" {if $individual.measure_estimated == 0}checked{/if}>
+                                <input  class="fish" type="radio" name="measure_estimated" id="measure_estimated0" value="0" {if $individual.measure_estimated == 0}checked{/if}>
                                 {t}non{/t}
                             </label>
                             <label class="radio-inline">
-                                <input  type="radio" name="measure_estimated" id="measure_estimated1" value="1" {if $individual.measure_estimated == 1}checked{/if}>
+                                <input class="fish" type="radio" name="measure_estimated" id="measure_estimated1" value="1" {if $individual.measure_estimated == 1}checked{/if}>
                                 {t}oui{/t}
                             </label>
                         </div>
@@ -244,7 +262,7 @@ $(document).ready(function() {
                 </div>
 
                 <div class="form-group">
-                    <label for="pathology_id"  class="control-label col-md-4">{t}pathology :{/t}</label>
+                    <label for="pathology_id"  class="control-label col-md-4">{t}pathologie :{/t}</label>
                     <div class="col-md-8">
                         <select id="pathology_id" name="pathology_id" class="form-control combobox">
                             <option value ="" {if $row.pathology_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
@@ -276,10 +294,15 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="form-group" id="div-individual_comment">
-                    <label for="individual_comment"  class="control-label col-md-4"> {t}individual_comment (année) :{/t}</label>
+                    <label for="individual_comment"  class="control-label col-md-4"> {t}Commentaires :{/t}</label>
                     <div class="col-md-8">
                         <textarea id="individual_comment" class="fish md-textarea form-control">{$individual.individual_comment}</textarea>
                     </div>
+                </div>
+                <div class="center">
+                    {if $individual.individual_id > 0 }
+                        <button id="delete-individual" class="btn btn-danger">{t}Supprimer{/t}</button>
+                    {/if}
                 </div>
             </fieldset>
         </div>    

@@ -219,5 +219,6 @@
 	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty"/>
 	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion"   retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
 	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion"  retourok="sequenceDisplay" retourko="sampleChange"  modulebefore="sampleChange" />
+	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion"  retourok="sampleChange" retourko="sampleChange"  modulebefore="sampleChange" />
 </navigation>
 	
