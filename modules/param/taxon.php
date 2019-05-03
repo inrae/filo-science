@@ -35,7 +35,7 @@ switch ($t_module["param"]) {
 		break;
 
 	case "searchAjax":
-		$vue->set($dataClass->search($_REQUEST["name"]));
+		$vue->set($dataClass->search($_REQUEST["name"], $_REQUEST["freshwater"]));
 		break;
 
 	case "lireAjax":

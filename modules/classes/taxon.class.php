@@ -33,15 +33,25 @@ class Taxon extends ObjetBDD
      * @param string $val
      * @return array
      */
-    function search($val)
+    function search($val, $isFreshcode = false)
     {
         $val = strtoupper($this->encodeData($val));
         $sql = "select taxon_id, scientific_name, common_name, fresh_code, sea_code, length_max, weight_max
                 from taxon";
-        $where = " where upper(scientific_name) like '%" . $val . "%'
-                    or upper (common_name) like '%" . $val . "%'
-                    or upper(fresh_code) = '" . $val . "'
-                    or upper(sea_code) = '" . $val . "'";
+        if (strlen($val) == 3) {
+            /**
+             * search only on the code
+             */
+            $isFreshcode ? $field = "fresh_code" : $field = "sea_code";
+            $where = " where upper($field) = '$val'";
+        } else {
+            /**
+             * Search on the name
+             */
+            $where = " where upper(scientific_name) like '%" . $val . "%'
+                    or upper (common_name) like '%" . $val . "%'";
+        }
+
         $order = " order by scientific_name";
         return $this->getListeParam($sql . $where . $order);
     }

@@ -8,9 +8,9 @@ $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
 
 switch ($t_module["param"]) {
     case "change":
-        $data = dataRead($dataClass, $id, "gestion/sequenceChange.tpl", $sequence_id);
+        $data = dataRead($dataClass, $id, "gestion/sampleChange.tpl", $sample_id);
         $data = $_SESSION["ti_sample"]->translateRow($data);
-        $data = $_SESSION["ti_sequence"]->translateRow($data);
+        $data = $_SESSION["ti_sample"]->translateRow($data);
         /**
          * Get the detail of the sequence
          */
@@ -26,6 +26,7 @@ switch ($t_module["param"]) {
         /*
          * write record in database
          */
+        $data = $_POST;
         $data["sample_id"] = $id;
         $data["sequence_id"] = $sequence_id;
         $id = dataWrite($dataClass, $data);

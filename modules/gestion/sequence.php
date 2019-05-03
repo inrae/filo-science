@@ -25,8 +25,18 @@ switch ($t_module["param"]) {
                 $_SESSION["ti_sequence"]->translateList(
                     $sg->getListFromSequence($id)
                 )
-                ),
-                "gears"
+            ),
+            "gears"
+        );
+        require_once 'modules/classes/sample.class.php';
+        $sample = new Sample($bdd, $ObjetBDDParam);
+        $vue->set(
+            $_SESSION["ti_sample"]->translateList(
+                $_SESSION["ti_sequence"]->translateList(
+                    $sample->getListFromSequence($id)
+                )
+            ),
+            "samples"
         );
         /**
          * select the good tab for display

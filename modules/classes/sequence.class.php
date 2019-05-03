@@ -5,7 +5,7 @@
 class Sequence extends ObjetBDD
 {
     private $sql = "select sequence_id, sequence_number, s.date_start, s.date_end, fishing_duration
-                    , operation_id, operation_name
+                    , operation_id, operation_name, freshwater
                     ,campaign_id, campaign_name
                     ,project_id, project_name
                     from sequence s

@@ -1,34 +1,44 @@
 <script>
 $(document).ready(function() {
+    var freshwater = {$sequence.freshwater};
     /* Taxon search */
     $("#taxon-search").keyup(function() { 
         var name = $(this).val();
-        if (nom.length > 2) {
+        if (name.length > 2) {
             var options = "";
             var url = "index.php";
-            $.getJSON(url, {
-                "module" : "taxonSearchAjax",
-                "name" : name
-            }, function(data) {
+            var data = { "module": "taxonSearchAjax",
+                        "name":name,
+                        "freshwater" : freshwater
+                    };
+            $.ajax( {
+                url: "index.php",
+                data: data
+            })
+            .done (function(data) {
+                var result = JSON.parse(data);
                 //options = '<option value="" selected></option>';			
-                for (var i = 0; i < data.length; i++) {
-                    options += '<option value="' + data[i].taxon_id + '">'
-                            + data[i].scientific_name;
-                    if (data[i].common_name.length > 0) {
-                        options += ' (' + data[i].common_name + ')';
+                for (var i = 0; i < result.length; i++) {
+                    options += '<option value="' + result[i].taxon_id + '">'
+                            + result[i].scientific_name;
+                    if (result[i].common_name.length > 0) {
+                        options += ' (' + result[i].common_name + ')';
                     }
                     options += '</option>';
                 }
                 ;
                 $("#taxon_id").html(options);
-            });
-            $("#taxon_id").change();
+                $("#taxon_id").change();
+            });   
         }
     });
     $("#taxon_id").change(function () { 
         /* Get the name of the taxon */
         var taxonId = $("#taxon_id").val();
-        if (taxonId.length>0) {
+        if (taxonId === null) {
+            taxonId = 0;
+        }
+        if (taxonId > 0) {
             $.ajax( {
                 url: "index.php",
                 data: { "module": "taxonGetName", "taxon_id":taxonId}
@@ -47,7 +57,6 @@ $(document).ready(function() {
 });
 </script>
 
-<h2>{t}Opération{/t} {$sequence.operation_name}, {t}séquence{/t}&nbsp;{$sequence.sequence_number}</h2>
 <div class="row">
     <div class="col-md-12">
         <a href="index.php?module=campaignDisplay&campaign_id={$sequence.campaign_id}"><img src="display/images/display-red.png" height="25">
@@ -55,16 +64,16 @@ $(document).ready(function() {
         </a>
         &nbsp;
         <a href="index.php?module=operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}">
-            <img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t} {$data.operation_name}
+            <img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t} {$sequence.operation_name}
         </a>
         &nbsp;
-        <a href="index.php?module=sequenceDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$data.sequence_id}&activeTab=tab-sequence">
-            <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t} {$data.sequence_number}
+        <a href="index.php?module=sequenceDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$sequence.sequence_id}&activeTab=tab-sequence">
+            <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t} {$sequence.sequence_number}
         </a>
     </div>
     <div class="col-md-12">
         <a href="index.php?module=sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id=0">
-            <img src="display/images/new.gif" height="25">{t}Nouveau lot{/t}
+            <img src="display/images/new.png" height="25">{t}Nouveau lot{/t}
         </a>
 
     </div>
@@ -77,7 +86,7 @@ $(document).ready(function() {
                 <form id="lotform" class="form-horizontal protoform" method="post" action="index.php">
                         <input type="hidden" name="moduleBase" value="sample">
                         <input type="hidden" name="action" value="Write">
-                        <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
+                        <input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">
                         <input type="hidden" name="sample_id" value="{$data.sample_id}">
                         <div class="form-group">
                                 <label for="taxon-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
@@ -87,9 +96,10 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group">
                                 <label for="taxon_id"  class="control-label col-md-4"> {t}Taxon correspondant :{/t}</label>
-                            <select id="taxon_id" class="form-control">
-
-                            </select>
+                            <div class="col-md-8">
+                                <select id="taxon_id" class="form-control">
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="taxon_name"  class="control-label col-md-4"> {t}Nom du taxon :{/t}<span class="red">*</span></label>
@@ -98,9 +108,9 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="total_number"  class="control-label col-md-4"> {t}Nombre total :{/t}</label>
+                            <label for="total_number"  class="control-label col-md-4"> {t}Nombre total :{/t}<span class="red">*</span></label>
                             <div class="col-md-8">
-                                <input id="total_number" type="text" class="form-control nombre" name="sl" value="{$data.total_number}">
+                                <input id="total_number" name="total_number" type="text" class="form-control nombre" value="{$data.total_number}" required>
                             </div>
                         </div>
                         <div class="form-group">
