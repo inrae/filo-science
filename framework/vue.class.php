@@ -14,8 +14,7 @@
  *        
  */
 class VueException extends Exception
-{
-}
+{ }
 
 class Message
 {
@@ -68,7 +67,8 @@ class Message
      *
      * @return int
      */
-    function getMessageNumber() {
+    function getMessageNumber()
+    {
         return (count($this->_message));
     }
 
@@ -111,7 +111,6 @@ class Message
             $error = "err";
             $code_error = 4;
             $level = "warn";
-
         } else {
             $error = "info";
             $code_error = 6;
@@ -161,7 +160,21 @@ class Vue
      * @param string $param
      */
     function send($param = "")
+    { }
+
+    /**
+     * Return the content of a variable
+     *
+     * @param string $variable
+     * @return string|array
+     */
+    function get($variable = "")
     {
+        if (strlen($variable) > 0) {
+            return $this->data[$variable];
+        } else {
+            return $this->data;
+        }
     }
 
     /**
@@ -283,6 +296,17 @@ class VueSmarty extends Vue
          */
         $this->smarty->display($this->templateMain);
     }
+
+        /**
+     * Return the content of a variable
+     *
+     * @param string $variable
+     * @return string|array
+     */
+    function get($variable = "")
+    {
+        return $this->smarty->getTemplateVars($variable);
+    } 
 }
 
 /**
@@ -513,12 +537,12 @@ class VuePdf extends Vue
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             header('Content-Type: ' . finfo_file($finfo, $this->filename));
             finfo_close($finfo);
-            
+
             /*
              * Mise a disposition
              */
             header('Content-Disposition: ' . $this->disposition . '; filename="' . basename($this->filename) . '"');
-            
+
             /*
              * Desactivation du cache
              */
@@ -614,7 +638,7 @@ class VueBinaire extends Vue
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: no-cache');
-            
+
             /*
              * Envoi au navigateur
              */
@@ -638,5 +662,3 @@ class VueBinaire extends Vue
         }
     }
 }
-
-?>

@@ -22,7 +22,7 @@
                 <tbody>
                     {foreach $samples as $sample}
                     <tr>
-                        <td class="center">{$sample.sample_id}</td>
+                        <td class="center">{$sample.sample_uid}</td>
                         <td class="center">
                             <a href="index.php?module=sampleChange&sequence_id={$sample.sequence_id}&sample_id={$sample.sample_id}">
                                 {$sample.taxon_name}

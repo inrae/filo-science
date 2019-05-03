@@ -4,11 +4,11 @@
  */
 class Individual extends ObjetBDD
 {
-    private $sql = "select individual_id, sample_id, sexe_id, pathology_id
+    private $sql = "select individual_id, individual_id as individual_uid, sample_id, sexe_id, pathology_id
                     , sl, fl, tl, wd, ot, weight
                     ,other_measure, individual_comment, age
-                    ,measure_estimated,.pathology_codes, tag, tag_posed
-                    ,pathology_name, pathology_code
+                    ,measure_estimated, pathology_codes, tag, tag_posed
+                    ,pathology_name, pathology_code 
                     ,sexe_name, sexe_code
                     from individual 
                     left outer join pathology using (pathology_id)
@@ -38,7 +38,7 @@ class Individual extends ObjetBDD
             "measure_estimated" => array("type" => 1, "defaultValue" => 0),
             "other_measure" => array("type" => 0),
             "individual_comment" => array("type" => 0),
-            "pathology_code" => array("type" => 0),
+            "pathology_codes" => array("type" => 0),
             "tag" => array("type" => 0),
             "tag_posed" => array("type" => 0)
         );

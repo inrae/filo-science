@@ -8,10 +8,12 @@ class Sequence extends ObjetBDD
                     , operation_id, operation_name, freshwater
                     ,campaign_id, campaign_name
                     ,project_id, project_name
+                    ,protocol_id, measure_default, measure_default_only
                     from sequence s
                     join operation using (operation_id)
                     join campaign using (campaign_id)
                     join project using (project_id)
+                    join protocol using (protocol_id)
                     ";
     /**
      * Constructor

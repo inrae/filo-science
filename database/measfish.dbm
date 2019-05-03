@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,639" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,498" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres">
 <role name="measfish"
       sql-disabled="true">
@@ -2532,7 +2532,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	</customidxs>
 	<initial-data>
 <![CDATA[protocol_id•protocol_name•protocol_url•protocol_description•protocol_pdf•measure_default•measure_default_only•analysis_template_id⸣
-1•Default••Protocole par défaut••lt•0•]]>
+1•Default••Protocole par défaut••tl•0•]]>
 	</initial-data>
 </table>
 

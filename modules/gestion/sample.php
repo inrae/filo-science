@@ -1,6 +1,7 @@
 <?php
 require_once 'modules/classes/sample.class.php';
-
+require_once 'modules/classes/individual.class.php';
+$ind = new Individual($bdd, $ObjetBDDParam);
 $dataClass = new Sample($bdd, $ObjetBDDParam);
 $keyName = "sample_id";
 $id = $_SESSION["ti_sample"]->getValue($_REQUEST[$keyName]);
@@ -23,35 +24,38 @@ switch ($t_module["param"]) {
         /**
          * Get the list of individuals
          */
-        require_once 'modules/classes/individual.class.php';
-        $ind = new Individual($bdd, $ObjetBDDParam);
+
         $vue->set(
-            $_SESSION["ti_individual"]->translateRow(
-                $_SESSION["ti_sample"]->translateRow(
+            $_SESSION["ti_individual"]->translateList(
+                $_SESSION["ti_sample"]->translateList(
                     $ind->getListFromSample($id)
                 )
             ),
             "individuals"
         );
         /**
-         * Get an individual, if necessary, for change
+         * Get an individual
          */
-        if ($id > 0) {
-            if ($_REQUEST["individual_id"] > 0) {
-                $individual_id = $_SESSION["ti_individual"]->getValue($_REQUEST["individual_id"]);
-            } else {
-                $individual_id = 0;
-            }
-            $dataIndiv = $ind->lire($individual_id, true, $id);
-            $vue->set(
-                $_SESSION["ti_individual"]->translateFromRow(
-                    $_SESSION["ti_sample"]->translateFromRow(
-                        $dataIndiv
-                    ),
-                    "individual"
-                )
-            );
+        if ($_REQUEST["individual_id"] > 0) {
+            $individual_id = $_SESSION["ti_individual"]->getValue($_REQUEST["individual_id"]);
+        } else {
+            $individual_id = 0;
         }
+        $dataIndiv = $ind->lire($individual_id, true, $id);
+        $vue->set(
+            $_SESSION["ti_individual"]->translateRow(
+                $_SESSION["ti_sample"]->translateRow(
+                    $dataIndiv
+                )
+            ),
+            "individual"
+        );
+        require_once 'modules/classes/sexe.class.php';
+        $sexe = new Sexe($bdd, $ObjetBDDParam);
+        $vue->set($sexe->getListe(1), "sexes");
+        require_once 'modules/classes/pathology.class.php';
+        $pathology = new Pathology($bdd, $ObjetBDDParam);
+        $vue->set($pathology->getListe(3), "pathologys");
         break;
     case "write":
         /*
@@ -60,9 +64,30 @@ switch ($t_module["param"]) {
         $data = $_POST;
         $data["sample_id"] = $id;
         $data["sequence_id"] = $sequence_id;
-        $id = dataWrite($dataClass, $data);
-        if ($id > 0) {
-            $_REQUEST[$keyName] = $_SESSION["ti_sample"]->setValue($id);
+        try {
+            $bdd->beginTransaction();
+            $id = dataWrite($dataClass, $data, true);
+            if ($id > 0) {
+                $_REQUEST[$keyName] = $_SESSION["ti_sample"]->setValue($id);
+                /**
+                 * Write individual, if necessary
+                 */
+                if ($_REQUEST["individualChange"]) {
+                    $data["sample_id"] = $id;
+                    $data["individual_id"] = $_SESSION["ti_individual"]->getValue($data["individual_id"]);
+                    $ind->ecrire($data);
+                }
+            }
+            /**
+             * Update sample from individuals
+             */
+            $dataClass->setCalculatedData($id);
+            $bdd->commit();
+        } catch (Exception $e) {
+            $bdd->rollback();
+            $message->setSyslog($e->getMessage());
+            $message->setLog(_("Problème lors de l'enregistrement de l'échantillon ou de l'individu"), true);
+            $module_coderetour = -1;
         }
         $activeTab = "tab-sample";
         break;
