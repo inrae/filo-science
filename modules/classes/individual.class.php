@@ -35,7 +35,7 @@ class Individual extends ObjetBDD
             "ot" => array("type" => 1),
             "weight" => array("type" => 1),
             "age" => array("type" => 1),
-            "measure_estimated" => array("type" => 1,  "requis"=>1, "defaultValue" => 0),
+            "measure_estimated" => array("type" => 1,  "requis" => 1, "defaultValue" => 0),
             "other_measure" => array("type" => 0),
             "individual_comment" => array("type" => 0),
             "pathology_codes" => array("type" => 0),
@@ -54,5 +54,21 @@ class Individual extends ObjetBDD
     {
         $where = " where sample_id = :sample_id";
         return $this->getListeParamAsPrepared($this->sql . $where, array("sample_id" => $sample_id));
+    }
+    /**
+     * Add the value individual_uid for display individual_id in forms
+     *
+     * @param int $id
+     * @param boolean $getDefault
+     * @param string $parentValue
+     * @return array
+     */
+    function lire($id, $getDefault = true, $parentValue = "")
+    {
+        $data = parent::lire($id, $getDefault, $parentValue);
+        if ($data["individual_id"] > 0) {
+            $data["individual_uid"] = $data["individual_id"];
+        }
+        return $data;
     }
 }

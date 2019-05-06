@@ -171,3 +171,9 @@ legend {
 .lexique dt {
   white-space: pre-wrap;
 }
+
+td a {
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+}

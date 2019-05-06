@@ -188,7 +188,7 @@ $(document).ready(function() {
         </div>
         <div class="col-md-6 form-horizontal">
             <fieldset>
-                <legend>{t}Poisson mesuré{/t}</legend>
+                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if}</legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
                 <input type="hidden" id="individualChange" name="individualChange" value=0>
                 <div class="form-group" id="div-sl">
@@ -250,7 +250,7 @@ $(document).ready(function() {
                 <div class="form-group">
                     <label for="sexe_id"  class="control-label col-md-4">{t}Sexe :{/t}</label>
                     <div class="col-md-8">
-                        <select id="sexe_id" name="sexe_id" class="form-control">
+                        <select id="sexe_id" name="sexe_id" class="fish form-control">
                             <option value ="" {if $row.sexe_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                             {foreach $sexes as $row}
                                 <option value="{$row.sexe_id}" {if $row.sexe_id == $individual.sexe_id}selected{/if}>
@@ -264,7 +264,7 @@ $(document).ready(function() {
                 <div class="form-group">
                     <label for="pathology_id"  class="control-label col-md-4">{t}pathologie :{/t}</label>
                     <div class="col-md-8">
-                        <select id="pathology_id" name="pathology_id" class="form-control combobox">
+                        <select id="pathology_id" name="pathology_id" class="fish form-control combobox">
                             <option value ="" {if $row.pathology_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                             {foreach $pathologys as $row}
                                 <option value="{$row.pathology_id}" {if $row.pathology_id == $individual.pathology_id}selected{/if}>
@@ -275,7 +275,7 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="form-group" id="div-pathology_codes">
-                    <label for="pathology_codes"  class="control-label col-md-4"> {t}Pathologies (suite de codes) ou commentaires sur la pathologie :{/t}</label>
+                    <label for="pathology_codes"  class="fish control-label col-md-4"> {t}Pathologies (suite de codes) ou commentaires sur la pathologie :{/t}</label>
                     <div class="col-md-8">
                         <input id="pathology_codes" type="text" class="fish form-control" name="pathology_codes" value="{$individual.pathology_codes}">
                     </div>
@@ -294,12 +294,13 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="form-group" id="div-individual_comment">
-                    <label for="individual_comment"  class="control-label col-md-4"> {t}Commentaires :{/t}</label>
+                    <label for="individual_comment"  class="fish control-label col-md-4"> {t}Commentaires :{/t}</label>
                     <div class="col-md-8">
-                        <textarea id="individual_comment" class="fish md-textarea form-control">{$individual.individual_comment}</textarea>
+                        <textarea id="individual_comment" name="individual_comment" class="fish md-textarea form-control">{$individual.individual_comment}</textarea>
                     </div>
                 </div>
                 <div class="center">
+                        <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
                     {if $individual.individual_id > 0 }
                         <button id="delete-individual" class="btn btn-danger">{t}Supprimer{/t}</button>
                     {/if}

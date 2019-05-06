@@ -11,7 +11,8 @@ switch ($t_module["param"]) {
     case "change":
         $data = dataRead($dataClass, $id, "gestion/sampleChange.tpl", $sample_id);
         $data = $_SESSION["ti_sample"]->translateRow($data);
-        $data = $_SESSION["ti_sample"]->translateRow($data);
+        $data = $_SESSION["ti_sequence"]->translateRow($data);
+        $vue->set($data, "data");
         /**
          * Get the detail of the sequence
          */
@@ -111,9 +112,11 @@ switch ($t_module["param"]) {
                 $bdd->beginTransaction();
                 datadelete($ind, $individual_id, true);
                 $dataClass->setCalculatedData($id);
-                $bdd->commit;
+                $bdd->commit();
+                $message->set(_("Suppression effectuée"));
             } catch (Exception $e) {
-                $bdd->rollback;
+                $bdd->rollback();
+                $message->set(_("Problème rencontré lors de la suppression du poisson"), true);
             }
         }
         break;

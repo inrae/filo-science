@@ -108,4 +108,19 @@ class Sample extends ObjetBDD
         $data["sample_size_max"] = $max;
         $this->ecrire($data);
     }
+
+    /**
+     * Rewrite Delete function for delete individuals
+     */
+    function supprimer($id)
+    {
+        /**
+         * Delete individuals
+         */
+        require_once 'modules/classes/individual.class.php';
+        $ind = new Individual($this->connection, $this->paramori);
+        if ($ind->supprimerChamp($id, "sample_id")) {
+            parent::supprimer($id);
+        }
+    }
 }
