@@ -23,6 +23,9 @@ if (!isset($_SESSION["ti_sample"])) {
 if (!isset($_SESSION["ti_individual"])) {
     $_SESSION["ti_individual"] = new TranslateId("individual_id");
 }
+if (!isset($_SESSION["ti_ambience"])) {
+    $_SESSION["ti_ambience"] = new TranslateId("ambience_id");
+}
 if (!isset($_SESSION["searchCampaign"])) {
     $_SESSION["searchCampaign"] = new SearchCampaign();
 }

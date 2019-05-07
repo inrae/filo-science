@@ -34,7 +34,7 @@ $(document).ready(function() {
         </div>
         <div class="tab-pane fade" id="nav-ambience" role="tabpanel" aria-labelledby="tab-ambience">
             <div class="col-md-12">
-                {include file="gestion/ambienceDetail.tpl"}
+                {include file="gestion/ambienceDetailOperation.tpl"}
             </div>
         </div>
         <div class="tab-pane fade" id="nav-sequence" role="tabpanel" aria-labelledby="tab-sequence">

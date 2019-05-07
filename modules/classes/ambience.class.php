@@ -3,7 +3,7 @@ class Ambience extends ObjetBDD
 {
 
     private $sql = "select a.*
-                    ,operation_name, sequence_number
+                    ,o.operation_name, sequence_number
                     
                     ,speed_name, shady_name, clogging_name, facies_name, sinuosity_name
                     ,localisation_name, turbidity_name, situation_name, flow_trend_name
@@ -16,7 +16,7 @@ class Ambience extends ObjetBDD
                     ,g1.granulometry_name as dominant_granulometry
                     ,g2.granulometry_name as secondary_granulometry
                     from ambience a
-                    left outer join operation using (operation_id)
+                    left outer join operation o on (o.operation_id = a.operation_id)
                     left outer join sequence using (sequence_id)
                     left outer join speed using (speed_id)
                     left outer join shady using (shady_id)
@@ -92,8 +92,8 @@ class Ambience extends ObjetBDD
      */
     function getFromOperation($operation_id)
     {
-        $where = " where operation_id = :id";
-        return $this->lireParamAsPrepared($this->sql, array("id" => $operation_id));
+        $where = " where o.operation_id = :id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("id" => $operation_id));
     }
     /**
      * Get the ambience attached at sequence
@@ -104,6 +104,6 @@ class Ambience extends ObjetBDD
     function getFromSequence($sequence_id)
     {
         $where = " where sequence_id = :id";
-        return $this->lireParamAsPrepared($this->sql, array("id" => $sequence_id));
+        return $this->lireParamAsPrepared($this->sql . $where, array("id" => $sequence_id));
     }
 }

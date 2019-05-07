@@ -19,10 +19,23 @@ switch ($t_module["param"]) {
          */
         require_once 'modules/classes/sequence.class.php';
         $sequence = new Sequence($bdd, $ObjetBDDParam);
-        $sequences =$sequence->getListFromParent($id);
+        $sequences = $sequence->getListFromParent($id);
         $sequences = $_SESSION["ti_sequence"]->translateList($sequences);
         $sequences = $_SESSION["ti_operation"]->translateList($sequences);
         $vue->set($sequences, "sequences");
+        /**
+         * Ambience
+         */
+        require_once 'modules/classes/ambience.class.php';
+        $ambience = new Ambience($bdd, $ObjetBDDParam);
+        $vue->set(
+            $_SESSION["ti_operation"]->translateRow(
+                $_SESSION["ti_ambience"]->translateRow(
+                    $ambience->getFromOperation($id)
+                )
+            ),
+            "ambience"
+        );
         /**
          * select the good tab for display
          */
@@ -59,7 +72,7 @@ switch ($t_module["param"]) {
          */
         require_once 'modules/classes/station.class.php';
         $station = new Station($bdd, $ObjetBDDParam);
-        $vue->set($station->getListFromProject($dcampaign["project_id"]),"stations");
+        $vue->set($station->getListFromProject($dcampaign["project_id"]), "stations");
         break;
     case "write":
         /*

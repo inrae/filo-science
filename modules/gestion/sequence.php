@@ -39,6 +39,19 @@ switch ($t_module["param"]) {
             "samples"
         );
         /**
+         * Ambience
+         */
+        require_once 'modules/classes/ambience.class.php';
+        $ambience = new Ambience($bdd, $ObjetBDDParam);
+        $vue->set(
+            $_SESSION["ti_sequence"]->translateRow(
+                $_SESSION["ti_ambience"]->translateRow(
+                    $ambience->getFromSequence($id)
+                )
+            ),
+            "ambience"
+        );
+        /**
          * select the good tab for display
          */
         if (isset($activeTab)) {
