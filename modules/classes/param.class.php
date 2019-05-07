@@ -23,4 +23,23 @@ class Param extends ObjetBDD
         );
         parent::__construct($bdd);
     }
+    /**
+     * Get the id of a record from the name
+     *
+     * @param varchar $name
+     * @param boolean $withCreate: if true and the record not exists, the parameter is created
+     * @return int
+     */
+    function getIdFromName($name, $withCreate = false)
+    {
+        if (strlen($name) > 0) { }
+        $sql = "select " . $this->table . "_id  as id
+                from $this->table
+                where " . $this->table . "_name = :name";
+        $data = $this->lireParamAsPrepared($sql, array("name" => $name));
+        if ($withCreate && !$data["id"] ) {
+            $data["id"] = $this->ecrire(array($this->table . "_name" => $name));
+        }
+        return $data["id"];
+    }
 }

@@ -22,6 +22,9 @@ switch ($t_module["param"]) {
         dataRead($dataClass, $id, "param/stationChange.tpl");
         include 'modules/gestion/mapInit.php';
         $vue->set($_SESSION["projects"], "projects");
+        require_once 'modules/classes/param.class.php';
+        $river = new Param($bdd, "river");
+        $vue->set($river->getListe("river_name"), "rivers");
         break;
     case "write":
         /*
@@ -43,15 +46,21 @@ switch ($t_module["param"]) {
             require_once 'modules/classes/import.class.php';
             $i = 0;
             try {
+                $bdd->beginTransaction();
                 $import = new Import($_FILES['upfile']['tmp_name'], $_POST["separator"], false, array(
                     "name",
                     "code",
-                    "x",
-                    "y"
+                    "long",
+                    "lat",
+                    "pk",
+                    "river"
                 ));
+                require_once 'modules/classes/param.class.php';
+                $river = new Param($bdd, "river");
                 $rows = $import->getContentAsArray();
                 foreach ($rows as $row) {
                     if (strlen($row["name"]) > 0) {
+                        printr($row);
                         /*
                          * Ecriture en base, en mode ajout ou modification
                          */
@@ -64,13 +73,18 @@ switch ($t_module["param"]) {
                             "station_pk" => $row["pk"],
                             "station_id" => $dataClass->getIdFromName($row["name"])
                         );
+                        if (strlen($row["river"]) > 0) {
+                            $data["river_id"] = $river->getIdFromName($row["river"], true);
+                        }
                         $dataClass->ecrire($data);
                         $i++;
                     }
                 }
+                $bdd->commit();
                 $message->set(sprintf(_("%d stations(s) importée(s)"), $i));
                 $module_coderetour = 1;
             } catch (Exception $e) {
+                $bdd->rollback();
                 $message->set(_("Impossible d'importer les stations"));
                 $message->set($e->getMessage());
                 $module_coderetour = -1;
@@ -87,4 +101,3 @@ switch ($t_module["param"]) {
         $vue->set($dataClass->getCoordinates($_REQUEST["station_id"]));
         break;
 }
-?>

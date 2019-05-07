@@ -1,7 +1,13 @@
 <?php
 class Station extends ObjetBDD
 {
-
+private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code
+            ,project_id, project_name
+            ,river_id, river_name
+            from station 
+            left outer join project using (project_id)
+            left outer join river using (river_id)
+            ";
     /**
      * Constructor
      * 
@@ -94,8 +100,7 @@ class Station extends ObjetBDD
      */
     function getListFromProject($project_id = 0, $with_noaffected = true)
     {
-        $sql = "select * from station 
-                left outer join project using (project_id) ";
+
         $where = "";
         $order = " order by station_code, station_name";
         if ($with_noaffected) {
@@ -109,11 +114,11 @@ class Station extends ObjetBDD
                 $where = " where ";
             }
             $where .= " project_id = :project_id";
-            return $this->getListeParamAsPrepared($sql . $where . $order, array(
+            return $this->getListeParamAsPrepared($this->sql . $where . $order, array(
                 "project_id" => $project_id
             ));
         } else {
-            return $this->getListeParam($sql . $where . $order);
+            return $this->getListeParam($this->sql . $where . $order);
         }
     }
 
