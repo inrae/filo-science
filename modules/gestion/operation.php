@@ -42,12 +42,24 @@ switch ($t_module["param"]) {
         $data = $_SESSION["ti_campaign"]->translateRow($data);
         $vue->set($_SESSION["ti_operation"]->translateRow($data), "data");
         /**
+         * Get campaign item
+         */
+        require_once 'modules/classes/campaign.class.php';
+        $campaign = new Campaign($bdd, $ObjetBDDParam);
+        $dcampaign = $campaign->lire($campaign_id);
+        /**
          * Preparation of the parameters tables
          */
         $params = array("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
         foreach ($params as $tablename) {
             setParamToVue($vue, $tablename);
         }
+        /**
+         * Stations
+         */
+        require_once 'modules/classes/station.class.php';
+        $station = new Station($bdd, $ObjetBDDParam);
+        $vue->set($station->getListFromProject($dcampaign["project_id"]),"stations");
         break;
     case "write":
         /*

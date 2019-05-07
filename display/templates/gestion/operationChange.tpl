@@ -27,7 +27,7 @@
                         <option value ="" {if $row.station_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                     {foreach $stations as $row}
                         <option value="{$row.station_id}" {if $row.station_id == $data.station_id}selected{/if}>
-                        {$row.station_name}
+                        {$row.station_name}{if strlen($row.river_name) > 0} ({$row.river_name}){/if}
                         </option>
                     {/foreach}
                     </select>
