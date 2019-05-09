@@ -27,7 +27,7 @@ switch ($t_module["param"]) {
          * Treatment of parameters
          */
         require_once 'modules/classes/param.class.php';
-        $tables = array("granulometry, speed, shady, clogging, facies, sinuosity, localisation, turbidity, situation, flow_trend, vegetation, cache_abundance");
+        $tables = array("granulometry", "speed", "shady", "clogging", "facies", "sinuosity", "localisation", "turbidity", "situation", "flow_trend", "vegetation", "cache_abundance");
         foreach ($tables as $tablename) {
             setParamToVue($vue, $tablename);
         }
@@ -35,9 +35,9 @@ switch ($t_module["param"]) {
          * Set origin
          */
         if ($operation_id > 0) {
-            $vue->set("Operation","origin");
+            $vue->set("operation","origin");
         } else {
-            $vue->set("Sequence", "origin");
+            $vue->set("sequence", "origin");
         }
         break;
     case "write":

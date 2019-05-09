@@ -29,10 +29,6 @@
             <dt>{t}Largeur (en m) :{/t}</dt>
             <dd>{$ambience.ambience_width}</dd>
         </dl>
-        <dl class="dl-horizontal">
-            <dt>{t}Profondeur (en m) :{/t}</dt>
-            <dd>{$ambience.ambience_depth}</dd>
-        </dl>
 
         <fieldset>
             <legend>{t}Lame d'eau{/t}</legend>
@@ -41,11 +37,11 @@
                 <dd>{$ambience.speed_name}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>{t}Vitesse du courant / min / max (cm/s) :{/t}</dt>
+                <dt>{t}Vitesse du courant : moy / min / max (cm/s){/t}</dt>
                 <dd>{$ambience.current_speed} / {$ambience.current_speed_min} / {$ambience.current_speed_max}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>{t}Hauteur d'eau / min / max (cm) :{/t}</dt>
+                <dt>{t}Hauteur d'eau : moy / min / max (cm){/t}</dt>
                 <dd>{$ambience.water_height} / {$ambience.water_height_min} / {$ambience.water_height_max}</dd>
             </dl>
             <dl class="dl-horizontal">

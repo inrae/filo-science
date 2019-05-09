@@ -231,10 +231,10 @@
 	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
 
 	<ambienceChange action="modules/gestion/ambience.php" param="change" droits="gestion" type="smarty"/>
-	<ambienceSequenceWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
-	<ambienceSequenceDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
-	<ambienceOperationWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="OperationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
-	<ambienceOperationDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="OperationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
+	<ambiencesequenceWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
+	<ambiencesequenceDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
+	<ambienceoperationWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
+	<ambienceoperationDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
 
 </navigation>
 	

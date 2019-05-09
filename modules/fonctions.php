@@ -34,6 +34,7 @@ function setParamToVue($vue, $tablename)
         include_once "modules/classes/param.class.php";
         $iclass = new Param($bdd, $tablename);
         $vue->set($iclass->getListe(2), $tablename . "s");
+        unset ($iclass);
     } catch (Exception $e) {
         $message->set(sprintf(_("Problème de récupération des paramètres de la table %s"), $tablename), true);
         $message->setSyslog($e->getMessage);

@@ -1,14 +1,27 @@
 <div class="row">
-    <div class="col-md-6">
+    {if $origin="operation"}
+        <a href="index.php?module=operationDisplay&operation_id={$data.operation_id}&activeTab=tab-ambience">
+            <img src="display/images/display-green.png" height="25">
+            {t}Retour à l'opération{/t}
+        </a>
+    {else}
+        <a href="index.php?module=sequenceDisplay&sequence_id={$data.sequence_id}&activeTab=tab-ambience">
+            <img src="display/images/display.png" height="25">
+            {t}Retour à la séquence{/t}
+        </a>
+    {/if}
+</div>
+<div class="row form-display">
+    
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
-            <input type="hidden" name="moduleBase" value="ambience{$origin}">
-            <input type="hidden" name="action" value="Write">
-            <input type="hidden" name="ambience_id" value="{$data.ambience_id}">
-            <input type="hidden" name="operation_id" value="{$data.operation_id}">
-            <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
- 
-            
+    <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <input type="hidden" name="moduleBase" value="ambience{$origin}">
+        <input type="hidden" name="action" value="Write">
+        <input type="hidden" name="ambience_id" value="{$data.ambience_id}">
+        <input type="hidden" name="operation_id" value="{$data.operation_id}">
+        <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
+        <input type="hidden" name="activeTab" value="tab-ambience">
+        <div class="col-md-6 ">       
             <div class="form-group">
                 <label for="ambience_name"  class="control-label col-md-4">{t}Nom de l'ambiance :{/t}</label>
                 <div class="col-md-8">
@@ -26,6 +39,7 @@
                 <div class="col-md-8">
                     <input id="ambience_lat" name="ambience_lat" value="{$data.ambience_lat}" class="form-control">
                 </div>
+            </div>
             <div class="form-group">
                 <label for="situation_id"  class="control-label col-md-4">{t}Situation :{/t}</label>
                 <div class="col-md-8">
@@ -37,7 +51,7 @@
                             </option>
                         {/foreach}
                     </select>
-            </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="localisation_id"  class="control-label col-md-4">{t}Localisation :{/t}</label>
@@ -64,13 +78,6 @@
                     <input id="ambience_width" name="ambience_width" value="{$data.ambience_width}" class="form-control">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="ambience_depth"  class="control-label col-md-4">{t}Profondeur (en m) :{/t}</label>
-                    <div class="col-md-8">
-                    <input id="ambience_depth" name="ambience_depth" value="{$data.ambience_depth}" class="form-control">
-                </div>
-            </div>
-    
             <fieldset>
                 <legend>{t}Lame d'eau{/t}</legend>
                 <div class="form-group">
@@ -87,7 +94,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for=""  class="control-label col-md-4">{t}Vitesse du courant / min / max (cm/s) :{/t}</label>
+                    <label for=""  class="control-label col-md-4">{t}Vitesse du courant : moy / min / max (cm/s){/t}</label>
                     <div class="col-md-8">
                         <input id="current_speed" name="current_speed" value="{$data.current_speed}" class="form-control">
                         <input id=current_speed_min" name="current_speed_min" value="{$data.current_speed_min}" class="form-control" placeholder="{t}Valeur mini{/t}">
@@ -95,12 +102,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="water_height"  class="control-label col-md-4">{t}Hauteur d'eau / min / max (cm) :{/t}</label>
+                    <label for="water_height"  class="control-label col-md-4">{t}Hauteur d'eau : moy / min / max (cm){/t}</label>
                     <div class="col-md-8">
                         <input id="water_height" name="water_height" value="{$data.water_height}" class="form-control">
                         <input id=water_height_min" name="water_height_min" value="{$data.water_height_min}" class="form-control" placeholder="{t}Valeur mini{/t}">
                         <input id="water_height_max" name="water_height_max" value="{$data.water_height_max}" class="form-control"placeholder="{t}Valeur maxi{/t}"> 
-                        <input id="" name="" value="" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -128,12 +134,11 @@
                             {/foreach}
                         </select>
                     </div>
-                </div>
-                            
+                </div>                
             </fieldset>
-            
         </div>
-        <div class="col-md-6 form-display">
+    
+        <div class="col-md-6">
             <fieldset>
                 <legend>{t}Caractéristiques du milieu{/t}</legend>
                 <div class="form-group">
@@ -176,13 +181,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for=""  class="control-label col-md-4">{t}Ombrage :{/t}</label>
+                    <label for="shady_id"  class="control-label col-md-4">{t}Ombrage :{/t}</label>
                     <div class="col-md-8">
-                        <select id="shaddy_id" name="shaddy_id" class="form-control">
+                        <select id="shady_id" name="shady_id" class="form-control">
                         <option value="" {if $data.shaddy_id==""}selected{/if}>{t}Choisissez...{/t}</option>
-                            {foreach $shaddys as $row}
-                                <option value="{$row.shaddy_id}" {if $data.shaddy_id == $row.shaddy_id}selected{/if}>
-                                    {$row.shaddy_name}
+                            {foreach $shadys as $row}
+                                <option value="{$row.shady_id}" {if $data.shady_id == $row.shady_id}selected{/if}>
+                                    {$row.shady_name}
                                 </option>
                             {/foreach}
                         </select>
@@ -298,14 +303,14 @@
             </fieldset>
         </div>
 
-
+        <div class="col-md-12">
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
                 {if $data.ambience_id > 0 }
                     <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
                 {/if}
             </div>
-        </form>
-    </div>
+        </div>
+    </form>  
 </div>
 <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>

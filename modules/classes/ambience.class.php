@@ -53,7 +53,6 @@ class Ambience extends ObjetBDD
             "sequence_id" => array("type" => 1),
             "ambience_length" => array("type" => 1),
             "ambience_width" => array("type" => 1),
-            "ambience_depth" => array("type" => 1),
             "ambience_comment" => array("type" => 0),
             "ambience_long" => array("type" => 1),
             "ambience_lat" => array("type" => 1),
