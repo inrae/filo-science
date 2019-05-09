@@ -7,47 +7,49 @@ $operation_id = $_SESSION["ti_operation"]->getValue($_REQUEST["operation_id"]);
 $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
 
 switch ($t_module["param"]) {
-
-
-
     case "change":
-        /*
-         * open the form to modify the record
-         * If is a new record, generate a new record with default value :
-         * $_REQUEST["idParent"] contains the identifiant of the parent record
-         */
-        $data = dataRead($dataClass, $id, "gestion/ambienceChange.tpl", $campaign_id);
-        $data = $_SESSION["ti_campaign"]->translateRow($data);
-        $vue->set($_SESSION["ti_ambience"]->translateRow($data), "data");
+        $data = dataRead($dataClass, $id, "gestion/ambienceChange.tpl");
+        if ($id == 0) {
+            $data["operation_id"] = $operation_id;
+            $data["sequence_id"] = $sequence_id;
+        }
+        $vue->set(
+            $_SESSION["ti_ambience"]->translateRow(
+                $_SESSION["ti_operation"]->translateRow(
+                    $_SESSION["ti_sequence"]->translateRow(
+                        $data
+                    )
+                )
+            ),
+            "data"
+        );
         /**
-         * Get campaign item
+         * Treatment of parameters
          */
-        require_once 'modules/classes/campaign.class.php';
-        $campaign = new Campaign($bdd, $ObjetBDDParam);
-        $dcampaign = $campaign->lire($campaign_id);
-        /**
-         * Preparation of the parameters tables
-         */
-        $params = array("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
-        foreach ($params as $tablename) {
+        require_once 'modules/classes/param.class.php';
+        $tables = array("granulometry, speed, shady, clogging, facies, sinuosity, localisation, turbidity, situation, flow_trend, vegetation, cache_abundance");
+        foreach ($tables as $tablename) {
             setParamToVue($vue, $tablename);
         }
         /**
-         * Stations
+         * Set origin
          */
-        require_once 'modules/classes/station.class.php';
-        $station = new Station($bdd, $ObjetBDDParam);
-        $vue->set($station->getListFromProject($dcampaign["project_id"]),"stations");
+        if ($operation_id > 0) {
+            $vue->set("Operation","origin");
+        } else {
+            $vue->set("Sequence", "origin");
+        }
         break;
     case "write":
         /*
          * write record in database
          */
-        /**
-         * Test if the project is authorized
-         */
-        $data = $_SESSION["ti_campaign"]->translateFromRow($_REQUEST);
-        $data = $_SESSION["ti_ambience"]->translateFromRow($data);
+        $data = $_SESSION["ti_operation"]->translateFromRow($_REQUEST);
+        $data = $_SESSION["ti_ambience"]->translateFromRow(
+            $_SESSION["ti_sequence"]->translateFromRow(
+                $data
+            )
+        );
         $id = dataWrite($dataClass, $data);
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_ambience"]->setValue($id);

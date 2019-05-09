@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1108" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,904" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres">
 <role name="measfish"
       sql-disabled="true">
@@ -1483,7 +1483,7 @@ By default : total_length and weight]]></comment>
 	</initial-data>
 </table>
 
-<table name="ambience" layer="0" collapse-mode="1" max-obj-count="39">
+<table name="ambience" layer="0" collapse-mode="1" max-obj-count="38">
 	<schema name="measfish"/>
 	<role name="measfish"/>
 	<comment><![CDATA[Description of the ambiences of the operation]]></comment>
@@ -1503,10 +1503,6 @@ By default : total_length and weight]]></comment>
 	<column name="ambience_width">
 		<type name="float" length="0"/>
 		<comment><![CDATA[Width of the point, in meter]]></comment>
-	</column>
-	<column name="ambience_depth">
-		<type name="float" length="0"/>
-		<comment><![CDATA[Average depth of water, in meter]]></comment>
 	</column>
 	<column name="ambience_comment">
 		<type name="varchar" length="0"/>

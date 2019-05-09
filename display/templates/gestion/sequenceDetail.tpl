@@ -2,7 +2,7 @@
     <fieldset class="col-md-6">
         <legend>{t}Informations générales{/t}</legend>
         <a href="index.php?module=sequenceChange&campaign_id={$data.campaign_id}&sequence_id={$data.sequence_id}">
-                <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+                <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
             </a>
         <div class="form-display">
             <dl class="dl-horizontal">

@@ -2,27 +2,13 @@
     <div class="col-md-6">
 
         <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
-            <input type="hidden" name="moduleBase" value="ambience">
+            <input type="hidden" name="moduleBase" value="ambience{$origin}">
             <input type="hidden" name="action" value="Write">
             <input type="hidden" name="ambience_id" value="{$data.ambience_id}">
-            <div class="form-group">
-                <label for="paramName"  class="control-label col-md-4">{t}Nom de l'ambiance :{/t}</label>
-                <div class="col-md-8">
-                    <input id="ambience_name" type="text" class="form-control" name="ambience_name" value="{$data.ambience_name}" autofocus required>
-                </div>
-            </div>
-            <div class="form-group">
-                    <label for="project_id"  class="control-label col-md-4"><span class="red">*</span> {t}Projet :{/t}</label>
-                <div class="col-md-8">
-                    <select id="project_id" name="project_id" class="form-control">
-                    {foreach $projects as $row}
-                        <option value="{$row.project_id}" {if $row.project_id == $searchambience.project_id}selected{/if}>
-                        {$row.project_name}
-                        </option>
-                    {/foreach}
-                </select>
-                </div>
-            </div>
+            <input type="hidden" name="operation_id" value="{$data.operation_id}">
+            <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
+ 
+            
             <div class="form-group">
                 <label for="ambience_name"  class="control-label col-md-4">{t}Nom de l'ambiance :{/t}</label>
                 <div class="col-md-8">

@@ -28,14 +28,20 @@ switch ($t_module["param"]) {
          */
         require_once 'modules/classes/ambience.class.php';
         $ambience = new Ambience($bdd, $ObjetBDDParam);
-        $vue->set(
-            $_SESSION["ti_operation"]->translateRow(
-                $_SESSION["ti_ambience"]->translateRow(
-                    $ambience->getFromOperation($id)
-                )
-            ),
-            "ambience"
+        $dataAmbience = $ambience->getFromOperation($id);
+        if (!isset($dataAmbience["ambience_id"])) {
+            $dataAmbience["ambience_id"] = 0;
+            $dataAmbience["operation_id"] = $id;
+        }
+        $dataAmbience = $_SESSION["ti_operation"]->translateRow(
+            $_SESSION["ti_ambience"]->translateRow(
+                $dataAmbience
+            )
         );
+        if ($dataAmbience["ambience_id"] == "") {
+            $dataAmbience["ambience_id"] = 0;
+        }
+        $vue->set($dataAmbience, "ambience");
         /**
          * select the good tab for display
          */
