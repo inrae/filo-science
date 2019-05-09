@@ -1,0 +1,2954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,0" last-zoom="1" max-obj-count="61"
+	 default-owner="postgres">
+<role name="filo"
+      password="filoPassword"
+      sql-disabled="true">
+</role>
+
+<database name="filo" is-template="false" allow-conns="true">
+	<comment><![CDATA[Recording of measurements taken during scientific fisheries]]></comment>
+</database>
+
+<tag name="projet">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#fcaf3e,#fcaf3e,#20486f"/>
+</tag>
+<tag name="operation">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#8ae234,#8ae234,#20486f"/>
+</tag>
+<tag name="protocol">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#ad7fa8,#ad7fa8,#20486f"/>
+</tag>
+<tag name="parametres">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#4e9a06,#4e9a06,#20486f"/>
+</tag>
+<tag name="login">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#75507b,#75507b,#20486f"/>
+</tag>
+<tag name="acl">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#ef2929,#ef2929,#20486f"/>
+</tag>
+<tag name="ambience">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#fcaf3e,#fcaf3e,#20486f"/>
+</tag>
+<tag name="ambience_param">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#f57900,#f57900,#20486f"/>
+</tag>
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="filo" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="filo"/>
+	<comment><![CDATA[Scientific fisheries management - schema of data]]></comment>
+</schema>
+
+<sequence name="project_project_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="campaign_campaign_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="project" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of projects. This table is used for grant rights]]></comment>
+	<tag name="projet"/>
+	<position x="500" y="460"/>
+	<column name="project_id" not-null="true" sequence="filo.project_project_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="project_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the project]]></comment>
+	</column>
+	<constraint name="project_id_pk" type="pk-constr" table="filo.project">
+		<columns names="project_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="campaign" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of campaigns rattached to a project]]></comment>
+	<tag name="projet"/>
+	<position x="280" y="600"/>
+	<column name="campaign_id" not-null="true" sequence="filo.campaign_campaign_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="campaign_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the campaign]]></comment>
+	</column>
+	<constraint name="campaign_id_pk" type="pk-constr" table="filo.campaign">
+		<columns names="campaign_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="project_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="project_has_many_campaign" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#8df630"
+	 src-table="measfish.project"
+	 dst-table="measfish.campaign"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="station_station_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="operation_operation_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="place_place_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="station" layer="0" collapse-mode="1" max-obj-count="9">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of the stations used for a project]]></comment>
+	<tag name="projet"/>
+	<position x="20" y="600"/>
+	<column name="station_id" not-null="true" sequence="filo.station_station_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="station_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the station]]></comment>
+	</column>
+	<column name="station_long">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Longitude of the station, in WGS84, numeric value]]></comment>
+	</column>
+	<column name="station_lat">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Latitude of the station, in WGS84, numeric value]]></comment>
+	</column>
+	<column name="station_pk">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Kilometer point from source, in meters]]></comment>
+	</column>
+	<column name="station_code">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code of the station, according to the nomenclature sandre.eaufrance.fr]]></comment>
+	</column>
+	<constraint name="station_id_pk" type="pk-constr" table="filo.station">
+		<columns names="station_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="project_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="project_has_many_station" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#c1c7a7"
+	 src-table="measfish.project"
+	 dst-table="measfish.station"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="taxon_taxon_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="sample_sample_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="taxon" layer="0" collapse-mode="1" max-obj-count="12">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of taxons]]></comment>
+	<tag name="protocol"/>
+	<position x="1240" y="600"/>
+	<column name="taxon_id" not-null="true" sequence="filo.taxon_taxon_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="scientific_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Scientific name of the taxon]]></comment>
+	</column>
+	<column name="author">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Author of the description of the taxon]]></comment>
+	</column>
+	<column name="common_name">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Common name of the taxon]]></comment>
+	</column>
+	<column name="taxon_code">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code used for reference the taxon in national nomenclature]]></comment>
+	</column>
+	<column name="fresh_code">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[code mnemotechnic used for fishing operations in fresh water]]></comment>
+	</column>
+	<column name="sea_code">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code mnemotechnic used for fishing operations in sea water]]></comment>
+	</column>
+	<column name="ecotype">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Specific ecotype used for this taxon]]></comment>
+	</column>
+	<column name="length_max">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Length maximum, in cm]]></comment>
+	</column>
+	<column name="weight_max">
+		<type name="float" length="0"/>
+		<comment><![CDATA[weight maximum, in g]]></comment>
+	</column>
+	<constraint name="taxon_id_pk" type="pk-constr" table="filo.taxon">
+		<columns names="taxon_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[scientific_name•author•common_name•taxon_code•fresh_code•sea_code•length_max•weight_max⸣
+Leucaspius delineatus•Heckel 1843•Able de Heckel•2117•ABH•ABH•10.0•⸣
+Alburnus alburnus•Linnaeus, 1758•Ablette•2090•ABL•ABL•25.0•⸣
+Alosa alosa•Linnaeus, 1758•Alose (Grande Alose)•2056•ALA•ALA•83.0•⸣
+Alosa fallax fallax••Alose feinte••••50.0•⸣
+Alosa fallax rhodanensis••Alose du Rhône•2058•ALR••70.0•⸣
+Anguilla anguilla•Linnaeus, 1758•Anguille•2038•ANG•ANG•133.0•⸣
+Aphanius fasciatus•(Valenciennes), 1821•Aphanius de Corse•2142•APC••6.0•⸣
+Aphanius iberus•Valenciennes, 1846•Aphanius d'Espagne•2143•APE••5.0•⸣
+Austropotamobius pallipes••Ecrevisse à pieds blancs•868•APP••12.0•⸣
+Zingel asper••Apron•2197•APR••22.0•⸣
+Astacus astacus••Ecrevisse à pieds rouges•866•ASA••18.0•⸣
+Astacus leptodactylus••Ecrevisse à pieds grêles•2963•ASL••20.0•⸣
+Aspius aspius••Aspe•2094•ASP••100.0•⸣
+Atherina boyeri•Risso 1810•Joël•2041••ATB•12.0•⸣
+Barbus barbus•Linnaeus, 1758•Barbeau fluviatile•2096•BAF••120.0•⸣
+Barbus meridionalis••Barbeau méridional•2097•BAM••30.0•⸣
+Dicentrarchus labrax•Linnaeus, 1758•Loup•2234•LOU•LOU•103.0•⸣
+Micropterus salmoides•Lacepède 1802•Achigan à grande bouche•2053•BBG••97.0•⸣
+Micropterus dolomieu••Achigan à petite bouche••••40.0•⸣
+Salaria fluviatilis•Asso, 1801•Blennie fluviatile•2045•BLE••25.0•⸣
+Telestes souffia••Blageon•25609•BLN••36.0•⸣
+Rhodeus amarus•Bloch 1782•Bouvière•2131•BOU••11.0•⸣
+Blicca bjoerkna•Linnaeus, 1758•Brème bordelière•2099•BRB•BRB•36.0•⸣
+Abramis brama•Linnaeus, 1758•Brème commune•2086•BRE•BRE•82.0•⸣
+Abramis sp.••Brème (non identifiée)••••60.0•⸣
+Esox lucius•Linnaeus, 1758•Brochet•2151•BRO•BRO•150.0•⸣
+Carassius auratus••Carassin doré•20597•CAD••40.0•⸣
+Carassius gibelio••Carassin argenté•20550•CAG••40.0•⸣
+Hypophthalmichthys molitrix••Carpe argentée•2115•CAR••105.0•⸣
+Carassius carassius•Linnaeus, 1758•Carassin commun•2102•CAS•CAR•64.0•⸣
+Cyprinus carpio•Linnaeus, 1758•Carpe commune•2109•CMI•CCO•134.0•⸣
+Ambloplites rupestris••Crapet de roche•2048•CDR••43.0•⸣
+Cottus gobio•Linnaeus, 1758•Chabot•2080•CHA••18.0•⸣
+Squalius cephalus••Chevaine•31041•CHE••72.0•⸣
+Cottus petiti••Chabot du Lez•2354•CHP••4.0•⸣
+Chondrostoma sp.••Chondrostome•••••⸣
+Coregonus lavaretus••Lavaret••••60.0•⸣
+Valencia hispanica••Cyprinodonte de Valence•2145•CPV••8.0•⸣
+Salvelinus namaycush••Cristivomer•2228•CRI••150.0•⸣
+Ctenopharyngodon idella••Carpe amour•31039•CTI••150.0•⸣
+Cyprinidae••Cyprinidae indeterminé••••5.0•⸣
+Osmerus eperlanus•Linnaeus, 1758•Eperlan•2188•EPE•EPE•45.0•⸣
+Gasterosteus gymnurus••Epinoche••••8.0•⸣
+Pungitius pungitius•Linnaeus, 1758•Epinochette•2167•EPT•EPT•9.0•⸣
+Acipenser sturio•Linnaeus, 1758•Esturgeon•2032•EST•EST•600.0•⸣
+Platichthys flesus•Linnaeus, 1758•Flet•2203•FLE•FLE•60.0•⸣
+Gambusia holbrooki••Gambusie••••7.0•⸣
+Rutilus rutilus•Linnaeus, 1758•Gardon•2133•GAR•GAR•60.0•⸣
+Gobio gobio•Linnaeus, 1758•Goujon•2113•GOU•GOU•20.0•⸣
+Gymnocephalus cernuus•Linnaeus, 1758•Grémille•2191•GRE•GRE•25.0•⸣
+Chondrostoma nasus•Linnaeus, 1758•Hotu•2104•HOT••50.0•⸣
+Hucho hucho••Huchon•2214•HUC••150.0•⸣
+Leuciscus idus•Linnaeus, 1758•Ide mélanote•2121•IDE••104.0•⸣
+Cobitis bilineata••Loche transalpine•34369•LOB••12.0•⸣
+Misgurnus fossilis•Linnaeus, 1758•Loche d'étang•2069•LOE••30.0•⸣
+Barbatula barbatula•Linnaeus, 1758•Loche franche•2071•LOF•LOF•21.0•⸣
+Cobitis taenia•Ikeda 1936•Loche épineuse•2067•LOR••13.0•⸣
+Lota lota••Lote de rivière•2156•LOT••152.0•⸣
+non identifiee••Lamproie (ammocoete)••••20.0•⸣
+Petromyzon marinus•Linnaeus, 1758•Lamproie marine•2014•LPM•LPM•120.0•⸣
+Lampetra planeri•Bloch 1784•Lamproie de Planer•2012•LPP•LPP•20.0•⸣
+Lampetra fluviatilis•Linnaeus, 1758•Lamproie de rivière•2011•LPR•LPR•50.0•⸣
+Chelon labrosus•Risso 1827•Mulet à grosses lèvres•2180•MGL•MGL•84.0•⸣
+Mugil cephalus•Linnaeus, 1758•Mulet cabot•2185•MUC••114.0•⸣
+Liza aurata•Risso 1810•Mulet doré•2182•MUD•MUD•59.0•⸣
+Liza ramada•Risso 1810•Mulet porc•2183•MUP•MUP•70.0•⸣
+Poissons non identifés••Poissons non identifés•••••⸣
+Pas de poisson••Pas de poisson••••0.0•⸣
+Salvelinus alpinus••Omble chevalier••••80.0•⸣
+Thymallus thymallus•Linnaeus, 1758•Ombre commun•2247•OBR••60.0•⸣
+Orconectes limosus•Rafinesque 1817•Ecrevisse américaine•871•OCL•ORL•12.0•⸣
+Procambarus clarkii•Girard 1852•Ecrevisse de Louisiane•2028•PCC•ECL•15.0•⸣
+Ameiurus melas•Rafinesque 1820•Poisson chat•2177•PCH••66.0•⸣
+Perca fluviatilis•Linnaeus, 1758•Perche commune•2193•PER•PER•67.0•⸣
+Lepomis gibbosus•Linnaeus, 1758•Perche soleil•2050•PES•PES•40.0•⸣
+Pacifastacus leniusculus••Ecrevisse signal•873•PFL••18.0•⸣
+Pimephales promelas••Tête de boule•2127•PIM••10.0•⸣
+Pleuronectes platessa•Linnaeus, 1758•Plie•2205•PLI•PLI•126.0•⸣
+Pseudorasbora parva•Temminck & Schlegel, 1846•Pseudorasbora•2129•PSR•PSE•11.0•⸣
+Scardinius erythrophthalmus•Linnaeus, 1758•Rotengle•2135•ROT•ROT•51.0•⸣
+Sander lucioperca•Linnaeus, 1758•Sandre•2195•SAN••127.0•⸣
+Salmo salar•Linnaeus, 1758•Saumon Atlantique•2220•SAT•SAT•150.0•⸣
+Salvelinus fontinalis••Omble de fontaine•2227•SDF••94.0•⸣
+Silurus glanis•Linnaeus, 1758•Silure•2238•SIL•SIL•500.0•⸣
+Alburnoides bipunctatus•Bloch 1782•Spirlin•2088•SPI••16.0•⸣
+Acipenser ruthenus••Sterlet•3217•STL••125.0•⸣
+Oncorhynchus mykiss•Walbaum 1792•Truite arc en ciel•2216•TAC••120.0•⸣
+Tinca tinca•Linnaeus, 1758•Tanche•2137•TAN•TAN•82.0•⸣
+Parachondrostoma toxostoma••Toxostome•31135•TOX••30.0•⸣
+Salmo trutta•Berg 1908•Truite commune•••TRM•100.0•⸣
+Umbra pygmea••Umbre pygmée••••10.0•⸣
+Phoxinus phoxinus•Linnaeus, 1758•Vairon•2125•VAI•VAI•14.0•⸣
+Leuciscus leuciscus•Linnaeus, 1758•Vandoise•2122•VAN••40.0•⸣
+Vimba vimba••Vimbe•2139•VIM••50.0•⸣
+Abramis•Cuvier 1817•Brèmes d'eau douce nca•2085•BRX••36.0•⸣
+Abramis brama, Blicca bjoerkna••Brèmes•19511••••⸣
+Acipenser•Linnaeus, 1758•Esturgeons•2031•ES?••600.0•⸣
+Acipenser baerii•Brandt, 1869•Esturgeon de Sibérie•3218•BAE••200.0•⸣
+Acipenseridae••Esturgeons nca•2030••••⸣
+Acipenseriformes••Acipenseriformes•3347••••⸣
+Agonus cataphractus•Linnaeus, 1758•Souris de mer•3544•••21.0•⸣
+Alloteuthis••calmars nca•••••⸣
+Alloteuthis subulata•Lamarck 1798•calmar commun•••••⸣
+Alosa alosa x fallax••Aloses vraie et feinte•••••⸣
+Alosa fallax•Lacepède 1803•Alose feinte•2057•ALF•ALF•70.0•⸣
+Alosa sp.•Linck 1790•Aloses nca•2055••ALS••⸣
+Ammodytes marinus•Raitt 1934•Lançon équille•3422•••25.0•⸣
+Ammodytes tobianus•Linnaeus, 1758•Equille•2035•LAN••30.0•⸣
+Anguilla•Schrank 1798•Anguilles nca•2037•AN?•••⸣
+Anguillidae••Anguilles•2036••••⸣
+Aphia minuta•Risso 1810•Nonnat•2170•APH••7.0•⸣
+Aplysia•Linnaeus, 1767•Aplysie nca•2143••••⸣
+Aplysia punctata•Cuvier, 1803•Lièvre de mer•••••⸣
+Apogon imberbis•Linnaeus, 1758•Castagnole rouge•20736•••15.0•⸣
+Argyrosomus regius•Asso 1801•Maigre commun•2231•MAI•MAI•230.0•⸣
+Argyrosomus sp.•De La Pylaie 1835••••••⸣
+Arnoglossus imperialis•Rafinesque, 1810•Arnoglosse impérial•3505•••25.0•⸣
+Arnoglossus laterna•Walbaum 1792•Arnoglosse de Méditerranée•3506•••19.0•⸣
+Arnoglossus thori•Kyle 1913•Arnoglosse tacheté•3507•••20.5•⸣
+Aspitrigla cuculus•Linnaeus, 1758•Grondin rouge•19453••••⸣
+Atelecyclus rotundatus•Olivi 1792•Petit crabe circulaire•••••⸣
+Atelecyclus undecimdentatus•(Herbst, 1783)•Crabe circulaire•••••⸣
+Athanas nitescens•(Leach, 1814)•crevette athanas•••••⸣
+Atherina•Linnaeus, 1758•Athérines nca•2040•AT?••20.0•⸣
+Atherina hepsetus•Linnaeus, 1758•Athèrine sauclet•3264••••⸣
+Atherina presbyter•Cuvier 1829•Prêtre•2042••ATP•20.0•⸣
+Atherina sp.••Atherine sp•••SILP••⸣
+Atherinidae••Athérinidés•2039••••⸣
+Atyaephyra desmaresti,Palemon varians••crevettes divers•••••⸣
+Balistes carolinensis•Gmelin, 1789•Baliste•19460•••60.0•⸣
+Barbus•Cuvier 1817•Barbeaux nca•2095•BAX••120.0•⸣
+Belone belone•Linnaeus 1761•Orphie•3378••ORF••⸣
+Belone sp.•Cuvier 1817••••••⸣
+Bivalvia•Linnaeus, 1758•bivalves•••••⸣
+Blennius ocellaris•Linnaeus, 1758•Blennie papillon•3430•••20.0•⸣
+Boops boops•Linnaeus, 1758•Bogue•3482••BOG••⸣
+Bothus podas•Delaroche, 1809•Rombou commun•25283•••45.0•⸣
+Brachyura••Crabes nca•••••⸣
+Buglossidium luteum•Risso 1810•Petite sole jaune•3535•••15.0•⸣
+Callionymus•Linnaeus, 1758•Callionymes•3369••••⸣
+Callionymus lyra•Linnaeus, 1758•Callionyme lyre•3370••CAL•30.0•⸣
+Callionymus pusillus•Delaroche, 1809•Dragonnet élégant•••••⸣
+Callionymus reticulatus•Valenciennes 1837•Callionyme réticulé•3372••••⸣
+Callionymus risso•Lesueur 1814•Callionyme bélène•19458•••11.0•⸣
+Cancer pagurus•Linnaeus, 1758•Tourteau•••••⸣
+Carassius•Nilsson 1832•Carassins nca•2100•CAX••40.0•⸣
+Carassius auratus auratus•Linnaeus, 1758•Carassin doré•5208•CAA••40.0•⸣
+Carassius auratus gibelio•Bloch, 1782•Carassin argenté•5207••••⸣
+Carcinus aestuarii•Nardo 1847•Crabe vert de la Méditerranée•••••⸣
+Carcinus maenas•Linnaeus, 1758•Crabe vert•••••⸣
+Centrolabrus exoletus•Linnaeus, 1758•Petite vieille•3459•••18.0•⸣
+Chelidonichthys lucernus•Linnaeus, 1758•Grondin perlon•3563•••75.0•⸣
+Chelon•Artedi, 1793•Mulets nca•2179••••⸣
+Chlamys opercularis••Coquille Saint Jacques•••••⸣
+Chlamys varia•(Linnaeus, 1758)•Pétoncle•••••⸣
+Chromis chromis•Linnaeus, 1758•Castagnole•20738••••⸣
+Ciliata•Couch 1832•Motelle•2153••••⸣
+Ciliata mustela•Linnaeus, 1758•Motelle à cinq barbillons•2154•MOT•MOT•25.0•⸣
+Ciliata septentrionalis•Collett 1875•Motelle à moustaches•3384••••⸣
+Clupea harengus•Linnaeus, 1758•Hareng de l'Atlantique•2060•HAR•HER•45.0•⸣
+Clupea sp.•Linnaeus 1758••••••⸣
+Clupeidae••Harengs, sardines nca•2054•CLU••41.76•⸣
+Conger conger•Linnaeus, 1758•Congre d'Europe•2074•CGR•CON•300.0•⸣
+Coris julis•Linnaeus, 1758•Girelle•19451••••⸣
+Cottus•Linnaeus, 1758•Chabot nca•2079••••⸣
+Crangon••Crevettes crangon nca•3281••••⸣
+Crangon crangon•Linnaeus, 1758•Crevette grise•3282•CRG•CRG••⸣
+Crangonidae••Crevettes crangonidés•••••⸣
+Crassostrea gigas•Thunberg 1793•Huître creuse du Pacifique•••••⸣
+Crystallogobius linearis•Düben 1845•Gobie cristal•3445•••4.7•⸣
+Ctenolabrus rupestris•Linnaeus, 1758•Rouquié•3461••ROU•18.0•⸣
+Cyclopterus lumpus•Linnaeus, 1758•Lompe•3551••••⸣
+Cyprinidae••Cyprinidés•2084•CYP•CYP••⸣
+Cypriniformes••Cypriniformes•3362••••⸣
+Cyprinus•Linnaeus, 1758•Carpes nca•2108•CCX••134.0•⸣
+Dasyatis•Rafinesque 1810•Pastenagues nca•3588••••⸣
+Dasyatis pastinaca•Linnaeus, 1758•Pastenague•3589••WSX••⸣
+Dentex dentex•Linnaeus, 1758•Denté commun•20740•••100.0•⸣
+Dicentrarchus•Gill 1860•Bars nca•2233•••86.5•⸣
+Dicentrarchus punctatus•Bloch 1792•Bar tacheté•2235•LOM•SPU•70.0•⸣
+Dicologlossa cuneata•Moreau 1881•Cèteau•3537•••30.0•⸣
+Diplecogaster bimaculata bimaculata•Bonnaterre, 1788•Gluette rougeoleuse•3415•••6.0•⸣
+Diplodus annularis•Linnaeus, 1758•Sparaillon commun•19481•••24.0•⸣
+Diplodus cervinus•Lowe 1838•Sar à grosses lèvres•19482•••61.0•⸣
+Diplodus puntazzo•Cetti, 1777•Sar à museau pointu•20741•••60.0•⸣
+Diplodus sargus•Linnaeus, 1758•Sar commun•19483•••45.0•⸣
+Diplodus vulgaris•Geoffroy St. Hilaire 1817•Sar à tête noire•19484••SRG•45.0•⸣
+Dromia•Weber, 1795•Dromie nca•••••⸣
+Dromia personata•Linnaeus, 1758•Crabe dormeur•••••⸣
+Echiichthys vipera•Cuvier 1829•Petite vive•19480•••16.0•⸣
+Enchelyopus cimbrius•Linnaeus 1766•Motelle à quatre barbillons•3402••••⸣
+Engraulis•Cuvier 1817•Anchois nca•2147••••⸣
+Engraulis encrasicolus•Linnaeus, 1758•Anchois•2148•ANC•ANC•20.0•⸣
+Enophrys bubalis•Euphrasen, 1786•chabot buffle•••••⸣
+Entelurus aequoreus•Linnaeus, 1758•Entélure•3567•••60.0•⸣
+Eriocheir sinensis•H. Milne Edwards 1853•Crabe chinois•879•CRC•••⸣
+Eupagurus bernhardus•Linnaeus, 1758•Bernard l’ermite commun•••••⸣
+Eurynome•Leach, 1814•Majidé eurynome•••••⸣
+Eurynome aspera•(Pennant, 1777)•Eurynome rugeuse•••••⸣
+Eutrigla gurnardus•Linnaeus, 1758•Grondin gris•19478•••60.0•⸣
+Gadidae••Gadidés•2152••••⸣
+Gadus morhua•Linnaeus, 1758•Morue de l'Atlantique•3386••COD••⸣
+Gaidropsarus mediterraneus•Linnaeus, 1758•Motelle de Méditerranée•3388•••50.0•⸣
+Gaidropsarus vulgaris•Cloquet 1824•Motelle commune•3389•••60.0•⸣
+Galathea rugosa•Fabricius, 1775•Galathée rose•••••⸣
+Galathea squamifera•Leach, 1814•Galathée écailleuse•••••⸣
+Galathea strigosa••Galathée striée•••••⸣
+Galeorhinus galeus•Linnaeus, 1758•Requin-hâ•3581••LSK••⸣
+Galeus melastomus•Rafinesque 1810•Chien espagnol•19487••••⸣
+Gambusia•Poey 1854•Gambusie nca•2207••••⸣
+Gambusia affinis•Baird & Girard 1853•Gambusie•2208•GAM•GAM•4.0•⸣
+Gammaridae••Gammares•887••••⸣
+Gasterosteus•Linnaeus, 1758•Epinoches•2164••••⸣
+Gasterosteus aculeatus•Linnaeus, 1758•Epinoche à trois épines•2165••EPI•11.0•⸣
+Glyptocephalus cynoglossus•Linnaeus, 1758•Plie cynoglosse•3512••••⸣
+Gobiidae••Gobidés•2168•••8.25•⸣
+Gobius cobitis•Pallas 1814•Gobie céphalote•19490••••⸣
+Gobius cruentatus•Gmelin 1789•Gobie ensanglanté•19491••••⸣
+Gobiusculus flavescens•Fabricius 1779•Gobie nageur•3451•••6.3•⸣
+Gobius geniporus•Valenciennes 1837•Gobie à joues poreuses•19492••••⸣
+Gobius niger•Linnaeus, 1758•Gobie noir•2172•GBN••18.0•⸣
+Gobius paganellus•Linnaeus, 1758•Gobie paganel•19493•••12.0•⸣
+Gobius roulei•De Buen 1928•Gobie paganel gros oeil•19494••••⸣
+Goneplax rhomboides•Linnaeus, 1758•crabe•••••⸣
+Gymnammodytes semisquamatus•Jourdain 1879•Lançon aiguille•3424••••⸣
+Hemigrapsus••crabe japonais•••••⸣
+Hemigrapsus penicillatus•De Haan, 1835•crabe japonais•••••⸣
+Hippocampus•Rafinesque 1810•Hippocampes nca•3568••••⸣
+Hippocampus erectus•Perry•Hippocampe rayé•••••⸣
+Hippocampus guttulatus•Cuvier, 1829•Hippocampe moucheté•3569•••21.0•⸣
+Hippocampus hippocampus•Linnaeus, 1758•Hippocampe à museau court•19485••HIP•15.0•⸣
+Hippocampus ingens•Girard••••••⸣
+Hippocampus ramulosus•Leach 1814•Hippocampe moucheté•••••⸣
+Hippocampus reidi•Ginsburg••••••⸣
+Hippocampus zosterae•Jordan&Gilbert•Hippocampe Atlantique ouest•••••⸣
+Hippoglossoides platessoides•Fabricius 1780•Balai de l'Atlantique•3514••••⸣
+Hippolyte varians•Leach, 1814•Crevette hippolyte•••••⸣
+Hyperoplus•Linné, 1758•lançon ind•3426•••37.0•⸣
+Hyperoplus immaculatus•Corbin, 1950•Lançon jolivet•3427•••35.0•⸣
+Hyperoplus lanceolatus•Le Sauvage 1824•Lançon commun•3428•••39.0•⸣
+Ictalurus•Rafinesque 1820•Barbottes nca•2176••••⸣
+Ictalurus melas••Poisson chat•••PCH••⸣
+Ictalurus punctatus•Rafinesque 1818•Barbue d'Amérique•19486••••⸣
+Idotea baltica••isopode•••••⸣
+Inachus•Weber, 1795•Crabe inachus•••••⸣
+Inachus dorsettensis•Pennant, 1777•Crabe des anémones•••••⸣
+Labrus bergylta•Ascanius 1767•Vieille commune•3463•••60.0•⸣
+Labrus merula•Linnaeus, 1758•Merle•19474••••⸣
+Labrus mixtus•Linnaeus,1758•Coquette•19489•••35.0•⸣
+Labrus viridis•Linnaeus,1758•Labre vert•19479•••60.0•⸣
+Lampetra•Gray 1851•Lamproie Lampetra•2010•LPX••40.0•⸣
+Lepadogaster candolii•Risso, 1810•Gluette petite queue•3417•••7.5•⸣
+Lepadogaster lepadogaster•Walbaum 1792•Gluette barbier•3418•••6.5•⸣
+Lepidorhombus whiffiagonis•Walbaum 1792•Cardine franche•3523••••⸣
+Lepomis sp.•••••••⸣
+Lesueurigobius friesii•Malm 1874•Gobie raôlet•19469•••13.0•⸣
+Leuciscus cephalus•Linnaeus, 1758•Chevaine•2120••CHE•60.0•⸣
+Leuciscus souffia•Risso 1827•Blageon•2119••••⸣
+Leucoraja naevus•Müller & Henle, 1841•Raie fleurie•3599••••⸣
+Lichia amia•Linnaeus, 1758•Liche•25286••••⸣
+Limanda limanda•Linnaeus, 1758•Limande•3518•••40.0•⸣
+Liocarcinus•Stimpson, 1870•Etrille nca•••••⸣
+Liocarcinus arcuatus•Leach, 1814•Etrille arcuatus•••••⸣
+Liocarcinus depurator•Linnaeus, 1758•Etrille pattes bleues•••••⸣
+Liocarcinus holsatus•Fabricius, 1798•Etrille nageuse•••••⸣
+Liocarcinus navigator•(Hebst, 1794)•Etrille pattes bleues•••••⸣
+Liparis liparis•Linnaeus 1766•Limace de mer•3553•••15.0•⸣
+Liparis montagui•Donovan 1804•Limace anicotte•2083•LIP••12.0•⸣
+Lipophrys dalmatinus•Steindachner & Kolombatovic, 1884•Blennie dalmate•20742••••⸣
+Lipophrys pholis•Linnaeus, 1758•Blennie mordocet•3431••••⸣
+Lithognathus mormyrus•Linnaeus, 1758•Marbré•19465•••37.6•⸣
+Liza•Jordan&Swain 1884•Mulets nca•2181•••59.15•⸣
+Liza saliens•Risso 1810•Mulet sauteur•3267•MUS••40.0•⸣
+Loliginidae•D'Orbigny, 1848•Calmars côtiers nca•••••⸣
+Loligo••Calmars nca•••••⸣
+Loligo vulgaris•Lamarck 1798•Encornet•••••⸣
+Lophius piscatorius•Linnaeus, 1758•Baudroie commune•3421••ANF••⸣
+Macoma balthica•Linnaeus, 1758•Telline de la Baltique•••••⸣
+Macropodia••Macropode nca•••••⸣
+Macropodia longirostris•Fabricius, 1775•Macropode longirostris•••••⸣
+Macropodia rostrata•Linnaeus, 1761•Macropode commun•••••⸣
+Maja brachydactyla••Araignée de mer•••••⸣
+Maja squinado•Herbst, 1788•Araignée de mer•••••⸣
+Maurolicus muelleri•Gmelin 1789•Brossé améthyste•19466••••⸣
+Medorippe lanata•••••••⸣
+Melanogrammus aeglefinus•Linnaeus, 1758•Eglefin•19467••••⸣
+Merlangius merlangus•Linnaeus, 1758•Merlan•2158•MER•WHG•7.0•⸣
+Merluccius merluccius•Linnaeus, 1758•Merlu européen•3410••HKE•140.0•⸣
+Micrenophrys lilljeborgii•Collett 1875•Chabot têtu•3549••••⸣
+Microchirus variegatus•Donovan, 1808•Sole perdrix•3539•••35.0•⸣
+Micromesistius poutassou•Risso 1827•Merlan bleu•3391••••⸣
+Microstomus kitt•Walbaum 1792•Limande sole•3520••••⸣
+Molva molva•Linnaeus, 1758•Lingue•3393••••⸣
+Mugil•Linnaeus, 1758•Mulets nca•2184••••⸣
+Mugilidae••Mugilidés•2178•••78.33•⸣
+Mugil liza•Valenciennes 1836•Mulet lebranche•••••⸣
+Mullus•Linnaeus, 1758•Rougets nca•3471••••⸣
+Mullus barbatus•Linnaeus, 1758•Rouget de vase•3472•••33.2•⸣
+Mullus sp.••Mullus sp.•••MUL••⸣
+Mullus surmuletus•Linnaeus, 1758•Rouget de roche•3473••MUS•40.0•⸣
+Mustelus asterias•Cloquet 1821•Emissole tachetée•3584••••⸣
+Mustelus mustelus•Linnaeus, 1758•Emissole lisse•3585••••⸣
+Myoxocephalus scorpius•Linnaeus, 1758•Chaboisseau à épines courtes•3546••••⸣
+Myxine glutinosa•Linnaeus, 1758•Myxine•19470••••⸣
+Necora puber•Linnaeus 1767•Etrille commune•••••⸣
+Nerophis lumbriciformis•Jenyns 1835•Nérophis petit nez•19471•••16.0•⸣
+Nerophis maculatus•Rafinesque, 1810•Nérophis tacheté••••30.0•⸣
+Nerophis ophidion•Linnaeus, 1758•Nérophis tête bleue•19472•••29.0•⸣
+NoName•••••••⸣
+Oblada melanura•Linnaeus, 1758•Oblade•3485••••⸣
+Octopus vulgaris••poulpe commun•••••⸣
+Osmerus mordax•Steindachner & Kner 1870•Eperlan arc-en-ciel•••••⸣
+Osmerus mordax dentex•Steind. 1870••••••⸣
+Osmerus mordax mordax•Mitchill 1814••••••⸣
+Osmerus sp.•Linnaeus 1758••••••⸣
+Osmerus sp., Hypomesus sp.••Eperlans nca•••••⸣
+Pachygrapsus••Crabes Pachygrapsus•••••⸣
+Pachygrapsus marmoratus•Fabricius 1787•Grapse marbré•••••⸣
+Pachygrapsus transversus•Gibbes 1850•Anglette africaine•••••⸣
+Pagellus bogaraveo•Linnaeus, 1758•Pageot rose••••70.0•⸣
+Pagellus erythrinus•Linnaeus, 1758•Pageot commun•23613•••51.7•⸣
+Pagurus prideauxi•Leach, 1814•Gonfaron•••••⸣
+Palaemon•Weber, 1795•Crevettes Palaemon nca•••••⸣
+Palaemon adspersus•Rathke, 1837•Bouquet balte•••••⸣
+Palaemon elegans•Rathke 1837•Bouquet flaque•••••⸣
+Palaemonetes varians•Leach 1814•Bouquet atlantique des canaux•••••⸣
+Palaemonidae•Rafinesque, 1815•Palaemonidés•••••⸣
+Palaemon longirostris•H. Milne Edwards 1837•Crevette blanche•3280•CRB•CRB••⸣
+Palaemon longirostris, P. serratus••crevettes blanche et rose•••••⸣
+Palaemon macrodactylus•M.J. Rathbun 1902•Bouquet migrateur•••CRM••⸣
+Palaemon serratus•Pennant 1777•Bouquet commun•••CRR••⸣
+Palaemon sp.••Palaemon sp.•••PAL••⸣
+Panopeus africanus•A. Milne Edwards 1867•Crabe caillou africain•••••⸣
+Parablennius gattorugine•Linnaeus, 1758•Blennie cabot•3429•••30.0•⸣
+Parablennius pilicornis•Cuvier, 1829•Blennie pilicorne•20743•••12.7•⸣
+Parablennius sanguinolentus•Pallas 1814•Baveuse•19473••••⸣
+Parthenope angulifrons•••••••⸣
+Pecten maximus•(Linnaeus, 1758)•Coquille St Jacques•••••⸣
+Pegusa impar•Bennett, 1831•Sole adriatique•20746••••⸣
+Pegusa lascaris•Ben-Tuvia 1990•Sole-pole•3540•••40.0•⸣
+Penaeus japonicus•Bate 1888•Crevette kuruma•••••⸣
+Penaeus kerathurus•Forskal 1775•Caramote•••••⸣
+Petromyzon marinus, Lampetra fluviatilis••lamproie marine et lamproie de rivière•19512••LPS••⸣
+Petromyzon sp.•Linnaeus 1758••••••⸣
+Petromyzontidae••Lamproies nca•2009••••⸣
+Petromyzontiformes••Petromyzontiformes•5070••••⸣
+Philocheras trispinosus•(Hailstone, 1835)•crevette philocheras•••••⸣
+Pholis gunnellus•Linnaeus, 1758•Gonelle•2200•GON••25.0•⸣
+Phoxinus•Rafinesque 1820•Vairons nca•2124•PHX•••⸣
+Pilumnus hirtellus•Linnaeus, 1758•Crabe rouge poilu•••••⸣
+Pirimela denticulata•••••••⸣
+Pisa tetraodon•(Pennant, 1777)•Araignée cornue•••••⸣
+Pisidia longicornis•Linnaeus 1767•Porcellane noire•••••⸣
+Planes minutus•Linnaeus, 1758•Grapse des tortues•••••⸣
+Platichthys flesus flesus•L. 1758••••••⸣
+Platichthys flesus italicus•Gsnt. 1862••••••⸣
+Platichthys flesus luscus•Pallas 1811••••••⸣
+Platichthys sp.•Girard 1856••••••⸣
+Pleuronectes•Linnaeus, 1758•Plies nca•2204••••⸣
+Pleuronectidae••Pleuronectidés•2201••••⸣
+Pollachius pollachius•Linnaeus, 1758•Lieu jaune•2160•LIJ•POL•130.0•⸣
+Pollachius virens•Linnaeus, 1758•Lieu noir•3398••••⸣
+Polybius holsatus•••••••⸣
+Pomatomus saltatrix•Linnaeus, 1766•Tassergal•20744••••⸣
+Pomatoschistus•Gill 1864•Gobies Pomatoschistus•2173•••7.66•⸣
+Pomatoschistus lozanoi•De Buen, 1923•Gobie rouillé•19464•••8.0•⸣
+Pomatoschistus marmoratus•Risso, 1810•Gobie marbré•19463•••8.0•⸣
+Pomatoschistus microps•Kroeyer 1838•Gobie tacheté•3455•••6.8•⸣
+Pomatoschistus minutus•Pallas 1770•Gobie buhotte•2174•GOB•GOB•11.0•⸣
+Pomatoschistus pictus•Malm 1865•Gobie varié•3456•••8.0•⸣
+Pomatoschistus quagga•Gil, 1863•Gobie quagga•••••⸣
+Porcellana platycheles•Pennant 1777•Crabe porcelaine•••••⸣
+Portumnus latipes•Pennant 1777•Etrille elegante•••••⸣
+Portunidae•Rafinesque, 1815•crabes portunidés nca•••••⸣
+Procambarus••Ecrevisses nca•2027••••⸣
+Processa edulis•Risso 1816•Guernade nica•••••⸣
+Processa nouveli•Al Adhub & Williamson, 1975•Guernade nouveli•••••⸣
+Processa parva••crevette ind•••••⸣
+Psetta maxima•Linnaeus, 1758•Turbot•19468••TUR•100.0•⸣
+Psetta sp.•Swainson 1839••••••⸣
+Pycnogonidae••Pycnogonide nca•••••⸣
+Raja•Linnaeus, 1758•Raie nca•2210•••112.2•⸣
+Raja brachyura•Lafont 1873•Raie lisse•3591••••⸣
+Raja clavata•Linnaeus, 1758•Raie bouclée•2211•RBC•RJC•105.0•⸣
+Raja microocellata•Montagu 1818•Raie mélée•3592••••⸣
+Raja montagui•Fowler, 1910•Raie étoilée•3593••••⸣
+Raja naevus•Müller & Henle 1841•Raie fleurie•••RJN••⸣
+Raja undulata•Lacepède 1802•Raie brunette•3594••SKA•120.0•⸣
+Rajella fyllae•Lütken, 1887•Raie ronde•3602•••60.0•⸣
+Raniceps raninus•Linnaeus, 1758•Trident•3400••••⸣
+Rhithropanopeus•Gould 1832•Crabe•••••⸣
+Rhithropanopeus harrisii•Gould, 1841•Crabe de vase•••••⸣
+Rhodeus sericeus•Pallas 1776•Bouvière•••BOU••⸣
+Rutilus•Rafinesque 1820•Gardons nca•2132••••⸣
+Salaria basilisca•Valenciennes, 1836•Blennie basilic•25285••••⸣
+Salaria pavo•Risso 1810•Blennie paon•19488••••⸣
+Salmo•Linnaeus, 1758•Truites nca•2219••••⸣
+Salmonidae••Salmonidés•2212•SAL•••⸣
+Salmo trutta fario•Linnaeus, 1758•Truite fario•2221•TRF••100.0•⸣
+Salmo trutta trutta•Linnaeus, 1758•Truite de mer brune•2224•TRM••100.0•⸣
+Sander••Sandres nca•5074••••⸣
+Sardina pilchardus•Walbaum 1792•Sardine commune•2062•SAR•SAR•27.0•⸣
+Sardinella aurita•Valenciennes 1847•Allache•19476••••⸣
+Sarpa salpa•Linnaeus, 1758•Saupe•19475••••⸣
+Sciaena umbra•Linnaeus, 1758•Corb commun•19477••••⸣
+Scomber scombrus•Linnaeus, 1758•Maquereau commun•3475••MAC•60.0•⸣
+Scophthalmus maximus•Linnaeus, 1758•Turbot•••••⸣
+Scophthalmus rhombus•Linnaeus, 1758•Barbue•3531••BLL•75.0•⸣
+Scophthalmus sp.•Rafinesque 1810••••••⸣
+Scorpaena porcus•Linnaeus, 1758•Rascasse brune•20745•••37.0•⸣
+Scyliorhinus canicula•Linnaeus, 1758•Petite roussette•3609•••100.0•⸣
+Scyliorhinus stellaris•Linnaeus, 1758•Grande roussette•3610••••⸣
+Sepia•Linnaeus, 1758•Seiches•••••⸣
+Sepia officinalis•Linnaeus, 1758•Seiche commune•••SEI••⸣
+Sepiola•Leach, 1817•Sépioles•••••⸣
+Sepiola atlantica•Orbigny 1840•Sépiole grandes oreilles•••••⸣
+Sepiola rondeleti•Leach, 1817•Sepiole rondeleti•••••⸣
+Serranus hepatus•Linné, 1758•Serran tambour•3479•••25.0•⸣
+Sicyonia carinata•••••••⸣
+Silurus•Linnaeus, 1758•Silures nca•2237••••⸣
+Solea•Quensel 1806•Soles•2240••SOL•65.0•⸣
+Solea aegyptiaca•Chabanaud, 1927•Sole egyptienne•••••⸣
+Solea lascaris••Sole pole•••SOS••⸣
+Solea senegalensis•Kaup 1858•Sole sénégalaise•3541••SOX•60.0•⸣
+Solea solea•Linnaeus, 1758•Sole•2241•SOL••70.0•⸣
+Solea vulgaris•Quensel 1806•Sole commune•••SOL••⸣
+Sparidae••sparidés nca•3481•••48.07•⸣
+Sparus aurata•Linnaeus, 1758•Dorade royale•3490••DRO•70.0•⸣
+Spicara smaris•Linnaeus, 1758•Picarel•3449••••⸣
+Spinachia spinachia•Linnaeus, 1758•Epinoche de mer•19452•••19.1•⸣
+Spondyliosoma cantharus•Linnaeus, 1758•Griset•3492••BRD•60.0•⸣
+Sprattus sp.•Girgensohn 1846••••••⸣
+Sprattus sprattus•Linnaeus, 1758•Sprat•2064•SPT•SPT•16.0•⸣
+Squalus acanthias•Linnaeus, 1758•Aiguillat commun•3614••••⸣
+Stizostedion lucioperca••Sandre•••SAN••⸣
+Symphodus bailloni•Valenciennes in Cuv. & Val., 1839•Crénilabre grelue•19443•••21.0•⸣
+Symphodus cinereus•(Bonnaterre), 1788•Crénilabre balafré•19449•••16.0•⸣
+Symphodus melops•Linnaeus, 1758•Crénilabre melops•3466•••24.0•⸣
+Symphodus ocellatus•(Forsskål, 1775)•Crénilabre ocellé•19448•••12.0•⸣
+Symphodus roissali•Risso 1810•Crénilabre langaneu•19447•••17.0•⸣
+Symphodus tinca•Linnaeus, 1758•Crénilabre paon•19450••••⸣
+Synapturichthys kleinii•Risso, 1827•Sole tachetée•25284•••42.0•⸣
+Synchiropus phaeton•(Günther 1861)•Callionyme paille-en-queue•19445••••⸣
+Syngnathidae••Syngnathes•2242••••⸣
+Syngnathus•Linnaeus, 1758•Syngnathes•2243•••29.75•⸣
+Syngnathus abaster•Risso 1827•Syngnathe gorge claire•19444•••21.0•⸣
+Syngnathus acus•Linnaeus, 1758•Syngnathe aiguille•2244•SYN••2.0•⸣
+Syngnathus rostellatus•Nilsson 1855•Syngnathe de Duméril•3570••SYN•20.5•⸣
+Syngnathus taenionotus•Canestrini 1871•Syngnathe taenionotus•19459••••⸣
+Syngnathus typhle•Linnaeus, 1758•Siphonostome•3571•••36.0•⸣
+Syngnathus typhle typhle•Linnaeus, 1758•Siphonostome atlantique•••••⸣
+Taurulus bubalis•Euphrasen 1786•Chabot buffle•3548•••17.5•⸣
+Thorogobius ephippiatus••gobie léopard••••12.9•⸣
+Tinca sp.•Cuvier 1817••••••⸣
+Torpedo marmorata•Risso 1810•Torpille marbrée•19461••TOE•61.2•⸣
+Torpedo torpedo•Linné, 1758•Torpille ocelée•25287•••55.0•⸣
+Trachinotus ovatus•Linnaeus, 1758•Liche glauque•••••⸣
+Trachinus draco•Linnaeus, 1758•Grande vive•3498••••⸣
+Trachurus trachurus•Linnaeus, 1758•Chinchard d'Europe•3375••HOM•70.0•⸣
+Trigla•Linnaeus, 1758•Grondins nca•3562••••⸣
+Trigla lucerna••Grondin perlon•••GUP••⸣
+Trigla lyra•Linnaeus, 1758•Grondin lyre•19455•••60.0•⸣
+Triglidae••Grondins, cavillones nca•3557••••⸣
+Tripterygion delaisi•Cadenat & Blache, 1970•Triptérygion commun•19454•••8.9•⸣
+Trisopterus•Rafinesque, 1814•Tacaud nca•2161•••43.0•⸣
+Trisopterus esmarkii•Nilsson 1855•Tacaud norvégien•3404••••⸣
+Trisopterus luscus•Linnaeus, 1758•Tacaud commun•2162•TAD•BIB•46.0•⸣
+Trisopterus minutus•Linnaeus, 1758•Capelan•3406•••40.0•⸣
+Umbrina•Cuvier, 1816•Ombrine nca•19435••••⸣
+Umbrina canariensis•Valenciennes 1843•Ombrine bronze•19456••UMBB•80.0•⸣
+Umbrina cirrosa•Linnaeus, 1758•Ombrine côtière•19457••UMBC•100.0•⸣
+Umbrina sp.••Ombrine sp.•••UMB••⸣
+Upogebia pusilla•Petagna, 1792•Crevette fouisseuse•••••⸣
+Xantho incisus•Herbst, 1790•Crabe de pierre•••••⸣
+Zebrus zebrus•Risso, 1827•Gobie zébré•19446•••5.5•⸣
+Zeugopterus punctatus•Bloch 1787•Targeur•3533•••27.0•⸣
+Zeus faber•Linnaeus, 1758•Saint Pierre•3577•••59.0•⸣
+Zoarces viviparus•Linnaeus, 1758•Loquette d'Europe•3501••••⸣
+Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
+	</initial-data>
+</table>
+
+<table name="operation" layer="0" collapse-mode="1" max-obj-count="28">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Description of operation]]></comment>
+	<tag name="operation"/>
+	<position x="280" y="860"/>
+	<column name="operation_id" not-null="true" sequence="filo.operation_operation_id_seq">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Operations rattached at a campaign]]></comment>
+	</column>
+	<column name="operation_name">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of operation]]></comment>
+	</column>
+	<column name="date_start" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Start date of operation]]></comment>
+	</column>
+	<column name="date_end">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of end of operation]]></comment>
+	</column>
+	<column name="freshwater" not-null="true" default-value="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Is the operation in fresh water ?]]></comment>
+	</column>
+	<column name="long_start">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Longitude of the first point, in wgs84 (decimal)]]></comment>
+	</column>
+	<column name="lat_start">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Latitude of the first point, in WGS84 (decimal)]]></comment>
+	</column>
+	<column name="long_end">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Longitude of the last point, in WGS84 (decimal)]]></comment>
+	</column>
+	<column name="lat_end">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Latitude of the last point, in WGS84 (decimal)]]></comment>
+	</column>
+	<column name="pk_source">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Distance from the source, in meter]]></comment>
+	</column>
+	<column name="pk_mouth">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Distance from the mouth, in meter]]></comment>
+	</column>
+	<column name="length">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Length of the sampled zone, in meter]]></comment>
+	</column>
+	<column name="side">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Position in the river (left side, central, right side, etc.)]]></comment>
+	</column>
+	<column name="altitude">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Altitude, in meter]]></comment>
+	</column>
+	<column name="tidal_coef">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Tidal coefficient or water high of the tidal]]></comment>
+	</column>
+	<column name="debit">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Debit of the river, in m³/s]]></comment>
+	</column>
+	<column name="surface">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Surface parsed, in square meters]]></comment>
+	</column>
+	<constraint name="operation_id_pk" type="pk-constr" table="filo.operation">
+		<columns names="operation_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="campaign_id" index="1"/>
+		<object name="fishing_strategy_id" index="21"/>
+		<object name="protocol_id" index="19"/>
+		<object name="scale_id" index="22"/>
+		<object name="station_id" index="18"/>
+		<object name="taxa_template_id" index="23"/>
+		<object name="water_regime_id" index="20"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="campaign_fk" index="1"/>
+		<object name="fishing_strategy_fk" index="5"/>
+		<object name="protocol_fk" index="3"/>
+		<object name="scale_fk" index="6"/>
+		<object name="station_fk" index="2"/>
+		<object name="taxa_template_fk" index="7"/>
+		<object name="water_regime_fk" index="4"/>
+	</customidxs>
+</table>
+
+<relationship name="campaign_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#14a368"
+	 src-table="measfish.campaign"
+	 dst-table="measfish.operation"
+	 src-required="true" dst-required="false"/>
+
+<table name="sequence" layer="0" collapse-mode="1" max-obj-count="7">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Catching sequence]]></comment>
+	<tag name="operation"/>
+	<position x="500" y="860"/>
+	<column name="sequence_id" not-null="true" sequence="filo.place_place_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sequence_number">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Number of sequence in the operation]]></comment>
+	</column>
+	<column name="date_start" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Start time of fishing at this place]]></comment>
+	</column>
+	<column name="date_end">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[End time of fishing at this place]]></comment>
+	</column>
+	<column name="fishing_duration">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Fishing duration, in mn]]></comment>
+	</column>
+	<constraint name="place_id_pk" type="pk-constr" table="filo.sequence">
+		<columns names="sequence_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="operation_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="operation_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="operation_has_many_place" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#77ec00"
+	 src-table="measfish.operation"
+	 dst-table="measfish.sequence"
+	 src-required="true" dst-required="false"/>
+
+<table name="sample" layer="0" collapse-mode="1" max-obj-count="12">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of samplings. One or many for a taxon]]></comment>
+	<tag name="operation"/>
+	<position x="780" y="860"/>
+	<column name="sample_id" not-null="true" sequence="filo.sample_sample_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="taxon_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the taxon, issued from the table of taxa or created if a new taxon discovered]]></comment>
+	</column>
+	<column name="total_number" not-null="true" default-value="1">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Total number of catched elements
+0 : presence of the taxon, but number not estimated]]></comment>
+	</column>
+	<column name="total_measured">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Number of elements measured]]></comment>
+	</column>
+	<column name="total_weight">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Total weight, in g]]></comment>
+	</column>
+	<column name="sample_size_min">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Minimal size of fishes in this sample, in cm]]></comment>
+	</column>
+	<column name="sample_size_max">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Maximal size of fishes in this sample, in cm]]></comment>
+	</column>
+	<column name="sample_comment">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="sample_id_pk" type="pk-constr" table="filo.sample">
+		<columns names="sample_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="sequence_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="sequence_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="place_has_many_sample" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9d3e79"
+	 src-table="measfish.sequence"
+	 dst-table="measfish.sample"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="taxon_has_many_sample" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#86f2ba"
+	 src-table="measfish.taxon"
+	 dst-table="measfish.sample"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="item_item_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="individual" layer="0" collapse-mode="1" max-obj-count="20">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of individuals measured]]></comment>
+	<tag name="operation"/>
+	<position x="1020" y="860"/>
+	<column name="individual_id" not-null="true" sequence="filo.item_item_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="other_measure">
+		<type name="json" length="0"/>
+		<comment><![CDATA[List of others measures realized on an item]]></comment>
+	</column>
+	<column name="sl">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Standard length, in cm]]></comment>
+	</column>
+	<column name="fl">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Fork length, in cm]]></comment>
+	</column>
+	<column name="tl">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Total length, in cm]]></comment>
+	</column>
+	<column name="wd">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Width of disk, in cm]]></comment>
+	</column>
+	<column name="ot">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Other length, in cm]]></comment>
+	</column>
+	<column name="weight">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Weight, in g]]></comment>
+	</column>
+	<column name="individual_comment">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="age">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Age of fish, in year]]></comment>
+	</column>
+	<column name="measure_estimated" not-null="true" default-value="'f'">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Is the measure estimated ?]]></comment>
+	</column>
+	<column name="pathology_codes">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[List of codes of pathologies or remarks]]></comment>
+	</column>
+	<column name="tag">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Read tag]]></comment>
+	</column>
+	<column name="tag_posed">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Tag posed on the fish]]></comment>
+	</column>
+	<constraint name="individual_id_pk" type="pk-constr" table="filo.individual">
+		<columns names="individual_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="pathology_id" index="16"/>
+		<object name="sample_id" index="1"/>
+		<object name="sexe_id" index="15"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="pathology_fk" index="3"/>
+		<object name="sample_fk" index="1"/>
+		<object name="sexe_fk" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="sample_has_many_item" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#dd78a7"
+	 src-table="measfish.sample"
+	 dst-table="measfish.individual"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="measure_template_measure_template_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="measure_template" layer="0" collapse-mode="1" max-obj-count="4">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<tag name="parametres"/>
+	<position x="1020" y="600"/>
+	<column name="measure_template_id" not-null="true" sequence="filo.measure_template_measure_template_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="measure_template_name" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="measure_template_value">
+		<type name="json" length="0"/>
+		<comment><![CDATA[List of all measures usable by a taxon.
+For each type : name, extended.
+By default : total_length and weight]]></comment>
+	</column>
+	<constraint name="measure_template_pk" type="pk-constr" table="filo.measure_template">
+		<columns names="measure_template_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="operation_template_operation_template_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="item_generated_item_generated_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="gear_gear_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="sequence_gear_sequence_gear_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="gear" layer="0" collapse-mode="1" max-obj-count="6">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Gear used for fishery]]></comment>
+	<tag name="parametres"/>
+	<position x="1240" y="1360"/>
+	<column name="gear_id" not-null="true" sequence="filo.gear_gear_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="gear_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="gear_length">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Length of the net or other gear, in metter]]></comment>
+	</column>
+	<column name="gear_height">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Height of the net or other gear, in metter]]></comment>
+	</column>
+	<column name="mesh_size">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Size of the mesh, in textual form]]></comment>
+	</column>
+	<constraint name="fishing_gear_pk" type="pk-constr" table="filo.gear">
+		<columns names="gear_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="10">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of gear used during operation]]></comment>
+	<tag name="operation"/>
+	<position x="780" y="1080"/>
+	<column name="sequence_gear_id" not-null="true" sequence="filo.sequence_gear_sequence_gear_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="voltage">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Voltage used during electric fishing, in volt]]></comment>
+	</column>
+	<column name="amperage">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Amperage used during electric fishing, in ampere]]></comment>
+	</column>
+	<column name="gear_nb" not-null="true" default-value="1">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Nb of gears]]></comment>
+	</column>
+	<column name="depth">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Depth of the gear]]></comment>
+	</column>
+	<constraint name="sequence_gear_pk" type="pk-constr" table="filo.sequence_gear">
+		<columns names="sequence_gear_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="engine_engine_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="river_river_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="river" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[River, estuary, sea...]]></comment>
+	<tag name="projet"/>
+	<position x="20" y="460"/>
+	<column name="river_id" not-null="true" sequence="filo.river_river_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="river_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="river_pk" type="pk-constr" table="filo.river">
+		<columns names="river_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="river_has_many_station" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#c5ec33"
+	 src-table="measfish.river"
+	 dst-table="measfish.station"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="sequence_has_many_sequence_gear" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fb80d1"
+	 src-table="measfish.sequence"
+	 dst-table="measfish.sequence_gear"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="gear_has_many_sequence_gear" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7453d5"
+	 src-table="measfish.gear"
+	 dst-table="measfish.sequence_gear"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="analysis_analysis_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="analysis" layer="0" collapse-mode="1" max-obj-count="13">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Water analysis]]></comment>
+	<tag name="operation"/>
+	<position x="500" y="1080"/>
+	<column name="analysis_id" not-null="true" sequence="filo.analysis_analysis_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="analysis_date">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date/time of the sampling]]></comment>
+	</column>
+	<column name="ph">
+		<type name="float" length="0"/>
+		<comment><![CDATA[pH]]></comment>
+	</column>
+	<column name="temperature">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Temperature, in °C]]></comment>
+	</column>
+	<column name="o2_pc">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Percentage of oxygen saturation]]></comment>
+	</column>
+	<column name="o2_mg">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Oxygen level, in mg/l]]></comment>
+	</column>
+	<column name="salinity">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Salinity]]></comment>
+	</column>
+	<column name="conductivity">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Conductivity, in µS/cm]]></comment>
+	</column>
+	<column name="secchi">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Secchi depth, in meter]]></comment>
+	</column>
+	<column name="other_analysis">
+		<type name="json" length="0"/>
+		<comment><![CDATA[Others analysis performed (cf. analysis_template)]]></comment>
+	</column>
+	<constraint name="analysis_pk" type="pk-constr" table="filo.analysis">
+		<columns names="analysis_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="sequence_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="sequence_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="sequence_has_many_analysis" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#8683a5"
+	 src-table="measfish.sequence"
+	 dst-table="measfish.analysis"
+	 src-required="false" dst-required="false"/>
+
+<table name="sexe" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Sexe of fishs]]></comment>
+	<tag name="parametres"/>
+	<position x="1240" y="860"/>
+	<column name="sexe_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sexe_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="sexe_code" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437]]></comment>
+	</column>
+	<constraint name="sexe_pk" type="pk-constr" table="filo.sexe">
+		<columns names="sexe_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[sexe_id•sexe_name•sexe_code⸣
+1•Femelle•F⸣
+2•Mâle•M⸣
+3•Inconnu•N⸣
+4•Non identifié•R]]>
+	</initial-data>
+</table>
+
+<relationship name="sexe_has_many_individual" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#40e7e9"
+	 src-table="measfish.sexe"
+	 dst-table="measfish.individual"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="pathology_pathology_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="pathology" layer="0" collapse-mode="1" max-obj-count="4">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of pathologies]]></comment>
+	<tag name="parametres"/>
+	<position x="1240" y="1080"/>
+	<column name="pathology_id" not-null="true" sequence="filo.pathology_pathology_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="pathology_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the pathology]]></comment>
+	</column>
+	<column name="pathology_code">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code of the pathology, according to the nomenclature sandre.eaufrance.fr 129]]></comment>
+	</column>
+	<column name="pathology_description">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Description of the pathology]]></comment>
+	</column>
+	<constraint name="pathology_pk" type="pk-constr" table="filo.pathology">
+		<columns names="pathology_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[pathology_id•pathology_code•pathology_name•pathology_description⸣
+1•00•Ni poux, ni traces de poux•Le poisson, généralement un salmonidé migrateur venu de la mer, n'héberge aucun pou de mer et ne présente aucune lésion visible consécutive à une colonisation par le pou de mer (qui est en fait un crustacé parasite des salmonidés migrateurs)⸣
+2•AA•Altération de l'aspect•Le corps du poisson examiné présente des altérations morphologiques caractérisées, pouvant éventuellement être détaillées ou non.⸣
+3•AC•Altération de la couleur•La pigmentation présente des altérations entrainant une coloration anormale de tout ou partie du corps du poisson.⸣
+4•AD•Difforme•Le corps du poisson présente des déformations anormales se traduisant par des acures ou des bosselures,extériorisation possible d'une atteinte interne, virale par exemple (ex : nécrose pancréatique infectieuse de la truite arc-en-ciel)⸣
+5•AG•Grosseur, excroissance•Le corps du poisson présente une ou des déformations marquées constituant des excroissances ou des tumeurs⸣
+6•AH•Aspect hérissé (écailles)•Les écailles du poisson ont tendance à se relever perpendiculairement au corps, à la suite généralement d'une infection au niveau des téguments⸣
+7•AM•Maigreur•Le corps du poisson présente une minceur marquée par rapport à la normalité⸣
+8•AO•Absence d'organe•L'altération morphologique observée sur le poisson se traduit par l'absence d'un organe (nageoire, opercule, oeil, machoire)⸣
+9•BG•Bulle de gaz•Présence de bulle de gaz pouvant être observées sous la peau, au bord des nageoires, au niveau des yeux, des branchies ou de la bouche.⸣
+10•CA•Coloration anormale•L'altération de la pigmentation entraîne la différenciation de zones diversement colorées, avec en particulier des zones sombres.⸣
+11•CB•Branchiures (Argulus...)•Présence visible, à la surface du corps ou des branchies du poisson, de crustacés branchiures à un stade donné de leur cycle de développement.⸣
+12•CC•Copépodes (Ergasilus, Lerna,...)•Présence visible, à la surface du corps ou des branchies du poisson, de crustacés parasites, à un stade donné de leur cycle de développement.⸣
+13•CO•Coloration opaque (oeil)•L'altération de la coloration se traduit par une opacification de l'un ou des deux yeux.⸣
+14•CR•Présence de crustacés•Présence visible, à la surface du corps ou des branchies du poisson, de crustacés parasites, à un stade donné de leur cycle de développement.⸣
+15•CS•Coloration sombre•L'altération de la coloration du corps du poisson se traduit par un assombrissement de tout ou partie de celui-ci (noircissement).⸣
+16•CT•Coloration terne (pâle)•L'altération de la coloration du corps du poisson se traduit par une absence de reflets lui conférant un aspect terne, pâle, voire une décoloration.⸣
+17•ER•Erosion•⸣
+18•EX•Exophtalmie ou proptose•⸣
+19•HA•Acanthocéphales•Présence visible, à la surface du corps ou des branchies du poisson, d'acanthocéphales à un stade donné de leur cycle de développement.⸣
+20•HC•Cestodes (Ligula,  Bothriocephalus, ...)•Présence visible, à la surface du corps ou des branchies du poisson, de cestodes à un stade donné de leur cycle de développement.⸣
+21•HE•Hémorragie•Ecoulement de sang pouvant être observ?? à la surface du corps ou au niveau des branchies.⸣
+22•HH•Hirudinés (Piscicola)•Présence visible sur le poisson de sangsue(s)⸣
+23•HN•Nématodes (Philometra, Philimena...)•Présence visible, à la surface du corps ou des branchies du poisson, de  nématodes à un stade donné de leur cycle de développement.⸣
+24•HS•Stade pre-mortem•Le poisson présente un état pathologique tel qu'il n'est plus capable de se mouvoir normalement dans son milieu et qu'il est voué à une mort certaine à brève échéance.⸣
+25•HT•Trématodes (Bucephalus, ...)•Présence visible, à la surface du corps ou des branchies du poisson, de trématodes parasites à un stade donné de leur cycle de développement.⸣
+26•IS•Individu sain•Après examen du poisson, aucun signe externe, caractéristique d'une pathologie quelconque, n'est décelable à l'oeil nu⸣
+27•LD•Lésions diverses•Les téguments présentent une altération quelconque de leur intégrité.⸣
+28•NE•Nécrose•Lésion(s) observée(s) à la surface du corps avec mortification des tissus.⸣
+29•NN•Pathologie non renseigné•L'aspect pathologique du poisson n'a fait l'objet d'aucun examen et aucune information n'est fournie à ce sujet⸣
+30•OO•Absence de lésions ou de parasites•⸣
+31•PA•Parasitisme•Présence visible, à la surface du corps ou des branchies du poisson, d'organismes parasites vivant à ses dépens.⸣
+32•PB•Points blancs•Présence de points blancs consécutive à la prolifération de certains protozoaires parasites comme Ichtyopthtirius (ne pas confondre avec les boutons de noces, formations kératinisées apparaissant  lors de la période de reproduction)⸣
+33•PC•Champignons (mousse, ...)•Présence d'un développement à la surface du corps, d'un mycélium formant une sorte de plaque rappelant l'aspect de la mousse et appartenant à une espèce de champignon colonisant les tissus du poisson.⸣
+34•PL•Plaie - blessure•Présence d'une ou plusieurs lésions à la surface du tégument généralement due à un prédateur (poisson, oiseau,.)⸣
+35•PN•Points noirs•Présence de tâches noires bien individualisées sur la surface du tégument du poisson⸣
+36•PT•Parasites (PB ou PC ou CR ou HH ou PX)•⸣
+37•PX•Autres parasites (autre que CR, HH, PB, PC)•⸣
+38•SM•Sécrétion de mucus importante•Présence anormale de mucus sur le corps ou au niveau de la chambre branchiale.⸣
+39•UH•Ulcère hémorragique•Ecoulement de sang observé au niveau d'une zone d'altération des tissus.⸣
+40•US•Anus rouge ou saillant•⸣
+41•VL•Vésicule contenant un liquide•Présence d'un oedème constituant une excroissance.⸣
+42•ZO•Etat pathologie multiforme•Le poisson présente plus de deux caractéristiques pathologiques différentes⸣
+43•01•Traces de poux•Le poisson ne porte aucun pou mais présente des lésions cutanées consécutives à une colonisation par le pou de mer. La présence du poisson en eau douce a été suffisante pour obliger les poux à quitter leur hôte.⸣
+44•11•<10 poux , sans flagelles•Le poisson présente moins de 10 poux de mer, mais ces derniers, en raison d'un présence prolongée en eau douce, ont déjà perdu leur flagelle⸣
+45•21•<10 poux , avec flagelles•Le poisson présente moins de 10 poux de mer, mais ces derniers, compte-tenu de l'arrivée récente de leur hôte en eau douce, n'ont pas encore perdu leur flagelle⸣
+46•31•>10 poux, sans flagelles•Le poisson présente plus de 10 poux de mer, mais ces derniers, en raison d'un présence prolongée en eau douce, ont déjà perdu leur flagelle⸣
+47•42•>10 poux, avec flagelles•Le poisson présente plus de 10 poux de mer, mais ces derniers, compte-tenu de l'arrivée récente de leur hôte en eau douce, n'ont pas encore perdu leur flagelle⸣
+48•NC•Signe pathologique d'origine inconnue•Signe pathologique d'origine inconnue⸣
+49•AP•Aphanomycose ou peste de l’écrevisse•⸣
+50•TH•Thélohaniose ou maladie de porcelaine•⸣
+51•BR•Branchiobdellidae (Branchiobdella, Xironogiton, ...)•Présence de Branchiobdellidae (Branchiobdella, Xironogiton, ...)⸣
+52•CH•Chytridiomycose•maladie mortelle menaçant les amphibiens, cette maladie fongique est provoqué par champignon Batrachochytrium dendrobatidis, plus connu sous l’appellation de chytride⸣
+53•RO•Rouille•provoquée par un champignons parasites, elle se caractérisent par la présence de taches brun rouge ou noires entourées de rouge sur la carapace⸣
+54•MY•Mycose des oeufs•Les mycoses des oeufs: provoquent la mort et un changement de coloration de ceux-ci (deviennent orangés)⸣
+55•PF•Paragnathia formica•Paragnathia formica est un parasite qui est présent sur les saumons sauvages]]>
+	</initial-data>
+</table>
+
+<relationship name="pathology_has_many_individual" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e9546b"
+	 src-table="measfish.pathology"
+	 dst-table="measfish.individual"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="station_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#489111"
+	 src-table="measfish.station"
+	 dst-table="measfish.operation"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="facies_facies_id_seq" cycle="false" start="11" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="ambience_ambience_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="situation_situation_id_seq" cycle="false" start="11" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="facies" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of facies]]></comment>
+	<tag name="ambience_param"/>
+	<position x="280" y="1940"/>
+	<column name="facies_id" not-null="true" sequence="filo.facies_facies_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="facies_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="facies_pk" type="pk-constr" table="filo.facies">
+		<columns names="facies_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[facies_id•facies_name⸣
+1•Rapide⸣
+2•Radier⸣
+3•Plat courant⸣
+4•Plat lent⸣
+5•Mouille ou profond⸣
+6•Chenal lotique (profond courant)⸣
+7•Chenal lentique (profond lent)⸣
+8•Remous ou contre-courant⸣
+9•Bras mort ou lône⸣
+10•Darse]]>
+	</initial-data>
+</table>
+
+<table name="ambience" layer="0" collapse-mode="1" max-obj-count="38">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Description of the ambiences of the operation]]></comment>
+	<tag name="ambience"/>
+	<position x="500" y="1460"/>
+	<column name="ambience_id" not-null="true" sequence="filo.ambience_ambience_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="ambience_name">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the point]]></comment>
+	</column>
+	<column name="ambience_length">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Length of the point, in meter]]></comment>
+	</column>
+	<column name="ambience_width">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Width of the point, in meter]]></comment>
+	</column>
+	<column name="ambience_comment">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="ambience_long">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Longitude of the point of observation, in decimal WGS84]]></comment>
+	</column>
+	<column name="ambience_lat">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Latitude of the point of observation, in decimal WGS84]]></comment>
+	</column>
+	<column name="current_speed">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Speed measured of the current, in cm/s]]></comment>
+	</column>
+	<column name="current_speed_max">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Maximum value of the current, in cm/s]]></comment>
+	</column>
+	<column name="current_speed_min">
+		<type name="float" length="0"/>
+		<comment><![CDATA[Minimum speed of the current, in cm/s]]></comment>
+	</column>
+	<column name="water_height">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Average height of water, in cm]]></comment>
+	</column>
+	<column name="water_height_max">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Max height of water, in cm]]></comment>
+	</column>
+	<column name="water_height_min">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Min of height of water, in cm]]></comment>
+	</column>
+	<constraint name="ambience_pk" type="pk-constr" table="filo.ambience">
+		<columns names="ambience_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="operation_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="operation_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="operation_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a936f0"
+	 src-table="measfish.operation"
+	 dst-table="measfish.ambience"
+	 src-required="true" dst-required="false"/>
+
+<table name="situation" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of situations]]></comment>
+	<tag name="ambience_param"/>
+	<position x="780" y="1720"/>
+	<column name="situation_id" not-null="true" sequence="filo.situation_situation_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="situation_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="situation_pk" type="pk-constr" table="filo.situation">
+		<columns names="situation_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[situation_id•situation_name⸣
+3•Confluence ruisseau⸣
+4•Palplanche⸣
+5•Exutoire d'étang⸣
+6•Maçonnerie⸣
+7•Aval d'ouvrage⸣
+8•Enrochement⸣
+9•Rejet⸣
+10•Aval turbine/gabion]]>
+	</initial-data>
+</table>
+
+<sequence name="localisation_localisation_id_seq" cycle="false" start="3" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="localisation" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of localisations of the ambience]]></comment>
+	<tag name="ambience_param"/>
+	<position x="780" y="1600"/>
+	<column name="localisation_id" not-null="true" sequence="filo.localisation_localisation_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="localisation_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="localisation_pk" type="pk-constr" table="filo.localisation">
+		<columns names="localisation_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[localisation_id•localisation_name⸣
+1•Chenal⸣
+2•Berge]]>
+	</initial-data>
+</table>
+
+<table name="speed" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Speed of current, in cm/s]]></comment>
+	<tag name="ambience_param"/>
+	<position x="280" y="1600"/>
+	<column name="speed_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="speed_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="speed_pk" type="pk-constr" table="filo.speed">
+		<columns names="speed_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[speed_id•speed_name⸣
+1•< 10 cm/s⸣
+2•11 à 40 cm/s⸣
+3•41 à 80 cm/s⸣
+4•81 à 150 cm/s⸣
+5•> 151 cm/s]]>
+	</initial-data>
+</table>
+
+<table name="shady" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of shaddies used for ambiences]]></comment>
+	<tag name="ambience_param"/>
+	<position x="280" y="1720"/>
+	<column name="shady_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="shady_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="shady_pk" type="pk-constr" table="filo.shady">
+		<columns names="shady_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[shady_id•shady_name⸣
+1•Rivière couverte (>90% d'ombrage)⸣
+2•Rivière assez couverte (50 à 90% d'ombrage)⸣
+3•Rivière assez dégagée (10 à 50 % d'ombrage)⸣
+4•Rivière dégagée (< 10 % d'ombrage)]]>
+	</initial-data>
+</table>
+
+<sequence name="granulometry_granulometry_id_seq" cycle="false" start="13" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="granulometry" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of types of granulometry]]></comment>
+	<tag name="ambience_param"/>
+	<position x="280" y="1460"/>
+	<column name="granulometry_id" not-null="true" sequence="filo.granulometry_granulometry_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="granulometry_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="granulometry_pk" type="pk-constr" table="filo.granulometry">
+		<columns names="granulometry_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[granulometry_id•granulometry_name⸣
+1•Argile (<3,9 µm)⸣
+2•Limons (de 3,9 à 62,5 µm)⸣
+3•Sables fins (de 62,5 à 0,5 µm)⸣
+4•Sables grossiers (de 0,5 µm à 2 mm)⸣
+5•Graviers (de 2 à 16 mm)⸣
+6•Cailloux fins (de 16 à 32 mm)⸣
+7•Cailloux grossiers (de 32 à 64 mm)⸣
+8•Pierres fines (de 64 à 128 mm)⸣
+9•Pierres grossières (de 128 à 256 mm)⸣
+10•Blocs (de 256 à 1024 mm)⸣
+11•Rochers (substra immergé avec protubérance)⸣
+12•Dalle (substrat immergé sans protubérance)]]>
+	</initial-data>
+</table>
+
+<sequence name="vegetation_vegetation_id_seq" cycle="false" start="9" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="vegetation" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of types of vegetation]]></comment>
+	<tag name="ambience_param"/>
+	<position x="780" y="1820"/>
+	<column name="vegetation_id" not-null="true" sequence="filo.vegetation_vegetation_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="vegetation_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="vegetation_pk" type="pk-constr" table="filo.vegetation">
+		<columns names="vegetation_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[vegetation_id•vegetation_name⸣
+1•Algues - microphytes⸣
+2•Plantes immergées à petites feuilles⸣
+3•Plantes immergées à grandes feuilles⸣
+4•Plante immergées à feuilles rubanées⸣
+5•Plantes flottantes à petites feuilles⸣
+6•Plantes flottantes à grandes feuilles⸣
+7•Plantes émergées⸣
+8•Pas de végétation]]>
+	</initial-data>
+</table>
+
+<sequence name="cache_abundance_cache_abundance_id_seq" cycle="false" start="6" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="cache_abundance" layer="0" collapse-mode="1" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Levels of abundance of caches]]></comment>
+	<tag name="ambience_param"/>
+	<position x="1020" y="1820"/>
+	<column name="cache_abundance_id" not-null="true" sequence="filo.cache_abundance_cache_abundance_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cache_abundance_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="cache_abundance_pk" type="pk-constr" table="filo.cache_abundance">
+		<columns names="cache_abundance_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[cache_abundance_id•cache_abundance_name⸣
+1•Nulle⸣
+2•Faible⸣
+3•Moyenne⸣
+4•Importante⸣
+5•Indéterminable]]>
+	</initial-data>
+</table>
+
+<relationship name="facies_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#034bd2"
+	 src-table="measfish.facies"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="situation_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fc834a"
+	 src-table="measfish.situation"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="speed_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5939ec"
+	 src-table="measfish.speed"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="shady_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e91da2"
+	 src-table="measfish.shady"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="localisation_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#8554d4"
+	 src-table="measfish.localisation"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="vegetation_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#13f8e9"
+	 src-table="measfish.vegetation"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="granulometry_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="dominant_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9528c4"
+	 src-table="measfish.granulometry"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="granulometry_has_many_secondary_ambience" type="rel1n" layer="0"
+	 src-col-pattern="secondary_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1ea1cb"
+	 src-table="measfish.granulometry"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cache_abundance_has_many_herbarium_ambience" type="rel1n" layer="0"
+	 src-col-pattern="herbarium_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#52a2d0"
+	 src-table="measfish.cache_abundance"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cache_abundance_has_many_branch_ambience" type="rel1n" layer="0"
+	 src-col-pattern="branch_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7208b6"
+	 src-table="measfish.cache_abundance"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cache_abundance_has_many_vegetation_ambience" type="rel1n" layer="0"
+	 src-col-pattern="vegetation_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f140da"
+	 src-table="measfish.cache_abundance"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cache_abundance_has_many_bank_ambience" type="rel1n" layer="0"
+	 src-col-pattern="subbank_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#840b8c"
+	 src-table="measfish.cache_abundance"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="cache_abundance_has_many_granulometry_ambience" type="rel1n" layer="0"
+	 src-col-pattern="granulometry_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7efaaa"
+	 src-table="measfish.cache_abundance"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<schema name="gacl" layer="0" rect-visible="true" fill-color="#943dc9">
+	<role name="filo"/>
+</schema>
+
+<sequence name="aclgroup_aclgroup_id_seq" cycle="false" start="7" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="aclacl" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des droits attribués]]></comment>
+	<tag name="acl"/>
+	<position x="220" y="200"/>
+	<column name="aclaco_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="aclgroup_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="aclacl_pk" type="pk-constr" table="gacl.aclacl">
+		<columns names="aclaco_id,aclgroup_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[aclaco_id•aclgroup_id⸣
+1•1⸣
+2•5⸣
+3•4⸣
+4•3⸣
+5•2⸣
+6•6]]>
+	</initial-data>
+</table>
+
+<sequence name="aclaco_aclaco_id_seq" cycle="false" start="7" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="aclaco" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des droits gérés]]></comment>
+	<tag name="acl"/>
+	<position x="420" y="40"/>
+	<column name="aclaco_id" not-null="true" sequence="gacl.aclaco_aclaco_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="aclappli_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="aco" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="aclaco_pk" type="pk-constr" table="gacl.aclaco">
+		<columns names="aclaco_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[aclaco_id•aclappli_id•aco⸣
+1•1•admin⸣
+2•1•param⸣
+3•1•project⸣
+4•1•gestion⸣
+5•1•consult⸣
+6•1•import]]>
+	</initial-data>
+</table>
+
+<sequence name="aclappli_aclappli_id_seq" cycle="false" start="2" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="aclappli" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des applications gérées]]></comment>
+	<tag name="acl"/>
+	<position x="420" y="200"/>
+	<column name="aclappli_id" not-null="true" sequence="gacl.aclappli_aclappli_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="appli" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Nom de l'application pour la gestion des droits]]></comment>
+	</column>
+	<column name="applidetail">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Description de l'application]]></comment>
+	</column>
+	<constraint name="aclappli_pk" type="pk-constr" table="gacl.aclappli">
+		<columns names="aclappli_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[aclappli_id•appli•applidetail⸣
+1•filo•]]>
+	</initial-data>
+</table>
+
+<table name="aclgroup" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Groupes des logins]]></comment>
+	<tag name="acl"/>
+	<position x="20" y="200"/>
+	<column name="aclgroup_id" not-null="true" sequence="gacl.aclgroup_aclgroup_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="groupe" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="aclgroup_id_parent">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="aclgroup_pk" type="pk-constr" table="gacl.aclgroup">
+		<columns names="aclgroup_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[aclgroup_id•groupe•aclgroup_id_parent⸣
+1•admin•⸣
+2•consult•⸣
+3•gestion•2⸣
+4•project•3⸣
+5•param•4⸣
+6•import•3]]>
+	</initial-data>
+</table>
+
+<sequence name="acllogin_acllogin_id_seq" cycle="false" start="2" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="acllogin" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des logins des utilisateurs autorisés]]></comment>
+	<tag name="acl"/>
+	<position x="220" y="40"/>
+	<column name="acllogin_id" not-null="true" sequence="gacl.acllogin_acllogin_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="logindetail" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Nom affiché]]></comment>
+	</column>
+	<constraint name="acllogin_pk" type="pk-constr" table="gacl.acllogin">
+		<columns names="acllogin_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[acllogin_id•login•logindetail⸣
+1•admin•admin]]>
+	</initial-data>
+</table>
+
+<table name="acllogingroup" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des relations entre les logins et les groupes]]></comment>
+	<tag name="acl"/>
+	<position x="20" y="40"/>
+	<column name="acllogin_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="aclgroup_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="acllogingroup_pk" type="pk-constr" table="gacl.acllogingroup">
+		<columns names="acllogin_id,aclgroup_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[acllogin_id•aclgroup_id⸣
+1•1⸣
+1•5]]>
+	</initial-data>
+</table>
+
+<sequence name="log_log_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="log" layer="0" collapse-mode="1" max-obj-count="7">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Liste des connexions ou des actions enregistrées]]></comment>
+	<position x="740" y="40"/>
+	<column name="log_id" not-null="true" sequence="gacl.log_log_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="nom_module">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="log_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Heure de connexion]]></comment>
+	</column>
+	<column name="commentaire">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Donnees complementaires enregistrees]]></comment>
+	</column>
+	<column name="ipaddress">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Adresse IP du client]]></comment>
+	</column>
+	<constraint name="log_pk" type="pk-constr" table="gacl.log">
+		<columns names="log_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="seq_logingestion_id" cycle="false" start="2" increment="1" min-value="1" max-value="999999" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="login_oldpassword_login_oldpassword_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="login_oldpassword" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table contenant les anciens mots de passe]]></comment>
+	<tag name="login"/>
+	<position x="540" y="40"/>
+	<column name="login_oldpassword_id" not-null="true" sequence="gacl.login_oldpassword_login_oldpassword_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="gacl.seq_logingestion_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="password">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="login_oldpassword_pk" type="pk-constr" table="gacl.login_oldpassword">
+		<columns names="login_oldpassword_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="logingestion" layer="0" collapse-mode="1" max-obj-count="12">
+	<schema name="gacl"/>
+	<role name="filo"/>
+	<tag name="login"/>
+	<position x="560" y="200"/>
+	<column name="id" not-null="true" sequence="gacl.seq_logingestion_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="password">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="nom">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="prenom">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="mail">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="datemodif">
+		<type name="date" length="0"/>
+	</column>
+	<column name="actif" default-value="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="is_clientws" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="tokenws">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_logingestion" type="pk-constr" table="gacl.logingestion">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[id•login•password•nom•prenom•mail•datemodif•actif•is_clientws•tokenws⸣
+1•admin•cd916028a2d8a1b901e831246dd5b9b4d3832786ddc63bbf5af4b50d9fc98f50•Administrator••••1••]]>
+	</initial-data>
+</table>
+
+<index name="log_date_idx" table="gacl.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="log_date"/>
+		</idxelement>
+</index>
+
+<index name="log_login_idx" table="gacl.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="login"/>
+		</idxelement>
+</index>
+
+<table name="project_group" layer="0" collapse-mode="1" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<tag name="projet"/>
+	<position x="280" y="460"/>
+</table>
+
+<relationship name="project_has_many_project_group" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#c5559e"
+	 src-table="measfish.project"
+	 dst-table="measfish.project_group"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="aclgroup_has_many_project_group" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#560476"
+	 src-table="gacl.aclgroup"
+	 dst-table="measfish.project_group"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<sequence name="operator_operator_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="operator" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of operators]]></comment>
+	<tag name="operation"/>
+	<position x="20" y="860"/>
+	<column name="operator_id" not-null="true" sequence="filo.operator_operator_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="firstname">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[First name of the operator]]></comment>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Last name of operator]]></comment>
+	</column>
+	<column name="is_active" not-null="true" default-value="'t'">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Is the opérator actually active ?]]></comment>
+	</column>
+	<constraint name="operator_pk" type="pk-constr" table="filo.operator">
+		<columns names="operator_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="operation_operator" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Operators rattached to an operation]]></comment>
+	<tag name="operation"/>
+	<position x="20" y="1080"/>
+	<column name="is_responsible" default-value="'t'">
+		<type name="bool" length="0"/>
+		<comment><![CDATA[True if the operator is responsible of the operation]]></comment>
+	</column>
+</table>
+
+<relationship name="operation_has_many_operation_operator" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#aad7fe"
+	 src-table="measfish.operation"
+	 dst-table="measfish.operation_operator"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="operator_has_many_operation_operator" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5bec6d"
+	 src-table="measfish.operator"
+	 dst-table="measfish.operation_operator"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<sequence name="analysis_template_analysis_template_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="analysis_template" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table of types of complementary analysis]]></comment>
+	<tag name="parametres"/>
+	<position x="780" y="460"/>
+	<column name="analysis_template_id" not-null="true" sequence="filo.analysis_template_analysis_template_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="analysis_template_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the template]]></comment>
+	</column>
+	<column name="analysis_template_value">
+		<type name="json" length="0"/>
+		<comment><![CDATA[Description of all parameters recorded, in Json format]]></comment>
+	</column>
+	<constraint name="analysis_template_pk" type="pk-constr" table="filo.analysis_template">
+		<columns names="analysis_template_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="cloggging_clogging_id_seq" cycle="false" start="10" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="clogging" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of types of cloggings]]></comment>
+	<tag name="ambience_param"/>
+	<position x="280" y="1820"/>
+	<column name="clogging_id" not-null="true" sequence="filo.cloggging_clogging_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="clogging_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the type of clogging]]></comment>
+	</column>
+	<constraint name="clogging_pk" type="pk-constr" table="filo.clogging">
+		<columns names="clogging_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[clogging_id•clogging_name⸣
+1•Pas de colmatage⸣
+2•Sable⸣
+3•Vase⸣
+4•Sédiments fins⸣
+5•Recouvrements biologiques⸣
+6•Débris végétaux⸣
+7•Litières⸣
+8•Dépôts incrustants⸣
+9•Autres]]>
+	</initial-data>
+</table>
+
+<relationship name="clogging_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0a6327"
+	 src-table="measfish.clogging"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="sinuosity_sinuosity_id_seq" cycle="false" start="5" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="sinuosity" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of types of sinuosities of the river]]></comment>
+	<tag name="ambience_param"/>
+	<position x="780" y="1460"/>
+	<column name="sinuosity_id" not-null="true" sequence="filo.sinuosity_sinuosity_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sinuosity_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="sinuosity_pk" type="pk-constr" table="filo.sinuosity">
+		<columns names="sinuosity_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[sinuosity_id•sinuosity_name⸣
+1•Cours d'eau rectiligne⸣
+2•Cours d'eau sinueux⸣
+3•Cours d'eau très sinueux⸣
+4•Cours d'eau méandriforme]]>
+	</initial-data>
+</table>
+
+<relationship name="sinuosity_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#56df20"
+	 src-table="measfish.sinuosity"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="flow_trend_flow_trend_id_seq" cycle="false" start="5" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="flow_trend" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of trends of flow]]></comment>
+	<tag name="ambience_param"/>
+	<position x="1020" y="1720"/>
+	<column name="flow_trend_id" not-null="true" sequence="filo.flow_trend_flow_trend_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="flow_trend_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="flow_trend_pk" type="pk-constr" table="filo.flow_trend">
+		<columns names="flow_trend_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[flow_trend_id•flow_trend_name⸣
+1•Augmentation (en crue)⸣
+2•Diminution (en décrue)⸣
+3•Stabilité⸣
+4•Irrégularité]]>
+	</initial-data>
+</table>
+
+<relationship name="flow_trend_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bcec5b"
+	 src-table="measfish.flow_trend"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="turbidity_id" cycle="false" start="5" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="turbidity" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of types of turbidity]]></comment>
+	<tag name="ambience_param"/>
+	<position x="1020" y="1600"/>
+	<column name="turbidity_id" not-null="true" sequence="filo.turbidity_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="turbidity_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="turbidity_pk" type="pk-constr" table="filo.turbidity">
+		<columns names="turbidity_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[turbidity_id•turbidity_name⸣
+1•Nulle⸣
+2•Faible⸣
+3•Moyenne⸣
+4•Forte]]>
+	</initial-data>
+</table>
+
+<relationship name="turbidity_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0817a9"
+	 src-table="measfish.turbidity"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="protocol_protocol_id_seq" cycle="false" start="2" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="protocol" layer="0" collapse-mode="2" max-obj-count="9">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of protocols used]]></comment>
+	<tag name="protocol"/>
+	<position x="500" y="600"/>
+	<column name="protocol_id" not-null="true" sequence="filo.protocol_protocol_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="protocol_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the protocol]]></comment>
+	</column>
+	<column name="protocol_url">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Url where the description of the protocol can be found]]></comment>
+	</column>
+	<column name="protocol_description">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Synthetic description of the protocol]]></comment>
+	</column>
+	<column name="protocol_pdf">
+		<type name="bytea" length="0"/>
+		<comment><![CDATA[Document attached in pdf format]]></comment>
+	</column>
+	<column name="measure_default" not-null="true" default-value="'sl'">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the prefered measure in the protocol
+Possible values : sl, fl, tl, wd, ot]]></comment>
+	</column>
+	<column name="measure_default_only" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[If true, only the measure_default type is used during the protocol]]></comment>
+	</column>
+	<constraint name="protocol_pk" type="pk-constr" table="filo.protocol">
+		<columns names="protocol_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="analysis_template_id" index="7"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="analysis_template_fk" index="1"/>
+	</customidxs>
+	<initial-data>
+<![CDATA[protocol_id•protocol_name•protocol_url•protocol_description•protocol_pdf•measure_default•measure_default_only•analysis_template_id⸣
+1•Default••Protocole par défaut••tl•0•]]>
+	</initial-data>
+</table>
+
+<relationship name="protocol_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 src-table="measfish.protocol"
+	 dst-table="measfish.operation"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="taxon_has_many_measure_template" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#abb48e"
+	 src-table="measfish.taxon"
+	 dst-table="measfish.measure_template"
+	 src-required="true" dst-required="false"/>
+
+<table name="protocol_measure" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of particular species measures used in the protocol]]></comment>
+	<tag name="protocol"/>
+	<position x="780" y="600"/>
+</table>
+
+<relationship name="protocol_has_many_protocol_measure" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4a1564"
+	 src-table="measfish.protocol"
+	 dst-table="measfish.protocol_measure"
+	 src-required="true" dst-required="false">
+	<special-pk-cols indexes="0"/>
+</relationship>
+
+<relationship name="measure_template_has_many_protocol_measure" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#29337a"
+	 src-table="measfish.measure_template"
+	 dst-table="measfish.protocol_measure"
+	 src-required="true" dst-required="false">
+	<constraint name="protocol_measure_pk" type="pk-constr" alias="protocol_measure_pk" protected="true" table="measfish.protocol_measure">
+		</constraint>
+	<special-pk-cols indexes="0"/>
+</relationship>
+
+<relationship name="analysis_template_has_many_protocol" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1e15bd"
+	 src-table="measfish.analysis_template"
+	 dst-table="measfish.protocol"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="water_regime_water_regime_id_seq" cycle="false" start="5" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="water_regime" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of water regimes]]></comment>
+	<tag name="parametres"/>
+	<position x="20" y="1360"/>
+	<column name="water_regime_id" not-null="true" sequence="filo.water_regime_water_regime_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="water_regime_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="water_regime_pk" type="pk-constr" table="filo.water_regime">
+		<columns names="water_regime_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[water_regime_name•water_regime_id⸣
+Étiage•1⸣
+Niveau moyen•2⸣
+Hautes eaux•3⸣
+Crue•4]]>
+	</initial-data>
+</table>
+
+<relationship name="water_regime_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#71c518"
+	 src-table="measfish.water_regime"
+	 dst-table="measfish.operation"
+	 src-required="false" dst-required="false"/>
+
+<table name="electric_current_type" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<tag name="parametres"/>
+	<position x="780" y="1360"/>
+	<column name="electric_current_type_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="electric_current_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="electric_current_type_pk" type="pk-constr" table="filo.electric_current_type">
+		<columns names="electric_current_type_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[electric_current_type_id•electric_current_type_name⸣
+1•Continu⸣
+2•Ondulé]]>
+	</initial-data>
+</table>
+
+<sequence name="fishing_strategy_fishing_strategy_id_seq" cycle="false" start="3" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="fishing_strategy" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<tag name="parametres"/>
+	<position x="20" y="1460"/>
+	<column name="fishing_strategy_id" not-null="true" sequence="filo.fishing_strategy_fishing_strategy_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fishing_strategy_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="fishing_strategy_pk" type="pk-constr" table="filo.fishing_strategy">
+		<columns names="fishing_strategy_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[fishing_strategy_id•fishing_strategy_name⸣
+1•Inventaire⸣
+2•Sondage⸣
+3•EPA]]>
+	</initial-data>
+</table>
+
+<relationship name="fishing_strategy_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bfad17"
+	 src-table="measfish.fishing_strategy"
+	 dst-table="measfish.operation"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="scale_scale_id_seq" cycle="false" start="4" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="scale" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Scale of the operation (global station, point, ambience)]]></comment>
+	<tag name="parametres"/>
+	<position x="20" y="1600"/>
+	<column name="scale_id" not-null="true" sequence="filo.scale_scale_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="scale_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="scale_pk" type="pk-constr" table="filo.scale">
+		<columns names="scale_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[scale_id•scale_name⸣
+1•Global station⸣
+2•Ambiances⸣
+3•Points]]>
+	</initial-data>
+</table>
+
+<relationship name="scale_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e31259"
+	 src-table="measfish.scale"
+	 dst-table="measfish.operation"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="gear_method_gear_method_id_seq" cycle="false" start="3" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="gear_method" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Method of usage of the gear (in boat, walk fishing, etc.)]]></comment>
+	<tag name="parametres"/>
+	<position x="1020" y="1360"/>
+	<column name="gear_method_id" not-null="true" sequence="filo.gear_method_gear_method_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="gear_method_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="gear_method_pk" type="pk-constr" table="filo.gear_method">
+		<columns names="gear_method_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[gear_method_id•gear_method_name⸣
+1•À pied⸣
+2•En bateau⸣
+3•Autre]]>
+	</initial-data>
+</table>
+
+<relationship name="gear_method_has_many_sequence_gear" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#11e85a"
+	 src-table="measfish.gear_method"
+	 dst-table="measfish.sequence_gear"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="electric_current_type_has_many_sequence_gear" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#29264e"
+	 src-table="measfish.electric_current_type"
+	 dst-table="measfish.sequence_gear"
+	 src-required="false" dst-required="false"/>
+
+<table name="dbparam" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des parametres associes de maniere intrinseque a l'instance]]></comment>
+	<position x="20" y="1940"/>
+	<column name="dbparam_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dbparam_name" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Nom du parametre]]></comment>
+	</column>
+	<column name="dbparam_value">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Valeur du paramètre]]></comment>
+	</column>
+	<constraint name="dbparam_pk" type="pk-constr" table="filo.dbparam">
+		<columns names="dbparam_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[dbparam_id•dbparam_name•dbparam_value⸣
+1•APPLI_title•Measfish]]>
+	</initial-data>
+</table>
+
+<sequence name="dbversion_dbversion_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="dbversion" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Table des versions de la base de donnees]]></comment>
+	<position x="20" y="1820"/>
+	<column name="dbversion_id" not-null="true" sequence="filo.dbversion_dbversion_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dbversion_number" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Numero de la version]]></comment>
+	</column>
+	<column name="dbversion_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date de la version]]></comment>
+	</column>
+	<constraint name="dbversion_pk" type="pk-constr" table="filo.dbversion">
+		<columns names="dbversion_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[dbversion_number•dbversion_date⸣
+0.1•2019-04-15]]>
+	</initial-data>
+</table>
+
+<sequence name="taxa_template_taxa_template_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="taxa_template" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of templates used to select taxa]]></comment>
+	<tag name="parametres"/>
+	<position x="280" y="1360"/>
+	<column name="taxa_template_id" not-null="true" sequence="filo.taxa_template_taxa_template_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="taxa_template_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="taxa_model">
+		<type name="json" length="0"/>
+		<comment><![CDATA[Model of emplacement of taxa on screen]]></comment>
+	</column>
+	<constraint name="taxa_template_pk" type="pk-constr" table="filo.taxa_template">
+		<columns names="taxa_template_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="taxa_template_has_many_operation" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b86a87"
+	 src-table="measfish.taxa_template"
+	 dst-table="measfish.operation"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="sequence_has_many_ambience" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f31f81"
+	 src-table="measfish.sequence"
+	 dst-table="measfish.ambience"
+	 src-required="false" dst-required="false"/>
+
+<constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
+	<columns names="aclaco_id" ref-type="src-columns"/>
+	<columns names="aclaco_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclgroup_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclgroup" table="gacl.aclacl">
+	<columns names="aclgroup_id" ref-type="src-columns"/>
+	<columns names="aclgroup_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclappli_aclaco_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclappli" table="gacl.aclaco">
+	<columns names="aclappli_id" ref-type="src-columns"/>
+	<columns names="aclappli_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclgroup_aclgroup_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclgroup" table="gacl.aclgroup">
+	<columns names="aclgroup_id_parent" ref-type="src-columns"/>
+	<columns names="aclgroup_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclgroup_acllogingroup_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclgroup" table="gacl.acllogingroup">
+	<columns names="aclgroup_id" ref-type="src-columns"/>
+	<columns names="aclgroup_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="acllogin_acllogingroup_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.acllogin" table="gacl.acllogingroup">
+	<columns names="acllogin_id" ref-type="src-columns"/>
+	<columns names="acllogin_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="logingestion_login_oldpassword_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.logingestion" table="gacl.login_oldpassword">
+	<columns names="id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_aclacl_aclaco" type="relfk" layer="0"
+	 src-table="gacl.aclacl"
+	 dst-table="gacl.aclaco" reference-fk="aclaco_aclacl_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_aclacl_aclgroup" type="relfk" layer="0"
+	 src-table="gacl.aclacl"
+	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclacl_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_aclaco_aclappli" type="relfk" layer="0"
+	 src-table="gacl.aclaco"
+	 dst-table="gacl.aclappli" reference-fk="aclappli_aclaco_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_aclgroup_aclgroup" type="relfk" layer="0"
+	 src-table="gacl.aclgroup"
+	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclgroup_fk"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="187.64" y="230.733"/>
+	<position x="187.64" y="177"/>
+	<position x="116.427" y="177"/>
+	</line>
+</relationship>
+
+<relationship name="rel_acllogingroup_aclgroup" type="relfk" layer="0"
+	 src-table="gacl.acllogingroup"
+	 dst-table="gacl.aclgroup" reference-fk="aclgroup_acllogingroup_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_acllogingroup_acllogin" type="relfk" layer="0"
+	 src-table="gacl.acllogingroup"
+	 dst-table="gacl.acllogin" reference-fk="acllogin_acllogingroup_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_login_oldpassword_logingestion" type="relfk" layer="0"
+	 src-table="gacl.login_oldpassword"
+	 dst-table="gacl.logingestion" reference-fk="logingestion_login_oldpassword_fk"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
