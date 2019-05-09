@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,0" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1091" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres">
 <role name="filo"
       password="filoPassword"
@@ -2790,7 +2790,7 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbparam_id•dbparam_name•dbparam_value⸣
-1•APPLI_title•Measfish]]>
+1•APPLI_title•Filo-Science]]>
 	</initial-data>
 </table>
 

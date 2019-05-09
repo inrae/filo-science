@@ -1,4 +1,4 @@
-<h1><span class="red">MEAS</span>ure <span class="red">FISH</span>s</h1>
+<h1 class="center"><span class="red">FI</span>sh <span class="red">LO</span>gger for <span class="red">Science</span></h1>
 <p class="center">
     
 </p>
