@@ -44,18 +44,19 @@ switch ($t_module["param"]) {
         require_once 'modules/classes/ambience.class.php';
         $ambience = new Ambience($bdd, $ObjetBDDParam);
         $dataAmbience = $ambience->getFromSequence($id);
-        if (!$dataAmbience["ambience_id"] > 0) {
+        if (!isset($dataAmbience["ambience_id"])) {
             $dataAmbience["ambience_id"] = 0;
             $dataAmbience["sequence_id"] = $id;
         }
-        $vue->set(
-            $_SESSION["ti_sequence"]->translateRow(
-                $_SESSION["ti_ambience"]->translateRow(
-                    $dataAmbience
-                )
-            ),
-            "ambience"
+        $dataAmbience = $_SESSION["ti_sequence"]->translateRow(
+            $_SESSION["ti_ambience"]->translateRow(
+                $dataAmbience
+            )
         );
+        if ($dataAmbience["ambience_id"] == "") {
+            $dataAmbience["ambience_id"] = 0;
+        }
+        $vue->set($dataAmbience, "ambience");
         /**
          * select the good tab for display
          */

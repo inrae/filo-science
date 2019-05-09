@@ -34,23 +34,46 @@ switch ($t_module["param"]) {
         /**
          * Set origin
          */
-        if ($operation_id > 0) {
-            $vue->set("operation","origin");
+        $vue->set($_REQUEST["origin"], "origin");
+        /**
+         * Get sequence or operation data
+         */
+        if ($_REQUEST["origin"] == "operation") {
+            require_once 'modules/classes/operation.class.php';
+            $op = new Operation($bdd, $ObjetBDDParam);
+            $dparent = $_SESSION["ti_operation"]->translateRow(
+                $_SESSION["ti_campaign"]->translateRow(
+                    $op->getDetail($operation_id)
+                )
+            );
         } else {
-            $vue->set("sequence", "origin");
+            require_once 'modules/classes/sequence.class.php';
+            $seq = new Sequence($bdd, $ObjetBDDParam);
+            $dparent = $_SESSION["ti_operation"]->translateRow(
+                $_SESSION["ti_campaign"]->translateRow(
+                    $_SESSION["ti_sequence"]->translateRow(
+                        $seq->getDetail($sequence_id)
+                    )
+                )
+            );
         }
+        $vue->set($dparent, "dataParent");
         break;
     case "write":
         /*
          * write record in database
          */
-        $data = $_SESSION["ti_operation"]->translateFromRow($_REQUEST);
-        $data = $_SESSION["ti_ambience"]->translateFromRow(
-            $_SESSION["ti_sequence"]->translateFromRow(
-                $data
-            )
-        );
+        $data = $_REQUEST;
+        $data["ambience_id"] = $id;
+        if ($operation_id > 0) {
+            $data["operation_id"] = $operation_id;
+        }
+        if ($sequence_id > 0) {
+            $data["sequence_id"] = $sequence_id;
+        }
         $id = dataWrite($dataClass, $data);
+
+
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_ambience"]->setValue($id);
         }

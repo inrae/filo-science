@@ -1,13 +1,13 @@
 <div class="row">
-    {if $origin="operation"}
-        <a href="index.php?module=operationDisplay&operation_id={$data.operation_id}&activeTab=tab-ambience">
-            <img src="display/images/display-green.png" height="25">
-            {t}Retour à l'opération{/t}
-        </a>
-    {else}
-        <a href="index.php?module=sequenceDisplay&sequence_id={$data.sequence_id}&activeTab=tab-ambience">
+    <a href="index.php?module=campaignDisplay&campaign_id={$dataParent.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$dataParent.campaign_name}</a>
+        &nbsp;
+
+    <a href="index.php?module=operationDisplay&campaign_id={$dataParent.campaign_id}&operation_id={$dataParent.operation_id}&activeTab=tab-sequence">
+                <img src="display/images/display-green.png" height="25">   {t}Retour à l'opération{/t} {$dataParent.operation_name}</a>
+    {if $origin=="sequence"}
+        <a href="index.php?module=sequenceDisplay&sequence_id={$dataParent.sequence_id}&activeTab=tab-ambience">
             <img src="display/images/display.png" height="25">
-            {t}Retour à la séquence{/t}
+            {t}Retour à la séquence{/t}&nbsp;{$dataParent.sequence_number}
         </a>
     {/if}
 </div>

@@ -52,6 +52,7 @@
             </thead>
             <tbody>
                 {foreach $operations as $row}
+                <tr>
                 <td>
                     <a href="index.php?module=operationDisplay&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
                         {$row.operation_name}
@@ -64,6 +65,7 @@
                 <td>{$row.fishing_strategy_name}</td>
                 <td>{$row.scale_name}</td>
                 <td>{$row.taxa_template_name}</td>
+            </tr>
                 {/foreach}
             </tbody>
         </table>
