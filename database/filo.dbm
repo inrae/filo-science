@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1091" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1087" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -256,7 +256,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="length_max">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Length maximum, in cm]]></comment>
+		<comment><![CDATA[Length maximum, in mm]]></comment>
 	</column>
 	<column name="weight_max">
 		<type name="float" length="0"/>
@@ -267,228 +267,228 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 	<initial-data>
 <![CDATA[scientific_name•author•common_name•taxon_code•fresh_code•sea_code•length_max•weight_max⸣
-Leucaspius delineatus•Heckel 1843•Able de Heckel•2117•ABH•ABH•10.0•⸣
-Alburnus alburnus•Linnaeus, 1758•Ablette•2090•ABL•ABL•25.0•⸣
-Alosa alosa•Linnaeus, 1758•Alose (Grande Alose)•2056•ALA•ALA•83.0•⸣
-Alosa fallax fallax••Alose feinte••••50.0•⸣
-Alosa fallax rhodanensis••Alose du Rhône•2058•ALR••70.0•⸣
-Anguilla anguilla•Linnaeus, 1758•Anguille•2038•ANG•ANG•133.0•⸣
-Aphanius fasciatus•(Valenciennes), 1821•Aphanius de Corse•2142•APC••6.0•⸣
-Aphanius iberus•Valenciennes, 1846•Aphanius d'Espagne•2143•APE••5.0•⸣
-Austropotamobius pallipes••Ecrevisse à pieds blancs•868•APP••12.0•⸣
-Zingel asper••Apron•2197•APR••22.0•⸣
-Astacus astacus••Ecrevisse à pieds rouges•866•ASA••18.0•⸣
-Astacus leptodactylus••Ecrevisse à pieds grêles•2963•ASL••20.0•⸣
-Aspius aspius••Aspe•2094•ASP••100.0•⸣
-Atherina boyeri•Risso 1810•Joël•2041••ATB•12.0•⸣
-Barbus barbus•Linnaeus, 1758•Barbeau fluviatile•2096•BAF••120.0•⸣
-Barbus meridionalis••Barbeau méridional•2097•BAM••30.0•⸣
-Dicentrarchus labrax•Linnaeus, 1758•Loup•2234•LOU•LOU•103.0•⸣
-Micropterus salmoides•Lacepède 1802•Achigan à grande bouche•2053•BBG••97.0•⸣
-Micropterus dolomieu••Achigan à petite bouche••••40.0•⸣
-Salaria fluviatilis•Asso, 1801•Blennie fluviatile•2045•BLE••25.0•⸣
-Telestes souffia••Blageon•25609•BLN••36.0•⸣
-Rhodeus amarus•Bloch 1782•Bouvière•2131•BOU••11.0•⸣
-Blicca bjoerkna•Linnaeus, 1758•Brème bordelière•2099•BRB•BRB•36.0•⸣
-Abramis brama•Linnaeus, 1758•Brème commune•2086•BRE•BRE•82.0•⸣
-Abramis sp.••Brème (non identifiée)••••60.0•⸣
-Esox lucius•Linnaeus, 1758•Brochet•2151•BRO•BRO•150.0•⸣
-Carassius auratus••Carassin doré•20597•CAD••40.0•⸣
-Carassius gibelio••Carassin argenté•20550•CAG••40.0•⸣
-Hypophthalmichthys molitrix••Carpe argentée•2115•CAR••105.0•⸣
-Carassius carassius•Linnaeus, 1758•Carassin commun•2102•CAS•CAR•64.0•⸣
-Cyprinus carpio•Linnaeus, 1758•Carpe commune•2109•CMI•CCO•134.0•⸣
-Ambloplites rupestris••Crapet de roche•2048•CDR••43.0•⸣
-Cottus gobio•Linnaeus, 1758•Chabot•2080•CHA••18.0•⸣
-Squalius cephalus••Chevaine•31041•CHE••72.0•⸣
-Cottus petiti••Chabot du Lez•2354•CHP••4.0•⸣
+Leucaspius delineatus•Heckel 1843•Able de Heckel•2117•ABH•ABH•100•⸣
+Alburnus alburnus•Linnaeus, 1758•Ablette•2090•ABL•ABL•250•⸣
+Alosa alosa•Linnaeus, 1758•Alose (Grande Alose)•2056•ALA•ALA•830•⸣
+Alosa fallax fallax••Alose feinte••••500•⸣
+Alosa fallax rhodanensis••Alose du Rhône•2058•ALR••700•⸣
+Anguilla anguilla•Linnaeus, 1758•Anguille•2038•ANG•ANG•1330•⸣
+Aphanius fasciatus•(Valenciennes), 1821•Aphanius de Corse•2142•APC••60•⸣
+Aphanius iberus•Valenciennes, 1846•Aphanius d'Espagne•2143•APE••50•⸣
+Austropotamobius pallipes••Ecrevisse à pieds blancs•868•APP••120•⸣
+Zingel asper••Apron•2197•APR••220•⸣
+Astacus astacus••Ecrevisse à pieds rouges•866•ASA••180•⸣
+Astacus leptodactylus••Ecrevisse à pieds grêles•2963•ASL••200•⸣
+Aspius aspius••Aspe•2094•ASP••1000•⸣
+Atherina boyeri•Risso 1810•Joël•2041••ATB•120•⸣
+Barbus barbus•Linnaeus, 1758•Barbeau fluviatile•2096•BAF••1200•⸣
+Barbus meridionalis••Barbeau méridional•2097•BAM••300•⸣
+Dicentrarchus labrax•Linnaeus, 1758•Loup•2234•LOU•LOU•1030•⸣
+Micropterus salmoides•Lacepède 1802•Achigan à grande bouche•2053•BBG••970•⸣
+Micropterus dolomieu••Achigan à petite bouche••••400•⸣
+Salaria fluviatilis•Asso, 1801•Blennie fluviatile•2045•BLE••250•⸣
+Telestes souffia••Blageon•25609•BLN••360•⸣
+Rhodeus amarus•Bloch 1782•Bouvière•2131•BOU••110•⸣
+Blicca bjoerkna•Linnaeus, 1758•Brème bordelière•2099•BRB•BRB•360•⸣
+Abramis brama•Linnaeus, 1758•Brème commune•2086•BRE•BRE•820•⸣
+Abramis sp.••Brème (non identifiée)••••600•⸣
+Esox lucius•Linnaeus, 1758•Brochet•2151•BRO•BRO•1500•⸣
+Carassius auratus••Carassin doré•20597•CAD••400•⸣
+Carassius gibelio••Carassin argenté•20550•CAG••400•⸣
+Hypophthalmichthys molitrix••Carpe argentée•2115•CAR••1050•⸣
+Carassius carassius•Linnaeus, 1758•Carassin commun•2102•CAS•CAR•640•⸣
+Cyprinus carpio•Linnaeus, 1758•Carpe commune•2109•CMI•CCO•1340•⸣
+Ambloplites rupestris••Crapet de roche•2048•CDR••430•⸣
+Cottus gobio•Linnaeus, 1758•Chabot•2080•CHA••180•⸣
+Squalius cephalus••Chevaine•31041•CHE••720•⸣
+Cottus petiti••Chabot du Lez•2354•CHP••40•⸣
 Chondrostoma sp.••Chondrostome•••••⸣
-Coregonus lavaretus••Lavaret••••60.0•⸣
-Valencia hispanica••Cyprinodonte de Valence•2145•CPV••8.0•⸣
-Salvelinus namaycush••Cristivomer•2228•CRI••150.0•⸣
-Ctenopharyngodon idella••Carpe amour•31039•CTI••150.0•⸣
-Cyprinidae••Cyprinidae indeterminé••••5.0•⸣
-Osmerus eperlanus•Linnaeus, 1758•Eperlan•2188•EPE•EPE•45.0•⸣
-Gasterosteus gymnurus••Epinoche••••8.0•⸣
-Pungitius pungitius•Linnaeus, 1758•Epinochette•2167•EPT•EPT•9.0•⸣
-Acipenser sturio•Linnaeus, 1758•Esturgeon•2032•EST•EST•600.0•⸣
-Platichthys flesus•Linnaeus, 1758•Flet•2203•FLE•FLE•60.0•⸣
-Gambusia holbrooki••Gambusie••••7.0•⸣
-Rutilus rutilus•Linnaeus, 1758•Gardon•2133•GAR•GAR•60.0•⸣
-Gobio gobio•Linnaeus, 1758•Goujon•2113•GOU•GOU•20.0•⸣
-Gymnocephalus cernuus•Linnaeus, 1758•Grémille•2191•GRE•GRE•25.0•⸣
-Chondrostoma nasus•Linnaeus, 1758•Hotu•2104•HOT••50.0•⸣
-Hucho hucho••Huchon•2214•HUC••150.0•⸣
-Leuciscus idus•Linnaeus, 1758•Ide mélanote•2121•IDE••104.0•⸣
-Cobitis bilineata••Loche transalpine•34369•LOB••12.0•⸣
-Misgurnus fossilis•Linnaeus, 1758•Loche d'étang•2069•LOE••30.0•⸣
-Barbatula barbatula•Linnaeus, 1758•Loche franche•2071•LOF•LOF•21.0•⸣
-Cobitis taenia•Ikeda 1936•Loche épineuse•2067•LOR••13.0•⸣
-Lota lota••Lote de rivière•2156•LOT••152.0•⸣
-non identifiee••Lamproie (ammocoete)••••20.0•⸣
-Petromyzon marinus•Linnaeus, 1758•Lamproie marine•2014•LPM•LPM•120.0•⸣
-Lampetra planeri•Bloch 1784•Lamproie de Planer•2012•LPP•LPP•20.0•⸣
-Lampetra fluviatilis•Linnaeus, 1758•Lamproie de rivière•2011•LPR•LPR•50.0•⸣
-Chelon labrosus•Risso 1827•Mulet à grosses lèvres•2180•MGL•MGL•84.0•⸣
-Mugil cephalus•Linnaeus, 1758•Mulet cabot•2185•MUC••114.0•⸣
-Liza aurata•Risso 1810•Mulet doré•2182•MUD•MUD•59.0•⸣
-Liza ramada•Risso 1810•Mulet porc•2183•MUP•MUP•70.0•⸣
+Coregonus lavaretus••Lavaret••••600•⸣
+Valencia hispanica••Cyprinodonte de Valence•2145•CPV••80•⸣
+Salvelinus namaycush••Cristivomer•2228•CRI••1500•⸣
+Ctenopharyngodon idella••Carpe amour•31039•CTI••1500•⸣
+Cyprinidae••Cyprinidae indeterminé••••50•⸣
+Osmerus eperlanus•Linnaeus, 1758•Eperlan•2188•EPE•EPE•450•⸣
+Gasterosteus gymnurus••Epinoche••••80•⸣
+Pungitius pungitius•Linnaeus, 1758•Epinochette•2167•EPT•EPT•90•⸣
+Acipenser sturio•Linnaeus, 1758•Esturgeon•2032•EST•EST•6000•⸣
+Platichthys flesus•Linnaeus, 1758•Flet•2203•FLE•FLE•600•⸣
+Gambusia holbrooki••Gambusie••••70•⸣
+Rutilus rutilus•Linnaeus, 1758•Gardon•2133•GAR•GAR•600•⸣
+Gobio gobio•Linnaeus, 1758•Goujon•2113•GOU•GOU•200•⸣
+Gymnocephalus cernuus•Linnaeus, 1758•Grémille•2191•GRE•GRE•250•⸣
+Chondrostoma nasus•Linnaeus, 1758•Hotu•2104•HOT••500•⸣
+Hucho hucho••Huchon•2214•HUC••1500•⸣
+Leuciscus idus•Linnaeus, 1758•Ide mélanote•2121•IDE••1040•⸣
+Cobitis bilineata••Loche transalpine•34369•LOB••120•⸣
+Misgurnus fossilis•Linnaeus, 1758•Loche d'étang•2069•LOE••300•⸣
+Barbatula barbatula•Linnaeus, 1758•Loche franche•2071•LOF•LOF•210•⸣
+Cobitis taenia•Ikeda 1936•Loche épineuse•2067•LOR••130•⸣
+Lota lota••Lote de rivière•2156•LOT••1520•⸣
+non identifiee••Lamproie (ammocoete)••••200•⸣
+Petromyzon marinus•Linnaeus, 1758•Lamproie marine•2014•LPM•LPM•1200•⸣
+Lampetra planeri•Bloch 1784•Lamproie de Planer•2012•LPP•LPP•200•⸣
+Lampetra fluviatilis•Linnaeus, 1758•Lamproie de rivière•2011•LPR•LPR•500•⸣
+Chelon labrosus•Risso 1827•Mulet à grosses lèvres•2180•MGL•MGL•840•⸣
+Mugil cephalus•Linnaeus, 1758•Mulet cabot•2185•MUC••1140•⸣
+Liza aurata•Risso 1810•Mulet doré•2182•MUD•MUD•590•⸣
+Liza ramada•Risso 1810•Mulet porc•2183•MUP•MUP•700•⸣
 Poissons non identifés••Poissons non identifés•••••⸣
-Pas de poisson••Pas de poisson••••0.0•⸣
-Salvelinus alpinus••Omble chevalier••••80.0•⸣
-Thymallus thymallus•Linnaeus, 1758•Ombre commun•2247•OBR••60.0•⸣
-Orconectes limosus•Rafinesque 1817•Ecrevisse américaine•871•OCL•ORL•12.0•⸣
-Procambarus clarkii•Girard 1852•Ecrevisse de Louisiane•2028•PCC•ECL•15.0•⸣
-Ameiurus melas•Rafinesque 1820•Poisson chat•2177•PCH••66.0•⸣
-Perca fluviatilis•Linnaeus, 1758•Perche commune•2193•PER•PER•67.0•⸣
-Lepomis gibbosus•Linnaeus, 1758•Perche soleil•2050•PES•PES•40.0•⸣
-Pacifastacus leniusculus••Ecrevisse signal•873•PFL••18.0•⸣
-Pimephales promelas••Tête de boule•2127•PIM••10.0•⸣
-Pleuronectes platessa•Linnaeus, 1758•Plie•2205•PLI•PLI•126.0•⸣
-Pseudorasbora parva•Temminck & Schlegel, 1846•Pseudorasbora•2129•PSR•PSE•11.0•⸣
-Scardinius erythrophthalmus•Linnaeus, 1758•Rotengle•2135•ROT•ROT•51.0•⸣
-Sander lucioperca•Linnaeus, 1758•Sandre•2195•SAN••127.0•⸣
-Salmo salar•Linnaeus, 1758•Saumon Atlantique•2220•SAT•SAT•150.0•⸣
-Salvelinus fontinalis••Omble de fontaine•2227•SDF••94.0•⸣
-Silurus glanis•Linnaeus, 1758•Silure•2238•SIL•SIL•500.0•⸣
-Alburnoides bipunctatus•Bloch 1782•Spirlin•2088•SPI••16.0•⸣
-Acipenser ruthenus••Sterlet•3217•STL••125.0•⸣
-Oncorhynchus mykiss•Walbaum 1792•Truite arc en ciel•2216•TAC••120.0•⸣
-Tinca tinca•Linnaeus, 1758•Tanche•2137•TAN•TAN•82.0•⸣
-Parachondrostoma toxostoma••Toxostome•31135•TOX••30.0•⸣
-Salmo trutta•Berg 1908•Truite commune•••TRM•100.0•⸣
-Umbra pygmea••Umbre pygmée••••10.0•⸣
-Phoxinus phoxinus•Linnaeus, 1758•Vairon•2125•VAI•VAI•14.0•⸣
-Leuciscus leuciscus•Linnaeus, 1758•Vandoise•2122•VAN••40.0•⸣
-Vimba vimba••Vimbe•2139•VIM••50.0•⸣
-Abramis•Cuvier 1817•Brèmes d'eau douce nca•2085•BRX••36.0•⸣
+Pas de poisson••Pas de poisson•••••⸣
+Salvelinus alpinus••Omble chevalier••••800•⸣
+Thymallus thymallus•Linnaeus, 1758•Ombre commun•2247•OBR••600•⸣
+Orconectes limosus•Rafinesque 1817•Ecrevisse américaine•871•OCL•ORL•120•⸣
+Procambarus clarkii•Girard 1852•Ecrevisse de Louisiane•2028•PCC•ECL•150•⸣
+Ameiurus melas•Rafinesque 1820•Poisson chat•2177•PCH••660•⸣
+Perca fluviatilis•Linnaeus, 1758•Perche commune•2193•PER•PER•670•⸣
+Lepomis gibbosus•Linnaeus, 1758•Perche soleil•2050•PES•PES•400•⸣
+Pacifastacus leniusculus••Ecrevisse signal•873•PFL••180•⸣
+Pimephales promelas••Tête de boule•2127•PIM••100•⸣
+Pleuronectes platessa•Linnaeus, 1758•Plie•2205•PLI•PLI•1260•⸣
+Pseudorasbora parva•Temminck & Schlegel, 1846•Pseudorasbora•2129•PSR•PSE•110•⸣
+Scardinius erythrophthalmus•Linnaeus, 1758•Rotengle•2135•ROT•ROT•510•⸣
+Sander lucioperca•Linnaeus, 1758•Sandre•2195•SAN••1270•⸣
+Salmo salar•Linnaeus, 1758•Saumon Atlantique•2220•SAT•SAT•1500•⸣
+Salvelinus fontinalis••Omble de fontaine•2227•SDF••940•⸣
+Silurus glanis•Linnaeus, 1758•Silure•2238•SIL•SIL•5000•⸣
+Alburnoides bipunctatus•Bloch 1782•Spirlin•2088•SPI••160•⸣
+Acipenser ruthenus••Sterlet•3217•STL••1250•⸣
+Oncorhynchus mykiss•Walbaum 1792•Truite arc en ciel•2216•TAC••1200•⸣
+Tinca tinca•Linnaeus, 1758•Tanche•2137•TAN•TAN•820•⸣
+Parachondrostoma toxostoma••Toxostome•31135•TOX••300•⸣
+Salmo trutta•Berg 1908•Truite commune•••TRM•1000•⸣
+Umbra pygmea••Umbre pygmée••••100•⸣
+Phoxinus phoxinus•Linnaeus, 1758•Vairon•2125•VAI•VAI•140•⸣
+Leuciscus leuciscus•Linnaeus, 1758•Vandoise•2122•VAN••400•⸣
+Vimba vimba••Vimbe•2139•VIM••500•⸣
+Abramis•Cuvier 1817•Brèmes d'eau douce nca•2085•BRX••360•⸣
 Abramis brama, Blicca bjoerkna••Brèmes•19511••••⸣
-Acipenser•Linnaeus, 1758•Esturgeons•2031•ES?••600.0•⸣
-Acipenser baerii•Brandt, 1869•Esturgeon de Sibérie•3218•BAE••200.0•⸣
+Acipenser•Linnaeus, 1758•Esturgeons•2031•ES?••6000•⸣
+Acipenser baerii•Brandt, 1869•Esturgeon de Sibérie•3218•BAE••2000•⸣
 Acipenseridae••Esturgeons nca•2030••••⸣
 Acipenseriformes••Acipenseriformes•3347••••⸣
-Agonus cataphractus•Linnaeus, 1758•Souris de mer•3544•••21.0•⸣
+Agonus cataphractus•Linnaeus, 1758•Souris de mer•3544•••210•⸣
 Alloteuthis••calmars nca•••••⸣
 Alloteuthis subulata•Lamarck 1798•calmar commun•••••⸣
 Alosa alosa x fallax••Aloses vraie et feinte•••••⸣
-Alosa fallax•Lacepède 1803•Alose feinte•2057•ALF•ALF•70.0•⸣
+Alosa fallax•Lacepède 1803•Alose feinte•2057•ALF•ALF•700•⸣
 Alosa sp.•Linck 1790•Aloses nca•2055••ALS••⸣
-Ammodytes marinus•Raitt 1934•Lançon équille•3422•••25.0•⸣
-Ammodytes tobianus•Linnaeus, 1758•Equille•2035•LAN••30.0•⸣
+Ammodytes marinus•Raitt 1934•Lançon équille•3422•••250•⸣
+Ammodytes tobianus•Linnaeus, 1758•Equille•2035•LAN••300•⸣
 Anguilla•Schrank 1798•Anguilles nca•2037•AN?•••⸣
 Anguillidae••Anguilles•2036••••⸣
-Aphia minuta•Risso 1810•Nonnat•2170•APH••7.0•⸣
+Aphia minuta•Risso 1810•Nonnat•2170•APH••70•⸣
 Aplysia•Linnaeus, 1767•Aplysie nca•2143••••⸣
 Aplysia punctata•Cuvier, 1803•Lièvre de mer•••••⸣
-Apogon imberbis•Linnaeus, 1758•Castagnole rouge•20736•••15.0•⸣
-Argyrosomus regius•Asso 1801•Maigre commun•2231•MAI•MAI•230.0•⸣
+Apogon imberbis•Linnaeus, 1758•Castagnole rouge•20736•••150•⸣
+Argyrosomus regius•Asso 1801•Maigre commun•2231•MAI•MAI•2300•⸣
 Argyrosomus sp.•De La Pylaie 1835••••••⸣
-Arnoglossus imperialis•Rafinesque, 1810•Arnoglosse impérial•3505•••25.0•⸣
-Arnoglossus laterna•Walbaum 1792•Arnoglosse de Méditerranée•3506•••19.0•⸣
-Arnoglossus thori•Kyle 1913•Arnoglosse tacheté•3507•••20.5•⸣
+Arnoglossus imperialis•Rafinesque, 1810•Arnoglosse impérial•3505•••250•⸣
+Arnoglossus laterna•Walbaum 1792•Arnoglosse de Méditerranée•3506•••190•⸣
+Arnoglossus thori•Kyle 1913•Arnoglosse tacheté•3507•••205•⸣
 Aspitrigla cuculus•Linnaeus, 1758•Grondin rouge•19453••••⸣
 Atelecyclus rotundatus•Olivi 1792•Petit crabe circulaire•••••⸣
 Atelecyclus undecimdentatus•(Herbst, 1783)•Crabe circulaire•••••⸣
 Athanas nitescens•(Leach, 1814)•crevette athanas•••••⸣
-Atherina•Linnaeus, 1758•Athérines nca•2040•AT?••20.0•⸣
+Atherina•Linnaeus, 1758•Athérines nca•2040•AT?••200•⸣
 Atherina hepsetus•Linnaeus, 1758•Athèrine sauclet•3264••••⸣
-Atherina presbyter•Cuvier 1829•Prêtre•2042••ATP•20.0•⸣
+Atherina presbyter•Cuvier 1829•Prêtre•2042••ATP•200•⸣
 Atherina sp.••Atherine sp•••SILP••⸣
 Atherinidae••Athérinidés•2039••••⸣
 Atyaephyra desmaresti,Palemon varians••crevettes divers•••••⸣
-Balistes carolinensis•Gmelin, 1789•Baliste•19460•••60.0•⸣
-Barbus•Cuvier 1817•Barbeaux nca•2095•BAX••120.0•⸣
+Balistes carolinensis•Gmelin, 1789•Baliste•19460•••600•⸣
+Barbus•Cuvier 1817•Barbeaux nca•2095•BAX••1200•⸣
 Belone belone•Linnaeus 1761•Orphie•3378••ORF••⸣
 Belone sp.•Cuvier 1817••••••⸣
 Bivalvia•Linnaeus, 1758•bivalves•••••⸣
-Blennius ocellaris•Linnaeus, 1758•Blennie papillon•3430•••20.0•⸣
+Blennius ocellaris•Linnaeus, 1758•Blennie papillon•3430•••200•⸣
 Boops boops•Linnaeus, 1758•Bogue•3482••BOG••⸣
-Bothus podas•Delaroche, 1809•Rombou commun•25283•••45.0•⸣
+Bothus podas•Delaroche, 1809•Rombou commun•25283•••450•⸣
 Brachyura••Crabes nca•••••⸣
-Buglossidium luteum•Risso 1810•Petite sole jaune•3535•••15.0•⸣
+Buglossidium luteum•Risso 1810•Petite sole jaune•3535•••150•⸣
 Callionymus•Linnaeus, 1758•Callionymes•3369••••⸣
-Callionymus lyra•Linnaeus, 1758•Callionyme lyre•3370••CAL•30.0•⸣
+Callionymus lyra•Linnaeus, 1758•Callionyme lyre•3370••CAL•300•⸣
 Callionymus pusillus•Delaroche, 1809•Dragonnet élégant•••••⸣
 Callionymus reticulatus•Valenciennes 1837•Callionyme réticulé•3372••••⸣
-Callionymus risso•Lesueur 1814•Callionyme bélène•19458•••11.0•⸣
+Callionymus risso•Lesueur 1814•Callionyme bélène•19458•••110•⸣
 Cancer pagurus•Linnaeus, 1758•Tourteau•••••⸣
-Carassius•Nilsson 1832•Carassins nca•2100•CAX••40.0•⸣
-Carassius auratus auratus•Linnaeus, 1758•Carassin doré•5208•CAA••40.0•⸣
+Carassius•Nilsson 1832•Carassins nca•2100•CAX••400•⸣
+Carassius auratus auratus•Linnaeus, 1758•Carassin doré•5208•CAA••400•⸣
 Carassius auratus gibelio•Bloch, 1782•Carassin argenté•5207••••⸣
 Carcinus aestuarii•Nardo 1847•Crabe vert de la Méditerranée•••••⸣
 Carcinus maenas•Linnaeus, 1758•Crabe vert•••••⸣
-Centrolabrus exoletus•Linnaeus, 1758•Petite vieille•3459•••18.0•⸣
-Chelidonichthys lucernus•Linnaeus, 1758•Grondin perlon•3563•••75.0•⸣
+Centrolabrus exoletus•Linnaeus, 1758•Petite vieille•3459•••180•⸣
+Chelidonichthys lucernus•Linnaeus, 1758•Grondin perlon•3563•••750•⸣
 Chelon•Artedi, 1793•Mulets nca•2179••••⸣
 Chlamys opercularis••Coquille Saint Jacques•••••⸣
 Chlamys varia•(Linnaeus, 1758)•Pétoncle•••••⸣
 Chromis chromis•Linnaeus, 1758•Castagnole•20738••••⸣
 Ciliata•Couch 1832•Motelle•2153••••⸣
-Ciliata mustela•Linnaeus, 1758•Motelle à cinq barbillons•2154•MOT•MOT•25.0•⸣
+Ciliata mustela•Linnaeus, 1758•Motelle à cinq barbillons•2154•MOT•MOT•250•⸣
 Ciliata septentrionalis•Collett 1875•Motelle à moustaches•3384••••⸣
-Clupea harengus•Linnaeus, 1758•Hareng de l'Atlantique•2060•HAR•HER•45.0•⸣
+Clupea harengus•Linnaeus, 1758•Hareng de l'Atlantique•2060•HAR•HER•450•⸣
 Clupea sp.•Linnaeus 1758••••••⸣
-Clupeidae••Harengs, sardines nca•2054•CLU••41.76•⸣
-Conger conger•Linnaeus, 1758•Congre d'Europe•2074•CGR•CON•300.0•⸣
+Clupeidae••Harengs, sardines nca•2054•CLU••4176•⸣
+Conger conger•Linnaeus, 1758•Congre d'Europe•2074•CGR•CON•3000•⸣
 Coris julis•Linnaeus, 1758•Girelle•19451••••⸣
 Cottus•Linnaeus, 1758•Chabot nca•2079••••⸣
 Crangon••Crevettes crangon nca•3281••••⸣
 Crangon crangon•Linnaeus, 1758•Crevette grise•3282•CRG•CRG••⸣
 Crangonidae••Crevettes crangonidés•••••⸣
 Crassostrea gigas•Thunberg 1793•Huître creuse du Pacifique•••••⸣
-Crystallogobius linearis•Düben 1845•Gobie cristal•3445•••4.7•⸣
-Ctenolabrus rupestris•Linnaeus, 1758•Rouquié•3461••ROU•18.0•⸣
+Crystallogobius linearis•Düben 1845•Gobie cristal•3445•••47•⸣
+Ctenolabrus rupestris•Linnaeus, 1758•Rouquié•3461••ROU•180•⸣
 Cyclopterus lumpus•Linnaeus, 1758•Lompe•3551••••⸣
 Cyprinidae••Cyprinidés•2084•CYP•CYP••⸣
 Cypriniformes••Cypriniformes•3362••••⸣
-Cyprinus•Linnaeus, 1758•Carpes nca•2108•CCX••134.0•⸣
+Cyprinus•Linnaeus, 1758•Carpes nca•2108•CCX••1340•⸣
 Dasyatis•Rafinesque 1810•Pastenagues nca•3588••••⸣
 Dasyatis pastinaca•Linnaeus, 1758•Pastenague•3589••WSX••⸣
-Dentex dentex•Linnaeus, 1758•Denté commun•20740•••100.0•⸣
-Dicentrarchus•Gill 1860•Bars nca•2233•••86.5•⸣
-Dicentrarchus punctatus•Bloch 1792•Bar tacheté•2235•LOM•SPU•70.0•⸣
-Dicologlossa cuneata•Moreau 1881•Cèteau•3537•••30.0•⸣
-Diplecogaster bimaculata bimaculata•Bonnaterre, 1788•Gluette rougeoleuse•3415•••6.0•⸣
-Diplodus annularis•Linnaeus, 1758•Sparaillon commun•19481•••24.0•⸣
-Diplodus cervinus•Lowe 1838•Sar à grosses lèvres•19482•••61.0•⸣
-Diplodus puntazzo•Cetti, 1777•Sar à museau pointu•20741•••60.0•⸣
-Diplodus sargus•Linnaeus, 1758•Sar commun•19483•••45.0•⸣
-Diplodus vulgaris•Geoffroy St. Hilaire 1817•Sar à tête noire•19484••SRG•45.0•⸣
+Dentex dentex•Linnaeus, 1758•Denté commun•20740•••1000•⸣
+Dicentrarchus•Gill 1860•Bars nca•2233•••865•⸣
+Dicentrarchus punctatus•Bloch 1792•Bar tacheté•2235•LOM•SPU•700•⸣
+Dicologlossa cuneata•Moreau 1881•Cèteau•3537•••300•⸣
+Diplecogaster bimaculata bimaculata•Bonnaterre, 1788•Gluette rougeoleuse•3415•••60•⸣
+Diplodus annularis•Linnaeus, 1758•Sparaillon commun•19481•••240•⸣
+Diplodus cervinus•Lowe 1838•Sar à grosses lèvres•19482•••610•⸣
+Diplodus puntazzo•Cetti, 1777•Sar à museau pointu•20741•••600•⸣
+Diplodus sargus•Linnaeus, 1758•Sar commun•19483•••450•⸣
+Diplodus vulgaris•Geoffroy St. Hilaire 1817•Sar à tête noire•19484••SRG•450•⸣
 Dromia•Weber, 1795•Dromie nca•••••⸣
 Dromia personata•Linnaeus, 1758•Crabe dormeur•••••⸣
-Echiichthys vipera•Cuvier 1829•Petite vive•19480•••16.0•⸣
+Echiichthys vipera•Cuvier 1829•Petite vive•19480•••160•⸣
 Enchelyopus cimbrius•Linnaeus 1766•Motelle à quatre barbillons•3402••••⸣
 Engraulis•Cuvier 1817•Anchois nca•2147••••⸣
-Engraulis encrasicolus•Linnaeus, 1758•Anchois•2148•ANC•ANC•20.0•⸣
+Engraulis encrasicolus•Linnaeus, 1758•Anchois•2148•ANC•ANC•200•⸣
 Enophrys bubalis•Euphrasen, 1786•chabot buffle•••••⸣
-Entelurus aequoreus•Linnaeus, 1758•Entélure•3567•••60.0•⸣
+Entelurus aequoreus•Linnaeus, 1758•Entélure•3567•••600•⸣
 Eriocheir sinensis•H. Milne Edwards 1853•Crabe chinois•879•CRC•••⸣
 Eupagurus bernhardus•Linnaeus, 1758•Bernard l’ermite commun•••••⸣
 Eurynome•Leach, 1814•Majidé eurynome•••••⸣
 Eurynome aspera•(Pennant, 1777)•Eurynome rugeuse•••••⸣
-Eutrigla gurnardus•Linnaeus, 1758•Grondin gris•19478•••60.0•⸣
+Eutrigla gurnardus•Linnaeus, 1758•Grondin gris•19478•••600•⸣
 Gadidae••Gadidés•2152••••⸣
 Gadus morhua•Linnaeus, 1758•Morue de l'Atlantique•3386••COD••⸣
-Gaidropsarus mediterraneus•Linnaeus, 1758•Motelle de Méditerranée•3388•••50.0•⸣
-Gaidropsarus vulgaris•Cloquet 1824•Motelle commune•3389•••60.0•⸣
+Gaidropsarus mediterraneus•Linnaeus, 1758•Motelle de Méditerranée•3388•••500•⸣
+Gaidropsarus vulgaris•Cloquet 1824•Motelle commune•3389•••600•⸣
 Galathea rugosa•Fabricius, 1775•Galathée rose•••••⸣
 Galathea squamifera•Leach, 1814•Galathée écailleuse•••••⸣
 Galathea strigosa••Galathée striée•••••⸣
 Galeorhinus galeus•Linnaeus, 1758•Requin-hâ•3581••LSK••⸣
 Galeus melastomus•Rafinesque 1810•Chien espagnol•19487••••⸣
 Gambusia•Poey 1854•Gambusie nca•2207••••⸣
-Gambusia affinis•Baird & Girard 1853•Gambusie•2208•GAM•GAM•4.0•⸣
+Gambusia affinis•Baird & Girard 1853•Gambusie•2208•GAM•GAM•40•⸣
 Gammaridae••Gammares•887••••⸣
 Gasterosteus•Linnaeus, 1758•Epinoches•2164••••⸣
-Gasterosteus aculeatus•Linnaeus, 1758•Epinoche à trois épines•2165••EPI•11.0•⸣
+Gasterosteus aculeatus•Linnaeus, 1758•Epinoche à trois épines•2165••EPI•110•⸣
 Glyptocephalus cynoglossus•Linnaeus, 1758•Plie cynoglosse•3512••••⸣
-Gobiidae••Gobidés•2168•••8.25•⸣
+Gobiidae••Gobidés•2168•••825•⸣
 Gobius cobitis•Pallas 1814•Gobie céphalote•19490••••⸣
 Gobius cruentatus•Gmelin 1789•Gobie ensanglanté•19491••••⸣
-Gobiusculus flavescens•Fabricius 1779•Gobie nageur•3451•••6.3•⸣
+Gobiusculus flavescens•Fabricius 1779•Gobie nageur•3451•••63•⸣
 Gobius geniporus•Valenciennes 1837•Gobie à joues poreuses•19492••••⸣
-Gobius niger•Linnaeus, 1758•Gobie noir•2172•GBN••18.0•⸣
-Gobius paganellus•Linnaeus, 1758•Gobie paganel•19493•••12.0•⸣
+Gobius niger•Linnaeus, 1758•Gobie noir•2172•GBN••180•⸣
+Gobius paganellus•Linnaeus, 1758•Gobie paganel•19493•••120•⸣
 Gobius roulei•De Buen 1928•Gobie paganel gros oeil•19494••••⸣
 Goneplax rhomboides•Linnaeus, 1758•crabe•••••⸣
 Gymnammodytes semisquamatus•Jourdain 1879•Lançon aiguille•3424••••⸣
@@ -496,50 +496,50 @@ Hemigrapsus••crabe japonais•••••⸣
 Hemigrapsus penicillatus•De Haan, 1835•crabe japonais•••••⸣
 Hippocampus•Rafinesque 1810•Hippocampes nca•3568••••⸣
 Hippocampus erectus•Perry•Hippocampe rayé•••••⸣
-Hippocampus guttulatus•Cuvier, 1829•Hippocampe moucheté•3569•••21.0•⸣
-Hippocampus hippocampus•Linnaeus, 1758•Hippocampe à museau court•19485••HIP•15.0•⸣
+Hippocampus guttulatus•Cuvier, 1829•Hippocampe moucheté•3569•••210•⸣
+Hippocampus hippocampus•Linnaeus, 1758•Hippocampe à museau court•19485••HIP•150•⸣
 Hippocampus ingens•Girard••••••⸣
 Hippocampus ramulosus•Leach 1814•Hippocampe moucheté•••••⸣
 Hippocampus reidi•Ginsburg••••••⸣
 Hippocampus zosterae•Jordan&Gilbert•Hippocampe Atlantique ouest•••••⸣
 Hippoglossoides platessoides•Fabricius 1780•Balai de l'Atlantique•3514••••⸣
 Hippolyte varians•Leach, 1814•Crevette hippolyte•••••⸣
-Hyperoplus•Linné, 1758•lançon ind•3426•••37.0•⸣
-Hyperoplus immaculatus•Corbin, 1950•Lançon jolivet•3427•••35.0•⸣
-Hyperoplus lanceolatus•Le Sauvage 1824•Lançon commun•3428•••39.0•⸣
+Hyperoplus•Linné, 1758•lançon ind•3426•••370•⸣
+Hyperoplus immaculatus•Corbin, 1950•Lançon jolivet•3427•••350•⸣
+Hyperoplus lanceolatus•Le Sauvage 1824•Lançon commun•3428•••390•⸣
 Ictalurus•Rafinesque 1820•Barbottes nca•2176••••⸣
 Ictalurus melas••Poisson chat•••PCH••⸣
 Ictalurus punctatus•Rafinesque 1818•Barbue d'Amérique•19486••••⸣
 Idotea baltica••isopode•••••⸣
 Inachus•Weber, 1795•Crabe inachus•••••⸣
 Inachus dorsettensis•Pennant, 1777•Crabe des anémones•••••⸣
-Labrus bergylta•Ascanius 1767•Vieille commune•3463•••60.0•⸣
+Labrus bergylta•Ascanius 1767•Vieille commune•3463•••600•⸣
 Labrus merula•Linnaeus, 1758•Merle•19474••••⸣
-Labrus mixtus•Linnaeus,1758•Coquette•19489•••35.0•⸣
-Labrus viridis•Linnaeus,1758•Labre vert•19479•••60.0•⸣
-Lampetra•Gray 1851•Lamproie Lampetra•2010•LPX••40.0•⸣
-Lepadogaster candolii•Risso, 1810•Gluette petite queue•3417•••7.5•⸣
-Lepadogaster lepadogaster•Walbaum 1792•Gluette barbier•3418•••6.5•⸣
+Labrus mixtus•Linnaeus,1758•Coquette•19489•••350•⸣
+Labrus viridis•Linnaeus,1758•Labre vert•19479•••600•⸣
+Lampetra•Gray 1851•Lamproie Lampetra•2010•LPX••400•⸣
+Lepadogaster candolii•Risso, 1810•Gluette petite queue•3417•••75•⸣
+Lepadogaster lepadogaster•Walbaum 1792•Gluette barbier•3418•••65•⸣
 Lepidorhombus whiffiagonis•Walbaum 1792•Cardine franche•3523••••⸣
 Lepomis sp.•••••••⸣
-Lesueurigobius friesii•Malm 1874•Gobie raôlet•19469•••13.0•⸣
-Leuciscus cephalus•Linnaeus, 1758•Chevaine•2120••CHE•60.0•⸣
+Lesueurigobius friesii•Malm 1874•Gobie raôlet•19469•••130•⸣
+Leuciscus cephalus•Linnaeus, 1758•Chevaine•2120••CHE•600•⸣
 Leuciscus souffia•Risso 1827•Blageon•2119••••⸣
 Leucoraja naevus•Müller & Henle, 1841•Raie fleurie•3599••••⸣
 Lichia amia•Linnaeus, 1758•Liche•25286••••⸣
-Limanda limanda•Linnaeus, 1758•Limande•3518•••40.0•⸣
+Limanda limanda•Linnaeus, 1758•Limande•3518•••400•⸣
 Liocarcinus•Stimpson, 1870•Etrille nca•••••⸣
 Liocarcinus arcuatus•Leach, 1814•Etrille arcuatus•••••⸣
 Liocarcinus depurator•Linnaeus, 1758•Etrille pattes bleues•••••⸣
 Liocarcinus holsatus•Fabricius, 1798•Etrille nageuse•••••⸣
 Liocarcinus navigator•(Hebst, 1794)•Etrille pattes bleues•••••⸣
-Liparis liparis•Linnaeus 1766•Limace de mer•3553•••15.0•⸣
-Liparis montagui•Donovan 1804•Limace anicotte•2083•LIP••12.0•⸣
+Liparis liparis•Linnaeus 1766•Limace de mer•3553•••150•⸣
+Liparis montagui•Donovan 1804•Limace anicotte•2083•LIP••120•⸣
 Lipophrys dalmatinus•Steindachner & Kolombatovic, 1884•Blennie dalmate•20742••••⸣
 Lipophrys pholis•Linnaeus, 1758•Blennie mordocet•3431••••⸣
-Lithognathus mormyrus•Linnaeus, 1758•Marbré•19465•••37.6•⸣
-Liza•Jordan&Swain 1884•Mulets nca•2181•••59.15•⸣
-Liza saliens•Risso 1810•Mulet sauteur•3267•MUS••40.0•⸣
+Lithognathus mormyrus•Linnaeus, 1758•Marbré•19465•••376•⸣
+Liza•Jordan&Swain 1884•Mulets nca•2181•••5915•⸣
+Liza saliens•Risso 1810•Mulet sauteur•3267•MUS••400•⸣
 Loliginidae•D'Orbigny, 1848•Calmars côtiers nca•••••⸣
 Loligo••Calmars nca•••••⸣
 Loligo vulgaris•Lamarck 1798•Encornet•••••⸣
@@ -553,28 +553,28 @@ Maja squinado•Herbst, 1788•Araignée de mer•••••⸣
 Maurolicus muelleri•Gmelin 1789•Brossé améthyste•19466••••⸣
 Medorippe lanata•••••••⸣
 Melanogrammus aeglefinus•Linnaeus, 1758•Eglefin•19467••••⸣
-Merlangius merlangus•Linnaeus, 1758•Merlan•2158•MER•WHG•7.0•⸣
-Merluccius merluccius•Linnaeus, 1758•Merlu européen•3410••HKE•140.0•⸣
+Merlangius merlangus•Linnaeus, 1758•Merlan•2158•MER•WHG•70•⸣
+Merluccius merluccius•Linnaeus, 1758•Merlu européen•3410••HKE•1400•⸣
 Micrenophrys lilljeborgii•Collett 1875•Chabot têtu•3549••••⸣
-Microchirus variegatus•Donovan, 1808•Sole perdrix•3539•••35.0•⸣
+Microchirus variegatus•Donovan, 1808•Sole perdrix•3539•••350•⸣
 Micromesistius poutassou•Risso 1827•Merlan bleu•3391••••⸣
 Microstomus kitt•Walbaum 1792•Limande sole•3520••••⸣
 Molva molva•Linnaeus, 1758•Lingue•3393••••⸣
 Mugil•Linnaeus, 1758•Mulets nca•2184••••⸣
-Mugilidae••Mugilidés•2178•••78.33•⸣
+Mugilidae••Mugilidés•2178•••7833•⸣
 Mugil liza•Valenciennes 1836•Mulet lebranche•••••⸣
 Mullus•Linnaeus, 1758•Rougets nca•3471••••⸣
-Mullus barbatus•Linnaeus, 1758•Rouget de vase•3472•••33.2•⸣
+Mullus barbatus•Linnaeus, 1758•Rouget de vase•3472•••332•⸣
 Mullus sp.••Mullus sp.•••MUL••⸣
-Mullus surmuletus•Linnaeus, 1758•Rouget de roche•3473••MUS•40.0•⸣
+Mullus surmuletus•Linnaeus, 1758•Rouget de roche•3473••MUS•400•⸣
 Mustelus asterias•Cloquet 1821•Emissole tachetée•3584••••⸣
 Mustelus mustelus•Linnaeus, 1758•Emissole lisse•3585••••⸣
 Myoxocephalus scorpius•Linnaeus, 1758•Chaboisseau à épines courtes•3546••••⸣
 Myxine glutinosa•Linnaeus, 1758•Myxine•19470••••⸣
 Necora puber•Linnaeus 1767•Etrille commune•••••⸣
-Nerophis lumbriciformis•Jenyns 1835•Nérophis petit nez•19471•••16.0•⸣
-Nerophis maculatus•Rafinesque, 1810•Nérophis tacheté••••30.0•⸣
-Nerophis ophidion•Linnaeus, 1758•Nérophis tête bleue•19472•••29.0•⸣
+Nerophis lumbriciformis•Jenyns 1835•Nérophis petit nez•19471•••160•⸣
+Nerophis maculatus•Rafinesque, 1810•Nérophis tacheté••••300•⸣
+Nerophis ophidion•Linnaeus, 1758•Nérophis tête bleue•19472•••290•⸣
 NoName•••••••⸣
 Oblada melanura•Linnaeus, 1758•Oblade•3485••••⸣
 Octopus vulgaris••poulpe commun•••••⸣
@@ -586,8 +586,8 @@ Osmerus sp., Hypomesus sp.••Eperlans nca•••••⸣
 Pachygrapsus••Crabes Pachygrapsus•••••⸣
 Pachygrapsus marmoratus•Fabricius 1787•Grapse marbré•••••⸣
 Pachygrapsus transversus•Gibbes 1850•Anglette africaine•••••⸣
-Pagellus bogaraveo•Linnaeus, 1758•Pageot rose••••70.0•⸣
-Pagellus erythrinus•Linnaeus, 1758•Pageot commun•23613•••51.7•⸣
+Pagellus bogaraveo•Linnaeus, 1758•Pageot rose••••700•⸣
+Pagellus erythrinus•Linnaeus, 1758•Pageot commun•23613•••517•⸣
 Pagurus prideauxi•Leach, 1814•Gonfaron•••••⸣
 Palaemon•Weber, 1795•Crevettes Palaemon nca•••••⸣
 Palaemon adspersus•Rathke, 1837•Bouquet balte•••••⸣
@@ -600,13 +600,13 @@ Palaemon macrodactylus•M.J. Rathbun 1902•Bouquet migrateur•••CRM••
 Palaemon serratus•Pennant 1777•Bouquet commun•••CRR••⸣
 Palaemon sp.••Palaemon sp.•••PAL••⸣
 Panopeus africanus•A. Milne Edwards 1867•Crabe caillou africain•••••⸣
-Parablennius gattorugine•Linnaeus, 1758•Blennie cabot•3429•••30.0•⸣
-Parablennius pilicornis•Cuvier, 1829•Blennie pilicorne•20743•••12.7•⸣
+Parablennius gattorugine•Linnaeus, 1758•Blennie cabot•3429•••300•⸣
+Parablennius pilicornis•Cuvier, 1829•Blennie pilicorne•20743•••127•⸣
 Parablennius sanguinolentus•Pallas 1814•Baveuse•19473••••⸣
 Parthenope angulifrons•••••••⸣
 Pecten maximus•(Linnaeus, 1758)•Coquille St Jacques•••••⸣
 Pegusa impar•Bennett, 1831•Sole adriatique•20746••••⸣
-Pegusa lascaris•Ben-Tuvia 1990•Sole-pole•3540•••40.0•⸣
+Pegusa lascaris•Ben-Tuvia 1990•Sole-pole•3540•••400•⸣
 Penaeus japonicus•Bate 1888•Crevette kuruma•••••⸣
 Penaeus kerathurus•Forskal 1775•Caramote•••••⸣
 Petromyzon marinus, Lampetra fluviatilis••lamproie marine et lamproie de rivière•19512••LPS••⸣
@@ -614,7 +614,7 @@ Petromyzon sp.•Linnaeus 1758••••••⸣
 Petromyzontidae••Lamproies nca•2009••••⸣
 Petromyzontiformes••Petromyzontiformes•5070••••⸣
 Philocheras trispinosus•(Hailstone, 1835)•crevette philocheras•••••⸣
-Pholis gunnellus•Linnaeus, 1758•Gonelle•2200•GON••25.0•⸣
+Pholis gunnellus•Linnaeus, 1758•Gonelle•2200•GON••250•⸣
 Phoxinus•Rafinesque 1820•Vairons nca•2124•PHX•••⸣
 Pilumnus hirtellus•Linnaeus, 1758•Crabe rouge poilu•••••⸣
 Pirimela denticulata•••••••⸣
@@ -627,16 +627,16 @@ Platichthys flesus luscus•Pallas 1811••••••⸣
 Platichthys sp.•Girard 1856••••••⸣
 Pleuronectes•Linnaeus, 1758•Plies nca•2204••••⸣
 Pleuronectidae••Pleuronectidés•2201••••⸣
-Pollachius pollachius•Linnaeus, 1758•Lieu jaune•2160•LIJ•POL•130.0•⸣
+Pollachius pollachius•Linnaeus, 1758•Lieu jaune•2160•LIJ•POL•1300•⸣
 Pollachius virens•Linnaeus, 1758•Lieu noir•3398••••⸣
 Polybius holsatus•••••••⸣
 Pomatomus saltatrix•Linnaeus, 1766•Tassergal•20744••••⸣
-Pomatoschistus•Gill 1864•Gobies Pomatoschistus•2173•••7.66•⸣
-Pomatoschistus lozanoi•De Buen, 1923•Gobie rouillé•19464•••8.0•⸣
-Pomatoschistus marmoratus•Risso, 1810•Gobie marbré•19463•••8.0•⸣
-Pomatoschistus microps•Kroeyer 1838•Gobie tacheté•3455•••6.8•⸣
-Pomatoschistus minutus•Pallas 1770•Gobie buhotte•2174•GOB•GOB•11.0•⸣
-Pomatoschistus pictus•Malm 1865•Gobie varié•3456•••8.0•⸣
+Pomatoschistus•Gill 1864•Gobies Pomatoschistus•2173•••766•⸣
+Pomatoschistus lozanoi•De Buen, 1923•Gobie rouillé•19464•••80•⸣
+Pomatoschistus marmoratus•Risso, 1810•Gobie marbré•19463•••80•⸣
+Pomatoschistus microps•Kroeyer 1838•Gobie tacheté•3455•••68•⸣
+Pomatoschistus minutus•Pallas 1770•Gobie buhotte•2174•GOB•GOB•110•⸣
+Pomatoschistus pictus•Malm 1865•Gobie varié•3456•••80•⸣
 Pomatoschistus quagga•Gil, 1863•Gobie quagga•••••⸣
 Porcellana platycheles•Pennant 1777•Crabe porcelaine•••••⸣
 Portumnus latipes•Pennant 1777•Etrille elegante•••••⸣
@@ -645,17 +645,17 @@ Procambarus••Ecrevisses nca•2027••••⸣
 Processa edulis•Risso 1816•Guernade nica•••••⸣
 Processa nouveli•Al Adhub & Williamson, 1975•Guernade nouveli•••••⸣
 Processa parva••crevette ind•••••⸣
-Psetta maxima•Linnaeus, 1758•Turbot•19468••TUR•100.0•⸣
+Psetta maxima•Linnaeus, 1758•Turbot•19468••TUR•1000•⸣
 Psetta sp.•Swainson 1839••••••⸣
 Pycnogonidae••Pycnogonide nca•••••⸣
-Raja•Linnaeus, 1758•Raie nca•2210•••112.2•⸣
+Raja•Linnaeus, 1758•Raie nca•2210•••1122•⸣
 Raja brachyura•Lafont 1873•Raie lisse•3591••••⸣
-Raja clavata•Linnaeus, 1758•Raie bouclée•2211•RBC•RJC•105.0•⸣
+Raja clavata•Linnaeus, 1758•Raie bouclée•2211•RBC•RJC•1050•⸣
 Raja microocellata•Montagu 1818•Raie mélée•3592••••⸣
 Raja montagui•Fowler, 1910•Raie étoilée•3593••••⸣
 Raja naevus•Müller & Henle 1841•Raie fleurie•••RJN••⸣
-Raja undulata•Lacepède 1802•Raie brunette•3594••SKA•120.0•⸣
-Rajella fyllae•Lütken, 1887•Raie ronde•3602•••60.0•⸣
+Raja undulata•Lacepède 1802•Raie brunette•3594••SKA•1200•⸣
+Rajella fyllae•Lütken, 1887•Raie ronde•3602•••600•⸣
 Raniceps raninus•Linnaeus, 1758•Trident•3400••••⸣
 Rhithropanopeus•Gould 1832•Crabe•••••⸣
 Rhithropanopeus harrisii•Gould, 1841•Crabe de vase•••••⸣
@@ -665,85 +665,85 @@ Salaria basilisca•Valenciennes, 1836•Blennie basilic•25285••••⸣
 Salaria pavo•Risso 1810•Blennie paon•19488••••⸣
 Salmo•Linnaeus, 1758•Truites nca•2219••••⸣
 Salmonidae••Salmonidés•2212•SAL•••⸣
-Salmo trutta fario•Linnaeus, 1758•Truite fario•2221•TRF••100.0•⸣
-Salmo trutta trutta•Linnaeus, 1758•Truite de mer brune•2224•TRM••100.0•⸣
+Salmo trutta fario•Linnaeus, 1758•Truite fario•2221•TRF••1000•⸣
+Salmo trutta trutta•Linnaeus, 1758•Truite de mer brune•2224•TRM••1000•⸣
 Sander••Sandres nca•5074••••⸣
-Sardina pilchardus•Walbaum 1792•Sardine commune•2062•SAR•SAR•27.0•⸣
+Sardina pilchardus•Walbaum 1792•Sardine commune•2062•SAR•SAR•270•⸣
 Sardinella aurita•Valenciennes 1847•Allache•19476••••⸣
 Sarpa salpa•Linnaeus, 1758•Saupe•19475••••⸣
 Sciaena umbra•Linnaeus, 1758•Corb commun•19477••••⸣
-Scomber scombrus•Linnaeus, 1758•Maquereau commun•3475••MAC•60.0•⸣
+Scomber scombrus•Linnaeus, 1758•Maquereau commun•3475••MAC•600•⸣
 Scophthalmus maximus•Linnaeus, 1758•Turbot•••••⸣
-Scophthalmus rhombus•Linnaeus, 1758•Barbue•3531••BLL•75.0•⸣
+Scophthalmus rhombus•Linnaeus, 1758•Barbue•3531••BLL•750•⸣
 Scophthalmus sp.•Rafinesque 1810••••••⸣
-Scorpaena porcus•Linnaeus, 1758•Rascasse brune•20745•••37.0•⸣
-Scyliorhinus canicula•Linnaeus, 1758•Petite roussette•3609•••100.0•⸣
+Scorpaena porcus•Linnaeus, 1758•Rascasse brune•20745•••370•⸣
+Scyliorhinus canicula•Linnaeus, 1758•Petite roussette•3609•••1000•⸣
 Scyliorhinus stellaris•Linnaeus, 1758•Grande roussette•3610••••⸣
 Sepia•Linnaeus, 1758•Seiches•••••⸣
 Sepia officinalis•Linnaeus, 1758•Seiche commune•••SEI••⸣
 Sepiola•Leach, 1817•Sépioles•••••⸣
 Sepiola atlantica•Orbigny 1840•Sépiole grandes oreilles•••••⸣
 Sepiola rondeleti•Leach, 1817•Sepiole rondeleti•••••⸣
-Serranus hepatus•Linné, 1758•Serran tambour•3479•••25.0•⸣
+Serranus hepatus•Linné, 1758•Serran tambour•3479•••250•⸣
 Sicyonia carinata•••••••⸣
 Silurus•Linnaeus, 1758•Silures nca•2237••••⸣
-Solea•Quensel 1806•Soles•2240••SOL•65.0•⸣
+Solea•Quensel 1806•Soles•2240••SOL•650•⸣
 Solea aegyptiaca•Chabanaud, 1927•Sole egyptienne•••••⸣
 Solea lascaris••Sole pole•••SOS••⸣
-Solea senegalensis•Kaup 1858•Sole sénégalaise•3541••SOX•60.0•⸣
-Solea solea•Linnaeus, 1758•Sole•2241•SOL••70.0•⸣
+Solea senegalensis•Kaup 1858•Sole sénégalaise•3541••SOX•600•⸣
+Solea solea•Linnaeus, 1758•Sole•2241•SOL••700•⸣
 Solea vulgaris•Quensel 1806•Sole commune•••SOL••⸣
-Sparidae••sparidés nca•3481•••48.07•⸣
-Sparus aurata•Linnaeus, 1758•Dorade royale•3490••DRO•70.0•⸣
+Sparidae••sparidés nca•3481•••4807•⸣
+Sparus aurata•Linnaeus, 1758•Dorade royale•3490••DRO•700•⸣
 Spicara smaris•Linnaeus, 1758•Picarel•3449••••⸣
-Spinachia spinachia•Linnaeus, 1758•Epinoche de mer•19452•••19.1•⸣
-Spondyliosoma cantharus•Linnaeus, 1758•Griset•3492••BRD•60.0•⸣
+Spinachia spinachia•Linnaeus, 1758•Epinoche de mer•19452•••191•⸣
+Spondyliosoma cantharus•Linnaeus, 1758•Griset•3492••BRD•600•⸣
 Sprattus sp.•Girgensohn 1846••••••⸣
-Sprattus sprattus•Linnaeus, 1758•Sprat•2064•SPT•SPT•16.0•⸣
+Sprattus sprattus•Linnaeus, 1758•Sprat•2064•SPT•SPT•160•⸣
 Squalus acanthias•Linnaeus, 1758•Aiguillat commun•3614••••⸣
 Stizostedion lucioperca••Sandre•••SAN••⸣
-Symphodus bailloni•Valenciennes in Cuv. & Val., 1839•Crénilabre grelue•19443•••21.0•⸣
-Symphodus cinereus•(Bonnaterre), 1788•Crénilabre balafré•19449•••16.0•⸣
-Symphodus melops•Linnaeus, 1758•Crénilabre melops•3466•••24.0•⸣
-Symphodus ocellatus•(Forsskål, 1775)•Crénilabre ocellé•19448•••12.0•⸣
-Symphodus roissali•Risso 1810•Crénilabre langaneu•19447•••17.0•⸣
+Symphodus bailloni•Valenciennes in Cuv. & Val., 1839•Crénilabre grelue•19443•••210•⸣
+Symphodus cinereus•(Bonnaterre), 1788•Crénilabre balafré•19449•••160•⸣
+Symphodus melops•Linnaeus, 1758•Crénilabre melops•3466•••240•⸣
+Symphodus ocellatus•(Forsskål, 1775)•Crénilabre ocellé•19448•••120•⸣
+Symphodus roissali•Risso 1810•Crénilabre langaneu•19447•••170•⸣
 Symphodus tinca•Linnaeus, 1758•Crénilabre paon•19450••••⸣
-Synapturichthys kleinii•Risso, 1827•Sole tachetée•25284•••42.0•⸣
+Synapturichthys kleinii•Risso, 1827•Sole tachetée•25284•••420•⸣
 Synchiropus phaeton•(Günther 1861)•Callionyme paille-en-queue•19445••••⸣
 Syngnathidae••Syngnathes•2242••••⸣
-Syngnathus•Linnaeus, 1758•Syngnathes•2243•••29.75•⸣
-Syngnathus abaster•Risso 1827•Syngnathe gorge claire•19444•••21.0•⸣
-Syngnathus acus•Linnaeus, 1758•Syngnathe aiguille•2244•SYN••2.0•⸣
-Syngnathus rostellatus•Nilsson 1855•Syngnathe de Duméril•3570••SYN•20.5•⸣
+Syngnathus•Linnaeus, 1758•Syngnathes•2243•••2975•⸣
+Syngnathus abaster•Risso 1827•Syngnathe gorge claire•19444•••210•⸣
+Syngnathus acus•Linnaeus, 1758•Syngnathe aiguille•2244•SYN••20•⸣
+Syngnathus rostellatus•Nilsson 1855•Syngnathe de Duméril•3570••SYN•205•⸣
 Syngnathus taenionotus•Canestrini 1871•Syngnathe taenionotus•19459••••⸣
-Syngnathus typhle•Linnaeus, 1758•Siphonostome•3571•••36.0•⸣
+Syngnathus typhle•Linnaeus, 1758•Siphonostome•3571•••360•⸣
 Syngnathus typhle typhle•Linnaeus, 1758•Siphonostome atlantique•••••⸣
-Taurulus bubalis•Euphrasen 1786•Chabot buffle•3548•••17.5•⸣
-Thorogobius ephippiatus••gobie léopard••••12.9•⸣
+Taurulus bubalis•Euphrasen 1786•Chabot buffle•3548•••175•⸣
+Thorogobius ephippiatus••gobie léopard••••129•⸣
 Tinca sp.•Cuvier 1817••••••⸣
-Torpedo marmorata•Risso 1810•Torpille marbrée•19461••TOE•61.2•⸣
-Torpedo torpedo•Linné, 1758•Torpille ocelée•25287•••55.0•⸣
+Torpedo marmorata•Risso 1810•Torpille marbrée•19461••TOE•612•⸣
+Torpedo torpedo•Linné, 1758•Torpille ocelée•25287•••550•⸣
 Trachinotus ovatus•Linnaeus, 1758•Liche glauque•••••⸣
 Trachinus draco•Linnaeus, 1758•Grande vive•3498••••⸣
-Trachurus trachurus•Linnaeus, 1758•Chinchard d'Europe•3375••HOM•70.0•⸣
+Trachurus trachurus•Linnaeus, 1758•Chinchard d'Europe•3375••HOM•700•⸣
 Trigla•Linnaeus, 1758•Grondins nca•3562••••⸣
 Trigla lucerna••Grondin perlon•••GUP••⸣
-Trigla lyra•Linnaeus, 1758•Grondin lyre•19455•••60.0•⸣
+Trigla lyra•Linnaeus, 1758•Grondin lyre•19455•••600•⸣
 Triglidae••Grondins, cavillones nca•3557••••⸣
-Tripterygion delaisi•Cadenat & Blache, 1970•Triptérygion commun•19454•••8.9•⸣
-Trisopterus•Rafinesque, 1814•Tacaud nca•2161•••43.0•⸣
+Tripterygion delaisi•Cadenat & Blache, 1970•Triptérygion commun•19454•••89•⸣
+Trisopterus•Rafinesque, 1814•Tacaud nca•2161•••430•⸣
 Trisopterus esmarkii•Nilsson 1855•Tacaud norvégien•3404••••⸣
-Trisopterus luscus•Linnaeus, 1758•Tacaud commun•2162•TAD•BIB•46.0•⸣
-Trisopterus minutus•Linnaeus, 1758•Capelan•3406•••40.0•⸣
+Trisopterus luscus•Linnaeus, 1758•Tacaud commun•2162•TAD•BIB•460•⸣
+Trisopterus minutus•Linnaeus, 1758•Capelan•3406•••400•⸣
 Umbrina•Cuvier, 1816•Ombrine nca•19435••••⸣
-Umbrina canariensis•Valenciennes 1843•Ombrine bronze•19456••UMBB•80.0•⸣
-Umbrina cirrosa•Linnaeus, 1758•Ombrine côtière•19457••UMBC•100.0•⸣
+Umbrina canariensis•Valenciennes 1843•Ombrine bronze•19456••UMBB•800•⸣
+Umbrina cirrosa•Linnaeus, 1758•Ombrine côtière•19457••UMBC•1000•⸣
 Umbrina sp.••Ombrine sp.•••UMB••⸣
 Upogebia pusilla•Petagna, 1792•Crevette fouisseuse•••••⸣
 Xantho incisus•Herbst, 1790•Crabe de pierre•••••⸣
-Zebrus zebrus•Risso, 1827•Gobie zébré•19446•••5.5•⸣
-Zeugopterus punctatus•Bloch 1787•Targeur•3533•••27.0•⸣
-Zeus faber•Linnaeus, 1758•Saint Pierre•3577•••59.0•⸣
+Zebrus zebrus•Risso, 1827•Gobie zébré•19446•••55•⸣
+Zeugopterus punctatus•Bloch 1787•Targeur•3533•••270•⸣
+Zeus faber•Linnaeus, 1758•Saint Pierre•3577•••590•⸣
 Zoarces viviparus•Linnaeus, 1758•Loquette d'Europe•3501••••⸣
 Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</initial-data>
@@ -932,11 +932,11 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="sample_size_min">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Minimal size of fishes in this sample, in cm]]></comment>
+		<comment><![CDATA[Minimal size of fishes in this sample, in mm]]></comment>
 	</column>
 	<column name="sample_size_max">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Maximal size of fishes in this sample, in cm]]></comment>
+		<comment><![CDATA[Maximal size of fishes in this sample, in mm]]></comment>
 	</column>
 	<column name="sample_comment">
 		<type name="varchar" length="0"/>
@@ -947,10 +947,12 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 
 	<customidxs object-type="column">
 		<object name="sequence_id" index="1"/>
+		<object name="taxon_id" index="9"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
 		<object name="sequence_fk" index="1"/>
+		<object name="taxon_fk" index="2"/>
 	</customidxs>
 </table>
 
@@ -992,23 +994,23 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="sl">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Standard length, in cm]]></comment>
+		<comment><![CDATA[Standard length, in mm]]></comment>
 	</column>
 	<column name="fl">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Fork length, in cm]]></comment>
+		<comment><![CDATA[Fork length, in mm]]></comment>
 	</column>
 	<column name="tl">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Total length, in cm]]></comment>
+		<comment><![CDATA[Total length, in mm]]></comment>
 	</column>
 	<column name="wd">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Width of disk, in cm]]></comment>
+		<comment><![CDATA[Width of disk, in mm]]></comment>
 	</column>
 	<column name="ot">
 		<type name="float" length="0"/>
-		<comment><![CDATA[Other length, in cm]]></comment>
+		<comment><![CDATA[Other length, in mm]]></comment>
 	</column>
 	<column name="weight">
 		<type name="float" length="0"/>
@@ -2790,8 +2792,8 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbparam_id•dbparam_name•dbparam_value⸣
-1•APPLI_title•filo⸣
-2•mapDefaultZoom•10⸣
+1•APPLI_title•Filo-Science⸣
+2•mapDefaultZoom•9⸣
 3•mapDefaultLong•0⸣
 4•mapDefaultLat•45]]>
 	</initial-data>
