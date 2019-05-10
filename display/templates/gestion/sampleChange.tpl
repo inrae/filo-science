@@ -160,13 +160,13 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="sample_size_min"  class="control-label col-md-4"> {t}Longueur minimale mesurée (cm) :{/t}</label>
+                    <label for="sample_size_min"  class="control-label col-md-4"> {t}Longueur minimale mesurée (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="sample_size_min" type="text" class="form-control taux" name="sample_size_min" value="{$data.sample_size_min}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="sample_size_max"  class="control-label col-md-4"> {t}Longueur maximale mesurée (cm) :{/t}</label>
+                    <label for="sample_size_max"  class="control-label col-md-4"> {t}Longueur maximale mesurée (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="sample_size_max" type="text" class="form-control taux" name="sample_size_max" value="{$data.sample_size_max}">
                     </div>
@@ -193,31 +193,31 @@ $(document).ready(function() {
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
                 <input type="hidden" id="individualChange" name="individualChange" value=0>
                 <div class="form-group" id="div-sl">
-                    <label for="sl"  class="control-label col-md-4"> {t}Longueur standard (cm) :{/t}</label>
+                    <label for="sl"  class="control-label col-md-4"> {t}Longueur standard (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="sl" type="text" class="fish form-control taux" name="sl" value="{$individual.sl}" {if $sequence.measure_default == "sl"}autofocus{/if}>
                     </div>
                 </div>
                 <div class="form-group" id="div-fl">
-                    <label for="fl"  class="control-label col-md-4"> {t}Longueur fourche (cm) :{/t}</label>
+                    <label for="fl"  class="control-label col-md-4"> {t}Longueur fourche (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="fl" type="text" class="fish form-control taux" name="fl" value="{$individual.fl}" {if $sequence.measure_default == "fl"}autofocus{/if}>
                     </div>
                 </div>
                 <div class="form-group" id="div-tl">
-                    <label for="tl"  class="control-label col-md-4"> {t}Longueur totale (cm) :{/t}</label>
+                    <label for="tl"  class="control-label col-md-4"> {t}Longueur totale (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="tl" type="text" class="fish form-control taux" name="tl" value="{$individual.tl}" {if $sequence.measure_default == "tl"}autofocus{/if}>
                     </div>
                 </div>
                 <div class="form-group" id="div-wd">
-                    <label for="wd"  class="control-label col-md-4"> {t}Largeur disque (cm) :{/t}</label>
+                    <label for="wd"  class="control-label col-md-4"> {t}Largeur disque (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="wd" type="text" class="fish form-control taux" name="wd" value="{$individual.wd}" {if $sequence.measure_default == "wd"}autofocus{/if}>
                     </div>
                 </div>
                 <div class="form-group" id="div-ot">
-                    <label for="ot"  class="control-label col-md-4"> {t}Autre longueur (cm) :{/t}</label>
+                    <label for="ot"  class="control-label col-md-4"> {t}Autre longueur (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="ot" type="text" class="fish form-control taux" name="ot" value="{$individual.ot}" {if $sequence.measure_default == "ot"}autofocus{/if}>
                     </div>

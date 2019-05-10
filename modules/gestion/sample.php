@@ -6,6 +6,11 @@ $dataClass = new Sample($bdd, $ObjetBDDParam);
 $keyName = "sample_id";
 $id = $_SESSION["ti_sample"]->getValue($_REQUEST[$keyName]);
 $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
+if (strlen($id) == 0) {
+    $t_module["param"] = "error";
+    $t_module["retourko"] = "default";
+    $module_coderetour = -1;
+}
 
 switch ($t_module["param"]) {
     case "change":

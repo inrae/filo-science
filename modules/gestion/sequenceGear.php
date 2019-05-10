@@ -4,9 +4,13 @@ $dataClass = new SequenceGear($bdd, $ObjetBDDParam);
 $keyName = "sequence_gear_id";
 $id = $_SESSION["ti_sequenceGear"]->getValue($_REQUEST[$keyName]);
 $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
-switch ($t_module["param"]) {
+if (strlen($id) == 0) {
+    $t_module["param"] = "error";
+    $t_module["retourko"] = "default";
+    $module_coderetour = -1;
+}
 
-    
+switch ($t_module["param"]) {
     case "change":
         /*
          * open the form to modify the record

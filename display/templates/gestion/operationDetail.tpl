@@ -1,11 +1,11 @@
 <script>
     var mapIsChange = false;
 </script>
-<div class="row">
+<div class="row col-md-12">
         <a href="index.php?module=operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
             <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
-        <fieldset class="col-md-12">
+        <fieldset >
         <legend>{t}Informations générales{/t}</legend>
 
         <div class="col-md-6">          

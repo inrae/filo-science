@@ -2,7 +2,7 @@
 	<its:rules version="2.0">
 		<its:translateRule selector="//item/@tabledescription" translate="yes"/>
 	</its:rules>
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv" droitko="droitko" modulebefore="module1,module2">
+	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id">
 	</model>
 	<default action="framework/default.php" type="smarty"></default>
 	<droitko action="framework/droitko.php" type="smarty"></droitko>
@@ -207,31 +207,31 @@
 
 	<!-- modules for projects -->
 	<campaignList action="modules/gestion/campaign.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty"/>
+	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty" requiredVar="campaign_id"/>
 	<campaignChange action="modules/gestion/campaign.php" param="change" droits="gestion" type="smarty"/>
 	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion" retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange" />
 	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion" retourok="campaignList" retourko="campaignChange" modulebefore="campaignChange" />
 
-	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty"/>
-	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty"/>
+	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty" requiredVar="operation_id"/>
+	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty" requiredVar="operation_id" />
 	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" />
 	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignList" retourko="operationChange" modulebefore="operationChange" />
 
-	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty"/>
-	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty"/>
+	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id"/>
+	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id"/>
 	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" />
 	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange" />
 
-	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty"/>
+	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_gear_id"/>
 	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" />
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" />
 
-	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty"/>
+	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty"  requiredVar="sample_id"/>
 	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
 	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sampleChange" modulebefore="sampleChange" />
 	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
 
-	<ambienceChange action="modules/gestion/ambience.php" param="change" droits="gestion" type="smarty"/>
+	<ambienceChange action="modules/gestion/ambience.php" param="change" droits="gestion" type="smarty"  requiredVar="ambience_id"/>
 	<ambiencesequenceWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
 	<ambiencesequenceDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
 	<ambienceoperationWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />

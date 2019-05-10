@@ -20,7 +20,7 @@ switch ($t_module["param"]) {
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
         dataRead($dataClass, $id, "param/stationChange.tpl");
-        include 'modules/gestion/mapInit.php';
+        setParamMap($vue);
         $vue->set($_SESSION["projects"], "projects");
         require_once 'modules/classes/param.class.php';
         $river = new Param($bdd, "river");

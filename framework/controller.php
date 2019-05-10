@@ -159,6 +159,12 @@ while (isset($module)) {
         $message->set(sprintf(_('Le module demandé n\'existe pas (%s)'), $module), true);
         $t_module = $navigation->getModule("default");
     }
+    /**
+     * Si la variable demandee n'existe pas, retour vers la page par defaut
+     */
+    if (isset($t_module["requiredVar"]) && !isset($_REQUEST[$t_module["requiredVar"]])) {
+        $t_module = $navigation->getModule("default");
+    }
     /*
      * Extraction des droits necessaires
      */

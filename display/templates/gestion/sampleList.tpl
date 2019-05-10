@@ -14,8 +14,8 @@
                         <th>{t}Nombre total{/t}</th>
                         <th>{t}Nombre mesurés{/t}</th>
                         <th>{t}Poids total (g){/t}</th>
-                        <th>{t}Taille mini mesurée (cm){/t}</th>
-                        <th>{t}Taille maxi mesurée (cm){/t}</th>
+                        <th>{t}Taille mini mesurée (mm){/t}</th>
+                        <th>{t}Taille maxi mesurée (mm){/t}</th>
                         <th>{t}Commentaires{/t}</th>
                     </tr>
                 </thead>

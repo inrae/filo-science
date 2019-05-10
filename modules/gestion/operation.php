@@ -7,6 +7,11 @@ $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 if (isset($_REQUEST["activeTab"])) {
     $activeTab = $_REQUEST["activeTab"];
 }
+if (strlen($id) == 0) {
+    $t_module["param"] = "error";
+    $t_module["retourko"] = "default";
+    $module_coderetour = -1;
+}
 
 switch ($t_module["param"]) {
 

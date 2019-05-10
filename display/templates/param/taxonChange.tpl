@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="length_max"  class="control-label col-md-4">{t}Longueur maxi (cm) :{/t}</label>
+                <label for="length_max"  class="control-label col-md-4">{t}Longueur maxi (mm) :{/t}</label>
                 <div class="col-md-8">
                     <input id="length_max" type="text" class="form-control" name="length_max" value="{$data.length_max}" >
                 </div>

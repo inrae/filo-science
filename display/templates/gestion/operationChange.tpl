@@ -248,7 +248,7 @@ $(document).ready(function() {
         </form>
     </div>
     <div class="col-md-6">
-        <div id="map" class="mapDisplay">
+        <div id="map" class="map">
                 {include file="gestion/operationMapChange.tpl"}
         </div>
     </div>

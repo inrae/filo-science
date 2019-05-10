@@ -4,6 +4,11 @@ require_once 'modules/classes/campaign.class.php';
 $dataClass = new Campaign($bdd, $ObjetBDDParam);
 $keyName = "campaign_id";
 $id = $_SESSION["ti_campaign"]->getValue($_REQUEST[$keyName]);
+if (strlen($id) == 0) {
+    $t_module["param"] = "error";
+    $t_module["retourko"] = "default";
+    $module_coderetour = -1;
+}
 
 switch ($t_module["param"]) {
     case "list":

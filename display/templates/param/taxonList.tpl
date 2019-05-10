@@ -17,7 +17,7 @@
             <th>{t}Code rivière{/t}</th>
             <th>{t}Code mer/estuaire{/t}</th>
             <th>{t}Écotype{/t}</th>
-            <th>{t}Longueur max (cm){/t}</th>
+            <th>{t}Longueur max (mm){/t}</th>
             <th>{t}Poids max (g){/t}</th>
         </tr>
     </thead>
