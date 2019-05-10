@@ -2,12 +2,13 @@
     var mapIsChange = false;
 </script>
 <div class="row">
-    <fieldset class="col-md-12">
+        <a href="index.php?module=operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
+            <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+        </a>
+        <fieldset class="col-md-12">
         <legend>{t}Informations générales{/t}</legend>
-        <div class="col-md-6">
-            <a href="index.php?module=operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
-                    <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
-                </a>
+
+        <div class="col-md-6">          
             <div class="form-display">
                 <dl class="dl-horizontal">
                     <dt>{t}Nom de l'opération :{/t}</dt>
@@ -102,7 +103,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div id="map" class="mapDisplay">
+            <div id="map" class="map">
                     {include file="gestion/operationMapChange.tpl"}
             </div>
         </div>

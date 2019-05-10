@@ -1,6 +1,17 @@
+<script>
+    var mapIsChange = false;
+    $(document).ready(function() { 
+        var long = "{$ambience.ambience_long}";
+        var lat = "{$ambience.ambience_lat}";
+        if (long.length > 0 && lat.length > 0) {
+            setPosition(long, lat);
+        }
+    });
+
+</script>
 <div class="row">
 
-    <div class="col-md-6 form-display">
+    <div class="col-md-4 form-display">
         <dl class="dl-horizontal">
             <dt>{t}Nom de l'ambiance :{/t}</dt>
             <dd>{$ambience.ambience_name}</dd>
@@ -56,7 +67,7 @@
         </fieldset>
         
     </div>
-    <div class="col-md-6 form-display">
+    <div class="col-md-4 form-display">
         <fieldset>
             <legend>{t}Caractéristiques du milieu{/t}</legend>
             <dl class="dl-horizontal">
@@ -111,6 +122,10 @@
                 <dd>{$ambience.granulometry_cache_abundance}</dd>
             </dl>
         </fieldset>
+    </div>
+    <div class="col-md-4">
+        {include file="gestion/ambienceMap.tpl"}
+        <br>{t}Si la carte ne s'affiche pas, redimensionnez votre navigateur{/t}
     </div>
         
 </div>

@@ -1,10 +1,14 @@
+<script>
+    var mapIsChange = true;
+</script>
 <h2>{t}Création - Modification d'une station{/t}</h2>
+<a href="index.php?module=stationList">
+    <img src="display/images/list.png" height="25">
+    {t}Retour à la liste{/t}
+</a>
 <div class="row">
     <div class="col-md-6">
-        <a href="index.php?module=stationList">
-            <img src="display/images/list.png" height="25">
-            {t}Retour à la liste{/t}
-        </a>
+        
 
         <form class="form-horizontal protoform" id="stationForm" method="post" action="index.php">
             <input type="hidden" name="moduleBase" value="station">

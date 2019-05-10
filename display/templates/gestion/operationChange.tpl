@@ -1,7 +1,8 @@
 
 <script>
+var mapIsChange = true;    
 $(document).ready(function() {
-    var mapIsChange = true;
+    
     $("#station_id").change(function() { 
         var stationId = $(this).val();
         if (stationId > 0) {

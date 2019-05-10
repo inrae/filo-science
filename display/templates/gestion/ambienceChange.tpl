@@ -1,8 +1,25 @@
+<script>
+    var mapIsChange = true;
+$(document).ready(function(){ 
+    function setPos() {
+        var lon = $("#ambience_long").val();
+        var lat = $("#ambience_lat").val();
+        setPosition(lon, lat);
+    };
+    $(".position").change(function () {
+        setPos();        
+    });
+    /*
+     * Initialisation of map
+     */
+    setPos();
+});
+</script>
 <div class="row">
     <a href="index.php?module=campaignDisplay&campaign_id={$dataParent.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$dataParent.campaign_name}</a>
         &nbsp;
 
-    <a href="index.php?module=operationDisplay&campaign_id={$dataParent.campaign_id}&operation_id={$dataParent.operation_id}&activeTab=tab-sequence">
+    <a href="index.php?module=operationDisplay&campaign_id={$dataParent.campaign_id}&operation_id={$dataParent.operation_id}&activeTab=tab-ambience">
                 <img src="display/images/display-green.png" height="25">   {t}Retour à l'opération{/t} {$dataParent.operation_name}</a>
     {if $origin=="sequence"}
         <a href="index.php?module=sequenceDisplay&sequence_id={$dataParent.sequence_id}&activeTab=tab-ambience">
@@ -21,7 +38,7 @@
         <input type="hidden" name="operation_id" value="{$data.operation_id}">
         <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
         <input type="hidden" name="activeTab" value="tab-ambience">
-        <div class="col-md-6 ">       
+        <div class="col-md-4 ">       
             <div class="form-group">
                 <label for="ambience_name"  class="control-label col-md-4">{t}Nom de l'ambiance :{/t}</label>
                 <div class="col-md-8">
@@ -138,7 +155,7 @@
             </fieldset>
         </div>
     
-        <div class="col-md-6">
+        <div class="col-md-4">
             <fieldset>
                 <legend>{t}Caractéristiques du milieu{/t}</legend>
                 <div class="form-group">
@@ -301,6 +318,9 @@
                     </div>
                 </div>
             </fieldset>
+        </div>
+        <div class="col-md-4">
+                {include file="gestion/ambienceMap.tpl"}
         </div>
 
         <div class="col-md-12">

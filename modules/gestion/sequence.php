@@ -63,6 +63,10 @@ switch ($t_module["param"]) {
         if (isset($activeTab)) {
             $vue->set($activeTab, "activeTab");
         }
+        /**
+         * Map
+         */
+        setParamMap($vue);
         break;
 
     case "change":

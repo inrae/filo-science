@@ -1,13 +1,13 @@
 <script type="text/javascript" charset="utf-8" src="display/javascript/ol-v4.2.0-dist/ol.js"></script>
 <link rel="stylesheet" type="text/css" href="display/javascript/ol-v4.2.0-dist/ol.css">
 
-<div id="map" class="map"></div>
+<div id="mapAmbience" class="map"></div>
 <script>
 var earth_radius = 6389125.541;
 var zoom = {$mapDefaultZoom};
 var mapCenter = [{$mapDefaultLong}, {$mapDefaultLat}];
-{if strlen({$data.station_long})>0 && strlen({$data.station_lat})>0} 
-	mapCenter = [{$data.station_long}, {$data.station_lat}];
+{if strlen({$ambience.ambience_long})>0 && strlen({$ambience.ambience_lat})>0} 
+	mapCenter = [{$ambience.ambience_long}, {$ambience.ambience_lat}];
 {/if}
 function getStyle() {
 	var styleRed = new ol.style.Style( { 
@@ -25,9 +25,8 @@ function getStyle() {
 return styleRed;
 }
 
-
 var attribution = new ol.control.Attribution({
-  collapsible: false
+  collapsible: true
 });
 var mousePosition = new ol.control.MousePosition( { 
     coordinateFormat: ol.coordinate.createStringXY(2),
@@ -35,13 +34,14 @@ var mousePosition = new ol.control.MousePosition( {
     target: undefined,
     undefinedHTML: '&nbsp;'
 });
-var map = new ol.Map({
-  controls: ol.control.defaults({ attribution: false }).extend([attribution]),
-  target: 'map',
-  view: new ol.View({
-  	center: ol.proj.fromLonLat(mapCenter),
+var view = new ol.View({
+    center: ol.proj.fromLonLat(mapCenter),
     zoom: zoom
-  })
+});
+var mapAmbience = new ol.Map({
+  controls: ol.control.defaults({ attribution: false }).extend([attribution]),
+  target: 'mapAmbience',
+  view: view
 });
 
 var layer = new ol.layer.Tile({
@@ -55,8 +55,8 @@ function transform_geometry(element) {
   element.getGeometry().transform(current_projection, new_projection);
 }
 
-map.addLayer(layer);
-var coordinates;
+mapAmbience.addLayer(layer);
+var coordinates = [,];
 var point;
 var point_feature;
 var features = new Array();
@@ -64,16 +64,16 @@ var features = new Array();
  * Traitement de chaque localisation
  */
 /*console.log("Début de traitement de l'affichage du point");
-console.log("x : " + {$data.wgs84_x});
-console.log("y  : "+ {$data.wgs84_y});
+console.log("x : " + {$ambience.wgs84_x});
+console.log("y  : "+ {$ambience.wgs84_y});
 */
 
-coordinates = [{$data.station_long}, {$data.station_lat}];
+//coordinates = [{$ambience.ambience_long}, {$ambience.ambience_lat}];
  point = new ol.geom.Point(coordinates);
  point_feature = new ol.Feature ( {
 	geometry: point
 });
-point_feature.setStyle(getStyle({$data.station_id}));
+point_feature.setStyle(getStyle());
 features.push ( point_feature) ;
 
 /*  
@@ -86,33 +86,29 @@ var layerPoint = new ol.layer.Vector({
   })
 });
 features.forEach(transform_geometry);
-map.addLayer(layerPoint);
-map.addControl(mousePosition);
+mapAmbience.addLayer(layerPoint);
+mapAmbience.addControl(mousePosition);
 
-	$(".position").change(function () {
-		var lon = $("#station_long").val();
-		var lat = $("#station_lat").val();
-		if (lon.length > 0 && lat.length > 0) {
-			console.log("longitude saisie : "+ lon);
-			console.log ("latitude saisie : " + lat);
-			var lonlat3857 = ol.proj.transform([parseFloat(lon),parseFloat(lat)], 'EPSG:4326', 'EPSG:3857');
-	        point.setCoordinates (lonlat3857);
-		}
-	});
-	console.log(mapIsChange);
-if (mapIsChange == true) {
-map.on('click', function(evt) {
-	  var lonlat3857 = evt.coordinate;
-	  var lonlat = ol.proj.transform(lonlat3857, 'EPSG:3857', 'EPSG:4326');
-	  var lon = lonlat[0];
-	  var lat = lonlat[1];
-	  console.log("longitude sélectionnée : "+ lon);
-	  console.log ("latitude sélectionnée : " + lat);
-	  point.setCoordinates (lonlat3857);
-	  $("#station_long").val(lon);
-	  $("#station_lat").val(lat);
-});
+function setPosition(lon, lat) {
+    console.log (lon);
+    console.log(lat);
+    if (lon.length > 0 && lat.length > 0) {
+        var lonlat3857 = ol.proj.transform([parseFloat(lon),parseFloat(lat)], 'EPSG:4326', 'EPSG:3857');
+        point.setCoordinates (lonlat3857);
+        view.setCenter(lonlat3857);
+    }
 }
-
-
+if (mapIsChange == true) {
+    mapAmbience.on('click', function(evt) {
+        var lonlat3857 = evt.coordinate;
+        var lonlat = ol.proj.transform(lonlat3857, 'EPSG:3857', 'EPSG:4326');
+        var lon = lonlat[0];
+        var lat = lonlat[1];
+        console.log("longitude sélectionnée : "+ lon);
+        console.log ("latitude sélectionnée : " + lat);
+        point.setCoordinates (lonlat3857);
+        $("#ambience_long").val(lon);
+        $("#ambience_lat").val(lat);
+    });
+}
 </script>

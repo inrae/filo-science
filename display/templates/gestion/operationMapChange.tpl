@@ -5,15 +5,13 @@
     var earth_radius = 6389125.541;
     var zoom = 5;
     {if $mapDefaultZoom > 0}zoom = {$mapDefaultZoom};{/if}
-    var mapCenter = [2.3,46];
+    var mapCenter = [{$mapDefaultLong}, {$mapDefaultLat}];
     var numpoint = 1;
-    {if strlen($mapDefaultLong) > 0 && strlen($mapDefaultLat) > 0}mapCenter = [{$mapDefaultLong}, {$mapDefaultLat}];{/if}
     {if strlen({$data.long_start})>0 && strlen({$data.lat_start})>0} 
         mapCenter = [{$data.long_start}, {$data.lat_start}];
     {/if}
     function getStyle(libelle) {
         libelle = libelle.toString();
-        console.log("libelle : "+libelle);
         var styleRed = new ol.style.Style( { 
             image: new ol.style.Circle({
                 radius: 6,
@@ -141,8 +139,6 @@
             var lonlat = ol.proj.transform(lonlat3857, 'EPSG:3857', 'EPSG:4326');
             var lon = lonlat[0];
             var lat = lonlat[1];
-            console.log("longitude sélectionnée : "+ lon);
-            console.log ("latitude sélectionnée : " + lat);
             setPosition(numpoint, lon, lat);
             if (numpoint == 1) {
                 $("#long_start").val(lon);
