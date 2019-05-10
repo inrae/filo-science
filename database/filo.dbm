@@ -3,8 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,887" last-zoom="1" max-obj-count="61"
-	 default-owner="postgres">
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1091" last-zoom="1" max-obj-count="61"
+	 default-owner="postgres"
+	 layers="gacl" active-layers="0;1">
 <role name="filo"
       sql-disabled="true">
 </role>
@@ -1890,7 +1891,7 @@ By default : total_length and weight]]></comment>
 	 dst-table="filo.ambience"
 	 src-required="false" dst-required="false"/>
 
-<schema name="gacl" layer="0" rect-visible="true" fill-color="#943dc9">
+<schema name="gacl" layer="1" rect-visible="true" fill-color="#943dc9">
 	<role name="filo"/>
 </schema>
 
@@ -1899,7 +1900,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="aclacl" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="aclacl" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des droits attribués]]></comment>
@@ -1930,7 +1931,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="aclaco" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="aclaco" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des droits gérés]]></comment>
@@ -1964,7 +1965,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="aclappli" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="aclappli" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des applications gérées]]></comment>
@@ -1990,7 +1991,7 @@ By default : total_length and weight]]></comment>
 	</initial-data>
 </table>
 
-<table name="aclgroup" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="aclgroup" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Groupes des logins]]></comment>
@@ -2024,7 +2025,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="acllogin" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="acllogin" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des logins des utilisateurs autorisés]]></comment>
@@ -2049,7 +2050,7 @@ By default : total_length and weight]]></comment>
 	</initial-data>
 </table>
 
-<table name="acllogingroup" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="acllogingroup" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des relations entre les logins et les groupes]]></comment>
@@ -2076,7 +2077,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="log" layer="0" collapse-mode="1" max-obj-count="7">
+<table name="log" layer="1" collapse-mode="1" max-obj-count="7">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Liste des connexions ou des actions enregistrées]]></comment>
@@ -2117,7 +2118,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="login_oldpassword" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="login_oldpassword" layer="1" collapse-mode="1" max-obj-count="3">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table contenant les anciens mots de passe]]></comment>
@@ -2137,7 +2138,7 @@ By default : total_length and weight]]></comment>
 	</constraint>
 </table>
 
-<table name="logingestion" layer="0" collapse-mode="1" max-obj-count="12">
+<table name="logingestion" layer="1" collapse-mode="1" max-obj-count="12">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<tag name="login"/>
@@ -2215,7 +2216,7 @@ By default : total_length and weight]]></comment>
 	 identifier="true"
 />
 
-<relationship name="aclgroup_has_many_project_group" type="rel1n" layer="0"
+<relationship name="aclgroup_has_many_project_group" type="rel1n" layer="1"
 	 src-col-pattern="{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
@@ -2789,7 +2790,10 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbparam_id•dbparam_name•dbparam_value⸣
-1•APPLI_title•filo]]>
+1•APPLI_title•filo⸣
+2•mapDefaultZoom•10⸣
+3•mapDefaultLong•0⸣
+4•mapDefaultLat•45]]>
 	</initial-data>
 </table>
 
@@ -2909,22 +2913,26 @@ Crue•4]]>
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<relationship name="rel_aclacl_aclaco" type="relfk" layer="0"
+<relationship name="rel_aclacl_aclaco" type="relfk" layer="1"
 	 src-table="gacl.aclacl"
 	 dst-table="gacl.aclaco" reference-fk="aclaco_aclacl_fk"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-7.35359" y="-0.0979007"/>
+	</label>
+</relationship>
 
-<relationship name="rel_aclacl_aclgroup" type="relfk" layer="0"
+<relationship name="rel_aclacl_aclgroup" type="relfk" layer="1"
 	 src-table="gacl.aclacl"
 	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclacl_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_aclaco_aclappli" type="relfk" layer="0"
+<relationship name="rel_aclaco_aclappli" type="relfk" layer="1"
 	 src-table="gacl.aclaco"
 	 dst-table="gacl.aclappli" reference-fk="aclappli_aclaco_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_aclgroup_aclgroup" type="relfk" layer="0"
+<relationship name="rel_aclgroup_aclgroup" type="relfk" layer="1"
 	 src-table="gacl.aclgroup"
 	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclgroup_fk"
 	 src-required="false" dst-required="false">
@@ -2935,17 +2943,17 @@ Crue•4]]>
 	</line>
 </relationship>
 
-<relationship name="rel_acllogingroup_aclgroup" type="relfk" layer="0"
+<relationship name="rel_acllogingroup_aclgroup" type="relfk" layer="1"
 	 src-table="gacl.acllogingroup"
 	 dst-table="gacl.aclgroup" reference-fk="aclgroup_acllogingroup_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_acllogingroup_acllogin" type="relfk" layer="0"
+<relationship name="rel_acllogingroup_acllogin" type="relfk" layer="1"
 	 src-table="gacl.acllogingroup"
 	 dst-table="gacl.acllogin" reference-fk="acllogin_acllogingroup_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_login_oldpassword_logingestion" type="relfk" layer="0"
+<relationship name="rel_login_oldpassword_logingestion" type="relfk" layer="1"
 	 src-table="gacl.login_oldpassword"
 	 dst-table="gacl.logingestion" reference-fk="logingestion_login_oldpassword_fk"
 	 src-required="false" dst-required="false"/>

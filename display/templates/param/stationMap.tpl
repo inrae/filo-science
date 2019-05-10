@@ -7,7 +7,7 @@ var earth_radius = 6389125.541;
 var zoom = {$mapDefaultZoom};
 var mapIsChange = 0;
 {if $mapIsChange == 1}mapIsChange = 1;{/if}
-var mapCenter = [{$mapDefaultX}, {$mapDefaultY}];
+var mapCenter = [{$mapDefaultLong}, {$mapDefaultLat}];
 {if strlen({$data.station_long})>0 && strlen({$data.station_lat})>0} 
 	mapCenter = [{$data.station_long}, {$data.station_lat}];
 {/if}
@@ -101,7 +101,7 @@ map.addControl(mousePosition);
 	        point.setCoordinates (lonlat3857);
 		}
 	});
- 
+if (mapIsChange == true) {
 map.on('click', function(evt) {
 	  var lonlat3857 = evt.coordinate;
 	  var lonlat = ol.proj.transform(lonlat3857, 'EPSG:3857', 'EPSG:4326');
@@ -113,6 +113,7 @@ map.on('click', function(evt) {
 	  $("#station_long").val(lon);
 	  $("#station_lat").val(lat);
 });
+}
 
 
 </script>

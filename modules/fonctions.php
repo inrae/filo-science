@@ -40,3 +40,16 @@ function setParamToVue($vue, $tablename)
         $message->setSyslog($e->getMessage);
     }
 }
+/**
+ * Set defaults parameters for maps to vue
+ *
+ * @param Vue $vue
+ * @return void
+ */
+function setParamMap($vue) {
+    if (isset($vue)) {
+        foreach (array("mapDefaultZoom", "mapDefaultLong", "mapDefaultLat") as $mapParam) {
+            $vue->set($_SESSION[$mapParam], $mapParam);
+        }
+    }
+}

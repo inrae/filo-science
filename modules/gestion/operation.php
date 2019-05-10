@@ -48,7 +48,10 @@ switch ($t_module["param"]) {
         if (isset($activeTab)) {
             $vue->set($activeTab, "activeTab");
         }
-
+        /**
+         * Map
+         */
+        setParamMap($vue);
         break;
 
     case "change":
@@ -79,6 +82,10 @@ switch ($t_module["param"]) {
         require_once 'modules/classes/station.class.php';
         $station = new Station($bdd, $ObjetBDDParam);
         $vue->set($station->getListFromProject($dcampaign["project_id"]), "stations");
+        /**
+         * Map
+         */
+        setParamMap($vue);
         break;
     case "write":
         /*

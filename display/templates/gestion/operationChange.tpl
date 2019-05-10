@@ -1,3 +1,54 @@
+
+<script>
+$(document).ready(function() {
+    var mapIsChange = true;
+    $("#station_id").change(function() { 
+        var stationId = $(this).val();
+        if (stationId > 0) {
+            var options = "";
+            var url = "index.php";
+            var data = { "module": "stationGetCoordinate",
+                        "station_id":stationId
+                    };
+            $.ajax( {
+                url: "index.php",
+                data: data
+            })
+            .done (function(data) {
+                var result = JSON.parse(data);
+                $("#long_start").val(result["station_long"]);
+                $("#lat_start").val(result["station_lat"]);
+                coordChange();
+            });
+        }
+    });
+    /*
+     * function for put points on map
+     */
+    function coordChange() {
+    var long_deb = $('#long_start').val();
+		var lat_deb = $('#lat_start').val();
+		var long_fin = $('#long_end').val();
+        var lat_fin = $('#lat_end').val();
+        /*console.log("long:"+long_deb);
+        console.log("lat:"+lat_deb);
+        console.log("longend:"+long_fin);
+        console.log("latend:"+lat_fin);*/
+    if (long_deb.length > 0 && lat_deb.length > 0) {
+			 setPosition(1, long_deb, lat_deb);
+		 }
+		if (long_fin.length > 0 && lat_fin.length > 0) {
+			setPosition(2, long_fin, lat_fin);
+        }
+    }
+    $(".coord").change(function() {
+        coordChange();
+    });
+    /* Initialisation of map */
+    coordChange();
+});
+</script>
+
 <h2>{t}Création - Modification d'une opération{/t}</h2>
 <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
 {if $data.operation_id > 0}
@@ -91,25 +142,25 @@
             <div class="form-group">
                 <label for="long_start"  class="control-label col-md-4"> {t}Longitude de départ :{/t}</label>
                 <div class="col-md-8">
-                    <input id="long_start" name="long_start" class="form-control taux" value="{$data.long_start}">
+                    <input id="long_start" name="long_start" class="form-control taux coord" value="{$data.long_start}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="lat_start"  class="control-label col-md-4"> {t}Latitude de départ :{/t}</label>
                 <div class="col-md-8">
-                    <input id="lat_start" name="lat_start" class="form-control taux" value="{$data.lat_start}">
+                    <input id="lat_start" name="lat_start" class="form-control taux coord" value="{$data.lat_start}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="long_end"  class="control-label col-md-4"> {t}Longitude de fin :{/t}</label>
                 <div class="col-md-8">
-                    <input id="long_end" name="long_end" class="form-control taux" value="{$data.long_end}">
+                    <input id="long_end" name="long_end" class="form-control taux coord" value="{$data.long_end}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="lat_end"  class="control-label col-md-4"> {t}Latitude de fin :{/t}</label>
                 <div class="col-md-8">
-                    <input id="lat_end" name="lat_end" class="form-control taux" value="{$data.lat_end}">
+                    <input id="lat_end" name="lat_end" class="form-control taux coord" value="{$data.lat_end}">
                 </div>
             </div>
             <div class="form-group">
@@ -194,6 +245,11 @@
                 {/if}
             </div>
         </form>
+    </div>
+    <div class="col-md-6">
+        <div id="map" class="mapDisplay">
+                {include file="gestion/operationMapChange.tpl"}
+        </div>
     </div>
 </div>
 <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>

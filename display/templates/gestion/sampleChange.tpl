@@ -1,5 +1,6 @@
 <script>
 $(document).ready(function() {
+    var mapIsChange = true;
     var freshwater = {$sequence.freshwater};
     /* Taxon search */
     $("#taxon-search").keyup(function() { 

@@ -203,6 +203,7 @@
 	<stationWrite action="modules/param/station.php" param="write" droits="gestion" retourok="stationList" retourko="stationChange" modulebefore="stationChange" />
 	<stationDelete action="modules/param/station.php" param="delete" droits="gestion" retourok="stationList" retourko="stationChange" modulebefore="stationChange" />
 	<stationImport action="modules/param/station.php" param="import" droits="gestion" retourok="stationList" retourko="stationList" modulebefore="stationList,stationImport" />
+	<stationGetCoordinate action="modules/param/station.php" param="getCoordinate" droits="consult" type="ajax"/>
 
 	<!-- modules for projects -->
 	<campaignList action="modules/gestion/campaign.php" param="list" droits="consult" type="smarty" retourlogin="1"/>

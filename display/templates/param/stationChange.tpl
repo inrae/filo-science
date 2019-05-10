@@ -51,13 +51,13 @@
             <div class="form-group">
                 <label for="station_long"  class="control-label col-md-4">{t}Longitude :{/t}</label>
                 <div class="col-md-8">
-                    <input id="station_long" type="text" class="form-control taux" name="station_long" value="{$data.station_long}">
+                    <input id="station_long" type="text" class="form-control taux position" name="station_long" value="{$data.station_long}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="station_lat"  class="control-label col-md-4">{t}Latitude :{/t}</label>
                 <div class="col-md-8">
-                    <input id="station_lat" type="text" class="form-control taux" name="station_lat" value="{$data.station_lat}">
+                    <input id="station_lat" type="text" class="form-control taux position" name="station_lat" value="{$data.station_lat}">
                 </div>
             </div>
             <div class="form-group">
