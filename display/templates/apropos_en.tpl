@@ -11,9 +11,9 @@ Version {$version} of {$versiondate}.
 <li>Éric Quinton (IRSTEA)</li>
 </ul>
 
-    <h3>Copyright (C) 2016-2018 Eric Quinton for IRSTEA</h3>
+    <h3>Copyright © 2016-2018 Eric Quinton for IRSTEA (France)</h3>
 <p>
-Version 1.0 of the software has been registered with the Agency for the Protection of Programs under number IDDN.FR.001.470013.000.S.C.2016.000.31500
+Version 1.0 of the software has been registered with the Agency for the Protection of Programs under number (in progress)
 <br>
     This program is free software: you can redistribute it and/or modify<br>
     it under the terms of the GNU Affero General Public License as<br>

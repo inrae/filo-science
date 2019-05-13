@@ -20,14 +20,14 @@ $ident_type = "BDD";
 $BDD_login = "filo";
 $BDD_passwd = "filoPassword";
 $BDD_dsn = "pgsql:host=localhost;dbname=filo;sslmode=require";
-$BDD_schema = "public";
+$BDD_schema = "filo,gacl";
 
 /*
  * Rights management, logins and logs records database
  */
 $GACL_dblogin = "filo";
 $GACL_dbpasswd = "filoPassword";
-$GACL_aco = "col";
+$GACL_aco = "filo";
 $GACL_dsn = "pgsql:host=localhost;dbname=filo;sslmode=require";
 $GACL_schema = "gacl";
 

@@ -20,7 +20,7 @@
 		<item module="sexeList" label="Sexe" tooltip="Liste des sexes"/>
 		<item module="pathologyList" label="Pathologies" tooltip="Types de pathologie"/>
 		<item divider="1"/>
-		<item module="water_heightList" label="Hauteur d'eau" tooltip="Classes de hauteur d'eau"/>
+		
 		<item module="fishing_strategyList" label="Stratégies" tooltip="Stratégies de pêche"/>
 		<item module="scaleList" label="Échelle de pêche" tooltip="Échelle spatiale de pêche"/>
 

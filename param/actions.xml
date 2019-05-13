@@ -135,10 +135,11 @@
 	<cache_abundanceWrite action="modules/param/param.php" param="write" droits="param" tablename="cache_abundance" retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange" />
 	<cache_abundanceDelete action="modules/param/param.php" param="delete" droits="param" tablename="cache_abundance" retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange"/>
 
-	<water_heightList action="modules/param/param.php" param="list" droits="consult" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty" retourlogin="1"/>
+	<!--<water_heightList action="modules/param/param.php" param="list" droits="consult" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty" retourlogin="1"/>
 	<water_heightChange action="modules/param/param.php" param="change" droits="param" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty"/>
 	<water_heightWrite action="modules/param/param.php" param="write" droits="param" tablename="water_height" retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange" />
 	<water_heightDelete action="modules/param/param.php" param="delete" droits="param" tablename="water_height" retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange" />
+	-->
 
 	<fishing_strategyList action="modules/param/param.php" param="list" droits="consult" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage" type="smarty" retourlogin="1"/>
 	<fishing_strategyChange action="modules/param/param.php" param="change" droits="param" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage" type="smarty"/>

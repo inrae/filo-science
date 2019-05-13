@@ -11,7 +11,7 @@ Version {$version} du {$versiondate}.
 <li>Éric Quinton (IRSTEA)</li>
 </ul>
 
-    <h3>Copyright (C) 2019  Eric Quinton pour IRSTEA</h3>
+    <h3>Copyright © 2019  Eric Quinton pour IRSTEA</h3>
 <p>
 La version 1.0 du logiciel est en cours de dépôt auprès de l'Agence pour la Protection des Programmes
 <br>

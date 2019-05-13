@@ -185,3 +185,7 @@ sympy-plots-for-*.tex/
 /param/id_measfish*
 /display/javascript/.Rhistory
 /.scannerwork/*
+/database/filo-restore.dbm
+/install/deploy_instance_test.sh
+/param/id_filo-science
+/param/id_filo-science.pub

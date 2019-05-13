@@ -60,7 +60,6 @@ switch ($t_module["param"]) {
                 $rows = $import->getContentAsArray();
                 foreach ($rows as $row) {
                     if (strlen($row["name"]) > 0) {
-                        printr($row);
                         /*
                          * Ecriture en base, en mode ajout ou modification
                          */
