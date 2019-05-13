@@ -65,7 +65,9 @@ line="0 20 * * * /var/lib/postgresql/backup.sh"
 echo "$line" | crontab -u postgres -
 
 # update rights to specific software folders
-chmod -R 750 .
+find . -type d -exec chmod -R 750 {} \;
+find . -type f -exec chmod -R 640 {} \;
+
 mkdir filo-science/display/templates_c
 mkdir filo-science/temp
 chgrp -R www-data .
