@@ -184,3 +184,4 @@ sympy-plots-for-*.tex/
 *.sav
 /param/id_measfish*
 /display/javascript/.Rhistory
+/.scannerwork/*
