@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1087" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1090" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -75,7 +75,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <schema name="filo" layer="0" rect-visible="true" fill-color="#e1e1e1">
 	<role name="filo"/>
-	<comment><![CDATA[Scientific fisheries management - schema of data]]></comment>
+	<comment><![CDATA[Fish logging - schema of data]]></comment>
 </schema>
 
 <sequence name="project_project_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
@@ -2825,7 +2825,7 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbversion_number•dbversion_date⸣
-0.1•2019-04-15]]>
+1.0•2019-05-13]]>
 	</initial-data>
 </table>
 

@@ -18,5 +18,5 @@ foreach ($file as $value) {
 }
 
 $vue->set($doc, "texteNews");
-$vue->set("documentation/quoideneuf.tpl", "corps");
+$vue->set("framework/news.tpl", "corps");
 ?>

@@ -1,4 +1,4 @@
-<h2>About MeasFish
+<h2>About Filo-Science
 </h2>
 <p>
 Version {$version} of {$versiondate}.

@@ -55,10 +55,9 @@
 	<item module="disconnect" label="Déconnexion" tooltip="Déconnexion de l'application" loginrequis="1">
 		<item module="loginChangePassword" loginrequis="1" label="Modifier le mot de passe" tooltip="Modifiez votre mot de passe (identification locale uniquement)" />
 	</item>
-	<item module="aide" label="?" tooltip="Aide">
+	<item module="apropos" label="?" tooltip="Aide">
 		<item module="apropos" label="A propos" tooltip="A propos de Collec-Science"/>
-		<item module="quoideneuf" label="Nouveautés" tooltip="Quoi de neuf dans l'application ?"/>
-		<item module="lexique" label="Lexique" tooltip="Lexique des termes utilisés dans le logiciel" />
+		<item module="news" label="Nouveautés" tooltip="Quoi de neuf dans l'application ?"/>
 		<item module="setlanguagefr" label="Français" tooltip="Libellés en français"/>
 		<item module="setlanguageen" label="English" tooltip="Labels in English"/>
 	</item>

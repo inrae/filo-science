@@ -17,24 +17,24 @@ $ident_type = "BDD";
 /*
  * Parametres concernant la base de donnees
  */
-$BDD_login = "proto";
-$BDD_passwd = "proto";
-$BDD_dsn = "pgsql:host=localhost;dbname=proto;sslmode=require";
+$BDD_login = "filo";
+$BDD_passwd = "filoPassword";
+$BDD_dsn = "pgsql:host=localhost;dbname=filo;sslmode=require";
 $BDD_schema = "public";
 
 /*
  * Rights management, logins and logs records database
  */
-$GACL_dblogin = "proto";
-$GACL_dbpasswd = "proto";
+$GACL_dblogin = "filo";
+$GACL_dbpasswd = "filoPassword";
 $GACL_aco = "col";
-$GACL_dsn = "pgsql:host=localhost;dbname=proto;sslmode=require";
+$GACL_dsn = "pgsql:host=localhost;dbname=filo;sslmode=require";
 $GACL_schema = "gacl";
 
 /*
  * Lien vers le site d'assistance
  */
-$APPLI_mail = "https://monsite/assistance";
+$APPLI_mail = "https://github.com/Irstea/filo-science/issues/new";
 
 $LDAP ["address" ] = "localhost";
 $LDAP ["port" ] = 389;

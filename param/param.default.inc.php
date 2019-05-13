@@ -6,9 +6,9 @@
 * Parametres par defaut de l'application
 * Si des modifications doivent etre apportees, faites-les dans le fichier param.inc.php
 */
-$APPLI_version = "0.1";
-$APPLI_dbversion = "0.1";
-$APPLI_versiondate = _("5/4/2019");
+$APPLI_version = "1.0";
+$APPLI_dbversion = "1.0";
+$APPLI_versiondate = _("13/05/2019");
 //$APPLI_versiondate = "3/7/2018";
 $language = "fr";
 $DEFAULT_formatdate = "fr";
@@ -148,8 +148,8 @@ $APPLI_notSSL = false;
  * Cles privee et publique utilisees 
  * pour la generation des jetons
  */
-$privateKey = "param/id_measfish";
-$pubKey = "param/id_measfish.pub";
+$privateKey = "param/id_filo-science";
+$pubKey = "param/id_filo-science.pub";
 /*
  * Duree de validite du token d'identification
  */

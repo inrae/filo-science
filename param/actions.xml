@@ -27,7 +27,7 @@
 	<disconnect action="framework/identification/disconnect.php" type="smarty"/>
 	<apropos action="framework/apropos.php" type="smarty" />
 	<phpinfo action="framework/phpinfo.php" droits="admin" retourlogin="1" type="smarty"/>
-	<quoideneuf action="doc/quoideneuf.php" retourlogin="1" type="smarty"/>
+	<news action="framework/news.php" retourlogin="1" type="smarty"/>
 
 	<setlanguage action='framework/setlanguage.php' param="" retourlogin="1" type="smarty" retourok="default" />
 	<setlanguagefr action='framework/setlanguage.php' param="fr" retourlogin="1" type="smarty" retourok="default" />

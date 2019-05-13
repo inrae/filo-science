@@ -1,0 +1,10 @@
+News
+===========
+Release v1.0
+------------
+First production version of the application. It does not understand :
+- seizure of other measurements (ocular diameters, p. e.)
+- seizure of chemical analyzes of water
+- typing in tablet mode
+- fish length controls
+- the translation of the labels in English

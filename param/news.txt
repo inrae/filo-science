@@ -1,2 +1,10 @@
 Nouveautés
 ==========
+Version 1.0
+--------------
+Première version de production de l'application. Elle ne comprend pas :
+- la saisie des autres mesures (diamètres occulaires, p. e.)
+- la saisie des analyses chimiques de l'eau
+- la saisie en mode tablette
+- les contrôles de longueur des poissons
+- la traduction des libellés en anglais

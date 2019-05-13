@@ -142,8 +142,9 @@ class MimeType extends ObjetBDD {
 						"requis" => 1 
 				) 
 		);
-		if (! is_array ( $param ))
-			$param == array ();
+		if (! is_array ( $param )) {
+			$param = array ();
+		}
 		$param ["fullDescription"] = 1;
 		parent::__construct ( $bdd, $param );
 	}
@@ -219,8 +220,9 @@ class Document extends ObjetBDD {
 						"defaultValue" => 0 
 				) 
 		);
-		if (! is_array ( $param ))
-			$param == array ();
+		if (! is_array ( $param )) {
+			$param = array ();
+		}
 		$param ["fullDescription"] = 1;
 		parent::__construct ( $bdd, $param );
 	}
@@ -257,9 +259,9 @@ class Document extends ObjetBDD {
 				if (extension_loaded ( 'clamav' )) {
 					$retcode = cl_scanfile ( $file ["tmp_name"], $virusname );
 					if ($retcode == CL_VIRUS) {
+						global $log;
 						$virus = true;
 						$texte_erreur = $file ["name"] . " : " . cl_pretcode ( $retcode ) . ". Virus found name : " . $virusname;
-						$message .= "<br>" . $texte_erreur;
 						$log->setLog ( $_SESSION ["login"], "Document-ecrire", $texte_erreur );
 					}
 				}
@@ -463,7 +465,7 @@ class Document extends ObjetBDD {
 						try {
 							$image = new Imagick ();
 							$image->readImageFile ( $docRef );
-							if ($i == 1) {
+							if ($phototype == 1) {
 								/*
 								 * Redimensionnement de l'image
 								 */
@@ -495,7 +497,7 @@ class Document extends ObjetBDD {
 						 * Autres types de documents : ecriture directe du contenu
 						 */
 						// rewind ( $docRef );
-						if ($data ["mime_type_id"] == 1 && $i == 2 || $i == 0) {
+						if ($data ["mime_type_id"] == 1 && $phototype == 2 || $phototype == 0) {
 							$writeOk = true;
 							$document = stream_get_contents ( $docRef );
 							if ($document == false)
@@ -549,8 +551,9 @@ class DocumentLie extends ObjetBDD {
 						"key" => 1 
 				) 
 		);
-		if (! is_array ( $param ))
-			$param == array ();
+		if (! is_array ( $param )) {
+			$param = array ();
+		}
 		$param ["fullDescription"] = 1;
 		parent::__construct ( $bdd, $param );
 	}
