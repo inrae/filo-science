@@ -615,6 +615,8 @@ class VueBinaire extends Vue
      */
     function send()
     {
+        printr($this->param);
+
         if (strlen($this->param["tmp_name"]) > 0) {
             /*
              * Recuperation du content-type s'il n'a pas ete fourni
@@ -626,7 +628,7 @@ class VueBinaire extends Vue
             }
             header('Content-Type: ' . $this->param["content_type"]);
             header('Content-Transfer-Encoding: binary');
-            if ($this->param["disposition"] == "attachment" && strlen($this->param["filename"] > 0)) {
+            if ($this->param["disposition"] == "attachment" && strlen($this->param["filename"]) > 0) {
                 header('Content-Disposition: attachment; filename="' . basename($this->param["filename"]) . '"');
             } else {
                 header('Content-Disposition: inline');
@@ -638,7 +640,6 @@ class VueBinaire extends Vue
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: no-cache');
-
             /*
              * Envoi au navigateur
              */

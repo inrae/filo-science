@@ -20,7 +20,7 @@
 		<item module="sexeList" label="Sexe" tooltip="Liste des sexes"/>
 		<item module="pathologyList" label="Pathologies" tooltip="Types de pathologie"/>
 		<item divider="1"/>
-		
+
 		<item module="fishing_strategyList" label="Stratégies" tooltip="Stratégies de pêche"/>
 		<item module="scaleList" label="Échelle de pêche" tooltip="Échelle spatiale de pêche"/>
 
@@ -50,9 +50,10 @@
 		<item module="groupList" droits="admin" label="ACL - groupes de logins" tooltip="Groupes de logins et logins rattachés aux groupes"/>
 		<item module="dbparamList" droits="admin" label="Paramètres de l'application" tooltip="Liste des paramètres pérennes de l'application" />
 		<item divider='1'/>
-	<item module="dbstructureHtml" droits='admin' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes"/>
-	<item module="dbstructureLatex" droits='admin' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex"/>
-	<item module="dbstructureGacl" droits="admin" label="Structure de la base de données des droits (HTML)" tooltip="Liste des tables et des colonnes de la base de données de gestion des droits"/>
+		<item module="dbstructureSchema" droits="admin" label="Schéma de la base de données" tooltip="Schéma de la base de données"/>
+		<item module="dbstructureHtml" droits='admin' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes"/>
+		<item module="dbstructureLatex" droits='admin' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex"/>
+		<item module="dbstructureGacl" droits="admin" label="Structure de la base de données des droits (HTML)" tooltip="Liste des tables et des colonnes de la base de données de gestion des droits"/>
 		<item module="phpinfo" droits="admin" label="PHP info" tooltip="configuration générale du serveur PHP"/>
 	</item>
 	<item module="connexion" label="Connexion" tooltip="S'identifier dans l'application" onlynoconnect="1"/>

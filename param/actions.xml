@@ -2,7 +2,7 @@
 	<its:rules version="2.0">
 		<its:translateRule selector="//item/@tabledescription" translate="yes"/>
 	</its:rules>
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id">
+	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id">
 	</model>
 	<default action="framework/default.php" type="smarty"></default>
 	<droitko action="framework/droitko.php" type="smarty"></droitko>
@@ -74,7 +74,7 @@
 	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" droits="admin"/>
 	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="admin"/>
 	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="smarty" droits="admin"/>
-
+	<dbstructureSchema action="framework/utils/structure.php" param="schema" retourlogin="1" type="binaire" droits="param"/>
 	<!-- Parameters of the software -->
 
 	<param action="framework/default.php" type="smarty"/>
