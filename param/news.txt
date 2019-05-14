@@ -1,6 +1,16 @@
 Nouveautés
 ==========
-Version 1.0
+Version 1.0.1 du 14/05/2019
+--------------
+Correction de bugs :
+- la transformation des identifiants ne fonctionnait pas dans certains cas, entraînant l'impossibilité de saisir les engins rattachés à une séquence
+- l'affichage de la taille minimale mesurée d'un lot ne fonctionnait pas
+- corrections du script d'installation
+
+Nouveautés :
+- affichage de la structure de la base de données (en mode admin)
+
+Version 1.0 du 13/05/2019
 --------------
 Première version de production de l'application. Elle ne comprend pas :
 - la saisie des autres mesures (diamètres occulaires, p. e.)

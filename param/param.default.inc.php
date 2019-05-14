@@ -6,9 +6,9 @@
 * Parametres par defaut de l'application
 * Si des modifications doivent etre apportees, faites-les dans le fichier param.inc.php
 */
-$APPLI_version = "1.0";
+$APPLI_version = "1.0.1";
 $APPLI_dbversion = "1.0";
-$APPLI_versiondate = _("13/05/2019");
+$APPLI_versiondate = _("14/05/2019");
 //$APPLI_versiondate = "3/7/2018";
 $language = "fr";
 $DEFAULT_formatdate = "fr";
@@ -172,6 +172,7 @@ $APPLI_lostPassword = 0; // Autorise la recuperation d'un nouveau mot de passe e
 
 /*
  * Affichage par defaut des cartes Openstreetmap
+ * obsolete: now in dbparam table
  */
 $mapDefaultX = -0.70;
 $mapDefaultY = 44.77;

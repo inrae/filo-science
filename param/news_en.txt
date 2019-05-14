@@ -1,5 +1,15 @@
 News
 ===========
+Release v1.0.1 of 2019-05-14
+------------
+Bugfix:
+- the transformation of the identifiers did not work in certain cases, resulting in the impossibility of seizing the gear attached to a sequence
+- the display of the minimum measured size of a lot did not work
+- corrections of the installation script
+
+News:
+- display of structure of the database (admin access)
+
 Release v1.0
 ------------
 First production version of the application. It does not understand :
