@@ -8,3 +8,4 @@ Première version de production de l'application. Elle ne comprend pas :
 - la saisie en mode tablette
 - les contrôles de longueur des poissons
 - la traduction des libellés en anglais
+- la saisie des opérateurs

@@ -31,7 +31,7 @@
                         <td class="center">{$sample.total_number}</td>
                         <td class="center">{$sample.total_measured}</td>
                         <td class="center">{$sample.total_weight}</td>
-                        <td class="center"></td>{$sample.sample_size_min}</td>
+                        <td class="center">{$sample.sample_size_min}</td>
                         <td class="center">{$sample.sample_size_max}</td>
                         <td class="textareaDisplay">{$sample.sample_comment}</td>
                     </tr>
