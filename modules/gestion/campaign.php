@@ -65,7 +65,7 @@ switch ($t_module["param"]) {
          * Test if the project is authorized
          */
         if (verifiyProject($_REQUEST["project_id"])) {
-            $id = dataWrite($dataClass, $_SESSION["ti_campaign"]->translateFromRow($_REQUEST));
+            $id = dataWrite($dataClass, $_SESSION["ti_campaign"]->getDbkeyFromRow($_REQUEST));
             if ($id > 0) {
                 $_REQUEST[$keyName] = $_SESSION["ti_campaign"]->setValue($id);
             }

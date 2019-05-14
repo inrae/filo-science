@@ -33,8 +33,8 @@ switch ($t_module["param"]) {
         /*
          * write record in database
          */
-        $data = $_SESSION["ti_sequence"]->translateFromRow($_REQUEST);
-        $data = $_SESSION["ti_sequenceGear"]->translateFromRow($data);
+        $data = $_SESSION["ti_sequence"]->getDbkeyFromRow($_REQUEST);
+        $data = $_SESSION["ti_sequenceGear"]->getDbkeyFromRow($data);
         $data["sequence_gear_id"] = $id;
         $id = dataWrite($dataClass, $data);
         if ($id > 0) {

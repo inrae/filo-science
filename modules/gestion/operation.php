@@ -99,8 +99,8 @@ switch ($t_module["param"]) {
         /**
          * Test if the project is authorized
          */
-        $data = $_SESSION["ti_campaign"]->translateFromRow($_REQUEST);
-        $data = $_SESSION["ti_operation"]->translateFromRow($data);
+        $data = $_SESSION["ti_campaign"]->getDbkeyFromRow($_REQUEST);
+        $data = $_SESSION["ti_operation"]->getDbkeyFromRow($data);
         $id = dataWrite($dataClass, $data);
         if ($id > 0) {
             $_REQUEST[$keyName] = $_SESSION["ti_operation"]->setValue($id);

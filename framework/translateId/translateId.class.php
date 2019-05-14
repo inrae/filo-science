@@ -132,18 +132,14 @@ class TranslateId
     }
 
     /**
-     * Transforme la cle d'un enregistrement
-     * 
+     * Transform the row: replace the calculate key by the dbkey
+     *
      * @param array $row
+     * @return array
      */
-    function translateFromRow(array $row)
-    {
+    function getDbkeyFromRow(array $row) {
         if (isset($row[$this->fieldname])) {
-            $value = $row[$this->fieldname];
-            if (! isset($this->corresp_reverse[$value])) {
-                $this->setValue($value);
-            }
-            $row[$this->fieldname] = $this->corresp_reverse[$value];
+            $row[$this->fieldname] = $this->corresp[$row[$this->fieldname]];
         }
         return $row;
     }

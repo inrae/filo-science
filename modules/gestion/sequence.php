@@ -103,8 +103,8 @@ switch ($t_module["param"]) {
         /*
          * write record in database
          */
-        $data = $_SESSION["ti_campaign"]->translateFromRow($_REQUEST);
-        $data = $_SESSION["ti_operation"]->translateFromRow($data);
+        $data = $_SESSION["ti_campaign"]->getDbkeyFromRow($_REQUEST);
+        $data = $_SESSION["ti_operation"]->getDbkeyFromRow($data);
         $data["sequence_id"] = $id;
         $id = dataWrite($dataClass, $data);
         if ($id > 0) {

@@ -13,7 +13,7 @@ read -p "Do you want to continue [y/n]?" response
 if [ "$response" = "y" ] 
 then
 # installing packages
-apt install unzip apache2 libapache2-mod-php7.0 php7.0 php7.0-ldap php7.0-pgsql php7.0-mbstring php7.0-xml php7.0-zip php7.0-imagick php7.0-gd php7.0-ldap fop postgresql postgresql-client postgresql-9.6-postgis-2.3
+apt install unzip apache2 libapache2-mod-php7.0 php7.0 php7.0-ldap php7.0-pgsql php7.0-mbstring php7.0-xml php7.0-zip php7.0-imagick php7.0-gd php7.0-ldap php7.0-curl fop postgresql postgresql-client postgresql-9.6-postgis-2.3
 a2enmod ssl
 a2enmod headers
 a2enmod rewrite
