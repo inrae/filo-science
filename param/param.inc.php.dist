@@ -31,10 +31,9 @@ $GACL_aco = "filo";
 $GACL_dsn = "pgsql:host=localhost;dbname=filo;sslmode=require";
 $GACL_schema = "gacl";
 
-/*
- * Lien vers le site d'assistance
+/**
+ * LDAP authentification
  */
-$APPLI_mail = "https://github.com/Irstea/filo-science/issues/new";
 
 $LDAP ["address" ] = "localhost";
 $LDAP ["port" ] = 389;
