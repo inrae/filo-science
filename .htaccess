@@ -15,6 +15,8 @@ Header set Pragma "no-cache"
 Header set X-Frame-Options SAMEORIGIN
 Header set X-XSS-Protection "1; mode=block"
 Header set X-Content-Type-Options "nosniff"
+Header set Content-Security-Policy "default-src 'self'"
+Header set Referrer-Policy "no-referrer"
 Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 Header set Strict-Transport-Security "max-age=63072000"
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
