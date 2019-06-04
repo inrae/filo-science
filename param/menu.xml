@@ -12,6 +12,7 @@
 	<item module="param" label="Paramètres" tooltip="Paramètres généraux et tables de référence">
 		<item module="projectList" label="Projets" tooltip="Liste des projets"/>
 		<item module="protocolList" label="Protocoles" tooltip="Liste des protocoles"/>
+		<item module="operatorList" label="Opérateurs" tooltip="Liste des opérateurs"/>
 		<item divider="1"/>
 		<item module="riverList" label="Cours d'eau" tooltip="Liste des cours d'eau"/>
 		<item module="stationList" label="Stations" tooltip="Liste des stations"/>

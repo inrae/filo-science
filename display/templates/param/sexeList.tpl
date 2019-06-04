@@ -21,7 +21,7 @@
                 <td class="center">{$row["sexe_id"]}</td>
                 <td>
                     {if $droits.param == 1}
-                    <a href="index.php?module=sexeChange&sexe_id={$row["sexe_id"]}">
+                    <a href='index.php?module=sexeChange&sexe_id={$row["sexe_id"]}'>
                     {$row["sexe_name"]}
                     {else}
                     {$row["sexe_name"]}
