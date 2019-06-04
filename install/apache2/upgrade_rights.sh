@@ -9,7 +9,6 @@ chmod -R 750 $1
 mkdir $1/display/templates_c
 chgrp -R www-data $1
 chmod -R 770 $1/display/templates_c
-chmod -R 770 $1/img
 else 
 echo "folder "$1 "don't exists"
 fi

@@ -1,15 +1,14 @@
-\documentclass[12pt %
-,a4paper %
-,titlepage %
-,twoside %
-%,openany % ouvre les sections indifféremment sur la page de gauche ou de droite
+\documentclass[12pt
+,a4paper
+,titlepage
+%,twoside
+,openany % ouvre les sections indifféremment sur la page de gauche ou de droite
 ]{book}
 
-%\usepackage{layout}
-%\usepackage[nomarginpar, margin=3cm]{geometry}
 % Paramétrages de la langue et de l'encodage
 \usepackage[utf8]{inputenc}
-\usepackage[frenchb]{babel}
+\usepackage{textcomp}
+\usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 
 % formules mathématiques
@@ -19,7 +18,8 @@
 
 % gestion des graphiques
 \usepackage{graphicx}
-
+% positionnement flottant des graphiques
+\usepackage{float}
 % Gestion des couleurs
 \usepackage[usenames,dvipsnames]{xcolor}
 
@@ -27,42 +27,22 @@
 \usepackage{url}
 \usepackage[colorlinks=false,urlbordercolor=white,linkbordercolor=white]{hyperref}
 
+\usepackage{longtable}
+\usepackage{array}
+
 % Définition des marges de la page
-%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
 % Polices de caractères
 \usepackage{lmodern}
 \usepackage{mathptmx} % times, y compris dans les formules mathématiques
 
 % Insertion de code source dans le texte, à utiliser avec \begin{lstlisting} et \lstset{java|html|php...}
-\usepackage{listingsutf8}
-
-% Definition de l'affichage du code
-\lstset %
-{basicstyle=\ttfamily, %frame=single %
-,showstringspaces=false %
-,tabsize=3 %
-,breaklines=true, %
-,inputencoding=utf8/latin1 %
-,literate=
-    {é}{{\'e}}{1}%
-    {è}{{\`e}}{1}%
-    {à}{{\`a}}{1}%
-    {â}{{\^a}}{1}%%%
-    {ç}{{\c{c}}}{1}%
-    {œ}{{\oe}}{1}%
-    {ù}{{\`u}}{1}%
-    {É}{{\'E}}{1}%
-    {È}{{\`E}}{1}%
-    {À}{{\`A}}{1}%
-    {Ç}{{\c{C}}}{1}%
-    {Œ}{{\OE}}{1}%
-    {Ê}{{\^E}}{1}%
-    {ê}{{\^e}}{1}%
-    {î}{{\^i}}{1}%
-     {ï}{{\"i}}{1}%%%
-    {ô}{{\^o}}{1}%
-    {û}{{\^u}}{1}%
+\usepackage{listings}
+\lstset{ %
+basicstyle=\small\ttfamily, %
+breaklines=true, %
+columns=spaceflexible, %
 }
 
 % Définition des entêtes
@@ -74,11 +54,6 @@
 
 % Insertion de graphiques à des emplacements définis
 \usepackage[abs]{overpic}
-
-% Tableaux
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{float}
 
 % règles typographiques de l'Imprimerie nationale
 \usepackage[all]{nowidow}
@@ -104,35 +79,40 @@ hyphenation
 %\usepackage{blindtext}
 
 
-
 % Definition des couleurs IRSTEA
-%\definecolor{titreColor}{RGB}{0,58,128}  % Marine
-%\definecolor{stitreColor}{RGB}{0,158,224}  % Ocean
-%\definecolor{auteurColor}{RGB}{0,58,128}     % Marine
-%\definecolor{texteColor}{RGB}{164,196,0}     % Prairie
+\definecolor{titreColor}{RGB}{0,58,128}  % Marine
+\definecolor{stitreColor}{RGB}{0,158,224}  % Ocean
+\definecolor{auteurColor}{RGB}{0,58,128}     % Marine
+\definecolor{texteColor}{RGB}{164,196,0}     % Prairie
 
 % Definition des chapitres
 \titleformat{\chapter}[display]
-{\normalfont\Large\filcenter\sffamily}{
+{\normalfont\Large\filcenter\sffamily}
+%{\titlerule[1pt]%
+% \vspace{1pt}%
+% \titlerule
+% \vspace{1pc}%
+{
+ \Large\color{titreColor}{
  %\MakeUppercase{\chaptertitlename}
  \chaptertitlename~\thechapter}
+ }
 {1pc}
 %{\titlerule
 %% \vspace{1pc}%
-\Large
+ \Huge
 
-\titleformat{\section}
-{\normalfont\Large\bfseries\sffamily}
-{\thesection}{1em}{}
+\titleformat{\section}[block]
+{\color{titreColor}\normalfont\Large\bfseries\sffamily}
+{\color{titreColor}\thesection}{1em}{}
 
-\titleformat{\subsection}
-{\bfseries\sffamily}
-{\thesubsection}{1em}{}
+\titleformat{\subsection}[block]
+{\color{stitreColor}\bfseries\sffamily}
+{\color{stitreColor}\thesubsection}{1em}{}
 
-\titleformat{\subsubsection}
-{\sffamily\itshape}
-{\thesubsubsection}{1em}{}
-
+\titleformat{\subsubsection}[block]
+{\color{stitreColor}\sffamily\em}
+{\color{stitreColor}{\thesubsection}}{1em}{}
 
 % Bibliographie
 % natbib est indispensable si la biblio contient des accents
@@ -155,36 +135,28 @@ hyphenation
 % En cas de souci, supprimez les fichiers .aux et .bbi après modification des paramètres
 \usepackage[square,sort,comma,numbers]{natbib}
 % styles natbib natifs : abbrvnat, plainnat, unsrtnat
-\bibliographystyle{unsrtnat}
+\bibliographystyle{plainnat}
 \usepackage{hypernat}
 % Ajout de la référence à la bibliographie dans la table des matières
 \usepackage[nottoc, notlof, notlot]{tocbibind}
 
-\usepackage{titling}
-\newcommand{\subtitle}[1]{%
-  \posttitle{%
-    \par\end{center}
-    \begin{center}\large#1\end{center}
-    \vskip0.5em}%
-}
-
 %Données de titre et d'auteur pour la page de garde
-\newcommand{\titre}{Framework PrototypePHP}
-\newcommand{\sousTitre}{Comment l'utiliser ?}
+\newcommand{\titre}{Logiciel Filo-Science}
+\newcommand{\sousTitre}{Manuel d'installation et de paramétrage}
 \newcommand{\auteur}{Éric Quinton}
-\newcommand{\dateModif}{\today}
-\title{\titre}
-\subtitle{\sousTitre}
-\author{\auteur}
+\newcommand{\dateModif}{4/6/2019 - v1.0.1}
+\usepackage[final]{pdfpages} 
+
+\usepackage{lscape}
+
 \begin{document}
-%\layout
 %Supprime les veuves et orphelines
 \widowpenalty=10000
 \clubpenalty=10000
 \raggedbottom 
-\maketitle
-% Integrer la page de garde
 
+% Integrer la page de garde
+\input{titre_irstea}
 % Définition des entêtes
 \fancyhead{}
 \fancyhead[CO]{\leftmark\sffamily}
@@ -192,41 +164,48 @@ hyphenation
 \fancyfoot[CO]{\sffamily\thepage}
 \fancyfoot[CE]{\sffamily\thepage}
 % Redéfinition de \cleardoublepage pour créer une page totalement vide
-%\makeatletter
-%\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-%  \hbox{}
-%  \vspace*{\fill}
-%
-%  \vspace{\fill}
-%  \thispagestyle{empty}
-%  \newpage
-%  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-%\makeatother
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \vspace*{\fill}
 
-\tableofcontents
+  \vspace{\fill}
+  \thispagestyle{empty}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
 
-\frontmatter
 % \cleardoublepage permet de générer une page vide 
 % si le chapitre ne commence pas sur la page de droite
-% Table des matières
 
 % Ajout d'un préambule
+\frontmatter
+\cleardoublepage
 
-%\cleardoublepage
+% Table des matières
+\tableofcontents
+
+
+% Début réel du texte
 \mainmatter
+%\cleardoublepage
 
 \include{presentation}
 
+\include{installation}
 
-\part{Le contrôleur}
-\include{controleur}
-\part{Le modèle}
-\include{modele}
+\include{administration}
 
-\part{Les vues}
-\include{vue}
 
-\part{Sécurité et implémentation}
-\include{securite}
+%Bibliographie
+\backmatter
+
+% Integration de la biblio
+% Pour insérer toutes les références : 
+%\nocite{*}
+% Pour intégrer une référence non citée : 
+%\nocite{ref}
+\nocite{*}
+\bibliography{filo-science}
 
 \end{document}

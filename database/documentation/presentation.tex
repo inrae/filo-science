@@ -1,121 +1,80 @@
-\chapter{Présentation}
-\section{Historique}
-Au début des années 2000, PHP commençait à être largement utilisé pour créer des applications web. Certains frameworks étaient déjà présents, mais ils présentaient souvent des difficultés pour les appréhender et n'étaient pas forcément adaptés aux besoins de l'époque (performance souvent insuffisante en raison d'un chargement systématique de toutes les classes, fonctionnement exclusivement objet, etc.). De plus, ils ne permettaient que difficilement de remplacer certains composants par d'autres.
+\chapter{Le logiciel Filo-Science}
+\section{Présentation}
 
-Des outils comme Smarty, un moteur de templates qui permet de séparer le code HTML du code PHP commençaient à se faire une place. On trouvait également des bibliothèques assez élaborées comme PHPGACL pour gérer les droits de manière particulièrement pertinente.
+Le logiciel Filo-Science a été conçu pour permettre l'enregistrement des informations concernant les poissons capturés lors des opérations de pêches scientifiques (pêches électriques, pêches au filet). 
 
-La gestion des bases de données n'était pas des plus optimales, et un souvent un peu trop conceptuelle.
+Il a été conçu pour l'unité de recherche \textit{Écosystèmes aquatiques et changements globaux} d'IRSTEA, à Cestas (33).
 
-PrototypePHP a été créé pour assembler divers outils disponibles, selon la con-ception qu'en avait l'auteur à l'époque. Il était loin d'être parfait et a évolué de multiples fois, pour intégrer une approche mvc, puis des contraintes de sécurité, etc. Toutefois, les fondements de départ sont restés quasiment identiques, même si certaines évolutions ont été intégrées :
-\begin{itemize}
-\item des actions décrites dans un fichier xml, qui est utilisé pour générer le menu en fonction des droits détenus par l'utilisateur ;
-\item une gestion des droits basée sur PHPGACL. Si le produit initial a été abandonné, sa philosophie a été conservée ;
-\item une séparation du code PHP et HTML avec l'utilisation de SMARTY ;
-\item un accès aux tables de la base de données réalisé par l'intermédiaire d'une classe dédiée à cet usage, ObjetBDD, qui contient des fonctions très simples à manipuler, comme ecrire(\$data), lire(\$id), supprimer(\$id). La connexion à la base de données, à l'époque réalisée en utilisant la bibliothèque ADODB, a été remplacée par PDO ;
-\item un support de l'identification selon quatre modalités : base de données, annuaire LDAP, annuaire LDAP puis base de données, et connexion via un serveur CAS ;
-\item un souci permanent de la performance, lié au passé de son concepteur\footnote{il a commencé sa carrière à une époque où les ressources informatiques étaient rares, chères, et dont la puissance était limitée}.
-\end{itemize}
+Il a été écrit en PHP, les pages web sont générées en HTML et Javascript avec le composant Smarty.
 
-La première version publiée l'a été en 2008, dans sourceforge \\ (\url{https://sourceforge.net/projects/prototypephp/}). Depuis quelques années, elle est disponible dans github \\(\url{https://github.com/equinton/prototypephp}), la branche active étant la branche \textit{bootstrap}, créée au moment du basculement de l'affichage en utilisant les fonctionnalités de ce produit.
+\section{Fonctionnalités générales}
 
-Si le principe général d'une conception MVC a prévalu depuis plusieurs années, des améliorations récentes, notamment dans la gestion des vues, a été apportée. À partir de septembre 2016, une meilleure gestion des droits a été implémentée pour travailler de manière transparente avec les groupes issus d'un annuaire d'entreprise de type LDAP. 
-Il n'est pas impossible également que le support de Shibboleth puisse être intégré dans le futur, quand des bibliothèques prêtes à l'emploi seront disponibles.
+L'application est organisée autour de la notion de projet : un projet peut regrouper plusieurs campagnes, qui sont menées en réalisant des opérations de pêche. Les droits d'accès sont attribués par projet.
 
-\section{Gestion des versions}
+\section{Technologie employée}
+\subsection{Base de données}
 
-Le framework est mis à jour en parallèle aux développements de logiciels bâtis à partir de celui-ci. Le code disponible reflète donc les retranscriptions des modifications apportées au gré des évolutions envisagées par son concepteur.
+L'application a été conçue pour fonctionner avec Postgresql, en version 9.6. 
 
-Il n'existe ainsi plus depuis plusieurs mois de gestion de version : le plus simple est de se référer à la date du commit, en utilisant la branche \textit{bootstrap}, qui est celle de travail actuel.
+\subsection{Langage de développement et framework utilisé}
+Le logiciel a été écrit en PHP, en s'appuyant sur le framework \textit{Prototypephp} \cite{prototypephp}, développé parallèlement par l'auteur du logiciel.
 
-\section{plugins utilisés}
-Les bibliothèques suivantes sont installées dans le framework :
-\begin{itemize}
-\item pour le code PHP :
-\begin{itemize}
-\item ObjetBDD (conçu par le développeur du framework), qui gère l'interface avec la base de données ;
-\item SMARTY (\url{http://www.smarty.net}), le moteur de templates ;
-\item phpCAS (\url{https://wiki.jasig.org/display/CASC/phpCAS}), pour la connexion par l'intermédiaire d'un serveur CAS.
-
-\end{itemize}
-\item pour l'affichage et la conception des pages web, le recours au javascript est omniprésent :
-\begin{itemize}
-\item JQuery, JQueryUI, et des plugins pour les sélections des dates ;
-\item DataTables et ses plugins ;
-\item OpenLayers pour l'affichage des cartes ;
-\item bootstrap pour la prise en compte de l'affichage sur le mode \textit{responsive} ;
-\item ...
-
-\end{itemize}
-\end{itemize}
-
-Elles sont mises à jour régulièrement, mais il est préférable de vérifier si de nouvelles versions sont disponibles avant de procéder à une mise en production.
-
-\section{Modèle MVC}
-
-Le framework est basé sur un modèle MVC, qui présente les caractéristiques suivantes :
-\begin{itemize}
-\item le contrôleur est unique, les actions et les droits associés sont décrits dans un fichier unique ;
-\item les vues sont héritées d'une classe non instanciable, avec des classes dédiées à l'usage (html via Smarty, ajax, csv, pdf pour le moment) ;
-\item le modèle est constitué de deux types d'objets : des classes héritées d'ObjetBDD pour gérer les échanges avec la base de données, et des fichiers de script exécutant les modules (ou actions) demandés.
-\end{itemize}
-
-Le framework n'a pas une philosophie \og tout objet \fg{}, comme peuvent l'être d'autres, pour tirer parti de la souplesse du php. De nombreuses fonctions permettent de faciliter et limiter le code à écrire.
-
-Quelques classes génériques sont utilisées (une classe Message, par exemple), et l'application recourt fortement aux variables de session. 
-
-\section{Licences}
-
-Le framework est distribué sous licence LGPL v2 et CECILL-C.
-
-Voici la liste des licences des composants utilisés :
+Il utilise la classe \textit{Smarty} \cite{smarty} pour gérer l'affichage des pages HTML. Celles-ci sont générées en utilisant \textit{Jquery} \cite{jquery}  et divers composants associés. Le rendu général est réalisé avec \textit{Bootstrap} \cite{bootstrap}.
 
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3cm}|p{6cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|}
-\hline
-\textbf{Composant - version} & \textbf{Site web et usage} & \textbf{Langage} & \textbf{Licence} \\
-\hline
+
+\subsection{Liste des composants externes utilisés}
+% \usepackage{array} is required
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3cm}|c|c|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{3cm}|}
+\hline 
+\textbf{Nom} & \textbf{Version} & \textbf{Licence} & \textbf{Usage} & \textbf{Site} \\ 
+\hline 
 \endhead
-ObjetBDD &  Accès aux tables des bases de données (ORM) - version intégrée dans le framework & PHP & LGPL \\
+PrototypePHP & 5/4/2019 & LGPL & Framework & \href{https://github.com/equinton/prototypephp}{github.com/ equinton/ prototypephp} \\ 
+\hline 
+Smarty & 3.1 & LGPL & Générateur de pages HTML & \href{http://www.smarty.net}{www.smarty.net} \\ 
+\hline 
+Smarty-gettext & 1.2.0 & LGPL & Gestion du multi-linguisme avec Smarty & \href{https://github.com/smarty-gettext/smarty-gettext}{https://github.com/smarty-gettext/smarty-gettext} \\
 \hline
-SMARTY 3.1.31 & \url{http://www.smarty.net} Moteur de templates & PHP & LGPL \\
+PHPCAS & 1.3.5 & Apache 2.0 & Identification auprès d'un serveur CAS & \href{https://wiki.jasig.org/display/CASC/phpCAS}{wiki.jasig.org/ display/ CASC/ phpCAS} \\ 
+\hline 
+Bootstrap & 3.3.7 & MIT & Présentation HTML & \href{http://getbootstrap.com}{get.bootstrap.com} \\ 
+\hline 
+js-cookie-master & 2.1.4 & MIT & Gestion des cookies dans le navigateur & \href{https://github.com/js-cookie/js-cookie}{github.com/ js-cookie/ js-cookie} \\ 
+\hline 
+Datatables & 1.10.15 & MIT & Affichage des tableaux HTML & \href{http://www.datatables.net/}{www.datatables. net} \\ 
+\hline 
+Datetime-moment &  & MIT & Formatage des dates dans les tableaux & \href{https://datatables.net/plug-ins/sorting/datetime-moment}{datatables.net/ plug-ins/ sorting/ datetime-moment} \\ 
+\hline 
+Moment & 2.8.4 & MIT & Composant utilisé par datetime-moment & \href{http://momentjs.com} {momentjs.com}\\ 
+\hline 
+JQuery & 3.3.1 & $\approx$ BSD & Commandes Javascript & \href{http://jquery.com/}{jquery.com} \\ 
+\hline 
+JQuery-ui & 1.12.1 & $\approx$ BSD & Commandes Javascript pour les rendus graphiques & \href{http://jqueryui.com/}{jqueryui.com} \\ 
+\hline 
+Jquery-timepicker-addon & 1.6.3 & MIT & Time picker & \href{https://github.com/trentrichardson/jQuery-Timepicker-Addon}{github.com/ trentrichardson/ jQuery-Timepicker-Addon} \\ 
+\hline 
+Magnific-popup & 1.1.0 & MIT & Affichage des photos & \href{http://dimsemenov.com/plugins/magnific-popup/}{dimsemenov .com/plugins/ magnific-popup/}\\ 
+\hline 
+Smartmenus & 1.1.0 & MIT & Génération du menu HTML & \href{http://www.smartmenus .org}{www.smartmenus .org} \\ 
+\hline 
+OpenLayers & 4.2.0 & BSD 2 & \href{https://github.com/openlayers/openlayers}{github.com/openlayers/openlayers} \\
 \hline
-SMARTY-GETTEXT 1.2.0 & Traduction des libellés dans Smarty & PHP & LGPL \\
+AlpacaJS & 1.5.23 & Apache 2 & Génération et saisie des métadonnées (pour une version future) & 
+\href{http://www.alpacajs.org/}{www.alpacajs.org}\\
 \hline
+\caption{Table des composants externes utilisés dans l'application}
+\end{longtable} 
 
+\section{Sécurité}
 
-PHPCAS 1.3.5 & \url{https://wiki.jasig.org/display/CASC/phpCAS} Identification via un serveur CAS & PHP & Apache 2.0\\
-\hline
-fpdf17 & \url{http://www.fpdf.org/} Génération de fichiers PDF & PHP & Aucune restriction d'usage\\
-\hline
+L'application a été conçue pour résister aux attaques dites opportunistes selon la nomenclature ASVS v4 \cite{asvs} de l'OWASP \cite{owasp}. Des tests d'attaque ont été réalisés en mai 2019 avec le logiciel ZapProxy \cite{zaproxy}, et n'ont pas détecté de faiblesse particulière.
 
-bootstrap & \url{http://getbootstrap.com} Affichage HTML & CSS et Javascript &  MIT\\
-\hline
-js-cookie-master & \url{https://github.com/js-cookie/js-cookie} Gestion des cookies dans le navigateur & Javascript & MIT \\
-\hline
-Datatables 1.10.15 & \url{http://www.datatables.net/} Affichage des tables & Javascript & MIT \\
-\hline
-datetime-moment & \url{https://datatables.net/plug-ins/sorting/datetime-moment} Gestion du tri des dates dans Datatables & Javascript & MIT\\
-\hline
-moment & \url{http://momentjs.com} bibliothèque utilisée par le composant précédent pour le tri des dates & Javascript & MIT\\
-\hline
-Jquery 3.3.1 & \url{http://jquery.com/} Fonctions d'encapsulation de Javascript & Javascript & Équivalent BSD \\
-\hline
-JqueryUI & \url{http://jqueryui.com/} Composants graphiques associés à Jquery & Javascript & Équivalent BSD \\
-\hline
-jquery-timepicker-addon & \url{https://github.com/trentrichardson/jQuery-Timepicker-Addon} saisie de la date/heure & Javascript & MIT\\
-\hline
-magnific-popup 1.1.0 & \url{http://dimsemenov.com/plugins/magnific-popup/} Affichage des images sous forme de pop-up & Javascript & MIT \\
-\hline
-smartmenus & \url{http://www.smartmenus.org} Affichage des menus dans bootstrap & Javascript & MIT\\
-\hline
-c3js0.4.10 & \url{http://c3js.org/} Création de graphiques & Javascript & MIT \\
-\hline
-openlayers 4.2.0 & \url{http://openlayers.org/} Affichage de cartes & Javascript & BSD\\
-\hline
-alpaca 1.5.23 & \url{http://alpacajs.org/} Gestion de formulaires JSON & Javascript & Apache 2\\
-\hline
+La gestion des droits est conçue pour qu'un utilisateur ne puisse accéder qu'aux projets auxquels il est rattaché. 
 
-\caption{Liste des licences des composants les plus fréquemment utilisés}
-\end{longtable}
+\section{Licence}
+Le logiciel est diffusé selon les termes de la licence GNU AFFERO GENERAL PUBLIC LICENSE version 3, en date du 19 novembre 2007 \cite{agpl}.
 
-Les composants PHP sont stockés dans le dossier \textit{plugins}, les composants Javascript dans \textit{display/javascript}.
+\section{Copyright}
+
+L'application est en cours de dépôt auprès de l'Agence de protection des programmes \cite{app}.
