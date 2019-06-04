@@ -36,7 +36,7 @@ class Operator extends ObjetBDD
             $sql = "select distinct operator_id, firstname, name, is_active, 
                     null as operation_id, false as is_responsible
                     from operator
-                    left outer join (operation_operator using (operator_id)
+                    left outer join operation_operator using (operator_id)
                     where operation_id <> :operation_id
                     and is_active = true";
             $data = array_merge($data, $this->getListeParamAsPrepared($sql, array("operation_id" => $operation_id)));

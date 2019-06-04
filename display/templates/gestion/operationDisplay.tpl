@@ -25,6 +25,9 @@ $(document).ready(function() {
         <li class="nav-item">
             <a class="nav-link" id="tab-sequence" href="#nav-sequence"  data-toggle="tab" role="tab" aria-controls="nav-sequence" aria-selected="false">{t}Séquences de pêche{/t}</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab-operator" href="#nav-operator" data-toggle="tab" role="tab" aria-controls="nav-operator" aria-selected="false">{t}Opérateurs{/t}</a>
+        </li>
     </ul>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane active in" id="nav-detail" role="tabpanel" aria-labelledby="tab-detail">
@@ -40,6 +43,11 @@ $(document).ready(function() {
         <div class="tab-pane fade" id="nav-sequence" role="tabpanel" aria-labelledby="tab-sequence">
             <div class="col-md-12">
                 {include file="gestion/sequenceList.tpl"}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-operator" role="tabpanel" aria-labelledby="tab-operator">
+            <div class="col-md-12">
+                {include file="gestion/operationOperators.tpl"}
             </div>
         </div>
     </div>

@@ -48,6 +48,12 @@ switch ($t_module["param"]) {
         }
         $vue->set($dataAmbience, "ambience");
         /**
+         * Operators
+         */
+        require_once 'modules/classes/operator.class.php';
+        $operator = new Operator($bdd, $ObjetBDDParam);
+        $vue->set($operator->getListFromOperation($id),"operators");
+        /**
          * select the good tab for display
          */
         if (isset($activeTab)) {
