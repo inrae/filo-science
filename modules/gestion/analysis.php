@@ -2,10 +2,16 @@
 require_once 'modules/classes/analysis.class.php';
 $dataClass = new Analysis($bdd, $ObjetBDDParam);
 $keyName = "analysis_id";
+if (strlen($_REQUEST[$keyName]) == 0) {
+    $t_module["param"] = "error";
+    $t_module["retourko"] = "default";
+    $module_coderetour = -1;
+}
 $id = $_SESSION["ti_analysis"]->getValue($_REQUEST[$keyName]);
 if (strlen($id) == 0) {
     $id = 0;
 }
+
 $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
 
 switch ($t_module["param"]) {
@@ -46,10 +52,13 @@ switch ($t_module["param"]) {
         );
         break;
     case "write":
-        /*
-     * write record in database
-     */
-        $id = dataWrite($dataClass, $_REQUEST);
+        /**
+         * write record in database
+         */
+        $data = $_REQUEST;
+        $data["sequence_id"] = $sequence_id;
+        $data ["analysis_id"] = $id;
+        $id = dataWrite($dataClass, $data);
         if ($id > 0) {
             $_REQUEST[$keyName] = $id;
         }
