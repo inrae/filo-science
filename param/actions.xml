@@ -248,5 +248,9 @@
 	<ambienceoperationWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
 	<ambienceoperationDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
 
+	<analysisChange action="modules/gestion/analysis.php" param="change" droits="gestion" type="smarty"  />
+	<analysisWrite action="modules/gestion/analysis.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange" />
+	<analysisDelete action="modules/gestion/analysis.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange" />
+
 </navigation>
 	

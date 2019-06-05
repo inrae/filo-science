@@ -62,6 +62,25 @@ switch ($t_module["param"]) {
             $dataAmbience["ambience_id"] = 0;
         }
         $vue->set($dataAmbience, "ambience");
+
+        /**
+         * Analysis
+         */
+        require_once 'modules/classes/analysis.class.php';
+        $analysis = new Analysis($bdd, $ObjetBDDParam);
+        $dataAnalysis = $_SESSION["ti_sequence"]->translateRow(
+            $_SESSION["ti_analysis"]->translateRow(
+                $analysis->getListFromParent($id)[0]
+            )
+        );
+        if (!isset($dataAnalysis["analysis_id"])) {
+            $dataAnalysis["analysis_id"] = 0;
+        }
+        $vue->set(
+            $dataAnalysis,
+            "analysis"
+        );
+
         /**
          * select the good tab for display
          */
