@@ -12,7 +12,6 @@ if (strlen($id) == 0) {
     $t_module["retourko"] = "default";
     $module_coderetour = -1;
 }
-
 switch ($t_module["param"]) {
 
     case "display":
@@ -52,7 +51,7 @@ switch ($t_module["param"]) {
          */
         require_once 'modules/classes/operator.class.php';
         $operator = new Operator($bdd, $ObjetBDDParam);
-        $vue->set($operator->getListFromOperation($id),"operators");
+        $vue->set($operator->getListFromOperation($id), "operators");
         /**
          * select the good tab for display
          */
@@ -119,6 +118,23 @@ switch ($t_module["param"]) {
          */
 
         dataDelete($dataClass, $id);
-
+        break;
+    case "operatorsChange":
+        /**
+         * Add operators to the operation
+         */
+        require_once 'modules/classes/operator.class.php';
+        $operator = new Operator($bdd, $ObjetBDDParam);
+        try {
+            $bdd->beginTransaction();
+            $operator->setOperatorsToOperation($id, $_POST["operators"], $_POST["operator_responsible"]);
+            $module_coderetour = 1;
+            $bdd->commit();
+        } catch (ObjetBDDException $e) {
+            $bdd->rollback();
+            $message->set(_("Problème rencontré lors de l'enregistrement des opérateurs"), true);
+            $message->setSyslog($e->getMessage());
+            $module_coderetour = -1;
+        }
         break;
 }

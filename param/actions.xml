@@ -226,6 +226,7 @@
 	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty" requiredVar="operation_id" />
 	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" />
 	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignList" retourko="operationChange" modulebefore="operationChange" />
+	<operationOperatorsChange action="modules/gestion/operation.php" param="operatorsChange" droits="gestion" retourok="operationDisplay" retourko="operationDisplay"/>
 
 	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id"/>
 	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id"/>

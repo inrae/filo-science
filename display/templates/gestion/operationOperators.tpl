@@ -1,11 +1,12 @@
 <div class="col-md-12">
     <fieldset>
         <legend>{t}Opérateurs{/t}</legend>
-        <form id="operators">
+        <form id="operators" method="post" action="index.php">
+            <input type="hidden" name="module" value="operationOperatorsChange">
             <input type="hidden" name="activeTab" value="tab-operator">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
             <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
-            <table id="operators" class="table table-bordered table-hover datatable " data-order='[[0,"asc"]]' >
+            <table id="operators" class="table table-bordered table-hover datatable-nopaging " data-order='[[0,"asc"]]' >
                 <thead>
                     <tr>
                         <th>{t}Nom - prénom{/t}</th>
@@ -27,6 +28,9 @@
                     {/foreach}
                 </tbody>
             </table>
+            <div class="form-group center">
+                <button type="submit" class="btn btn-primary">{t}Valider{/t}</button>
+            </div>
         </form>
     </fieldset>
 </div>

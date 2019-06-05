@@ -25,23 +25,38 @@ class Operator extends ObjetBDD
      * @param boolean $with_active : get the list of active operators  not rattached to the operation
      * @return array
      */
-    function getListFromOperation($operation_id, $with_active = true)
+    function getListFromOperation($operation_id, $with_others_active = true)
     {
-        $sql = "select operator_id, firstname, name, is_active, operation_id, is_responsible
+        if ($with_others_active) {
+            $sql = "SELECT operator_id,
+                            firstname,
+                            name,
+                            is_active,
+                            operation_id,
+                            is_responsible
+                    FROM operator
+                    JOIN operation_operator USING (operator_id)
+                    WHERE operation_id = :operation_id
+                    UNION
+                    SELECT operator_id,
+                            firstname,
+                            name,
+                            is_active,
+                            NULL AS operation_id,
+                            FALSE AS is_responsible
+                    FROM operator
+                    WHERE operator_id NOT IN (SELECT operator_id
+                                            FROM operation_operator
+                                            WHERE operation_id = :operation_id)
+                    AND   is_active = TRUE
+                    ";
+        } else {
+            $sql = "select operator_id, firstname, name, is_active, operation_id, is_responsible
                 from operator
                 join operation_operator using (operator_id)
                 where operation_id = :operation_id";
-        $data = $this->getListeParamAsPrepared($sql, array("operation_id" => $operation_id));
-        if ($with_active) {
-            $sql = "select distinct operator_id, firstname, name, is_active, 
-                    null as operation_id, false as is_responsible
-                    from operator
-                    left outer join operation_operator using (operator_id)
-                    where operation_id <> :operation_id
-                    and is_active = true";
-            $data = array_merge($data, $this->getListeParamAsPrepared($sql, array("operation_id" => $operation_id)));
         }
-        return $data;
+        return $this->getListeParamAsPrepared($sql, array("operation_id" => $operation_id));
     }
     /**
      * Set operators attached to an operation
