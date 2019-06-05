@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,914" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1091" last-zoom="1" max-obj-count="61"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -1239,7 +1239,7 @@ By default : total_length and weight]]></comment>
 	<column name="analysis_id" not-null="true" sequence="filo.analysis_analysis_id_seq">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="analysis_date">
+	<column name="analysis_date" not-null="true">
 		<type name="timestamp" length="0"/>
 		<comment><![CDATA[Date/time of the sampling]]></comment>
 	</column>
@@ -1295,7 +1295,7 @@ By default : total_length and weight]]></comment>
 	 custom-color="#8683a5"
 	 src-table="filo.sequence"
 	 dst-table="filo.analysis"
-	 src-required="false" dst-required="false"/>
+	 src-required="true" dst-required="false"/>
 
 <table name="sexe" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
@@ -2826,7 +2826,7 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbversion_number•dbversion_date⸣
-1.0•2019-05-13]]>
+1.1•2019-06-05]]>
 	</initial-data>
 </table>
 

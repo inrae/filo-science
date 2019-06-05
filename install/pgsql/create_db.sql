@@ -1669,8 +1669,8 @@ ALTER SEQUENCE filo.analysis_analysis_id_seq OWNER TO filo;
 -- DROP TABLE IF EXISTS filo.analysis CASCADE;
 CREATE TABLE filo.analysis (
 	analysis_id integer NOT NULL DEFAULT nextval('filo.analysis_analysis_id_seq'::regclass),
-	sequence_id integer,
-	analysis_date timestamp,
+	sequence_id integer NOT NULL,
+	analysis_date timestamp NOT NULL,
 	ph float,
 	temperature float,
 	o2_pc float,
@@ -1710,7 +1710,7 @@ ALTER TABLE filo.analysis OWNER TO filo;
 -- ALTER TABLE filo.analysis DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
 ALTER TABLE filo.analysis ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
 REFERENCES filo.sequence (sequence_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
+ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: filo.sexe | type: TABLE --
@@ -3387,7 +3387,7 @@ COMMENT ON COLUMN filo.dbversion.dbversion_date IS 'Date de la version';
 ALTER TABLE filo.dbversion OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.0', E'2019-05-13');
+INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.1', E'2019-06-05');
 -- ddl-end --
 
 -- object: filo.taxa_template_taxa_template_id_seq | type: SEQUENCE --

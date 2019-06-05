@@ -2,6 +2,7 @@
 # upgrade an instance 2.2.2 to 2.2.3
 OLDVERSION=filo-1.0
 VERSION=filo-1.0.1
+SQLSCRIPT=upgradedb-1.0-1.1.sql
 echo "This script will install the release $VERSION"
 echo "have you a backup of your database and a copy of param/param.inc.php?"
 echo "Is your actual version of Filo-Science is $OLDVERSION ?"
@@ -36,6 +37,14 @@ fi
 #replacement of symbolic link
 rm -f filo-science
 ln -s $VERSION filo-science
+
+# upgrade database
+echo "update database"
+chmod 755 /var/www/html/filo-science
+cd filo-science/install
+su postgres -c "psql -f $SQLSCRIPT"
+cd ../..
+chmod 750 /var/www/html/filo-science
 
 # assign rights to new folder
 find filo-science/ -type d -exec chmod -R 750 {} \;
