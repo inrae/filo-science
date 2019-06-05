@@ -1,7 +1,7 @@
 #!/bin/bash
 # upgrade an instance 2.2.2 to 2.2.3
-OLDVERSION=filo-1.0
-VERSION=filo-1.0.1
+OLDVERSION=filo-1.0.1
+VERSION=filo-1.1
 SQLSCRIPT=upgradedb-1.0-1.1.sql
 echo "This script will install the release $VERSION"
 echo "have you a backup of your database and a copy of param/param.inc.php?"

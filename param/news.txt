@@ -1,5 +1,16 @@
 Nouveautés
 ==========
+Version 1.1.0 du 05/06/2019
+--------------
+Correction de bugs :
+- dans certains cas, la navigation ne s'effectuait pas correctement, notamment pour les retours vers les pages précédentes
+- le retour de connexion avec des identifiants vides était mal géré
+
+Nouveautés :
+- ajout de la saisie des opérateurs
+- ajout de la saisie des analyses d'eau (paramètres standards)
+- écriture de la documentation d'administration
+
 Version 1.0.1 du 14/05/2019
 --------------
 Correction de bugs :

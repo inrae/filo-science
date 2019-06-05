@@ -1,8 +1,19 @@
 News
 ===========
+Release 1.1.0 of 2019-06-05
+--------------
+Bug fixes:
+- in some cases, navigation was not carried out correctly, especially for returns to previous pages
+- connection feedback with empty identifiers was poorly managed
+
+News:
+- added operator entry
+- added entry of water analyses (standard parameters)
+- writing administration documentation
+
 Release v1.0.1 of 2019-05-14
 ------------
-Bugfix:
+Bug fixes:
 - the transformation of the identifiers did not work in certain cases, resulting in the impossibility of seizing the gear attached to a sequence
 - the display of the minimum measured size of a lot did not work
 - corrections of the installation script
