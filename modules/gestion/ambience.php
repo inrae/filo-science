@@ -79,9 +79,13 @@ switch ($t_module["param"]) {
         $data["ambience_id"] = $id;
         if ($operation_id > 0) {
             $data["operation_id"] = $operation_id;
+        } else {
+            unset($data["operation_id"]);
         }
         if ($sequence_id > 0) {
             $data["sequence_id"] = $sequence_id;
+        } else {
+            unset($data["sequence_id"]);
         }
         $id = dataWrite($dataClass, $data);
 

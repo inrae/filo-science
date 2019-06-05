@@ -30,7 +30,7 @@ chgrp www-data $VERSION/param/param.inc.php
 # keys for tokens
 if [ -e filo-science/param/id_filo-science ]
 then
-cp filo/param/id_filo-science* $VERSION/param/
+cp filo-science/param/id_filo-science* $VERSION/param/
 chown www-data $VERSION/param/id_filo-science
 fi
 

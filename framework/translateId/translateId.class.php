@@ -157,7 +157,7 @@ class TranslateId
                 if (! isset($this->corresp_reverse[$value])) {
                     $this->setValue($value);
                 }
-                $row[$key] = $this->corresp_reverse[$value];
+                $value > 0 ? $row[$key] = $this->corresp_reverse[$value] : $row[$key]=0;
                 break;
             }
         }
