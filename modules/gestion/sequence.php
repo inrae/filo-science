@@ -2,23 +2,29 @@
 require_once 'modules/classes/sequence.class.php';
 $dataClass = new Sequence($bdd, $ObjetBDDParam);
 $keyName = "sequence_id";
+if (strlen($_REQUEST[$keyName]) == 0) {
+    $t_module["param"] = "error";
+    $t_module["retourko"] = "default";
+    $module_coderetour = -1;
+}
 $id = $_SESSION["ti_sequence"]->getValue($_REQUEST[$keyName]);
 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 $operation_id = $_SESSION["ti_operation"]->getValue($_REQUEST["operation_id"]);
 if (isset($_REQUEST["activeTab"])) {
     $activeTab = $_REQUEST["activeTab"];
 }
-if (strlen($id) == 0) {
-    $t_module["param"] = "error";
-    $t_module["retourko"] = "default";
-    $module_coderetour = -1;
-}
 
 switch ($t_module["param"]) {
 
     case "display":
-        $data = $_SESSION["ti_sequence"]->translateRow($dataClass->getDetail($id));
-        $vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");
+        $data = $_SESSION["ti_campaign"]->translateRow(
+            $_SESSION["ti_operation"]->translateRow(
+                $_SESSION["ti_sequence"]->translateRow(
+                    $dataClass->getDetail($id)
+                )
+            )
+        );
+        $vue->set($data, "data");
         $vue->set("gestion/sequenceDisplay.tpl", "corps");
         /**
          * related lists
@@ -80,7 +86,7 @@ switch ($t_module["param"]) {
             $dataAnalysis,
             "analysis"
         );
-
+        $vue->get("analysis");
         /**
          * select the good tab for display
          */
