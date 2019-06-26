@@ -7,8 +7,7 @@
  * Classe maîtrisant les aspects identification.
  */
 class IdentificationException extends Exception
-{
-}
+{ }
 
 /**
  * @class Identification
@@ -135,7 +134,7 @@ class Identification
         } else {
             phpCAS::forceAuthentication();
         }
-        
+
         return phpCAS::getUser();
     }
 
@@ -158,12 +157,14 @@ class Identification
                     '*',
                     '(',
                     ')',
-                ), array(
+                ),
+                array(
                     '\5c',
                     '\2a',
                     '\28',
                     '\29',
-                ), $login
+                ),
+                $login
             );
             for ($i = 0; $i < strlen($login); $i++) {
                 $char = substr($login, $i, 1);
@@ -249,9 +250,8 @@ class Identification
             if (strlen($adresse_retour) > 0) {
                 phpCAS::logoutWithUrl($adresse_retour);
             } else {
-                 phpCAS::logout();
+                phpCAS::logout();
             }
-           
         }
         if ($this->ident_type == "HEADER") {
             /*
@@ -391,7 +391,6 @@ class Identification
                         } catch (Exception $e) {
                             $message->setSyslog($e->getMessage());
                         }
-
                     } elseif ($ident_type == "BDD") {
                         /*
                          * Verification de l'identification uniquement en base de donnees
@@ -828,7 +827,8 @@ class LoginGestion extends ObjetBDD
             $sql .= " where lower(mail) = lower(:mail)";
             $sql .= " order by id desc limit 1";
             return $this->lireParamAsPrepared(
-                $sql, array(
+                $sql,
+                array(
                     "mail" => $mail,
                 )
             );
@@ -942,7 +942,6 @@ class Log extends ObjetBDD
          */
         if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
             return $_SERVER["HTTP_X_FORWARDED_FOR"];
-
         } else if (isset($_SERVER["REMOTE_ADDR"])) {
             /*
              * Cas classique
@@ -965,11 +964,38 @@ class Log extends ObjetBDD
             and nom_module like '%connexion' and commentaire like '%ok'
             order by log_id desc limit 2";
             $data = $this->getListeParamAsPrepared(
-                $sql, array(
+                $sql,
+                array(
                     "login" => $_SESSION["login"],
                 )
             );
             return $data[1];
+        }
+    }
+    /**
+     * Get the list of all connexions during max duration of session
+     *
+     * @param integer $duration
+     * @return void
+     */
+    public function getLastConnections($duration = 36000)
+    {
+        if (isset($_SESSION["login"])) {
+
+            $sql = "select log_date, ipaddress from log where login = :login
+            and nom_module like '%connexion' and commentaire like '%ok'
+            and log_date > :datefrom
+            order by log_id desc";
+            $date = new DateTime(now);
+            $date->sub(new DateInterval("PT" . $duration . "S"));
+            $data = $this->getListeParamAsPrepared(
+                $sql,
+                array(
+                    "login" => $_SESSION["login"],
+                    "datefrom" => $date->format(DATELONGMASK),
+                )
+            );
+            return $data;
         }
     }
 
@@ -987,7 +1013,8 @@ class Log extends ObjetBDD
             $sql .= " where login = :login and nom_module like '%connexion' and commentaire like '%ok'";
             $sql .= "order by log_id desc limit 1";
             $data = $this->lireParamAsPrepared(
-                $sql, array(
+                $sql,
+                array(
                     "login" => $login,
                 )
             );
@@ -1020,7 +1047,8 @@ class Log extends ObjetBDD
         $date->sub(new DateInterval("PT" . $maxtime . "S"));
         $sql = "select log_id from log where login = :login " . " and nom_module = 'connexionBlocking'" . " and log_date > :blockingdate " . " order by log_id desc limit 1";
         $data = $this->lireParamAsPrepared(
-            $sql, array(
+            $sql,
+            array(
                 "login" => $login,
                 "blockingdate" => $date->format(DATELONGMASK),
             )
@@ -1034,7 +1062,8 @@ class Log extends ObjetBDD
                     and log_date > :blockingdate
                 order by log_id desc limit :nbmax";
             $data = $this->getListeParamAsPrepared(
-                $sql, array(
+                $sql,
+                array(
                     "login" => $login,
                     "nbmax" => $nbMax,
                     "blockingdate" => $date->format(DATELONGMASK),
@@ -1112,7 +1141,8 @@ class Log extends ObjetBDD
                      */
                     $sql = 'select log_id, log_date from log' . " where nom_module like '%sendMailAdminForBlocking'" . ' and login = :login' . ' and commentaire = :admin' . ' and log_date > :lastdate' . ' order by log_id desc limit 1';
                     $logval = $this->lireParamAsPrepared(
-                        $sql, array(
+                        $sql,
+                        array(
                             "admin" => $admin,
                             "login" => $login,
                             "lastdate" => $lastDate->format("Y-m-d H:i:s"),

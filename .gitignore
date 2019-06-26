@@ -189,3 +189,4 @@ sympy-plots-for-*.tex/
 /install/deploy_instance_test.sh
 /param/id_filo-science
 /param/id_filo-science.pub
+/test/*
