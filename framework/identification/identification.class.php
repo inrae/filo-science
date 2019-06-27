@@ -1,5 +1,6 @@
 <?php
-
+use ZxcvbnPhp\Zxcvbn;
+require_once 'vendor/autoload.php';
 /** Fichier cree le 4 mai 07 par quinton
  *
  *UTF-8
@@ -737,19 +738,28 @@ class LoginGestion extends ObjetBDD
                  * Verification de la complexite du mot de passe
                  */
                 if ($this->controleComplexite($pass1) >= 3) {
-                    /*
+                    /**
+                     * Verify strength of password
+                     */
+                    $zxcvbn = new Zxcvbn();
+                    $strength = $zxcvbn->passwordStrength($pass1, array());
+                    if ($strength["score"] > 1) {
+                        /*
                      * calcul du sha256 du mot de passe
                      */
-                    $password_hash = $this->passwordHash($login, $pass1);
-                    /*
+                        $password_hash = $this->passwordHash($login, $pass1);
+                        /*
                      * Verification que le mot de passe n'a pas deja ete employe
                      */
-                    $loginOldPassword = new LoginOldPassword($this->connection, $this->paramori);
-                    $nb = $loginOldPassword->testPassword($login, $password_hash);
-                    if ($nb == 0) {
-                        $ok = true;
+                        $loginOldPassword = new LoginOldPassword($this->connection, $this->paramori);
+                        $nb = $loginOldPassword->testPassword($login, $password_hash);
+                        if ($nb == 0) {
+                            $ok = true;
+                        } else {
+                            $message->set(_("Le mot de passe a déjà été utilisé"), true);
+                        }
                     } else {
-                        $message->set(_("Le mot de passe a déjà été utilisé"), true);
+                        $message->set(_("Le mot de passe n'est pas assez fort"), true);
                     }
                 } else {
                     $message->set(_("Le mot de passe n'est pas assez complexe"), true);

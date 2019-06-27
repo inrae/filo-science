@@ -14,6 +14,10 @@ class ComposerStaticInitfc06e24141f3a87f90d0d3c71e70b08b
     );
 
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'ZxcvbnPhp\\' => 10,
+        ),
         'R' => 
         array (
             'Ramsey\\Uuid\\' => 12,
@@ -21,6 +25,10 @@ class ComposerStaticInitfc06e24141f3a87f90d0d3c71e70b08b
     );
 
     public static $prefixDirsPsr4 = array (
+        'ZxcvbnPhp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',

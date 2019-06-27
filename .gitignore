@@ -190,3 +190,4 @@ sympy-plots-for-*.tex/
 /param/id_filo-science
 /param/id_filo-science.pub
 /test/*
+/composer.lock
