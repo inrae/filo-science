@@ -1,32 +1,36 @@
+<script src="display/bower_components/zxcvbn/dist/zxcvbn.js">
+</script>
+
 <script >
 $(document).ready(function() {
 	var strength = {
-        0: "Worst ☹",
-        1: "Bad ☹",
-        2: "Weak ☹",
-        3: "Good ☺",
-        4: "Strong ☻"
+        0: "{t}Le pire{/t} ☹",
+        1: "{t}Mauvais{/t} ☹",
+        2: "{t}Faible{/t} ☹",
+        3: "{t}Bon{/t} ☺",
+        4: "{t}Robuste{/t} ☻"
 }
 
-var password = document.getElementById('password');
-var meter = document.getElementById('password-strength-meter');
-var text = document.getElementById('password-strength-text');
+var password = $("#pass1");
+var meter = $('#password-strength-meter');
+var text = $('#password-strength-text');
 
-password.addEventListener('input', function()
+$("#pass1").on('input', function()
 {
-    var val = password.value;
+    var val = $(this).val();
     var result = zxcvbn(val);
     
     // Update the password strength meter
-    meter.value = result.score;
+    $('#password-strength-meter').val(result.score);
    
     // Update the text indicator
     if(val !== "") {
-        text.innerHTML = "Strength: " + "<strong>" + strength[result.score] + "</strong>" + "<span class='feedback'>" + result.feedback.warning + " " + result.feedback.suggestions + "</span"; 
+		message = "{t}Force du mot de passe :{/t} " + strength[result.score] +  result.feedback.warning + ". " + result.feedback.suggestions;
     }
     else {
-        text.innerHTML = "";
+        message = "";
     }
+	$("#message").text(message);
 });
 
 	$("#formPassword").submit(function (event) {
@@ -83,18 +87,20 @@ password.addEventListener('input', function()
 <div class="col-md-8">
 <input type="password" id="pass1" class="form-control" autocomplete="off" name="pass1">
 </div>
+<div class="col-md-12 center">
+	<meter max="4" id="password-strength-meter"></meter>
+	<div id="message"></div>
+</div>
+
 </div>
 <div class="form-group">
-<label for="pass1" class="control-label col-md-4">
+<label for="pass2" class="control-label col-md-4">
 {t}Répétez le mot de passe :{/t}
 </label>
 <div class="col-md-8">
 <input type="password" id="pass2" name="pass2" class="form-control" autocomplete="off">
 </div>
 </div>
-<meter max="4" id="password-strength-meter"></meter>
-        <p id="password-strength-text"></p>
-
 <div class="form-group center">
       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
 </div>
@@ -102,10 +108,5 @@ password.addEventListener('input', function()
 Il doit comprendre au minimum 3 types de caractères différents
 (minuscule, majuscule, chiffre, ponctuation et autre symboles){/t}</span>
 </form>
-</div>
-</div>
-<div class="row">
-<div class="col-lg-6">
-<div id="message"></div>
 </div>
 </div>
