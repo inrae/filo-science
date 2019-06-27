@@ -16,7 +16,7 @@ switch ($t_module["param"]) {
          * Display the list of all records of the table
          */
         $vue->set($dataClass->getListeTriee(), "liste");
-        $vue->set("ident/loginliste.tpl", "corps");
+        $vue->set("framework/ident/loginliste.tpl", "corps");
         break;
     case "change":
 		/*
@@ -24,7 +24,7 @@ switch ($t_module["param"]) {
          * If is a new record, generate a new record with default value :
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
-        $data = dataRead($dataClass, $id, "ident/loginsaisie.tpl", 0);
+        $data = dataRead($dataClass, $id, "framework/ident/loginsaisie.tpl", 0);
         unset($data["password"]);
         $vue->set($data, "data");
         break;
@@ -60,7 +60,7 @@ switch ($t_module["param"]) {
         break;
     case "changePassword":
         if ($log->getLastConnexionType($_SESSION["login"]) == "db") {
-            $vue->set("ident/loginChangePassword.tpl", "corps");
+            $vue->set("framework/ident/loginChangePassword.tpl", "corps");
             $vue->set($APPLI_passwordMinLength,"passwordMinLength");
         } else {
             $message->set(_("Le mode d'identification utilisé pour votre compte n'autorise pas la modification du mot de passe depuis cette application"), true);

@@ -247,7 +247,7 @@ while (isset($module)) {
                 /*
                  * Gestion de la saisie du login
                  */
-                $vue->set("ident/login.tpl", "corps");
+                $vue->set("framework/ident/login.tpl", "corps");
                 $vue->set($tokenIdentityValidity, "tokenIdentityValidity");
                 $vue->set($APPLI_lostPassword, "lostPassword");
                 $loginForm = true;
@@ -455,7 +455,7 @@ while (isset($module)) {
                 /*
                  * saisie du login en mode admin
                  */
-                $vue->set("ident/loginAdmin.tpl", "corps");
+                $vue->set("framework/ident/loginAdmin.tpl", "corps");
                 $resident = 0;
                 if ($t_module["retourlogin"] == 1) {
                     $vue->set($_REQUEST["module"], "module");
