@@ -104,8 +104,9 @@ $("#pass1").on('input', function()
 <div class="form-group center">
       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
 </div>
-<span id="helpBlock" class="help-block center">{t}Le mot de passe doit avoir une longueur minimale de 10 caractères
-Il doit comprendre au minimum 3 types de caractères différents
+<span id="helpBlock" class="help-block center">{t}Longueur minimale du mot de passe :{/t} {$passwordMinLength} {t}caractères{/t}
+	<br>
+{t}Il doit comprendre au minimum 3 types de caractères différents
 (minuscule, majuscule, chiffre, ponctuation et autre symboles){/t}</span>
 </form>
 </div>

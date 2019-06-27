@@ -7,7 +7,9 @@
  */
 $dataClass = new LoginGestion($bdd_gacl, $ObjetBDDParam);
 $id = $_REQUEST["id"];
-
+if (! $APPLI_passwordMinLength > 0) {
+    $APPLI_passwordMinLength = 12;
+}
 switch ($t_module["param"]) {
     case "list":
 		/*
@@ -73,4 +75,3 @@ switch ($t_module["param"]) {
         }
         break;
 }
-?>
