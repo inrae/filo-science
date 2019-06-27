@@ -15,7 +15,7 @@
 	<loginDelete action="framework/identification/login.php" param="delete" droits="admin" retourko="loginChange" retourok="loginList" modulebefore="loginChange"/>
 	<loginChangePassword action="framework/identification/login.php" param="changePassword" loginrequis="1" type="smarty" />
 	<loginChangePasswordExec action="framework/identification/login.php" param="changePasswordExec" loginrequis="1" retourko="loginChangePassword" retourok="default" modulebefore="loginChangePassword" />
-	<getLastConnections action="framework/log.php" param="getLastConnections" loginrequis="1" type="smarty"/>
+	<getLastConnections action="framework/log/log.php" param="getLastConnections" loginrequis="1" type="smarty"/>
 
 	<administration action="modules/administration/index.php" droits="admin" retourko="" retourok="" droitko="droitko" type="smarty"></administration>
 	<gestion action="modules/gestion/index.php" droits="gestion" retourko="" retourok="" droitko="droitko" type="smarty">

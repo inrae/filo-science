@@ -233,14 +233,15 @@ while (isset($module)) {
             /*
              * Affichage de l'ecran de saisie du login si necessaire
              */
-            if (in_array(
-                $ident_type,
-                array(
-                "BDD",
-                "LDAP",
-                "LDAP-BDD",
-                )
-            ) && !isset($_REQUEST["login"]) && strlen($_SESSION["login"]) == 0 
+            if (
+                in_array(
+                    $ident_type,
+                    array(
+                        "BDD",
+                        "LDAP",
+                        "LDAP-BDD",
+                    )
+                ) && !isset($_REQUEST["login"]) && strlen($_SESSION["login"]) == 0
                 && !isset($_COOKIE["tokenIdentity"])
             ) {
                 /*
@@ -301,14 +302,27 @@ while (isset($module)) {
                          * Regeneration de l'identifiant de session
                          */
                         session_regenerate_id();
-                        /*
+                        /**
+                         * Recuperation des connexions recentes
+                         */
+                        $connections = $log->getLastConnections($APPLI_absolute_session);
+                        $nbConnection = count($connections);
+                        if ($nbConnection > 1) {
+                            $message->set(_("Connexions précédentes récentes :"));
+                            for($i = 1; $i < $nbConnection; $i++) {
+                                $connection = $connections[$i];
+                                $message->set($connection["log_date"] . " - IP: " . $connection["ipaddress"]);
+                            }
+                        } else {
+                            /*
                          * Recuperation de la derniere connexion et affichage a l'ecran
                          */
-                        $lastConnect = $log->getLastConnexion();
-                        if (isset($lastConnect["log_date"])) {
-                            // traduction: bien conserver inchangées les chaînes %1$s, %2$s...
-                            $texte = _('Dernière connexion le %1$s depuis l\'adresse IP %2$s. Si ce n\'était pas vous, modifiez votre mot de passe ou contactez l\'administrateur de l\'application.');
-                            $message->set(sprintf($texte, $lastConnect["log_date"], $lastConnect["ipaddress"]));
+                            $lastConnect = $log->getLastConnexion();
+                            if (isset($lastConnect["log_date"])) {
+                                // traduction: bien conserver inchangées les chaînes %1$s, %2$s...
+                                $texte = _('Dernière connexion le %1$s depuis l\'adresse IP %2$s. Si ce n\'était pas vous, modifiez votre mot de passe ou contactez l\'administrateur de l\'application.');
+                                $message->set(sprintf($texte, $lastConnect["log_date"], $lastConnect["ipaddress"]));
+                            }
                         }
                         $message->setSyslog("connexion ok for " . $_SESSION["login"] . " from " . getIPClientAddress());
                         /*
@@ -357,11 +371,11 @@ while (isset($module)) {
                                 $cookieParam["httponly"] = true;
                                 setcookie('tokenIdentity', $token, time() + $tokenIdentityValidity, $cookieParam["path"], $cookieParam["domain"], $cookieParam["secure"], $cookieParam["httponly"]);
                             } catch (Exception $e) {
-                                $message->set($e->getMessage(),true);
+                                $message->set($e->getMessage(), true);
                             }
                         }
                     } else {
-                        $message->set(_("Identification refusée"),true);
+                        $message->set(_("Identification refusée"), true);
                         $message->setSyslog("connexion ko from " . getIPClientAddress());
                     }
                 }
@@ -471,7 +485,7 @@ while (isset($module)) {
         $log->setLog($_SESSION["login"], $module, $motifErreur);
     } catch (Exception $e) {
         if ($OBJETBDD_debugmode > 0) {
-            $message->set($log->getErrorData(1),true);
+            $message->set($log->getErrorData(1), true);
         } else {
             $message->set(_("Erreur d'écriture dans le fichier de traces"));
         }

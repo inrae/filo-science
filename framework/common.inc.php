@@ -40,6 +40,12 @@ if ($APPLI_utf8) {
     $ObjetBDDParam["UTF8"] = true;
 }
 $ObjetBDDParam["codageHtml"] = false;
+
+/**
+ * Recuperation de la classe de gestion des logs
+ */
+require_once 'framework/log/log.class.php';
+
 /**
  * Integration de la classe gerant la navigation dans les modules
  */
