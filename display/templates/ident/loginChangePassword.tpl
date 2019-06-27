@@ -46,7 +46,7 @@ $("#pass1").on('input', function()
 		 	message = "{t}Les mots de passe ne sont pas identiques{/t}";
 		 } else if (verifyLength(mdp1) == false) {
 		 	error = true;
-		 	message = "{t}Le mot de passe est trop court (minimum : 10 caractères){/t}";
+		 	message = "{t}Le mot de passe est trop court. Minimum : {/t}" + {$passwordMinLength}+ " {t}caractères{/t}";
 		 } else if (verifyComplexity(mdp1) == false) {
 		 	error = true;
 		 	message = "{t}Le mot de passe n'est pas assez complexe (mixez 3 jeux de caractères parmi les minuscules, majuscules, chiffres et signes de ponctuation){/t}";

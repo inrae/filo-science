@@ -723,7 +723,7 @@ class LoginGestion extends ObjetBDD
      */
     private function passwordVerify($login, $pass1, $pass2)
     {
-        global $message;
+        global $message, $APPLI_passwordMinLength;
         $ok = false;
         /*
          * Verification que le mot de passe soit identique
@@ -732,7 +732,7 @@ class LoginGestion extends ObjetBDD
             /*
              * Verification de la longueur - minimum : 10 caracteres
              */
-            if (strlen($pass1) > 9) {
+            if (strlen($pass1) >= $APPLI_passwordMinLength) {
                 /*
                  * Verification de la complexite du mot de passe
                  */

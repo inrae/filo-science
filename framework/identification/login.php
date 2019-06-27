@@ -59,6 +59,7 @@ switch ($t_module["param"]) {
     case "changePassword":
         if ($log->getLastConnexionType($_SESSION["login"]) == "db") {
             $vue->set("ident/loginChangePassword.tpl", "corps");
+            $vue->set($APPLI_passwordMinLength,"passwordMinLength");
         } else {
             $message->set(_("Le mode d'identification utilisé pour votre compte n'autorise pas la modification du mot de passe depuis cette application"), true);
             $vue->set("main.tpl");
