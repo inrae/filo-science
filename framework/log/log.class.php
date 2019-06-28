@@ -264,18 +264,69 @@ class Log extends ObjetBDD
      */
     public function blockingAccount($login)
     {
+        global $message, $APPLI_address, $GACL_aco;
         $this->setLog($login, "connexionBlocking");
-        global $message, $MAIL_enabled, $APPLI_mail, $APPLI_address, $APPLI_mailToAdminPeriod;
-        $date = date("Y-m-d H:i:s");
         $message->setSyslog("connexionBlocking for login $login");
+        $date = date("Y-m-d H:i:s");
+        $subject = "SECURITY REPORTING - " . $GACL_aco . " - account blocked";
+        $contents = "<html><body>" . "The account <b>$login<b> was blocked at $date for too many connection attempts" . '<br>Software : <a href="' . $APPLI_address . '">' . $APPLI_address . "</a>" . '</body></html>';
+        $this->sendMailToAdmin($subject, $contents, "sendMailAdminForBlocking", $login);
+    }
+    /**
+     * Calculate the number of calls to a module 
+     * return false if the number is greater than $maxNumber
+     *
+     * @param [varchar] $moduleName
+     * @param [int] $maxNumber
+     * @param [int] $duration: in seconds
+     * @return boolean
+     */
+    public function getCallsToModule($moduleName, $maxNumber, $duration)
+    {
+        global $APPLI_address, $GACL_aco, $message;
+        $sql = "select count(*) as nombre from log 
+                where nom_module = :moduleName 
+                and login = :login
+                and log_date > :dateref
+                ";
+        $dateRef = date('Y-m-d H:i:s', time() - $duration);
+        $moduleNameComplete = $GACL_aco . "-" . $moduleName;
+        $data = $this->lireParamAsPrepared($sql, array("moduleName" => $moduleNameComplete, "login" => $_SESSION["login"], "dateref" => $dateRef));
+        if ($data["nombre"] > $maxNumber) {
+            $messageLog = $moduleName . "-Duration:" . $duration . "-nbCalls:" . $data["nombre"] . "-nbMax:" . $maxNumber;
+            $this->setLog($_SESSION["login"], "nbMaxCallReached", $messageLog);
+            $message->setSyslog($GACL_aco . "-" . $APPLI_address . ":nbMaxCallReached-" . $messageLog);
+            $message->set(_("Le nombre d'accès autorisés pour le module demandé a été atteint. Si vous considérez que la valeur est trop faible, veuillez contacter l'administrateur de l'application"), true);
+            $subject = "SECURITY REPORTING - " . $GACL_aco . " - Maximum number of calls to a module reached";
+            $contents = "<html><body>" . "The account <b>" . $_SESSION["login"] . "<b> as reached the maximum number of authorized calls for the module $moduleName" . "<br>" . $data["nombre"] . " calls made in $duration seconds." . '<br>Software : <a href="' . $APPLI_address . '">' . $APPLI_address . "</a>" . '</body></html>';
+            $this->sendMailToAdmin($subject, $contents, "sendMailAdminForMaxCalls", $_SESSION["login"]);
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /**
+     * Send mails to administrors
+     *
+     * @param [string] $subject: subject of mail
+     * @param [string] $contents: content of mail, in html format
+     * @param [string] $moduleName: name of the module recorded in log table for this send
+     * @param [type] $login: login of the user concerned by this message
+     * @return void
+     */
+    public function sendMailToAdmin($subject, $contents, $moduleName, $login)
+    {
+        global $message, $MAIL_enabled, $APPLI_mail, $APPLI_mailToAdminPeriod, $GACL_aco;
+        $moduleNameComplete = $GACL_aco . "-" . $moduleName;
+
         if ($MAIL_enabled == 1) {
             include_once 'framework/identification/mail.class.php';
             include_once 'framework/droits/droits.class.php';
             $MAIL_param = array(
                 "replyTo" => "$APPLI_mail",
-                "subject" => "SECURITY REPORTING - " . $_SESSION["APPLI_code"] . " - account blocked",
+                "subject" => $subject,
                 "from" => "$APPLI_mail",
-                "contents" => "<html><body>" . "The account <b>$login<b> was blocked at $date for too many connection attempts" . '<br>Software : <a href="' . $APPLI_address . '">' . $APPLI_address . "</a>" . '</body></html>',
+                "contents" => $contents,
             );
             /*
              * Recherche de la liste des administrateurs
@@ -285,35 +336,35 @@ class Log extends ObjetBDD
             /*
              * Envoi des mails aux administrateurs
              */
-            $lastDate = new DateTime(now);
             if (isset($APPLI_mailToAdminPeriod)) {
                 $period = $APPLI_mailToAdminPeriod;
             } else {
                 $period = 7200;
             }
-            $interval = new DateInterval('PT' . $period . 'S');
-            $lastDate->sub($interval);
+            $lastDate = date('Y-m-d H:i:s', time() - $period);
             $mail = new Mail($MAIL_param);
             $loginGestion = new LoginGestion($this->connection, $this->paramori);
             foreach ($logins as $value) {
                 $admin = $value["login"];
                 $dataLogin = $loginGestion->lireByLogin($admin);
                 if (strlen($dataLogin["mail"]) > 0) {
-                    /*
-                     * Recherche si un mail a deja ete adresse a l'administrateur pour ce blocage
+                    /** 
+                     * search if a mail has been send to this admin for the same event and the same user recently
                      */
-                    $sql = 'select log_id, log_date from log' . " where nom_module like '%sendMailAdminForBlocking'" . ' and login = :login' . ' and commentaire = :admin' . ' and log_date > :lastdate' . ' order by log_id desc limit 1';
+                    $sql = 'select log_id, log_date from log' . " where nom_module = :moduleName" . ' and login = :login' . ' and commentaire = :admin' . ' and log_date > :lastdate' . ' order by log_id desc limit 1';
+                    $dataSql =  array(
+                        "admin" => $admin,
+                        "login" => $login,
+                        "lastdate" => $lastDate,
+                        "moduleName" => $moduleNameComplete
+                    );
                     $logval = $this->lireParamAsPrepared(
                         $sql,
-                        array(
-                            "admin" => $admin,
-                            "login" => $login,
-                            "lastdate" => $lastDate->format("Y-m-d H:i:s"),
-                        )
+                        $dataSql
                     );
                     if (!$logval["log_id"] > 0) {
                         if ($mail->sendMail($dataLogin["mail"], array())) {
-                            $this->setLog($login, "sendMailAdminForBlocking", $value["login"]);
+                            $this->setLog($login, $moduleName, $value["login"]);
                         } else {
                             global $message;
                             $message->setSyslog("error_sendmail_to_admin:" . $dataLogin["mail"]);

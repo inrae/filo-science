@@ -168,8 +168,11 @@ $CONNEXION_blocking_duration = 600;
  */
 $APPLI_mailToAdminPeriod = 7200;
 $APPLI_admin_ttl = 600; // Duree maxi d'inactivite pour acceder a un module d'administration
-$APPLI_lostPassword = 0; // Autorise la recuperation d'un nouveau mot de passe en cas de perte
-$APPLI_passwordMinLength = 8;
+$APPLI_lostPassword = 1; // Autorise la recuperation d'un nouveau mot de passe en cas de perte
+$APPLI_passwordMinLength = 12;
+$APPLI_hour_duration = 3600; // Duration of an hour for count all calls to a module
+$APPLI_day_duration = 36000; //Duration of a day for count all calls to a module
+$MAIL_enabled = 1; // send mails
 
 /*
  * Affichage par defaut des cartes Openstreetmap

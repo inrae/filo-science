@@ -309,7 +309,7 @@ while (isset($module)) {
                         $nbConnection = count($connections);
                         if ($nbConnection > 1) {
                             $message->set(_("Connexions précédentes récentes :"));
-                            for($i = 1; $i < $nbConnection; $i++) {
+                            for ($i = 1; $i < $nbConnection; $i++) {
                                 $connection = $connections[$i];
                                 $message->set($connection["log_date"] . " - IP: " . $connection["ipaddress"]);
                             }
@@ -432,6 +432,22 @@ while (isset($module)) {
         }
     }
 
+    /**
+     * Count all calls to the module
+     */
+    if ($t_module["maxCountByHour"] > 0) {
+        if ($log->getCallsToModule($module, $t_module["maxCountByHour"], $APPLI_hour_duration) == false) {
+            $resident = 0;
+            $motifErreur = "callsReached";
+        }
+    }
+    if ($t_module["maxCountByDay"] > 0) {
+        if ($log->getCallsToModule($module, $t_module["maxCountByDay"], $APPLI_day_duration) == false) {
+            $resident = 0;
+            $motifErreur = "callsReached";
+        }
+    }
+
     /*
      * Verification s'il s'agit d'un module d'administration
      */
@@ -546,6 +562,9 @@ while (isset($module)) {
                 break;
             case "adminko":
                 $module = $APPLI_moduleAdminLogin;
+                break;
+            case "callsReached":
+                $module = "default";
                 break;
             default:
                 unset($module);

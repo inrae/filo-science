@@ -2,7 +2,7 @@
 	<its:rules version="2.0">
 		<its:translateRule selector="//item/@tabledescription" translate="yes"/>
 	</its:rules>
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id">
+	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id"  maxCountByHour="60" maxCountByDay="600">
 	</model>
 	<default action="framework/default.php" type="smarty"></default>
 	<droitko action="framework/droitko.php" type="smarty"></droitko>
@@ -43,25 +43,25 @@
 	<exampleDelete action="modules/example/example.php" param="delete" droits="admin" retourok="exampleList" retourko="exampleChange" />
 
 	<!-- gestion des droits nouvelle formule -->
-	<appliList action="framework/droits/appli.php" param="list" droits="admin" retourlogin="1" type="smarty" />
+	<appliList action="framework/droits/appli.php" param="list" droits="admin" retourlogin="1" type="smarty"  maxCountByHour="60" maxCountByDay="600"/>
 	<appliDisplay action="framework/droits/appli.php" param="display" droits="admin" type="smarty"/>
-	<appliChange action="framework/droits/appli.php" param="change" droits="admin" type="smarty"/>
-	<appliWrite action="framework/droits/appli.php" param="write" droits="admin" retourok="appliDisplay" retourko="appliChange" modulebefore="appliChange" />
+	<appliChange action="framework/droits/appli.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<appliWrite action="framework/droits/appli.php" param="write" droits="admin" retourok="appliDisplay" retourko="appliChange" modulebefore="appliChange"  maxCountByHour="60" maxCountByDay="600"/>
 	<appliDelete action="framework/droits/appli.php" param="delete" droits="admin" retourok="appliList" retourko="appliChange" modulebefore="appliChange"/>
 
-	<aclloginList action="framework/droits/login.php" param="list" droits="admin" retourlogin="1" type="smarty" />
-	<aclloginChange action="framework/droits/login.php" param="change" droits="admin" type="smarty"/>
-	<aclloginWrite action="framework/droits/login.php" param="write" droits="admin" retourok="aclloginList" retourko="aclloginChange" modulebefore="aclloginChange" />
+	<aclloginList action="framework/droits/login.php" param="list" droits="admin" retourlogin="1" type="smarty"  maxCountByHour="60" maxCountByDay="600"/>
+	<aclloginChange action="framework/droits/login.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<aclloginWrite action="framework/droits/login.php" param="write" droits="admin" retourok="aclloginList" retourko="aclloginChange" modulebefore="aclloginChange"  maxCountByHour="60" maxCountByDay="600"/>
 	<aclloginDelete action="framework/droits/login.php" param="delete" droits="admin" retourok="aclloginList" retourko="aclloginChange" modulebefore="aclloginChange"/>
 
-	<groupList action="framework/droits/group.php" param="list" droits="admin" retourlogin="1" type="smarty" />
-	<groupChange action="framework/droits/group.php" param="change" droits="admin" type="smarty" />
-	<groupWrite action="framework/droits/group.php" param="write" droits="admin" retourok="groupList" retourko="groupChange" modulebefore="groupChange" />
+	<groupList action="framework/droits/group.php" param="list" droits="admin" retourlogin="1" type="smarty"  maxCountByHour="60" maxCountByDay="600"/>
+	<groupChange action="framework/droits/group.php" param="change" droits="admin" type="smarty"  maxCountByHour="60" maxCountByDay="600"/>
+	<groupWrite action="framework/droits/group.php" param="write" droits="admin" retourok="groupList" retourko="groupChange" modulebefore="groupChange"  maxCountByHour="60" maxCountByDay="600"/>
 	<groupDelete action="framework/droits/group.php" param="delete" droits="admin" retourok="groupList" retourko="groupChange" modulebefore="groupChange"/>
 
-	<acoDisplay action="framework/droits/aco.php" param="display" droits="admin" type="smarty" />
-	<acoChange action="framework/droits/aco.php" param="change" droits="admin" type="smarty"/>
-	<acoWrite action="framework/droits/aco.php" param="write" droits="admin" retourok="appliDisplay" retourko="acoChange" modulebefore="acoChange" />
+	<acoDisplay action="framework/droits/aco.php" param="display" droits="admin" type="smarty"  maxCountByHour="60" maxCountByDay="600"/>
+	<acoChange action="framework/droits/aco.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<acoWrite action="framework/droits/aco.php" param="write" droits="admin" retourok="appliDisplay" retourko="acoChange" modulebefore="acoChange"  maxCountByHour="60" maxCountByDay="600"/>
 	<acoDelete action="framework/droits/aco.php" param="delete" droits="admin" retourok="appliDisplay" retourko="acoChange" modulebefore="acoChange"/>
 
 	<passwordlostIslost action="framework/identification/passwordLost.php" param="isLost" type="smarty"/>
@@ -69,189 +69,189 @@
 	<passwordlostReinitchange action="framework/identification/passwordLost.php" param="reinitChange" type="smarty" />
 	<passwordlostReinitwrite action="framework/identification/passwordLost.php" param="reinitWrite" modulebefore="passwordlostReinitchange" retourko="default" retourok="connexion"/>
 
-	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty" />
-	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" />
+	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty"  maxCountByHour="60" maxCountByDay="600"/>
+	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList"  maxCountByHour="60" maxCountByDay="600"/>
 
-	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" droits="admin"/>
-	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="admin"/>
-	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="smarty" droits="admin"/>
-	<dbstructureSchema action="framework/utils/structure.php" param="schema" retourlogin="1" type="binaire" droits="param"/>
+	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" droits="admin" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="admin" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="smarty" droits="admin" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureSchema action="framework/utils/structure.php" param="schema" retourlogin="1" type="binaire" droits="param" maxCountByHour="60" maxCountByDay="600"/>
 	<!-- Parameters of the software -->
 
 	<param action="framework/default.php" type="smarty"/>
 
-	<granulometryList action="modules/param/param.php" param="list" droits="consult" tablename="granulometry" tabledescription="Classes de granulométrie" type="smarty" retourlogin="1"/>
-	<granulometryChange action="modules/param/param.php" param="change" droits="param" tablename="granulometry" tabledescription="Classes de granulométrie" type="smarty"/>
-	<granulometryWrite action="modules/param/param.php" param="write" droits="param" tablename="granulometry" retourok="granulometryList" retourko="granulometryChange" modulebefore="granulometryChange" />
+	<granulometryList action="modules/param/param.php" param="list" droits="consult" tablename="granulometry" tabledescription="Classes de granulométrie" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<granulometryChange action="modules/param/param.php" param="change" droits="param" tablename="granulometry" tabledescription="Classes de granulométrie" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<granulometryWrite action="modules/param/param.php" param="write" droits="param" tablename="granulometry" retourok="granulometryList" retourko="granulometryChange" modulebefore="granulometryChange"  maxCountByHour="60" maxCountByDay="600"/>
 	<granulometryDelete action="modules/param/param.php" param="delete" droits="param" tablename="granulometry" retourok="granulometryList" retourko="granulometryChange" modulebefore="granulometryChange" />
 
-	<speedList action="modules/param/param.php" param="list" droits="consult" tablename="speed" tabledescription="Classes de vitesse de courant" type="smarty" retourlogin="1"/>
-	<speedChange action="modules/param/param.php" param="change" droits="param" tablename="speed" tabledescription="Classes de vitesse de courant" type="smarty"/>
-	<speedWrite action="modules/param/param.php" param="write" droits="param" tablename="speed" retourok="speedList" retourko="speedChange" modulebefore="speedChange" />
-	<speedDelete action="modules/param/param.php" param="delete" droits="param" tablename="speed" retourok="speedList" retourko="speedChange" modulebefore="speedChange" />
+	<speedList action="modules/param/param.php" param="list" droits="consult" tablename="speed" tabledescription="Classes de vitesse de courant" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<speedChange action="modules/param/param.php" param="change" droits="param" tablename="speed" tabledescription="Classes de vitesse de courant" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<speedWrite action="modules/param/param.php" param="write" droits="param" tablename="speed" retourok="speedList" retourko="speedChange" modulebefore="speedChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<speedDelete action="modules/param/param.php" param="delete" droits="param" tablename="speed" retourok="speedList" retourko="speedChange" modulebefore="speedChange"  maxCountByHour="60" maxCountByDay="600"/>
 
-	<shadyList action="modules/param/param.php" param="list" droits="consult" tablename="shady" tabledescription="Types d'ombrage" type="smarty" retourlogin="1"/>
-	<shadyChange action="modules/param/param.php" param="change" droits="param" tablename="shady" tabledescription="Types d'ombrage" type="smarty"/>
-	<shadyWrite action="modules/param/param.php" param="write" droits="param" tablename="shady" retourok="shadyList" retourko="shadyChange" modulebefore="shadyChange" />
-	<shadyDelete action="modules/param/param.php" param="delete" droits="param" tablename="shady" retourok="shadyList" retourko="shadyChange" modulebefore="shadyChange" />
+	<shadyList action="modules/param/param.php" param="list" droits="consult" tablename="shady" tabledescription="Types d'ombrage" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<shadyChange action="modules/param/param.php" param="change" droits="param" tablename="shady" tabledescription="Types d'ombrage" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<shadyWrite action="modules/param/param.php" param="write" droits="param" tablename="shady" retourok="shadyList" retourko="shadyChange" modulebefore="shadyChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<shadyDelete action="modules/param/param.php" param="delete" droits="param" tablename="shady" retourok="shadyList" retourko="shadyChange" modulebefore="shadyChange"  maxCountByHour="60" maxCountByDay="600"/>
 
-	<cloggingList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de colmatages" tablename="clogging" type="smarty" retourlogin="1"/>
-	<cloggingChange action="modules/param/param.php" param="change" droits="param" tablename="clogging" tabledescription="Types de colmatages" type="smarty"/>
-	<cloggingWrite action="modules/param/param.php" param="write" droits="param" tablename="clogging" retourok="cloggingList" retourko="cloggingChange" modulebefore="cloggingChange" />
-	<cloggingDelete action="modules/param/param.php" param="delete" droits="param" tablename="clogging" retourok="cloggingList" retourko="cloggingChange" modulebefore="cloggingChange"/>
+	<cloggingList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de colmatages" tablename="clogging" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<cloggingChange action="modules/param/param.php" param="change" droits="param" tablename="clogging" tabledescription="Types de colmatages" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<cloggingWrite action="modules/param/param.php" param="write" droits="param" tablename="clogging" retourok="cloggingList" retourko="cloggingChange" modulebefore="cloggingChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<cloggingDelete action="modules/param/param.php" param="delete" droits="param" tablename="clogging" retourok="cloggingList" retourko="cloggingChange" modulebefore="cloggingChange" maxCountByHour="60" maxCountByDay="600"/>
 
-	<faciesList action="modules/param/param.php" param="list" droits="consult" tablename="facies" tabledescription="Types de faciès" type="smarty" retourlogin="1"/>
-	<faciesChange action="modules/param/param.php" param="change" droits="param" tablename="facies" tabledescription="Types de faciès" type="smarty"/>
-	<faciesWrite action="modules/param/param.php" param="write" droits="param" tablename="facies" retourok="faciesList" retourko="faciesChange" modulebefore="faciesChange" />
-	<faciesDelete action="modules/param/param.php" param="delete" droits="param" tablename="facies" retourok="faciesList" retourko="faciesChange" modulebefore="faciesChange" />
+	<faciesList action="modules/param/param.php" param="list" droits="consult" tablename="facies" tabledescription="Types de faciès" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<faciesChange action="modules/param/param.php" param="change" droits="param" tablename="facies" tabledescription="Types de faciès" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<faciesWrite action="modules/param/param.php" param="write" droits="param" tablename="facies" retourok="faciesList" retourko="faciesChange" modulebefore="faciesChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<faciesDelete action="modules/param/param.php" param="delete" droits="param" tablename="facies" retourok="faciesList" retourko="faciesChange" modulebefore="faciesChange"  maxCountByHour="60" maxCountByDay="600"/>
 
-	<sinuosityList action="modules/param/param.php" param="list" droits="consult" tablename="sinuosity" tabledescription="Types de sinuosités de la rivière" type="smarty" retourlogin="1"/>
-	<sinuosityChange action="modules/param/param.php" param="change" droits="param" tablename="sinuosity" tabledescription="Types de sinuosités de la rivière" type="smarty"/>
-	<sinuosityWrite action="modules/param/param.php" param="write" droits="param" tablename="sinuosity" retourok="sinuosityList" retourko="sinuosityChange" modulebefore="sinuosityChange" />
-	<sinuosityDelete action="modules/param/param.php" param="delete" droits="param" tablename="sinuosity" retourok="sinuosityList" retourko="sinuosityChange" modulebefore="sinuosityChange" />
+	<sinuosityList action="modules/param/param.php" param="list" droits="consult" tablename="sinuosity" tabledescription="Types de sinuosités de la rivière" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<sinuosityChange action="modules/param/param.php" param="change" droits="param" tablename="sinuosity" tabledescription="Types de sinuosités de la rivière" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<sinuosityWrite action="modules/param/param.php" param="write" droits="param" tablename="sinuosity" retourok="sinuosityList" retourko="sinuosityChange" modulebefore="sinuosityChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<sinuosityDelete action="modules/param/param.php" param="delete" droits="param" tablename="sinuosity" retourok="sinuosityList" retourko="sinuosityChange" modulebefore="sinuosityChange"  maxCountByHour="60" maxCountByDay="600"/>
 
-	<localisationList action="modules/param/param.php" param="list" droits="consult" tablename="localisation" tabledescription="Localisation de l'opération de pêche" type="smarty" retourlogin="1"/>
-	<localisationChange action="modules/param/param.php" param="change" droits="param" tablename="localisation" tabledescription="Localisation de l'opération de pêche" type="smarty"/>
-	<localisationWrite action="modules/param/param.php" param="write" droits="param" tablename="localisation" retourok="localisationList" retourko="localisationChange" modulebefore="localisationChange" />
-	<localisationDelete action="modules/param/param.php" param="delete" droits="param" tablename="localisation" retourok="localisationList" retourko="localisationChange" modulebefore="localisationChange" />
+	<localisationList action="modules/param/param.php" param="list" droits="consult" tablename="localisation" tabledescription="Localisation de l'opération de pêche" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<localisationChange action="modules/param/param.php" param="change" droits="param" tablename="localisation" tabledescription="Localisation de l'opération de pêche" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<localisationWrite action="modules/param/param.php" param="write" droits="param" tablename="localisation" retourok="localisationList" retourko="localisationChange" modulebefore="localisationChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<localisationDelete action="modules/param/param.php" param="delete" droits="param" tablename="localisation" retourok="localisationList" retourko="localisationChange" modulebefore="localisationChange"  maxCountByHour="60" maxCountByDay="600"/>
 
-	<situationList action="modules/param/param.php" param="list" droits="consult" tablename="situation" tabledescription="Liste des emplacements particuliers" type="smarty" retourlogin="1"/>
-	<situationChange action="modules/param/param.php" param="change" droits="param" tablename="situation" tabledescription="Liste des emplacements particuliers" type="smarty"/>
-	<situationWrite action="modules/param/param.php" param="write" droits="param" tablename="situation" retourok="situationList" retourko="situationChange" modulebefore="situationChange" />
-	<situationDelete action="modules/param/param.php" param="delete" droits="param" tablename="situation" retourok="situationList" retourko="situationChange" modulebefore="situationChange"/>
+	<situationList action="modules/param/param.php" param="list" droits="consult" tablename="situation" tabledescription="Liste des emplacements particuliers" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<situationChange action="modules/param/param.php" param="change" droits="param" tablename="situation" tabledescription="Liste des emplacements particuliers" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<situationWrite action="modules/param/param.php" param="write" droits="param" tablename="situation" retourok="situationList" retourko="situationChange" modulebefore="situationChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<situationDelete action="modules/param/param.php" param="delete" droits="param" tablename="situation" retourok="situationList" retourko="situationChange" modulebefore="situationChange" maxCountByHour="60" maxCountByDay="600"/>
 
-	<vegetationList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de végétation" tablename="vegetation" type="smarty" retourlogin="1"/>
-	<vegetationChange action="modules/param/param.php" param="change" droits="param" tablename="vegetation" tabledescription="Types de végétation" type="smarty"/>
-	<vegetationWrite action="modules/param/param.php" param="write" droits="param" tablename="vegetation" retourok="vegetationList" retourko="vegetationChange" modulebefore="vegetationChange" />
-	<vegetationDelete action="modules/param/param.php" param="delete" droits="param" tablename="vegetation" retourok="vegetationList" retourko="vegetationChange" modulebefore="vegetationChange" />
+	<vegetationList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de végétation" tablename="vegetation" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
+	<vegetationChange action="modules/param/param.php" param="change" droits="param" tablename="vegetation" tabledescription="Types de végétation" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
+	<vegetationWrite action="modules/param/param.php" param="write" droits="param" tablename="vegetation" retourok="vegetationList" retourko="vegetationChange" modulebefore="vegetationChange"  maxCountByHour="60" maxCountByDay="600"/>
+	<vegetationDelete action="modules/param/param.php" param="delete" droits="param" tablename="vegetation" retourok="vegetationList" retourko="vegetationChange" modulebefore="vegetationChange"  maxCountByHour="60" maxCountByDay="600" maxCountByHour="60" maxCountByDay="600" />
 
-	<turbidityList action="modules/param/param.php" param="list" droits="consult" tablename="turbidity" tabledescription="Classes de turbidité" type="smarty" retourlogin="1"/>
-	<turbidityChange action="modules/param/param.php" param="change" droits="param" tablename="turbidity" tabledescription="Classes de turbidité" type="smarty"/>
-	<turbidityWrite action="modules/param/param.php" param="write" droits="param" tablename="turbidity" retourok="turbidityList" retourko="turbidityChange" modulebefore="turbidityChange" />
-	<turbidityDelete action="modules/param/param.php" param="delete" droits="param" tablename="turbidity" retourok="turbidityList" retourko="turbidityChange" modulebefore="turbidityChange"/>
+	<turbidityList action="modules/param/param.php" param="list" droits="consult" tablename="turbidity" tabledescription="Classes de turbidité" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<turbidityChange action="modules/param/param.php" param="change" droits="param" tablename="turbidity" tabledescription="Classes de turbidité" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<turbidityWrite action="modules/param/param.php" param="write" droits="param" tablename="turbidity" retourok="turbidityList" retourko="turbidityChange" modulebefore="turbidityChange"  maxCountByHour="60" maxCountByDay="600" />
+	<turbidityDelete action="modules/param/param.php" param="delete" droits="param" tablename="turbidity" retourok="turbidityList" retourko="turbidityChange" modulebefore="turbidityChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<flow_trendList action="modules/param/param.php" param="list" droits="consult" tabledescription="Évolutions du débit" tablename="flow_trend" type="smarty" retourlogin="1"/>
-	<flow_trendChange action="modules/param/param.php" param="change" droits="param" tablename="flow_trend" tabledescription="Évolutions du débit" type="smarty"/>
-	<flow_trendWrite action="modules/param/param.php" param="write" droits="param" tablename="flow_trend" retourok="flow_trendList" retourko="flow_trendChange" modulebefore="flow_trendChange" />
-	<flow_trendDelete action="modules/param/param.php" param="delete" droits="param" tablename="flow_trend" retourok="flow_trendList" retourko="flow_trendChange" modulebefore="flow_trendChange"/>
+	<flow_trendList action="modules/param/param.php" param="list" droits="consult" tabledescription="Évolutions du débit" tablename="flow_trend" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<flow_trendChange action="modules/param/param.php" param="change" droits="param" tablename="flow_trend" tabledescription="Évolutions du débit" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<flow_trendWrite action="modules/param/param.php" param="write" droits="param" tablename="flow_trend" retourok="flow_trendList" retourko="flow_trendChange" modulebefore="flow_trendChange"  maxCountByHour="60" maxCountByDay="600" />
+	<flow_trendDelete action="modules/param/param.php" param="delete" droits="param" tablename="flow_trend" retourok="flow_trendList" retourko="flow_trendChange" modulebefore="flow_trendChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<cache_abundanceList action="modules/param/param.php" param="list" droits="consult" tabledescription="Classes d'abondance des caches" tablename="cache_abundance" type="smarty" retourlogin="1"/>
-	<cache_abundanceChange action="modules/param/param.php" param="change" droits="param" tablename="cache_abundance" tabledescription="Classes d'abondance des caches" type="smarty"/>
-	<cache_abundanceWrite action="modules/param/param.php" param="write" droits="param" tablename="cache_abundance" retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange" />
-	<cache_abundanceDelete action="modules/param/param.php" param="delete" droits="param" tablename="cache_abundance" retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange"/>
+	<cache_abundanceList action="modules/param/param.php" param="list" droits="consult" tabledescription="Classes d'abondance des caches" tablename="cache_abundance" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<cache_abundanceChange action="modules/param/param.php" param="change" droits="param" tablename="cache_abundance" tabledescription="Classes d'abondance des caches" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<cache_abundanceWrite action="modules/param/param.php" param="write" droits="param" tablename="cache_abundance" retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange"  maxCountByHour="60" maxCountByDay="600" />
+	<cache_abundanceDelete action="modules/param/param.php" param="delete" droits="param" tablename="cache_abundance" retourok="cache_abundanceList" retourko="cache_abundanceChange" modulebefore="cache_abundanceChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<!--<water_heightList action="modules/param/param.php" param="list" droits="consult" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty" retourlogin="1"/>
-	<water_heightChange action="modules/param/param.php" param="change" droits="param" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty"/>
-	<water_heightWrite action="modules/param/param.php" param="write" droits="param" tablename="water_height" retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange" />
-	<water_heightDelete action="modules/param/param.php" param="delete" droits="param" tablename="water_height" retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange" />
+	<!--<water_heightList action="modules/param/param.php" param="list" droits="consult" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<water_heightChange action="modules/param/param.php" param="change" droits="param" tablename="water_height" tabledescription="Classes d'hauteur d'eau" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<water_heightWrite action="modules/param/param.php" param="write" droits="param" tablename="water_height" retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange"  maxCountByHour="60" maxCountByDay="600" />
+	<water_heightDelete action="modules/param/param.php" param="delete" droits="param" tablename="water_height" retourok="water_heightList" retourko="water_heightChange" modulebefore="water_heightChange"  maxCountByHour="60" maxCountByDay="600" />
 	-->
 
-	<fishing_strategyList action="modules/param/param.php" param="list" droits="consult" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage" type="smarty" retourlogin="1"/>
-	<fishing_strategyChange action="modules/param/param.php" param="change" droits="param" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage" type="smarty"/>
-	<fishing_strategyWrite action="modules/param/param.php" param="write" droits="param" tablename="fishing_strategy" retourok="fishing_strategyList" retourko="fishing_strategyChange" modulebefore="fishing_strategyChange" />
-	<fishing_strategyDelete action="modules/param/param.php" param="delete" droits="param" tablename="fishing_strategy" retourok="fishing_strategyList" retourko="fishing_strategyChange" modulebefore="fishing_strategyChange" />
+	<fishing_strategyList action="modules/param/param.php" param="list" droits="consult" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<fishing_strategyChange action="modules/param/param.php" param="change" droits="param" tablename="fishing_strategy" tabledescription="Stratégies d'échantillonnage" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<fishing_strategyWrite action="modules/param/param.php" param="write" droits="param" tablename="fishing_strategy" retourok="fishing_strategyList" retourko="fishing_strategyChange" modulebefore="fishing_strategyChange"  maxCountByHour="60" maxCountByDay="600" />
+	<fishing_strategyDelete action="modules/param/param.php" param="delete" droits="param" tablename="fishing_strategy" retourok="fishing_strategyList" retourko="fishing_strategyChange" modulebefore="fishing_strategyChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<scaleList action="modules/param/param.php" param="list" droits="consult" tablename="scale" tabledescription="Échelles d'échantillonnage" type="smarty" retourlogin="1"/>
-	<scaleChange action="modules/param/param.php" param="change" droits="param" tablename="scale" tabledescription="Échelles d'échantillonnage" type="smarty"/>
-	<scaleWrite action="modules/param/param.php" param="write" droits="param" tablename="scale" retourok="scaleList" retourko="scaleChange" modulebefore="scaleChange" />
-	<scaleDelete action="modules/param/param.php" param="delete" droits="param" tablename="scale" retourok="scaleList" retourko="scaleChange" modulebefore="scaleChange" />
+	<scaleList action="modules/param/param.php" param="list" droits="consult" tablename="scale" tabledescription="Échelles d'échantillonnage" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<scaleChange action="modules/param/param.php" param="change" droits="param" tablename="scale" tabledescription="Échelles d'échantillonnage" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<scaleWrite action="modules/param/param.php" param="write" droits="param" tablename="scale" retourok="scaleList" retourko="scaleChange" modulebefore="scaleChange"  maxCountByHour="60" maxCountByDay="600" />
+	<scaleDelete action="modules/param/param.php" param="delete" droits="param" tablename="scale" retourok="scaleList" retourko="scaleChange" modulebefore="scaleChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<electric_current_typeList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de courant électrique" tablename="electric_current_type" type="smarty" retourlogin="1"/>
-	<electric_current_typeChange action="modules/param/param.php" param="change" droits="param" tablename="electric_current_type" tabledescription="Types de courant électrique" type="smarty"/>
-	<electric_current_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="electric_current_type" retourok="electric_currentList" retourko="electric_currentChange" modulebefore="electric_currentChange" />
-	<electric_current_typeDelete action="modules/param/param.php" param="delete" droits="param" tablename="electric_current_type" retourok="electric_currentList" retourko="electric_currentChange" modulebefore="electric_currentChange" />
+	<electric_current_typeList action="modules/param/param.php" param="list" droits="consult" tabledescription="Types de courant électrique" tablename="electric_current_type" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<electric_current_typeChange action="modules/param/param.php" param="change" droits="param" tablename="electric_current_type" tabledescription="Types de courant électrique" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<electric_current_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="electric_current_type" retourok="electric_currentList" retourko="electric_currentChange" modulebefore="electric_currentChange"  maxCountByHour="60" maxCountByDay="600" />
+	<electric_current_typeDelete action="modules/param/param.php" param="delete" droits="param" tablename="electric_current_type" retourok="electric_currentList" retourko="electric_currentChange" modulebefore="electric_currentChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<gear_methodList action="modules/param/param.php" param="list" droits="consult" tablename="gear_method" tabledescription="Méthodes d'utilisation des engins" type="smarty" retourlogin="1"/>
-	<gear_methodChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="gear_method" type="smarty"/>
-	<gear_methodWrite action="modules/param/param.php" param="write" droits="param" tablename="gear_method" retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange" />
-	<gear_methodDelete action="modules/param/param.php" param="delete" droits="param" tablename="gear_method" retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange"/>
+	<gear_methodList action="modules/param/param.php" param="list" droits="consult" tablename="gear_method" tabledescription="Méthodes d'utilisation des engins" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<gear_methodChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="gear_method" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<gear_methodWrite action="modules/param/param.php" param="write" droits="param" tablename="gear_method" retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange"  maxCountByHour="60" maxCountByDay="600" />
+	<gear_methodDelete action="modules/param/param.php" param="delete" droits="param" tablename="gear_method" retourok="gear_methodList" retourko="gear_methodChange" modulebefore="gear_methodChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<sexeList action="modules/param/sexe.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<sexeChange action="modules/param/sexe.php" param="change" droits="param" type="smarty"/>
-	<sexeWrite action="modules/param/sexe.php" param="write" droits="param" retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange" />
-	<sexeDelete action="modules/param/sexe.php" param="delete" droits="param" retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange" />
+	<sexeList action="modules/param/sexe.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<sexeChange action="modules/param/sexe.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<sexeWrite action="modules/param/sexe.php" param="write" droits="param" retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange"  maxCountByHour="60" maxCountByDay="600" />
+	<sexeDelete action="modules/param/sexe.php" param="delete" droits="param" retourok="sexeList" retourko="sexeChange" modulebefore="sexeChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<pathologyList action="modules/param/pathology.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<pathologyChange action="modules/param/pathology.php" param="change" droits="param" type="smarty"/>
-	<pathologyWrite action="modules/param/pathology.php" param="write" droits="param" retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange" />
-	<pathologyDelete action="modules/param/pathology.php" param="delete" droits="param" retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange" />
+	<pathologyList action="modules/param/pathology.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<pathologyChange action="modules/param/pathology.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<pathologyWrite action="modules/param/pathology.php" param="write" droits="param" retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange"  maxCountByHour="60" maxCountByDay="600" />
+	<pathologyDelete action="modules/param/pathology.php" param="delete" droits="param" retourok="pathologyList" retourko="pathologyChange" modulebefore="pathologyChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<gearList action="modules/param/gear.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<gearChange action="modules/param/gear.php" param="change" droits="param" type="smarty"/>
-	<gearWrite action="modules/param/gear.php" param="write" droits="param" retourok="gearList" retourko="gearChange" modulebefore="gearChange" />
-	<gearDelete action="modules/param/gear.php" param="delete" droits="param" retourok="gearList" retourko="gearChange" modulebefore="gearChange" />
+	<gearList action="modules/param/gear.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<gearChange action="modules/param/gear.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<gearWrite action="modules/param/gear.php" param="write" droits="param" retourok="gearList" retourko="gearChange" modulebefore="gearChange"  maxCountByHour="60" maxCountByDay="600" />
+	<gearDelete action="modules/param/gear.php" param="delete" droits="param" retourok="gearList" retourko="gearChange" modulebefore="gearChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<taxonList action="modules/param/taxon.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<taxonChange action="modules/param/taxon.php" param="change" droits="param" type="smarty"/>
-	<taxonWrite action="modules/param/taxon.php" param="write" droits="param" retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange" />
-	<taxonDelete action="modules/param/taxon.php" param="delete" droits="param" retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange" />
-	<taxonSearchAjax action="modules/param/taxon.php" param="searchAjax" droits="consult" type="ajax"/>
-	<taxonGetName action="modules/param/taxon.php" param="lireAjax" droits="consult" type="ajax"/>
+	<taxonList action="modules/param/taxon.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<taxonChange action="modules/param/taxon.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<taxonWrite action="modules/param/taxon.php" param="write" droits="param" retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange"  maxCountByHour="60" maxCountByDay="600" />
+	<taxonDelete action="modules/param/taxon.php" param="delete" droits="param" retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange"  maxCountByHour="60" maxCountByDay="600" />
+	<taxonSearchAjax action="modules/param/taxon.php" param="searchAjax" droits="consult" type="ajax" />
+	<taxonGetName action="modules/param/taxon.php" param="lireAjax" droits="consult" type="ajax"  />
 
-	<projectList action="modules/param/project.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<projectChange action="modules/param/project.php" param="change" droits="param" type="smarty"/>
-	<projectWrite action="modules/param/project.php" param="write" droits="param" retourok="projectList" retourko="projectChange" modulebefore="projectChange" />
-	<projectDelete action="modules/param/project.php" param="delete" droits="param" retourok="projectList" retourko="projectChange" modulebefore="projectChange" />
+	<projectList action="modules/param/project.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<projectChange action="modules/param/project.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<projectWrite action="modules/param/project.php" param="write" droits="param" retourok="projectList" retourko="projectChange" modulebefore="projectChange"  maxCountByHour="60" maxCountByDay="600" />
+	<projectDelete action="modules/param/project.php" param="delete" droits="param" retourok="projectList" retourko="projectChange" modulebefore="projectChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<protocolList action="modules/param/protocol.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<protocolDisplay action="modules/param/protocol.php" param="display" droits="consult" type="smarty"/>
-	<protocolChange action="modules/param/protocol.php" param="change" droits="gestion" type="smarty"/>
-	<protocolWrite action="modules/param/protocol.php" param="write" droits="gestion" retourok="protocolDisplay" retourko="protocolChange" modulebefore="protocolChange" />
-	<protocolDelete action="modules/param/protocol.php" param="delete" droits="gestion" retourok="protocolList" retourko="protocolChange" modulebefore="protocolChange" />
+	<protocolList action="modules/param/protocol.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<protocolDisplay action="modules/param/protocol.php" param="display" droits="consult" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<protocolChange action="modules/param/protocol.php" param="change" droits="gestion" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<protocolWrite action="modules/param/protocol.php" param="write" droits="gestion" retourok="protocolDisplay" retourko="protocolChange" modulebefore="protocolChange"  maxCountByHour="60" maxCountByDay="600" />
+	<protocolDelete action="modules/param/protocol.php" param="delete" droits="gestion" retourok="protocolList" retourko="protocolChange" modulebefore="protocolChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<riverList action="modules/param/param.php" param="list" droits="consult" tablename="river" tabledescription="Cours d'eau" type="smarty" retourlogin="1"/>
-	<riverChange action="modules/param/param.php" param="change" droits="param" tablename="river" tabledescription="Cours d'eau" type="smarty"/>
-	<riverWrite action="modules/param/param.php" param="write" droits="param" tablename="river" retourok="riverList" retourko="riverChange" modulebefore="riverChange" />
-	<riverDelete action="modules/param/param.php" param="delete" droits="param" tablename="river" retourok="riverList" retourko="riverChange" modulebefore="riverChange" />
+	<riverList action="modules/param/param.php" param="list" droits="consult" tablename="river" tabledescription="Cours d'eau" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<riverChange action="modules/param/param.php" param="change" droits="param" tablename="river" tabledescription="Cours d'eau" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<riverWrite action="modules/param/param.php" param="write" droits="param" tablename="river" retourok="riverList" retourko="riverChange" modulebefore="riverChange"  maxCountByHour="60" maxCountByDay="600" />
+	<riverDelete action="modules/param/param.php" param="delete" droits="param" tablename="river" retourok="riverList" retourko="riverChange" modulebefore="riverChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<stationList action="modules/param/station.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<stationChange action="modules/param/station.php" param="change" droits="gestion" type="smarty"/>
-	<stationWrite action="modules/param/station.php" param="write" droits="gestion" retourok="stationList" retourko="stationChange" modulebefore="stationChange" />
-	<stationDelete action="modules/param/station.php" param="delete" droits="gestion" retourok="stationList" retourko="stationChange" modulebefore="stationChange" />
-	<stationImport action="modules/param/station.php" param="import" droits="gestion" retourok="stationList" retourko="stationList" modulebefore="stationList,stationImport" />
-	<stationGetCoordinate action="modules/param/station.php" param="getCoordinate" droits="consult" type="ajax"/>
+	<stationList action="modules/param/station.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<stationChange action="modules/param/station.php" param="change" droits="gestion" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<stationWrite action="modules/param/station.php" param="write" droits="gestion" retourok="stationList" retourko="stationChange" modulebefore="stationChange"  maxCountByHour="60" maxCountByDay="600" />
+	<stationDelete action="modules/param/station.php" param="delete" droits="gestion" retourok="stationList" retourko="stationChange" modulebefore="stationChange"  maxCountByHour="60" maxCountByDay="600" />
+	<stationImport action="modules/param/station.php" param="import" droits="gestion" retourok="stationList" retourko="stationList" modulebefore="stationList,stationImport"  maxCountByHour="60" maxCountByDay="600" />
+	<stationGetCoordinate action="modules/param/station.php" param="getCoordinate" droits="consult" type="ajax"  />
 
-	<operatorList action="modules/param/operator.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<operatorChange action="modules/param/operator.php" param="change" droits="param" type="smarty"/>
-	<operatorWrite action="modules/param/operator.php" param="write" droits="param" retourok="operatorList" retourko="operatorChange" modulebefore="operatorChange" />
-	<operatorDelete action="modules/param/operator.php" param="delete" droits="param" retourok="operatorList" retourko="operatorChange" modulebefore="operatorChange" />
+	<operatorList action="modules/param/operator.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<operatorChange action="modules/param/operator.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<operatorWrite action="modules/param/operator.php" param="write" droits="param" retourok="operatorList" retourko="operatorChange" modulebefore="operatorChange"  maxCountByHour="60" maxCountByDay="600" />
+	<operatorDelete action="modules/param/operator.php" param="delete" droits="param" retourok="operatorList" retourko="operatorChange" modulebefore="operatorChange"  maxCountByHour="60" maxCountByDay="600" />
 
 	<!-- modules for projects -->
-	<campaignList action="modules/gestion/campaign.php" param="list" droits="consult" type="smarty" retourlogin="1"/>
-	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty" requiredVar="campaign_id"/>
-	<campaignChange action="modules/gestion/campaign.php" param="change" droits="gestion" type="smarty"/>
-	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion" retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange" />
-	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion" retourok="campaignList" retourko="campaignChange" modulebefore="campaignChange" />
+	<campaignList action="modules/gestion/campaign.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty" requiredVar="campaign_id" maxCountByHour="60" maxCountByDay="600" />
+	<campaignChange action="modules/gestion/campaign.php" param="change" droits="gestion" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion" retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange"  maxCountByHour="60" maxCountByDay="600" />
+	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion" retourok="campaignList" retourko="campaignChange" modulebefore="campaignChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty" requiredVar="operation_id"/>
-	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty" requiredVar="operation_id" />
-	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" />
-	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignList" retourko="operationChange" modulebefore="operationChange" />
-	<operationOperatorsChange action="modules/gestion/operation.php" param="operatorsChange" droits="gestion" retourok="operationDisplay" retourko="operationDisplay"/>
+	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty" requiredVar="operation_id" maxCountByHour="60" maxCountByDay="600" />
+	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty" requiredVar="operation_id"  maxCountByHour="60" maxCountByDay="600" />
+	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange"  maxCountByHour="60" maxCountByDay="600" />
+	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignList" retourko="operationChange" modulebefore="operationChange"  maxCountByHour="60" maxCountByDay="600" />
+	<operationOperatorsChange action="modules/gestion/operation.php" param="operatorsChange" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByHour="60" maxCountByDay="600" />
 
-	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id"/>
-	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id"/>
-	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" />
-	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange" />
+	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
+	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
+	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange"  maxCountByHour="60" maxCountByDay="600" />
+	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_gear_id"/>
-	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" />
-	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" />
+	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_gear_id" maxCountByHour="60" maxCountByDay="600" />
+	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange"  maxCountByHour="60" maxCountByDay="600" />
+	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty"  requiredVar="sample_id"/>
-	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
-	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sampleChange" modulebefore="sampleChange" />
-	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
+	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty"  requiredVar="sample_id" maxCountByHour="60" maxCountByDay="600" />
+	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange"  maxCountByHour="60" maxCountByDay="600" />
+	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sampleChange" modulebefore="sampleChange"  maxCountByHour="60" maxCountByDay="600" />
+	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<ambienceChange action="modules/gestion/ambience.php" param="change" droits="gestion" type="smarty"  requiredVar="ambience_id"/>
-	<ambiencesequenceWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
-	<ambiencesequenceDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
-	<ambienceoperationWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
-	<ambienceoperationDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange" />
+	<ambienceChange action="modules/gestion/ambience.php" param="change" droits="gestion" type="smarty"  requiredVar="ambience_id" maxCountByHour="60" maxCountByDay="600" />
+	<ambiencesequenceWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange"  maxCountByHour="60" maxCountByDay="600" />
+	<ambiencesequenceDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="ambienceChange" modulebefore="ambienceChange"  maxCountByHour="60" maxCountByDay="600" />
+	<ambienceoperationWrite action="modules/gestion/ambience.php" param="write" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange"  maxCountByHour="60" maxCountByDay="600" />
+	<ambienceoperationDelete action="modules/gestion/ambience.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="ambienceChange" modulebefore="ambienceChange"  maxCountByHour="60" maxCountByDay="600" />
 
-	<analysisChange action="modules/gestion/analysis.php" param="change" droits="gestion" type="smarty"  />
-	<analysisWrite action="modules/gestion/analysis.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange" />
-	<analysisDelete action="modules/gestion/analysis.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange" />
+	<analysisChange action="modules/gestion/analysis.php" param="change" droits="gestion" type="smarty"   maxCountByHour="60" maxCountByDay="600" />
+	<analysisWrite action="modules/gestion/analysis.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange"  maxCountByHour="60" maxCountByDay="600" />
+	<analysisDelete action="modules/gestion/analysis.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange"  maxCountByHour="60" maxCountByDay="600" />
 
 </navigation>
 	

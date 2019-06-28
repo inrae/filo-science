@@ -237,55 +237,6 @@
         ]
     },
     {
-        "name": "smarty-gettext/smarty-gettext",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/smarty-gettext/smarty-gettext.git",
-            "reference": "bc3978d07165c62cd9f6e1c41e9196e5b90166f2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/bc3978d07165c62cd9f6e1c41e9196e5b90166f2",
-            "reference": "bc3978d07165c62cd9f6e1c41e9196e5b90166f2",
-            "shasum": ""
-        },
-        "require": {
-            "ext-gettext": "*",
-            "ext-pcre": "*",
-            "php": ">=5.2.1"
-        },
-        "time": "2015-05-11T16:00:56+00:00",
-        "bin": [
-            "tsmarty2c.php"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "block.t.php",
-                "function.locale.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL-2.1+"
-        ],
-        "authors": [
-            {
-                "name": "Sagi Bashari",
-                "email": "sagi@boom.org.il"
-            },
-            {
-                "name": "Elan Ruusamäe",
-                "email": "glen@delfi.ee"
-            }
-        ],
-        "description": "Gettext plugin enabling internationalization in Smarty Package files",
-        "homepage": "https://github.com/smarty-gettext/smarty-gettext"
-    },
-    {
         "name": "smarty/smarty",
         "version": "v3.1.31",
         "version_normalized": "3.1.31.0",
