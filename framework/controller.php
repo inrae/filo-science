@@ -131,7 +131,6 @@ if (!isset($_REQUEST["module"])) {
 if (strlen($_REQUEST["module"]) == 0) {
     $_REQUEST["module"] = "default";
 }
-
 /**
  * Recuperation du module
  */
