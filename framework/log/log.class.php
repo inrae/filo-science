@@ -146,7 +146,7 @@ class Log extends ObjetBDD
         if (isset($_SESSION["login"])) {
 
             $sql = "select log_date, ipaddress from log where login = :login
-            and nom_module like '%connexion' and commentaire like '%ok'
+            and nom_module like '%connexion' and commentaire like '%-ok' and commentaire <> 'token-ok'
             and log_date > :datefrom
             order by log_id desc";
             $date = new DateTime(now);

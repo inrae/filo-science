@@ -62,11 +62,9 @@ class LoginGestion extends ObjetBDD
         global $log;
         $retour = false;
         if (strlen($login) > 0 && strlen($password) > 0) {
-            $login = $this->encodeData($login);
-            $password = hash("sha256", $password . $login);
-            $sql = "select login from LoginGestion where login ='" . $login . "' and password = '" . $password . "' and actif = 1";
-            $res = ObjetBDD::lireParam($sql);
-            if ($res["login"] == $login) {
+            $sql = "select login, password from LoginGestion where login = :login and actif = 1";
+            $data = $this->lireParamAsPrepared($sql, array("login"=>$login));
+            if ($this->_testPassword($login, $password, $data["password"])) {
                 $log->setLog($login, "connexion", "db-ok");
                 $retour = true;
             } else {
@@ -89,7 +87,8 @@ class LoginGestion extends ObjetBDD
         /**
          * Test the type of hash
          */
-        if (password_get_info($hash)["algo"] > 0) {
+        $pinfo = password_get_info($hash);
+        if ($pinfo["algo"] > 0) {
             $ok = password_verify($password, $hash);
         } else {
             /**
@@ -143,9 +142,9 @@ class LoginGestion extends ObjetBDD
     {
         if (strlen($data["pass1"]) > 0 && strlen($data["pass2"]) > 0 && $data["pass1"] == $data["pass2"]) {
             if ($this->controleComplexite($data["pass1"]) > 2 && strlen($data["pass1"]) > 9) {
-                $data["password"] = hash("sha256", $data["pass1"] . $data["login"]);
+                $data["password"] = $this->_encryptPassword($data["pass1"]);
             } else {
-                throw new IdentificationException("Password not enough complex or too small");
+                throw new IdentificationException(_("Password not enough complex or too small"));
             }
         }
         $data["datemodif"] = date($_SESSION["MASKDATELONG"]);
@@ -210,7 +209,7 @@ class LoginGestion extends ObjetBDD
                     /*
                      * Verifications de validite du mot de passe
                      */
-                    if ($this->passwordVerify($_SESSION["login"], $pass1, $pass2)) {
+                    if ($this->passwordVerify( $pass1, $pass2)) {
                         $retour = $this->writeNewPassword($_SESSION["login"], $pass1);
                     } else {
                         $message->set(_("La modification du mot de passe a échoué"), true);
@@ -238,7 +237,7 @@ class LoginGestion extends ObjetBDD
     {
         $retour = 0;
         if (strlen($login) > 0) {
-            if ($this->passwordVerify($login, $pass1, $pass2)) {
+            if ($this->passwordVerify($pass1, $pass2)) {
                 $retour = $this->writeNewPassword($login, $pass1);
             }
         }
@@ -259,7 +258,7 @@ class LoginGestion extends ObjetBDD
         $oldData = $this->lireByLogin($login);
         if ($log->getLastConnexionType($login) == "db") {
             $data = $oldData;
-            $data["password"] = password_hash($pass, PASSWORD_BCRYPT, array("cost" => 13));
+            $data["password"] = $this->_encryptPassword($pass);
             $data["datemodif"] = date('d-m-y');
             if ($this->ecrire($data) > 0) {
                 $retour = 1;
@@ -275,6 +274,16 @@ class LoginGestion extends ObjetBDD
     }
 
     /**
+     * Generate hash for password
+     *
+     * @param [string] $pass
+     * @return string
+     */
+    private function _encryptPassword($pass) {
+        return password_hash($pass, PASSWORD_BCRYPT, array("cost" => 13));
+    }
+
+    /**
      * Fonction verifiant la validite du mot de passe fourni,
      * avant changement
      *
@@ -283,7 +292,7 @@ class LoginGestion extends ObjetBDD
      * @param string $pass2
      * @return boolean
      */
-    private function passwordVerify($login, $pass1, $pass2)
+    private function passwordVerify($pass1, $pass2)
     {
         global $message, $APPLI_passwordMinLength;
         $ok = false;
