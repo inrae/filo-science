@@ -322,6 +322,7 @@ class Log extends ObjetBDD
         if ($MAIL_enabled == 1) {
             include_once 'framework/identification/mail.class.php';
             include_once 'framework/droits/droits.class.php';
+            include_once 'framework/identification/loginGestion.class.php';
             $MAIL_param = array(
                 "replyTo" => "$APPLI_mail",
                 "subject" => $subject,

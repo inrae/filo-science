@@ -5,6 +5,7 @@
  * Gestion de la saisie, de la modification d'un login
  * Gestion du changement du mot de passe (en mode BDD)
  */
+require_once 'framework/identification/loginGestion.class.php';
 $dataClass = new LoginGestion($bdd_gacl, $ObjetBDDParam);
 $id = $_REQUEST["id"];
 if (! $APPLI_passwordMinLength > 0) {

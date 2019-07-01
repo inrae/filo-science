@@ -214,6 +214,7 @@ while (isset($module)) {
          */
         if ($t_module["type"] == "ws") {
             require_once "framework/identification/identification.class.php";
+            require_once "framework/identification/loginGestion.class.php";
             $lg = new LoginGestion($bdd_gacl, $ObjetBDDParam);
             $dataId = $lg->getLoginFromTokenWS($_REQUEST["login"], $_REQUEST["token"]);
             if (strlen($dataId["login"]) > 0) {

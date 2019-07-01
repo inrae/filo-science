@@ -306,7 +306,7 @@ class Acllogin extends ObjetBDD
             /*
              * Recherche s'il existe un login correspondant
              */
-            require_once 'framework/identification/identification.class.php';
+            require_once 'framework/identification/loginGestion.class.php';
             $loginGestion = new LoginGestion($this->connection, $this->paramori);
             $dlg = $loginGestion->getFromLogin($data["login"]);
             if ($dlg["id"] > 0) {

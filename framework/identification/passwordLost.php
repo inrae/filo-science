@@ -6,6 +6,7 @@
  * Copyright 2017 - All rights reserved
  */
 require_once 'framework/identification/passwordlost.class.php';
+require_once 'framework/identification/loginGestion.class.php';
 $dataClass = new Passwordlost($bdd_gacl, $ObjetBDDParam);
 $keyName = "passwordlost_id";
 $id = $_REQUEST[$keyName];
