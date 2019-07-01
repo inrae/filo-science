@@ -75,6 +75,33 @@ class LoginGestion extends ObjetBDD
         }
         return $retour;
     }
+    /**
+     * verify the password
+     *
+     * @param [string] $login
+     * @param [string] $password
+     * @param [string] $hash
+     * @return boolean
+     */
+    private function _testPassword($login, $password, $hash)
+    {
+        $ok = false;
+        /**
+         * Test the type of hash
+         */
+        if (password_get_info($hash)["algo"] > 0) {
+            $ok = password_verify($password, $hash);
+        } else {
+            /**
+             * old hash algorithm
+             */
+            $newHash = hash("sha256", $password . $login);
+            if ($newHash == $hash) {
+                $ok = true;
+            }
+        }
+        return $ok;
+    }
 
     /**
      * Recupere le login a partir d'un jeton pour les services web
@@ -130,13 +157,7 @@ class LoginGestion extends ObjetBDD
         } else {
             $data["is_clientws"] = 0;
         }
-        $id = parent::ecrire($data);
-        if ($id > 0 && strlen($data["password"]) > 0) {
-            include_once 'framework/identification/loginOldPassword.class.php';
-            $lgo = new LoginOldPassword($this->connection, $this->paramori);
-            $lgo->setPassword($id, $data["password"]);
-        }
-        return $id;
+        return parent::ecrire($data);
     }
 
     /**
@@ -148,12 +169,6 @@ class LoginGestion extends ObjetBDD
      */
     public function supprimer($id)
     {
-        /*
-         * Suppression le cas echeant des anciens logins enregistres
-         */
-        include_once 'framework/identification/loginOldPassword.class.php';
-        $loginOP = new LoginOldPassword($this->connection, $this->paramori);
-        $loginOP->supprimerChamp($id, "id");
         $data = $this->lire($id);
         if (parent::supprimer($id) > 0) {
             /*
@@ -191,8 +206,7 @@ class LoginGestion extends ObjetBDD
         if (isset($_SESSION["login"])) {
             $oldData = $this->lireByLogin($_SESSION["login"]);
             if ($log->getLastConnexionType($_SESSION["login"]) == "db") {
-                $oldpassword_hash = $this->passwordHash($_SESSION["login"], $oldpassword);
-                if ($oldpassword_hash == $oldData["password"]) {
+                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"]) == false) {
                     /*
                      * Verifications de validite du mot de passe
                      */
@@ -210,23 +224,6 @@ class LoginGestion extends ObjetBDD
         }
 
         return $retour;
-    }
-
-    /**
-     * Calcule le hash d'un mot de passe
-     *
-     * @param string $login
-     * @param string $password
-     * @throws Exception
-     * @return string
-     */
-    public function passwordHash($login, $password)
-    {
-        if (strlen($login) == 0 || strlen($password) == 0) {
-            throw new IdentificationException("password hashing not possible");
-        } else {
-            return hash("sha256", $password . $login);
-        }
     }
 
     /**
@@ -262,18 +259,11 @@ class LoginGestion extends ObjetBDD
         $oldData = $this->lireByLogin($login);
         if ($log->getLastConnexionType($login) == "db") {
             $data = $oldData;
-            $data["password"] = $this->passwordHash($login, $pass);
+            $data["password"] = password_hash($pass, PASSWORD_BCRYPT, array("cost" => 13));
             $data["datemodif"] = date('d-m-y');
             if ($this->ecrire($data) > 0) {
                 $retour = 1;
                 $log->setLog($login, "password_change", "ip:" . $_SESSION["remoteIP"]);
-                /*
-                 * Ecriture du mot de passe dans la table des mots de passe deja utilises
-                 */
-                include_once 'framework/identification/loginOldPassword.class.php';
-                $loginOldPassword = new LoginOldPassword($this->connection, $this->paramori);
-                $loginOldPassword->setPassword($data["id"], $data["password"]);
-
                 $message->set(_("Le mot de passe a été modifié"));
             } else {
                 $message->set(_("Echec de modification du mot de passe pour une raison inconnue. Si le problème persiste, contactez l'assistance"), true);
@@ -315,21 +305,7 @@ class LoginGestion extends ObjetBDD
                     $zxcvbn = new Zxcvbn();
                     $strength = $zxcvbn->passwordStrength($pass1, array());
                     if ($strength["score"] > 1) {
-                        /*
-                     * calcul du sha256 du mot de passe
-                     */
-                        $password_hash = $this->passwordHash($login, $pass1);
-                        /*
-                     * Verification que le mot de passe n'a pas deja ete employe
-                     */
-                        include_once 'framework/identification/loginOldPassword.class.php';
-                        $loginOldPassword = new LoginOldPassword($this->connection, $this->paramori);
-                        $nb = $loginOldPassword->testPassword($login, $password_hash);
-                        if ($nb == 0) {
-                            $ok = true;
-                        } else {
-                            $message->set(_("Le mot de passe a déjà été utilisé"), true);
-                        }
+                       $ok = true;
                     } else {
                         $message->set(_("Le mot de passe n'est pas assez fort"), true);
                     }
