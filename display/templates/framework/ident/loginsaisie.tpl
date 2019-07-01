@@ -1,5 +1,6 @@
 <script >
 $(document).ready(function() {
+	var  visible = [false, false];
 	$("#formLogin").submit(function (event) {
 		var error = false;
 		var message = "";
@@ -49,6 +50,20 @@ $(document).ready(function() {
 	});
 	$("#is_clientws2").click(function () {
 		$("#tokenws").val("");
+	});
+
+	$(".passwordVisible").click(function() {
+		var fieldnumber = Number($(this).data("fieldnumber"));
+		var fieldname = "#pass"+(fieldnumber + 1);
+		if (visible[fieldnumber]) {
+			$(fieldname).prop("type", "password");
+			visible[fieldnumber] = false;
+			$(this).attr("src","display/images/framework/visible-24.png");
+		} else {
+			$(fieldname).prop("type", "text");
+			visible[fieldnumber] = true;
+			$(this).attr("src","display/images/framework/invisible-24.png");
+		}
 	});
 
 });
@@ -123,14 +138,20 @@ $(document).ready(function() {
 </div>
 <div class="form-group">
 <label for="pass1" class="col-md-4 control-label"><span class="red">*</span> {t}Mot de passe :{/t} </label>
-<div class="col-md-8">
+<div class="col-md-7">
 <input class="form-control" type="password" autocomplete="off" id="pass1" name="pass1" >
+</div>
+<div class="col-md-1">
+	<img src="display/images/framework/visible-24.png" height="16" id="passVisible" class="passwordVisible" data-fieldnumber="0">
 </div>
 </div>
 <div class="form-group">
 <label for="pass2" class="col-md-4 control-label"><span class="red">*</span> {t}Répétez le mot de passe :{/t} </label> 
-<div class="col-md-8">
+<div class="col-md-7">
 <input type="password" class="form-control" id="pass2" autocomplete="off" name="pass2">
+</div>
+<div class="col-md-1">
+	<img src="display/images/framework/visible-24.png" height="16" id="passVisible2" class="passwordVisible" data-fieldnumber="1">
 </div>
 </div>
 <div class="form-group">

@@ -14,7 +14,7 @@ $(document).ready(function() {
 var password = $("#pass1");
 var meter = $('#password-strength-meter');
 var text = $('#password-strength-text');
-var isVisible = false;
+var  visible = [false, false, false];
 
 $("#pass1").on('input', function()
 {
@@ -60,14 +60,16 @@ $("#pass1").on('input', function()
 			event.preventDefault();
 	});
 
-	$("#passVisible").click(function() {
-		if (isVisible) {
-			$("#pass1").prop("type", "password");
-			isVisible = false;
+	$(".passwordVisible").click(function() {
+		var fieldnumber = Number($(this).data("fieldnumber"));
+		var fieldname = "#pass"+(fieldnumber + 1);
+		if (visible[fieldnumber]) {
+			$(fieldname).prop("type", "password");
+			visible[fieldnumber] = false;
 			$(this).attr("src","display/images/framework/visible-24.png");
 		} else {
-			$("#pass1").prop("type", "text");
-			isVisible = true;
+			$(fieldname).prop("type", "text");
+			visible[fieldnumber] = true;
 			$(this).attr("src","display/images/framework/invisible-24.png");
 		}
 	});
@@ -88,8 +90,11 @@ $("#pass1").on('input', function()
 <input type="hidden" name="module" value="loginChangePasswordExec">
 <div class="form-group">
 <label for="oldPassword" class="control-label col-md-4">{t}Ancien mot de passe :{/t}</label>
-<div class="col-md-8">
-<input id="oldPassword" class="form-control" type="password" name="oldPassword" autocomplete="off" autofocus>
+<div class="col-md-7">
+<input id="pass3" class="form-control" type="password" name="oldPassword" autocomplete="off" autofocus>
+</div>
+<div class="col-md-1">
+	<img src="display/images/framework/visible-24.png" height="16" id="passVisible" class="passwordVisible" data-fieldnumber="2">
 </div>
 </div>
 {/if}
@@ -101,7 +106,7 @@ $("#pass1").on('input', function()
 <input type="password" id="pass1" class="form-control" autocomplete="off" name="pass1">
 </div>
 <div class="col-md-1">
-	<img src="display/images/framework/visible-24.png" height="16" id="passVisible">
+	<img src="display/images/framework/visible-24.png" height="16" id="passVisible" class="passwordVisible" data-fieldnumber="0">
 </div>
 <div class="col-md-12 center">
 	<meter max="4" id="password-strength-meter"></meter>
@@ -115,6 +120,9 @@ $("#pass1").on('input', function()
 </label>
 <div class="col-md-7">
 <input type="password" id="pass2" name="pass2" class="form-control" autocomplete="off">
+</div>
+<div class="col-md-1">
+	<img src="display/images/framework/visible-24.png" height="16" id="passVisible2" class="passwordVisible" data-fieldnumber="1">
 </div>
 </div>
 <div class="form-group center">
