@@ -1,6 +1,5 @@
 <?php
-use ZxcvbnPhp\Zxcvbn;
-require_once 'vendor/autoload.php';
+
 /** Fichier cree le 4 mai 07 par quinton
  *
  *UTF-8

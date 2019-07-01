@@ -1,5 +1,9 @@
 <?php
 
+use ZxcvbnPhp\Zxcvbn;
+
+require_once 'vendor/autoload.php';
+
 /**
  * Classe permettant de manipuler les logins stockés en base de données locale
  */
@@ -16,8 +20,8 @@ class LoginGestion extends ObjetBDD
                 "key" => 1,
             ),
             "datemodif" => array(
-                "type" => 2,
-                "defaultValue" => "getDateJour",
+                "type" => 3,
+                "defaultValue" => "getDateHeure",
             ),
             "mail" => array(
                 "pattern" => "#^.+@.+\.[a-zA-Z]{2,6}$#",
@@ -46,6 +50,10 @@ class LoginGestion extends ObjetBDD
             "tokenws" => array(
                 'type' => 0,
             ),
+            "is_expired" => array(
+                "type" => 1,
+                "defaultValue" => "0"
+            )
         );
         parent::__construct($link, $param);
     }
@@ -62,10 +70,11 @@ class LoginGestion extends ObjetBDD
         global $log;
         $retour = false;
         if (strlen($login) > 0 && strlen($password) > 0) {
-            $sql = "select login, password from LoginGestion where login = :login and actif = 1";
-            $data = $this->lireParamAsPrepared($sql, array("login"=>$login));
+            $sql = "select login, password, is_expired from LoginGestion where login = :login and actif = 1";
+            $data = $this->lireParamAsPrepared($sql, array("login" => $login));
             if ($this->_testPassword($login, $password, $data["password"])) {
-                $log->setLog($login, "connexion", "db-ok");
+                $data["is_expired"] == 1 ? $comment = "db-ok-expired" : $comment = "db-ok";
+                $log->setLog($login, "connexion", $comment);
                 $retour = true;
             } else {
                 $log->setLog($login, "connexion", "db-ko");
@@ -89,7 +98,7 @@ class LoginGestion extends ObjetBDD
          */
         $pinfo = password_get_info($hash);
         if ($pinfo["algo"] > 0) {
-            $ok = password_verify($password, $hash);
+            $ok = password_verify("$password", $hash);
         } else {
             /**
              * old hash algorithm
@@ -97,6 +106,25 @@ class LoginGestion extends ObjetBDD
             $newHash = hash("sha256", $password . $login);
             if ($newHash == $hash) {
                 $ok = true;
+            }
+        }
+        if ($ok) {
+            /**
+             * Verify if the account is not expired
+             */
+            global $log;
+            $this->auto_date = 0;
+            $data = $this->getFromLogin($login);
+            $this->auto_date = 1;
+            $nb = $log->countNbExpiredConnectionsFromDate($login, $data["datemodif"]);
+            if ($nb > 0) {
+                global $message;
+                if ($nb > 3) {
+                    $message->set(_("Votre mot de passe a expiré. Veuillez contacter l'administrateur de l'application pour le renouveler"), true);
+                    $ok = false;
+                } else {
+                    $message->set(_("Votre mot de passe va expirer. Veuillez le changer immédiatement"), true);
+                }
             }
         }
         return $ok;
@@ -143,6 +171,7 @@ class LoginGestion extends ObjetBDD
         if (strlen($data["pass1"]) > 0 && strlen($data["pass2"]) > 0 && $data["pass1"] == $data["pass2"]) {
             if ($this->controleComplexite($data["pass1"]) > 2 && strlen($data["pass1"]) > 9) {
                 $data["password"] = $this->_encryptPassword($data["pass1"]);
+                $data["is_expired"] = 1;
             } else {
                 throw new IdentificationException(_("Password not enough complex or too small"));
             }
@@ -205,11 +234,11 @@ class LoginGestion extends ObjetBDD
         if (isset($_SESSION["login"])) {
             $oldData = $this->lireByLogin($_SESSION["login"]);
             if ($log->getLastConnexionType($_SESSION["login"]) == "db") {
-                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"]) == false) {
+                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"]) == true) {
                     /*
                      * Verifications de validite du mot de passe
                      */
-                    if ($this->passwordVerify( $pass1, $pass2)) {
+                    if ($this->_passwordVerify($pass1, $pass2)) {
                         $retour = $this->writeNewPassword($_SESSION["login"], $pass1);
                     } else {
                         $message->set(_("La modification du mot de passe a échoué"), true);
@@ -237,7 +266,7 @@ class LoginGestion extends ObjetBDD
     {
         $retour = 0;
         if (strlen($login) > 0) {
-            if ($this->passwordVerify($pass1, $pass2)) {
+            if ($this->_passwordVerify($pass1, $pass2)) {
                 $retour = $this->writeNewPassword($login, $pass1);
             }
         }
@@ -253,17 +282,21 @@ class LoginGestion extends ObjetBDD
      */
     private function writeNewPassword($login, $pass)
     {
-        global $log, $message;
+        global $log, $message, $APPLI_address, $APPLI_title;
         $retour = 0;
         $oldData = $this->lireByLogin($login);
         if ($log->getLastConnexionType($login) == "db") {
             $data = $oldData;
             $data["password"] = $this->_encryptPassword($pass);
             $data["datemodif"] = date('d-m-y');
+            $data["is_expired"] = 0;
             if ($this->ecrire($data) > 0) {
                 $retour = 1;
                 $log->setLog($login, "password_change", "ip:" . $_SESSION["remoteIP"]);
                 $message->set(_("Le mot de passe a été modifié"));
+                $contents = "<html><body>" . _("Votre mot de passe vient d'être modifié.<br>Si vous n'avez pas réalisé cette opération, veuillez contacter le responsable de l'application") . '<br><a href="' . $APPLI_address . '">' . $APPLI_address . "</a>" . '</body></html>';
+                $subject = $APPLI_title . " - " . _("Modification de votre mot de passe");
+                $this->_sendMail($login, $subject, $contents);
             } else {
                 $message->set(_("Echec de modification du mot de passe pour une raison inconnue. Si le problème persiste, contactez l'assistance"), true);
             }
@@ -279,7 +312,8 @@ class LoginGestion extends ObjetBDD
      * @param [string] $pass
      * @return string
      */
-    private function _encryptPassword($pass) {
+    private function _encryptPassword($pass)
+    {
         return password_hash($pass, PASSWORD_BCRYPT, array("cost" => 13));
     }
 
@@ -292,7 +326,7 @@ class LoginGestion extends ObjetBDD
      * @param string $pass2
      * @return boolean
      */
-    private function passwordVerify($pass1, $pass2)
+    private function _passwordVerify($pass1, $pass2)
     {
         global $message, $APPLI_passwordMinLength;
         $ok = false;
@@ -314,7 +348,7 @@ class LoginGestion extends ObjetBDD
                     $zxcvbn = new Zxcvbn();
                     $strength = $zxcvbn->passwordStrength($pass1, array());
                     if ($strength["score"] > 1) {
-                       $ok = true;
+                        $ok = true;
                     } else {
                         $message->set(_("Le mot de passe n'est pas assez fort"), true);
                     }
@@ -399,6 +433,39 @@ class LoginGestion extends ObjetBDD
                     "mail" => $mail,
                 )
             );
+        }
+    }
+    /**
+     * Send mail to login
+     *
+     * @param [string] $login
+     * @param [string] $subject
+     * @param [tstringype] $contents
+     * @return void
+     */
+    private function _sendMail($login, $subject, $contents)
+    {
+        global $message, $MAIL_enabled, $APPLI_mail, $GACL_aco, $log;
+        $moduleNameComplete = $GACL_aco . "-sendMailForPasswordChange";
+        if ($MAIL_enabled == 1) {
+            $dataLogin = $this->getFromLogin($login);
+            $MAIL_param = array(
+                "replyTo" => "$APPLI_mail",
+                "subject" => $subject,
+                "from" => "$APPLI_mail",
+                "contents" => $contents,
+            );
+            if (strlen($dataLogin["mail"]) > 0) {
+                include_once 'framework/identification/mail.class.php';
+                $mail = new Mail($MAIL_param);
+                if ($mail->sendMail($dataLogin["mail"], array())) {
+                    $ok = "ok";
+                } else {
+                    $message->setSyslog("error_sendmail_for_password_change:" . $dataLogin["mail"]);
+                    $ok = "ko";
+                }
+                $log->setLog($login, $moduleNameComplete, $ok);
+            }
         }
     }
 }

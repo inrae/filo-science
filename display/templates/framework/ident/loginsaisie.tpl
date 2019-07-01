@@ -1,6 +1,7 @@
 <script >
 $(document).ready(function() {
 	var  visible = [false, false];
+	var minLength = {$passwordMinLength};
 	$("#formLogin").submit(function (event) {
 		var error = false;
 		var message = "";
@@ -13,9 +14,9 @@ $(document).ready(function() {
 			 if (mdp1 != mdp2) {
 			 	error = true;
 			 	message = "{t}Les mots de passe ne sont pas identiques{/t}";
-			 } else if (verifyLength(mdp1) == false) {
+			 } else if (mdp1.length < minLength) {
 			 	error = true;
-			 	message = "{t}Le mot de passe est trop court (minimum : 10 caractères){/t}";
+				message = "{t}Le mot de passe est trop court. Minimum : {/t}" + {$passwordMinLength}+ " {t}caractères{/t}";
 			 } else if (verifyComplexity(mdp1) == false) {
 			 	error = true;
 			 	message = "{t}Le mot de passe n'est pas assez complexe (mixez 3 jeux de caractères parmi les minuscules, majuscules, chiffres et signes de ponctuation){/t}";
@@ -28,6 +29,11 @@ $(document).ready(function() {
 		 if (error == true)
 			event.preventDefault();
 	});
+
+	$("#generate").click(function() {
+		getPassword('pass1', 'pass2', 'motdepasse', minLength);
+	});
+
 	$("#password_copy").click(function() { 
 		 var temp = $("<input>");
 		  $("body").append(temp);
@@ -157,7 +163,7 @@ $(document).ready(function() {
 <div class="form-group">
 <label for="generate" class="col-md-4 control-label">{t}Générez un mot de passe aléatoire{/t}</label> 
 <div class="col-md-2">
-<input id="generate" type="button" class="btn btn-info" name="generate" value="{t}Générez{/t}" onclick="getPassword('pass1', 'pass2', 'motdepasse')">
+<input id="generate" type="button" class="btn btn-info" name="generate" value="{t}Générez{/t}" >
 </div>
 <div class="col-md-6">
 <label for="motdepasse" class="sr-only">{t}Mot de passe généré{/t}</label>

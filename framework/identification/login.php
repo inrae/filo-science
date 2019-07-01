@@ -26,6 +26,7 @@ switch ($t_module["param"]) {
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
         $data = dataRead($dataClass, $id, "framework/ident/loginsaisie.tpl", 0);
+        $vue->set($APPLI_passwordMinLength, "passwordMinLength");
         unset($data["password"]);
         $vue->set($data, "data");
         break;

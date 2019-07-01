@@ -37,6 +37,7 @@ $("#pass1").on('input', function()
 	$("#formPassword").submit(function (event) {
 		var error = false;
 		var message = "";
+		var minLength = {$passwordMinLength};
 		/*
 		 * Verifications
 		 */
@@ -45,7 +46,7 @@ $("#pass1").on('input', function()
 		 if (mdp1 != mdp2) {
 		 	error = true;
 		 	message = "{t}Les mots de passe ne sont pas identiques{/t}";
-		 } else if (verifyLength(mdp1) == false) {
+		 } else if (mdp1.length < minLength ) {
 		 	error = true;
 		 	message = "{t}Le mot de passe est trop court. Minimum : {/t}" + {$passwordMinLength}+ " {t}caractères{/t}";
 		 } else if (verifyComplexity(mdp1) == false) {
@@ -83,6 +84,7 @@ $("#pass1").on('input', function()
 <div class="col-lg-6">
 <form id="formPassword" method="post" class="form-horizontal protoform" action="index.php">
 <input type="hidden" name="id" value="{$data.id}">
+<input type="hidden" name="is_expired" value="0">
 {if $passwordLost == 1}
 <input type="hidden" name="token" value="{$token}">
 <input type="hidden" name="module" value="passwordlostReinitwrite">

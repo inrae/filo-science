@@ -375,4 +375,19 @@ class Log extends ObjetBDD
             }
         }
     }
+    /**
+     * Calculate the number of expired connections from db connections
+     *
+     * @param [string] $login
+     * @param [string] $date
+     * @return number
+     */
+    function countNbExpiredConnectionsFromDate($login, $date) {
+        $sql = "select count(*) as nombre from log
+                where login = :login
+                and log_date > :date
+                and commentaire = 'db-ok-expired'";
+        $data = $this->lireParamAsPrepared($sql, array("login"=>$login, "date"=>$date));
+        return $data["nombre"];
+    }
 }
