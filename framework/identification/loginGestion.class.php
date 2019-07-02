@@ -2,8 +2,6 @@
 
 use ZxcvbnPhp\Zxcvbn;
 
-require_once 'vendor/autoload.php';
-
 /**
  * Classe permettant de manipuler les logins stockés en base de données locale
  */

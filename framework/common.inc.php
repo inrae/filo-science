@@ -26,13 +26,10 @@ header("X-Frame-Options: SAMEORIGIN");
 ini_set("session.use_strict_mode", true);
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_maxlifetime', $APPLI_session_ttl);
-
 /**
- * Integration de SMARTY
+ * Integration of external libraries
  */
-require_once "vendor/smarty/smarty/libs/Smarty.class.php";
-require_once "vendor/smarty-gettext/smarty-gettext/block.t.php";
-require_once "vendor/smarty-gettext/smarty-gettext/function.locale.php";
+require_once "vendor/autoload.php";
 /**
  * Integration de la classe ObjetBDD et des scripts associes
  */
