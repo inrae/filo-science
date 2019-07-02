@@ -37,6 +37,10 @@ How to upgrade to release 3.0.0
 new attributes: maxCountByDay: number of calls allowed per day, maxCountByHour: number of calls allowed per hour. these attributes can be added in all modules, except when the type is ajax.
 
 - replace composer.json
-
 - run in a terminal: composer install, and composer update
+
+- replace the folder display/bower_components
+- in folder display/bower_components, run bower update
+
+- search in the code of the software if the command require_once "vendor/autoload.php" is used: it's no longer necessary
 
