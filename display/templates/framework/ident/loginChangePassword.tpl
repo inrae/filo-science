@@ -31,7 +31,7 @@ $("#pass1").on('input', function()
     else {
         message = "";
     }
-	$("#message").text(message);
+	$("#messageZxcvbn").text(message);
 });
 
 	$("#formPassword").submit(function (event) {
@@ -53,7 +53,7 @@ $("#pass1").on('input', function()
 		 	error = true;
 		 	message = "{t}Le mot de passe n'est pas assez complexe (mixez 3 jeux de caractères parmi les minuscules, majuscules, chiffres et signes de ponctuation){/t}";
 		 }
-		 $("#message").text(message);
+		 $("#messageZxcvbn").text(message);
 		/*
 	 	 * Blocage de l'envoi du formulaire
 		 */
@@ -112,7 +112,7 @@ $("#pass1").on('input', function()
 </div>
 <div class="col-md-12 center">
 	<meter max="4" id="password-strength-meter"></meter>
-	<div id="message"></div>
+	<div id="messageZxcvbn" class="red"></div>
 </div>
 
 </div>
