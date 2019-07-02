@@ -235,6 +235,63 @@
         ]
     },
     {
+        "name": "smarty-gettext/smarty-gettext",
+        "version": "1.6.1",
+        "version_normalized": "1.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/smarty-gettext/smarty-gettext.git",
+            "reference": "9a7d9284b5374caeae5eb226cf486efb4bc748b4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/smarty-gettext/smarty-gettext/zipball/9a7d9284b5374caeae5eb226cf486efb4bc748b4",
+            "reference": "9a7d9284b5374caeae5eb226cf486efb4bc748b4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-gettext": "*",
+            "ext-pcre": "*",
+            "php": "~5.3|~7.0"
+        },
+        "require-dev": {
+            "azatoth/php-pgettext": "~1.0",
+            "phpunit/phpunit": ">=4.8.36",
+            "smarty/smarty": "3.1.*"
+        },
+        "suggest": {
+            "azatoth/php-pgettext": "Support msgctxt for {t} via context parameter"
+        },
+        "time": "2019-01-17T23:06:53+00:00",
+        "bin": [
+            "tsmarty2c.php"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "block.t.php",
+                "function.locale.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Sagi Bashari",
+                "email": "sagi@boom.org.il"
+            },
+            {
+                "name": "Elan Ruusamäe",
+                "email": "glen@delfi.ee"
+            }
+        ],
+        "description": "Gettext plugin enabling internationalization in Smarty Package files",
+        "homepage": "https://github.com/smarty-gettext/smarty-gettext"
+    },
+    {
         "name": "smarty/smarty",
         "version": "v3.1.33",
         "version_normalized": "3.1.33.0",

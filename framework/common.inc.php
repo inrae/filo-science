@@ -31,6 +31,8 @@ ini_set('session.gc_maxlifetime', $APPLI_session_ttl);
  * Integration de SMARTY
  */
 require_once "vendor/smarty/smarty/libs/Smarty.class.php";
+require_once "vendor/smarty-gettext/smarty-gettext/block.t.php";
+require_once "vendor/smarty-gettext/smarty-gettext/function.locale.php";
 /**
  * Integration de la classe ObjetBDD et des scripts associes
  */
