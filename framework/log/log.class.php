@@ -390,4 +390,21 @@ class Log extends ObjetBDD
         $data = $this->lireParamAsPrepared($sql, array("login"=>$login, "date"=>$date));
         return $data["nombre"];
     }
+    /**
+     * Get the delay of the last call from a login
+     *
+     * @param string $login
+     * @return number
+     */
+    function getTimestampFromLastCall($login) {
+        $ip = getIPClientAddress();
+        $sql = "select extract (epoch from now() - log_date) as ts from log
+                where login = :login and ipaddress = :ip
+                order by log_date desc limit 1";
+        $data = $this->lireParamAsPrepared($sql, array("login"=>$login, "ip"=>$ip));
+        if (! $data["ts"] > 0) {
+            $data["ts"] = 10000;
+        }
+        return ($data["ts"]);
+    }
 }

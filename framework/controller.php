@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controleur de l'application (modele MVC)
  * Fichier modifie le 21 mars 2013 par Eric Quinton
@@ -163,6 +164,17 @@ while (isset($module)) {
      */
     if (isset($t_module["requiredVar"]) && !isset($_REQUEST[$t_module["requiredVar"]])) {
         $t_module = $navigation->getModule("default");
+    }
+    /**
+     * Verification du delai entre deux appels, et mise en sommeil
+     */
+    if ($moduleRequested == $module && ! in_array($t_module["type"], array("ajax", "json", "ws")) && isset($_SESSION["login"])) { 
+        $delay = $log->getTimestampFromLastCall($_SESSION["login"]);
+        if ($delay < $APPLI_delay_between_call) {
+            $log->setLog($login,$module, "sleep because too fast");
+            $message->setSyslog("module ".$module.": sleep because too fast");
+            sleep($APPLI_sleep_duration);
+        }
     }
     /*
      * Extraction des droits necessaires
