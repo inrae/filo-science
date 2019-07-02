@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInitfc06e24141f3a87f90d0d3c71e70b08b
 {
     public static $files = array (
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'f084d01b0a599f67676cffef638aa95b' => __DIR__ . '/..' . '/smarty/smarty/libs/bootstrap.php',
     );
 
@@ -15,6 +15,10 @@ class ComposerStaticInitfc06e24141f3a87f90d0d3c71e70b08b
         'Z' => 
         array (
             'ZxcvbnPhp\\' => 10,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
         'R' => 
         array (
@@ -26,6 +30,10 @@ class ComposerStaticInitfc06e24141f3a87f90d0d3c71e70b08b
         'ZxcvbnPhp\\' => 
         array (
             0 => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'Ramsey\\Uuid\\' => 
         array (

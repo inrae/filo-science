@@ -1,0 +1,5 @@
+Framework prototypephp © Eric Quinton, 2006-2019
+News
+============
+Release v3.0.0 - july 2019
+--------------------------

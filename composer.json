@@ -1,6 +1,7 @@
 {
     "name": "equinton/prototypephp",
     "license": "LGPL",
+    "version": "3.0.0",
     "authors": [
         {
             "name": "Eric Quinton",

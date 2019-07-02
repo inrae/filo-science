@@ -237,8 +237,8 @@
 	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty" requiredVar="sample_id" maxCountByHour="60" maxCountByDay="600" />
-	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />
+	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty" requiredVar="sample_id" />
+	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange"  />
 	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />
 	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />
 
