@@ -565,6 +565,12 @@ while (isset($module)) {
                 } else {
                     $module = $APPLI_moduleDroitKO;
                 }
+                /**
+                 * Send mail to administrators
+                 */
+                $subject = "SECURITY REPORTING - " . $GACL_aco . " - The user ".$_SESSION["login"]."  has attempted to access an unauthorized module";
+                $contents = "<html><body>" . "The account <b>$login<b> has attempted at $date the user has tried to access at the module $module without having the necessary rights". '<br>Software : <a href="' . $APPLI_address . '">' . $APPLI_address . "</a>" . '</body></html>';
+                $log->sendMailToAdmin($subject, $contents, $module, $_SESSION["login"]);
                 break;
             case "nologin":
                 $module = $APPLI_moduleErrorLogin;

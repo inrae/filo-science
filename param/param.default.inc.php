@@ -49,8 +49,6 @@ $LOG_duree = 365;
 $ident_header_login_var = "AUTH_USER";
 $ident_header_logout_address = "";
 $ident_type = "BDD";
-$CAS_address = "http://localhost/CAS";
-$CAS_port = 443;
 $LDAP = array(
 		"address"=>"localhost",
 		"port" => 389,
@@ -176,6 +174,10 @@ $MAIL_enabled = 1; // send mails
 $APPLI_delay_between_call = 1; //delay between call of modules others than ajax
 $APPLI_sleep_duration = 30; // duration of the temporary sleep
 
+$CAS_address = "localhost/CAS"; // Address of CAS server
+$CAS_port = 443; //port of CAS server
+$CAS_debug = false; // Activation of debug mode
+$CAS_CApath=""; // path to the certificate of the CAS
 /*
  * Affichage par defaut des cartes Openstreetmap
  * obsolete: now in dbparam table
