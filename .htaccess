@@ -19,6 +19,7 @@ Header set Content-Security-Policy "default-src 'self'"
 Header set Referrer-Policy "no-referrer"
 Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 Header set Strict-Transport-Security "max-age=63072000"
-<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+<FilesMatch "\.(ico|pdf|jpg|jpeg|png|gif|js|css)$">
     Header set Cache-Control "max-age=604800, private"
 </FilesMatch>
+
