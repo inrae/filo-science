@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe permettant d'enregistrer toutes les operations effectuees dans la base
  *
@@ -382,12 +383,13 @@ class Log extends ObjetBDD
      * @param [string] $date
      * @return number
      */
-    function countNbExpiredConnectionsFromDate($login, $date) {
+    function countNbExpiredConnectionsFromDate($login, $date)
+    {
         $sql = "select count(*) as nombre from log
                 where login = :login
                 and log_date > :date
                 and commentaire = 'db-ok-expired'";
-        $data = $this->lireParamAsPrepared($sql, array("login"=>$login, "date"=>$date));
+        $data = $this->lireParamAsPrepared($sql, array("login" => $login, "date" => $date));
         return $data["nombre"];
     }
     /**
@@ -396,13 +398,14 @@ class Log extends ObjetBDD
      * @param string $login
      * @return number
      */
-    function getTimestampFromLastCall($login) {
+    function getTimestampFromLastCall($login)
+    {
         $ip = getIPClientAddress();
         $sql = "select extract (epoch from now() - log_date) as ts from log
                 where login = :login and ipaddress = :ip
                 order by log_date desc limit 1";
-        $data = $this->lireParamAsPrepared($sql, array("login"=>$login, "ip"=>$ip));
-        if (! $data["ts"] > 0) {
+        $data = $this->lireParamAsPrepared($sql, array("login" => $login, "ip" => $ip));
+        if (strlen($data["ts"]) == 0) {
             $data["ts"] = 10000;
         }
         return ($data["ts"]);
