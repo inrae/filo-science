@@ -100,7 +100,9 @@ class Sample extends ObjetBDD
         if ($data["total_number"] < $nb) {
             $data["total_number"] = $nb;
         }
-        $data["total_weight"] = $weight;
+        if ($data["total_weight"] < $weight) {
+            $data["total_weight"] = $weight;
+        }
         if ($min == 999999) {
             $min = 0;
         }
