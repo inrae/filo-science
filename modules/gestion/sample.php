@@ -1,7 +1,9 @@
 <?php
 require_once 'modules/classes/sample.class.php';
 require_once 'modules/classes/individual.class.php';
-$ind = new Individual($bdd, $ObjetBDDParam);
+if (!isset($ind)) {
+    $ind = new Individual($bdd, $ObjetBDDParam);
+}
 $dataClass = new Sample($bdd, $ObjetBDDParam);
 $keyName = "sample_id";
 if (strlen($_REQUEST[$keyName]) == 0) {
@@ -21,6 +23,9 @@ switch ($t_module["param"]) {
         $data["sample_uid"] = $data["sample_id"];
         $data = $_SESSION["ti_sample"]->translateRow($data);
         $data = $_SESSION["ti_sequence"]->translateRow($data);
+        if ($data["sample_uid"] == 0 && $_POST["taxon_id_new"] > 0) {
+            $data["taxon_id"] = $_POST["taxon_id_new"];
+        }
         $vue->set($data, "data");
         /**
          * Get the detail of the sequence
@@ -97,6 +102,12 @@ switch ($t_module["param"]) {
              */
             $dataClass->setCalculatedData($id);
             $bdd->commit();
+            /**
+             * Inactivate the modification if taxon_id_new is filled
+             */
+            if ($_POST["taxon_id_new"] > 0) {
+                $_REQUEST["sample_id"] = 0;
+            }
             $module_coderetour = -1;
         } catch (Exception $e) {
             $bdd->rollback();

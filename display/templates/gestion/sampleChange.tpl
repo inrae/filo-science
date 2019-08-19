@@ -1,7 +1,10 @@
 <script>
 $(document).ready(function() {
     var mapIsChange = true;
-    var freshwater = {$sequence.freshwater};
+    var freshwater = "{$sequence.freshwater}";
+    var taxonIdInitial = parseInt("{$data.taxon_id}");
+    var sampleId = parseInt("{$data.sample_id}");
+
     /* Taxon search */
     $("#taxon-search").keyup(function() { 
         var name = $(this).val();
@@ -40,18 +43,39 @@ $(document).ready(function() {
             taxonId = 0;
         }
         if (taxonId > 0) {
-            $.ajax( {
-                url: "index.php",
-                data: { "module": "taxonGetName", "taxon_id":taxonId}
-            })
-            .done (function(value) { 
-                if (value) {
-                    var name = JSON.parse(value);
-                    $("#taxon_name").val(name.scientific_name);
+            if (taxonId != taxonIdInitial && taxonIdInitial > 0) {
+                if (window.confirm( "{t}Le taxon a été changé : voulez-vous modifier l'échantillon courant (ok) ou créer un nouvel échantillon (annuler) ?{/t}" )) {
+                     taxonIdInitial = 0;
+                   setTaxonName(taxonId);
+                } else {
+                    /*
+                     * submit the form
+                     */
+                     $("#taxon_id").val(taxonIdInitial);
+                     $("#taxon_id_new").val(taxonId);
+                     $(this.form).submit();
                 }
-            });
+            } else {
+                setTaxonName(taxonId);
+            }
+            
         }
     });
+    /*
+     * set the name of the taxon
+     */
+    function setTaxonName(taxonId) {
+        $.ajax( {
+            url: "index.php",
+            data: { "module": "taxonGetName", "taxon_id":taxonId}
+        })
+        .done (function(value) { 
+            if (value) {
+                var name = JSON.parse(value);
+                $("#taxon_name").val(name.scientific_name);
+            }
+        });
+    }
 
     /* hide fields measures if necessary */
     var mdo = "{$sequence.measure_default_only}";
@@ -80,7 +104,13 @@ $(document).ready(function() {
 			return false;
 		}
     });
-
+    /*
+     * Initialisation when it's a new taxon
+     */
+    if (taxonIdInitial > 0 && sampleId == 0) {
+        $("#taxon_id").val(taxonIdInitial);
+        setTaxonName(taxonIdInitial);
+    }
 });
 </script>
 
@@ -119,6 +149,7 @@ $(document).ready(function() {
                 <input type="hidden" name="action" value="Write">
                 <input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">
                 <input type="hidden" name="sample_id" value="{$data.sample_id}">
+                <input type="hidden" name="taxon_id_new" value="0" id="taxon_id_new">
                 <div class="form-group">
                         <label for="taxon-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
                         <div class="col-md-8">
