@@ -1802,7 +1802,7 @@ class ObjetBDD
      * @param array $data
      *            : tableau des valeurs a inserer
      * @throws Exception
-     * @return s array : tableau des resultats
+     * @return array : tableau des resultats
      */
     function executeAsPrepared($sql, $data, $onlyExecute = false)
     {

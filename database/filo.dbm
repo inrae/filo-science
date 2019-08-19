@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1091" last-zoom="1" max-obj-count="61"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,194" last-zoom="1" max-obj-count="66"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -70,6 +70,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<style id="table-schema-name" colors="#000000"/>
 	<style id="table-title" colors="#f57900,#f57900,#20486f"/>
 </tag>
+<tag name="document">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#cc0000,#cc0000,#20486f"/>
+</tag>
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
@@ -93,7 +100,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 	<comment><![CDATA[List of projects. This table is used for grant rights]]></comment>
 	<tag name="projet"/>
-	<position x="500" y="460"/>
+	<position x="500" y="440"/>
 	<column name="project_id" not-null="true" sequence="filo.project_project_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -111,7 +118,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 	<comment><![CDATA[List of campaigns rattached to a project]]></comment>
 	<tag name="projet"/>
-	<position x="280" y="600"/>
+	<position x="280" y="640"/>
 	<column name="campaign_id" not-null="true" sequence="filo.campaign_campaign_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -161,7 +168,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 	<comment><![CDATA[List of the stations used for a project]]></comment>
 	<tag name="projet"/>
-	<position x="20" y="600"/>
+	<position x="20" y="640"/>
 	<column name="station_id" not-null="true" sequence="filo.station_station_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -222,7 +229,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 	<comment><![CDATA[List of taxons]]></comment>
 	<tag name="protocol"/>
-	<position x="1240" y="600"/>
+	<position x="1240" y="640"/>
 	<column name="taxon_id" not-null="true" sequence="filo.taxon_taxon_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -754,7 +761,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 	<comment><![CDATA[Description of operation]]></comment>
 	<tag name="operation"/>
-	<position x="280" y="860"/>
+	<position x="280" y="900"/>
 	<column name="operation_id" not-null="true" sequence="filo.operation_operation_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Operations rattached at a campaign]]></comment>
@@ -862,7 +869,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 	<comment><![CDATA[Catching sequence]]></comment>
 	<tag name="operation"/>
-	<position x="500" y="860"/>
+	<position x="500" y="900"/>
 	<column name="sequence_id" not-null="true" sequence="filo.place_place_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -909,7 +916,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 	<comment><![CDATA[List of samplings. One or many for a taxon]]></comment>
 	<tag name="operation"/>
-	<position x="780" y="860"/>
+	<position x="780" y="900"/>
 	<column name="sample_id" not-null="true" sequence="filo.sample_sample_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -984,7 +991,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 	<comment><![CDATA[List of individuals measured]]></comment>
 	<tag name="operation"/>
-	<position x="1020" y="860"/>
+	<position x="1020" y="900"/>
 	<column name="individual_id" not-null="true" sequence="filo.item_item_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1074,7 +1081,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="1020" y="600"/>
+	<position x="1020" y="640"/>
 	<column name="measure_template_id" not-null="true" sequence="filo.measure_template_measure_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1117,7 +1124,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Gear used for fishery]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="1360"/>
+	<position x="1240" y="1400"/>
 	<column name="gear_id" not-null="true" sequence="filo.gear_gear_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1146,7 +1153,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of gear used during operation]]></comment>
 	<tag name="operation"/>
-	<position x="780" y="1080"/>
+	<position x="780" y="1120"/>
 	<column name="sequence_gear_id" not-null="true" sequence="filo.sequence_gear_sequence_gear_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1186,7 +1193,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[River, estuary, sea...]]></comment>
 	<tag name="projet"/>
-	<position x="20" y="460"/>
+	<position x="20" y="440"/>
 	<column name="river_id" not-null="true" sequence="filo.river_river_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1235,7 +1242,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Water analysis]]></comment>
 	<tag name="operation"/>
-	<position x="500" y="1080"/>
+	<position x="500" y="1120"/>
 	<column name="analysis_id" not-null="true" sequence="filo.analysis_analysis_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1302,7 +1309,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Sexe of fishs]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="860"/>
+	<position x="1240" y="900"/>
 	<column name="sexe_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1344,7 +1351,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of pathologies]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="1080"/>
+	<position x="1240" y="1120"/>
 	<column name="pathology_id" not-null="true" sequence="filo.pathology_pathology_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1461,7 +1468,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of facies]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1940"/>
+	<position x="280" y="1980"/>
 	<column name="facies_id" not-null="true" sequence="filo.facies_facies_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1491,7 +1498,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Description of the ambiences of the operation]]></comment>
 	<tag name="ambience"/>
-	<position x="500" y="1460"/>
+	<position x="500" y="1500"/>
 	<column name="ambience_id" not-null="true" sequence="filo.ambience_ambience_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1569,7 +1576,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of situations]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1720"/>
+	<position x="780" y="1760"/>
 	<column name="situation_id" not-null="true" sequence="filo.situation_situation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1602,7 +1609,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of localisations of the ambience]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1600"/>
+	<position x="780" y="1640"/>
 	<column name="localisation_id" not-null="true" sequence="filo.localisation_localisation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1624,7 +1631,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Speed of current, in cm/s]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1600"/>
+	<position x="280" y="1640"/>
 	<column name="speed_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1649,7 +1656,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of shaddies used for ambiences]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1720"/>
+	<position x="280" y="1760"/>
 	<column name="shady_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1678,7 +1685,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of granulometry]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1460"/>
+	<position x="280" y="1500"/>
 	<column name="granulometry_id" not-null="true" sequence="filo.granulometry_granulometry_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1715,7 +1722,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of vegetation]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1820"/>
+	<position x="780" y="1860"/>
 	<column name="vegetation_id" not-null="true" sequence="filo.vegetation_vegetation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1748,7 +1755,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Levels of abundance of caches]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1020" y="1820"/>
+	<position x="1020" y="1860"/>
 	<column name="cache_abundance_id" not-null="true" sequence="filo.cache_abundance_cache_abundance_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2205,7 +2212,7 @@ By default : total_length and weight]]></comment>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="projet"/>
-	<position x="280" y="460"/>
+	<position x="280" y="440"/>
 </table>
 
 <relationship name="project_has_many_project_group" type="rel1n" layer="0"
@@ -2240,7 +2247,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of operators]]></comment>
 	<tag name="operation"/>
-	<position x="20" y="860"/>
+	<position x="20" y="900"/>
 	<column name="operator_id" not-null="true" sequence="filo.operator_operator_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2266,7 +2273,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Operators rattached to an operation]]></comment>
 	<tag name="operation"/>
-	<position x="20" y="1080"/>
+	<position x="20" y="1120"/>
 	<column name="is_responsible" default-value="'t'">
 		<type name="bool" length="0"/>
 		<comment><![CDATA[True if the operator is responsible of the operation]]></comment>
@@ -2305,7 +2312,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table of types of complementary analysis]]></comment>
 	<tag name="parametres"/>
-	<position x="780" y="460"/>
+	<position x="780" y="780"/>
 	<column name="analysis_template_id" not-null="true" sequence="filo.analysis_template_analysis_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2332,7 +2339,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of cloggings]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1820"/>
+	<position x="280" y="1860"/>
 	<column name="clogging_id" not-null="true" sequence="filo.cloggging_clogging_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2376,7 +2383,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of sinuosities of the river]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1460"/>
+	<position x="780" y="1500"/>
 	<column name="sinuosity_id" not-null="true" sequence="filo.sinuosity_sinuosity_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2414,7 +2421,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of trends of flow]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1020" y="1720"/>
+	<position x="1020" y="1760"/>
 	<column name="flow_trend_id" not-null="true" sequence="filo.flow_trend_flow_trend_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2452,7 +2459,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of turbidity]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1020" y="1600"/>
+	<position x="1020" y="1640"/>
 	<column name="turbidity_id" not-null="true" sequence="filo.turbidity_id">
 		<type name="integer" length="0"/>
 	</column>
@@ -2490,7 +2497,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of protocols used]]></comment>
 	<tag name="protocol"/>
-	<position x="500" y="600"/>
+	<position x="500" y="640"/>
 	<column name="protocol_id" not-null="true" sequence="filo.protocol_protocol_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2558,7 +2565,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of particular species measures used in the protocol]]></comment>
 	<tag name="protocol"/>
-	<position x="780" y="600"/>
+	<position x="780" y="640"/>
 </table>
 
 <relationship name="protocol_has_many_protocol_measure" type="rel1n" layer="0"
@@ -2604,7 +2611,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of water regimes]]></comment>
 	<tag name="parametres"/>
-	<position x="20" y="1360"/>
+	<position x="20" y="1400"/>
 	<column name="water_regime_id" not-null="true" sequence="filo.water_regime_water_regime_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2636,7 +2643,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="780" y="1360"/>
+	<position x="780" y="1400"/>
 	<column name="electric_current_type_id" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -2662,7 +2669,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="20" y="1460"/>
+	<position x="20" y="1500"/>
 	<column name="fishing_strategy_id" not-null="true" sequence="filo.fishing_strategy_fishing_strategy_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2699,7 +2706,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Scale of the operation (global station, point, ambience)]]></comment>
 	<tag name="parametres"/>
-	<position x="20" y="1600"/>
+	<position x="20" y="1640"/>
 	<column name="scale_id" not-null="true" sequence="filo.scale_scale_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2736,7 +2743,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Method of usage of the gear (in boat, walk fishing, etc.)]]></comment>
 	<tag name="parametres"/>
-	<position x="1020" y="1360"/>
+	<position x="1020" y="1400"/>
 	<column name="gear_method_id" not-null="true" sequence="filo.gear_method_gear_method_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2776,7 +2783,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des parametres associes de maniere intrinseque a l'instance]]></comment>
-	<position x="20" y="1940"/>
+	<position x="20" y="1980"/>
 	<column name="dbparam_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -2809,7 +2816,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des versions de la base de donnees]]></comment>
-	<position x="20" y="1820"/>
+	<position x="20" y="1860"/>
 	<column name="dbversion_id" not-null="true" sequence="filo.dbversion_dbversion_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2840,7 +2847,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[List of templates used to select taxa]]></comment>
 	<tag name="parametres"/>
-	<position x="280" y="1360"/>
+	<position x="280" y="1400"/>
 	<column name="taxa_template_id" not-null="true" sequence="filo.taxa_template_taxa_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2873,6 +2880,190 @@ Crue•4]]>
 	 src-table="filo.sequence"
 	 dst-table="filo.ambience"
 	 src-required="false" dst-required="false"/>
+
+<table name="document" layer="0" collapse-mode="2" max-obj-count="10">
+	<schema name="filo"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Documents stocked in the database]]></comment>
+	<tag name="document"/>
+	<position x="1020" y="440"/>
+	<column name="document_id" not-null="true" sequence="filo.document_document_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="document_date_import" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="document_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the document]]></comment>
+	</column>
+	<column name="document_description">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Description of the document]]></comment>
+	</column>
+	<column name="data">
+		<type name="bytea" length="0"/>
+		<comment><![CDATA[Content of the document, in binary format]]></comment>
+	</column>
+	<column name="size">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Total size of the document]]></comment>
+	</column>
+	<column name="thumbnail">
+		<type name="bytea" length="0"/>
+		<comment><![CDATA[Thumbnail of the document, if it's an image or a pdf]]></comment>
+	</column>
+	<column name="document_creation_date">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of creation of the document]]></comment>
+	</column>
+	<constraint name="document_pk" type="pk-constr" table="filo.document">
+		<columns names="document_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="mime_type_id" index="7"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="mime_type_fk" index="0"/>
+	</customidxs>
+</table>
+
+<sequence name="document_document_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="mime_type" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="postgres"/>
+	<comment><![CDATA[List of types mime associable to the documents]]></comment>
+	<tag name="document"/>
+	<position x="1240" y="440"/>
+	<column name="mime_type_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="content_type" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Normalized description of the type mime]]></comment>
+	</column>
+	<column name="extension" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Extension associated with the type mime]]></comment>
+	</column>
+	<constraint name="mime_type_pk" type="pk-constr" table="filo.mime_type">
+		<columns names="mime_type_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[mime_type_id•extension•content_type⸣
+1•pdf•application/pdf⸣
+2•zip•application/zip⸣
+3•mp3•audio/mpeg⸣
+4•jpg•image/jpeg⸣
+5•jpeg•image/jpeg⸣
+6•png•image/png⸣
+7•tiff•image/tiff⸣
+9•odt•application/vnd.oasis.opendocument.text⸣
+10•ods•application/vnd.oasis.opendocument.spreadsheet⸣
+11•xls•application/vnd.ms-excel⸣
+12•xlsx•application/vnd.openxmlformats-officedocument.spreadsheetml.sheet⸣
+13•doc•application/msword⸣
+14•docx•application/vnd.openxmlformats-officedocument.wordprocessingml.document⸣
+8•csv•text/csv]]>
+	</initial-data>
+</table>
+
+<relationship name="mime_type_has_many_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fc275a"
+	 src-table="filo.mime_type"
+	 dst-table="filo.document"
+	 src-required="true" dst-required="false"/>
+
+<table name="project_document" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Documents associated with a project]]></comment>
+	<tag name="document"/>
+	<position x="780" y="440"/>
+
+	<customidxs object-type="column">
+		<object name="document_id" index="1"/>
+		<object name="project_id" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="document_fk" index="2"/>
+		<object name="project_document_pk" index="0"/>
+		<object name="project_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="project_has_many_project_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5b90f9"
+	 src-table="filo.project"
+	 dst-table="filo.project_document"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="document_has_many_project_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#39a2dd"
+	 src-table="filo.document"
+	 dst-table="filo.project_document"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<table name="protocol_document" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="postgres"/>
+	<comment><![CDATA[List of the documents associated with a protocol]]></comment>
+	<tag name="document"/>
+	<position x="780" y="560"/>
+
+	<customidxs object-type="column">
+		<object name="document_id" index="1"/>
+		<object name="protocol_id" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="document_fk" index="2"/>
+		<object name="protocol_document_pk" index="0"/>
+		<object name="protocol_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="protocol_has_many_protocol_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#eb1f42"
+	 src-table="filo.protocol"
+	 dst-table="filo.protocol_document"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="document_has_many_protocol_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#44b01b"
+	 src-table="filo.document"
+	 dst-table="filo.protocol_document"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">

@@ -60,7 +60,7 @@
     </fieldset>
 </div>
 <div class="row">
-    <fieldset class="col-md-8">
+    <fieldset class="col-md-6">
     <legend>Modèles de mesure rattachés</legend>
 
         <table class="datatable table table-bordered table-hover" data-order='[[0,"asc"]]'>
@@ -80,5 +80,8 @@
             </tbody>
         </table>
     </fieldset>
-
+    <fieldset class="col-md-6">
+            <legend>{t}Liste des documents associés{/t}</legend>
+            {include file="gestion/documentList.tpl"}
+    </fieldset>
 </div>

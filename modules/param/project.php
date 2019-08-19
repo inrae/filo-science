@@ -23,6 +23,12 @@ switch ($t_module["param"]) {
             $message->set($e->getMessage(), true);
         }
         break;
+
+    case "display":
+        include_once 'modules/classes/document.class.php';
+        $document = new Document($bdd, $ObjetBDDParam);
+        $vue->set($document->getListFromParent("project", $id), "dataDoc");
+        break;
     case "change":
         /*
          * open the form to modify the record
@@ -30,6 +36,15 @@ switch ($t_module["param"]) {
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
         dataRead($dataClass, $id, "param/projectChange.tpl");
+        if ($id > 0) {
+            /**
+             * Get the associated documents
+             */
+            include_once 'modules/classes/document.class.php';
+            $document = new Document($bdd, $ObjetBDDParam);
+            $vue->set($document->getListFromParent("project", $id), "dataDoc");
+            break;
+        }
         /*
          * Recuperation des groupes
          */
@@ -61,4 +76,3 @@ switch ($t_module["param"]) {
         dataDelete($dataClass, $id);
         break;
 }
-?>

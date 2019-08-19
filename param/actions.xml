@@ -252,5 +252,11 @@
 	<analysisWrite action="modules/gestion/analysis.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange" maxCountByHour="60" maxCountByDay="600" />
 	<analysisDelete action="modules/gestion/analysis.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="analysisChange" modulebefore="analysisChange" maxCountByHour="60" maxCountByDay="600" />
 
+	<projectdocumentWrite action="modules/gestion/document.php" param="write" droits="gestion" retourok="projectDisplay" retourko="projectDisplay" modulebefore="projectDisplay" />
+	<projectdocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="projectDisplay" retourko="projectDisplay" modulebefore="projectDisplay" />
+	<protocoldocumentWrite action="modules/gestion/document.php" param="write" droits="gestion" retourok="protocolDisplay" retourko="protocolDisplay" modulebefore="protocolDisplay" />
+	<protocoldocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="protocolDisplay" retourko="protocolDisplay" modulebefore="protocolDisplay" />
+	<documentGet action="modules/gestion/document.php" param="get" type="binaire" droits="consult" noDelayBeforeCall="1"/>	
+
 </navigation>
 	
