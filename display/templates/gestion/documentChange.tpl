@@ -13,7 +13,10 @@
 		<input type="hidden" name="document_id" value="0"> 
 		<input type="hidden" name="uid" value="{$data.uid}"> 
 		<input type="hidden" name="module" value="{$moduleParent}documentWrite">
+		<input type="hidden" name="parent_table" value="{$moduleParent}">
+		<input type="hidden" name="parent_id" value="{$parent_id}">
 		<input type="hidden" name="activeTab" value="tab-document">
+		<input type="hidden" name="{$moduleParent}_id" value="{$parent_id}">
 		<div class="form-group">
 			<label for="documentName" class="control-label col-md-4">
 				{t}Fichier(s) à importer :{/t} <br>(doc, jpg, png, pdf, xls, xlsx,

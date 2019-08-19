@@ -36,6 +36,7 @@ switch ($t_module["param"]) {
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
         dataRead($dataClass, $id, "param/projectChange.tpl");
+        $vue->set("project", "moduleParent");
         if ($id > 0) {
             /**
              * Get the associated documents
@@ -43,6 +44,8 @@ switch ($t_module["param"]) {
             include_once 'modules/classes/document.class.php';
             $document = new Document($bdd, $ObjetBDDParam);
             $vue->set($document->getListFromParent("project", $id), "dataDoc");
+            $vue->set("project", "moduleParent");
+            $vue->set($id, "parent_id");
             break;
         }
         /*

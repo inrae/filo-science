@@ -19,6 +19,14 @@ switch ($t_module["param"]) {
     case "display":
         $vue->set($dataClass->getDetail($id), "data");
         $vue->set("param/protocolDisplay.tpl", "corps");
+        /**
+         * Get the associated documents
+         */
+        include_once 'modules/classes/document.class.php';
+        $document = new Document($bdd, $ObjetBDDParam);
+        $vue->set($document->getListFromParent("protocol", $id), "dataDoc");
+        $vue->set("protocol", "moduleParent");
+        $vue->set($id, "parent_id");
 
         /**
          * List of measures templates

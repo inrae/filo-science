@@ -17,7 +17,7 @@
 </div>
 
 <div class="row">
-    <fieldset class="col-md-8">
+    <fieldset class="col-md-6">
         <legend>{t}Informations générales{/t}</legend>
         <div class="form-display">
             <dl class="dl-horizontal">
@@ -58,8 +58,7 @@
             </dl>
         </div>
     </fieldset>
-</div>
-<div class="row">
+
     <fieldset class="col-md-6">
     <legend>Modèles de mesure rattachés</legend>
 
@@ -80,6 +79,8 @@
             </tbody>
         </table>
     </fieldset>
+</div>
+<div class="row">
     <fieldset class="col-md-6">
             <legend>{t}Liste des documents associés{/t}</legend>
             {include file="gestion/documentList.tpl"}

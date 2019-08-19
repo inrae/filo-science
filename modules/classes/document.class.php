@@ -159,9 +159,8 @@ class MimeType extends ObjetBDD
 	function getTypeMime($extension)
 	{
 		if (strlen($extension) > 0) {
-			$extension = strtolower($this->encodeData($extension));
-			$sql = "select mime_type_id from " . $this->table . " where extension = '" . $extension . "'";
-			$res = $this->lireParam($sql);
+			$sql = "select mime_type_id from mime_type where extension = :extension";
+			$res = $this->lireParamAsPrepared($sql, array("extension" => strtolower($extension)));
 			return $res["mime_type_id"];
 		}
 	}
@@ -537,8 +536,8 @@ class Document extends ObjetBDD
 	function getListFromParent($parentTable, $parentId)
 	{
 		if (in_array($parentTable, $this->parents)) {
-			$sql = "select document_id, document_date_import, document_name, document_description,
-					size, document_creation_date
+			$sql = "select document_id, document_import_date, document_name, document_description,
+					size, document_creation_date, mime_type_id
 					from document 
 					join " . $parentTable . "_document using (document_id)
 					join " . $parentTable . " using (" . $parentTable . "_id)

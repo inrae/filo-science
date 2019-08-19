@@ -55,7 +55,7 @@ de création{/t}</th>
 <tr>
 <td class="center">
 {if in_array($dataDoc[lst].mime_type_id, array(4, 5, 6)) }
-<a class="image-popup-no-margins" href="index.php?module=documentGet&document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].photo_preview}&attached=0&phototype=1" title="{t}aperçu de la photo :{/t} {substr($dataDoc[lst].photo_name, strrpos($dataDoc[lst].photo_name, '/') + 1)}">
+<a class="image-popup-no-margins" href="index.php?module=documentGet&document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].photo_preview}&attached=0&phototype=1">
 <img src="index.php?module=documentGet&document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" height="30">
 </a>
 {elseif  $dataDoc[lst].mime_type_id == 1}
@@ -75,8 +75,8 @@ de création{/t}</th>
 {if $droits["gestion"] == 1}
 <td>
 <div class="center">
-<a href="index.php?module={$moduleParent}documentDelete&document_id={$dataDoc[lst].document_id}&uid={$data.uid}&activeTab=tab-document" onclick="return confirm('{t}Confirmez-vous la suppression ?{/t}');">
-<img src="display/images/corbeille.png" height="20">
+<a href="index.php?module={$moduleParent}documentDelete&document_id={$dataDoc[lst].document_id}&activeTab=tab-document&{$moduleParent}_id={$parent_id}" onclick="return confirm('{t}Confirmez-vous la suppression ?{/t}');">
+<img src="display/images/trash.png" height="25">
 </a>
 </div>
 </td>
