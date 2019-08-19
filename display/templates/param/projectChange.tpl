@@ -38,14 +38,6 @@
                   </div>
             </form>
       </div>
-      {if $data.project_id > 0}
-            <div class="col-md-6">
-                  <fieldset>
-                        <legend>{t}Liste des documents associés{/t}</legend>
-                        {include file="gestion/documentList.tpl"}
-                  </fieldset>
-            </div>
-      {/if}
 </div>
 
 <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>

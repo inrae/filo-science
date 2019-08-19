@@ -8,7 +8,12 @@
  */
 class project extends ObjetBDD
 {
-
+    private $sql = "select project_id, project_name, 
+    array_to_string(array_agg(groupe),', ') as groupe
+    from project
+    left outer join project_group using (project_id)
+    left outer join aclgroup using (aclgroup_id)";
+    private $group = " group by project_id, project_name";
     /**
      *
      * @param PDO $bdd
@@ -41,14 +46,20 @@ class project extends ObjetBDD
      */
     function getListe($order = 0)
     {
-        $sql = "select project_id, project_name, 
-                array_to_string(array_agg(groupe),', ') as groupe
-				from project
-                left outer join project_group using (project_id)
-				left outer join aclgroup using (aclgroup_id)
-				group by project_id, project_name
-				order by $order";
-        return $this->getListeParam($sql);
+        $orderSql = " order by $order";
+        return $this->getListeParam($this->sql . $this->group . $orderSql);
+    }
+    /**
+     * Get the detail of a project
+     *
+     * @param [int] $project_id
+     * @return array
+     */
+    function getDetail($project_id)
+    {
+        $where = " where project_id = :project_id";
+
+        return $this->lireParamAsPrepared($this->sql . $where . $this->group, array("project_id" => $project_id));
     }
 
     /**

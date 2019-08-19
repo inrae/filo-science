@@ -11,7 +11,6 @@
 	<form id="documentForm" class="form-horizontal protoform" method="post"
 		action="index.php" enctype="multipart/form-data">
 		<input type="hidden" name="document_id" value="0"> 
-		<input type="hidden" name="uid" value="{$data.uid}"> 
 		<input type="hidden" name="module" value="{$moduleParent}documentWrite">
 		<input type="hidden" name="parent_table" value="{$moduleParent}">
 		<input type="hidden" name="parent_id" value="{$parent_id}">

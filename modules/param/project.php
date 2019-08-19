@@ -25,9 +25,14 @@ switch ($t_module["param"]) {
         break;
 
     case "display":
+        $vue->set($dataClass->getDetail($id), "data");
+        $vue->set("param/projectDisplay.tpl", "corps");
+        $vue->set($dataClass->getAllGroupsFromproject($id), "groupes");
         include_once 'modules/classes/document.class.php';
         $document = new Document($bdd, $ObjetBDDParam);
         $vue->set($document->getListFromParent("project", $id), "dataDoc");
+        $vue->set("project", "moduleParent");
+        $vue->set($id, "parent_id");
         break;
     case "change":
         /*
@@ -37,17 +42,6 @@ switch ($t_module["param"]) {
          */
         dataRead($dataClass, $id, "param/projectChange.tpl");
         $vue->set("project", "moduleParent");
-        if ($id > 0) {
-            /**
-             * Get the associated documents
-             */
-            include_once 'modules/classes/document.class.php';
-            $document = new Document($bdd, $ObjetBDDParam);
-            $vue->set($document->getListFromParent("project", $id), "dataDoc");
-            $vue->set("project", "moduleParent");
-            $vue->set($id, "parent_id");
-            break;
-        }
         /*
          * Recuperation des groupes
          */
