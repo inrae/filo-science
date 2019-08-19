@@ -1,6 +1,14 @@
 Framework prototypephp © Eric Quinton, 2006-2019
 News
 ============
+Release v3.0.1 - august 2019
+--------------------------
+Fixed bugs:
+- some modules can be called without any delay (example: displaying photos). Attribute noDelayBeforeCall must be added in actions.xml file for concerned modules (file changed: controller.php)
+New features:
+- new class Vue: VueFile, to export any content
+- the addition of a new right can be disabled ($GACL_disable_new_right = 1)
+
 Release v3.0.0 - july 2019
 --------------------------
 This release is compatible with ASVS v4: https://github.com/OWASP/ASVS/raw/master/4.0/OWASP%20Application%20Security%20Verification%20Standard%204.0-en.pdf for level 1 and partially for level 2.
@@ -14,6 +22,7 @@ New features:
 - except for ajax requests, a minimum of 1 second is necessary between two requests. Otherwize, a delay of 30 seconds it performed before execute the request
 - in case of ungranted access to a module, an email is send to the administrators
 - only the extensions css|gif|png|jp?g|js|php|ico are served by the server
+- display the structure of the database and the description of all tables
 
 Upgrades:
 - identication by token test now the IP address

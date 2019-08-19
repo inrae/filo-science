@@ -121,7 +121,10 @@ $GACL_dbpasswd = "proto";
 $GACL_aco = "col";
 $GACL_dsn = "pgsql:host=localhost;dbname=proto";
 $GACL_schema = "gacl";
-
+/*
+ * Inhib the creation of a new right with 1
+ */
+$GACL_disable_new_right = 0;
 /*
  * Gestion des erreurs
  */

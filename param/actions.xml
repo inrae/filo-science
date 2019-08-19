@@ -2,7 +2,7 @@
 	<its:rules version="2.0">
 		<its:translateRule selector="//item/@tabledescription" translate="yes"/>
 	</its:rules>
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600"/>
+	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
 	<default action="framework/default.php" type="smarty"/>
 	<droitko action="framework/droitko.php" type="smarty"/>
 	<droits menudroits="admin" droits="admin" />
