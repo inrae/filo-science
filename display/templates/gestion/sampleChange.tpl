@@ -114,7 +114,7 @@ $(document).ready(function() {
     <form id="lotform" method="post" action="index.php">
         <div class="col-md-6 form-horizontal"> 
             <fieldset>
-                <legend>{t}Détail du lot{/t}</legend>            
+                <legend>{t}Détail du lot n°{/t} {$data.sample_uid}</legend>            
                 <input type="hidden" name="moduleBase" value="sample">
                 <input type="hidden" name="action" value="Write">
                 <input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">

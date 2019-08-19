@@ -15,6 +15,10 @@ $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
 switch ($t_module["param"]) {
     case "change":
         $data = dataRead($dataClass, $id, "gestion/sampleChange.tpl", $sample_id);
+        /**
+         * set the real value of the key
+         */
+        $data["sample_uid"] = $data["sample_id"];
         $data = $_SESSION["ti_sample"]->translateRow($data);
         $data = $_SESSION["ti_sequence"]->translateRow($data);
         $vue->set($data, "data");
