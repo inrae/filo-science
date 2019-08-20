@@ -257,6 +257,8 @@
 	<projectdocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="projectDisplay" retourko="projectDisplay" modulebefore="projectDisplay" />
 	<protocoldocumentWrite action="modules/gestion/document.php" param="write" droits="gestion" retourok="protocolDisplay" retourko="protocolDisplay" modulebefore="protocolDisplay" />
 	<protocoldocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="protocolDisplay" retourko="protocolDisplay" modulebefore="protocolDisplay" />
+	<operationdocumentWrite action="modules/gestion/document.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" modulebefore="operationDisplay" />
+	<operationdocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" modulebefore="operationDisplay" />
 	<documentGet action="modules/gestion/document.php" param="get" type="binaire" droits="consult" noDelayBeforeCall="1"/>	
 
 </navigation>

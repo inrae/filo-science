@@ -7,7 +7,7 @@ if (strlen($_REQUEST[$keyName]) == 0) {
     $t_module["retourko"] = "default";
     $module_coderetour = -1;
 }
-$id = $_SESSION["ti_operation"]->getValue($_REQUEST[$keyName]);
+$origine == "document" ? $id = $_REQUEST[$keyName] : $id = $_SESSION["ti_operation"]->getValue($_REQUEST[$keyName]);
 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 if (isset($_REQUEST["activeTab"])) {
     $activeTab = $_REQUEST["activeTab"];
@@ -63,6 +63,14 @@ switch ($t_module["param"]) {
          * Map
          */
         setParamMap($vue);
+        /**
+         * Documents
+         */
+        include_once 'modules/classes/document.class.php';
+        $document = new Document($bdd, $ObjetBDDParam);
+        $vue->set($document->getListFromParent("operation", $id), "dataDoc");
+        $vue->set("operation", "moduleParent");
+        $vue->set($id, "parent_id");
         break;
 
     case "change":

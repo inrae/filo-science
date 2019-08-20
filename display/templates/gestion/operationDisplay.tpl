@@ -28,6 +28,9 @@ $(document).ready(function() {
         <li class="nav-item">
             <a class="nav-link" id="tab-operator" href="#nav-operator" data-toggle="tab" role="tab" aria-controls="nav-operator" aria-selected="false">{t}Opérateurs{/t}</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab-document" href="#nav-document" data-toggle="tab" role="tab" aria-controls="nav-document" aria-selected="false">{t}Documents{/t}</a>
+        </li>
     </ul>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane active in" id="nav-detail" role="tabpanel" aria-labelledby="tab-detail">
@@ -48,6 +51,11 @@ $(document).ready(function() {
         <div class="tab-pane fade" id="nav-operator" role="tabpanel" aria-labelledby="tab-operator">
             <div class="col-md-12">
                 {include file="gestion/operationOperators.tpl"}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-document" role="tabpanel" aria-labelledby="tab-document">
+            <div class="col-md-12">
+                {include file="gestion/documentList.tpl"}
             </div>
         </div>
     </div>

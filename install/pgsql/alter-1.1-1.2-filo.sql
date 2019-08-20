@@ -125,7 +125,17 @@ CREATE TABLE protocol_document (
 COMMENT ON TABLE protocol_document IS 'List of the documents associated with a protocol';
 -- ddl-end --
 
+-- object: operation_document | type: TABLE --
+-- DROP TABLE IF EXISTS operation_document CASCADE;
+CREATE TABLE operation_document (
+	operation_id integer NOT NULL,
+	document_id integer NOT NULL,
+	CONSTRAINT operation_document_pk PRIMARY KEY (operation_id,document_id)
 
+);
+-- ddl-end --
+COMMENT ON TABLE operation_document IS 'Documents associated with an operation';
+-- ddl-end --
 
 
 
@@ -164,3 +174,16 @@ REFERENCES document (document_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
+-- object: operation_fk | type: CONSTRAINT --
+-- ALTER TABLE operation_document DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
+ALTER TABLE operation_document ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
+REFERENCES operation (operation_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: document_fk | type: CONSTRAINT --
+-- ALTER TABLE operation_document DROP CONSTRAINT IF EXISTS document_fk CASCADE;
+ALTER TABLE operation_document ADD CONSTRAINT document_fk FOREIGN KEY (document_id)
+REFERENCES document (document_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --

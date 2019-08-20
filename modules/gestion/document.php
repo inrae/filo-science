@@ -47,12 +47,14 @@ switch ($t_module["param"]) {
                 $module_coderetour = -1;
             }
         }
+        $origine = "document";
         break;
     case "delete":
         /*
 		 * delete record
 		 */
         dataDelete($dataClass, $id);
+        $origine = "document";
         break;
     case "get":
         /*

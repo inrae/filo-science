@@ -177,7 +177,7 @@ class Document extends ObjetBDD
 {
 
 	public $temp = "temp";
-	private $parents = array("project", "protocol");
+	private $parents = array("project", "protocol", "operation");
 
 	// Chemin de stockage des images générées à la volée
 	/**
@@ -248,7 +248,7 @@ class Document extends ObjetBDD
 	function ecrire($file, $parentTable, $parentId, $description = NULL, $document_creation_date = NULL)
 	{
 		if ($file["error"] == 0 && $file["size"] > 0) {
-			global $log, $message;
+			global $message;
 			/*
              * Recuperation de l'extension
              */
@@ -324,6 +324,9 @@ class Document extends ObjetBDD
 									values
 									(:parent_id, :document_id)";
 							$this->executeAsPrepared($sql, array("parent_id" => $parentId, "document_id" => $id), true);
+						} else {
+							$message->set(sprintf(_("L'ajout de documents à %s n'est pas autorisé"), $parentTable));
+							throw new DocumentException("Error: ".$parentTable." not parameterized");
 						}
 					}
 					return $id;

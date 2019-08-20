@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,422" last-zoom="1" max-obj-count="66"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,420" last-zoom="1" max-obj-count="67"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -3012,7 +3012,7 @@ Crue•4]]>
 	<role name="postgres"/>
 	<comment><![CDATA[List of the documents associated with a protocol]]></comment>
 	<tag name="document"/>
-	<position x="780" y="580"/>
+	<position x="780" y="560"/>
 
 	<customidxs object-type="column">
 		<object name="document_id" index="1"/>
@@ -3110,6 +3110,36 @@ Crue•4]]>
 	 src-table="gacl.logingestion"
 	 dst-table="gacl.passwordlost"
 	 src-required="true" dst-required="false"/>
+
+<table name="operation_document" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="filo"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Documents associated with an operation]]></comment>
+	<tag name="document"/>
+	<position x="500" y="560"/>
+</table>
+
+<relationship name="operation_has_many_operation_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3377e7"
+	 src-table="filo.operation"
+	 dst-table="filo.operation_document"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="document_has_many_operation_document" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bc5a69"
+	 src-table="filo.document"
+	 dst-table="filo.operation_document"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
