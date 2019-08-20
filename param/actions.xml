@@ -186,6 +186,7 @@
 	<taxonDelete action="modules/param/taxon.php" param="delete" droits="param" retourok="taxonList" retourko="taxonChange" modulebefore="taxonChange" maxCountByHour="60" maxCountByDay="600" />
 	<taxonSearchAjax action="modules/param/taxon.php" param="searchAjax" droits="consult" type="ajax" />
 	<taxonGetName action="modules/param/taxon.php" param="lireAjax" droits="consult" type="ajax" />
+	<taxonGetListCode action="modules/param/taxon.php" param="getListCode" droits="consult" type="ajax"/>
 
 	<projectList action="modules/param/project.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
 	<projectDisplay action="modules/param/project.php" param="display" droits="consult" type="smarty"/>

@@ -3,6 +3,34 @@
 $(document).ready(function() { 
     $(".freshwater").on("click", function () {
         var freshwater = $(".freshwater:checked").val();
+        var url = "index.php";
+        var data = { "module": "taxonGetListCode",
+                    "freshwater" : freshwater
+                };
+        $.ajax( {
+            url: "index.php",
+            data: data
+        })
+        .done (function(data) {
+            var result = JSON.parse(data);
+            $("#source > tbody").empty();
+            var col = 0;
+            var content = "";
+            for (var i = 0; i < result.length; i++) {
+                if (col == 0) {
+                    content += "<tr>";
+                }
+                content += "<td class='center'><div class='source' title='"+result[i].scientific_name+"'>"+result[i].code+"</div></td>";
+                col ++;
+                if (col == 12) {
+                    content += "</tr>";
+                    col = 0;
+                }
+            }
+            if (col != 0) {
+                content += "</tr>";
+            }
+        });
     });
 
     $(".source").draggable({
@@ -14,8 +42,6 @@ $(document).ready(function() {
             $(this).val(ui.draggable.text());
         }
     });
-
-
 });
 
 </script>
@@ -41,7 +67,7 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="freshwater"  class="control-label col-md-4 freshwater"> {t}Opération réalisée en eau douce ?{/t}<span class="red">*</span></label>
+                    <label for="freshwater"  class="control-label col-md-4 freshwater"> <span class="red">*</span>{t}Opération réalisée en eau douce ?{/t}</label>
                     <div class="col-md-8">
                             <label class="radio-inline">
                             <input  type="radio" name="freshwater" id="freshwater1" value="1" {if $data.freshwater == 1}checked{/if}>

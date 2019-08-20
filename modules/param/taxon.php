@@ -41,4 +41,7 @@ switch ($t_module["param"]) {
 	case "lireAjax":
 		$vue->set($dataClass->lire($_REQUEST["taxon_id"]));
 		break;
+	case "getListCode":
+		$vue->set($dataClass->getListCode($_REQUEST["freshwater"]));
+		break;
 }
