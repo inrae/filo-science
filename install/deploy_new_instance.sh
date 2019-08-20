@@ -91,6 +91,10 @@ do
  sed -i "s/^\($key\).*/\1 $(eval echo \${$key})/" $phpinifile
 done
 
+# adjust imagick policy
+sed -e "s/  <policy domain=\"coder\" rights=\"none\" pattern=\"PDF\" \/>/  <policy domain=\"coder\" rights=\"read|write\" pattern=\"PDF\" \/>/" /etc/ImageMagick-6/policy.xml > /tmp/policy.xml
+cp /tmp/policy.xml /etc/ImageMagick-6/
+
 # creation of virtual host
 echo "creation of virtual site"
 cp filo-science/install/apache2/filo-science.conf /etc/apache2/sites-available/

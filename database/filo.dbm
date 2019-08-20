@@ -2864,6 +2864,11 @@ Crue•4]]>
 	 dst-table="filo.ambience"
 	 src-required="false" dst-required="false"/>
 
+<sequence name="document_document_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="postgres"/>
+</sequence>
+
 <table name="document" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="filo"/>
 	<role name="postgres"/>
@@ -2912,11 +2917,6 @@ Crue•4]]>
 		<object name="mime_type_fk" index="0"/>
 	</customidxs>
 </table>
-
-<sequence name="document_document_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
-	<schema name="filo"/>
-	<role name="postgres"/>
-</sequence>
 
 <table name="mime_type" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="filo"/>
@@ -3064,6 +3064,11 @@ Crue•4]]>
 		</idxelement>
 </index>
 
+<sequence name="passwordlost_passwordlost_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="gacl"/>
+	<role name="postgres"/>
+</sequence>
+
 <table name="passwordlost" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="gacl"/>
 	<role name="postgres"/>
@@ -3096,11 +3101,6 @@ Crue•4]]>
 		<object name="logingestion_fk" index="0"/>
 	</customidxs>
 </table>
-
-<sequence name="passwordlost_passwordlost_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
-	<schema name="gacl"/>
-	<role name="postgres"/>
-</sequence>
 
 <relationship name="logingestion_has_many_passwordlost" type="rel1n" layer="0"
 	 src-col-pattern="{sc}"

@@ -291,12 +291,18 @@ class Document extends ObjetBDD
 
 					$dataDoc["data"] = pg_escape_bytea($dataBinaire);
 					if ($extension == "pdf" || $extension == "png" || $extension == "jpg") {
-						$image = new Imagick();
-						$image->readImageBlob($dataBinaire);
-						$image->setiteratorindex(0);
-						$image->resizeimage(200, 200, imagick::FILTER_LANCZOS, 1, true);
-						$image->setformat("png");
-						$dataDoc["thumbnail"] = pg_escape_bytea($image->getimageblob());
+						try {
+							//$image = new Imagick($file["tmp_name"].'[0]');
+							$image = new Imagick();
+							$image->readImageBlob($dataBinaire);
+							$image->setiteratorindex(0);
+							$image->resizeImage(200, 200, imagick::FILTER_LANCZOS, 1, true);
+							$image->setFormat("png");
+							$dataDoc["thumbnail"] = pg_escape_bytea($image->getimageblob());
+						} catch (ImagickException $ie) {
+							$message->set(sprintf(_("Génération de la vignette en échec pour %s"), $data["document_name"]));
+							$message->setSyslog($ie->getMessage());
+						}
 					}
 					/*
                      * suppression du stockage temporaire
@@ -360,15 +366,20 @@ class Document extends ObjetBDD
 	 */
 	function prepareDocument($id, $phototype = 0, $resolution = 800)
 	{
+		global $message;
 		$id = $this->encodeData($id);
-		$filename = $this->generateFileName($id, $phototype, $resolution);
-		if (strlen($filename) > 0 && is_numeric($id) && $id > 0) {
-			if (!file_exists($filename)) {
-				$this->writeFileImage($id, $phototype, $resolution);
+		try {
+			$filename = $this->generateFileName($id, $phototype, $resolution);
+			if (strlen($filename) > 0 && is_numeric($id) && $id > 0) {
+				if (!file_exists($filename)) {
+					$this->writeFileImage($id, $phototype, $resolution);
+				}
 			}
-		}
-		if (file_exists($filename)) {
-			return $filename;
+			if (file_exists($filename)) {
+				return $filename;
+			}
+		} catch (DocumentException $de) {
+			$message->set($de->getMessage());
 		}
 	}
 
@@ -400,7 +411,7 @@ class Document extends ObjetBDD
 				$filename = $this->temp . '/' . $id . '_vignette.png';
 				break;
 			default:
-				throw new DocumentException("Photo type not correctly defined");
+				throw new DocumentException(_("Génération du nom du fichier image : le type de photo n'est pas correctement défini"));
 		}
 		return $filename;
 	}
@@ -416,6 +427,7 @@ class Document extends ObjetBDD
 	 */
 	function writeFileImage($id, $phototype = 0, $resolution = 800)
 	{
+		global $message;
 		if ($id > 0 && is_numeric($id) && is_numeric($phototype) && is_numeric($resolution)) {
 			$data = $this->getData($id);
 			$okgenerate = false;
@@ -494,11 +506,8 @@ class Document extends ObjetBDD
 							}
 							$document = $image->getimageblob();
 							$writeOk = true;
-						} catch (Exception $e) {
-							/*
-                             * Desactivation de la gestion de l'exception
-                             */
-							//TODO : voir l'impact d'une gestion propre de l'exception
+						} catch (ImagickException $ie) {
+							throw new DocumentException(sprintf(_("Erreur de génération de l'image %s"), $data["document_name"]));
 						}
 					} else {
 						/*
