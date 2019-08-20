@@ -55,4 +55,16 @@ class Taxon extends ObjetBDD
         $order = " order by scientific_name";
         return $this->getListeParam($sql . $where . $order);
     }
+    /**
+     * Get the list of all taxons with a mnemonic code
+     *
+     * @param boolean $freshwater
+     * @return array
+     */
+    function getListCode($freshwater = true) {
+        $sql = "select taxon_id, scientific_name, ";
+        $freshwater ? $field = "fresh_code" : $field = "sea_code";
+        $sql .= $field ." as code from taxon where ".$field." is not null order by code";
+        return $this->getListeParam($sql);
+    }
 }

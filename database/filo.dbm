@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,420" last-zoom="1" max-obj-count="67"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,869" last-zoom="1" max-obj-count="67"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -1124,7 +1124,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Gear used for fishery]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="1420"/>
+	<position x="1240" y="1380"/>
 	<column name="gear_id" not-null="true" sequence="filo.gear_gear_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2594,7 +2594,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of water regimes]]></comment>
 	<tag name="parametres"/>
-	<position x="20" y="1420"/>
+	<position x="20" y="1380"/>
 	<column name="water_regime_id" not-null="true" sequence="filo.water_regime_water_regime_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2626,7 +2626,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="780" y="1420"/>
+	<position x="780" y="1380"/>
 	<column name="electric_current_type_id" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -2726,7 +2726,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Method of usage of the gear (in boat, walk fishing, etc.)]]></comment>
 	<tag name="parametres"/>
-	<position x="1020" y="1420"/>
+	<position x="1020" y="1380"/>
 	<column name="gear_method_id" not-null="true" sequence="filo.gear_method_gear_method_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2825,12 +2825,12 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="taxa_template" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="taxa_template" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of templates used to select taxa]]></comment>
 	<tag name="parametres"/>
-	<position x="280" y="1420"/>
+	<position x="280" y="1380"/>
 	<column name="taxa_template_id" not-null="true" sequence="filo.taxa_template_taxa_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2840,6 +2840,10 @@ Crue•4]]>
 	<column name="taxa_model">
 		<type name="json" length="0"/>
 		<comment><![CDATA[Model of emplacement of taxa on screen]]></comment>
+	</column>
+	<column name="freshwater" not-null="true" default-value="1">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Does the template operate for freshwater?]]></comment>
 	</column>
 	<constraint name="taxa_template_pk" type="pk-constr" table="filo.taxa_template">
 		<columns names="taxa_template_id" ref-type="src-columns"/>

@@ -187,3 +187,6 @@ ALTER TABLE operation_document ADD CONSTRAINT document_fk FOREIGN KEY (document_
 REFERENCES document (document_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
+
+alter table taxa_template add column freshwater boolean not null default 1;
+comment on column taxa_template.freshwater is 'Does the template operate for freshwater?';
