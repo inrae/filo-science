@@ -1,4 +1,4 @@
-<h2>{t}Modèles de sélection de taxons{/t}</h2>
+<h2>{t}Modèles de grille de sélection des taxons{/t}</h2>
 <div class="row">
 	<div class="col-md-6">
         {if $droits.gestion == 1}
@@ -10,8 +10,8 @@
         <table id="taxatemplateList" class="table table-bordered table-hover datatable " data-order='[[0,"asc"]]' >
             <thead>
                 <tr>
-                    <th>{t}Nom du modèle{/th}</th>
-                    <th>{t}Type de milieu{/th}</th>
+                    <th>{t}Nom du modèle{/t}</th>
+                    <th>{t}Type de milieu{/t}</th>
                 </tr>
             </thead>
             <tbody>

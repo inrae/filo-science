@@ -17,7 +17,8 @@ function __construct($bdd, $param = array())
             ),
             "freshwater" => array(
                 "type"=>1,
-                "requis"=>1
+                "requis"=>1,
+                "defaultValue"=>1
             ),
             "taxa_model"=>array(
                 "type"=>0

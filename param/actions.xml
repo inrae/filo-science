@@ -261,5 +261,10 @@
 	<operationdocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" modulebefore="operationDisplay" />
 	<documentGet action="modules/gestion/document.php" param="get" type="binaire" droits="consult" noDelayBeforeCall="1"/>	
 
+	<taxatemplateList action="modules/param/taxatemplate.php" param="list" droits="consult"  type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<taxatemplateChange action="modules/param/taxatemplate.php" param="change" droits="param"  type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<taxatemplateWrite action="modules/param/taxatemplate.php" param="write" droits="param" retourok="taxatemplateList" retourko="taxatemplateChange" modulebefore="taxatemplateChange" maxCountByHour="60" maxCountByDay="600" />
+	<taxatemplateDelete action="modules/param/taxatemplate.php" param="delete" droits="param" retourok="taxatemplateList" retourko="taxatemplateChange" modulebefore="taxatemplateChange" maxCountByHour="60" maxCountByDay="600" />
+
 </navigation>
 	
