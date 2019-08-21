@@ -4,6 +4,7 @@ $(document).ready(function() {
     var freshwater = "{$sequence.freshwater}";
     var taxonIdInitial = parseInt("{$data.taxon_id}");
     var sampleId = parseInt("{$data.sample_id}");
+    var isHide = false;
 
     /* Taxon search */
     $("#taxon-search").keyup(function() { 
@@ -140,11 +141,32 @@ $(document).ready(function() {
             }
         });
     });
+    /**
+     * hide some components where the screen is too small
+     */
+     if (screen.width <= 800) {
+         $(".hideable").hide();
+         isHide = true;
+         $("#button-hide").text("{t}Afficher{/t}");
+     }
+     $("#button-hide").on("click", function() { 
+         event.preventDefault();
+        if (isHide) {
+            $(".hideable").show();
+            $("#button-hide").text("{t}Masquer{/t}");
+            isHide = false;
+        } else {
+        $(".hideable").hide();
+         isHide = true;
+         $("#button-hide").text("{t}Afficher{/t}");
+        }
+     });
 });
 </script>
 
 <div class="row">
     <div class="col-md-12">
+        <span class="hidden-xs hidden-sm">
         <a href="index.php?module=campaignDisplay&campaign_id={$sequence.campaign_id}"><img src="display/images/display-red.png" height="25">
             {t}Retour à la campagne{/t} {$sequence.campaign_name}
         </a>
@@ -153,11 +175,12 @@ $(document).ready(function() {
             <img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t} {$sequence.operation_name}
         </a>
         &nbsp;
+    </span>
         <a href="index.php?module=sequenceDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$sequence.sequence_id}&activeTab=tab-sample">
             <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t} {$sequence.sequence_number}
         </a>
-    </div>
-    <div class="col-md-12">
+        <div class="hidden-xs hidden-sm"><br></div>
+        &nbsp;
         <a href="index.php?module=sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id=0">
             <img src="display/images/new.png" height="25">{t}Nouveau lot{/t}
         </a>
@@ -224,46 +247,46 @@ $(document).ready(function() {
                         <input id="total_number" name="total_number" type="text" class="form-control nombre" value="{$data.total_number}" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hideable">
                     <label for="total_measured"  class="control-label col-md-4"> {t}Nombre mesurés :{/t}</label>
                     <div class="col-md-8">
                         <input id="total_measured" type="text" class="form-control nombre" name="total_measured" value="{$data.total_measured}">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hideable">
                     <label for="total_weight"  class="control-label col-md-4"> {t}Poids total (g) :{/t}</label>
                     <div class="col-md-8">
                         <input id="total_weight" type="text" class="form-control nombre" name="total_weight" value="{$data.total_weight}">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hideable">
                     <label for="sample_size_min"  class="control-label col-md-4"> {t}Longueur minimale mesurée (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="sample_size_min" type="text" class="form-control taux" name="sample_size_min" value="{$data.sample_size_min}">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hideable">
                     <label for="sample_size_max"  class="control-label col-md-4"> {t}Longueur maximale mesurée (mm) :{/t}</label>
                     <div class="col-md-8">
                         <input id="sample_size_max" type="text" class="form-control taux" name="sample_size_max" value="{$data.sample_size_max}">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hideable">
                     <label for="sample_comment"  class="control-label col-md-4"> {t}Commentaires :{/t}</label>
                     <div class="col-md-8">
                         <textarea id="sample_comment" type="text" class="form-control" name="sample_comment">{$data.sample_comment}</textarea>
                     </div>
                 </div>
-
-                    <div class="form-group center">
-                    <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
-                    {if $data.sample_id > 0 }
-                        <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
-                    {/if}
+                <div class="form-group center">
+                       <button class="btn btn-secondary" id="button-hide" title="{t}Informations complémentaires du lot{/t}">{t}Masquer{/t}</button>
+                       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
+                        {if $data.sample_id > 0 }
+                            <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
+                        {/if}
                 </div>
-                
             </fieldset>
         </div>
+
         <div class="col-md-6 form-horizontal">
             <fieldset>
                 <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if}</legend>
