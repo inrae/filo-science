@@ -2,7 +2,7 @@
 <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
 <a href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}"><img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t}</a>
 {if $data.sequence_id > 0}
-<a href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id={$data.sequence_id}"><img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}</a>
+<a href="index.php?module=sequenceDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id={$data.sequence_id}"><img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}</a>
 {/if}
 <div class="row">
     <div class="col-md-6">

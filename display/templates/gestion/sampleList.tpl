@@ -6,7 +6,7 @@
         </a>
     <!--<legend>{t}Engins de pêche{/t}</legend>-->
         <div class="col-md-12">
-            <table class="table table-bordered table-hover datatable" data-order='[[0,"desc"]]'>
+            <table class="table table-bordered table-hover datatable-nopaging" data-order='[[0,"desc"]]'>
                 <thead>
                     <tr>
                         <th>{t}Id{/t}</th>

@@ -149,7 +149,7 @@ $(document).ready(function() {
          isHide = true;
          $("#button-hide").text("{t}Afficher{/t}");
      }
-     $("#button-hide").on("click", function() { 
+     $("#button-hide").on("click", function(event) { 
          event.preventDefault();
         if (isHide) {
             $(".hideable").show();
@@ -250,13 +250,13 @@ $(document).ready(function() {
                 <div class="form-group hideable">
                     <label for="total_measured"  class="control-label col-md-4"> {t}Nombre mesurés :{/t}</label>
                     <div class="col-md-8">
-                        <input id="total_measured" type="text" class="form-control nombre" name="total_measured" value="{$data.total_measured}">
+                        <input id="total_measured" type="text" class="form-control nombre" name="total_measured" value="{$data.total_measured}" autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group hideable">
                     <label for="total_weight"  class="control-label col-md-4"> {t}Poids total (g) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="total_weight" type="text" class="form-control nombre" name="total_weight" value="{$data.total_weight}">
+                        <input id="total_weight" type="text" class="form-control nombre" name="total_weight" value="{$data.total_weight}" autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group hideable">
@@ -289,37 +289,37 @@ $(document).ready(function() {
 
         <div class="col-md-6 form-horizontal">
             <fieldset>
-                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if}</legend>
+                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if} {$data.taxon_name}</legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
                 <input type="hidden" id="individualChange" name="individualChange" value=0>
                 <div class="form-group" id="div-sl">
                     <label for="sl"  class="control-label col-md-4"> {t}Longueur standard (mm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="sl" type="text" class="fish form-control taux" name="sl" value="{$individual.sl}" {if $sequence.measure_default == "sl"}autofocus{/if}>
+                        <input id="sl" type="text" class="fish form-control taux" name="sl" value="{$individual.sl}" {if $sequence.measure_default == "sl"}autofocus{/if} autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-fl">
                     <label for="fl"  class="control-label col-md-4"> {t}Longueur fourche (mm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="fl" type="text" class="fish form-control taux" name="fl" value="{$individual.fl}" {if $sequence.measure_default == "fl"}autofocus{/if}>
+                        <input id="fl" type="text" class="fish form-control taux" name="fl" value="{$individual.fl}" {if $sequence.measure_default == "fl"}autofocus{/if} autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-tl">
                     <label for="tl"  class="control-label col-md-4"> {t}Longueur totale (mm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="tl" type="text" class="fish form-control taux" name="tl" value="{$individual.tl}" {if $sequence.measure_default == "tl"}autofocus{/if}>
+                        <input id="tl" type="text" class="fish form-control taux" name="tl" value="{$individual.tl}" {if $sequence.measure_default == "tl"}autofocus{/if} autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-wd">
                     <label for="wd"  class="control-label col-md-4"> {t}Largeur disque (mm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="wd" type="text" class="fish form-control taux" name="wd" value="{$individual.wd}" {if $sequence.measure_default == "wd"}autofocus{/if}>
+                        <input id="wd" type="text" class="fish form-control taux" name="wd" value="{$individual.wd}" {if $sequence.measure_default == "wd"}autofocus{/if} autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-ot">
                     <label for="ot"  class="control-label col-md-4"> {t}Autre longueur (mm) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="ot" type="text" class="fish form-control taux" name="ot" value="{$individual.ot}" {if $sequence.measure_default == "ot"}autofocus{/if}>
+                        <input id="ot" type="text" class="fish form-control taux" name="ot" value="{$individual.ot}" {if $sequence.measure_default == "ot"}autofocus{/if} autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group">
@@ -338,13 +338,13 @@ $(document).ready(function() {
                 <div class="form-group" id="div-weight">
                     <label for="weight"  class="control-label col-md-4"> {t}Poids (g) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="weight" type="text" class="fish form-control taux" name="weight" value="{$individual.weight}">
+                        <input id="weight" type="text" class="fish form-control taux" name="weight" value="{$individual.weight}" autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-age">
                     <label for="age"  class="control-label col-md-4"> {t}Age (année) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="age" type="text" class="fish form-control nombre" name="age" value="{$individual.age}">
+                        <input id="age" type="text" class="fish form-control nombre" name="age" value="{$individual.age}" autocomplete="off" >
                     </div>
                 </div>
 
@@ -385,13 +385,13 @@ $(document).ready(function() {
                 <div class="form-group" id="div-tag">
                     <label for="tag"  class="control-label col-md-4"> {t}Marque lue :{/t}</label>
                     <div class="col-md-8">
-                        <input id="tag" type="text" class="fish form-control" name="tag" value="{$individual.tag}">
+                        <input id="tag" type="text" class="fish form-control" name="tag" value="{$individual.tag}" autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-tag_posed">
                     <label for="tag_posed"  class="control-label col-md-4"> {t}Marque posée :{/t}</label>
                     <div class="col-md-8">
-                        <input id="tag_posed" type="text" class="fish form-control" name="tag_posed" value="{$individual.tag_posed}">
+                        <input id="tag_posed" type="text" class="fish form-control" name="tag_posed" value="{$individual.tag_posed}" autocomplete="off" >
                     </div>
                 </div>
                 <div class="form-group" id="div-individual_comment">
