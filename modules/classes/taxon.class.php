@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ORM for the table taxon
  */
@@ -61,10 +62,25 @@ class Taxon extends ObjetBDD
      * @param boolean $freshwater
      * @return array
      */
-    function getListCode($freshwater = true) {
+    function getListCode($freshwater = true)
+    {
         $sql = "select taxon_id, scientific_name, ";
         $freshwater ? $field = "fresh_code" : $field = "sea_code";
-        $sql .= $field ." as code from taxon where ".$field." is not null order by code";
+        $sql .= $field . " as code from taxon where " . $field . " is not null order by code";
         return $this->getListeParam($sql);
+    }
+    /**
+     * Get a taxon from his code
+     *
+     * @param string $code
+     * @param boolean $freshwater
+     * @return array
+     */
+    function getFromCode($code, $freshwater = true)
+    {
+        $sql = "select taxon_id, scientific_name, ";
+        $freshwater ? $field = "fresh_code" : $field = "sea_code";
+        $sql .= $field . " as code from taxon where " . $field . " = :code";
+        return $this->lireParamAsPrepared($sql, array("code" => $code));
     }
 }

@@ -44,4 +44,7 @@ switch ($t_module["param"]) {
 	case "getListCode":
 		$vue->set($dataClass->getListCode($_REQUEST["freshwater"]));
 		break;
+	case "getFromCode":
+		$vue->set($dataClass->getFromCode($_REQUEST["code"], $_REQUEST["freshwater"]));
+		break;
 }

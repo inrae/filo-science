@@ -37,6 +37,21 @@ switch ($t_module["param"]) {
         $ds = $_SESSION["ti_operation"]->translateRow($ds);
         $vue->set($ds, "sequence");
         /**
+         * Generate the selection grid for taxa
+         */
+        if ($ds["taxa_template_id"] > 0) {
+            include_once "modules/classes/taxaTemplate.class.php";
+            $taxaTemplate = new TaxaTemplate($bdd, $ObjetBDDParam);
+            $dtt = $taxaTemplate->lire($ds["taxa_template_id"]);
+            $grid = json_decode($dtt["taxa_model"], true);
+            $newgrid = array();
+            foreach ($grid as $element) {
+                $name = "grid" . $element["row"] . "-" . $element["col"];
+                $newgrid[$element["row"]][$element["col"]] = $element["val"];
+            }
+            $vue->set($newgrid, "grid");
+        }
+        /**
          * Get the list of individuals
          */
 

@@ -187,6 +187,7 @@
 	<taxonSearchAjax action="modules/param/taxon.php" param="searchAjax" droits="consult" type="ajax" />
 	<taxonGetName action="modules/param/taxon.php" param="lireAjax" droits="consult" type="ajax" />
 	<taxonGetListCode action="modules/param/taxon.php" param="getListCode" droits="consult" type="ajax"/>
+	<taxonGetFromCode action="modules/param/taxon.php" param="getFromCode" droits="consult" type="ajax"/>
 
 	<projectList action="modules/param/project.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
 	<projectDisplay action="modules/param/project.php" param="display" droits="consult" type="smarty"/>
@@ -239,7 +240,7 @@
 	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty" requiredVar="sample_id" />
+	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty" requiredVar="sample_id" noDelayBeforeCall="1"/>
 	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange"  />
 	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />
 	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />

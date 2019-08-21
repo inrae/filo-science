@@ -111,6 +111,35 @@ $(document).ready(function() {
         $("#taxon_id").val(taxonIdInitial);
         setTaxonName(taxonIdInitial);
     }
+
+    $(".taxonselect").on("click", function () {
+        /**
+         * Generate a new lot with the selected taxon
+         */
+        var code = $(this).text();
+        console.log(code);
+        $.ajax( {
+            url: "index.php",
+            data: { "module": "taxonGetFromCode", "freshwater":freshwater, "code": code}
+        })
+        .done (function(value) { 
+            if (value) {
+                var name = JSON.parse(value);
+                console.log(name);
+                $("#taxon_id_new").val(name.taxon_id);                    
+                $("#action").val("Change");
+                $("#sample_id").val("0");
+                $("#lotform").submit();
+                /*$("#taxon_name").val(name.scientific_name);
+                option = '<option value="' + name.taxon_id + '">' + name.scientific_name;
+                if (name.common_name.length > 0) {
+                    option += ' (' + name.common_name + ')';
+                }
+                option += '</option>';
+                $("#taxon_id").html(option);*/
+            }
+        });
+    });
 });
 </script>
 
@@ -143,13 +172,30 @@ $(document).ready(function() {
 <div class="row col-md-12">
     <form id="lotform" method="post" action="index.php">
         <div class="col-md-6 form-horizontal"> 
+            {if count($grid) > 0}
+                <fieldset>
+                    <legend>{t}Création d'un nouveau lot{/t}</legend>
+                    {for $line = 1 to 4}
+                        <div class="row">
+                            {for $column = 1 to 6}
+                                <div class="col-sm-2 center">
+                                    {if strlen($grid[$line][$column]) > 0}
+                                        <button type="button" class="btn btn-info taxonselect">{$grid[$line][$column]}</button>
+                                    {/if}
+                                </div>
+                            {/for}
+                        </div>
+                    {/for}
+                </fieldset>
+            {/if}
             <fieldset>
                 <legend>{t}Détail du lot n°{/t} {$data.sample_uid}</legend>            
                 <input type="hidden" name="moduleBase" value="sample">
-                <input type="hidden" name="action" value="Write">
+                <input type="hidden" id="action" name="action" value="Write">
                 <input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">
-                <input type="hidden" name="sample_id" value="{$data.sample_id}">
+                <input type="hidden" id="sample_id" name="sample_id" value="{$data.sample_id}">
                 <input type="hidden" name="taxon_id_new" value="0" id="taxon_id_new">
+                
                 <div class="form-group">
                         <label for="taxon-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
                         <div class="col-md-8">
