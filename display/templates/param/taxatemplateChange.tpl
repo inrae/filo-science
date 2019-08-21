@@ -1,8 +1,8 @@
 <script src="display/javascript/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script>
 $(document).ready(function() { 
-    $(".freshwater").on("click", function () {
-        var freshwater = $(".freshwater:checked").val();
+    $(".freshwater").on("change", function () {
+        var freshwater = $(this).val();
         var url = "index.php";
         var data = { "module": "taxonGetListCode",
                     "freshwater" : freshwater
@@ -20,7 +20,7 @@ $(document).ready(function() {
                 if (col == 0) {
                     content += "<tr>";
                 }
-                content += "<td class='center'><div class='source' title='"+result[i].scientific_name+"'>"+result[i].code+"</div></td>";
+                content += '<td class="center"><div class="source" title="'+result[i].scientific_name+'">'+result[i].code+"</div></td>";
                 col ++;
                 if (col == 12) {
                     content += "</tr>";
@@ -30,17 +30,34 @@ $(document).ready(function() {
             if (col != 0) {
                 content += "</tr>";
             }
+            $("#source > tbody").append(content);
+            $(".source").draggable({
+                cursor: "move",
+                helper: "clone"
+            });
         });
     });
 
     $(".source").draggable({
-        revert:true,
-        cursor: "move"
+        revert: "invalid",
+        cursor: "move",
+        helper: "clone"
     });
     $(".dest").droppable({
         drop: function(event, ui ) {
-            $(this).val(ui.draggable.text());
+            var content = $("input",ui.draggable).val();
+            $("input",ui.draggable).val("");
+            if (content === undefined) {
+                content = ui.draggable.text();
+                $(ui.draggable).addClass("blue");
+            }            
+            $("input", this).val(content);
         }
+    });
+    $(".dest").draggable({
+        revert: "invalid",
+        cursor: "move",
+        helper: "clone"
     });
 });
 
@@ -67,14 +84,14 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="freshwater"  class="control-label col-md-4 freshwater"> <span class="red">*</span>{t}Opération réalisée en eau douce ?{/t}</label>
+                    <label for="freshwater"  class="control-label col-md-4"> <span class="red">*</span>&nbsp;{t}Opération réalisée en eau douce ?{/t}</label>
                     <div class="col-md-8">
                             <label class="radio-inline">
-                            <input  type="radio" name="freshwater" id="freshwater1" value="1" {if $data.freshwater == 1}checked{/if}>
+                            <input  class="freshwater" type="radio" name="freshwater" id="freshwater1" value="1" {if $data.freshwater == 1}checked{/if}>
                             {t}oui{/t}
                         </label>
                         <label class="radio-inline">
-                            <input  type="radio" name="freshwater" id="freshwater2" value="0" {if $data.freshwater == 0}checked{/if}>
+                            <input  type="radio" class="freshwater" name="freshwater" id="freshwater2" value="0" {if $data.freshwater == 0}checked{/if}>
                             {t}non{/t}
                         </label>
                     </div>   
@@ -99,7 +116,9 @@ $(document).ready(function() {
                         <tr>
                             {for $column = 1 to 6}
                                 <td class="center">
+                                    <div class="dest">
                                     <input class="dest" name="grid{$line}-{$column}" value="{$grid[$line][$column]}" size="5">
+                                    </div>
                                 </td>
                             {/for}
                         </tr>
