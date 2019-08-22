@@ -21,10 +21,8 @@
 
 <!-- Datatables -->
 <script src="display/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<!--<script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>-->
-<script src="display/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
-<!--link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" /-->
-<link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" />
+<script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" />
 <!--
 <link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/media/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/media/css/dataTables.bootstrap.min.css" />

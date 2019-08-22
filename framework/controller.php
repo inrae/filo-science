@@ -286,6 +286,9 @@ while (isset($module)) {
                      */
                     if (isset($_COOKIE["tokenIdentity"])) {
                         try {
+                            if ($t_module["retourlogin"] != 1) {
+                                $t_module = $navigation->getModule("default");
+                            }
                             include_once 'framework/identification/token.class.php';
                             $token = new Token($privateKey, $pubKey);
                             $login = $token->openToken($_COOKIE["tokenIdentity"]);
