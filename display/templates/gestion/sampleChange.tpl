@@ -161,6 +161,18 @@ $(document).ready(function() {
          $("#button-hide").text("{t}Afficher{/t}");
         }
      });
+     /**
+      * erase the + as first character in numeric fields
+      * for calliper
+      */
+       $(".fish").on("change paste keyup", function(e) { 
+            var val = $(this).val();
+            if (val.charAt(0) == "+") {
+                val = val.substr(1,val.length - 1);
+                $(this).val(val);
+            }
+       });
+
 });
 </script>
 
@@ -277,19 +289,20 @@ $(document).ready(function() {
                         <textarea id="sample_comment" type="text" class="form-control" name="sample_comment">{$data.sample_comment}</textarea>
                     </div>
                 </div>
-                <div class="form-group center">
-                       <button class="btn btn-secondary" id="button-hide" title="{t}Informations complémentaires du lot{/t}">{t}Masquer{/t}</button>
-                       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
+                <div class="form-group center">  
+                       <button type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                         {if $data.sample_id > 0 }
-                            <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
+                            <button class="btn btn-danger button-delete ">{t}Supprimer{/t}</button>
                         {/if}
+                        <button class="btn btn-secondary" id="button-hide" title="{t}Informations complémentaires du lot{/t}">{t}Masquer{/t}</button>
                 </div>
             </fieldset>
         </div>
 
         <div class="col-md-6 form-horizontal">
             <fieldset>
-                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if} {$data.taxon_name}</legend>
+                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if} <i>{$data.taxon_name}</i>
+                </legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
                 <input type="hidden" id="individualChange" name="individualChange" value=0>
                 <div class="form-group" id="div-sl">
@@ -401,9 +414,9 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="center">
-                        <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
+                        <button type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                     {if $individual.individual_id > 0 }
-                        <button id="delete-individual" class="btn btn-danger">{t}Supprimer{/t}</button>
+                        <button id="delete-individual" class="btn btn-danger ">{t}Supprimer{/t}</button>
                     {/if}
                 </div>
             </fieldset>
