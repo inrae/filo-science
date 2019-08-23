@@ -3,7 +3,7 @@
 {if $droits.param == 1}
     &nbsp;
     <a href="index.php?module=projectChange&project_id={$data.project_id}">
-        <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+        <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
     </a>
 {/if}
 <div class="row">

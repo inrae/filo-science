@@ -2,7 +2,7 @@
 <div class="row">
     <fieldset class="col-md-12">
             <a href="index.php?module=sequenceChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id=0">
-                    <img src="{$display}/images/new.png" height="25">{t}Nouvelle séquence{/t}
+                    <img src="display/images/new.png" height="25">{t}Nouvelle séquence{/t}
                 </a>
         <legend>{t}Séquences{/t}</legend>
             <div class="col-md-12">

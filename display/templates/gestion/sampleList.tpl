@@ -2,7 +2,7 @@
 <div class="row">
     <fieldset class="col-md-12">
         <a href="index.php?module=sampleChange&sequence_id={$data.sequence_id}&sample_id=0">
-            <img src="{$display}/images/new.png" height="25">{t}Nouveau lot{/t}
+            <img src="display/images/new.png" height="25">{t}Nouveau lot{/t}
         </a>
     <!--<legend>{t}Engins de pêche{/t}</legend>-->
         <div class="col-md-12">

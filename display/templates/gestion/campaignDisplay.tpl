@@ -5,12 +5,12 @@
         {if $droits.gestion == 1}
         &nbsp;
         <a href="index.php?module=campaignChange&campaign_id=0">
-            <img src="{$display}/images/new.png" height="25">
+            <img src="display/images/new.png" height="25">
             {t}Nouvelle campagne{/t}
         </a>
         &nbsp;
         <a href="index.php?module=campaignChange&campaign_id={$data.campaign_id}">
-            <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+            <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
         {/if}
     </div>

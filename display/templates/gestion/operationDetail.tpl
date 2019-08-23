@@ -3,7 +3,7 @@
 </script>
 <div class="row col-md-12">
         <a href="index.php?module=operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
-            <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+            <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
         <fieldset >
         <legend>{t}Informations générales{/t}</legend>
