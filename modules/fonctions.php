@@ -44,12 +44,16 @@ function setParamToVue($vue, $tablename)
  * Set defaults parameters for maps to vue
  *
  * @param Vue $vue
+ * @param boolean $isChange
  * @return void
  */
-function setParamMap($vue) {
+function setParamMap($vue, $isChange = false) {
     if (isset($vue)) {
         foreach (array("mapDefaultZoom", "mapDefaultLong", "mapDefaultLat") as $mapParam) {
             $vue->set($_SESSION[$mapParam], $mapParam);
+        }
+        if ($isChange) {
+            $vue->set("edit", "mapMode");
         }
     }
 }

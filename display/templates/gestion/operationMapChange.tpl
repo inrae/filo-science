@@ -151,6 +151,25 @@
             }
         });
     }
-         
+    $("#radar").click(function () { 
+	 if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( function (position) {
+        var lon = position.coords.longitude;
+        var lat = position.coords.latitude;
+    //console.log("longitude calculée : "+ lon);
+    //console.log ("latitude calculée : " + lat);
+        setPosition(numpoint, lon, lat);
+            if (numpoint == 1) {
+                $("#long_start").val(lon);
+                $("#lat_start").val(lat);
+                numpoint = 2;
+            } else {
+                $("#long_end").val(lon);
+                $("#lat_end").val(lat);
+                numpoint = 1;
+            }
+      });   
+   }
+ });    
    
 </script>

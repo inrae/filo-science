@@ -1,6 +1,12 @@
 <script type="text/javascript" charset="utf-8" src="display/javascript/ol-v4.2.0-dist/ol.js"></script>
 <link rel="stylesheet" type="text/css" href="display/javascript/ol-v4.2.0-dist/ol.css">
-
+<div id="mapAmbience" class="map"></div>
+{if $mapMode == "edit"}
+  <div id="radar">
+    <a href="#">
+    <img src="display/images/map-pointer.png" height="30">{t}Repérez votre position !{/t}</a>
+  </div>
+{/if}
 <div id="mapAmbience" class="map"></div>
 <script>
 var earth_radius = 6389125.541;
@@ -104,11 +110,31 @@ if (mapIsChange == true) {
         var lonlat = ol.proj.transform(lonlat3857, 'EPSG:3857', 'EPSG:4326');
         var lon = lonlat[0];
         var lat = lonlat[1];
-        console.log("longitude sélectionnée : "+ lon);
-        console.log ("latitude sélectionnée : " + lat);
+        //console.log("longitude sélectionnée : "+ lon);
+        //console.log ("latitude sélectionnée : " + lat);
         point.setCoordinates (lonlat3857);
         $("#ambience_long").val(lon);
         $("#ambience_lat").val(lat);
     });
 }
+
+/*
+ * Traitement de la localisation par clic sur le radar 
+ * (position approximative du terminal)
+ */
+ $("#radar").click(function () { 
+	 if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( function (position) {
+        var lon = position.coords.longitude;
+        var lat = position.coords.latitude;
+    //console.log("longitude calculée : "+ lon);
+    //console.log ("latitude calculée : " + lat);
+        $("#ambience_long").val(lon);
+        $("#ambience_lat").val(lat);
+        var lonlat3857 = ol.proj.transform([parseFloat(lon),parseFloat(lat)], 'EPSG:4326', 'EPSG:3857');
+        point.setCoordinates (lonlat3857);
+        view.setCenter(lonlat3857);
+      });   
+   }
+ });
 </script>
