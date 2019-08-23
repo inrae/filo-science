@@ -5,6 +5,19 @@ $(document).ready(function() {
     var taxonIdInitial = parseInt("{$data.taxon_id}");
     var sampleId = parseInt("{$data.sample_id}");
     var isHide = false;
+    var isAuto = Cookies.get("fishAutoMode");
+    console.log(isAuto);
+    if (isAuto === undefined) {
+        isAuto = true;
+        Cookies.set("fishAutoMode", true, { expires: 180});
+    }
+    if (isAuto == "true") {
+        $("#modeAuto").prop("checked", true);
+        $(".btn").prop("disabled", false);
+    } else {
+        $("#modeAuto").prop("checked", false);
+        $(".btn").prop("disabled", true);
+    }
 
     /* Taxon search */
     $("#taxon-search").keyup(function() { 
@@ -172,7 +185,28 @@ $(document).ready(function() {
                 $(this).val(val);
             }
        });
-
+      
+        $(".btn").hover(function() { 
+            if (! isAuto) {
+                $(this).prop("disabled", false);
+            }
+        });
+        $(".btn").mouseout(function() { 
+            if (! isAuto) {
+                $(this).prop("disabled", true);
+            }
+        });
+        $("#modeAuto").on ("change", function (){ 
+            if ($(this).prop("checked")) {
+                isAuto = true;
+                Cookies.set("fishAutoMode", true, { expires: 180});
+                $(".btn").prop("disabled", false);
+            } else {
+                isAuto = false;
+                Cookies.set("fishAutoMode", false, { expires: 180});
+                $(".btn").prop("disabled", true);
+            }
+        });
 });
 </script>
 
@@ -302,6 +336,7 @@ $(document).ready(function() {
         <div class="col-md-6 form-horizontal">
             <fieldset>
                 <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if} <i>{$data.taxon_name}</i>
+                    {t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto">
                 </legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
                 <input type="hidden" id="individualChange" name="individualChange" value=0>
