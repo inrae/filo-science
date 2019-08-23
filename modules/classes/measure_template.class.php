@@ -49,6 +49,23 @@ class MeasureTemplate extends ObjetBDD
         return $this->getListeParamAsPrepared($sql, array("protocol_id" => $protocol_id));
     }
     /**
+     * get all the templates, associated or no to a protocol
+     *
+     * @param [type] $protocol_id
+     * @return void
+     */
+    function getTotalListForProtocol ($protocol_id) {
+        $sql = "select m. measure_template_id, m.measure_template_name,
+                taxon_id, scientific_name, common_name
+                , protocol_id
+                from measure_template m
+                join taxon using (taxon_id)
+                left outer join protocol_measure p on (m.measure_template_id = p.measure_template_id and p.protocol_id = :protocol_id)
+                order by measure_template_name";
+        return $this->getListeParamAsPrepared($sql, array("protocol_id"=>$protocol_id));
+    }
+
+    /**
      * Add the data of taxon to the default function
      *
      * @param int $id

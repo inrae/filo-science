@@ -32,7 +32,7 @@ switch ($t_module["param"]) {
          * List of measures templates
          */
         include_once 'modules/classes/measure_template.class.php';
-        $mt = new Measure_template($bdd, $ObjetBDDParam);
+        $mt = new MeasureTemplate($bdd, $ObjetBDDParam);
         $vue->set($mt->getListFromProtocol($id), "mtdata");
         break;
 

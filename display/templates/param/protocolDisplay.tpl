@@ -5,12 +5,12 @@
         {if $droits.gestion == 1}
             &nbsp;
             <a href="index.php?module=protocolChange&protocol_id=0">
-                <img src="{$display}/images/new.png" height="25">
+                <img src="display/images/new.png" height="25">
                 {t}Nouveau protocole{/t}
             </a>
             &nbsp;
             <a href="index.php?module=protocolChange&protocol_id={$data.protocol_id}">
-                <img src="{$display}/images/edit.gif" height="25">{t}Modifier{/t}
+                <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
             </a>
         {/if}
     </div>
@@ -60,8 +60,10 @@
     </fieldset>
 
     <fieldset class="col-md-6">
-    <legend>Modèles de mesure rattachés</legend>
-
+        <legend>Modèles de mesure rattachés</legend>
+        <a href="index.php?module=protocolMeasureChange&protocol_id={$data.protocol_id}">
+            <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
+        </a>
         <table class="datatable table table-bordered table-hover" data-order='[[0,"asc"]]'>
             <thead>
                 <th>{t}Taxon{/t}</th>
@@ -69,12 +71,14 @@
             </thead>
             <tbody>
                 {foreach $mtdata as $row}
-                    <td>
-                        {$row["scientific_name"]}
-                    </td>
-                    <td>
-                        {$row["measure_template_name"]}
-                    </td>
+                    <tr>
+                        <td>
+                            {$row["scientific_name"]}
+                        </td>
+                        <td>
+                            {$row["measure_template_name"]}
+                        </td>
+                    </tr>
                 {/foreach}
             </tbody>
         </table>

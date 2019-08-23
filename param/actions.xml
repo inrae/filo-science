@@ -277,5 +277,8 @@
 	<measureTemplateChange action="modules/param/measureTemplate.php" param="change" droits="param" type="smarty" requiredVar="measure_template_id" maxCountByHour="60" maxCountByDay="600" />
 	<measureTemplateWrite action="modules/param/measureTemplate.php" param="write" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 	<measureTemplateDelete action="modules/param/measureTemplate.php" param="delete" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+
+	<protocolMeasureChange action="modules/param/protocolMeasure.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" requiredVar="protocol_id"/>
+	<protocolMeasureWrite action="modules/param/protocolMeasure.php" param="write" droits="param" retourok="protocolDisplay" retourko="protocolMeasureChange" modulebefore="protocolMeasureChange"/>
 </navigation>
 	

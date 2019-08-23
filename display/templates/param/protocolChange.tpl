@@ -1,5 +1,10 @@
 <h2>{t}Création - Modification d'un protocole{/t}</h2>
 <a href="index.php?module=protocolList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
+{if $data.protocol_id > 0}
+    &nbsp;<a href="index.php?module=protocolDisplay&protocol_id={$data.protocol_id}">
+            <img src="display/images/display.png" height="25">{t}Retour au détail{/t}
+        </a>
+{/if}
 <div class="row">
     <div class="col-md-6">
 
