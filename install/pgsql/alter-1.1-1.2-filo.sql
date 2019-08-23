@@ -192,4 +192,5 @@ alter table taxa_template add column freshwater boolean not null default 1;
 comment on column taxa_template.freshwater is 'Does the template operate for freshwater?';
 
 alter table analysis_template rename column analysis_template_value to analysis_template_schema;
-
+alter table measure_template rename column measure_template_value to measure_template_schema;
+alter table measure_template alter column measure_template_name type varchar;

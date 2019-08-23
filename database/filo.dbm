@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,585" last-zoom="1" max-obj-count="67"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,163" last-zoom="1" max-obj-count="67"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -1086,9 +1086,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 		<type name="integer" length="0"/>
 	</column>
 	<column name="measure_template_name" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="varchar" length="0"/>
 	</column>
-	<column name="measure_template_value">
+	<column name="measure_template_schema">
 		<type name="json" length="0"/>
 		<comment><![CDATA[List of all measures usable by a taxon.
 For each type : name, extended.
@@ -1097,6 +1097,14 @@ By default : total_length and weight]]></comment>
 	<constraint name="measure_template_pk" type="pk-constr" table="filo.measure_template">
 		<columns names="measure_template_id" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="taxon_id" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="taxon_fk" index="1"/>
+	</customidxs>
 </table>
 
 <sequence name="operation_template_operation_template_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">

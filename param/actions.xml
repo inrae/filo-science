@@ -268,9 +268,14 @@
 	<taxatemplateWrite action="modules/param/taxatemplate.php" param="write" droits="param" retourok="taxatemplateList" retourko="taxatemplateChange" modulebefore="taxatemplateChange" maxCountByHour="60" maxCountByDay="600" />
 	<taxatemplateDelete action="modules/param/taxatemplate.php" param="delete" droits="param" retourok="taxatemplateList" retourko="taxatemplateChange" modulebefore="taxatemplateChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<analysisTemplateList action="modules/param/analysisTemplate.php" param="list" droits="consult" type="smarty"  maxCountByHour="60" maxCountByDay="600" retourlogin="1"/>
+	<analysisTemplateList action="modules/param/analysisTemplate.php" param="list" droits="consult" type="smarty" maxCountByHour="60" maxCountByDay="600" retourlogin="1"/>
 	<analysisTemplateChange action="modules/param/analysisTemplate.php" param="change" droits="param" type="smarty" requiredVar="analysis_template_id" maxCountByHour="60" maxCountByDay="600" />
 	<analysisTemplateWrite action="modules/param/analysisTemplate.php" param="write" droits="param" retourok="analysisTemplateList" retourko="analysisTemplateChange" modulebefore="analysisTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 	<analysisTemplateDelete action="modules/param/analysisTemplate.php" param="delete" droits="param" retourok="analysisTemplateList" retourko="analysisTemplateChange" modulebefore="analysisTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+
+	<measureTemplateList action="modules/param/measureTemplate.php" param="list" droits="consult" type="smarty" maxCountByHour="60" maxCountByDay="600" retourlogin="1"/>
+	<measureTemplateChange action="modules/param/measureTemplate.php" param="change" droits="param" type="smarty" requiredVar="measure_template_id" maxCountByHour="60" maxCountByDay="600" />
+	<measureTemplateWrite action="modules/param/measureTemplate.php" param="write" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+	<measureTemplateDelete action="modules/param/measureTemplate.php" param="delete" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 </navigation>
 	

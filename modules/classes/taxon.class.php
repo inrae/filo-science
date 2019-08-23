@@ -34,12 +34,12 @@ class Taxon extends ObjetBDD
      * @param string $val
      * @return array
      */
-    function search($val, $isFreshcode = false)
+    function search($val, $isFreshcode = false, $noFreshcode = 0)
     {
         $val = strtoupper($this->encodeData($val));
         $sql = "select taxon_id, scientific_name, common_name, fresh_code, sea_code, length_max, weight_max
                 from taxon";
-        if (strlen($val) == 3) {
+        if ( $noFreshcode == 0 && (strlen($val) == 3 || strlen($val) == 4)) {
             /**
              * search only on the code
              */
