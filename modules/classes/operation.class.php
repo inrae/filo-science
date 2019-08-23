@@ -5,6 +5,7 @@
 class Operation extends ObjetBDD
 {
     private $sql = "select o.*
+                    ,operation_id as operation_uid
                     ,campaign_name
                     , station_name
                     , protocol_name, measure_default, measure_default_only
@@ -107,5 +108,37 @@ class Operation extends ObjetBDD
     {
         $where = " where operation_id = :operation_id";
         return $this->lireParamAsPrepared($this->sql . $where, array("operation_id" => $operation_id));
+    }
+     /**
+     * Get the project of an operation, using the real key
+     *
+     * @param int $uid
+     * @return int
+     */
+    function getProject ($uid) {
+        $sql = "select project_id
+                from operation
+                join campaign using (campaign_id)
+                where operation_id = :id";
+        $res = $this->lireParamAsPrepared($sql, array("id"=>$uid));
+        return ($res["project_id"]);
+    }
+    /**
+     * Test if an operation is granted
+     *
+     * @param array $projects: list of granted projects
+     * @param int $uid
+     * @return boolean
+     */
+    function isGranted(array $projects, $uid) {
+        $project_id = $this->getProject($uid);
+        $retour = false;
+        foreach($projects as $project) {
+            if ($project["project_id"] == $project_id) {
+                $retour = true;
+                break;
+            }
+        }
+        return $retour;
     }
 }

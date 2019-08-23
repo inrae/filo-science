@@ -51,10 +51,10 @@
             <div class="form-group">
                 <label for="analysis_template_id" class="control-label col-md-4">{t}Modèle d'analyse complémentaire :{/t}</label>
                 <div class="col-md-8">
-                    <select id="analysis_template_id" class="form-control">
+                    <select id="analysis_template_id" name="analysis_template_id" class="form-control">
                         <option value="" {if $data.analysis_template_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                         {foreach $dataat as $row}
-                            <option value="{$row["analysis_template_id"]}" {if $row["analysis_template_id"] == $data.analysis_template_id}selected{/if}>
+                            <option value="{$row.analysis_template_id}" {if $row.analysis_template_id == $data.analysis_template_id}selected{/if}>
                                 {$row.analysis_template_name}
                             </option>
                         {/foreach}

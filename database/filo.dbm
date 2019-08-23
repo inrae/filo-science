@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,869" last-zoom="1" max-obj-count="67"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,585" last-zoom="1" max-obj-count="67"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -2303,7 +2303,7 @@ By default : total_length and weight]]></comment>
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[Name of the template]]></comment>
 	</column>
-	<column name="analysis_template_value">
+	<column name="analysis_template_schema">
 		<type name="json" length="0"/>
 		<comment><![CDATA[Description of all parameters recorded, in Json format]]></comment>
 	</column>

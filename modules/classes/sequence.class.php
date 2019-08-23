@@ -6,9 +6,10 @@ class Sequence extends ObjetBDD
 {
     private $sql = "select sequence_id, sequence_number, s.date_start, s.date_end, fishing_duration
                     , operation_id, operation_name, freshwater, long_start, lat_start, long_end, lat_end, taxa_template_id
+                    ,sequence_id as sequence_uid
                     ,campaign_id, campaign_name
                     ,project_id, project_name
-                    ,protocol_id, measure_default, measure_default_only
+                    ,protocol_id, measure_default, measure_default_only, analysis_template_id
                     from sequence s
                     join operation using (operation_id)
                     join campaign using (campaign_id)
@@ -59,5 +60,38 @@ class Sequence extends ObjetBDD
     function getDetail($sequence_id) {
         $where = " where sequence_id = :sequence_id";
         return $this->lireParamAsPrepared($this->sql.$where, array("sequence_id"=>$sequence_id));
+    }
+    /**
+     * Get the project of a sequence, using the real key
+     *
+     * @param int $uid
+     * @return int
+     */
+    function getProject ($uid) {
+        $sql = "select project_id
+                from sequence
+                join operation using (operation_id)
+                join campaign using (campaign_id)
+                where sequence_id = :id";
+        $res = $this->lireParamAsPrepared($sql, array("id"=>$uid));
+        return ($res["project_id"]);
+    }
+    /**
+     * Test if a sequence is granted
+     *
+     * @param array $projects: list of granted projects
+     * @param int $uid
+     * @return boolean
+     */
+    function isGranted(array $projects, $uid) {
+        $project_id = $this->getProject($uid);
+        $retour = false;
+        foreach($projects as $project) {
+            if ($project["project_id"] == $project_id) {
+                $retour = true;
+                break;
+            }
+        }
+        return $retour;
     }
 }

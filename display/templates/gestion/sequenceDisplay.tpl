@@ -6,6 +6,11 @@ $(document).ready(function() {
         //console.log(activeTab);
         $("#"+activeTab).tab('show');
     }
+
+    /**
+     * set the id to the cookie
+     */
+     Cookies.set('sequence_uid', "{$data.sequence_uid}", { expires: 1, secure: true});
 });
 
 </script>

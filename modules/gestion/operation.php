@@ -3,18 +3,23 @@ require_once 'modules/classes/operation.class.php';
 $dataClass = new Operation($bdd, $ObjetBDDParam);
 $keyName = "operation_id";
 if (strlen($_REQUEST[$keyName]) == 0) {
-    $t_module["param"] = "error";
-    $t_module["retourko"] = "default";
-    $module_coderetour = -1;
+    if (isset($_COOKIE["operation_uid"]) && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["operation_uid"]) && $t_module["param"] == "display") {
+        $id = $_COOKIE["operation_uid"];
+    } else {
+        $t_module["param"] = "error";
+        $t_module["retourko"] = "default";
+        $module_coderetour = -1;
+    }
+} else {
+    $origine == "document" ? $id = $_REQUEST[$keyName] : $id = $_SESSION["ti_operation"]->getValue($_REQUEST[$keyName]);
 }
-$origine == "document" ? $id = $_REQUEST[$keyName] : $id = $_SESSION["ti_operation"]->getValue($_REQUEST[$keyName]);
+
 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 if (isset($_REQUEST["activeTab"])) {
     $activeTab = $_REQUEST["activeTab"];
 }
 
 switch ($t_module["param"]) {
-
     case "display":
         $data = $_SESSION["ti_operation"]->translateRow($dataClass->getDetail($id));
         $vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");

@@ -225,13 +225,13 @@
 	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion" retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange" maxCountByHour="60" maxCountByDay="600" />
 	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion" retourok="campaignList" retourko="campaignChange" modulebefore="campaignChange" maxCountByHour="60" maxCountByDay="600" />
 
-	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty" requiredVar="operation_id" maxCountByHour="60" maxCountByDay="600" />
+	<operationDisplay action="modules/gestion/operation.php" param="display" droits="consult" type="smarty" requiredVar="operation_id,operation_uid" maxCountByHour="60" maxCountByDay="600" />
 	<operationChange action="modules/gestion/operation.php" param="change" droits="gestion" type="smarty" requiredVar="operation_id" maxCountByHour="60" maxCountByDay="600" />
 	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" maxCountByHour="60" maxCountByDay="600" />
 	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignList" retourko="operationChange" modulebefore="operationChange" maxCountByHour="60" maxCountByDay="600" />
 	<operationOperatorsChange action="modules/gestion/operation.php" param="operatorsChange" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByHour="60" maxCountByDay="600" />
 
-	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
+	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id,sequence_uid" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
@@ -241,7 +241,7 @@
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 
 	<sampleChange action="modules/gestion/sample.php" param="change" droits="gestion" type="smarty" requiredVar="sample_id" noDelayBeforeCall="1"/>
-	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange"  />
+	<sampleWrite action="modules/gestion/sample.php" param="write" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" />
 	<sampleDelete action="modules/gestion/sample.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />
 	<sampleDeleteIndividual action="modules/gestion/sample.php" param="deleteIndividual" droits="gestion" retourok="sampleChange" retourko="sampleChange" modulebefore="sampleChange" maxCountByHour="60" maxCountByDay="600" />
 
@@ -261,12 +261,16 @@
 	<protocoldocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="protocolDisplay" retourko="protocolDisplay" modulebefore="protocolDisplay" />
 	<operationdocumentWrite action="modules/gestion/document.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" modulebefore="operationDisplay" />
 	<operationdocumentDelete action="modules/gestion/document.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" modulebefore="operationDisplay" />
-	<documentGet action="modules/gestion/document.php" param="get" type="binaire" droits="consult" noDelayBeforeCall="1"/>	
+	<documentGet action="modules/gestion/document.php" param="get" type="binaire" droits="consult" noDelayBeforeCall="1"/>
 
-	<taxatemplateList action="modules/param/taxatemplate.php" param="list" droits="consult"  type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
-	<taxatemplateChange action="modules/param/taxatemplate.php" param="change" droits="param"  type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<taxatemplateList action="modules/param/taxatemplate.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<taxatemplateChange action="modules/param/taxatemplate.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<taxatemplateWrite action="modules/param/taxatemplate.php" param="write" droits="param" retourok="taxatemplateList" retourko="taxatemplateChange" modulebefore="taxatemplateChange" maxCountByHour="60" maxCountByDay="600" />
 	<taxatemplateDelete action="modules/param/taxatemplate.php" param="delete" droits="param" retourok="taxatemplateList" retourko="taxatemplateChange" modulebefore="taxatemplateChange" maxCountByHour="60" maxCountByDay="600" />
 
+	<analysisTemplateList action="modules/param/analysisTemplate.php" param="list" droits="consult" type="smarty"  maxCountByHour="60" maxCountByDay="600" retourlogin="1"/>
+	<analysisTemplateChange action="modules/param/analysisTemplate.php" param="change" droits="param" type="smarty" requiredVar="analysis_template_id" maxCountByHour="60" maxCountByDay="600" />
+	<analysisTemplateWrite action="modules/param/analysisTemplate.php" param="write" droits="param" retourok="analysisTemplateList" retourko="analysisTemplateChange" modulebefore="analysisTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+	<analysisTemplateDelete action="modules/param/analysisTemplate.php" param="delete" droits="param" retourok="analysisTemplateList" retourko="analysisTemplateChange" modulebefore="analysisTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 </navigation>
 	

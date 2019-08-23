@@ -1,3 +1,36 @@
+<script type="text/javascript" src="display/javascript/alpaca/js/formbuilder.js"></script>
+<script>
+$(document).ready(function() { 
+    $("#paramForm").submit(function(event) { 
+        if ($("#action").val()=="Write"){
+            var error = false;
+            $('#metadata').alpaca().refreshValidationState(true);
+            if($('#metadata').alpaca().isValid()){
+                var value = $('#metadata').alpaca().getValue();
+                // met les metadata en JSON dans le champ qui sera sauvegardé en base
+                $("#metadataField").val(JSON.stringify(value));                   
+            } else {
+                console.log("Error in analysis of metadata");
+                error = true;
+            }
+            if (error) {
+                event.preventDefault();
+            }
+        }
+    });
+    var dataParse = $("#metadataField").val();
+    dataParse = dataParse.replace(/&quot;/g,'"');
+    dataParse = dataParse.replace(/\n/g,"\\n");
+    if (dataParse.length > 2) {
+        dataParse = JSON.parse(dataParse);
+    }
+    var schema = "{$analysis_template_schema}";
+    if (schema.length > 0) {
+        schema = schema.replace(/&quot;/g,'"');
+        showForm(JSON.parse(schema),dataParse);
+    }
+});
+</script>
 <div class="row">
     <a href="index.php?module=campaignDisplay&campaign_id={$dataParent.campaign_id}">
         <img src="display/images/display-red.png" height="25">
@@ -18,11 +51,11 @@
 <div class="row">
     <form class="form-horizontal protoform col-md-6" id="paramForm" method="post" action="index.php">
         <input type="hidden" name="moduleBase" value="analysis">
-        <input type="hidden" name="action" value="Write">
+        <input type="hidden" id="action" name="action" value="Write">
         <input type="hidden" name="analysis_id" value="{$data.analysis_id}">
         <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
         <input type="hidden" name="activeTab" value="tab-analysis">
-       
+        <input type="hidden" name="other_analysis" id="metadataField" value="{$data.other_analysis}">
         <div class="form-group">
             <label for="analysis_date"  class="control-label col-md-4">{t}Date-Heure de l'analyse :{/t}</label>
             <div class="col-md-8">
@@ -71,7 +104,14 @@
                 <input id="secchi" type="text" class="form-control taux" name="secchi" value="{$data.secchi}" >
             </div>
         </div>
-
+        <fieldset>
+            <legend>{t}Analyses complémentaires{/t}</legend>
+            <div class="form-group">
+                <div class="col-md-10 col-sm-offset-1">
+                    <div id="metadata"></div>
+                </div>
+            </div>
+        </fieldset>
         <div class="col-md-12">
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>

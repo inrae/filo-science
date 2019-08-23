@@ -36,6 +36,31 @@
             <dt>{t}Secchi, en mètre :{/t}</dt>
             <dd>{$analysis.secchi}</dd>
         </dl>
+        {if count($other_analysis) >0}
+            <fieldset>
+                <legend>{t}Analyses complémentaires{/t}</legend>
+                {foreach $other_analysis as $key=>$value}
+                    {if strlen($value) > 0 || count($value) > 0}
+                        <dl class="dl-horizontal">
+                            <dt>{t 1=$key}%1 :{/t}</dt>
+                            <dd>
+                            {if is_array($value) }
+                                {foreach $value as $val}
+                                    {$val}<br>
+                                {/foreach}
+                            {else}
+                                {if substr($value, 0, 5) == "http:" || substr($value, 0, 6) == "https:"}
+                                    <a href="{$value}" target="_blank">{$value}</a>
+                                {else}
+                                    {$value}
+                                {/if}
+                            {/if}
+                            </dd>
+                        </dl>
+                    {/if}
+                {/foreach}
+            </fieldset>
+        {/if}
         
     </div>
 </div>

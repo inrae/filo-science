@@ -3,11 +3,16 @@ require_once 'modules/classes/sequence.class.php';
 $dataClass = new Sequence($bdd, $ObjetBDDParam);
 $keyName = "sequence_id";
 if (strlen($_REQUEST[$keyName]) == 0) {
-    $t_module["param"] = "error";
-    $t_module["retourko"] = "default";
-    $module_coderetour = -1;
+    if (isset($_COOKIE["sequence_uid"]) && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sequence_uid"]) && $t_module["param"] == "display") {
+        $id = $_COOKIE["sequence_uid"];
+    } else {
+        $t_module["param"] = "error";
+        $t_module["retourko"] = "default";
+        $module_coderetour = -1;
+    }
+} else {
+    $id = $_SESSION["ti_sequence"]->getValue($_REQUEST[$keyName]);
 }
-$id = $_SESSION["ti_sequence"]->getValue($_REQUEST[$keyName]);
 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 $operation_id = $_SESSION["ti_operation"]->getValue($_REQUEST["operation_id"]);
 if (isset($_REQUEST["activeTab"])) {
@@ -81,6 +86,14 @@ switch ($t_module["param"]) {
         );
         if (!isset($dataAnalysis["analysis_id"])) {
             $dataAnalysis["analysis_id"] = 0;
+        }
+        /*
+         * Récupération des analyses complementaires dans un tableau pour l'affichage
+         */
+        $other_analysis = json_decode($dataAnalysis["other_analysis"], true);
+        
+        if ( count($other_analysis) > 0) {
+            $vue->set($other_analysis, "other_analysis");
         }
         $vue->set(
             $dataAnalysis,

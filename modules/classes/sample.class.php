@@ -125,4 +125,38 @@ class Sample extends ObjetBDD
             parent::supprimer($id);
         }
     }
+        /**
+     * Get the project of a sample, using the real key
+     *
+     * @param int $uid
+     * @return int
+     */
+    function getProject ($uid) {
+        $sql = "select project_id
+                from sample
+                join sequence using (sequence_id)
+                join operation using (operation_id)
+                join campaign using (campaign_id)
+                where sample_id = :id";
+        $res = $this->lireParamAsPrepared($sql, array("id"=>$uid));
+        return ($res["project_id"]);
+    }
+    /**
+     * Test if a sample is granted
+     *
+     * @param array $projects: list of granted projects
+     * @param int $uid
+     * @return boolean
+     */
+    function isGranted(array $projects, $uid) {
+        $project_id = $this->getProject($uid);
+        $retour = false;
+        foreach($projects as $project) {
+            if ($project["project_id"] == $project_id) {
+                $retour = true;
+                break;
+            }
+        }
+        return $retour;
+    }
 }

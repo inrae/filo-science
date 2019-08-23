@@ -249,7 +249,11 @@ $(document).ready(function() {
     </div>
     <div class="col-md-6">
         <div id="map" class="map">
-                {include file="gestion/operationMapChange.tpl"}
+            <div id="radar">
+                <a href="#">
+                <img src="display/images/map-pointer.png" height="30">{t}Repérez votre position !{/t}</a>
+            </div>
+            {include file="gestion/operationMapChange.tpl"}
         </div>
     </div>
 </div>

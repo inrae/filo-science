@@ -42,8 +42,9 @@ class protocol extends ObjetBDD
     {
         $sql = "select protocol_id, protocol_name, protocol_url, protocol_description,
         measure_default, measure_default_only, 
-        analysis_tempate_id, analysis_template_name
+        analysis_template_id, analysis_template_name
         from protocol
+        left outer join analysis_template using (analysis_template_id)
         order by protocol_name";
         return $this->getListeParam($sql);
     }
@@ -58,7 +59,7 @@ class protocol extends ObjetBDD
     {
         $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
                 , measure_default, measure_default_only
-                ,analysis_template_id, analysis_template_name, analysis_template_value
+                ,analysis_template_id, analysis_template_name, analysis_template_schema
                 from protocol
                 left outer join analysis_template using (analysis_template_id)
                 where protocol_id = :protocol_id";

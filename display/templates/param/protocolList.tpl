@@ -11,11 +11,12 @@
     <thead>
         <tr>
             <th>{t}Id{/t}</th>
-            <th>{t}Libellé{/t}</th>           
+            <th>{t}Nom du protocole{/t}</th>           
             <th>{t}Description{/t}</th>
             <th>{t}URL{/t}</th>
             <th>{t}Fichier de description{/t}</th>
             <th>{t}Unité de mesure par défaut{/t}</th>
+            <th>{t}Modèle d'analyse complémentaire{/t}</th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +40,7 @@
                     {elseif $row.measure_default == "tl"}{t}Longueur totale{/t}
                     {/if} 
                 </td>
+                <td>{$row.analysis_template_name}</td>
             </tr>
         {/foreach}
     </tbody>

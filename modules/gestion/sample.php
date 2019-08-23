@@ -7,20 +7,28 @@ if (!isset($ind)) {
 $dataClass = new Sample($bdd, $ObjetBDDParam);
 $keyName = "sample_id";
 if (strlen($_REQUEST[$keyName]) == 0) {
-    $t_module["param"] = "error";
-    $t_module["retourko"] = "default";
-    $module_coderetour = -1;
+    if (isset($_COOKIE["sample_uid"]) && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sample_uid"]) && $tmodule["param"] == "change") {
+        $id = $_COOKIE["sample_uid"];
+    } else {
+        $t_module["param"] = "error";
+        $t_module["retourko"] = "default";
+        $module_coderetour = -1;
+    }
+} else {
+    $id = $_SESSION["ti_sample"]->getValue($_REQUEST[$keyName]);
+    $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
 }
-$id = $_SESSION["ti_sample"]->getValue($_REQUEST[$keyName]);
-$sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
 
 switch ($t_module["param"]) {
     case "change":
-        $data = dataRead($dataClass, $id, "gestion/sampleChange.tpl", $sample_id);
+        $data = dataRead($dataClass, $id, "gestion/sampleChange.tpl", $sequence_id);
         /**
          * set the real value of the key
          */
         $data["sample_uid"] = $data["sample_id"];
+        if (!isset($sequence_id)) {
+            $sequence_id = $data["sequence_id"];
+        }
         $data = $_SESSION["ti_sample"]->translateRow($data);
         $data = $_SESSION["ti_sequence"]->translateRow($data);
         if ($data["sample_uid"] == 0 && $_POST["taxon_id_new"] > 0) {
@@ -32,6 +40,7 @@ switch ($t_module["param"]) {
          */
         require_once 'modules/classes/sequence.class.php';
         $sequence = new Sequence($bdd, $ObjetBDDParam);
+
         $ds = $_SESSION["ti_sequence"]->translateRow($sequence->getDetail($sequence_id));
         $ds = $_SESSION["ti_campaign"]->translateRow($ds);
         $ds = $_SESSION["ti_operation"]->translateRow($ds);

@@ -7,6 +7,8 @@
 
 	<item module="campaignList" label="Campagnes" tooltip="Campagnes de pêche">
 		<item module="campaignList" label="Campagnes" tooltip="Campagnes de pêche"/>
+		<item module="operationDisplay" label="Dernière opération" tooltip="Affichage de la dernière opération traitée récemment"/>
+		<item module="sequenceDisplay" label="Dernière séquence" tooltip="Affichage de la dernière séquence traitée récemment"/>
 	</item>
 
 	<item module="param" label="Paramètres" tooltip="Paramètres généraux et tables de référence">
@@ -25,20 +27,23 @@
 
 		<item module="fishing_strategyList" label="Stratégies" tooltip="Stratégies de pêche"/>
 		<item module="scaleList" label="Échelle de pêche" tooltip="Échelle spatiale de pêche"/>
+		<item module="analysisTemplateList" label="Modèles d'analyse" tooltip="Modèles d'analyse complémentaire"/>
 
 		<item divider="1"/>
-		<item module="cache_abundanceList" label="Caches" tooltip="Classes d'abondance des caches"/>
-		<item module="cloggingList" label="Colmatage" tooltip="Types de colmatage du substrat"/>
-		<item module="situationList" label="Emplacements" tooltip="Emplacements particuliers"/>
-		<item module="faciesList" label="Faciès" tooltip="Types de faciès"/>
-		<item module="flow_trendList" label="Flot" tooltip="Caractéristiques du flot"/>
-		<item module="granulometryList" label="Granulométrie" tooltip="Classes de granulométrie du substrat"/>
-		<item module="localisationList" label="Localisation" tooltip="Localisation du point de mesure"/>
-		<item module="shadyList" label="Ombrage" tooltip="Types d'ombrage"/>
-		<item module="sinuosityList" label="Sinuosité" tooltip="Types de sinuosité du cours d'eau"/>
-		<item module="turbidityList" label="Turbidité" tooltip="Classes de turbidité"/>
-		<item module="vegetationList" label="Végétation" tooltip="Nature de la végétation"/>
-		<item module="speedList" label="Vitesse" tooltip="Classes de vitesse"/>
+		<item module="default" label="Ambiances" tooltip="Paramètres d'ambiance">
+			<item module="cache_abundanceList" label="Caches" tooltip="Classes d'abondance des caches"/>
+			<item module="cloggingList" label="Colmatage" tooltip="Types de colmatage du substrat"/>
+			<item module="situationList" label="Emplacements" tooltip="Emplacements particuliers"/>
+			<item module="faciesList" label="Faciès" tooltip="Types de faciès"/>
+			<item module="flow_trendList" label="Flot" tooltip="Caractéristiques du flot"/>
+			<item module="granulometryList" label="Granulométrie" tooltip="Classes de granulométrie du substrat"/>
+			<item module="localisationList" label="Localisation" tooltip="Localisation du point de mesure"/>
+			<item module="shadyList" label="Ombrage" tooltip="Types d'ombrage"/>
+			<item module="sinuosityList" label="Sinuosité" tooltip="Types de sinuosité du cours d'eau"/>
+			<item module="turbidityList" label="Turbidité" tooltip="Classes de turbidité"/>
+			<item module="vegetationList" label="Végétation" tooltip="Nature de la végétation"/>
+			<item module="speedList" label="Vitesse" tooltip="Classes de vitesse"/>
+		</item>
 		<item divider="1"/>
 		<item module="gearList" label="Engins de pêche" tooltip="Liste des engins de pêche"/>
 		<item module="gear_methodList" label="Méthodes de pêche" tooltip="Méthodes d'utilisation des engins de pêche"/>

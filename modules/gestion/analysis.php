@@ -35,6 +35,15 @@ switch ($t_module["param"]) {
             $dataSequence,
             "sequence"
         );
+        if ($dataSequence["analysis_template_id"] > 0) {
+            /**
+             * Get the complementary analysis template
+             */
+            include_once "modules/classes/analysis_template.class.php";
+            $at = new AnalysisTemplate($bdd, $ObjetBDDParam);
+            $dat = $at->lire($dataSequence["analysis_template_id"]);
+            $vue->set($dat["analysis_template_schema"], "analysis_template_schema");
+        }
         if ($data["analysis_id"] == 0) {
             /**
              * Create a new record

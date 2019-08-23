@@ -69,7 +69,7 @@ switch ($t_module["param"]) {
         /**
          * Map
          */
-        setParamMap($vue);
+        setParamMap($vue, true);
         break;
     case "write":
         /*

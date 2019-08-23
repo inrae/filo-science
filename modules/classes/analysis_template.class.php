@@ -2,7 +2,7 @@
 /**
  * ORM of the table analyse_template
  */
-class Analysis_template extends ObjetBDD
+class AnalysisTemplate extends ObjetBDD
 {
 
     /**
@@ -24,7 +24,7 @@ class Analysis_template extends ObjetBDD
                 "type" => 0,
                 "requis" => 1
             ),
-            "analysis_template_value" => array("type"=>0)
+            "analysis_template_schema" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

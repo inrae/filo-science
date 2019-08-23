@@ -6,6 +6,10 @@ $(document).ready(function() {
         //console.log(activeTab);
         $("#"+activeTab).tab('show');
     }
+    /**
+     * set the id to the cookie
+     */
+     Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 1, secure: true});
 });
 
 </script>
