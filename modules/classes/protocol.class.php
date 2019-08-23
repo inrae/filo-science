@@ -65,4 +65,20 @@ class protocol extends ObjetBDD
                 where protocol_id = :protocol_id";
         return $this->lireParamAsPrepared($sql, array("protocol_id" => $protocol_id));
     }
+
+    /**
+     * Get the measure_template_schema from protocol and taxon
+     *
+     * @param int $protocol_id
+     * @param int $taxon_id
+     * @return string
+     */
+    function getTaxonTemplate($protocol_id, $taxon_id) {
+        $sql = "select measure_template_schema
+                from measure_template
+                join protocol_measure using (measure_template_id)
+                where protocol_id = :protocol_id and taxon_id = :taxon_id";
+        $data = $this->lireParamAsPrepared($sql, array("protocol_id"=>$protocol_id, "taxon_id"=>$taxon_id));
+        return ($data["measure_template_schema"]);
+    }
 }

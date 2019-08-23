@@ -1,3 +1,4 @@
+<script type="text/javascript" src="display/javascript/alpaca/js/formbuilder.js"></script>
 <script>
 $(document).ready(function() {
     var mapIsChange = true;
@@ -6,7 +7,6 @@ $(document).ready(function() {
     var sampleId = parseInt("{$data.sample_id}");
     var isHide = false;
     var isAuto = Cookies.get("fishAutoMode");
-    console.log(isAuto);
     if (isAuto === undefined) {
         isAuto = true;
         Cookies.set("fishAutoMode", true, { expires: 180});
@@ -72,7 +72,7 @@ $(document).ready(function() {
             } else {
                 setTaxonName(taxonId);
             }
-            
+            getMetadata();
         }
     });
     /*
@@ -89,6 +89,7 @@ $(document).ready(function() {
                 $("#taxon_name").val(name.scientific_name);
             }
         });
+
     }
 
     /* hide fields measures if necessary */
@@ -207,6 +208,52 @@ $(document).ready(function() {
                 $(".btn").prop("disabled", true);
             }
         });
+    function getMetadata() {
+        /*
+            * Recuperation du modele de metadonnees rattache au type d'echantillon
+            */
+        var dataParse = $("#metadataField").val();
+            dataParse = dataParse.replace(/&quot;/g,'"');
+            dataParse = dataParse.replace(/\n/g,"\\n");
+            if (dataParse.length > 2) {
+                dataParse = JSON.parse(dataParse);
+            }
+        var schema;
+        var protocolId = $("#protocol_id").val();
+        var taxonId = $("#taxon_id").val();
+        if (taxonId) {
+            $.ajax( { 
+                url: "index.php",
+                data: { "module": "protocolGetTaxonTemplate", "protocol_id": protocolId, "taxon_id":taxonId }
+            })
+            .done (function (value) {
+                if (value) {
+                var schema = value.replace(/&quot;/g,'"');
+                showForm(JSON.parse(schema),dataParse);
+                $(".alpaca-field-select").combobox();
+                }
+            })
+            ;
+        }
+    }
+    $("#lotForm").submit(function(event){ 
+        if($("#action").val()=="Write"){
+            var error = false;
+            $('#metadata').alpaca().refreshValidationState(true);
+                if($('#metadata').alpaca().isValid()){
+                	var value = $('#metadata').alpaca().getValue();
+                	 // met les metadata en JSON dans le champ (name="metadata") qui sera sauvegardé en base
+                	 $("#metadataField").val(JSON.stringify(value));
+                } else {
+                   	error = true;
+                }
+                if (error) {
+                	event.preventDefault();
+                }
+        }
+    });
+    /* Init metadata */
+    getMetadata();
 });
 </script>
 
@@ -264,6 +311,7 @@ $(document).ready(function() {
                 <input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">
                 <input type="hidden" id="sample_id" name="sample_id" value="{$data.sample_id}">
                 <input type="hidden" name="taxon_id_new" value="0" id="taxon_id_new">
+                <input type="hidden" name="other_measure" id="metadataField" value="{$individual.other_measure}">
                 
                 <div class="form-group">
                         <label for="taxon-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
@@ -395,7 +443,14 @@ $(document).ready(function() {
                         <input id="age" type="text" class="fish form-control nombre" name="age" value="{$individual.age}" autocomplete="off" >
                     </div>
                 </div>
-
+                <fieldset>
+                    <legend>{t}Données complémentaires{/t}</legend>
+                    <div class="form-group">
+                        <div class="col-md-10 col-sm-offset-1">
+                            <div id="metadata"></div>
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="form-group">
                     <label for="sexe_id"  class="control-label col-md-4">{t}Sexe :{/t}</label>
                     <div class="col-md-8">
