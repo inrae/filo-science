@@ -7,6 +7,7 @@ $(document).ready(function() {
     var sampleId = parseInt("{$data.sample_id}");
     var isHide = false;
     var isAuto = Cookies.get("fishAutoMode");
+    var defaultField = "{$sequence.measure_default}";
     if (isAuto === undefined) {
         isAuto = true;
         Cookies.set("fishAutoMode", true, { expires: 180});
@@ -227,16 +228,25 @@ $(document).ready(function() {
                 data: { "module": "protocolGetTaxonTemplate", "protocol_id": protocolId, "taxon_id":taxonId }
             })
             .done (function (value) {
-                if (value) {
-                var schema = value.replace(/&quot;/g,'"');
-                showForm(JSON.parse(schema),dataParse);
-                $(".alpaca-field-select").combobox();
+                if (value.length > 2) {
+                    $("#complementaryData").prop("hidden", false);
+                    var schema = value.replace(/&quot;/g,'"');
+                    showForm(JSON.parse(schema),dataParse);
+                    $(".alpaca-field-select").combobox();
+                } else {
+                    $("#complementaryData").prop("hidden", true); 
                 }
             })
             ;
         }
     }
-    $("#lotForm").submit(function(event){ 
+
+    $("#metadata :input").change( function () { 
+        console.log("metadata change event");
+        $("#individualChange").val(1);
+    });
+
+    $("#lotform").submit(function(event){ 
         if($("#action").val()=="Write"){
             var error = false;
             $('#metadata').alpaca().refreshValidationState(true);
@@ -244,6 +254,10 @@ $(document).ready(function() {
                 	var value = $('#metadata').alpaca().getValue();
                 	 // met les metadata en JSON dans le champ (name="metadata") qui sera sauvegardé en base
                 	 $("#metadataField").val(JSON.stringify(value));
+                     if ($("#metadataField").val().length > 0) {
+                        $("#individualChange").val(1);
+                        setFocusOnDefaultField("", function () { });
+                     }
                 } else {
                    	error = true;
                 }
@@ -252,6 +266,13 @@ $(document).ready(function() {
                 }
         }
     });
+     function setFocusOnDefaultField(test, callback) {
+         if (defaultField.length > 0) {
+            $("#".defaultField).focus();
+            $("#".defaultField).prop("autofocus", true);
+            callback();
+         }
+     }
     /* Init metadata */
     getMetadata();
 });
@@ -312,6 +333,7 @@ $(document).ready(function() {
                 <input type="hidden" id="sample_id" name="sample_id" value="{$data.sample_id}">
                 <input type="hidden" name="taxon_id_new" value="0" id="taxon_id_new">
                 <input type="hidden" name="other_measure" id="metadataField" value="{$individual.other_measure}">
+                <input type="hidden" id="protocol_id" value="{$sequence.protocol_id}">
                 
                 <div class="form-group">
                         <label for="taxon-search"  class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
@@ -443,7 +465,7 @@ $(document).ready(function() {
                         <input id="age" type="text" class="fish form-control nombre" name="age" value="{$individual.age}" autocomplete="off" >
                     </div>
                 </div>
-                <fieldset>
+                <fieldset id="complementaryData" hidden>
                     <legend>{t}Données complémentaires{/t}</legend>
                     <div class="form-group">
                         <div class="col-md-10 col-sm-offset-1">

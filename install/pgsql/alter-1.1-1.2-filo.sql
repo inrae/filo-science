@@ -194,3 +194,9 @@ comment on column taxa_template.freshwater is 'Does the template operate for fre
 alter table analysis_template rename column analysis_template_value to analysis_template_schema;
 alter table measure_template rename column measure_template_value to measure_template_schema;
 alter table measure_template alter column measure_template_name type varchar;
+
+create view v_individual_other_measures as (
+select individual_id, string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures from individual, json_each_text(individual.other_measure) as metadata
+group by individual_id
+)
+;

@@ -33,6 +33,10 @@ switch ($t_module["param"]) {
         $data = $_SESSION["ti_sequence"]->translateRow($data);
         if ($data["sample_uid"] == 0 && $_POST["taxon_id_new"] > 0) {
             $data["taxon_id"] = $_POST["taxon_id_new"];
+            /**
+             * Reinit individual
+             */
+            $_REQUEST["individual_id"] = 0;
         }
         $vue->set($data, "data");
         /**

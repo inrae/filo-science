@@ -16,6 +16,7 @@
                         <th>{t}Poids total (g){/t}</th>
                         <th>{t}Taille mini mesurée (mm){/t}</th>
                         <th>{t}Taille maxi mesurée (mm){/t}</th>
+                        <th>{t}Mesures complémentaires{/t}</th>
                         <th>{t}Commentaires{/t}</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                         <td class="center">{$sample.total_weight}</td>
                         <td class="center">{$sample.sample_size_min}</td>
                         <td class="center">{$sample.sample_size_max}</td>
+                        <td>{$sample.other_measures}</td>
                         <td class="textareaDisplay">{$sample.sample_comment}</td>
                     </tr>
                     {/foreach}

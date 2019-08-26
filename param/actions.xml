@@ -280,6 +280,6 @@
 
 	<protocolMeasureChange action="modules/param/protocolMeasure.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" requiredVar="protocol_id"/>
 	<protocolMeasureWrite action="modules/param/protocolMeasure.php" param="write" droits="param" retourok="protocolDisplay" retourko="protocolMeasureChange" modulebefore="protocolMeasureChange"/>
-	<protocolGetTaxonTemplate action="modules/param/protocole.php" param="getTaxonTemplate" droits="gestion" type="ajax"/>
+	<protocolGetTaxonTemplate action="modules/param/protocol.php" param="getTaxonTemplate" droits="gestion" type="ajax"/>
 </navigation>
 	

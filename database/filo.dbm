@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,163" last-zoom="1" max-obj-count="67"
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,586" last-zoom="1" max-obj-count="67"
 	 default-owner="postgres"
 	 layers="gacl" active-layers="0;1">
 <role name="filo"
@@ -3152,6 +3152,25 @@ Crue•4]]>
 	 src-required="true" dst-required="false"
 	 identifier="true"
 />
+
+<view name="v_individual_other_measures" layer="0" collapse-mode="2" max-obj-count="1">
+	<schema name="filo"/>
+	<role name="postgres"/>
+	<position x="1240" y="1280"/>
+	<reference>
+		<expression><![CDATA[select individual_id, 
+string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures 
+from individual, 
+json_each_text(individual.other_measure) as metadata
+group by individual_id]]></expression>
+	<column name="individual_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="other_measures">
+		<type name="varchar" length="0"/>
+	</column>
+	</reference>
+</view>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">

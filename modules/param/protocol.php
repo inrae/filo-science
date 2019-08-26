@@ -52,6 +52,6 @@ switch ($t_module["param"]) {
         dataDelete($dataClass, $id);
         break;
     case "getTaxonTemplate":
-        $vue->set($dataclass->getTaxonTemplate($id, $_REQUEST["taxon_id"]));
+        $vue->setJson($dataClass->getTaxonTemplate($id, $_REQUEST["taxon_id"]));
         break;
 }

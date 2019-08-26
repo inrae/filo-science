@@ -10,9 +10,11 @@ class Individual extends ObjetBDD
                     ,measure_estimated, pathology_codes, tag, tag_posed
                     ,pathology_name, pathology_code 
                     ,sexe_name, sexe_code
+                    ,other_measures
                     from individual 
                     left outer join pathology using (pathology_id)
                     left outer join sexe using (sexe_id)
+                    left outer join v_individual_other_measures using (individual_id)
     ";
     /**
      * Constructor
