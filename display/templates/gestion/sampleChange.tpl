@@ -174,7 +174,10 @@ $(document).ready(function() {
                 $(this).val(val);
             }
        });
-      
+    
+       $(".fish").hover(function() { 
+           $(this).focus();
+       });
         $(".btn").hover(function() { 
             if (! isAuto) {
                 $(this).prop("disabled", false);
