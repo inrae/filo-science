@@ -38,7 +38,6 @@ function getSchema(formdef) {
         if (value.required) {
             prop.required = value.required;
         }
-        console.log(prop);
         return prop;
     };
 
@@ -102,7 +101,6 @@ var baseFields = function (index, value) {
     if (value.helperChoice) {
         field.helper = value.helper;
     }
-    console.log(field);
     return field;
 };
 
@@ -123,7 +121,6 @@ function setDefault(value) {
         
         if (val.defaultValue) {
             d[val.name] = val.defaultValue;
-            console.log(d[val.name]);
         }
     });
       return d;

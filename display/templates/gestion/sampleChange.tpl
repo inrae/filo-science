@@ -133,7 +133,6 @@ $(document).ready(function() {
          * Generate a new lot with the selected taxon
          */
         var code = $(this).text();
-        console.log(code);
         $.ajax( {
             url: "index.php",
             data: { "module": "taxonGetFromCode", "freshwater":freshwater, "code": code}
@@ -141,7 +140,6 @@ $(document).ready(function() {
         .done (function(value) { 
             if (value) {
                 var name = JSON.parse(value);
-                console.log(name);
                 $("#taxon_id_new").val(name.taxon_id);                    
                 $("#action").val("Change");
                 $("#sample_id").val("0");
@@ -233,6 +231,7 @@ $(document).ready(function() {
                     var schema = value.replace(/&quot;/g,'"');
                     showForm(JSON.parse(schema),dataParse);
                     $(".alpaca-field-select").combobox();
+                    setFocusOnDefaultField("", function () { });
                 } else {
                     $("#complementaryData").prop("hidden", true); 
                 }
@@ -241,29 +240,25 @@ $(document).ready(function() {
         }
     }
 
-    $("#metadata :input").change( function () { 
-        console.log("metadata change event");
-        $("#individualChange").val(1);
-    });
-
     $("#lotform").submit(function(event){ 
         if($("#action").val()=="Write"){
             var error = false;
-            $('#metadata').alpaca().refreshValidationState(true);
+            try {
+                $('#metadata').alpaca().refreshValidationState(true);
                 if($('#metadata').alpaca().isValid()){
-                	var value = $('#metadata').alpaca().getValue();
-                	 // met les metadata en JSON dans le champ (name="metadata") qui sera sauvegardé en base
-                	 $("#metadataField").val(JSON.stringify(value));
-                     if ($("#metadataField").val().length > 0) {
+                    var value = $('#metadata').alpaca().getValue();
+                    // met les metadata en JSON dans le champ (name="metadata") qui sera sauvegardé en base
+                    $("#metadataField").val(JSON.stringify(value));
+                    if ($("#metadataField").val().length > 0) {
                         $("#individualChange").val(1);
-                        setFocusOnDefaultField("", function () { });
-                     }
+                    }
                 } else {
-                   	error = true;
+                    error = true;
                 }
                 if (error) {
-                	event.preventDefault();
+                    event.preventDefault();
                 }
+            } catch (e) {}
         }
     });
      function setFocusOnDefaultField(test, callback) {
@@ -547,6 +542,7 @@ $(document).ready(function() {
                     <th>{t}Disque{/t}</th>
                     <th>{t}Autre{/t}</th>
                     <th>{t}Poids{/t}</th>
+                    <th>{t}Mesures complémentaires{/t}</th>
                 </thead>
                 <tbody>
                     {foreach $individuals as $individual}
@@ -562,6 +558,7 @@ $(document).ready(function() {
                             <td class="center">{$individual.wd}</td>
                             <td class="center">{$individual.ot}</td>
                             <td class="center">{$individual.weight}</td>  
+                            <td>{$individual.other_measures}</td>
                         </tr>
                     {/foreach}
                 </tbody>
