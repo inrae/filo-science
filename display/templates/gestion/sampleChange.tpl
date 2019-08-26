@@ -59,20 +59,9 @@ $(document).ready(function() {
         }
         if (taxonId > 0) {
             if (taxonId != taxonIdInitial && taxonIdInitial > 0) {
-                if (window.confirm( "{t}Le taxon a été changé : voulez-vous modifier l'échantillon courant (ok) ou créer un nouvel échantillon (annuler) ?{/t}" )) {
-                     taxonIdInitial = 0;
-                   setTaxonName(taxonId);
-                } else {
-                    /*
-                     * submit the form
-                     */
-                     $("#taxon_id").val(taxonIdInitial);
-                     $("#taxon_id_new").val(taxonId);
-                     $(this.form).submit();
-                }
-            } else {
-                setTaxonName(taxonId);
-            }
+                $("#taxonChangeSpan").prop("hidden", false);
+            } 
+            setTaxonName(taxonId);
             getMetadata();
         }
     });
@@ -321,7 +310,13 @@ $(document).ready(function() {
                 </fieldset>
             {/if}
             <fieldset>
-                <legend>{t}Détail du lot n°{/t} {$data.sample_uid}</legend>            
+                <legend>
+                    {t}Détail du lot n°{/t} {$data.sample_uid}
+                    <span id="taxonChangeSpan" class="red" hidden>
+                        <img src="display/images/caution.png">
+                        {t}Changement de taxon{/t}
+                    </span>
+                </legend>            
                 <input type="hidden" name="moduleBase" value="sample">
                 <input type="hidden" id="action" name="action" value="Write">
                 <input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">
