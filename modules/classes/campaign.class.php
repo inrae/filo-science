@@ -41,6 +41,11 @@ class Campaign extends ObjetBDD
             $values["project_id"] = $param["project_id"];
             $and = " and ";
         }
+        if (strlen($param["is_active"])> 0) {
+            $where .= $and." is_active = :is_active";
+            $and = " and ";
+            $values["is_active"] = $param["is_active"];
+        }
         if (strlen($and) > 0) {
             return $this->getListeParamAsPrepared($this->sql . $where, $values);
         } else {

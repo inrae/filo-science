@@ -200,3 +200,6 @@ select individual_id, string_agg( metadata.key || ':' || metadata.value, ', '::v
 group by individual_id
 )
 ;
+
+alter table project add column 	is_active boolean DEFAULT true;
+comment on column project.is_active is 'Specify if the project is currently active';

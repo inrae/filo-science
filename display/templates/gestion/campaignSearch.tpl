@@ -1,3 +1,11 @@
+<script>
+$(document).ready(function(){ 
+    $(".is_active").change(function () { 
+        $("#project_id").val("");
+        $("#campaignSearch").submit();
+    });
+});
+</script>
 <div class="row">
     <form class="form-horizontal protoform" id="campaignSearch" action="index.php" method="GET">
         <input id="module" type="hidden" name="module" value="campaignList">
@@ -16,6 +24,13 @@
             <div class="col-md-2 col-md-offset-3">
                 <input type="submit" class="btn btn-success" value="{t}Rechercher{/t}">
             </div>   
+        </div>
+        <div class="form-group">
+            <label for="is_active" class="col-md-2 control-label">{t}Projets actifs :{/t}</label>
+            <div class="col-md-4">
+                <input type="radio" class="is_active" name="is_active" value="1" {if $searchCampaign.is_active == 1}checked{/if}>{t}oui{/t}
+                <input type="radio" class="is_active" name="is_active" value="0" {if $searchCampaign.is_active == 0}checked{/if}>{t}non{/t}
+            </div>
         </div>
         
     </form>

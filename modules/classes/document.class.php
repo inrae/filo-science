@@ -186,7 +186,7 @@ class Document extends ObjetBDD
 	 * @param Adodb_instance $bdd
 	 * @param array $param
 	 */
-	function __construct($bdd, $param = null)
+	function __construct($bdd, $param = array())
 	{
 		global $APPLI_temp;
 		if (strlen($APPLI_temp) > 0) {
@@ -555,6 +555,23 @@ class Document extends ObjetBDD
 					join " . $parentTable . " using (" . $parentTable . "_id)
 					where " . $parentTable . "_id = :parentId";
 			return $this->getListeParamAsPrepared($sql, array("parentId" => $parentId));
+		}
+	}
+
+	function deleteAllFromParent($parentTable, $parentId) {
+		if (in_array($parentTable, $this->parents)) {
+			$ldoc = $this->getListFromParent($parentTable, $parentId);
+			/**
+			 * Delete records in the relation table
+			 */
+			$sql = "delete from ".$parentTable."_document where ".$parentTable."_id = :parentId";
+			$this->executeAsPrepared($sql, array("parentId"=>$parentId), true);
+			/**
+			 * Delete records
+			 */
+			foreach ($ldoc as $doc) {
+				$this->supprimer($doc["document_id"]);
+			}
 		}
 	}
 }

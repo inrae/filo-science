@@ -192,7 +192,7 @@
 	<projectList action="modules/param/project.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
 	<projectDisplay action="modules/param/project.php" param="display" droits="consult" type="smarty"/>
 	<projectChange action="modules/param/project.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" />
-	<projectWrite action="modules/param/project.php" param="write" droits="param" retourok="projectList" retourko="projectChange" modulebefore="projectChange" maxCountByHour="60" maxCountByDay="600" />
+	<projectWrite action="modules/param/project.php" param="write" droits="param" retourok="projectDisplay" retourko="projectChange" modulebefore="projectChange" maxCountByHour="60" maxCountByDay="600" />
 	<projectDelete action="modules/param/project.php" param="delete" droits="param" retourok="projectList" retourko="projectChange" modulebefore="projectChange" maxCountByHour="60" maxCountByDay="600" />
 
 	<protocolList action="modules/param/protocol.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />

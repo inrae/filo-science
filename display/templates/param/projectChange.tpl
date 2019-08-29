@@ -13,6 +13,15 @@
                               <input id="projectName" type="text" class="form-control" name="project_name" value="{$data.project_name}" autofocus required>
                         </div>
                   </div>
+                  <div class="form-group">
+                        <label for="is_active" class="control-label col-md-4">{t}Actif ?{/t}</label>
+                        <div class="col-md-8">
+                              <input type="radio" name="is_active" value="1" {if $data.is_active == 1}checked{/if}>
+                              oui
+                              <input type="radio" name="is_active" value="0" {if $data.is_active == 0}checked{/if}>
+                              non
+                        </div>
+                  </div>
 
                   <div class="form-group">
                         <label for="groupes"  class="control-label col-md-4">{t}Groupes :{/t}</label>

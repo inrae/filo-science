@@ -8,12 +8,12 @@
  */
 class project extends ObjetBDD
 {
-    private $sql = "select project_id, project_name, 
+    private $sql = "select project_id, project_name, is_active,
     array_to_string(array_agg(groupe),', ') as groupe
     from project
     left outer join project_group using (project_id)
     left outer join aclgroup using (aclgroup_id)";
-    private $group = " group by project_id, project_name";
+    private $group = " group by project_id, project_name, is_active";
     /**
      *
      * @param PDO $bdd
@@ -32,6 +32,10 @@ class project extends ObjetBDD
             "project_name" => array(
                 "type" => 0,
                 "requis" => 1
+            ),
+            "is_active" => array(
+                "type" => 0,
+                "defaultValue" => 1
             )
         );
         parent::__construct($bdd, $param);
@@ -44,10 +48,15 @@ class project extends ObjetBDD
      *
      * @see ObjetBDD::getListe()
      */
-    function getListe($order = 0)
+    function getListe($order = 0, $is_active = -1)
     {
         $orderSql = " order by $order";
-        return $this->getListeParam($this->sql . $this->group . $orderSql);
+        if ($is_active > -1) {
+            $where = " where is_active = :is_active";
+            return $this->getListeParamAsPrepared($this->sql . $where . $this->group . $orderSql, array("is_active" => $is_active));
+        } else {
+            return $this->getListeParam($this->sql . $this->group . $orderSql);
+        }
     }
     /**
      * Get the detail of a project
@@ -126,7 +135,7 @@ class project extends ObjetBDD
     }
 
     /**
-     * Supprime un project
+     * Delete a project
      *
      * {@inheritdoc}
      *
@@ -139,6 +148,13 @@ class project extends ObjetBDD
             $sql = "delete from project_group where project_id = :project_id";
             $data["project_id"] = $id;
             $this->executeAsPrepared($sql, $data);
+            /**
+             * delete documents
+             */
+            include_once "modules/classes/document.class.php";
+            $doc = new Document($this->connection);
+            $doc->deleteAllFromParent("project", $id);
+
             return parent::supprimer($id);
         }
     }
@@ -199,5 +215,21 @@ class project extends ObjetBDD
         if (count($_SESSION["projects"]) > 0) {
             $_SESSION["droits"]["gestion"] = 1;
         }
+    }
+
+    function getProjectsActive($is_active, $projects)
+    {
+        /**
+         * Creation of the list of authorized projects
+         */
+        $in = "";
+        $comma = "";
+        foreach ($projects as $project) {
+            $in .= $comma . $project["project_id"];
+            $comma = ", ";
+        }
+        $where = " where is_active = :is_active and project_id in (" . $in . ")";
+        $order = " order by project_name";
+        return ($this->getListeParamAsPrepared($this->sql . $where . $this->group . $order, array("is_active" => $is_active)));
     }
 }

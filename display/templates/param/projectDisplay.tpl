@@ -12,6 +12,10 @@
             <dt>{t}Groupes autorisés :{/t}</dt>
             <dd>{$data.groupe}</dd>
         </dl>
+        <dl class="dl-horizontal">
+            <dt>{t}Projet actif ?{/t}</dt>
+            <dd>{if $data.is_active == 1}{t}oui{/t}{else}{t}non{/t}{/if}</dd>
+        </dl>
     </div>
 </div>
 <div class="row">

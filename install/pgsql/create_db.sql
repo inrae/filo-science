@@ -41,9 +41,9 @@ COMMENT ON SCHEMA gacl IS 'Rights management';
 SET search_path TO pg_catalog,public,filo,gacl;
 -- ddl-end --
 
--- object: filo.project_project_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.project_project_id_seq CASCADE;
-CREATE SEQUENCE filo.project_project_id_seq
+-- object: project_project_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS project_project_id_seq CASCADE;
+CREATE SEQUENCE project_project_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -52,12 +52,12 @@ CREATE SEQUENCE filo.project_project_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.project_project_id_seq OWNER TO filo;
+ALTER SEQUENCE project_project_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.campaign_campaign_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.campaign_campaign_id_seq CASCADE;
-CREATE SEQUENCE filo.campaign_campaign_id_seq
+-- object: campaign_campaign_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS campaign_campaign_id_seq CASCADE;
+CREATE SEQUENCE campaign_campaign_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -66,52 +66,54 @@ CREATE SEQUENCE filo.campaign_campaign_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.campaign_campaign_id_seq OWNER TO filo;
+ALTER SEQUENCE campaign_campaign_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.project | type: TABLE --
--- DROP TABLE IF EXISTS filo.project CASCADE;
-CREATE TABLE filo.project (
-	project_id integer NOT NULL DEFAULT nextval('filo.project_project_id_seq'::regclass),
+-- object: project | type: TABLE --
+-- DROP TABLE IF EXISTS project CASCADE;
+CREATE TABLE project (
+	project_id integer NOT NULL DEFAULT nextval('project_project_id_seq'::regclass),
 	project_name varchar NOT NULL,
+	is_active boolean DEFAULT true,
 	CONSTRAINT project_id_pk PRIMARY KEY (project_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.project IS 'List of projects. This table is used for grant rights';
+COMMENT ON TABLE project IS 'List of projects. This table is used for grant rights';
 -- ddl-end --
-COMMENT ON COLUMN filo.project.project_name IS 'Name of the project';
+COMMENT ON COLUMN project.project_name IS 'Name of the project';
+comment on column project.is_active is 'Specify if the project is currently active';
 -- ddl-end --
-ALTER TABLE filo.project OWNER TO filo;
+ALTER TABLE project OWNER TO filo;
 -- ddl-end --
 
--- object: filo.campaign | type: TABLE --
--- DROP TABLE IF EXISTS filo.campaign CASCADE;
-CREATE TABLE filo.campaign (
-	campaign_id integer NOT NULL DEFAULT nextval('filo.campaign_campaign_id_seq'::regclass),
+-- object: campaign | type: TABLE --
+-- DROP TABLE IF EXISTS campaign CASCADE;
+CREATE TABLE campaign (
+	campaign_id integer NOT NULL DEFAULT nextval('campaign_campaign_id_seq'::regclass),
 	project_id integer NOT NULL,
 	campaign_name varchar NOT NULL,
 	CONSTRAINT campaign_id_pk PRIMARY KEY (campaign_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.campaign IS 'List of campaigns rattached to a project';
+COMMENT ON TABLE campaign IS 'List of campaigns rattached to a project';
 -- ddl-end --
-COMMENT ON COLUMN filo.campaign.campaign_name IS 'Name of the campaign';
+COMMENT ON COLUMN campaign.campaign_name IS 'Name of the campaign';
 -- ddl-end --
-ALTER TABLE filo.campaign OWNER TO filo;
+ALTER TABLE campaign OWNER TO filo;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
--- ALTER TABLE filo.campaign DROP CONSTRAINT IF EXISTS project_fk CASCADE;
-ALTER TABLE filo.campaign ADD CONSTRAINT project_fk FOREIGN KEY (project_id)
-REFERENCES filo.project (project_id) MATCH FULL
+-- ALTER TABLE campaign DROP CONSTRAINT IF EXISTS project_fk CASCADE;
+ALTER TABLE campaign ADD CONSTRAINT project_fk FOREIGN KEY (project_id)
+REFERENCES project (project_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.station_station_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.station_station_id_seq CASCADE;
-CREATE SEQUENCE filo.station_station_id_seq
+-- object: station_station_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS station_station_id_seq CASCADE;
+CREATE SEQUENCE station_station_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -120,12 +122,12 @@ CREATE SEQUENCE filo.station_station_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.station_station_id_seq OWNER TO filo;
+ALTER SEQUENCE station_station_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.operation_operation_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.operation_operation_id_seq CASCADE;
-CREATE SEQUENCE filo.operation_operation_id_seq
+-- object: operation_operation_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS operation_operation_id_seq CASCADE;
+CREATE SEQUENCE operation_operation_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -134,12 +136,12 @@ CREATE SEQUENCE filo.operation_operation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.operation_operation_id_seq OWNER TO filo;
+ALTER SEQUENCE operation_operation_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.place_place_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.place_place_id_seq CASCADE;
-CREATE SEQUENCE filo.place_place_id_seq
+-- object: place_place_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS place_place_id_seq CASCADE;
+CREATE SEQUENCE place_place_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -148,13 +150,13 @@ CREATE SEQUENCE filo.place_place_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.place_place_id_seq OWNER TO filo;
+ALTER SEQUENCE place_place_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.station | type: TABLE --
--- DROP TABLE IF EXISTS filo.station CASCADE;
-CREATE TABLE filo.station (
-	station_id integer NOT NULL DEFAULT nextval('filo.station_station_id_seq'::regclass),
+-- object: station | type: TABLE --
+-- DROP TABLE IF EXISTS station CASCADE;
+CREATE TABLE station (
+	station_id integer NOT NULL DEFAULT nextval('station_station_id_seq'::regclass),
 	station_name varchar NOT NULL,
 	project_id integer,
 	station_long double precision,
@@ -166,31 +168,31 @@ CREATE TABLE filo.station (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.station IS 'List of the stations used for a project';
+COMMENT ON TABLE station IS 'List of the stations used for a project';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_name IS 'Name of the station';
+COMMENT ON COLUMN station.station_name IS 'Name of the station';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_long IS 'Longitude of the station, in WGS84, numeric value';
+COMMENT ON COLUMN station.station_long IS 'Longitude of the station, in WGS84, numeric value';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_lat IS 'Latitude of the station, in WGS84, numeric value';
+COMMENT ON COLUMN station.station_lat IS 'Latitude of the station, in WGS84, numeric value';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_pk IS 'Kilometer point from source, in meters';
+COMMENT ON COLUMN station.station_pk IS 'Kilometer point from source, in meters';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_code IS 'Code of the station, according to the nomenclature sandre.eaufrance.fr';
+COMMENT ON COLUMN station.station_code IS 'Code of the station, according to the nomenclature sandre.eaufrance.fr';
 -- ddl-end --
-ALTER TABLE filo.station OWNER TO filo;
+ALTER TABLE station OWNER TO filo;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
--- ALTER TABLE filo.station DROP CONSTRAINT IF EXISTS project_fk CASCADE;
-ALTER TABLE filo.station ADD CONSTRAINT project_fk FOREIGN KEY (project_id)
-REFERENCES filo.project (project_id) MATCH FULL
+-- ALTER TABLE station DROP CONSTRAINT IF EXISTS project_fk CASCADE;
+ALTER TABLE station ADD CONSTRAINT project_fk FOREIGN KEY (project_id)
+REFERENCES project (project_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.taxon_taxon_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.taxon_taxon_id_seq CASCADE;
-CREATE SEQUENCE filo.taxon_taxon_id_seq
+-- object: taxon_taxon_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS taxon_taxon_id_seq CASCADE;
+CREATE SEQUENCE taxon_taxon_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -199,12 +201,12 @@ CREATE SEQUENCE filo.taxon_taxon_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.taxon_taxon_id_seq OWNER TO filo;
+ALTER SEQUENCE taxon_taxon_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.sample_sample_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.sample_sample_id_seq CASCADE;
-CREATE SEQUENCE filo.sample_sample_id_seq
+-- object: sample_sample_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS sample_sample_id_seq CASCADE;
+CREATE SEQUENCE sample_sample_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -213,13 +215,13 @@ CREATE SEQUENCE filo.sample_sample_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.sample_sample_id_seq OWNER TO filo;
+ALTER SEQUENCE sample_sample_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.taxon | type: TABLE --
--- DROP TABLE IF EXISTS filo.taxon CASCADE;
-CREATE TABLE filo.taxon (
-	taxon_id integer NOT NULL DEFAULT nextval('filo.taxon_taxon_id_seq'::regclass),
+-- object: taxon | type: TABLE --
+-- DROP TABLE IF EXISTS taxon CASCADE;
+CREATE TABLE taxon (
+	taxon_id integer NOT NULL DEFAULT nextval('taxon_taxon_id_seq'::regclass),
 	scientific_name varchar NOT NULL,
 	author varchar,
 	common_name varchar,
@@ -233,992 +235,992 @@ CREATE TABLE filo.taxon (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.taxon IS 'List of taxons';
+COMMENT ON TABLE taxon IS 'List of taxons';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.scientific_name IS 'Scientific name of the taxon';
+COMMENT ON COLUMN taxon.scientific_name IS 'Scientific name of the taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.author IS 'Author of the description of the taxon';
+COMMENT ON COLUMN taxon.author IS 'Author of the description of the taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.common_name IS 'Common name of the taxon';
+COMMENT ON COLUMN taxon.common_name IS 'Common name of the taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.taxon_code IS 'Code used for reference the taxon in national nomenclature';
+COMMENT ON COLUMN taxon.taxon_code IS 'Code used for reference the taxon in national nomenclature';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.fresh_code IS 'code mnemotechnic used for fishing operations in fresh water';
+COMMENT ON COLUMN taxon.fresh_code IS 'code mnemotechnic used for fishing operations in fresh water';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.sea_code IS 'Code mnemotechnic used for fishing operations in sea water';
+COMMENT ON COLUMN taxon.sea_code IS 'Code mnemotechnic used for fishing operations in sea water';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.ecotype IS 'Specific ecotype used for this taxon';
+COMMENT ON COLUMN taxon.ecotype IS 'Specific ecotype used for this taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.length_max IS 'Length maximum, in mm';
+COMMENT ON COLUMN taxon.length_max IS 'Length maximum, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.weight_max IS 'weight maximum, in g';
+COMMENT ON COLUMN taxon.weight_max IS 'weight maximum, in g';
 -- ddl-end --
-ALTER TABLE filo.taxon OWNER TO filo;
+ALTER TABLE taxon OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucaspius delineatus', E'Heckel 1843', E'Able de Heckel', E'2117', E'ABH', E'ABH', E'100', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucaspius delineatus', E'Heckel 1843', E'Able de Heckel', E'2117', E'ABH', E'ABH', E'100', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnus alburnus', E'Linnaeus, 1758', E'Ablette', E'2090', E'ABL', E'ABL', E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnus alburnus', E'Linnaeus, 1758', E'Ablette', E'2090', E'ABL', E'ABL', E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa', E'Linnaeus, 1758', E'Alose (Grande Alose)', E'2056', E'ALA', E'ALA', E'830', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa', E'Linnaeus, 1758', E'Alose (Grande Alose)', E'2056', E'ALA', E'ALA', E'830', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax fallax', DEFAULT, E'Alose feinte', DEFAULT, DEFAULT, DEFAULT, E'500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax fallax', DEFAULT, E'Alose feinte', DEFAULT, DEFAULT, DEFAULT, E'500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax rhodanensis', DEFAULT, E'Alose du Rhône', E'2058', E'ALR', DEFAULT, E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax rhodanensis', DEFAULT, E'Alose du Rhône', E'2058', E'ALR', DEFAULT, E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla anguilla', E'Linnaeus, 1758', E'Anguille', E'2038', E'ANG', E'ANG', E'1330', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla anguilla', E'Linnaeus, 1758', E'Anguille', E'2038', E'ANG', E'ANG', E'1330', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius fasciatus', E'(Valenciennes), 1821', E'Aphanius de Corse', E'2142', E'APC', DEFAULT, E'60', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius fasciatus', E'(Valenciennes), 1821', E'Aphanius de Corse', E'2142', E'APC', DEFAULT, E'60', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius iberus', E'Valenciennes, 1846', E'Aphanius d''Espagne', E'2143', E'APE', DEFAULT, E'50', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphanius iberus', E'Valenciennes, 1846', E'Aphanius d''Espagne', E'2143', E'APE', DEFAULT, E'50', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Austropotamobius pallipes', DEFAULT, E'Ecrevisse à pieds blancs', E'868', E'APP', DEFAULT, E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Austropotamobius pallipes', DEFAULT, E'Ecrevisse à pieds blancs', E'868', E'APP', DEFAULT, E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zingel asper', DEFAULT, E'Apron', E'2197', E'APR', DEFAULT, E'220', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zingel asper', DEFAULT, E'Apron', E'2197', E'APR', DEFAULT, E'220', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus astacus', DEFAULT, E'Ecrevisse à pieds rouges', E'866', E'ASA', DEFAULT, E'180', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus astacus', DEFAULT, E'Ecrevisse à pieds rouges', E'866', E'ASA', DEFAULT, E'180', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus leptodactylus', DEFAULT, E'Ecrevisse à pieds grêles', E'2963', E'ASL', DEFAULT, E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Astacus leptodactylus', DEFAULT, E'Ecrevisse à pieds grêles', E'2963', E'ASL', DEFAULT, E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aspius aspius', DEFAULT, E'Aspe', E'2094', E'ASP', DEFAULT, E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aspius aspius', DEFAULT, E'Aspe', E'2094', E'ASP', DEFAULT, E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina boyeri', E'Risso 1810', E'Joël', E'2041', DEFAULT, E'ATB', E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina boyeri', E'Risso 1810', E'Joël', E'2041', DEFAULT, E'ATB', E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus barbus', E'Linnaeus, 1758', E'Barbeau fluviatile', E'2096', E'BAF', DEFAULT, E'1200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus barbus', E'Linnaeus, 1758', E'Barbeau fluviatile', E'2096', E'BAF', DEFAULT, E'1200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus meridionalis', DEFAULT, E'Barbeau méridional', E'2097', E'BAM', DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus meridionalis', DEFAULT, E'Barbeau méridional', E'2097', E'BAM', DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus labrax', E'Linnaeus, 1758', E'Loup', E'2234', E'LOU', E'LOU', E'1030', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus labrax', E'Linnaeus, 1758', E'Loup', E'2234', E'LOU', E'LOU', E'1030', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus salmoides', E'Lacepède 1802', E'Achigan à grande bouche', E'2053', E'BBG', DEFAULT, E'970', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus salmoides', E'Lacepède 1802', E'Achigan à grande bouche', E'2053', E'BBG', DEFAULT, E'970', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus dolomieu', DEFAULT, E'Achigan à petite bouche', DEFAULT, DEFAULT, DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micropterus dolomieu', DEFAULT, E'Achigan à petite bouche', DEFAULT, DEFAULT, DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria fluviatilis', E'Asso, 1801', E'Blennie fluviatile', E'2045', E'BLE', DEFAULT, E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria fluviatilis', E'Asso, 1801', E'Blennie fluviatile', E'2045', E'BLE', DEFAULT, E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Telestes souffia', DEFAULT, E'Blageon', E'25609', E'BLN', DEFAULT, E'360', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Telestes souffia', DEFAULT, E'Blageon', E'25609', E'BLN', DEFAULT, E'360', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus amarus', E'Bloch 1782', E'Bouvière', E'2131', E'BOU', DEFAULT, E'110', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus amarus', E'Bloch 1782', E'Bouvière', E'2131', E'BOU', DEFAULT, E'110', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Blicca bjoerkna', E'Linnaeus, 1758', E'Brème bordelière', E'2099', E'BRB', E'BRB', E'360', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Blicca bjoerkna', E'Linnaeus, 1758', E'Brème bordelière', E'2099', E'BRB', E'BRB', E'360', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama', E'Linnaeus, 1758', E'Brème commune', E'2086', E'BRE', E'BRE', E'820', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama', E'Linnaeus, 1758', E'Brème commune', E'2086', E'BRE', E'BRE', E'820', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis sp.', DEFAULT, E'Brème (non identifiée)', DEFAULT, DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis sp.', DEFAULT, E'Brème (non identifiée)', DEFAULT, DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Esox lucius', E'Linnaeus, 1758', E'Brochet', E'2151', E'BRO', E'BRO', E'1500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Esox lucius', E'Linnaeus, 1758', E'Brochet', E'2151', E'BRO', E'BRO', E'1500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus', DEFAULT, E'Carassin doré', E'20597', E'CAD', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus', DEFAULT, E'Carassin doré', E'20597', E'CAD', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius gibelio', DEFAULT, E'Carassin argenté', E'20550', E'CAG', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius gibelio', DEFAULT, E'Carassin argenté', E'20550', E'CAG', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hypophthalmichthys molitrix', DEFAULT, E'Carpe argentée', E'2115', E'CAR', DEFAULT, E'1050', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hypophthalmichthys molitrix', DEFAULT, E'Carpe argentée', E'2115', E'CAR', DEFAULT, E'1050', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius carassius', E'Linnaeus, 1758', E'Carassin commun', E'2102', E'CAS', E'CAR', E'640', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius carassius', E'Linnaeus, 1758', E'Carassin commun', E'2102', E'CAS', E'CAR', E'640', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus carpio', E'Linnaeus, 1758', E'Carpe commune', E'2109', E'CMI', E'CCO', E'1340', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus carpio', E'Linnaeus, 1758', E'Carpe commune', E'2109', E'CMI', E'CCO', E'1340', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ambloplites rupestris', DEFAULT, E'Crapet de roche', E'2048', E'CDR', DEFAULT, E'430', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ambloplites rupestris', DEFAULT, E'Crapet de roche', E'2048', E'CDR', DEFAULT, E'430', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus gobio', E'Linnaeus, 1758', E'Chabot', E'2080', E'CHA', DEFAULT, E'180', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus gobio', E'Linnaeus, 1758', E'Chabot', E'2080', E'CHA', DEFAULT, E'180', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalius cephalus', DEFAULT, E'Chevaine', E'31041', E'CHE', DEFAULT, E'720', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalius cephalus', DEFAULT, E'Chevaine', E'31041', E'CHE', DEFAULT, E'720', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus petiti', DEFAULT, E'Chabot du Lez', E'2354', E'CHP', DEFAULT, E'40', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus petiti', DEFAULT, E'Chabot du Lez', E'2354', E'CHP', DEFAULT, E'40', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma sp.', DEFAULT, E'Chondrostome', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma sp.', DEFAULT, E'Chondrostome', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coregonus lavaretus', DEFAULT, E'Lavaret', DEFAULT, DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coregonus lavaretus', DEFAULT, E'Lavaret', DEFAULT, DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Valencia hispanica', DEFAULT, E'Cyprinodonte de Valence', E'2145', E'CPV', DEFAULT, E'80', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Valencia hispanica', DEFAULT, E'Cyprinodonte de Valence', E'2145', E'CPV', DEFAULT, E'80', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus namaycush', DEFAULT, E'Cristivomer', E'2228', E'CRI', DEFAULT, E'1500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus namaycush', DEFAULT, E'Cristivomer', E'2228', E'CRI', DEFAULT, E'1500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenopharyngodon idella', DEFAULT, E'Carpe amour', E'31039', E'CTI', DEFAULT, E'1500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenopharyngodon idella', DEFAULT, E'Carpe amour', E'31039', E'CTI', DEFAULT, E'1500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidae indeterminé', DEFAULT, DEFAULT, DEFAULT, E'50', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidae indeterminé', DEFAULT, DEFAULT, DEFAULT, E'50', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus eperlanus', E'Linnaeus, 1758', E'Eperlan', E'2188', E'EPE', E'EPE', E'450', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus eperlanus', E'Linnaeus, 1758', E'Eperlan', E'2188', E'EPE', E'EPE', E'450', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus gymnurus', DEFAULT, E'Epinoche', DEFAULT, DEFAULT, DEFAULT, E'80', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus gymnurus', DEFAULT, E'Epinoche', DEFAULT, DEFAULT, DEFAULT, E'80', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pungitius pungitius', E'Linnaeus, 1758', E'Epinochette', E'2167', E'EPT', E'EPT', E'90', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pungitius pungitius', E'Linnaeus, 1758', E'Epinochette', E'2167', E'EPT', E'EPT', E'90', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser sturio', E'Linnaeus, 1758', E'Esturgeon', E'2032', E'EST', E'EST', E'6000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser sturio', E'Linnaeus, 1758', E'Esturgeon', E'2032', E'EST', E'EST', E'6000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus', E'Linnaeus, 1758', E'Flet', E'2203', E'FLE', E'FLE', E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus', E'Linnaeus, 1758', E'Flet', E'2203', E'FLE', E'FLE', E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia holbrooki', DEFAULT, E'Gambusie', DEFAULT, DEFAULT, DEFAULT, E'70', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia holbrooki', DEFAULT, E'Gambusie', DEFAULT, DEFAULT, DEFAULT, E'70', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus rutilus', E'Linnaeus, 1758', E'Gardon', E'2133', E'GAR', E'GAR', E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus rutilus', E'Linnaeus, 1758', E'Gardon', E'2133', E'GAR', E'GAR', E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobio gobio', E'Linnaeus, 1758', E'Goujon', E'2113', E'GOU', E'GOU', E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobio gobio', E'Linnaeus, 1758', E'Goujon', E'2113', E'GOU', E'GOU', E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gymnocephalus cernuus', E'Linnaeus, 1758', E'Grémille', E'2191', E'GRE', E'GRE', E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gymnocephalus cernuus', E'Linnaeus, 1758', E'Grémille', E'2191', E'GRE', E'GRE', E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma nasus', E'Linnaeus, 1758', E'Hotu', E'2104', E'HOT', DEFAULT, E'500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chondrostoma nasus', E'Linnaeus, 1758', E'Hotu', E'2104', E'HOT', DEFAULT, E'500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hucho hucho', DEFAULT, E'Huchon', E'2214', E'HUC', DEFAULT, E'1500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hucho hucho', DEFAULT, E'Huchon', E'2214', E'HUC', DEFAULT, E'1500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus idus', E'Linnaeus, 1758', E'Ide mélanote', E'2121', E'IDE', DEFAULT, E'1040', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus idus', E'Linnaeus, 1758', E'Ide mélanote', E'2121', E'IDE', DEFAULT, E'1040', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis bilineata', DEFAULT, E'Loche transalpine', E'34369', E'LOB', DEFAULT, E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis bilineata', DEFAULT, E'Loche transalpine', E'34369', E'LOB', DEFAULT, E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Misgurnus fossilis', E'Linnaeus, 1758', E'Loche d''étang', E'2069', E'LOE', DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Misgurnus fossilis', E'Linnaeus, 1758', E'Loche d''étang', E'2069', E'LOE', DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbatula barbatula', E'Linnaeus, 1758', E'Loche franche', E'2071', E'LOF', E'LOF', E'210', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbatula barbatula', E'Linnaeus, 1758', E'Loche franche', E'2071', E'LOF', E'LOF', E'210', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis taenia', E'Ikeda 1936', E'Loche épineuse', E'2067', E'LOR', DEFAULT, E'130', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cobitis taenia', E'Ikeda 1936', E'Loche épineuse', E'2067', E'LOR', DEFAULT, E'130', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lota lota', DEFAULT, E'Lote de rivière', E'2156', E'LOT', DEFAULT, E'1520', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lota lota', DEFAULT, E'Lote de rivière', E'2156', E'LOT', DEFAULT, E'1520', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'non identifiee', DEFAULT, E'Lamproie (ammocoete)', DEFAULT, DEFAULT, DEFAULT, E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'non identifiee', DEFAULT, E'Lamproie (ammocoete)', DEFAULT, DEFAULT, DEFAULT, E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon marinus', E'Linnaeus, 1758', E'Lamproie marine', E'2014', E'LPM', E'LPM', E'1200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon marinus', E'Linnaeus, 1758', E'Lamproie marine', E'2014', E'LPM', E'LPM', E'1200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra planeri', E'Bloch 1784', E'Lamproie de Planer', E'2012', E'LPP', E'LPP', E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra planeri', E'Bloch 1784', E'Lamproie de Planer', E'2012', E'LPP', E'LPP', E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra fluviatilis', E'Linnaeus, 1758', E'Lamproie de rivière', E'2011', E'LPR', E'LPR', E'500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra fluviatilis', E'Linnaeus, 1758', E'Lamproie de rivière', E'2011', E'LPR', E'LPR', E'500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelon labrosus', E'Risso 1827', E'Mulet à grosses lèvres', E'2180', E'MGL', E'MGL', E'840', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelon labrosus', E'Risso 1827', E'Mulet à grosses lèvres', E'2180', E'MGL', E'MGL', E'840', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil cephalus', E'Linnaeus, 1758', E'Mulet cabot', E'2185', E'MUC', DEFAULT, E'1140', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil cephalus', E'Linnaeus, 1758', E'Mulet cabot', E'2185', E'MUC', DEFAULT, E'1140', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza aurata', E'Risso 1810', E'Mulet doré', E'2182', E'MUD', E'MUD', E'590', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza aurata', E'Risso 1810', E'Mulet doré', E'2182', E'MUD', E'MUD', E'590', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza ramada', E'Risso 1810', E'Mulet porc', E'2183', E'MUP', E'MUP', E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza ramada', E'Risso 1810', E'Mulet porc', E'2183', E'MUP', E'MUP', E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Poissons non identifés', DEFAULT, E'Poissons non identifés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Poissons non identifés', DEFAULT, E'Poissons non identifés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pas de poisson', DEFAULT, E'Pas de poisson', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pas de poisson', DEFAULT, E'Pas de poisson', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus alpinus', DEFAULT, E'Omble chevalier', DEFAULT, DEFAULT, DEFAULT, E'800', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus alpinus', DEFAULT, E'Omble chevalier', DEFAULT, DEFAULT, DEFAULT, E'800', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Thymallus thymallus', E'Linnaeus, 1758', E'Ombre commun', E'2247', E'OBR', DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Thymallus thymallus', E'Linnaeus, 1758', E'Ombre commun', E'2247', E'OBR', DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Orconectes limosus', E'Rafinesque 1817', E'Ecrevisse américaine', E'871', E'OCL', E'ORL', E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Orconectes limosus', E'Rafinesque 1817', E'Ecrevisse américaine', E'871', E'OCL', E'ORL', E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Procambarus clarkii', E'Girard 1852', E'Ecrevisse de Louisiane', E'2028', E'PCC', E'ECL', E'150', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Procambarus clarkii', E'Girard 1852', E'Ecrevisse de Louisiane', E'2028', E'PCC', E'ECL', E'150', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ameiurus melas', E'Rafinesque 1820', E'Poisson chat', E'2177', E'PCH', DEFAULT, E'660', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ameiurus melas', E'Rafinesque 1820', E'Poisson chat', E'2177', E'PCH', DEFAULT, E'660', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Perca fluviatilis', E'Linnaeus, 1758', E'Perche commune', E'2193', E'PER', E'PER', E'670', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Perca fluviatilis', E'Linnaeus, 1758', E'Perche commune', E'2193', E'PER', E'PER', E'670', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepomis gibbosus', E'Linnaeus, 1758', E'Perche soleil', E'2050', E'PES', E'PES', E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepomis gibbosus', E'Linnaeus, 1758', E'Perche soleil', E'2050', E'PES', E'PES', E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pacifastacus leniusculus', DEFAULT, E'Ecrevisse signal', E'873', E'PFL', DEFAULT, E'180', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pacifastacus leniusculus', DEFAULT, E'Ecrevisse signal', E'873', E'PFL', DEFAULT, E'180', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pimephales promelas', DEFAULT, E'Tête de boule', E'2127', E'PIM', DEFAULT, E'100', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pimephales promelas', DEFAULT, E'Tête de boule', E'2127', E'PIM', DEFAULT, E'100', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectes platessa', E'Linnaeus, 1758', E'Plie', E'2205', E'PLI', E'PLI', E'1260', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectes platessa', E'Linnaeus, 1758', E'Plie', E'2205', E'PLI', E'PLI', E'1260', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pseudorasbora parva', E'Temminck & Schlegel, 1846', E'Pseudorasbora', E'2129', E'PSR', E'PSE', E'110', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pseudorasbora parva', E'Temminck & Schlegel, 1846', E'Pseudorasbora', E'2129', E'PSR', E'PSE', E'110', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scardinius erythrophthalmus', E'Linnaeus, 1758', E'Rotengle', E'2135', E'ROT', E'ROT', E'510', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scardinius erythrophthalmus', E'Linnaeus, 1758', E'Rotengle', E'2135', E'ROT', E'ROT', E'510', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander lucioperca', E'Linnaeus, 1758', E'Sandre', E'2195', E'SAN', DEFAULT, E'1270', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander lucioperca', E'Linnaeus, 1758', E'Sandre', E'2195', E'SAN', DEFAULT, E'1270', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo salar', E'Linnaeus, 1758', E'Saumon Atlantique', E'2220', E'SAT', E'SAT', E'1500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo salar', E'Linnaeus, 1758', E'Saumon Atlantique', E'2220', E'SAT', E'SAT', E'1500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus fontinalis', DEFAULT, E'Omble de fontaine', E'2227', E'SDF', DEFAULT, E'940', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salvelinus fontinalis', DEFAULT, E'Omble de fontaine', E'2227', E'SDF', DEFAULT, E'940', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Silurus glanis', E'Linnaeus, 1758', E'Silure', E'2238', E'SIL', E'SIL', E'5000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Silurus glanis', E'Linnaeus, 1758', E'Silure', E'2238', E'SIL', E'SIL', E'5000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnoides bipunctatus', E'Bloch 1782', E'Spirlin', E'2088', E'SPI', DEFAULT, E'160', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alburnoides bipunctatus', E'Bloch 1782', E'Spirlin', E'2088', E'SPI', DEFAULT, E'160', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser ruthenus', DEFAULT, E'Sterlet', E'3217', E'STL', DEFAULT, E'1250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser ruthenus', DEFAULT, E'Sterlet', E'3217', E'STL', DEFAULT, E'1250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Oncorhynchus mykiss', E'Walbaum 1792', E'Truite arc en ciel', E'2216', E'TAC', DEFAULT, E'1200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Oncorhynchus mykiss', E'Walbaum 1792', E'Truite arc en ciel', E'2216', E'TAC', DEFAULT, E'1200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tinca tinca', E'Linnaeus, 1758', E'Tanche', E'2137', E'TAN', E'TAN', E'820', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tinca tinca', E'Linnaeus, 1758', E'Tanche', E'2137', E'TAN', E'TAN', E'820', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parachondrostoma toxostoma', DEFAULT, E'Toxostome', E'31135', E'TOX', DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parachondrostoma toxostoma', DEFAULT, E'Toxostome', E'31135', E'TOX', DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta', E'Berg 1908', E'Truite commune', DEFAULT, DEFAULT, E'TRM', E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta', E'Berg 1908', E'Truite commune', DEFAULT, DEFAULT, E'TRM', E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbra pygmea', DEFAULT, E'Umbre pygmée', DEFAULT, DEFAULT, DEFAULT, E'100', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbra pygmea', DEFAULT, E'Umbre pygmée', DEFAULT, DEFAULT, DEFAULT, E'100', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus phoxinus', E'Linnaeus, 1758', E'Vairon', E'2125', E'VAI', E'VAI', E'140', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus phoxinus', E'Linnaeus, 1758', E'Vairon', E'2125', E'VAI', E'VAI', E'140', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus leuciscus', E'Linnaeus, 1758', E'Vandoise', E'2122', E'VAN', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus leuciscus', E'Linnaeus, 1758', E'Vandoise', E'2122', E'VAN', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Vimba vimba', DEFAULT, E'Vimbe', E'2139', E'VIM', DEFAULT, E'500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Vimba vimba', DEFAULT, E'Vimbe', E'2139', E'VIM', DEFAULT, E'500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis', E'Cuvier 1817', E'Brèmes d''eau douce nca', E'2085', E'BRX', DEFAULT, E'360', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis', E'Cuvier 1817', E'Brèmes d''eau douce nca', E'2085', E'BRX', DEFAULT, E'360', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama, Blicca bjoerkna', DEFAULT, E'Brèmes', E'19511', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Abramis brama, Blicca bjoerkna', DEFAULT, E'Brèmes', E'19511', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser', E'Linnaeus, 1758', E'Esturgeons', E'2031', E'ES?', DEFAULT, E'6000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser', E'Linnaeus, 1758', E'Esturgeons', E'2031', E'ES?', DEFAULT, E'6000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser baerii', E'Brandt, 1869', E'Esturgeon de Sibérie', E'3218', E'BAE', DEFAULT, E'2000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenser baerii', E'Brandt, 1869', E'Esturgeon de Sibérie', E'3218', E'BAE', DEFAULT, E'2000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenseridae', DEFAULT, E'Esturgeons nca', E'2030', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenseridae', DEFAULT, E'Esturgeons nca', E'2030', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenseriformes', DEFAULT, E'Acipenseriformes', E'3347', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Acipenseriformes', DEFAULT, E'Acipenseriformes', E'3347', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Agonus cataphractus', E'Linnaeus, 1758', E'Souris de mer', E'3544', DEFAULT, DEFAULT, E'210', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Agonus cataphractus', E'Linnaeus, 1758', E'Souris de mer', E'3544', DEFAULT, DEFAULT, E'210', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alloteuthis', DEFAULT, E'calmars nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alloteuthis', DEFAULT, E'calmars nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alloteuthis subulata', E'Lamarck 1798', E'calmar commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alloteuthis subulata', E'Lamarck 1798', E'calmar commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa x fallax', DEFAULT, E'Aloses vraie et feinte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa alosa x fallax', DEFAULT, E'Aloses vraie et feinte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax', E'Lacepède 1803', E'Alose feinte', E'2057', E'ALF', E'ALF', E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa fallax', E'Lacepède 1803', E'Alose feinte', E'2057', E'ALF', E'ALF', E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa sp.', E'Linck 1790', E'Aloses nca', E'2055', DEFAULT, E'ALS', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Alosa sp.', E'Linck 1790', E'Aloses nca', E'2055', DEFAULT, E'ALS', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes marinus', E'Raitt 1934', E'Lançon équille', E'3422', DEFAULT, DEFAULT, E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes marinus', E'Raitt 1934', E'Lançon équille', E'3422', DEFAULT, DEFAULT, E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes tobianus', E'Linnaeus, 1758', E'Equille', E'2035', E'LAN', DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ammodytes tobianus', E'Linnaeus, 1758', E'Equille', E'2035', E'LAN', DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla', E'Schrank 1798', E'Anguilles nca', E'2037', E'AN?', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguilla', E'Schrank 1798', E'Anguilles nca', E'2037', E'AN?', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguillidae', DEFAULT, E'Anguilles', E'2036', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Anguillidae', DEFAULT, E'Anguilles', E'2036', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphia minuta', E'Risso 1810', E'Nonnat', E'2170', E'APH', DEFAULT, E'70', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aphia minuta', E'Risso 1810', E'Nonnat', E'2170', E'APH', DEFAULT, E'70', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aplysia', E'Linnaeus, 1767', E'Aplysie nca', E'2143', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aplysia', E'Linnaeus, 1767', E'Aplysie nca', E'2143', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aplysia punctata', E'Cuvier, 1803', E'Lièvre de mer', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aplysia punctata', E'Cuvier, 1803', E'Lièvre de mer', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Apogon imberbis', E'Linnaeus, 1758', E'Castagnole rouge', E'20736', DEFAULT, DEFAULT, E'150', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Apogon imberbis', E'Linnaeus, 1758', E'Castagnole rouge', E'20736', DEFAULT, DEFAULT, E'150', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus regius', E'Asso 1801', E'Maigre commun', E'2231', E'MAI', E'MAI', E'2300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus regius', E'Asso 1801', E'Maigre commun', E'2231', E'MAI', E'MAI', E'2300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus sp.', E'De La Pylaie 1835', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Argyrosomus sp.', E'De La Pylaie 1835', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Arnoglossus imperialis', E'Rafinesque, 1810', E'Arnoglosse impérial', E'3505', DEFAULT, DEFAULT, E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Arnoglossus imperialis', E'Rafinesque, 1810', E'Arnoglosse impérial', E'3505', DEFAULT, DEFAULT, E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Arnoglossus laterna', E'Walbaum 1792', E'Arnoglosse de Méditerranée', E'3506', DEFAULT, DEFAULT, E'190', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Arnoglossus laterna', E'Walbaum 1792', E'Arnoglosse de Méditerranée', E'3506', DEFAULT, DEFAULT, E'190', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Arnoglossus thori', E'Kyle 1913', E'Arnoglosse tacheté', E'3507', DEFAULT, DEFAULT, E'205', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Arnoglossus thori', E'Kyle 1913', E'Arnoglosse tacheté', E'3507', DEFAULT, DEFAULT, E'205', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aspitrigla cuculus', E'Linnaeus, 1758', E'Grondin rouge', E'19453', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Aspitrigla cuculus', E'Linnaeus, 1758', E'Grondin rouge', E'19453', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atelecyclus rotundatus', E'Olivi 1792', E'Petit crabe circulaire', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atelecyclus rotundatus', E'Olivi 1792', E'Petit crabe circulaire', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atelecyclus undecimdentatus', E'(Herbst, 1783)', E'Crabe circulaire', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atelecyclus undecimdentatus', E'(Herbst, 1783)', E'Crabe circulaire', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Athanas nitescens', E'(Leach, 1814)', E'crevette athanas', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Athanas nitescens', E'(Leach, 1814)', E'crevette athanas', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina', E'Linnaeus, 1758', E'Athérines nca', E'2040', E'AT?', DEFAULT, E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina', E'Linnaeus, 1758', E'Athérines nca', E'2040', E'AT?', DEFAULT, E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina hepsetus', E'Linnaeus, 1758', E'Athèrine sauclet', E'3264', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina hepsetus', E'Linnaeus, 1758', E'Athèrine sauclet', E'3264', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina presbyter', E'Cuvier 1829', E'Prêtre', E'2042', DEFAULT, E'ATP', E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina presbyter', E'Cuvier 1829', E'Prêtre', E'2042', DEFAULT, E'ATP', E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina sp.', DEFAULT, E'Atherine sp', DEFAULT, DEFAULT, E'SILP', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherina sp.', DEFAULT, E'Atherine sp', DEFAULT, DEFAULT, E'SILP', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherinidae', DEFAULT, E'Athérinidés', E'2039', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atherinidae', DEFAULT, E'Athérinidés', E'2039', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atyaephyra desmaresti,Palemon varians', DEFAULT, E'crevettes divers', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Atyaephyra desmaresti,Palemon varians', DEFAULT, E'crevettes divers', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Balistes carolinensis', E'Gmelin, 1789', E'Baliste', E'19460', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Balistes carolinensis', E'Gmelin, 1789', E'Baliste', E'19460', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus', E'Cuvier 1817', E'Barbeaux nca', E'2095', E'BAX', DEFAULT, E'1200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Barbus', E'Cuvier 1817', E'Barbeaux nca', E'2095', E'BAX', DEFAULT, E'1200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Belone belone', E'Linnaeus 1761', E'Orphie', E'3378', DEFAULT, E'ORF', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Belone belone', E'Linnaeus 1761', E'Orphie', E'3378', DEFAULT, E'ORF', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Belone sp.', E'Cuvier 1817', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Belone sp.', E'Cuvier 1817', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Bivalvia', E'Linnaeus, 1758', E'bivalves', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Bivalvia', E'Linnaeus, 1758', E'bivalves', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Blennius ocellaris', E'Linnaeus, 1758', E'Blennie papillon', E'3430', DEFAULT, DEFAULT, E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Blennius ocellaris', E'Linnaeus, 1758', E'Blennie papillon', E'3430', DEFAULT, DEFAULT, E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Boops boops', E'Linnaeus, 1758', E'Bogue', E'3482', DEFAULT, E'BOG', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Boops boops', E'Linnaeus, 1758', E'Bogue', E'3482', DEFAULT, E'BOG', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Bothus podas', E'Delaroche, 1809', E'Rombou commun', E'25283', DEFAULT, DEFAULT, E'450', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Bothus podas', E'Delaroche, 1809', E'Rombou commun', E'25283', DEFAULT, DEFAULT, E'450', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Brachyura', DEFAULT, E'Crabes nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Brachyura', DEFAULT, E'Crabes nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Buglossidium luteum', E'Risso 1810', E'Petite sole jaune', E'3535', DEFAULT, DEFAULT, E'150', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Buglossidium luteum', E'Risso 1810', E'Petite sole jaune', E'3535', DEFAULT, DEFAULT, E'150', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus', E'Linnaeus, 1758', E'Callionymes', E'3369', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus', E'Linnaeus, 1758', E'Callionymes', E'3369', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus lyra', E'Linnaeus, 1758', E'Callionyme lyre', E'3370', DEFAULT, E'CAL', E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus lyra', E'Linnaeus, 1758', E'Callionyme lyre', E'3370', DEFAULT, E'CAL', E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus pusillus', E'Delaroche, 1809', E'Dragonnet élégant', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus pusillus', E'Delaroche, 1809', E'Dragonnet élégant', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus reticulatus', E'Valenciennes 1837', E'Callionyme réticulé', E'3372', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus reticulatus', E'Valenciennes 1837', E'Callionyme réticulé', E'3372', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus risso', E'Lesueur 1814', E'Callionyme bélène', E'19458', DEFAULT, DEFAULT, E'110', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Callionymus risso', E'Lesueur 1814', E'Callionyme bélène', E'19458', DEFAULT, DEFAULT, E'110', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cancer pagurus', E'Linnaeus, 1758', E'Tourteau', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cancer pagurus', E'Linnaeus, 1758', E'Tourteau', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius', E'Nilsson 1832', E'Carassins nca', E'2100', E'CAX', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius', E'Nilsson 1832', E'Carassins nca', E'2100', E'CAX', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus auratus', E'Linnaeus, 1758', E'Carassin doré', E'5208', E'CAA', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus auratus', E'Linnaeus, 1758', E'Carassin doré', E'5208', E'CAA', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus gibelio', E'Bloch, 1782', E'Carassin argenté', E'5207', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carassius auratus gibelio', E'Bloch, 1782', E'Carassin argenté', E'5207', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carcinus aestuarii', E'Nardo 1847', E'Crabe vert de la Méditerranée', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carcinus aestuarii', E'Nardo 1847', E'Crabe vert de la Méditerranée', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carcinus maenas', E'Linnaeus, 1758', E'Crabe vert', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Carcinus maenas', E'Linnaeus, 1758', E'Crabe vert', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Centrolabrus exoletus', E'Linnaeus, 1758', E'Petite vieille', E'3459', DEFAULT, DEFAULT, E'180', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Centrolabrus exoletus', E'Linnaeus, 1758', E'Petite vieille', E'3459', DEFAULT, DEFAULT, E'180', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelidonichthys lucernus', E'Linnaeus, 1758', E'Grondin perlon', E'3563', DEFAULT, DEFAULT, E'750', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelidonichthys lucernus', E'Linnaeus, 1758', E'Grondin perlon', E'3563', DEFAULT, DEFAULT, E'750', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelon', E'Artedi, 1793', E'Mulets nca', E'2179', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chelon', E'Artedi, 1793', E'Mulets nca', E'2179', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chlamys opercularis', DEFAULT, E'Coquille Saint Jacques', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chlamys opercularis', DEFAULT, E'Coquille Saint Jacques', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chlamys varia', E'(Linnaeus, 1758)', E'Pétoncle', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chlamys varia', E'(Linnaeus, 1758)', E'Pétoncle', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chromis chromis', E'Linnaeus, 1758', E'Castagnole', E'20738', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Chromis chromis', E'Linnaeus, 1758', E'Castagnole', E'20738', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata', E'Couch 1832', E'Motelle', E'2153', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata', E'Couch 1832', E'Motelle', E'2153', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata mustela', E'Linnaeus, 1758', E'Motelle à cinq barbillons', E'2154', E'MOT', E'MOT', E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata mustela', E'Linnaeus, 1758', E'Motelle à cinq barbillons', E'2154', E'MOT', E'MOT', E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata septentrionalis', E'Collett 1875', E'Motelle à moustaches', E'3384', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ciliata septentrionalis', E'Collett 1875', E'Motelle à moustaches', E'3384', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea harengus', E'Linnaeus, 1758', E'Hareng de l''Atlantique', E'2060', E'HAR', E'HER', E'450', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea harengus', E'Linnaeus, 1758', E'Hareng de l''Atlantique', E'2060', E'HAR', E'HER', E'450', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupea sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupeidae', DEFAULT, E'Harengs, sardines nca', E'2054', E'CLU', DEFAULT, E'4176', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Clupeidae', DEFAULT, E'Harengs, sardines nca', E'2054', E'CLU', DEFAULT, E'4176', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Conger conger', E'Linnaeus, 1758', E'Congre d''Europe', E'2074', E'CGR', E'CON', E'3000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Conger conger', E'Linnaeus, 1758', E'Congre d''Europe', E'2074', E'CGR', E'CON', E'3000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coris julis', E'Linnaeus, 1758', E'Girelle', E'19451', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Coris julis', E'Linnaeus, 1758', E'Girelle', E'19451', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus', E'Linnaeus, 1758', E'Chabot nca', E'2079', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cottus', E'Linnaeus, 1758', E'Chabot nca', E'2079', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon', DEFAULT, E'Crevettes crangon nca', E'3281', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon', DEFAULT, E'Crevettes crangon nca', E'3281', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon crangon', E'Linnaeus, 1758', E'Crevette grise', E'3282', E'CRG', E'CRG', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangon crangon', E'Linnaeus, 1758', E'Crevette grise', E'3282', E'CRG', E'CRG', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangonidae', DEFAULT, E'Crevettes crangonidés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crangonidae', DEFAULT, E'Crevettes crangonidés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crassostrea gigas', E'Thunberg 1793', E'Huître creuse du Pacifique', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crassostrea gigas', E'Thunberg 1793', E'Huître creuse du Pacifique', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crystallogobius linearis', E'Düben 1845', E'Gobie cristal', E'3445', DEFAULT, DEFAULT, E'47', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Crystallogobius linearis', E'Düben 1845', E'Gobie cristal', E'3445', DEFAULT, DEFAULT, E'47', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenolabrus rupestris', E'Linnaeus, 1758', E'Rouquié', E'3461', DEFAULT, E'ROU', E'180', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ctenolabrus rupestris', E'Linnaeus, 1758', E'Rouquié', E'3461', DEFAULT, E'ROU', E'180', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyclopterus lumpus', E'Linnaeus, 1758', E'Lompe', E'3551', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyclopterus lumpus', E'Linnaeus, 1758', E'Lompe', E'3551', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidés', E'2084', E'CYP', E'CYP', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinidae', DEFAULT, E'Cyprinidés', E'2084', E'CYP', E'CYP', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cypriniformes', DEFAULT, E'Cypriniformes', E'3362', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cypriniformes', DEFAULT, E'Cypriniformes', E'3362', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus', E'Linnaeus, 1758', E'Carpes nca', E'2108', E'CCX', DEFAULT, E'1340', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Cyprinus', E'Linnaeus, 1758', E'Carpes nca', E'2108', E'CCX', DEFAULT, E'1340', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dasyatis', E'Rafinesque 1810', E'Pastenagues nca', E'3588', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dasyatis', E'Rafinesque 1810', E'Pastenagues nca', E'3588', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dasyatis pastinaca', E'Linnaeus, 1758', E'Pastenague', E'3589', DEFAULT, E'WSX', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dasyatis pastinaca', E'Linnaeus, 1758', E'Pastenague', E'3589', DEFAULT, E'WSX', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dentex dentex', E'Linnaeus, 1758', E'Denté commun', E'20740', DEFAULT, DEFAULT, E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dentex dentex', E'Linnaeus, 1758', E'Denté commun', E'20740', DEFAULT, DEFAULT, E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus', E'Gill 1860', E'Bars nca', E'2233', DEFAULT, DEFAULT, E'865', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus', E'Gill 1860', E'Bars nca', E'2233', DEFAULT, DEFAULT, E'865', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus punctatus', E'Bloch 1792', E'Bar tacheté', E'2235', E'LOM', E'SPU', E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicentrarchus punctatus', E'Bloch 1792', E'Bar tacheté', E'2235', E'LOM', E'SPU', E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicologlossa cuneata', E'Moreau 1881', E'Cèteau', E'3537', DEFAULT, DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dicologlossa cuneata', E'Moreau 1881', E'Cèteau', E'3537', DEFAULT, DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplecogaster bimaculata bimaculata', E'Bonnaterre, 1788', E'Gluette rougeoleuse', E'3415', DEFAULT, DEFAULT, E'60', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplecogaster bimaculata bimaculata', E'Bonnaterre, 1788', E'Gluette rougeoleuse', E'3415', DEFAULT, DEFAULT, E'60', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus annularis', E'Linnaeus, 1758', E'Sparaillon commun', E'19481', DEFAULT, DEFAULT, E'240', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus annularis', E'Linnaeus, 1758', E'Sparaillon commun', E'19481', DEFAULT, DEFAULT, E'240', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus cervinus', E'Lowe 1838', E'Sar à grosses lèvres', E'19482', DEFAULT, DEFAULT, E'610', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus cervinus', E'Lowe 1838', E'Sar à grosses lèvres', E'19482', DEFAULT, DEFAULT, E'610', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus puntazzo', E'Cetti, 1777', E'Sar à museau pointu', E'20741', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus puntazzo', E'Cetti, 1777', E'Sar à museau pointu', E'20741', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus sargus', E'Linnaeus, 1758', E'Sar commun', E'19483', DEFAULT, DEFAULT, E'450', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus sargus', E'Linnaeus, 1758', E'Sar commun', E'19483', DEFAULT, DEFAULT, E'450', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus vulgaris', E'Geoffroy St. Hilaire 1817', E'Sar à tête noire', E'19484', DEFAULT, E'SRG', E'450', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Diplodus vulgaris', E'Geoffroy St. Hilaire 1817', E'Sar à tête noire', E'19484', DEFAULT, E'SRG', E'450', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dromia', E'Weber, 1795', E'Dromie nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dromia', E'Weber, 1795', E'Dromie nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dromia personata', E'Linnaeus, 1758', E'Crabe dormeur', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Dromia personata', E'Linnaeus, 1758', E'Crabe dormeur', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Echiichthys vipera', E'Cuvier 1829', E'Petite vive', E'19480', DEFAULT, DEFAULT, E'160', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Echiichthys vipera', E'Cuvier 1829', E'Petite vive', E'19480', DEFAULT, DEFAULT, E'160', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Enchelyopus cimbrius', E'Linnaeus 1766', E'Motelle à quatre barbillons', E'3402', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Enchelyopus cimbrius', E'Linnaeus 1766', E'Motelle à quatre barbillons', E'3402', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis', E'Cuvier 1817', E'Anchois nca', E'2147', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis', E'Cuvier 1817', E'Anchois nca', E'2147', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis encrasicolus', E'Linnaeus, 1758', E'Anchois', E'2148', E'ANC', E'ANC', E'200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Engraulis encrasicolus', E'Linnaeus, 1758', E'Anchois', E'2148', E'ANC', E'ANC', E'200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Enophrys bubalis', E'Euphrasen, 1786', E'chabot buffle', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Enophrys bubalis', E'Euphrasen, 1786', E'chabot buffle', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Entelurus aequoreus', E'Linnaeus, 1758', E'Entélure', E'3567', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Entelurus aequoreus', E'Linnaeus, 1758', E'Entélure', E'3567', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eriocheir sinensis', E'H. Milne Edwards 1853', E'Crabe chinois', E'879', E'CRC', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eriocheir sinensis', E'H. Milne Edwards 1853', E'Crabe chinois', E'879', E'CRC', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eupagurus bernhardus', E'Linnaeus, 1758', E'Bernard l’ermite commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eupagurus bernhardus', E'Linnaeus, 1758', E'Bernard l’ermite commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eurynome', E'Leach, 1814', E'Majidé eurynome', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eurynome', E'Leach, 1814', E'Majidé eurynome', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eurynome aspera', E'(Pennant, 1777)', E'Eurynome rugeuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eurynome aspera', E'(Pennant, 1777)', E'Eurynome rugeuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eutrigla gurnardus', E'Linnaeus, 1758', E'Grondin gris', E'19478', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Eutrigla gurnardus', E'Linnaeus, 1758', E'Grondin gris', E'19478', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gadidae', DEFAULT, E'Gadidés', E'2152', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gadidae', DEFAULT, E'Gadidés', E'2152', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gadus morhua', E'Linnaeus, 1758', E'Morue de l''Atlantique', E'3386', DEFAULT, E'COD', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gadus morhua', E'Linnaeus, 1758', E'Morue de l''Atlantique', E'3386', DEFAULT, E'COD', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gaidropsarus mediterraneus', E'Linnaeus, 1758', E'Motelle de Méditerranée', E'3388', DEFAULT, DEFAULT, E'500', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gaidropsarus mediterraneus', E'Linnaeus, 1758', E'Motelle de Méditerranée', E'3388', DEFAULT, DEFAULT, E'500', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gaidropsarus vulgaris', E'Cloquet 1824', E'Motelle commune', E'3389', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gaidropsarus vulgaris', E'Cloquet 1824', E'Motelle commune', E'3389', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galathea rugosa', E'Fabricius, 1775', E'Galathée rose', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galathea rugosa', E'Fabricius, 1775', E'Galathée rose', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galathea squamifera', E'Leach, 1814', E'Galathée écailleuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galathea squamifera', E'Leach, 1814', E'Galathée écailleuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galathea strigosa', DEFAULT, E'Galathée striée', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galathea strigosa', DEFAULT, E'Galathée striée', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galeorhinus galeus', E'Linnaeus, 1758', E'Requin-hâ', E'3581', DEFAULT, E'LSK', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galeorhinus galeus', E'Linnaeus, 1758', E'Requin-hâ', E'3581', DEFAULT, E'LSK', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galeus melastomus', E'Rafinesque 1810', E'Chien espagnol', E'19487', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Galeus melastomus', E'Rafinesque 1810', E'Chien espagnol', E'19487', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia', E'Poey 1854', E'Gambusie nca', E'2207', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia', E'Poey 1854', E'Gambusie nca', E'2207', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia affinis', E'Baird & Girard 1853', E'Gambusie', E'2208', E'GAM', E'GAM', E'40', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gambusia affinis', E'Baird & Girard 1853', E'Gambusie', E'2208', E'GAM', E'GAM', E'40', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gammaridae', DEFAULT, E'Gammares', E'887', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gammaridae', DEFAULT, E'Gammares', E'887', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus', E'Linnaeus, 1758', E'Epinoches', E'2164', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus', E'Linnaeus, 1758', E'Epinoches', E'2164', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus aculeatus', E'Linnaeus, 1758', E'Epinoche à trois épines', E'2165', DEFAULT, E'EPI', E'110', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gasterosteus aculeatus', E'Linnaeus, 1758', E'Epinoche à trois épines', E'2165', DEFAULT, E'EPI', E'110', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Glyptocephalus cynoglossus', E'Linnaeus, 1758', E'Plie cynoglosse', E'3512', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Glyptocephalus cynoglossus', E'Linnaeus, 1758', E'Plie cynoglosse', E'3512', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobiidae', DEFAULT, E'Gobidés', E'2168', DEFAULT, DEFAULT, E'825', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobiidae', DEFAULT, E'Gobidés', E'2168', DEFAULT, DEFAULT, E'825', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius cobitis', E'Pallas 1814', E'Gobie céphalote', E'19490', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius cobitis', E'Pallas 1814', E'Gobie céphalote', E'19490', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius cruentatus', E'Gmelin 1789', E'Gobie ensanglanté', E'19491', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius cruentatus', E'Gmelin 1789', E'Gobie ensanglanté', E'19491', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobiusculus flavescens', E'Fabricius 1779', E'Gobie nageur', E'3451', DEFAULT, DEFAULT, E'63', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobiusculus flavescens', E'Fabricius 1779', E'Gobie nageur', E'3451', DEFAULT, DEFAULT, E'63', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius geniporus', E'Valenciennes 1837', E'Gobie à joues poreuses', E'19492', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius geniporus', E'Valenciennes 1837', E'Gobie à joues poreuses', E'19492', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius niger', E'Linnaeus, 1758', E'Gobie noir', E'2172', E'GBN', DEFAULT, E'180', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius niger', E'Linnaeus, 1758', E'Gobie noir', E'2172', E'GBN', DEFAULT, E'180', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius paganellus', E'Linnaeus, 1758', E'Gobie paganel', E'19493', DEFAULT, DEFAULT, E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius paganellus', E'Linnaeus, 1758', E'Gobie paganel', E'19493', DEFAULT, DEFAULT, E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius roulei', E'De Buen 1928', E'Gobie paganel gros oeil', E'19494', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gobius roulei', E'De Buen 1928', E'Gobie paganel gros oeil', E'19494', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Goneplax rhomboides', E'Linnaeus, 1758', E'crabe', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Goneplax rhomboides', E'Linnaeus, 1758', E'crabe', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gymnammodytes semisquamatus', E'Jourdain 1879', E'Lançon aiguille', E'3424', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Gymnammodytes semisquamatus', E'Jourdain 1879', E'Lançon aiguille', E'3424', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hemigrapsus', DEFAULT, E'crabe japonais', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hemigrapsus', DEFAULT, E'crabe japonais', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hemigrapsus penicillatus', E'De Haan, 1835', E'crabe japonais', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hemigrapsus penicillatus', E'De Haan, 1835', E'crabe japonais', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus', E'Rafinesque 1810', E'Hippocampes nca', E'3568', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus', E'Rafinesque 1810', E'Hippocampes nca', E'3568', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus erectus', E'Perry', E'Hippocampe rayé', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus erectus', E'Perry', E'Hippocampe rayé', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus guttulatus', E'Cuvier, 1829', E'Hippocampe moucheté', E'3569', DEFAULT, DEFAULT, E'210', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus guttulatus', E'Cuvier, 1829', E'Hippocampe moucheté', E'3569', DEFAULT, DEFAULT, E'210', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus hippocampus', E'Linnaeus, 1758', E'Hippocampe à museau court', E'19485', DEFAULT, E'HIP', E'150', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus hippocampus', E'Linnaeus, 1758', E'Hippocampe à museau court', E'19485', DEFAULT, E'HIP', E'150', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus ingens', E'Girard', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus ingens', E'Girard', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus ramulosus', E'Leach 1814', E'Hippocampe moucheté', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus ramulosus', E'Leach 1814', E'Hippocampe moucheté', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus reidi', E'Ginsburg', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus reidi', E'Ginsburg', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus zosterae', E'Jordan&Gilbert', E'Hippocampe Atlantique ouest', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippocampus zosterae', E'Jordan&Gilbert', E'Hippocampe Atlantique ouest', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippoglossoides platessoides', E'Fabricius 1780', E'Balai de l''Atlantique', E'3514', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippoglossoides platessoides', E'Fabricius 1780', E'Balai de l''Atlantique', E'3514', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippolyte varians', E'Leach, 1814', E'Crevette hippolyte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hippolyte varians', E'Leach, 1814', E'Crevette hippolyte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hyperoplus', E'Linné, 1758', E'lançon ind', E'3426', DEFAULT, DEFAULT, E'370', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hyperoplus', E'Linné, 1758', E'lançon ind', E'3426', DEFAULT, DEFAULT, E'370', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hyperoplus immaculatus', E'Corbin, 1950', E'Lançon jolivet', E'3427', DEFAULT, DEFAULT, E'350', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hyperoplus immaculatus', E'Corbin, 1950', E'Lançon jolivet', E'3427', DEFAULT, DEFAULT, E'350', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hyperoplus lanceolatus', E'Le Sauvage 1824', E'Lançon commun', E'3428', DEFAULT, DEFAULT, E'390', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Hyperoplus lanceolatus', E'Le Sauvage 1824', E'Lançon commun', E'3428', DEFAULT, DEFAULT, E'390', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ictalurus', E'Rafinesque 1820', E'Barbottes nca', E'2176', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ictalurus', E'Rafinesque 1820', E'Barbottes nca', E'2176', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ictalurus melas', DEFAULT, E'Poisson chat', DEFAULT, DEFAULT, E'PCH', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ictalurus melas', DEFAULT, E'Poisson chat', DEFAULT, DEFAULT, E'PCH', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ictalurus punctatus', E'Rafinesque 1818', E'Barbue d''Amérique', E'19486', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Ictalurus punctatus', E'Rafinesque 1818', E'Barbue d''Amérique', E'19486', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Idotea baltica', DEFAULT, E'isopode', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Idotea baltica', DEFAULT, E'isopode', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Inachus', E'Weber, 1795', E'Crabe inachus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Inachus', E'Weber, 1795', E'Crabe inachus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Inachus dorsettensis', E'Pennant, 1777', E'Crabe des anémones', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Inachus dorsettensis', E'Pennant, 1777', E'Crabe des anémones', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus bergylta', E'Ascanius 1767', E'Vieille commune', E'3463', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus bergylta', E'Ascanius 1767', E'Vieille commune', E'3463', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus merula', E'Linnaeus, 1758', E'Merle', E'19474', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus merula', E'Linnaeus, 1758', E'Merle', E'19474', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus mixtus', E'Linnaeus,1758', E'Coquette', E'19489', DEFAULT, DEFAULT, E'350', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus mixtus', E'Linnaeus,1758', E'Coquette', E'19489', DEFAULT, DEFAULT, E'350', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus viridis', E'Linnaeus,1758', E'Labre vert', E'19479', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Labrus viridis', E'Linnaeus,1758', E'Labre vert', E'19479', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra', E'Gray 1851', E'Lamproie Lampetra', E'2010', E'LPX', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lampetra', E'Gray 1851', E'Lamproie Lampetra', E'2010', E'LPX', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepadogaster candolii', E'Risso, 1810', E'Gluette petite queue', E'3417', DEFAULT, DEFAULT, E'75', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepadogaster candolii', E'Risso, 1810', E'Gluette petite queue', E'3417', DEFAULT, DEFAULT, E'75', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepadogaster lepadogaster', E'Walbaum 1792', E'Gluette barbier', E'3418', DEFAULT, DEFAULT, E'65', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepadogaster lepadogaster', E'Walbaum 1792', E'Gluette barbier', E'3418', DEFAULT, DEFAULT, E'65', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepidorhombus whiffiagonis', E'Walbaum 1792', E'Cardine franche', E'3523', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepidorhombus whiffiagonis', E'Walbaum 1792', E'Cardine franche', E'3523', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepomis sp.', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lepomis sp.', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lesueurigobius friesii', E'Malm 1874', E'Gobie raôlet', E'19469', DEFAULT, DEFAULT, E'130', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lesueurigobius friesii', E'Malm 1874', E'Gobie raôlet', E'19469', DEFAULT, DEFAULT, E'130', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus cephalus', E'Linnaeus, 1758', E'Chevaine', E'2120', DEFAULT, E'CHE', E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus cephalus', E'Linnaeus, 1758', E'Chevaine', E'2120', DEFAULT, E'CHE', E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus souffia', E'Risso 1827', E'Blageon', E'2119', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leuciscus souffia', E'Risso 1827', E'Blageon', E'2119', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucoraja naevus', E'Müller & Henle, 1841', E'Raie fleurie', E'3599', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Leucoraja naevus', E'Müller & Henle, 1841', E'Raie fleurie', E'3599', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lichia amia', E'Linnaeus, 1758', E'Liche', E'25286', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lichia amia', E'Linnaeus, 1758', E'Liche', E'25286', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Limanda limanda', E'Linnaeus, 1758', E'Limande', E'3518', DEFAULT, DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Limanda limanda', E'Linnaeus, 1758', E'Limande', E'3518', DEFAULT, DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus', E'Stimpson, 1870', E'Etrille nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus', E'Stimpson, 1870', E'Etrille nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus arcuatus', E'Leach, 1814', E'Etrille arcuatus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus arcuatus', E'Leach, 1814', E'Etrille arcuatus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus depurator', E'Linnaeus, 1758', E'Etrille pattes bleues', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus depurator', E'Linnaeus, 1758', E'Etrille pattes bleues', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus holsatus', E'Fabricius, 1798', E'Etrille nageuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus holsatus', E'Fabricius, 1798', E'Etrille nageuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus navigator', E'(Hebst, 1794)', E'Etrille pattes bleues', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liocarcinus navigator', E'(Hebst, 1794)', E'Etrille pattes bleues', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis liparis', E'Linnaeus 1766', E'Limace de mer', E'3553', DEFAULT, DEFAULT, E'150', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis liparis', E'Linnaeus 1766', E'Limace de mer', E'3553', DEFAULT, DEFAULT, E'150', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis montagui', E'Donovan 1804', E'Limace anicotte', E'2083', E'LIP', DEFAULT, E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liparis montagui', E'Donovan 1804', E'Limace anicotte', E'2083', E'LIP', DEFAULT, E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lipophrys dalmatinus', E'Steindachner & Kolombatovic, 1884', E'Blennie dalmate', E'20742', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lipophrys dalmatinus', E'Steindachner & Kolombatovic, 1884', E'Blennie dalmate', E'20742', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lipophrys pholis', E'Linnaeus, 1758', E'Blennie mordocet', E'3431', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lipophrys pholis', E'Linnaeus, 1758', E'Blennie mordocet', E'3431', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lithognathus mormyrus', E'Linnaeus, 1758', E'Marbré', E'19465', DEFAULT, DEFAULT, E'376', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lithognathus mormyrus', E'Linnaeus, 1758', E'Marbré', E'19465', DEFAULT, DEFAULT, E'376', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza', E'Jordan&Swain 1884', E'Mulets nca', E'2181', DEFAULT, DEFAULT, E'5915', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza', E'Jordan&Swain 1884', E'Mulets nca', E'2181', DEFAULT, DEFAULT, E'5915', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza saliens', E'Risso 1810', E'Mulet sauteur', E'3267', E'MUS', DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Liza saliens', E'Risso 1810', E'Mulet sauteur', E'3267', E'MUS', DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loliginidae', E'D''Orbigny, 1848', E'Calmars côtiers nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loliginidae', E'D''Orbigny, 1848', E'Calmars côtiers nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loligo', DEFAULT, E'Calmars nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loligo', DEFAULT, E'Calmars nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loligo vulgaris', E'Lamarck 1798', E'Encornet', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Loligo vulgaris', E'Lamarck 1798', E'Encornet', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lophius piscatorius', E'Linnaeus, 1758', E'Baudroie commune', E'3421', DEFAULT, E'ANF', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Lophius piscatorius', E'Linnaeus, 1758', E'Baudroie commune', E'3421', DEFAULT, E'ANF', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macoma balthica', E'Linnaeus, 1758', E'Telline de la Baltique', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macoma balthica', E'Linnaeus, 1758', E'Telline de la Baltique', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macropodia', DEFAULT, E'Macropode nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macropodia', DEFAULT, E'Macropode nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macropodia longirostris', E'Fabricius, 1775', E'Macropode longirostris', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macropodia longirostris', E'Fabricius, 1775', E'Macropode longirostris', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macropodia rostrata', E'Linnaeus, 1761', E'Macropode commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Macropodia rostrata', E'Linnaeus, 1761', E'Macropode commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Maja brachydactyla', DEFAULT, E'Araignée de mer', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Maja brachydactyla', DEFAULT, E'Araignée de mer', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Maja squinado', E'Herbst, 1788', E'Araignée de mer', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Maja squinado', E'Herbst, 1788', E'Araignée de mer', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Maurolicus muelleri', E'Gmelin 1789', E'Brossé améthyste', E'19466', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Maurolicus muelleri', E'Gmelin 1789', E'Brossé améthyste', E'19466', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Medorippe lanata', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Medorippe lanata', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Melanogrammus aeglefinus', E'Linnaeus, 1758', E'Eglefin', E'19467', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Melanogrammus aeglefinus', E'Linnaeus, 1758', E'Eglefin', E'19467', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merlangius merlangus', E'Linnaeus, 1758', E'Merlan', E'2158', E'MER', E'WHG', E'70', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merlangius merlangus', E'Linnaeus, 1758', E'Merlan', E'2158', E'MER', E'WHG', E'70', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merluccius merluccius', E'Linnaeus, 1758', E'Merlu européen', E'3410', DEFAULT, E'HKE', E'1400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Merluccius merluccius', E'Linnaeus, 1758', E'Merlu européen', E'3410', DEFAULT, E'HKE', E'1400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micrenophrys lilljeborgii', E'Collett 1875', E'Chabot têtu', E'3549', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micrenophrys lilljeborgii', E'Collett 1875', E'Chabot têtu', E'3549', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Microchirus variegatus', E'Donovan, 1808', E'Sole perdrix', E'3539', DEFAULT, DEFAULT, E'350', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Microchirus variegatus', E'Donovan, 1808', E'Sole perdrix', E'3539', DEFAULT, DEFAULT, E'350', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micromesistius poutassou', E'Risso 1827', E'Merlan bleu', E'3391', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Micromesistius poutassou', E'Risso 1827', E'Merlan bleu', E'3391', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Microstomus kitt', E'Walbaum 1792', E'Limande sole', E'3520', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Microstomus kitt', E'Walbaum 1792', E'Limande sole', E'3520', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Molva molva', E'Linnaeus, 1758', E'Lingue', E'3393', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Molva molva', E'Linnaeus, 1758', E'Lingue', E'3393', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil', E'Linnaeus, 1758', E'Mulets nca', E'2184', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil', E'Linnaeus, 1758', E'Mulets nca', E'2184', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugilidae', DEFAULT, E'Mugilidés', E'2178', DEFAULT, DEFAULT, E'7833', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugilidae', DEFAULT, E'Mugilidés', E'2178', DEFAULT, DEFAULT, E'7833', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil liza', E'Valenciennes 1836', E'Mulet lebranche', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mugil liza', E'Valenciennes 1836', E'Mulet lebranche', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus', E'Linnaeus, 1758', E'Rougets nca', E'3471', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus', E'Linnaeus, 1758', E'Rougets nca', E'3471', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus barbatus', E'Linnaeus, 1758', E'Rouget de vase', E'3472', DEFAULT, DEFAULT, E'332', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus barbatus', E'Linnaeus, 1758', E'Rouget de vase', E'3472', DEFAULT, DEFAULT, E'332', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus sp.', DEFAULT, E'Mullus sp.', DEFAULT, DEFAULT, E'MUL', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus sp.', DEFAULT, E'Mullus sp.', DEFAULT, DEFAULT, E'MUL', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus surmuletus', E'Linnaeus, 1758', E'Rouget de roche', E'3473', DEFAULT, E'MUS', E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mullus surmuletus', E'Linnaeus, 1758', E'Rouget de roche', E'3473', DEFAULT, E'MUS', E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mustelus asterias', E'Cloquet 1821', E'Emissole tachetée', E'3584', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mustelus asterias', E'Cloquet 1821', E'Emissole tachetée', E'3584', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mustelus mustelus', E'Linnaeus, 1758', E'Emissole lisse', E'3585', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Mustelus mustelus', E'Linnaeus, 1758', E'Emissole lisse', E'3585', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Myoxocephalus scorpius', E'Linnaeus, 1758', E'Chaboisseau à épines courtes', E'3546', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Myoxocephalus scorpius', E'Linnaeus, 1758', E'Chaboisseau à épines courtes', E'3546', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Myxine glutinosa', E'Linnaeus, 1758', E'Myxine', E'19470', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Myxine glutinosa', E'Linnaeus, 1758', E'Myxine', E'19470', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Necora puber', E'Linnaeus 1767', E'Etrille commune', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Necora puber', E'Linnaeus 1767', E'Etrille commune', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Nerophis lumbriciformis', E'Jenyns 1835', E'Nérophis petit nez', E'19471', DEFAULT, DEFAULT, E'160', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Nerophis lumbriciformis', E'Jenyns 1835', E'Nérophis petit nez', E'19471', DEFAULT, DEFAULT, E'160', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Nerophis maculatus', E'Rafinesque, 1810', E'Nérophis tacheté', DEFAULT, DEFAULT, DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Nerophis maculatus', E'Rafinesque, 1810', E'Nérophis tacheté', DEFAULT, DEFAULT, DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Nerophis ophidion', E'Linnaeus, 1758', E'Nérophis tête bleue', E'19472', DEFAULT, DEFAULT, E'290', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Nerophis ophidion', E'Linnaeus, 1758', E'Nérophis tête bleue', E'19472', DEFAULT, DEFAULT, E'290', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'NoName', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'NoName', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Oblada melanura', E'Linnaeus, 1758', E'Oblade', E'3485', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Oblada melanura', E'Linnaeus, 1758', E'Oblade', E'3485', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Octopus vulgaris', DEFAULT, E'poulpe commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Octopus vulgaris', DEFAULT, E'poulpe commun', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus mordax', E'Steindachner & Kner 1870', E'Eperlan arc-en-ciel', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus mordax', E'Steindachner & Kner 1870', E'Eperlan arc-en-ciel', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus mordax dentex', E'Steind. 1870', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus mordax dentex', E'Steind. 1870', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus mordax mordax', E'Mitchill 1814', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus mordax mordax', E'Mitchill 1814', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus sp., Hypomesus sp.', DEFAULT, E'Eperlans nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Osmerus sp., Hypomesus sp.', DEFAULT, E'Eperlans nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pachygrapsus', DEFAULT, E'Crabes Pachygrapsus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pachygrapsus', DEFAULT, E'Crabes Pachygrapsus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pachygrapsus marmoratus', E'Fabricius 1787', E'Grapse marbré', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pachygrapsus marmoratus', E'Fabricius 1787', E'Grapse marbré', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pachygrapsus transversus', E'Gibbes 1850', E'Anglette africaine', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pachygrapsus transversus', E'Gibbes 1850', E'Anglette africaine', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pagellus bogaraveo', E'Linnaeus, 1758', E'Pageot rose', DEFAULT, DEFAULT, DEFAULT, E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pagellus bogaraveo', E'Linnaeus, 1758', E'Pageot rose', DEFAULT, DEFAULT, DEFAULT, E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pagellus erythrinus', E'Linnaeus, 1758', E'Pageot commun', E'23613', DEFAULT, DEFAULT, E'517', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pagellus erythrinus', E'Linnaeus, 1758', E'Pageot commun', E'23613', DEFAULT, DEFAULT, E'517', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pagurus prideauxi', E'Leach, 1814', E'Gonfaron', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pagurus prideauxi', E'Leach, 1814', E'Gonfaron', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon', E'Weber, 1795', E'Crevettes Palaemon nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon', E'Weber, 1795', E'Crevettes Palaemon nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon adspersus', E'Rathke, 1837', E'Bouquet balte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon adspersus', E'Rathke, 1837', E'Bouquet balte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon elegans', E'Rathke 1837', E'Bouquet flaque', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon elegans', E'Rathke 1837', E'Bouquet flaque', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemonetes varians', E'Leach 1814', E'Bouquet atlantique des canaux', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemonetes varians', E'Leach 1814', E'Bouquet atlantique des canaux', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemonidae', E'Rafinesque, 1815', E'Palaemonidés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemonidae', E'Rafinesque, 1815', E'Palaemonidés', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris', E'H. Milne Edwards 1837', E'Crevette blanche', E'3280', E'CRB', E'CRB', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris', E'H. Milne Edwards 1837', E'Crevette blanche', E'3280', E'CRB', E'CRB', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris, P. serratus', DEFAULT, E'crevettes blanche et rose', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon longirostris, P. serratus', DEFAULT, E'crevettes blanche et rose', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon macrodactylus', E'M.J. Rathbun 1902', E'Bouquet migrateur', DEFAULT, DEFAULT, E'CRM', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon macrodactylus', E'M.J. Rathbun 1902', E'Bouquet migrateur', DEFAULT, DEFAULT, E'CRM', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon serratus', E'Pennant 1777', E'Bouquet commun', DEFAULT, DEFAULT, E'CRR', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon serratus', E'Pennant 1777', E'Bouquet commun', DEFAULT, DEFAULT, E'CRR', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon sp.', DEFAULT, E'Palaemon sp.', DEFAULT, DEFAULT, E'PAL', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Palaemon sp.', DEFAULT, E'Palaemon sp.', DEFAULT, DEFAULT, E'PAL', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Panopeus africanus', E'A. Milne Edwards 1867', E'Crabe caillou africain', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Panopeus africanus', E'A. Milne Edwards 1867', E'Crabe caillou africain', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parablennius gattorugine', E'Linnaeus, 1758', E'Blennie cabot', E'3429', DEFAULT, DEFAULT, E'300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parablennius gattorugine', E'Linnaeus, 1758', E'Blennie cabot', E'3429', DEFAULT, DEFAULT, E'300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parablennius pilicornis', E'Cuvier, 1829', E'Blennie pilicorne', E'20743', DEFAULT, DEFAULT, E'127', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parablennius pilicornis', E'Cuvier, 1829', E'Blennie pilicorne', E'20743', DEFAULT, DEFAULT, E'127', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parablennius sanguinolentus', E'Pallas 1814', E'Baveuse', E'19473', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parablennius sanguinolentus', E'Pallas 1814', E'Baveuse', E'19473', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parthenope angulifrons', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Parthenope angulifrons', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pecten maximus', E'(Linnaeus, 1758)', E'Coquille St Jacques', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pecten maximus', E'(Linnaeus, 1758)', E'Coquille St Jacques', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pegusa impar', E'Bennett, 1831', E'Sole adriatique', E'20746', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pegusa impar', E'Bennett, 1831', E'Sole adriatique', E'20746', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pegusa lascaris', E'Ben-Tuvia 1990', E'Sole-pole', E'3540', DEFAULT, DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pegusa lascaris', E'Ben-Tuvia 1990', E'Sole-pole', E'3540', DEFAULT, DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Penaeus japonicus', E'Bate 1888', E'Crevette kuruma', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Penaeus japonicus', E'Bate 1888', E'Crevette kuruma', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Penaeus kerathurus', E'Forskal 1775', E'Caramote', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Penaeus kerathurus', E'Forskal 1775', E'Caramote', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon marinus, Lampetra fluviatilis', DEFAULT, E'lamproie marine et lamproie de rivière', E'19512', DEFAULT, E'LPS', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon marinus, Lampetra fluviatilis', DEFAULT, E'lamproie marine et lamproie de rivière', E'19512', DEFAULT, E'LPS', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzon sp.', E'Linnaeus 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzontidae', DEFAULT, E'Lamproies nca', E'2009', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzontidae', DEFAULT, E'Lamproies nca', E'2009', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzontiformes', DEFAULT, E'Petromyzontiformes', E'5070', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Petromyzontiformes', DEFAULT, E'Petromyzontiformes', E'5070', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Philocheras trispinosus', E'(Hailstone, 1835)', E'crevette philocheras', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Philocheras trispinosus', E'(Hailstone, 1835)', E'crevette philocheras', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pholis gunnellus', E'Linnaeus, 1758', E'Gonelle', E'2200', E'GON', DEFAULT, E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pholis gunnellus', E'Linnaeus, 1758', E'Gonelle', E'2200', E'GON', DEFAULT, E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus', E'Rafinesque 1820', E'Vairons nca', E'2124', E'PHX', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Phoxinus', E'Rafinesque 1820', E'Vairons nca', E'2124', E'PHX', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pilumnus hirtellus', E'Linnaeus, 1758', E'Crabe rouge poilu', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pilumnus hirtellus', E'Linnaeus, 1758', E'Crabe rouge poilu', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pirimela denticulata', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pirimela denticulata', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pisa tetraodon', E'(Pennant, 1777)', E'Araignée cornue', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pisa tetraodon', E'(Pennant, 1777)', E'Araignée cornue', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pisidia longicornis', E'Linnaeus 1767', E'Porcellane noire', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pisidia longicornis', E'Linnaeus 1767', E'Porcellane noire', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Planes minutus', E'Linnaeus, 1758', E'Grapse des tortues', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Planes minutus', E'Linnaeus, 1758', E'Grapse des tortues', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus flesus', E'L. 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus flesus', E'L. 1758', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus italicus', E'Gsnt. 1862', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus italicus', E'Gsnt. 1862', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus luscus', E'Pallas 1811', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys flesus luscus', E'Pallas 1811', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys sp.', E'Girard 1856', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Platichthys sp.', E'Girard 1856', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectes', E'Linnaeus, 1758', E'Plies nca', E'2204', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectes', E'Linnaeus, 1758', E'Plies nca', E'2204', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectidae', DEFAULT, E'Pleuronectidés', E'2201', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pleuronectidae', DEFAULT, E'Pleuronectidés', E'2201', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius pollachius', E'Linnaeus, 1758', E'Lieu jaune', E'2160', E'LIJ', E'POL', E'1300', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius pollachius', E'Linnaeus, 1758', E'Lieu jaune', E'2160', E'LIJ', E'POL', E'1300', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius virens', E'Linnaeus, 1758', E'Lieu noir', E'3398', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pollachius virens', E'Linnaeus, 1758', E'Lieu noir', E'3398', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Polybius holsatus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Polybius holsatus', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatomus saltatrix', E'Linnaeus, 1766', E'Tassergal', E'20744', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatomus saltatrix', E'Linnaeus, 1766', E'Tassergal', E'20744', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus', E'Gill 1864', E'Gobies Pomatoschistus', E'2173', DEFAULT, DEFAULT, E'766', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus', E'Gill 1864', E'Gobies Pomatoschistus', E'2173', DEFAULT, DEFAULT, E'766', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus lozanoi', E'De Buen, 1923', E'Gobie rouillé', E'19464', DEFAULT, DEFAULT, E'80', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus lozanoi', E'De Buen, 1923', E'Gobie rouillé', E'19464', DEFAULT, DEFAULT, E'80', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus marmoratus', E'Risso, 1810', E'Gobie marbré', E'19463', DEFAULT, DEFAULT, E'80', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus marmoratus', E'Risso, 1810', E'Gobie marbré', E'19463', DEFAULT, DEFAULT, E'80', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus microps', E'Kroeyer 1838', E'Gobie tacheté', E'3455', DEFAULT, DEFAULT, E'68', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus microps', E'Kroeyer 1838', E'Gobie tacheté', E'3455', DEFAULT, DEFAULT, E'68', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus minutus', E'Pallas 1770', E'Gobie buhotte', E'2174', E'GOB', E'GOB', E'110', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus minutus', E'Pallas 1770', E'Gobie buhotte', E'2174', E'GOB', E'GOB', E'110', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus pictus', E'Malm 1865', E'Gobie varié', E'3456', DEFAULT, DEFAULT, E'80', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus pictus', E'Malm 1865', E'Gobie varié', E'3456', DEFAULT, DEFAULT, E'80', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus quagga', E'Gil, 1863', E'Gobie quagga', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pomatoschistus quagga', E'Gil, 1863', E'Gobie quagga', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Porcellana platycheles', E'Pennant 1777', E'Crabe porcelaine', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Porcellana platycheles', E'Pennant 1777', E'Crabe porcelaine', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Portumnus latipes', E'Pennant 1777', E'Etrille elegante', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Portumnus latipes', E'Pennant 1777', E'Etrille elegante', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Portunidae', E'Rafinesque, 1815', E'crabes portunidés nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Portunidae', E'Rafinesque, 1815', E'crabes portunidés nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Procambarus', DEFAULT, E'Ecrevisses nca', E'2027', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Procambarus', DEFAULT, E'Ecrevisses nca', E'2027', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Processa edulis', E'Risso 1816', E'Guernade nica', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Processa edulis', E'Risso 1816', E'Guernade nica', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Processa nouveli', E'Al Adhub & Williamson, 1975', E'Guernade nouveli', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Processa nouveli', E'Al Adhub & Williamson, 1975', E'Guernade nouveli', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Processa parva', DEFAULT, E'crevette ind', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Processa parva', DEFAULT, E'crevette ind', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Psetta maxima', E'Linnaeus, 1758', E'Turbot', E'19468', DEFAULT, E'TUR', E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Psetta maxima', E'Linnaeus, 1758', E'Turbot', E'19468', DEFAULT, E'TUR', E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Psetta sp.', E'Swainson 1839', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Psetta sp.', E'Swainson 1839', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pycnogonidae', DEFAULT, E'Pycnogonide nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Pycnogonidae', DEFAULT, E'Pycnogonide nca', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja', E'Linnaeus, 1758', E'Raie nca', E'2210', DEFAULT, DEFAULT, E'1122', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja', E'Linnaeus, 1758', E'Raie nca', E'2210', DEFAULT, DEFAULT, E'1122', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja brachyura', E'Lafont 1873', E'Raie lisse', E'3591', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja brachyura', E'Lafont 1873', E'Raie lisse', E'3591', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja clavata', E'Linnaeus, 1758', E'Raie bouclée', E'2211', E'RBC', E'RJC', E'1050', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja clavata', E'Linnaeus, 1758', E'Raie bouclée', E'2211', E'RBC', E'RJC', E'1050', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja microocellata', E'Montagu 1818', E'Raie mélée', E'3592', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja microocellata', E'Montagu 1818', E'Raie mélée', E'3592', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja montagui', E'Fowler, 1910', E'Raie étoilée', E'3593', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja montagui', E'Fowler, 1910', E'Raie étoilée', E'3593', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja naevus', E'Müller & Henle 1841', E'Raie fleurie', DEFAULT, DEFAULT, E'RJN', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja naevus', E'Müller & Henle 1841', E'Raie fleurie', DEFAULT, DEFAULT, E'RJN', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja undulata', E'Lacepède 1802', E'Raie brunette', E'3594', DEFAULT, E'SKA', E'1200', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raja undulata', E'Lacepède 1802', E'Raie brunette', E'3594', DEFAULT, E'SKA', E'1200', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rajella fyllae', E'Lütken, 1887', E'Raie ronde', E'3602', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rajella fyllae', E'Lütken, 1887', E'Raie ronde', E'3602', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raniceps raninus', E'Linnaeus, 1758', E'Trident', E'3400', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Raniceps raninus', E'Linnaeus, 1758', E'Trident', E'3400', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhithropanopeus', E'Gould 1832', E'Crabe', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhithropanopeus', E'Gould 1832', E'Crabe', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhithropanopeus harrisii', E'Gould, 1841', E'Crabe de vase', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhithropanopeus harrisii', E'Gould, 1841', E'Crabe de vase', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus sericeus', E'Pallas 1776', E'Bouvière', DEFAULT, DEFAULT, E'BOU', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rhodeus sericeus', E'Pallas 1776', E'Bouvière', DEFAULT, DEFAULT, E'BOU', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus', E'Rafinesque 1820', E'Gardons nca', E'2132', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Rutilus', E'Rafinesque 1820', E'Gardons nca', E'2132', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria basilisca', E'Valenciennes, 1836', E'Blennie basilic', E'25285', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria basilisca', E'Valenciennes, 1836', E'Blennie basilic', E'25285', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria pavo', E'Risso 1810', E'Blennie paon', E'19488', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salaria pavo', E'Risso 1810', E'Blennie paon', E'19488', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo', E'Linnaeus, 1758', E'Truites nca', E'2219', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo', E'Linnaeus, 1758', E'Truites nca', E'2219', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmonidae', DEFAULT, E'Salmonidés', E'2212', E'SAL', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmonidae', DEFAULT, E'Salmonidés', E'2212', E'SAL', DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta fario', E'Linnaeus, 1758', E'Truite fario', E'2221', E'TRF', DEFAULT, E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta fario', E'Linnaeus, 1758', E'Truite fario', E'2221', E'TRF', DEFAULT, E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta trutta', E'Linnaeus, 1758', E'Truite de mer brune', E'2224', E'TRM', DEFAULT, E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Salmo trutta trutta', E'Linnaeus, 1758', E'Truite de mer brune', E'2224', E'TRM', DEFAULT, E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander', DEFAULT, E'Sandres nca', E'5074', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sander', DEFAULT, E'Sandres nca', E'5074', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardina pilchardus', E'Walbaum 1792', E'Sardine commune', E'2062', E'SAR', E'SAR', E'270', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardina pilchardus', E'Walbaum 1792', E'Sardine commune', E'2062', E'SAR', E'SAR', E'270', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardinella aurita', E'Valenciennes 1847', E'Allache', E'19476', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sardinella aurita', E'Valenciennes 1847', E'Allache', E'19476', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sarpa salpa', E'Linnaeus, 1758', E'Saupe', E'19475', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sarpa salpa', E'Linnaeus, 1758', E'Saupe', E'19475', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sciaena umbra', E'Linnaeus, 1758', E'Corb commun', E'19477', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sciaena umbra', E'Linnaeus, 1758', E'Corb commun', E'19477', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scomber scombrus', E'Linnaeus, 1758', E'Maquereau commun', E'3475', DEFAULT, E'MAC', E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scomber scombrus', E'Linnaeus, 1758', E'Maquereau commun', E'3475', DEFAULT, E'MAC', E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scophthalmus maximus', E'Linnaeus, 1758', E'Turbot', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scophthalmus maximus', E'Linnaeus, 1758', E'Turbot', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scophthalmus rhombus', E'Linnaeus, 1758', E'Barbue', E'3531', DEFAULT, E'BLL', E'750', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scophthalmus rhombus', E'Linnaeus, 1758', E'Barbue', E'3531', DEFAULT, E'BLL', E'750', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scophthalmus sp.', E'Rafinesque 1810', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scophthalmus sp.', E'Rafinesque 1810', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scorpaena porcus', E'Linnaeus, 1758', E'Rascasse brune', E'20745', DEFAULT, DEFAULT, E'370', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scorpaena porcus', E'Linnaeus, 1758', E'Rascasse brune', E'20745', DEFAULT, DEFAULT, E'370', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scyliorhinus canicula', E'Linnaeus, 1758', E'Petite roussette', E'3609', DEFAULT, DEFAULT, E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scyliorhinus canicula', E'Linnaeus, 1758', E'Petite roussette', E'3609', DEFAULT, DEFAULT, E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scyliorhinus stellaris', E'Linnaeus, 1758', E'Grande roussette', E'3610', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Scyliorhinus stellaris', E'Linnaeus, 1758', E'Grande roussette', E'3610', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepia', E'Linnaeus, 1758', E'Seiches', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepia', E'Linnaeus, 1758', E'Seiches', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepia officinalis', E'Linnaeus, 1758', E'Seiche commune', DEFAULT, DEFAULT, E'SEI', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepia officinalis', E'Linnaeus, 1758', E'Seiche commune', DEFAULT, DEFAULT, E'SEI', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepiola', E'Leach, 1817', E'Sépioles', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepiola', E'Leach, 1817', E'Sépioles', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepiola atlantica', E'Orbigny 1840', E'Sépiole grandes oreilles', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepiola atlantica', E'Orbigny 1840', E'Sépiole grandes oreilles', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepiola rondeleti', E'Leach, 1817', E'Sepiole rondeleti', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sepiola rondeleti', E'Leach, 1817', E'Sepiole rondeleti', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Serranus hepatus', E'Linné, 1758', E'Serran tambour', E'3479', DEFAULT, DEFAULT, E'250', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Serranus hepatus', E'Linné, 1758', E'Serran tambour', E'3479', DEFAULT, DEFAULT, E'250', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sicyonia carinata', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sicyonia carinata', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Silurus', E'Linnaeus, 1758', E'Silures nca', E'2237', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Silurus', E'Linnaeus, 1758', E'Silures nca', E'2237', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea', E'Quensel 1806', E'Soles', E'2240', DEFAULT, E'SOL', E'650', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea', E'Quensel 1806', E'Soles', E'2240', DEFAULT, E'SOL', E'650', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea aegyptiaca', E'Chabanaud, 1927', E'Sole egyptienne', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea aegyptiaca', E'Chabanaud, 1927', E'Sole egyptienne', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea lascaris', DEFAULT, E'Sole pole', DEFAULT, DEFAULT, E'SOS', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea lascaris', DEFAULT, E'Sole pole', DEFAULT, DEFAULT, E'SOS', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea senegalensis', E'Kaup 1858', E'Sole sénégalaise', E'3541', DEFAULT, E'SOX', E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea senegalensis', E'Kaup 1858', E'Sole sénégalaise', E'3541', DEFAULT, E'SOX', E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea solea', E'Linnaeus, 1758', E'Sole', E'2241', E'SOL', DEFAULT, E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea solea', E'Linnaeus, 1758', E'Sole', E'2241', E'SOL', DEFAULT, E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea vulgaris', E'Quensel 1806', E'Sole commune', DEFAULT, DEFAULT, E'SOL', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Solea vulgaris', E'Quensel 1806', E'Sole commune', DEFAULT, DEFAULT, E'SOL', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sparidae', DEFAULT, E'sparidés nca', E'3481', DEFAULT, DEFAULT, E'4807', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sparidae', DEFAULT, E'sparidés nca', E'3481', DEFAULT, DEFAULT, E'4807', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sparus aurata', E'Linnaeus, 1758', E'Dorade royale', E'3490', DEFAULT, E'DRO', E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sparus aurata', E'Linnaeus, 1758', E'Dorade royale', E'3490', DEFAULT, E'DRO', E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Spicara smaris', E'Linnaeus, 1758', E'Picarel', E'3449', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Spicara smaris', E'Linnaeus, 1758', E'Picarel', E'3449', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Spinachia spinachia', E'Linnaeus, 1758', E'Epinoche de mer', E'19452', DEFAULT, DEFAULT, E'191', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Spinachia spinachia', E'Linnaeus, 1758', E'Epinoche de mer', E'19452', DEFAULT, DEFAULT, E'191', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Spondyliosoma cantharus', E'Linnaeus, 1758', E'Griset', E'3492', DEFAULT, E'BRD', E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Spondyliosoma cantharus', E'Linnaeus, 1758', E'Griset', E'3492', DEFAULT, E'BRD', E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sp.', E'Girgensohn 1846', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sp.', E'Girgensohn 1846', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sprattus', E'Linnaeus, 1758', E'Sprat', E'2064', E'SPT', E'SPT', E'160', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Sprattus sprattus', E'Linnaeus, 1758', E'Sprat', E'2064', E'SPT', E'SPT', E'160', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalus acanthias', E'Linnaeus, 1758', E'Aiguillat commun', E'3614', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Squalus acanthias', E'Linnaeus, 1758', E'Aiguillat commun', E'3614', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Stizostedion lucioperca', DEFAULT, E'Sandre', DEFAULT, DEFAULT, E'SAN', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Stizostedion lucioperca', DEFAULT, E'Sandre', DEFAULT, DEFAULT, E'SAN', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus bailloni', E'Valenciennes in Cuv. & Val., 1839', E'Crénilabre grelue', E'19443', DEFAULT, DEFAULT, E'210', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus bailloni', E'Valenciennes in Cuv. & Val., 1839', E'Crénilabre grelue', E'19443', DEFAULT, DEFAULT, E'210', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus cinereus', E'(Bonnaterre), 1788', E'Crénilabre balafré', E'19449', DEFAULT, DEFAULT, E'160', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus cinereus', E'(Bonnaterre), 1788', E'Crénilabre balafré', E'19449', DEFAULT, DEFAULT, E'160', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus melops', E'Linnaeus, 1758', E'Crénilabre melops', E'3466', DEFAULT, DEFAULT, E'240', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus melops', E'Linnaeus, 1758', E'Crénilabre melops', E'3466', DEFAULT, DEFAULT, E'240', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus ocellatus', E'(Forsskål, 1775)', E'Crénilabre ocellé', E'19448', DEFAULT, DEFAULT, E'120', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus ocellatus', E'(Forsskål, 1775)', E'Crénilabre ocellé', E'19448', DEFAULT, DEFAULT, E'120', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus roissali', E'Risso 1810', E'Crénilabre langaneu', E'19447', DEFAULT, DEFAULT, E'170', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus roissali', E'Risso 1810', E'Crénilabre langaneu', E'19447', DEFAULT, DEFAULT, E'170', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus tinca', E'Linnaeus, 1758', E'Crénilabre paon', E'19450', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Symphodus tinca', E'Linnaeus, 1758', E'Crénilabre paon', E'19450', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Synapturichthys kleinii', E'Risso, 1827', E'Sole tachetée', E'25284', DEFAULT, DEFAULT, E'420', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Synapturichthys kleinii', E'Risso, 1827', E'Sole tachetée', E'25284', DEFAULT, DEFAULT, E'420', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Synchiropus phaeton', E'(Günther 1861)', E'Callionyme paille-en-queue', E'19445', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Synchiropus phaeton', E'(Günther 1861)', E'Callionyme paille-en-queue', E'19445', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathidae', DEFAULT, E'Syngnathes', E'2242', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathidae', DEFAULT, E'Syngnathes', E'2242', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus', E'Linnaeus, 1758', E'Syngnathes', E'2243', DEFAULT, DEFAULT, E'2975', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus', E'Linnaeus, 1758', E'Syngnathes', E'2243', DEFAULT, DEFAULT, E'2975', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus abaster', E'Risso 1827', E'Syngnathe gorge claire', E'19444', DEFAULT, DEFAULT, E'210', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus abaster', E'Risso 1827', E'Syngnathe gorge claire', E'19444', DEFAULT, DEFAULT, E'210', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus acus', E'Linnaeus, 1758', E'Syngnathe aiguille', E'2244', E'SYN', DEFAULT, E'20', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus acus', E'Linnaeus, 1758', E'Syngnathe aiguille', E'2244', E'SYN', DEFAULT, E'20', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus rostellatus', E'Nilsson 1855', E'Syngnathe de Duméril', E'3570', DEFAULT, E'SYN', E'205', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus rostellatus', E'Nilsson 1855', E'Syngnathe de Duméril', E'3570', DEFAULT, E'SYN', E'205', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus taenionotus', E'Canestrini 1871', E'Syngnathe taenionotus', E'19459', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus taenionotus', E'Canestrini 1871', E'Syngnathe taenionotus', E'19459', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus typhle', E'Linnaeus, 1758', E'Siphonostome', E'3571', DEFAULT, DEFAULT, E'360', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus typhle', E'Linnaeus, 1758', E'Siphonostome', E'3571', DEFAULT, DEFAULT, E'360', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus typhle typhle', E'Linnaeus, 1758', E'Siphonostome atlantique', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Syngnathus typhle typhle', E'Linnaeus, 1758', E'Siphonostome atlantique', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Taurulus bubalis', E'Euphrasen 1786', E'Chabot buffle', E'3548', DEFAULT, DEFAULT, E'175', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Taurulus bubalis', E'Euphrasen 1786', E'Chabot buffle', E'3548', DEFAULT, DEFAULT, E'175', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Thorogobius ephippiatus', DEFAULT, E'gobie léopard', DEFAULT, DEFAULT, DEFAULT, E'129', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Thorogobius ephippiatus', DEFAULT, E'gobie léopard', DEFAULT, DEFAULT, DEFAULT, E'129', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tinca sp.', E'Cuvier 1817', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tinca sp.', E'Cuvier 1817', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Torpedo marmorata', E'Risso 1810', E'Torpille marbrée', E'19461', DEFAULT, E'TOE', E'612', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Torpedo marmorata', E'Risso 1810', E'Torpille marbrée', E'19461', DEFAULT, E'TOE', E'612', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Torpedo torpedo', E'Linné, 1758', E'Torpille ocelée', E'25287', DEFAULT, DEFAULT, E'550', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Torpedo torpedo', E'Linné, 1758', E'Torpille ocelée', E'25287', DEFAULT, DEFAULT, E'550', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trachinotus ovatus', E'Linnaeus, 1758', E'Liche glauque', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trachinotus ovatus', E'Linnaeus, 1758', E'Liche glauque', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trachinus draco', E'Linnaeus, 1758', E'Grande vive', E'3498', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trachinus draco', E'Linnaeus, 1758', E'Grande vive', E'3498', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trachurus trachurus', E'Linnaeus, 1758', E'Chinchard d''Europe', E'3375', DEFAULT, E'HOM', E'700', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trachurus trachurus', E'Linnaeus, 1758', E'Chinchard d''Europe', E'3375', DEFAULT, E'HOM', E'700', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trigla', E'Linnaeus, 1758', E'Grondins nca', E'3562', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trigla', E'Linnaeus, 1758', E'Grondins nca', E'3562', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trigla lucerna', DEFAULT, E'Grondin perlon', DEFAULT, DEFAULT, E'GUP', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trigla lucerna', DEFAULT, E'Grondin perlon', DEFAULT, DEFAULT, E'GUP', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trigla lyra', E'Linnaeus, 1758', E'Grondin lyre', E'19455', DEFAULT, DEFAULT, E'600', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trigla lyra', E'Linnaeus, 1758', E'Grondin lyre', E'19455', DEFAULT, DEFAULT, E'600', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Triglidae', DEFAULT, E'Grondins, cavillones nca', E'3557', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Triglidae', DEFAULT, E'Grondins, cavillones nca', E'3557', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tripterygion delaisi', E'Cadenat & Blache, 1970', E'Triptérygion commun', E'19454', DEFAULT, DEFAULT, E'89', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Tripterygion delaisi', E'Cadenat & Blache, 1970', E'Triptérygion commun', E'19454', DEFAULT, DEFAULT, E'89', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus', E'Rafinesque, 1814', E'Tacaud nca', E'2161', DEFAULT, DEFAULT, E'430', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus', E'Rafinesque, 1814', E'Tacaud nca', E'2161', DEFAULT, DEFAULT, E'430', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus esmarkii', E'Nilsson 1855', E'Tacaud norvégien', E'3404', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus esmarkii', E'Nilsson 1855', E'Tacaud norvégien', E'3404', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus luscus', E'Linnaeus, 1758', E'Tacaud commun', E'2162', E'TAD', E'BIB', E'460', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus luscus', E'Linnaeus, 1758', E'Tacaud commun', E'2162', E'TAD', E'BIB', E'460', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus minutus', E'Linnaeus, 1758', E'Capelan', E'3406', DEFAULT, DEFAULT, E'400', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Trisopterus minutus', E'Linnaeus, 1758', E'Capelan', E'3406', DEFAULT, DEFAULT, E'400', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina', E'Cuvier, 1816', E'Ombrine nca', E'19435', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina', E'Cuvier, 1816', E'Ombrine nca', E'19435', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina canariensis', E'Valenciennes 1843', E'Ombrine bronze', E'19456', DEFAULT, E'UMBB', E'800', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina canariensis', E'Valenciennes 1843', E'Ombrine bronze', E'19456', DEFAULT, E'UMBB', E'800', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina cirrosa', E'Linnaeus, 1758', E'Ombrine côtière', E'19457', DEFAULT, E'UMBC', E'1000', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina cirrosa', E'Linnaeus, 1758', E'Ombrine côtière', E'19457', DEFAULT, E'UMBC', E'1000', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina sp.', DEFAULT, E'Ombrine sp.', DEFAULT, DEFAULT, E'UMB', DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Umbrina sp.', DEFAULT, E'Ombrine sp.', DEFAULT, DEFAULT, E'UMB', DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Upogebia pusilla', E'Petagna, 1792', E'Crevette fouisseuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Upogebia pusilla', E'Petagna, 1792', E'Crevette fouisseuse', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Xantho incisus', E'Herbst, 1790', E'Crabe de pierre', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Xantho incisus', E'Herbst, 1790', E'Crabe de pierre', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zebrus zebrus', E'Risso, 1827', E'Gobie zébré', E'19446', DEFAULT, DEFAULT, E'55', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zebrus zebrus', E'Risso, 1827', E'Gobie zébré', E'19446', DEFAULT, DEFAULT, E'55', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zeugopterus punctatus', E'Bloch 1787', E'Targeur', E'3533', DEFAULT, DEFAULT, E'270', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zeugopterus punctatus', E'Bloch 1787', E'Targeur', E'3533', DEFAULT, DEFAULT, E'270', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zeus faber', E'Linnaeus, 1758', E'Saint Pierre', E'3577', DEFAULT, DEFAULT, E'590', DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zeus faber', E'Linnaeus, 1758', E'Saint Pierre', E'3577', DEFAULT, DEFAULT, E'590', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zoarces viviparus', E'Linnaeus, 1758', E'Loquette d''Europe', E'3501', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zoarces viviparus', E'Linnaeus, 1758', E'Loquette d''Europe', E'3501', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
-INSERT INTO filo.taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zosterisessor ophiocephalus', E'Pallas 1814', E'Gobie lotte', E'19462', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO taxon (scientific_name, author, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max) VALUES (E'Zosterisessor ophiocephalus', E'Pallas 1814', E'Gobie lotte', E'19462', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 -- ddl-end --
 
--- object: filo.operation | type: TABLE --
--- DROP TABLE IF EXISTS filo.operation CASCADE;
-CREATE TABLE filo.operation (
-	operation_id integer NOT NULL DEFAULT nextval('filo.operation_operation_id_seq'::regclass),
+-- object: operation | type: TABLE --
+-- DROP TABLE IF EXISTS operation CASCADE;
+CREATE TABLE operation (
+	operation_id integer NOT NULL DEFAULT nextval('operation_operation_id_seq'::regclass),
 	campaign_id integer NOT NULL,
 	operation_name varchar,
 	date_start timestamp NOT NULL,
@@ -1246,56 +1248,56 @@ CREATE TABLE filo.operation (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.operation IS 'Description of operation';
+COMMENT ON TABLE operation IS 'Description of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.operation_id IS 'Operations rattached at a campaign';
+COMMENT ON COLUMN operation.operation_id IS 'Operations rattached at a campaign';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.operation_name IS 'Name of operation';
+COMMENT ON COLUMN operation.operation_name IS 'Name of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.date_start IS 'Start date of operation';
+COMMENT ON COLUMN operation.date_start IS 'Start date of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.date_end IS 'Date of end of operation';
+COMMENT ON COLUMN operation.date_end IS 'Date of end of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.freshwater IS 'Is the operation in fresh water ?';
+COMMENT ON COLUMN operation.freshwater IS 'Is the operation in fresh water ?';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.long_start IS 'Longitude of the first point, in wgs84 (decimal)';
+COMMENT ON COLUMN operation.long_start IS 'Longitude of the first point, in wgs84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.lat_start IS 'Latitude of the first point, in WGS84 (decimal)';
+COMMENT ON COLUMN operation.lat_start IS 'Latitude of the first point, in WGS84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.long_end IS 'Longitude of the last point, in WGS84 (decimal)';
+COMMENT ON COLUMN operation.long_end IS 'Longitude of the last point, in WGS84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.lat_end IS 'Latitude of the last point, in WGS84 (decimal)';
+COMMENT ON COLUMN operation.lat_end IS 'Latitude of the last point, in WGS84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.pk_source IS 'Distance from the source, in meter';
+COMMENT ON COLUMN operation.pk_source IS 'Distance from the source, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.pk_mouth IS 'Distance from the mouth, in meter';
+COMMENT ON COLUMN operation.pk_mouth IS 'Distance from the mouth, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.length IS 'Length of the sampled zone, in meter';
+COMMENT ON COLUMN operation.length IS 'Length of the sampled zone, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.side IS 'Position in the river (left side, central, right side, etc.)';
+COMMENT ON COLUMN operation.side IS 'Position in the river (left side, central, right side, etc.)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.altitude IS 'Altitude, in meter';
+COMMENT ON COLUMN operation.altitude IS 'Altitude, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.tidal_coef IS 'Tidal coefficient or water high of the tidal';
+COMMENT ON COLUMN operation.tidal_coef IS 'Tidal coefficient or water high of the tidal';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.debit IS 'Debit of the river, in m³/s';
+COMMENT ON COLUMN operation.debit IS 'Debit of the river, in m³/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.surface IS 'Surface parsed, in square meters';
+COMMENT ON COLUMN operation.surface IS 'Surface parsed, in square meters';
 -- ddl-end --
-ALTER TABLE filo.operation OWNER TO filo;
+ALTER TABLE operation OWNER TO filo;
 -- ddl-end --
 
 -- object: campaign_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS campaign_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT campaign_fk FOREIGN KEY (campaign_id)
-REFERENCES filo.campaign (campaign_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS campaign_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT campaign_fk FOREIGN KEY (campaign_id)
+REFERENCES campaign (campaign_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.sequence | type: TABLE --
--- DROP TABLE IF EXISTS filo.sequence CASCADE;
-CREATE TABLE filo.sequence (
-	sequence_id integer NOT NULL DEFAULT nextval('filo.place_place_id_seq'::regclass),
+-- object: sequence | type: TABLE --
+-- DROP TABLE IF EXISTS sequence CASCADE;
+CREATE TABLE sequence (
+	sequence_id integer NOT NULL DEFAULT nextval('place_place_id_seq'::regclass),
 	operation_id integer NOT NULL,
 	sequence_number smallint,
 	date_start timestamp NOT NULL,
@@ -1305,30 +1307,30 @@ CREATE TABLE filo.sequence (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.sequence IS 'Catching sequence';
+COMMENT ON TABLE sequence IS 'Catching sequence';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.sequence_number IS 'Number of sequence in the operation';
+COMMENT ON COLUMN sequence.sequence_number IS 'Number of sequence in the operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.date_start IS 'Start time of fishing at this place';
+COMMENT ON COLUMN sequence.date_start IS 'Start time of fishing at this place';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.date_end IS 'End time of fishing at this place';
+COMMENT ON COLUMN sequence.date_end IS 'End time of fishing at this place';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.fishing_duration IS 'Fishing duration, in mn';
+COMMENT ON COLUMN sequence.fishing_duration IS 'Fishing duration, in mn';
 -- ddl-end --
-ALTER TABLE filo.sequence OWNER TO filo;
+ALTER TABLE sequence OWNER TO filo;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sequence DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
-ALTER TABLE filo.sequence ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
-REFERENCES filo.operation (operation_id) MATCH FULL
+-- ALTER TABLE sequence DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
+ALTER TABLE sequence ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
+REFERENCES operation (operation_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.sample | type: TABLE --
--- DROP TABLE IF EXISTS filo.sample CASCADE;
-CREATE TABLE filo.sample (
-	sample_id integer NOT NULL DEFAULT nextval('filo.sample_sample_id_seq'::regclass),
+-- object: sample | type: TABLE --
+-- DROP TABLE IF EXISTS sample CASCADE;
+CREATE TABLE sample (
+	sample_id integer NOT NULL DEFAULT nextval('sample_sample_id_seq'::regclass),
 	sequence_id integer NOT NULL,
 	taxon_name varchar NOT NULL,
 	total_number smallint NOT NULL DEFAULT 1,
@@ -1342,41 +1344,41 @@ CREATE TABLE filo.sample (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.sample IS 'List of samplings. One or many for a taxon';
+COMMENT ON TABLE sample IS 'List of samplings. One or many for a taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.taxon_name IS 'Name of the taxon, issued from the table of taxa or created if a new taxon discovered';
+COMMENT ON COLUMN sample.taxon_name IS 'Name of the taxon, issued from the table of taxa or created if a new taxon discovered';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.total_number IS 'Total number of catched elements
+COMMENT ON COLUMN sample.total_number IS 'Total number of catched elements
 0 : presence of the taxon, but number not estimated';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.total_measured IS 'Number of elements measured';
+COMMENT ON COLUMN sample.total_measured IS 'Number of elements measured';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.total_weight IS 'Total weight, in g';
+COMMENT ON COLUMN sample.total_weight IS 'Total weight, in g';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.sample_size_min IS 'Minimal size of fishes in this sample, in mm';
+COMMENT ON COLUMN sample.sample_size_min IS 'Minimal size of fishes in this sample, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.sample_size_max IS 'Maximal size of fishes in this sample, in mm';
+COMMENT ON COLUMN sample.sample_size_max IS 'Maximal size of fishes in this sample, in mm';
 -- ddl-end --
-ALTER TABLE filo.sample OWNER TO filo;
+ALTER TABLE sample OWNER TO filo;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sample DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
-ALTER TABLE filo.sample ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
-REFERENCES filo.sequence (sequence_id) MATCH FULL
+-- ALTER TABLE sample DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
+ALTER TABLE sample ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
+REFERENCES sequence (sequence_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: taxon_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sample DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
-ALTER TABLE filo.sample ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
-REFERENCES filo.taxon (taxon_id) MATCH FULL
+-- ALTER TABLE sample DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
+ALTER TABLE sample ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
+REFERENCES taxon (taxon_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.item_item_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.item_item_id_seq CASCADE;
-CREATE SEQUENCE filo.item_item_id_seq
+-- object: item_item_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS item_item_id_seq CASCADE;
+CREATE SEQUENCE item_item_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1385,13 +1387,13 @@ CREATE SEQUENCE filo.item_item_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.item_item_id_seq OWNER TO filo;
+ALTER SEQUENCE item_item_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.individual | type: TABLE --
--- DROP TABLE IF EXISTS filo.individual CASCADE;
-CREATE TABLE filo.individual (
-	individual_id integer NOT NULL DEFAULT nextval('filo.item_item_id_seq'::regclass),
+-- object: individual | type: TABLE --
+-- DROP TABLE IF EXISTS individual CASCADE;
+CREATE TABLE individual (
+	individual_id integer NOT NULL DEFAULT nextval('item_item_id_seq'::regclass),
 	sample_id integer NOT NULL,
 	other_measure json,
 	sl float,
@@ -1412,45 +1414,45 @@ CREATE TABLE filo.individual (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.individual IS 'List of individuals measured';
+COMMENT ON TABLE individual IS 'List of individuals measured';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.other_measure IS 'List of others measures realized on an item';
+COMMENT ON COLUMN individual.other_measure IS 'List of others measures realized on an item';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.sl IS 'Standard length, in mm';
+COMMENT ON COLUMN individual.sl IS 'Standard length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.fl IS 'Fork length, in mm';
+COMMENT ON COLUMN individual.fl IS 'Fork length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.tl IS 'Total length, in mm';
+COMMENT ON COLUMN individual.tl IS 'Total length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.wd IS 'Width of disk, in mm';
+COMMENT ON COLUMN individual.wd IS 'Width of disk, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.ot IS 'Other length, in mm';
+COMMENT ON COLUMN individual.ot IS 'Other length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.weight IS 'Weight, in g';
+COMMENT ON COLUMN individual.weight IS 'Weight, in g';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.age IS 'Age of fish, in year';
+COMMENT ON COLUMN individual.age IS 'Age of fish, in year';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.measure_estimated IS 'Is the measure estimated ?';
+COMMENT ON COLUMN individual.measure_estimated IS 'Is the measure estimated ?';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.pathology_codes IS 'List of codes of pathologies or remarks';
+COMMENT ON COLUMN individual.pathology_codes IS 'List of codes of pathologies or remarks';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.tag IS 'Read tag';
+COMMENT ON COLUMN individual.tag IS 'Read tag';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.tag_posed IS 'Tag posed on the fish';
+COMMENT ON COLUMN individual.tag_posed IS 'Tag posed on the fish';
 -- ddl-end --
-ALTER TABLE filo.individual OWNER TO filo;
+ALTER TABLE individual OWNER TO filo;
 -- ddl-end --
 
 -- object: sample_fk | type: CONSTRAINT --
--- ALTER TABLE filo.individual DROP CONSTRAINT IF EXISTS sample_fk CASCADE;
-ALTER TABLE filo.individual ADD CONSTRAINT sample_fk FOREIGN KEY (sample_id)
-REFERENCES filo.sample (sample_id) MATCH FULL
+-- ALTER TABLE individual DROP CONSTRAINT IF EXISTS sample_fk CASCADE;
+ALTER TABLE individual ADD CONSTRAINT sample_fk FOREIGN KEY (sample_id)
+REFERENCES sample (sample_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.measure_template_measure_template_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.measure_template_measure_template_id_seq CASCADE;
-CREATE SEQUENCE filo.measure_template_measure_template_id_seq
+-- object: measure_template_measure_template_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS measure_template_measure_template_id_seq CASCADE;
+CREATE SEQUENCE measure_template_measure_template_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1459,13 +1461,13 @@ CREATE SEQUENCE filo.measure_template_measure_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.measure_template_measure_template_id_seq OWNER TO filo;
+ALTER SEQUENCE measure_template_measure_template_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.measure_template | type: TABLE --
--- DROP TABLE IF EXISTS filo.measure_template CASCADE;
-CREATE TABLE filo.measure_template (
-	measure_template_id integer NOT NULL DEFAULT nextval('filo.measure_template_measure_template_id_seq'::regclass),
+-- object: measure_template | type: TABLE --
+-- DROP TABLE IF EXISTS measure_template CASCADE;
+CREATE TABLE measure_template (
+	measure_template_id integer NOT NULL DEFAULT nextval('measure_template_measure_template_id_seq'::regclass),
 	measure_template_name smallint NOT NULL,
 	measure_template_value json,
 	taxon_id integer NOT NULL,
@@ -1473,16 +1475,16 @@ CREATE TABLE filo.measure_template (
 
 );
 -- ddl-end --
-COMMENT ON COLUMN filo.measure_template.measure_template_value IS 'List of all measures usable by a taxon.
+COMMENT ON COLUMN measure_template.measure_template_value IS 'List of all measures usable by a taxon.
 For each type : name, extended.
 By default : total_length and weight';
 -- ddl-end --
-ALTER TABLE filo.measure_template OWNER TO filo;
+ALTER TABLE measure_template OWNER TO filo;
 -- ddl-end --
 
--- object: filo.operation_template_operation_template_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.operation_template_operation_template_id_seq CASCADE;
-CREATE SEQUENCE filo.operation_template_operation_template_id_seq
+-- object: operation_template_operation_template_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS operation_template_operation_template_id_seq CASCADE;
+CREATE SEQUENCE operation_template_operation_template_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1491,12 +1493,12 @@ CREATE SEQUENCE filo.operation_template_operation_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.operation_template_operation_template_id_seq OWNER TO filo;
+ALTER SEQUENCE operation_template_operation_template_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.item_generated_item_generated_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.item_generated_item_generated_id_seq CASCADE;
-CREATE SEQUENCE filo.item_generated_item_generated_id_seq
+-- object: item_generated_item_generated_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS item_generated_item_generated_id_seq CASCADE;
+CREATE SEQUENCE item_generated_item_generated_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1505,12 +1507,12 @@ CREATE SEQUENCE filo.item_generated_item_generated_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.item_generated_item_generated_id_seq OWNER TO filo;
+ALTER SEQUENCE item_generated_item_generated_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.gear_gear_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.gear_gear_id_seq CASCADE;
-CREATE SEQUENCE filo.gear_gear_id_seq
+-- object: gear_gear_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS gear_gear_id_seq CASCADE;
+CREATE SEQUENCE gear_gear_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1519,12 +1521,12 @@ CREATE SEQUENCE filo.gear_gear_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.gear_gear_id_seq OWNER TO filo;
+ALTER SEQUENCE gear_gear_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.sequence_gear_sequence_gear_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.sequence_gear_sequence_gear_id_seq CASCADE;
-CREATE SEQUENCE filo.sequence_gear_sequence_gear_id_seq
+-- object: sequence_gear_sequence_gear_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS sequence_gear_sequence_gear_id_seq CASCADE;
+CREATE SEQUENCE sequence_gear_sequence_gear_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1533,13 +1535,13 @@ CREATE SEQUENCE filo.sequence_gear_sequence_gear_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.sequence_gear_sequence_gear_id_seq OWNER TO filo;
+ALTER SEQUENCE sequence_gear_sequence_gear_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.gear | type: TABLE --
--- DROP TABLE IF EXISTS filo.gear CASCADE;
-CREATE TABLE filo.gear (
-	gear_id integer NOT NULL DEFAULT nextval('filo.gear_gear_id_seq'::regclass),
+-- object: gear | type: TABLE --
+-- DROP TABLE IF EXISTS gear CASCADE;
+CREATE TABLE gear (
+	gear_id integer NOT NULL DEFAULT nextval('gear_gear_id_seq'::regclass),
 	gear_name varchar NOT NULL,
 	gear_length float,
 	gear_height float,
@@ -1548,21 +1550,21 @@ CREATE TABLE filo.gear (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.gear IS 'Gear used for fishery';
+COMMENT ON TABLE gear IS 'Gear used for fishery';
 -- ddl-end --
-COMMENT ON COLUMN filo.gear.gear_length IS 'Length of the net or other gear, in metter';
+COMMENT ON COLUMN gear.gear_length IS 'Length of the net or other gear, in metter';
 -- ddl-end --
-COMMENT ON COLUMN filo.gear.gear_height IS 'Height of the net or other gear, in metter';
+COMMENT ON COLUMN gear.gear_height IS 'Height of the net or other gear, in metter';
 -- ddl-end --
-COMMENT ON COLUMN filo.gear.mesh_size IS 'Size of the mesh, in textual form';
+COMMENT ON COLUMN gear.mesh_size IS 'Size of the mesh, in textual form';
 -- ddl-end --
-ALTER TABLE filo.gear OWNER TO filo;
+ALTER TABLE gear OWNER TO filo;
 -- ddl-end --
 
--- object: filo.sequence_gear | type: TABLE --
--- DROP TABLE IF EXISTS filo.sequence_gear CASCADE;
-CREATE TABLE filo.sequence_gear (
-	sequence_gear_id integer NOT NULL DEFAULT nextval('filo.sequence_gear_sequence_gear_id_seq'::regclass),
+-- object: sequence_gear | type: TABLE --
+-- DROP TABLE IF EXISTS sequence_gear CASCADE;
+CREATE TABLE sequence_gear (
+	sequence_gear_id integer NOT NULL DEFAULT nextval('sequence_gear_sequence_gear_id_seq'::regclass),
 	voltage float,
 	amperage float,
 	gear_nb smallint NOT NULL DEFAULT 1,
@@ -1575,22 +1577,22 @@ CREATE TABLE filo.sequence_gear (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.sequence_gear IS 'List of gear used during operation';
+COMMENT ON TABLE sequence_gear IS 'List of gear used during operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.voltage IS 'Voltage used during electric fishing, in volt';
+COMMENT ON COLUMN sequence_gear.voltage IS 'Voltage used during electric fishing, in volt';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.amperage IS 'Amperage used during electric fishing, in ampere';
+COMMENT ON COLUMN sequence_gear.amperage IS 'Amperage used during electric fishing, in ampere';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.gear_nb IS 'Nb of gears';
+COMMENT ON COLUMN sequence_gear.gear_nb IS 'Nb of gears';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.depth IS 'Depth of the gear';
+COMMENT ON COLUMN sequence_gear.depth IS 'Depth of the gear';
 -- ddl-end --
-ALTER TABLE filo.sequence_gear OWNER TO filo;
+ALTER TABLE sequence_gear OWNER TO filo;
 -- ddl-end --
 
--- object: filo.engine_engine_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.engine_engine_id_seq CASCADE;
-CREATE SEQUENCE filo.engine_engine_id_seq
+-- object: engine_engine_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS engine_engine_id_seq CASCADE;
+CREATE SEQUENCE engine_engine_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1599,12 +1601,12 @@ CREATE SEQUENCE filo.engine_engine_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.engine_engine_id_seq OWNER TO filo;
+ALTER SEQUENCE engine_engine_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.river_river_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.river_river_id_seq CASCADE;
-CREATE SEQUENCE filo.river_river_id_seq
+-- object: river_river_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS river_river_id_seq CASCADE;
+CREATE SEQUENCE river_river_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1613,47 +1615,47 @@ CREATE SEQUENCE filo.river_river_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.river_river_id_seq OWNER TO filo;
+ALTER SEQUENCE river_river_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.river | type: TABLE --
--- DROP TABLE IF EXISTS filo.river CASCADE;
-CREATE TABLE filo.river (
-	river_id integer NOT NULL DEFAULT nextval('filo.river_river_id_seq'::regclass),
+-- object: river | type: TABLE --
+-- DROP TABLE IF EXISTS river CASCADE;
+CREATE TABLE river (
+	river_id integer NOT NULL DEFAULT nextval('river_river_id_seq'::regclass),
 	river_name varchar NOT NULL,
 	CONSTRAINT river_pk PRIMARY KEY (river_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.river IS 'River, estuary, sea...';
+COMMENT ON TABLE river IS 'River, estuary, sea...';
 -- ddl-end --
-ALTER TABLE filo.river OWNER TO filo;
+ALTER TABLE river OWNER TO filo;
 -- ddl-end --
 
 -- object: river_fk | type: CONSTRAINT --
--- ALTER TABLE filo.station DROP CONSTRAINT IF EXISTS river_fk CASCADE;
-ALTER TABLE filo.station ADD CONSTRAINT river_fk FOREIGN KEY (river_id)
-REFERENCES filo.river (river_id) MATCH FULL
+-- ALTER TABLE station DROP CONSTRAINT IF EXISTS river_fk CASCADE;
+ALTER TABLE station ADD CONSTRAINT river_fk FOREIGN KEY (river_id)
+REFERENCES river (river_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sequence_gear DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
-ALTER TABLE filo.sequence_gear ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
-REFERENCES filo.sequence (sequence_id) MATCH FULL
+-- ALTER TABLE sequence_gear DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
+ALTER TABLE sequence_gear ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
+REFERENCES sequence (sequence_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: gear_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sequence_gear DROP CONSTRAINT IF EXISTS gear_fk CASCADE;
-ALTER TABLE filo.sequence_gear ADD CONSTRAINT gear_fk FOREIGN KEY (gear_id)
-REFERENCES filo.gear (gear_id) MATCH FULL
+-- ALTER TABLE sequence_gear DROP CONSTRAINT IF EXISTS gear_fk CASCADE;
+ALTER TABLE sequence_gear ADD CONSTRAINT gear_fk FOREIGN KEY (gear_id)
+REFERENCES gear (gear_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.analysis_analysis_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.analysis_analysis_id_seq CASCADE;
-CREATE SEQUENCE filo.analysis_analysis_id_seq
+-- object: analysis_analysis_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS analysis_analysis_id_seq CASCADE;
+CREATE SEQUENCE analysis_analysis_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1662,13 +1664,13 @@ CREATE SEQUENCE filo.analysis_analysis_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.analysis_analysis_id_seq OWNER TO filo;
+ALTER SEQUENCE analysis_analysis_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.analysis | type: TABLE --
--- DROP TABLE IF EXISTS filo.analysis CASCADE;
-CREATE TABLE filo.analysis (
-	analysis_id integer NOT NULL DEFAULT nextval('filo.analysis_analysis_id_seq'::regclass),
+-- object: analysis | type: TABLE --
+-- DROP TABLE IF EXISTS analysis CASCADE;
+CREATE TABLE analysis (
+	analysis_id integer NOT NULL DEFAULT nextval('analysis_analysis_id_seq'::regclass),
 	sequence_id integer NOT NULL,
 	analysis_date timestamp NOT NULL,
 	ph float,
@@ -1683,39 +1685,39 @@ CREATE TABLE filo.analysis (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.analysis IS 'Water analysis';
+COMMENT ON TABLE analysis IS 'Water analysis';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.analysis_date IS 'Date/time of the sampling';
+COMMENT ON COLUMN analysis.analysis_date IS 'Date/time of the sampling';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.ph IS 'pH';
+COMMENT ON COLUMN analysis.ph IS 'pH';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.temperature IS 'Temperature, in °C';
+COMMENT ON COLUMN analysis.temperature IS 'Temperature, in °C';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.o2_pc IS 'Percentage of oxygen saturation';
+COMMENT ON COLUMN analysis.o2_pc IS 'Percentage of oxygen saturation';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.o2_mg IS 'Oxygen level, in mg/l';
+COMMENT ON COLUMN analysis.o2_mg IS 'Oxygen level, in mg/l';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.salinity IS 'Salinity';
+COMMENT ON COLUMN analysis.salinity IS 'Salinity';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.conductivity IS 'Conductivity, in µS/cm';
+COMMENT ON COLUMN analysis.conductivity IS 'Conductivity, in µS/cm';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.secchi IS 'Secchi depth, in meter';
+COMMENT ON COLUMN analysis.secchi IS 'Secchi depth, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.other_analysis IS 'Others analysis performed (cf. analysis_template)';
+COMMENT ON COLUMN analysis.other_analysis IS 'Others analysis performed (cf. analysis_template)';
 -- ddl-end --
-ALTER TABLE filo.analysis OWNER TO filo;
+ALTER TABLE analysis OWNER TO filo;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
--- ALTER TABLE filo.analysis DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
-ALTER TABLE filo.analysis ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
-REFERENCES filo.sequence (sequence_id) MATCH FULL
+-- ALTER TABLE analysis DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
+ALTER TABLE analysis ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
+REFERENCES sequence (sequence_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.sexe | type: TABLE --
--- DROP TABLE IF EXISTS filo.sexe CASCADE;
-CREATE TABLE filo.sexe (
+-- object: sexe | type: TABLE --
+-- DROP TABLE IF EXISTS sexe CASCADE;
+CREATE TABLE sexe (
 	sexe_id integer NOT NULL,
 	sexe_name varchar NOT NULL,
 	sexe_code varchar NOT NULL,
@@ -1723,32 +1725,32 @@ CREATE TABLE filo.sexe (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.sexe IS 'Sexe of fishs';
+COMMENT ON TABLE sexe IS 'Sexe of fishs';
 -- ddl-end --
-COMMENT ON COLUMN filo.sexe.sexe_code IS 'Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437';
+COMMENT ON COLUMN sexe.sexe_code IS 'Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437';
 -- ddl-end --
-ALTER TABLE filo.sexe OWNER TO filo;
+ALTER TABLE sexe OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.sexe (sexe_id, sexe_name, sexe_code) VALUES (E'1', E'Femelle', E'F');
+INSERT INTO sexe (sexe_id, sexe_name, sexe_code) VALUES (E'1', E'Femelle', E'F');
 -- ddl-end --
-INSERT INTO filo.sexe (sexe_id, sexe_name, sexe_code) VALUES (E'2', E'Mâle', E'M');
+INSERT INTO sexe (sexe_id, sexe_name, sexe_code) VALUES (E'2', E'Mâle', E'M');
 -- ddl-end --
-INSERT INTO filo.sexe (sexe_id, sexe_name, sexe_code) VALUES (E'3', E'Inconnu', E'N');
+INSERT INTO sexe (sexe_id, sexe_name, sexe_code) VALUES (E'3', E'Inconnu', E'N');
 -- ddl-end --
-INSERT INTO filo.sexe (sexe_id, sexe_name, sexe_code) VALUES (E'4', E'Non identifié', E'R');
+INSERT INTO sexe (sexe_id, sexe_name, sexe_code) VALUES (E'4', E'Non identifié', E'R');
 -- ddl-end --
 
 -- object: sexe_fk | type: CONSTRAINT --
--- ALTER TABLE filo.individual DROP CONSTRAINT IF EXISTS sexe_fk CASCADE;
-ALTER TABLE filo.individual ADD CONSTRAINT sexe_fk FOREIGN KEY (sexe_id)
-REFERENCES filo.sexe (sexe_id) MATCH FULL
+-- ALTER TABLE individual DROP CONSTRAINT IF EXISTS sexe_fk CASCADE;
+ALTER TABLE individual ADD CONSTRAINT sexe_fk FOREIGN KEY (sexe_id)
+REFERENCES sexe (sexe_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.pathology_pathology_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.pathology_pathology_id_seq CASCADE;
-CREATE SEQUENCE filo.pathology_pathology_id_seq
+-- object: pathology_pathology_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS pathology_pathology_id_seq CASCADE;
+CREATE SEQUENCE pathology_pathology_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1757,13 +1759,13 @@ CREATE SEQUENCE filo.pathology_pathology_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.pathology_pathology_id_seq OWNER TO filo;
+ALTER SEQUENCE pathology_pathology_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.pathology | type: TABLE --
--- DROP TABLE IF EXISTS filo.pathology CASCADE;
-CREATE TABLE filo.pathology (
-	pathology_id integer NOT NULL DEFAULT nextval('filo.pathology_pathology_id_seq'::regclass),
+-- object: pathology | type: TABLE --
+-- DROP TABLE IF EXISTS pathology CASCADE;
+CREATE TABLE pathology (
+	pathology_id integer NOT NULL DEFAULT nextval('pathology_pathology_id_seq'::regclass),
 	pathology_name varchar NOT NULL,
 	pathology_code varchar,
 	pathology_description varchar,
@@ -1771,145 +1773,145 @@ CREATE TABLE filo.pathology (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.pathology IS 'List of pathologies';
+COMMENT ON TABLE pathology IS 'List of pathologies';
 -- ddl-end --
-COMMENT ON COLUMN filo.pathology.pathology_name IS 'Name of the pathology';
+COMMENT ON COLUMN pathology.pathology_name IS 'Name of the pathology';
 -- ddl-end --
-COMMENT ON COLUMN filo.pathology.pathology_code IS 'Code of the pathology, according to the nomenclature sandre.eaufrance.fr 129';
+COMMENT ON COLUMN pathology.pathology_code IS 'Code of the pathology, according to the nomenclature sandre.eaufrance.fr 129';
 -- ddl-end --
-COMMENT ON COLUMN filo.pathology.pathology_description IS 'Description of the pathology';
+COMMENT ON COLUMN pathology.pathology_description IS 'Description of the pathology';
 -- ddl-end --
-ALTER TABLE filo.pathology OWNER TO filo;
+ALTER TABLE pathology OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'1', E'00', E'Ni poux, ni traces de poux', E'Le poisson, généralement un salmonidé migrateur venu de la mer, n''héberge aucun pou de mer et ne présente aucune lésion visible consécutive à une colonisation par le pou de mer (qui est en fait un crustacé parasite des salmonidés migrateurs)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'1', E'00', E'Ni poux, ni traces de poux', E'Le poisson, généralement un salmonidé migrateur venu de la mer, n''héberge aucun pou de mer et ne présente aucune lésion visible consécutive à une colonisation par le pou de mer (qui est en fait un crustacé parasite des salmonidés migrateurs)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'2', E'AA', E'Altération de l''aspect', E'Le corps du poisson examiné présente des altérations morphologiques caractérisées, pouvant éventuellement être détaillées ou non.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'2', E'AA', E'Altération de l''aspect', E'Le corps du poisson examiné présente des altérations morphologiques caractérisées, pouvant éventuellement être détaillées ou non.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'3', E'AC', E'Altération de la couleur', E'La pigmentation présente des altérations entrainant une coloration anormale de tout ou partie du corps du poisson.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'3', E'AC', E'Altération de la couleur', E'La pigmentation présente des altérations entrainant une coloration anormale de tout ou partie du corps du poisson.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'4', E'AD', E'Difforme', E'Le corps du poisson présente des déformations anormales se traduisant par des acures ou des bosselures,extériorisation possible d''une atteinte interne, virale par exemple (ex : nécrose pancréatique infectieuse de la truite arc-en-ciel)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'4', E'AD', E'Difforme', E'Le corps du poisson présente des déformations anormales se traduisant par des acures ou des bosselures,extériorisation possible d''une atteinte interne, virale par exemple (ex : nécrose pancréatique infectieuse de la truite arc-en-ciel)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'5', E'AG', E'Grosseur, excroissance', E'Le corps du poisson présente une ou des déformations marquées constituant des excroissances ou des tumeurs');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'5', E'AG', E'Grosseur, excroissance', E'Le corps du poisson présente une ou des déformations marquées constituant des excroissances ou des tumeurs');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'6', E'AH', E'Aspect hérissé (écailles)', E'Les écailles du poisson ont tendance à se relever perpendiculairement au corps, à la suite généralement d''une infection au niveau des téguments');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'6', E'AH', E'Aspect hérissé (écailles)', E'Les écailles du poisson ont tendance à se relever perpendiculairement au corps, à la suite généralement d''une infection au niveau des téguments');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'7', E'AM', E'Maigreur', E'Le corps du poisson présente une minceur marquée par rapport à la normalité');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'7', E'AM', E'Maigreur', E'Le corps du poisson présente une minceur marquée par rapport à la normalité');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'8', E'AO', E'Absence d''organe', E'L''altération morphologique observée sur le poisson se traduit par l''absence d''un organe (nageoire, opercule, oeil, machoire)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'8', E'AO', E'Absence d''organe', E'L''altération morphologique observée sur le poisson se traduit par l''absence d''un organe (nageoire, opercule, oeil, machoire)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'9', E'BG', E'Bulle de gaz', E'Présence de bulle de gaz pouvant être observées sous la peau, au bord des nageoires, au niveau des yeux, des branchies ou de la bouche.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'9', E'BG', E'Bulle de gaz', E'Présence de bulle de gaz pouvant être observées sous la peau, au bord des nageoires, au niveau des yeux, des branchies ou de la bouche.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'10', E'CA', E'Coloration anormale', E'L''altération de la pigmentation entraîne la différenciation de zones diversement colorées, avec en particulier des zones sombres.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'10', E'CA', E'Coloration anormale', E'L''altération de la pigmentation entraîne la différenciation de zones diversement colorées, avec en particulier des zones sombres.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'11', E'CB', E'Branchiures (Argulus...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de crustacés branchiures à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'11', E'CB', E'Branchiures (Argulus...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de crustacés branchiures à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'12', E'CC', E'Copépodes (Ergasilus, Lerna,...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de crustacés parasites, à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'12', E'CC', E'Copépodes (Ergasilus, Lerna,...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de crustacés parasites, à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'13', E'CO', E'Coloration opaque (oeil)', E'L''altération de la coloration se traduit par une opacification de l''un ou des deux yeux.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'13', E'CO', E'Coloration opaque (oeil)', E'L''altération de la coloration se traduit par une opacification de l''un ou des deux yeux.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'14', E'CR', E'Présence de crustacés', E'Présence visible, à la surface du corps ou des branchies du poisson, de crustacés parasites, à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'14', E'CR', E'Présence de crustacés', E'Présence visible, à la surface du corps ou des branchies du poisson, de crustacés parasites, à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'15', E'CS', E'Coloration sombre', E'L''altération de la coloration du corps du poisson se traduit par un assombrissement de tout ou partie de celui-ci (noircissement).');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'15', E'CS', E'Coloration sombre', E'L''altération de la coloration du corps du poisson se traduit par un assombrissement de tout ou partie de celui-ci (noircissement).');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'16', E'CT', E'Coloration terne (pâle)', E'L''altération de la coloration du corps du poisson se traduit par une absence de reflets lui conférant un aspect terne, pâle, voire une décoloration.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'16', E'CT', E'Coloration terne (pâle)', E'L''altération de la coloration du corps du poisson se traduit par une absence de reflets lui conférant un aspect terne, pâle, voire une décoloration.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'17', E'ER', E'Erosion', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'17', E'ER', E'Erosion', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'18', E'EX', E'Exophtalmie ou proptose', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'18', E'EX', E'Exophtalmie ou proptose', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'19', E'HA', E'Acanthocéphales', E'Présence visible, à la surface du corps ou des branchies du poisson, d''acanthocéphales à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'19', E'HA', E'Acanthocéphales', E'Présence visible, à la surface du corps ou des branchies du poisson, d''acanthocéphales à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'20', E'HC', E'Cestodes (Ligula,  Bothriocephalus, ...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de cestodes à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'20', E'HC', E'Cestodes (Ligula,  Bothriocephalus, ...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de cestodes à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'21', E'HE', E'Hémorragie', E'Ecoulement de sang pouvant être observ?? à la surface du corps ou au niveau des branchies.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'21', E'HE', E'Hémorragie', E'Ecoulement de sang pouvant être observ?? à la surface du corps ou au niveau des branchies.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'22', E'HH', E'Hirudinés (Piscicola)', E'Présence visible sur le poisson de sangsue(s)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'22', E'HH', E'Hirudinés (Piscicola)', E'Présence visible sur le poisson de sangsue(s)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'23', E'HN', E'Nématodes (Philometra, Philimena...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de  nématodes à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'23', E'HN', E'Nématodes (Philometra, Philimena...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de  nématodes à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'24', E'HS', E'Stade pre-mortem', E'Le poisson présente un état pathologique tel qu''il n''est plus capable de se mouvoir normalement dans son milieu et qu''il est voué à une mort certaine à brève échéance.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'24', E'HS', E'Stade pre-mortem', E'Le poisson présente un état pathologique tel qu''il n''est plus capable de se mouvoir normalement dans son milieu et qu''il est voué à une mort certaine à brève échéance.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'25', E'HT', E'Trématodes (Bucephalus, ...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de trématodes parasites à un stade donné de leur cycle de développement.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'25', E'HT', E'Trématodes (Bucephalus, ...)', E'Présence visible, à la surface du corps ou des branchies du poisson, de trématodes parasites à un stade donné de leur cycle de développement.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'26', E'IS', E'Individu sain', E'Après examen du poisson, aucun signe externe, caractéristique d''une pathologie quelconque, n''est décelable à l''oeil nu');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'26', E'IS', E'Individu sain', E'Après examen du poisson, aucun signe externe, caractéristique d''une pathologie quelconque, n''est décelable à l''oeil nu');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'27', E'LD', E'Lésions diverses', E'Les téguments présentent une altération quelconque de leur intégrité.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'27', E'LD', E'Lésions diverses', E'Les téguments présentent une altération quelconque de leur intégrité.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'28', E'NE', E'Nécrose', E'Lésion(s) observée(s) à la surface du corps avec mortification des tissus.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'28', E'NE', E'Nécrose', E'Lésion(s) observée(s) à la surface du corps avec mortification des tissus.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'29', E'NN', E'Pathologie non renseigné', E'L''aspect pathologique du poisson n''a fait l''objet d''aucun examen et aucune information n''est fournie à ce sujet');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'29', E'NN', E'Pathologie non renseigné', E'L''aspect pathologique du poisson n''a fait l''objet d''aucun examen et aucune information n''est fournie à ce sujet');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'30', E'OO', E'Absence de lésions ou de parasites', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'30', E'OO', E'Absence de lésions ou de parasites', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'31', E'PA', E'Parasitisme', E'Présence visible, à la surface du corps ou des branchies du poisson, d''organismes parasites vivant à ses dépens.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'31', E'PA', E'Parasitisme', E'Présence visible, à la surface du corps ou des branchies du poisson, d''organismes parasites vivant à ses dépens.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'32', E'PB', E'Points blancs', E'Présence de points blancs consécutive à la prolifération de certains protozoaires parasites comme Ichtyopthtirius (ne pas confondre avec les boutons de noces, formations kératinisées apparaissant  lors de la période de reproduction)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'32', E'PB', E'Points blancs', E'Présence de points blancs consécutive à la prolifération de certains protozoaires parasites comme Ichtyopthtirius (ne pas confondre avec les boutons de noces, formations kératinisées apparaissant  lors de la période de reproduction)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'33', E'PC', E'Champignons (mousse, ...)', E'Présence d''un développement à la surface du corps, d''un mycélium formant une sorte de plaque rappelant l''aspect de la mousse et appartenant à une espèce de champignon colonisant les tissus du poisson.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'33', E'PC', E'Champignons (mousse, ...)', E'Présence d''un développement à la surface du corps, d''un mycélium formant une sorte de plaque rappelant l''aspect de la mousse et appartenant à une espèce de champignon colonisant les tissus du poisson.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'34', E'PL', E'Plaie - blessure', E'Présence d''une ou plusieurs lésions à la surface du tégument généralement due à un prédateur (poisson, oiseau,.)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'34', E'PL', E'Plaie - blessure', E'Présence d''une ou plusieurs lésions à la surface du tégument généralement due à un prédateur (poisson, oiseau,.)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'35', E'PN', E'Points noirs', E'Présence de tâches noires bien individualisées sur la surface du tégument du poisson');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'35', E'PN', E'Points noirs', E'Présence de tâches noires bien individualisées sur la surface du tégument du poisson');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'36', E'PT', E'Parasites (PB ou PC ou CR ou HH ou PX)', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'36', E'PT', E'Parasites (PB ou PC ou CR ou HH ou PX)', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'37', E'PX', E'Autres parasites (autre que CR, HH, PB, PC)', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'37', E'PX', E'Autres parasites (autre que CR, HH, PB, PC)', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'38', E'SM', E'Sécrétion de mucus importante', E'Présence anormale de mucus sur le corps ou au niveau de la chambre branchiale.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'38', E'SM', E'Sécrétion de mucus importante', E'Présence anormale de mucus sur le corps ou au niveau de la chambre branchiale.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'39', E'UH', E'Ulcère hémorragique', E'Ecoulement de sang observé au niveau d''une zone d''altération des tissus.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'39', E'UH', E'Ulcère hémorragique', E'Ecoulement de sang observé au niveau d''une zone d''altération des tissus.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'40', E'US', E'Anus rouge ou saillant', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'40', E'US', E'Anus rouge ou saillant', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'41', E'VL', E'Vésicule contenant un liquide', E'Présence d''un oedème constituant une excroissance.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'41', E'VL', E'Vésicule contenant un liquide', E'Présence d''un oedème constituant une excroissance.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'42', E'ZO', E'Etat pathologie multiforme', E'Le poisson présente plus de deux caractéristiques pathologiques différentes');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'42', E'ZO', E'Etat pathologie multiforme', E'Le poisson présente plus de deux caractéristiques pathologiques différentes');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'43', E'01', E'Traces de poux', E'Le poisson ne porte aucun pou mais présente des lésions cutanées consécutives à une colonisation par le pou de mer. La présence du poisson en eau douce a été suffisante pour obliger les poux à quitter leur hôte.');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'43', E'01', E'Traces de poux', E'Le poisson ne porte aucun pou mais présente des lésions cutanées consécutives à une colonisation par le pou de mer. La présence du poisson en eau douce a été suffisante pour obliger les poux à quitter leur hôte.');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'44', E'11', E'<10 poux , sans flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'44', E'11', E'<10 poux , sans flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'45', E'21', E'<10 poux , avec flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'45', E'21', E'<10 poux , avec flagelles', E'Le poisson présente moins de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'46', E'31', E'>10 poux, sans flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'46', E'31', E'>10 poux, sans flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, en raison d''un présence prolongée en eau douce, ont déjà perdu leur flagelle');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'47', E'42', E'>10 poux, avec flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'47', E'42', E'>10 poux, avec flagelles', E'Le poisson présente plus de 10 poux de mer, mais ces derniers, compte-tenu de l''arrivée récente de leur hôte en eau douce, n''ont pas encore perdu leur flagelle');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'48', E'NC', E'Signe pathologique d''origine inconnue', E'Signe pathologique d''origine inconnue');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'48', E'NC', E'Signe pathologique d''origine inconnue', E'Signe pathologique d''origine inconnue');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'49', E'AP', E'Aphanomycose ou peste de l’écrevisse', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'49', E'AP', E'Aphanomycose ou peste de l’écrevisse', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'50', E'TH', E'Thélohaniose ou maladie de porcelaine', DEFAULT);
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'50', E'TH', E'Thélohaniose ou maladie de porcelaine', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'51', E'BR', E'Branchiobdellidae (Branchiobdella, Xironogiton, ...)', E'Présence de Branchiobdellidae (Branchiobdella, Xironogiton, ...)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'51', E'BR', E'Branchiobdellidae (Branchiobdella, Xironogiton, ...)', E'Présence de Branchiobdellidae (Branchiobdella, Xironogiton, ...)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'52', E'CH', E'Chytridiomycose', E'maladie mortelle menaçant les amphibiens, cette maladie fongique est provoqué par champignon Batrachochytrium dendrobatidis, plus connu sous l’appellation de chytride');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'52', E'CH', E'Chytridiomycose', E'maladie mortelle menaçant les amphibiens, cette maladie fongique est provoqué par champignon Batrachochytrium dendrobatidis, plus connu sous l’appellation de chytride');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'53', E'RO', E'Rouille', E'provoquée par un champignons parasites, elle se caractérisent par la présence de taches brun rouge ou noires entourées de rouge sur la carapace');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'53', E'RO', E'Rouille', E'provoquée par un champignons parasites, elle se caractérisent par la présence de taches brun rouge ou noires entourées de rouge sur la carapace');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'54', E'MY', E'Mycose des oeufs', E'Les mycoses des oeufs: provoquent la mort et un changement de coloration de ceux-ci (deviennent orangés)');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'54', E'MY', E'Mycose des oeufs', E'Les mycoses des oeufs: provoquent la mort et un changement de coloration de ceux-ci (deviennent orangés)');
 -- ddl-end --
-INSERT INTO filo.pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'55', E'PF', E'Paragnathia formica', E'Paragnathia formica est un parasite qui est présent sur les saumons sauvages');
+INSERT INTO pathology (pathology_id, pathology_code, pathology_name, pathology_description) VALUES (E'55', E'PF', E'Paragnathia formica', E'Paragnathia formica est un parasite qui est présent sur les saumons sauvages');
 -- ddl-end --
 
 -- object: pathology_fk | type: CONSTRAINT --
--- ALTER TABLE filo.individual DROP CONSTRAINT IF EXISTS pathology_fk CASCADE;
-ALTER TABLE filo.individual ADD CONSTRAINT pathology_fk FOREIGN KEY (pathology_id)
-REFERENCES filo.pathology (pathology_id) MATCH FULL
+-- ALTER TABLE individual DROP CONSTRAINT IF EXISTS pathology_fk CASCADE;
+ALTER TABLE individual ADD CONSTRAINT pathology_fk FOREIGN KEY (pathology_id)
+REFERENCES pathology (pathology_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: station_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS station_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT station_fk FOREIGN KEY (station_id)
-REFERENCES filo.station (station_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS station_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT station_fk FOREIGN KEY (station_id)
+REFERENCES station (station_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.facies_facies_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.facies_facies_id_seq CASCADE;
-CREATE SEQUENCE filo.facies_facies_id_seq
+-- object: facies_facies_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS facies_facies_id_seq CASCADE;
+CREATE SEQUENCE facies_facies_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1918,12 +1920,12 @@ CREATE SEQUENCE filo.facies_facies_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.facies_facies_id_seq OWNER TO filo;
+ALTER SEQUENCE facies_facies_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.ambience_ambience_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.ambience_ambience_id_seq CASCADE;
-CREATE SEQUENCE filo.ambience_ambience_id_seq
+-- object: ambience_ambience_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS ambience_ambience_id_seq CASCADE;
+CREATE SEQUENCE ambience_ambience_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1932,12 +1934,12 @@ CREATE SEQUENCE filo.ambience_ambience_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.ambience_ambience_id_seq OWNER TO filo;
+ALTER SEQUENCE ambience_ambience_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.situation_situation_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.situation_situation_id_seq CASCADE;
-CREATE SEQUENCE filo.situation_situation_id_seq
+-- object: situation_situation_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS situation_situation_id_seq CASCADE;
+CREATE SEQUENCE situation_situation_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -1946,48 +1948,48 @@ CREATE SEQUENCE filo.situation_situation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.situation_situation_id_seq OWNER TO filo;
+ALTER SEQUENCE situation_situation_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.facies | type: TABLE --
--- DROP TABLE IF EXISTS filo.facies CASCADE;
-CREATE TABLE filo.facies (
-	facies_id integer NOT NULL DEFAULT nextval('filo.facies_facies_id_seq'::regclass),
+-- object: facies | type: TABLE --
+-- DROP TABLE IF EXISTS facies CASCADE;
+CREATE TABLE facies (
+	facies_id integer NOT NULL DEFAULT nextval('facies_facies_id_seq'::regclass),
 	facies_name varchar NOT NULL,
 	CONSTRAINT facies_pk PRIMARY KEY (facies_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.facies IS 'List of facies';
+COMMENT ON TABLE facies IS 'List of facies';
 -- ddl-end --
-ALTER TABLE filo.facies OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'1', E'Rapide');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'2', E'Radier');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'3', E'Plat courant');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'4', E'Plat lent');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'5', E'Mouille ou profond');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'6', E'Chenal lotique (profond courant)');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'7', E'Chenal lentique (profond lent)');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'8', E'Remous ou contre-courant');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'9', E'Bras mort ou lône');
--- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'10', E'Darse');
+ALTER TABLE facies OWNER TO filo;
 -- ddl-end --
 
--- object: filo.ambience | type: TABLE --
--- DROP TABLE IF EXISTS filo.ambience CASCADE;
-CREATE TABLE filo.ambience (
-	ambience_id integer NOT NULL DEFAULT nextval('filo.ambience_ambience_id_seq'::regclass),
+INSERT INTO facies (facies_id, facies_name) VALUES (E'1', E'Rapide');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'2', E'Radier');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'3', E'Plat courant');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'4', E'Plat lent');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'5', E'Mouille ou profond');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'6', E'Chenal lotique (profond courant)');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'7', E'Chenal lentique (profond lent)');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'8', E'Remous ou contre-courant');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'9', E'Bras mort ou lône');
+-- ddl-end --
+INSERT INTO facies (facies_id, facies_name) VALUES (E'10', E'Darse');
+-- ddl-end --
+
+-- object: ambience | type: TABLE --
+-- DROP TABLE IF EXISTS ambience CASCADE;
+CREATE TABLE ambience (
+	ambience_id integer NOT NULL DEFAULT nextval('ambience_ambience_id_seq'::regclass),
 	operation_id integer,
 	ambience_name varchar,
 	ambience_length float,
@@ -2023,74 +2025,74 @@ CREATE TABLE filo.ambience (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.ambience IS 'Description of the ambiences of the operation';
+COMMENT ON TABLE ambience IS 'Description of the ambiences of the operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_name IS 'Name of the point';
+COMMENT ON COLUMN ambience.ambience_name IS 'Name of the point';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_length IS 'Length of the point, in meter';
+COMMENT ON COLUMN ambience.ambience_length IS 'Length of the point, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_width IS 'Width of the point, in meter';
+COMMENT ON COLUMN ambience.ambience_width IS 'Width of the point, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_long IS 'Longitude of the point of observation, in decimal WGS84';
+COMMENT ON COLUMN ambience.ambience_long IS 'Longitude of the point of observation, in decimal WGS84';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_lat IS 'Latitude of the point of observation, in decimal WGS84';
+COMMENT ON COLUMN ambience.ambience_lat IS 'Latitude of the point of observation, in decimal WGS84';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.current_speed IS 'Speed measured of the current, in cm/s';
+COMMENT ON COLUMN ambience.current_speed IS 'Speed measured of the current, in cm/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.current_speed_max IS 'Maximum value of the current, in cm/s';
+COMMENT ON COLUMN ambience.current_speed_max IS 'Maximum value of the current, in cm/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.current_speed_min IS 'Minimum speed of the current, in cm/s';
+COMMENT ON COLUMN ambience.current_speed_min IS 'Minimum speed of the current, in cm/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.water_height IS 'Average height of water, in cm';
+COMMENT ON COLUMN ambience.water_height IS 'Average height of water, in cm';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.water_height_max IS 'Max height of water, in cm';
+COMMENT ON COLUMN ambience.water_height_max IS 'Max height of water, in cm';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.water_height_min IS 'Min of height of water, in cm';
+COMMENT ON COLUMN ambience.water_height_min IS 'Min of height of water, in cm';
 -- ddl-end --
-ALTER TABLE filo.ambience OWNER TO filo;
+ALTER TABLE ambience OWNER TO filo;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
-REFERENCES filo.operation (operation_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
+REFERENCES operation (operation_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.situation | type: TABLE --
--- DROP TABLE IF EXISTS filo.situation CASCADE;
-CREATE TABLE filo.situation (
-	situation_id integer NOT NULL DEFAULT nextval('filo.situation_situation_id_seq'::regclass),
+-- object: situation | type: TABLE --
+-- DROP TABLE IF EXISTS situation CASCADE;
+CREATE TABLE situation (
+	situation_id integer NOT NULL DEFAULT nextval('situation_situation_id_seq'::regclass),
 	situation_name varchar NOT NULL,
 	CONSTRAINT situation_pk PRIMARY KEY (situation_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.situation IS 'List of situations';
+COMMENT ON TABLE situation IS 'List of situations';
 -- ddl-end --
-ALTER TABLE filo.situation OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'3', E'Confluence ruisseau');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'4', E'Palplanche');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'5', E'Exutoire d''étang');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'6', E'Maçonnerie');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'7', E'Aval d''ouvrage');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'8', E'Enrochement');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'9', E'Rejet');
--- ddl-end --
-INSERT INTO filo.situation (situation_id, situation_name) VALUES (E'10', E'Aval turbine/gabion');
+ALTER TABLE situation OWNER TO filo;
 -- ddl-end --
 
--- object: filo.localisation_localisation_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.localisation_localisation_id_seq CASCADE;
-CREATE SEQUENCE filo.localisation_localisation_id_seq
+INSERT INTO situation (situation_id, situation_name) VALUES (E'3', E'Confluence ruisseau');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'4', E'Palplanche');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'5', E'Exutoire d''étang');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'6', E'Maçonnerie');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'7', E'Aval d''ouvrage');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'8', E'Enrochement');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'9', E'Rejet');
+-- ddl-end --
+INSERT INTO situation (situation_id, situation_name) VALUES (E'10', E'Aval turbine/gabion');
+-- ddl-end --
+
+-- object: localisation_localisation_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS localisation_localisation_id_seq CASCADE;
+CREATE SEQUENCE localisation_localisation_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2099,79 +2101,79 @@ CREATE SEQUENCE filo.localisation_localisation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.localisation_localisation_id_seq OWNER TO filo;
+ALTER SEQUENCE localisation_localisation_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.localisation | type: TABLE --
--- DROP TABLE IF EXISTS filo.localisation CASCADE;
-CREATE TABLE filo.localisation (
-	localisation_id integer NOT NULL DEFAULT nextval('filo.localisation_localisation_id_seq'::regclass),
+-- object: localisation | type: TABLE --
+-- DROP TABLE IF EXISTS localisation CASCADE;
+CREATE TABLE localisation (
+	localisation_id integer NOT NULL DEFAULT nextval('localisation_localisation_id_seq'::regclass),
 	localisation_name varchar NOT NULL,
 	CONSTRAINT localisation_pk PRIMARY KEY (localisation_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.localisation IS 'List of localisations of the ambience';
+COMMENT ON TABLE localisation IS 'List of localisations of the ambience';
 -- ddl-end --
-ALTER TABLE filo.localisation OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.localisation (localisation_id, localisation_name) VALUES (E'1', E'Chenal');
--- ddl-end --
-INSERT INTO filo.localisation (localisation_id, localisation_name) VALUES (E'2', E'Berge');
+ALTER TABLE localisation OWNER TO filo;
 -- ddl-end --
 
--- object: filo.speed | type: TABLE --
--- DROP TABLE IF EXISTS filo.speed CASCADE;
-CREATE TABLE filo.speed (
+INSERT INTO localisation (localisation_id, localisation_name) VALUES (E'1', E'Chenal');
+-- ddl-end --
+INSERT INTO localisation (localisation_id, localisation_name) VALUES (E'2', E'Berge');
+-- ddl-end --
+
+-- object: speed | type: TABLE --
+-- DROP TABLE IF EXISTS speed CASCADE;
+CREATE TABLE speed (
 	speed_id integer NOT NULL,
 	speed_name varchar NOT NULL,
 	CONSTRAINT speed_pk PRIMARY KEY (speed_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.speed IS 'Speed of current, in cm/s';
+COMMENT ON TABLE speed IS 'Speed of current, in cm/s';
 -- ddl-end --
-ALTER TABLE filo.speed OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.speed (speed_id, speed_name) VALUES (E'1', E'< 10 cm/s');
--- ddl-end --
-INSERT INTO filo.speed (speed_id, speed_name) VALUES (E'2', E'11 à 40 cm/s');
--- ddl-end --
-INSERT INTO filo.speed (speed_id, speed_name) VALUES (E'3', E'41 à 80 cm/s');
--- ddl-end --
-INSERT INTO filo.speed (speed_id, speed_name) VALUES (E'4', E'81 à 150 cm/s');
--- ddl-end --
-INSERT INTO filo.speed (speed_id, speed_name) VALUES (E'5', E'> 151 cm/s');
+ALTER TABLE speed OWNER TO filo;
 -- ddl-end --
 
--- object: filo.shady | type: TABLE --
--- DROP TABLE IF EXISTS filo.shady CASCADE;
-CREATE TABLE filo.shady (
+INSERT INTO speed (speed_id, speed_name) VALUES (E'1', E'< 10 cm/s');
+-- ddl-end --
+INSERT INTO speed (speed_id, speed_name) VALUES (E'2', E'11 à 40 cm/s');
+-- ddl-end --
+INSERT INTO speed (speed_id, speed_name) VALUES (E'3', E'41 à 80 cm/s');
+-- ddl-end --
+INSERT INTO speed (speed_id, speed_name) VALUES (E'4', E'81 à 150 cm/s');
+-- ddl-end --
+INSERT INTO speed (speed_id, speed_name) VALUES (E'5', E'> 151 cm/s');
+-- ddl-end --
+
+-- object: shady | type: TABLE --
+-- DROP TABLE IF EXISTS shady CASCADE;
+CREATE TABLE shady (
 	shady_id integer NOT NULL,
 	shady_name varchar NOT NULL,
 	CONSTRAINT shady_pk PRIMARY KEY (shady_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.shady IS 'List of shaddies used for ambiences';
+COMMENT ON TABLE shady IS 'List of shaddies used for ambiences';
 -- ddl-end --
-ALTER TABLE filo.shady OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.shady (shady_id, shady_name) VALUES (E'1', E'Rivière couverte (>90% d''ombrage)');
--- ddl-end --
-INSERT INTO filo.shady (shady_id, shady_name) VALUES (E'2', E'Rivière assez couverte (50 à 90% d''ombrage)');
--- ddl-end --
-INSERT INTO filo.shady (shady_id, shady_name) VALUES (E'3', E'Rivière assez dégagée (10 à 50 % d''ombrage)');
--- ddl-end --
-INSERT INTO filo.shady (shady_id, shady_name) VALUES (E'4', E'Rivière dégagée (< 10 % d''ombrage)');
+ALTER TABLE shady OWNER TO filo;
 -- ddl-end --
 
--- object: filo.granulometry_granulometry_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.granulometry_granulometry_id_seq CASCADE;
-CREATE SEQUENCE filo.granulometry_granulometry_id_seq
+INSERT INTO shady (shady_id, shady_name) VALUES (E'1', E'Rivière couverte (>90% d''ombrage)');
+-- ddl-end --
+INSERT INTO shady (shady_id, shady_name) VALUES (E'2', E'Rivière assez couverte (50 à 90% d''ombrage)');
+-- ddl-end --
+INSERT INTO shady (shady_id, shady_name) VALUES (E'3', E'Rivière assez dégagée (10 à 50 % d''ombrage)');
+-- ddl-end --
+INSERT INTO shady (shady_id, shady_name) VALUES (E'4', E'Rivière dégagée (< 10 % d''ombrage)');
+-- ddl-end --
+
+-- object: granulometry_granulometry_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS granulometry_granulometry_id_seq CASCADE;
+CREATE SEQUENCE granulometry_granulometry_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2180,51 +2182,51 @@ CREATE SEQUENCE filo.granulometry_granulometry_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.granulometry_granulometry_id_seq OWNER TO filo;
+ALTER SEQUENCE granulometry_granulometry_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.granulometry | type: TABLE --
--- DROP TABLE IF EXISTS filo.granulometry CASCADE;
-CREATE TABLE filo.granulometry (
-	granulometry_id integer NOT NULL DEFAULT nextval('filo.granulometry_granulometry_id_seq'::regclass),
+-- object: granulometry | type: TABLE --
+-- DROP TABLE IF EXISTS granulometry CASCADE;
+CREATE TABLE granulometry (
+	granulometry_id integer NOT NULL DEFAULT nextval('granulometry_granulometry_id_seq'::regclass),
 	granulometry_name varchar NOT NULL,
 	CONSTRAINT granulometry_pk PRIMARY KEY (granulometry_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.granulometry IS 'List of types of granulometry';
+COMMENT ON TABLE granulometry IS 'List of types of granulometry';
 -- ddl-end --
-ALTER TABLE filo.granulometry OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'1', E'Argile (<3,9 µm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'2', E'Limons (de 3,9 à 62,5 µm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'3', E'Sables fins (de 62,5 à 0,5 µm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'4', E'Sables grossiers (de 0,5 µm à 2 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'5', E'Graviers (de 2 à 16 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'6', E'Cailloux fins (de 16 à 32 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'7', E'Cailloux grossiers (de 32 à 64 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'8', E'Pierres fines (de 64 à 128 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'9', E'Pierres grossières (de 128 à 256 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'10', E'Blocs (de 256 à 1024 mm)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'11', E'Rochers (substra immergé avec protubérance)');
--- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'12', E'Dalle (substrat immergé sans protubérance)');
+ALTER TABLE granulometry OWNER TO filo;
 -- ddl-end --
 
--- object: filo.vegetation_vegetation_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.vegetation_vegetation_id_seq CASCADE;
-CREATE SEQUENCE filo.vegetation_vegetation_id_seq
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'1', E'Argile (<3,9 µm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'2', E'Limons (de 3,9 à 62,5 µm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'3', E'Sables fins (de 62,5 à 0,5 µm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'4', E'Sables grossiers (de 0,5 µm à 2 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'5', E'Graviers (de 2 à 16 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'6', E'Cailloux fins (de 16 à 32 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'7', E'Cailloux grossiers (de 32 à 64 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'8', E'Pierres fines (de 64 à 128 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'9', E'Pierres grossières (de 128 à 256 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'10', E'Blocs (de 256 à 1024 mm)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'11', E'Rochers (substra immergé avec protubérance)');
+-- ddl-end --
+INSERT INTO granulometry (granulometry_id, granulometry_name) VALUES (E'12', E'Dalle (substrat immergé sans protubérance)');
+-- ddl-end --
+
+-- object: vegetation_vegetation_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS vegetation_vegetation_id_seq CASCADE;
+CREATE SEQUENCE vegetation_vegetation_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2233,43 +2235,43 @@ CREATE SEQUENCE filo.vegetation_vegetation_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.vegetation_vegetation_id_seq OWNER TO filo;
+ALTER SEQUENCE vegetation_vegetation_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.vegetation | type: TABLE --
--- DROP TABLE IF EXISTS filo.vegetation CASCADE;
-CREATE TABLE filo.vegetation (
-	vegetation_id integer NOT NULL DEFAULT nextval('filo.vegetation_vegetation_id_seq'::regclass),
+-- object: vegetation | type: TABLE --
+-- DROP TABLE IF EXISTS vegetation CASCADE;
+CREATE TABLE vegetation (
+	vegetation_id integer NOT NULL DEFAULT nextval('vegetation_vegetation_id_seq'::regclass),
 	vegetation_name varchar NOT NULL,
 	CONSTRAINT vegetation_pk PRIMARY KEY (vegetation_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.vegetation IS 'List of types of vegetation';
+COMMENT ON TABLE vegetation IS 'List of types of vegetation';
 -- ddl-end --
-ALTER TABLE filo.vegetation OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'1', E'Algues - microphytes');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'2', E'Plantes immergées à petites feuilles');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'3', E'Plantes immergées à grandes feuilles');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'4', E'Plante immergées à feuilles rubanées');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'5', E'Plantes flottantes à petites feuilles');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'6', E'Plantes flottantes à grandes feuilles');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'7', E'Plantes émergées');
--- ddl-end --
-INSERT INTO filo.vegetation (vegetation_id, vegetation_name) VALUES (E'8', E'Pas de végétation');
+ALTER TABLE vegetation OWNER TO filo;
 -- ddl-end --
 
--- object: filo.cache_abundance_cache_abundance_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.cache_abundance_cache_abundance_id_seq CASCADE;
-CREATE SEQUENCE filo.cache_abundance_cache_abundance_id_seq
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'1', E'Algues - microphytes');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'2', E'Plantes immergées à petites feuilles');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'3', E'Plantes immergées à grandes feuilles');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'4', E'Plante immergées à feuilles rubanées');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'5', E'Plantes flottantes à petites feuilles');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'6', E'Plantes flottantes à grandes feuilles');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'7', E'Plantes émergées');
+-- ddl-end --
+INSERT INTO vegetation (vegetation_id, vegetation_name) VALUES (E'8', E'Pas de végétation');
+-- ddl-end --
+
+-- object: cache_abundance_cache_abundance_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS cache_abundance_cache_abundance_id_seq CASCADE;
+CREATE SEQUENCE cache_abundance_cache_abundance_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2278,122 +2280,122 @@ CREATE SEQUENCE filo.cache_abundance_cache_abundance_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.cache_abundance_cache_abundance_id_seq OWNER TO filo;
+ALTER SEQUENCE cache_abundance_cache_abundance_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.cache_abundance | type: TABLE --
--- DROP TABLE IF EXISTS filo.cache_abundance CASCADE;
-CREATE TABLE filo.cache_abundance (
-	cache_abundance_id integer NOT NULL DEFAULT nextval('filo.cache_abundance_cache_abundance_id_seq'::regclass),
+-- object: cache_abundance | type: TABLE --
+-- DROP TABLE IF EXISTS cache_abundance CASCADE;
+CREATE TABLE cache_abundance (
+	cache_abundance_id integer NOT NULL DEFAULT nextval('cache_abundance_cache_abundance_id_seq'::regclass),
 	cache_abundance_name varchar NOT NULL,
 	CONSTRAINT cache_abundance_pk PRIMARY KEY (cache_abundance_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.cache_abundance IS 'Levels of abundance of caches';
+COMMENT ON TABLE cache_abundance IS 'Levels of abundance of caches';
 -- ddl-end --
-ALTER TABLE filo.cache_abundance OWNER TO filo;
+ALTER TABLE cache_abundance OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'1', E'Nulle');
+INSERT INTO cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'1', E'Nulle');
 -- ddl-end --
-INSERT INTO filo.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'2', E'Faible');
+INSERT INTO cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'2', E'Faible');
 -- ddl-end --
-INSERT INTO filo.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'3', E'Moyenne');
+INSERT INTO cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'3', E'Moyenne');
 -- ddl-end --
-INSERT INTO filo.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'4', E'Importante');
+INSERT INTO cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'4', E'Importante');
 -- ddl-end --
-INSERT INTO filo.cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'5', E'Indéterminable');
+INSERT INTO cache_abundance (cache_abundance_id, cache_abundance_name) VALUES (E'5', E'Indéterminable');
 -- ddl-end --
 
 -- object: facies_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS facies_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT facies_fk FOREIGN KEY (facies_id)
-REFERENCES filo.facies (facies_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS facies_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT facies_fk FOREIGN KEY (facies_id)
+REFERENCES facies (facies_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: situation_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS situation_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT situation_fk FOREIGN KEY (situation_id)
-REFERENCES filo.situation (situation_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS situation_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT situation_fk FOREIGN KEY (situation_id)
+REFERENCES situation (situation_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: speed_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS speed_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT speed_fk FOREIGN KEY (speed_id)
-REFERENCES filo.speed (speed_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS speed_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT speed_fk FOREIGN KEY (speed_id)
+REFERENCES speed (speed_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: shady_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS shady_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT shady_fk FOREIGN KEY (shady_id)
-REFERENCES filo.shady (shady_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS shady_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT shady_fk FOREIGN KEY (shady_id)
+REFERENCES shady (shady_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: localisation_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS localisation_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT localisation_fk FOREIGN KEY (localisation_id)
-REFERENCES filo.localisation (localisation_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS localisation_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT localisation_fk FOREIGN KEY (localisation_id)
+REFERENCES localisation (localisation_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: vegetation_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS vegetation_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT vegetation_fk FOREIGN KEY (vegetation_id)
-REFERENCES filo.vegetation (vegetation_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS vegetation_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT vegetation_fk FOREIGN KEY (vegetation_id)
+REFERENCES vegetation (vegetation_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: granulometry_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS granulometry_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT granulometry_fk FOREIGN KEY (dominant_granulometry_id)
-REFERENCES filo.granulometry (granulometry_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS granulometry_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT granulometry_fk FOREIGN KEY (dominant_granulometry_id)
+REFERENCES granulometry (granulometry_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: granulometry_fk1 | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS granulometry_fk1 CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT granulometry_fk1 FOREIGN KEY (secondary_granulometry_id)
-REFERENCES filo.granulometry (granulometry_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS granulometry_fk1 CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT granulometry_fk1 FOREIGN KEY (secondary_granulometry_id)
+REFERENCES granulometry (granulometry_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: cache_abundance_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT cache_abundance_fk FOREIGN KEY (herbarium_cache_abundance_id)
-REFERENCES filo.cache_abundance (cache_abundance_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT cache_abundance_fk FOREIGN KEY (herbarium_cache_abundance_id)
+REFERENCES cache_abundance (cache_abundance_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: cache_abundance_fk1 | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk1 CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT cache_abundance_fk1 FOREIGN KEY (branch_cache_abundance_id)
-REFERENCES filo.cache_abundance (cache_abundance_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk1 CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT cache_abundance_fk1 FOREIGN KEY (branch_cache_abundance_id)
+REFERENCES cache_abundance (cache_abundance_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: cache_abundance_fk2 | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk2 CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT cache_abundance_fk2 FOREIGN KEY (vegetation_cache_abundance_id)
-REFERENCES filo.cache_abundance (cache_abundance_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk2 CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT cache_abundance_fk2 FOREIGN KEY (vegetation_cache_abundance_id)
+REFERENCES cache_abundance (cache_abundance_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: cache_abundance_fk3 | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk3 CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT cache_abundance_fk3 FOREIGN KEY (subbank_cache_abundance_id)
-REFERENCES filo.cache_abundance (cache_abundance_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk3 CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT cache_abundance_fk3 FOREIGN KEY (subbank_cache_abundance_id)
+REFERENCES cache_abundance (cache_abundance_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: cache_abundance_fk4 | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk4 CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT cache_abundance_fk4 FOREIGN KEY (granulometry_cache_abundance_id)
-REFERENCES filo.cache_abundance (cache_abundance_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS cache_abundance_fk4 CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT cache_abundance_fk4 FOREIGN KEY (granulometry_cache_abundance_id)
+REFERENCES cache_abundance (cache_abundance_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
@@ -2721,35 +2723,35 @@ CREATE INDEX log_login_idx ON gacl.log
 	WITH (FILLFACTOR = 90);
 -- ddl-end --
 
--- object: filo.project_group | type: TABLE --
--- DROP TABLE IF EXISTS filo.project_group CASCADE;
-CREATE TABLE filo.project_group (
+-- object: project_group | type: TABLE --
+-- DROP TABLE IF EXISTS project_group CASCADE;
+CREATE TABLE project_group (
 	project_id integer NOT NULL,
 	aclgroup_id integer NOT NULL,
 	CONSTRAINT project_group_pk PRIMARY KEY (project_id,aclgroup_id)
 
 );
 -- ddl-end --
-ALTER TABLE filo.project_group OWNER TO filo;
+ALTER TABLE project_group OWNER TO filo;
 -- ddl-end --
 
 -- object: project_fk | type: CONSTRAINT --
--- ALTER TABLE filo.project_group DROP CONSTRAINT IF EXISTS project_fk CASCADE;
-ALTER TABLE filo.project_group ADD CONSTRAINT project_fk FOREIGN KEY (project_id)
-REFERENCES filo.project (project_id) MATCH FULL
+-- ALTER TABLE project_group DROP CONSTRAINT IF EXISTS project_fk CASCADE;
+ALTER TABLE project_group ADD CONSTRAINT project_fk FOREIGN KEY (project_id)
+REFERENCES project (project_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: aclgroup_fk | type: CONSTRAINT --
--- ALTER TABLE filo.project_group DROP CONSTRAINT IF EXISTS aclgroup_fk CASCADE;
-ALTER TABLE filo.project_group ADD CONSTRAINT aclgroup_fk FOREIGN KEY (aclgroup_id)
+-- ALTER TABLE project_group DROP CONSTRAINT IF EXISTS aclgroup_fk CASCADE;
+ALTER TABLE project_group ADD CONSTRAINT aclgroup_fk FOREIGN KEY (aclgroup_id)
 REFERENCES gacl.aclgroup (aclgroup_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.operator_operator_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.operator_operator_id_seq CASCADE;
-CREATE SEQUENCE filo.operator_operator_id_seq
+-- object: operator_operator_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS operator_operator_id_seq CASCADE;
+CREATE SEQUENCE operator_operator_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2758,13 +2760,13 @@ CREATE SEQUENCE filo.operator_operator_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.operator_operator_id_seq OWNER TO filo;
+ALTER SEQUENCE operator_operator_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.operator | type: TABLE --
--- DROP TABLE IF EXISTS filo.operator CASCADE;
-CREATE TABLE filo.operator (
-	operator_id integer NOT NULL DEFAULT nextval('filo.operator_operator_id_seq'::regclass),
+-- object: operator | type: TABLE --
+-- DROP TABLE IF EXISTS operator CASCADE;
+CREATE TABLE operator (
+	operator_id integer NOT NULL DEFAULT nextval('operator_operator_id_seq'::regclass),
 	firstname varchar,
 	name varchar NOT NULL,
 	is_active boolean NOT NULL DEFAULT 't',
@@ -2772,20 +2774,20 @@ CREATE TABLE filo.operator (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.operator IS 'List of operators';
+COMMENT ON TABLE operator IS 'List of operators';
 -- ddl-end --
-COMMENT ON COLUMN filo.operator.firstname IS 'First name of the operator';
+COMMENT ON COLUMN operator.firstname IS 'First name of the operator';
 -- ddl-end --
-COMMENT ON COLUMN filo.operator.name IS 'Last name of operator';
+COMMENT ON COLUMN operator.name IS 'Last name of operator';
 -- ddl-end --
-COMMENT ON COLUMN filo.operator.is_active IS 'Is the opérator actually active ?';
+COMMENT ON COLUMN operator.is_active IS 'Is the opérator actually active ?';
 -- ddl-end --
-ALTER TABLE filo.operator OWNER TO filo;
+ALTER TABLE operator OWNER TO filo;
 -- ddl-end --
 
--- object: filo.operation_operator | type: TABLE --
--- DROP TABLE IF EXISTS filo.operation_operator CASCADE;
-CREATE TABLE filo.operation_operator (
+-- object: operation_operator | type: TABLE --
+-- DROP TABLE IF EXISTS operation_operator CASCADE;
+CREATE TABLE operation_operator (
 	is_responsible bool DEFAULT 't',
 	operation_id integer NOT NULL,
 	operator_id integer NOT NULL,
@@ -2793,30 +2795,30 @@ CREATE TABLE filo.operation_operator (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.operation_operator IS 'Operators rattached to an operation';
+COMMENT ON TABLE operation_operator IS 'Operators rattached to an operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation_operator.is_responsible IS 'True if the operator is responsible of the operation';
+COMMENT ON COLUMN operation_operator.is_responsible IS 'True if the operator is responsible of the operation';
 -- ddl-end --
-ALTER TABLE filo.operation_operator OWNER TO filo;
+ALTER TABLE operation_operator OWNER TO filo;
 -- ddl-end --
 
 -- object: operation_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation_operator DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
-ALTER TABLE filo.operation_operator ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
-REFERENCES filo.operation (operation_id) MATCH FULL
+-- ALTER TABLE operation_operator DROP CONSTRAINT IF EXISTS operation_fk CASCADE;
+ALTER TABLE operation_operator ADD CONSTRAINT operation_fk FOREIGN KEY (operation_id)
+REFERENCES operation (operation_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: operator_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation_operator DROP CONSTRAINT IF EXISTS operator_fk CASCADE;
-ALTER TABLE filo.operation_operator ADD CONSTRAINT operator_fk FOREIGN KEY (operator_id)
-REFERENCES filo.operator (operator_id) MATCH FULL
+-- ALTER TABLE operation_operator DROP CONSTRAINT IF EXISTS operator_fk CASCADE;
+ALTER TABLE operation_operator ADD CONSTRAINT operator_fk FOREIGN KEY (operator_id)
+REFERENCES operator (operator_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.analysis_template_analysis_template_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.analysis_template_analysis_template_id_seq CASCADE;
-CREATE SEQUENCE filo.analysis_template_analysis_template_id_seq
+-- object: analysis_template_analysis_template_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS analysis_template_analysis_template_id_seq CASCADE;
+CREATE SEQUENCE analysis_template_analysis_template_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2825,31 +2827,31 @@ CREATE SEQUENCE filo.analysis_template_analysis_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.analysis_template_analysis_template_id_seq OWNER TO filo;
+ALTER SEQUENCE analysis_template_analysis_template_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.analysis_template | type: TABLE --
--- DROP TABLE IF EXISTS filo.analysis_template CASCADE;
-CREATE TABLE filo.analysis_template (
-	analysis_template_id integer NOT NULL DEFAULT nextval('filo.analysis_template_analysis_template_id_seq'::regclass),
+-- object: analysis_template | type: TABLE --
+-- DROP TABLE IF EXISTS analysis_template CASCADE;
+CREATE TABLE analysis_template (
+	analysis_template_id integer NOT NULL DEFAULT nextval('analysis_template_analysis_template_id_seq'::regclass),
 	analysis_template_name varchar NOT NULL,
 	analysis_template_value json,
 	CONSTRAINT analysis_template_pk PRIMARY KEY (analysis_template_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.analysis_template IS 'Table of types of complementary analysis';
+COMMENT ON TABLE analysis_template IS 'Table of types of complementary analysis';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis_template.analysis_template_name IS 'Name of the template';
+COMMENT ON COLUMN analysis_template.analysis_template_name IS 'Name of the template';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis_template.analysis_template_value IS 'Description of all parameters recorded, in Json format';
+COMMENT ON COLUMN analysis_template.analysis_template_value IS 'Description of all parameters recorded, in Json format';
 -- ddl-end --
-ALTER TABLE filo.analysis_template OWNER TO filo;
+ALTER TABLE analysis_template OWNER TO filo;
 -- ddl-end --
 
--- object: filo.cloggging_clogging_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.cloggging_clogging_id_seq CASCADE;
-CREATE SEQUENCE filo.cloggging_clogging_id_seq
+-- object: cloggging_clogging_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS cloggging_clogging_id_seq CASCADE;
+CREATE SEQUENCE cloggging_clogging_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2858,54 +2860,54 @@ CREATE SEQUENCE filo.cloggging_clogging_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.cloggging_clogging_id_seq OWNER TO filo;
+ALTER SEQUENCE cloggging_clogging_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.clogging | type: TABLE --
--- DROP TABLE IF EXISTS filo.clogging CASCADE;
-CREATE TABLE filo.clogging (
-	clogging_id integer NOT NULL DEFAULT nextval('filo.cloggging_clogging_id_seq'::regclass),
+-- object: clogging | type: TABLE --
+-- DROP TABLE IF EXISTS clogging CASCADE;
+CREATE TABLE clogging (
+	clogging_id integer NOT NULL DEFAULT nextval('cloggging_clogging_id_seq'::regclass),
 	clogging_name varchar NOT NULL,
 	CONSTRAINT clogging_pk PRIMARY KEY (clogging_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.clogging IS 'List of types of cloggings';
+COMMENT ON TABLE clogging IS 'List of types of cloggings';
 -- ddl-end --
-COMMENT ON COLUMN filo.clogging.clogging_name IS 'Name of the type of clogging';
+COMMENT ON COLUMN clogging.clogging_name IS 'Name of the type of clogging';
 -- ddl-end --
-ALTER TABLE filo.clogging OWNER TO filo;
+ALTER TABLE clogging OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'1', E'Pas de colmatage');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'1', E'Pas de colmatage');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'2', E'Sable');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'2', E'Sable');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'3', E'Vase');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'3', E'Vase');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'4', E'Sédiments fins');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'4', E'Sédiments fins');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'5', E'Recouvrements biologiques');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'5', E'Recouvrements biologiques');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'6', E'Débris végétaux');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'6', E'Débris végétaux');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'7', E'Litières');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'7', E'Litières');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'8', E'Dépôts incrustants');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'8', E'Dépôts incrustants');
 -- ddl-end --
-INSERT INTO filo.clogging (clogging_id, clogging_name) VALUES (E'9', E'Autres');
+INSERT INTO clogging (clogging_id, clogging_name) VALUES (E'9', E'Autres');
 -- ddl-end --
 
 -- object: clogging_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS clogging_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT clogging_fk FOREIGN KEY (clogging_id)
-REFERENCES filo.clogging (clogging_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS clogging_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT clogging_fk FOREIGN KEY (clogging_id)
+REFERENCES clogging (clogging_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.sinuosity_sinuosity_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.sinuosity_sinuosity_id_seq CASCADE;
-CREATE SEQUENCE filo.sinuosity_sinuosity_id_seq
+-- object: sinuosity_sinuosity_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS sinuosity_sinuosity_id_seq CASCADE;
+CREATE SEQUENCE sinuosity_sinuosity_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2914,42 +2916,42 @@ CREATE SEQUENCE filo.sinuosity_sinuosity_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.sinuosity_sinuosity_id_seq OWNER TO filo;
+ALTER SEQUENCE sinuosity_sinuosity_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.sinuosity | type: TABLE --
--- DROP TABLE IF EXISTS filo.sinuosity CASCADE;
-CREATE TABLE filo.sinuosity (
-	sinuosity_id integer NOT NULL DEFAULT nextval('filo.sinuosity_sinuosity_id_seq'::regclass),
+-- object: sinuosity | type: TABLE --
+-- DROP TABLE IF EXISTS sinuosity CASCADE;
+CREATE TABLE sinuosity (
+	sinuosity_id integer NOT NULL DEFAULT nextval('sinuosity_sinuosity_id_seq'::regclass),
 	sinuosity_name varchar NOT NULL,
 	CONSTRAINT sinuosity_pk PRIMARY KEY (sinuosity_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.sinuosity IS 'List of types of sinuosities of the river';
+COMMENT ON TABLE sinuosity IS 'List of types of sinuosities of the river';
 -- ddl-end --
-ALTER TABLE filo.sinuosity OWNER TO filo;
+ALTER TABLE sinuosity OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'1', E'Cours d''eau rectiligne');
+INSERT INTO sinuosity (sinuosity_id, sinuosity_name) VALUES (E'1', E'Cours d''eau rectiligne');
 -- ddl-end --
-INSERT INTO filo.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'2', E'Cours d''eau sinueux');
+INSERT INTO sinuosity (sinuosity_id, sinuosity_name) VALUES (E'2', E'Cours d''eau sinueux');
 -- ddl-end --
-INSERT INTO filo.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'3', E'Cours d''eau très sinueux');
+INSERT INTO sinuosity (sinuosity_id, sinuosity_name) VALUES (E'3', E'Cours d''eau très sinueux');
 -- ddl-end --
-INSERT INTO filo.sinuosity (sinuosity_id, sinuosity_name) VALUES (E'4', E'Cours d''eau méandriforme');
+INSERT INTO sinuosity (sinuosity_id, sinuosity_name) VALUES (E'4', E'Cours d''eau méandriforme');
 -- ddl-end --
 
 -- object: sinuosity_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS sinuosity_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT sinuosity_fk FOREIGN KEY (sinuosity_id)
-REFERENCES filo.sinuosity (sinuosity_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS sinuosity_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT sinuosity_fk FOREIGN KEY (sinuosity_id)
+REFERENCES sinuosity (sinuosity_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.flow_trend_flow_trend_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.flow_trend_flow_trend_id_seq CASCADE;
-CREATE SEQUENCE filo.flow_trend_flow_trend_id_seq
+-- object: flow_trend_flow_trend_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS flow_trend_flow_trend_id_seq CASCADE;
+CREATE SEQUENCE flow_trend_flow_trend_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -2958,42 +2960,42 @@ CREATE SEQUENCE filo.flow_trend_flow_trend_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.flow_trend_flow_trend_id_seq OWNER TO filo;
+ALTER SEQUENCE flow_trend_flow_trend_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.flow_trend | type: TABLE --
--- DROP TABLE IF EXISTS filo.flow_trend CASCADE;
-CREATE TABLE filo.flow_trend (
-	flow_trend_id integer NOT NULL DEFAULT nextval('filo.flow_trend_flow_trend_id_seq'::regclass),
+-- object: flow_trend | type: TABLE --
+-- DROP TABLE IF EXISTS flow_trend CASCADE;
+CREATE TABLE flow_trend (
+	flow_trend_id integer NOT NULL DEFAULT nextval('flow_trend_flow_trend_id_seq'::regclass),
 	flow_trend_name varchar NOT NULL,
 	CONSTRAINT flow_trend_pk PRIMARY KEY (flow_trend_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.flow_trend IS 'List of trends of flow';
+COMMENT ON TABLE flow_trend IS 'List of trends of flow';
 -- ddl-end --
-ALTER TABLE filo.flow_trend OWNER TO filo;
+ALTER TABLE flow_trend OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'1', E'Augmentation (en crue)');
+INSERT INTO flow_trend (flow_trend_id, flow_trend_name) VALUES (E'1', E'Augmentation (en crue)');
 -- ddl-end --
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'2', E'Diminution (en décrue)');
+INSERT INTO flow_trend (flow_trend_id, flow_trend_name) VALUES (E'2', E'Diminution (en décrue)');
 -- ddl-end --
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'3', E'Stabilité');
+INSERT INTO flow_trend (flow_trend_id, flow_trend_name) VALUES (E'3', E'Stabilité');
 -- ddl-end --
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'4', E'Irrégularité');
+INSERT INTO flow_trend (flow_trend_id, flow_trend_name) VALUES (E'4', E'Irrégularité');
 -- ddl-end --
 
 -- object: flow_trend_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS flow_trend_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT flow_trend_fk FOREIGN KEY (flow_trend_id)
-REFERENCES filo.flow_trend (flow_trend_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS flow_trend_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT flow_trend_fk FOREIGN KEY (flow_trend_id)
+REFERENCES flow_trend (flow_trend_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.turbidity_id | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.turbidity_id CASCADE;
-CREATE SEQUENCE filo.turbidity_id
+-- object: turbidity_id | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS turbidity_id CASCADE;
+CREATE SEQUENCE turbidity_id
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3002,42 +3004,42 @@ CREATE SEQUENCE filo.turbidity_id
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.turbidity_id OWNER TO postgres;
+ALTER SEQUENCE turbidity_id OWNER TO postgres;
 -- ddl-end --
 
--- object: filo.turbidity | type: TABLE --
--- DROP TABLE IF EXISTS filo.turbidity CASCADE;
-CREATE TABLE filo.turbidity (
-	turbidity_id integer NOT NULL DEFAULT nextval('filo.turbidity_id'::regclass),
+-- object: turbidity | type: TABLE --
+-- DROP TABLE IF EXISTS turbidity CASCADE;
+CREATE TABLE turbidity (
+	turbidity_id integer NOT NULL DEFAULT nextval('turbidity_id'::regclass),
 	turbidity_name varchar NOT NULL,
 	CONSTRAINT turbidity_pk PRIMARY KEY (turbidity_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.turbidity IS 'List of types of turbidity';
+COMMENT ON TABLE turbidity IS 'List of types of turbidity';
 -- ddl-end --
-ALTER TABLE filo.turbidity OWNER TO filo;
+ALTER TABLE turbidity OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.turbidity (turbidity_id, turbidity_name) VALUES (E'1', E'Nulle');
+INSERT INTO turbidity (turbidity_id, turbidity_name) VALUES (E'1', E'Nulle');
 -- ddl-end --
-INSERT INTO filo.turbidity (turbidity_id, turbidity_name) VALUES (E'2', E'Faible');
+INSERT INTO turbidity (turbidity_id, turbidity_name) VALUES (E'2', E'Faible');
 -- ddl-end --
-INSERT INTO filo.turbidity (turbidity_id, turbidity_name) VALUES (E'3', E'Moyenne');
+INSERT INTO turbidity (turbidity_id, turbidity_name) VALUES (E'3', E'Moyenne');
 -- ddl-end --
-INSERT INTO filo.turbidity (turbidity_id, turbidity_name) VALUES (E'4', E'Forte');
+INSERT INTO turbidity (turbidity_id, turbidity_name) VALUES (E'4', E'Forte');
 -- ddl-end --
 
 -- object: turbidity_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS turbidity_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT turbidity_fk FOREIGN KEY (turbidity_id)
-REFERENCES filo.turbidity (turbidity_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS turbidity_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT turbidity_fk FOREIGN KEY (turbidity_id)
+REFERENCES turbidity (turbidity_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.protocol_protocol_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.protocol_protocol_id_seq CASCADE;
-CREATE SEQUENCE filo.protocol_protocol_id_seq
+-- object: protocol_protocol_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS protocol_protocol_id_seq CASCADE;
+CREATE SEQUENCE protocol_protocol_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3046,13 +3048,13 @@ CREATE SEQUENCE filo.protocol_protocol_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.protocol_protocol_id_seq OWNER TO filo;
+ALTER SEQUENCE protocol_protocol_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.protocol | type: TABLE --
--- DROP TABLE IF EXISTS filo.protocol CASCADE;
-CREATE TABLE filo.protocol (
-	protocol_id integer NOT NULL DEFAULT nextval('filo.protocol_protocol_id_seq'::regclass),
+-- object: protocol | type: TABLE --
+-- DROP TABLE IF EXISTS protocol CASCADE;
+CREATE TABLE protocol (
+	protocol_id integer NOT NULL DEFAULT nextval('protocol_protocol_id_seq'::regclass),
 	protocol_name varchar NOT NULL,
 	protocol_url varchar,
 	protocol_description varchar,
@@ -3064,79 +3066,79 @@ CREATE TABLE filo.protocol (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.protocol IS 'List of protocols used';
+COMMENT ON TABLE protocol IS 'List of protocols used';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_name IS 'Name of the protocol';
+COMMENT ON COLUMN protocol.protocol_name IS 'Name of the protocol';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_url IS 'Url where the description of the protocol can be found';
+COMMENT ON COLUMN protocol.protocol_url IS 'Url where the description of the protocol can be found';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_description IS 'Synthetic description of the protocol';
+COMMENT ON COLUMN protocol.protocol_description IS 'Synthetic description of the protocol';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_pdf IS 'Document attached in pdf format';
+COMMENT ON COLUMN protocol.protocol_pdf IS 'Document attached in pdf format';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.measure_default IS 'Name of the prefered measure in the protocol
+COMMENT ON COLUMN protocol.measure_default IS 'Name of the prefered measure in the protocol
 Possible values : sl, fl, tl, wd, ot';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.measure_default_only IS 'If true, only the measure_default type is used during the protocol';
+COMMENT ON COLUMN protocol.measure_default_only IS 'If true, only the measure_default type is used during the protocol';
 -- ddl-end --
-ALTER TABLE filo.protocol OWNER TO filo;
+ALTER TABLE protocol OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.protocol (protocol_id, protocol_name, protocol_url, protocol_description, protocol_pdf, measure_default, measure_default_only, analysis_template_id) VALUES (E'1', E'Default', DEFAULT, E'Protocole par défaut', DEFAULT, E'tl', E'0', DEFAULT);
+INSERT INTO protocol (protocol_id, protocol_name, protocol_url, protocol_description, protocol_pdf, measure_default, measure_default_only, analysis_template_id) VALUES (E'1', E'Default', DEFAULT, E'Protocole par défaut', DEFAULT, E'tl', E'0', DEFAULT);
 -- ddl-end --
 
 -- object: protocol_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS protocol_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT protocol_fk FOREIGN KEY (protocol_id)
-REFERENCES filo.protocol (protocol_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS protocol_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT protocol_fk FOREIGN KEY (protocol_id)
+REFERENCES protocol (protocol_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: taxon_fk | type: CONSTRAINT --
--- ALTER TABLE filo.measure_template DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
-ALTER TABLE filo.measure_template ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
-REFERENCES filo.taxon (taxon_id) MATCH FULL
+-- ALTER TABLE measure_template DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
+ALTER TABLE measure_template ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
+REFERENCES taxon (taxon_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.protocol_measure | type: TABLE --
--- DROP TABLE IF EXISTS filo.protocol_measure CASCADE;
-CREATE TABLE filo.protocol_measure (
+-- object: protocol_measure | type: TABLE --
+-- DROP TABLE IF EXISTS protocol_measure CASCADE;
+CREATE TABLE protocol_measure (
 	protocol_id integer NOT NULL,
 	measure_template_id integer NOT NULL,
 	CONSTRAINT protocol_measure_pk PRIMARY KEY (protocol_id,measure_template_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.protocol_measure IS 'List of particular species measures used in the protocol';
+COMMENT ON TABLE protocol_measure IS 'List of particular species measures used in the protocol';
 -- ddl-end --
-ALTER TABLE filo.protocol_measure OWNER TO filo;
+ALTER TABLE protocol_measure OWNER TO filo;
 -- ddl-end --
 
 -- object: protocol_fk | type: CONSTRAINT --
--- ALTER TABLE filo.protocol_measure DROP CONSTRAINT IF EXISTS protocol_fk CASCADE;
-ALTER TABLE filo.protocol_measure ADD CONSTRAINT protocol_fk FOREIGN KEY (protocol_id)
-REFERENCES filo.protocol (protocol_id) MATCH FULL
+-- ALTER TABLE protocol_measure DROP CONSTRAINT IF EXISTS protocol_fk CASCADE;
+ALTER TABLE protocol_measure ADD CONSTRAINT protocol_fk FOREIGN KEY (protocol_id)
+REFERENCES protocol (protocol_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: measure_template_fk | type: CONSTRAINT --
--- ALTER TABLE filo.protocol_measure DROP CONSTRAINT IF EXISTS measure_template_fk CASCADE;
-ALTER TABLE filo.protocol_measure ADD CONSTRAINT measure_template_fk FOREIGN KEY (measure_template_id)
-REFERENCES filo.measure_template (measure_template_id) MATCH FULL
+-- ALTER TABLE protocol_measure DROP CONSTRAINT IF EXISTS measure_template_fk CASCADE;
+ALTER TABLE protocol_measure ADD CONSTRAINT measure_template_fk FOREIGN KEY (measure_template_id)
+REFERENCES measure_template (measure_template_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: analysis_template_fk | type: CONSTRAINT --
--- ALTER TABLE filo.protocol DROP CONSTRAINT IF EXISTS analysis_template_fk CASCADE;
-ALTER TABLE filo.protocol ADD CONSTRAINT analysis_template_fk FOREIGN KEY (analysis_template_id)
-REFERENCES filo.analysis_template (analysis_template_id) MATCH FULL
+-- ALTER TABLE protocol DROP CONSTRAINT IF EXISTS analysis_template_fk CASCADE;
+ALTER TABLE protocol ADD CONSTRAINT analysis_template_fk FOREIGN KEY (analysis_template_id)
+REFERENCES analysis_template (analysis_template_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.water_regime_water_regime_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.water_regime_water_regime_id_seq CASCADE;
-CREATE SEQUENCE filo.water_regime_water_regime_id_seq
+-- object: water_regime_water_regime_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS water_regime_water_regime_id_seq CASCADE;
+CREATE SEQUENCE water_regime_water_regime_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3145,59 +3147,59 @@ CREATE SEQUENCE filo.water_regime_water_regime_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.water_regime_water_regime_id_seq OWNER TO filo;
+ALTER SEQUENCE water_regime_water_regime_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.water_regime | type: TABLE --
--- DROP TABLE IF EXISTS filo.water_regime CASCADE;
-CREATE TABLE filo.water_regime (
-	water_regime_id integer NOT NULL DEFAULT nextval('filo.water_regime_water_regime_id_seq'::regclass),
+-- object: water_regime | type: TABLE --
+-- DROP TABLE IF EXISTS water_regime CASCADE;
+CREATE TABLE water_regime (
+	water_regime_id integer NOT NULL DEFAULT nextval('water_regime_water_regime_id_seq'::regclass),
 	water_regime_name varchar NOT NULL,
 	CONSTRAINT water_regime_pk PRIMARY KEY (water_regime_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.water_regime IS 'List of water regimes';
+COMMENT ON TABLE water_regime IS 'List of water regimes';
 -- ddl-end --
-ALTER TABLE filo.water_regime OWNER TO filo;
+ALTER TABLE water_regime OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.water_regime (water_regime_name, water_regime_id) VALUES (E'Étiage', E'1');
+INSERT INTO water_regime (water_regime_name, water_regime_id) VALUES (E'Étiage', E'1');
 -- ddl-end --
-INSERT INTO filo.water_regime (water_regime_name, water_regime_id) VALUES (E'Niveau moyen', E'2');
+INSERT INTO water_regime (water_regime_name, water_regime_id) VALUES (E'Niveau moyen', E'2');
 -- ddl-end --
-INSERT INTO filo.water_regime (water_regime_name, water_regime_id) VALUES (E'Hautes eaux', E'3');
+INSERT INTO water_regime (water_regime_name, water_regime_id) VALUES (E'Hautes eaux', E'3');
 -- ddl-end --
-INSERT INTO filo.water_regime (water_regime_name, water_regime_id) VALUES (E'Crue', E'4');
+INSERT INTO water_regime (water_regime_name, water_regime_id) VALUES (E'Crue', E'4');
 -- ddl-end --
 
 -- object: water_regime_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS water_regime_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT water_regime_fk FOREIGN KEY (water_regime_id)
-REFERENCES filo.water_regime (water_regime_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS water_regime_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT water_regime_fk FOREIGN KEY (water_regime_id)
+REFERENCES water_regime (water_regime_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.electric_current_type | type: TABLE --
--- DROP TABLE IF EXISTS filo.electric_current_type CASCADE;
-CREATE TABLE filo.electric_current_type (
+-- object: electric_current_type | type: TABLE --
+-- DROP TABLE IF EXISTS electric_current_type CASCADE;
+CREATE TABLE electric_current_type (
 	electric_current_type_id smallint NOT NULL,
 	electric_current_type_name varchar NOT NULL,
 	CONSTRAINT electric_current_type_pk PRIMARY KEY (electric_current_type_id)
 
 );
 -- ddl-end --
-ALTER TABLE filo.electric_current_type OWNER TO filo;
+ALTER TABLE electric_current_type OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.electric_current_type (electric_current_type_id, electric_current_type_name) VALUES (E'1', E'Continu');
+INSERT INTO electric_current_type (electric_current_type_id, electric_current_type_name) VALUES (E'1', E'Continu');
 -- ddl-end --
-INSERT INTO filo.electric_current_type (electric_current_type_id, electric_current_type_name) VALUES (E'2', E'Ondulé');
+INSERT INTO electric_current_type (electric_current_type_id, electric_current_type_name) VALUES (E'2', E'Ondulé');
 -- ddl-end --
 
--- object: filo.fishing_strategy_fishing_strategy_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.fishing_strategy_fishing_strategy_id_seq CASCADE;
-CREATE SEQUENCE filo.fishing_strategy_fishing_strategy_id_seq
+-- object: fishing_strategy_fishing_strategy_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS fishing_strategy_fishing_strategy_id_seq CASCADE;
+CREATE SEQUENCE fishing_strategy_fishing_strategy_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3206,38 +3208,38 @@ CREATE SEQUENCE filo.fishing_strategy_fishing_strategy_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.fishing_strategy_fishing_strategy_id_seq OWNER TO filo;
+ALTER SEQUENCE fishing_strategy_fishing_strategy_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.fishing_strategy | type: TABLE --
--- DROP TABLE IF EXISTS filo.fishing_strategy CASCADE;
-CREATE TABLE filo.fishing_strategy (
-	fishing_strategy_id integer NOT NULL DEFAULT nextval('filo.fishing_strategy_fishing_strategy_id_seq'::regclass),
+-- object: fishing_strategy | type: TABLE --
+-- DROP TABLE IF EXISTS fishing_strategy CASCADE;
+CREATE TABLE fishing_strategy (
+	fishing_strategy_id integer NOT NULL DEFAULT nextval('fishing_strategy_fishing_strategy_id_seq'::regclass),
 	fishing_strategy_name varchar NOT NULL,
 	CONSTRAINT fishing_strategy_pk PRIMARY KEY (fishing_strategy_id)
 
 );
 -- ddl-end --
-ALTER TABLE filo.fishing_strategy OWNER TO filo;
+ALTER TABLE fishing_strategy OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'1', E'Inventaire');
+INSERT INTO fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'1', E'Inventaire');
 -- ddl-end --
-INSERT INTO filo.fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'2', E'Sondage');
+INSERT INTO fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'2', E'Sondage');
 -- ddl-end --
-INSERT INTO filo.fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'3', E'EPA');
+INSERT INTO fishing_strategy (fishing_strategy_id, fishing_strategy_name) VALUES (E'3', E'EPA');
 -- ddl-end --
 
 -- object: fishing_strategy_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS fishing_strategy_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT fishing_strategy_fk FOREIGN KEY (fishing_strategy_id)
-REFERENCES filo.fishing_strategy (fishing_strategy_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS fishing_strategy_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT fishing_strategy_fk FOREIGN KEY (fishing_strategy_id)
+REFERENCES fishing_strategy (fishing_strategy_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.scale_scale_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.scale_scale_id_seq CASCADE;
-CREATE SEQUENCE filo.scale_scale_id_seq
+-- object: scale_scale_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS scale_scale_id_seq CASCADE;
+CREATE SEQUENCE scale_scale_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3246,40 +3248,40 @@ CREATE SEQUENCE filo.scale_scale_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.scale_scale_id_seq OWNER TO filo;
+ALTER SEQUENCE scale_scale_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.scale | type: TABLE --
--- DROP TABLE IF EXISTS filo.scale CASCADE;
-CREATE TABLE filo.scale (
-	scale_id integer NOT NULL DEFAULT nextval('filo.scale_scale_id_seq'::regclass),
+-- object: scale | type: TABLE --
+-- DROP TABLE IF EXISTS scale CASCADE;
+CREATE TABLE scale (
+	scale_id integer NOT NULL DEFAULT nextval('scale_scale_id_seq'::regclass),
 	scale_name varchar NOT NULL,
 	CONSTRAINT scale_pk PRIMARY KEY (scale_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.scale IS 'Scale of the operation (global station, point, ambience)';
+COMMENT ON TABLE scale IS 'Scale of the operation (global station, point, ambience)';
 -- ddl-end --
-ALTER TABLE filo.scale OWNER TO filo;
+ALTER TABLE scale OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.scale (scale_id, scale_name) VALUES (E'1', E'Global station');
+INSERT INTO scale (scale_id, scale_name) VALUES (E'1', E'Global station');
 -- ddl-end --
-INSERT INTO filo.scale (scale_id, scale_name) VALUES (E'2', E'Ambiances');
+INSERT INTO scale (scale_id, scale_name) VALUES (E'2', E'Ambiances');
 -- ddl-end --
-INSERT INTO filo.scale (scale_id, scale_name) VALUES (E'3', E'Points');
+INSERT INTO scale (scale_id, scale_name) VALUES (E'3', E'Points');
 -- ddl-end --
 
 -- object: scale_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS scale_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT scale_fk FOREIGN KEY (scale_id)
-REFERENCES filo.scale (scale_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS scale_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT scale_fk FOREIGN KEY (scale_id)
+REFERENCES scale (scale_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.gear_method_gear_method_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.gear_method_gear_method_id_seq CASCADE;
-CREATE SEQUENCE filo.gear_method_gear_method_id_seq
+-- object: gear_method_gear_method_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS gear_method_gear_method_id_seq CASCADE;
+CREATE SEQUENCE gear_method_gear_method_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3288,47 +3290,47 @@ CREATE SEQUENCE filo.gear_method_gear_method_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.gear_method_gear_method_id_seq OWNER TO filo;
+ALTER SEQUENCE gear_method_gear_method_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.gear_method | type: TABLE --
--- DROP TABLE IF EXISTS filo.gear_method CASCADE;
-CREATE TABLE filo.gear_method (
-	gear_method_id integer NOT NULL DEFAULT nextval('filo.gear_method_gear_method_id_seq'::regclass),
+-- object: gear_method | type: TABLE --
+-- DROP TABLE IF EXISTS gear_method CASCADE;
+CREATE TABLE gear_method (
+	gear_method_id integer NOT NULL DEFAULT nextval('gear_method_gear_method_id_seq'::regclass),
 	gear_method_name varchar NOT NULL,
 	CONSTRAINT gear_method_pk PRIMARY KEY (gear_method_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.gear_method IS 'Method of usage of the gear (in boat, walk fishing, etc.)';
+COMMENT ON TABLE gear_method IS 'Method of usage of the gear (in boat, walk fishing, etc.)';
 -- ddl-end --
-ALTER TABLE filo.gear_method OWNER TO filo;
+ALTER TABLE gear_method OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.gear_method (gear_method_id, gear_method_name) VALUES (E'1', E'À pied');
+INSERT INTO gear_method (gear_method_id, gear_method_name) VALUES (E'1', E'À pied');
 -- ddl-end --
-INSERT INTO filo.gear_method (gear_method_id, gear_method_name) VALUES (E'2', E'En bateau');
+INSERT INTO gear_method (gear_method_id, gear_method_name) VALUES (E'2', E'En bateau');
 -- ddl-end --
-INSERT INTO filo.gear_method (gear_method_id, gear_method_name) VALUES (E'3', E'Autre');
+INSERT INTO gear_method (gear_method_id, gear_method_name) VALUES (E'3', E'Autre');
 -- ddl-end --
 
 -- object: gear_method_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sequence_gear DROP CONSTRAINT IF EXISTS gear_method_fk CASCADE;
-ALTER TABLE filo.sequence_gear ADD CONSTRAINT gear_method_fk FOREIGN KEY (gear_method_id)
-REFERENCES filo.gear_method (gear_method_id) MATCH FULL
+-- ALTER TABLE sequence_gear DROP CONSTRAINT IF EXISTS gear_method_fk CASCADE;
+ALTER TABLE sequence_gear ADD CONSTRAINT gear_method_fk FOREIGN KEY (gear_method_id)
+REFERENCES gear_method (gear_method_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: electric_current_type_fk | type: CONSTRAINT --
--- ALTER TABLE filo.sequence_gear DROP CONSTRAINT IF EXISTS electric_current_type_fk CASCADE;
-ALTER TABLE filo.sequence_gear ADD CONSTRAINT electric_current_type_fk FOREIGN KEY (electric_current_type_id)
-REFERENCES filo.electric_current_type (electric_current_type_id) MATCH FULL
+-- ALTER TABLE sequence_gear DROP CONSTRAINT IF EXISTS electric_current_type_fk CASCADE;
+ALTER TABLE sequence_gear ADD CONSTRAINT electric_current_type_fk FOREIGN KEY (electric_current_type_id)
+REFERENCES electric_current_type (electric_current_type_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: filo.dbparam | type: TABLE --
--- DROP TABLE IF EXISTS filo.dbparam CASCADE;
-CREATE TABLE filo.dbparam (
+-- object: dbparam | type: TABLE --
+-- DROP TABLE IF EXISTS dbparam CASCADE;
+CREATE TABLE dbparam (
 	dbparam_id integer NOT NULL,
 	dbparam_name character varying NOT NULL,
 	dbparam_value character varying,
@@ -3336,27 +3338,27 @@ CREATE TABLE filo.dbparam (
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.dbparam IS 'Table des parametres associes de maniere intrinseque a l''instance';
+COMMENT ON TABLE dbparam IS 'Table des parametres associes de maniere intrinseque a l''instance';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbparam.dbparam_name IS 'Nom du parametre';
+COMMENT ON COLUMN dbparam.dbparam_name IS 'Nom du parametre';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbparam.dbparam_value IS 'Valeur du paramètre';
+COMMENT ON COLUMN dbparam.dbparam_value IS 'Valeur du paramètre';
 -- ddl-end --
-ALTER TABLE filo.dbparam OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'1', E'APPLI_title', E'Filo-Science');
--- ddl-end --
-INSERT INTO filo.dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'2', E'mapDefaultZoom', E'9');
--- ddl-end --
-INSERT INTO filo.dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'3', E'mapDefaultLong', E'0');
--- ddl-end --
-INSERT INTO filo.dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'4', E'mapDefaultLat', E'45');
+ALTER TABLE dbparam OWNER TO filo;
 -- ddl-end --
 
--- object: filo.dbversion_dbversion_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.dbversion_dbversion_id_seq CASCADE;
-CREATE SEQUENCE filo.dbversion_dbversion_id_seq
+INSERT INTO dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'1', E'APPLI_title', E'Filo-Science');
+-- ddl-end --
+INSERT INTO dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'2', E'mapDefaultZoom', E'9');
+-- ddl-end --
+INSERT INTO dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'3', E'mapDefaultLong', E'0');
+-- ddl-end --
+INSERT INTO dbparam (dbparam_id, dbparam_name, dbparam_value) VALUES (E'4', E'mapDefaultLat', E'45');
+-- ddl-end --
+
+-- object: dbversion_dbversion_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS dbversion_dbversion_id_seq CASCADE;
+CREATE SEQUENCE dbversion_dbversion_id_seq
 	INCREMENT BY 1
 	MINVALUE 1
 	MAXVALUE 9223372036854775807
@@ -3365,34 +3367,34 @@ CREATE SEQUENCE filo.dbversion_dbversion_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.dbversion_dbversion_id_seq OWNER TO filo;
+ALTER SEQUENCE dbversion_dbversion_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.dbversion | type: TABLE --
--- DROP TABLE IF EXISTS filo.dbversion CASCADE;
-CREATE TABLE filo.dbversion (
-	dbversion_id integer NOT NULL DEFAULT nextval('filo.dbversion_dbversion_id_seq'::regclass),
+-- object: dbversion | type: TABLE --
+-- DROP TABLE IF EXISTS dbversion CASCADE;
+CREATE TABLE dbversion (
+	dbversion_id integer NOT NULL DEFAULT nextval('dbversion_dbversion_id_seq'::regclass),
 	dbversion_number character varying NOT NULL,
 	dbversion_date timestamp NOT NULL,
 	CONSTRAINT dbversion_pk PRIMARY KEY (dbversion_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.dbversion IS 'Table des versions de la base de donnees';
+COMMENT ON TABLE dbversion IS 'Table des versions de la base de donnees';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbversion.dbversion_number IS 'Numero de la version';
+COMMENT ON COLUMN dbversion.dbversion_number IS 'Numero de la version';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbversion.dbversion_date IS 'Date de la version';
+COMMENT ON COLUMN dbversion.dbversion_date IS 'Date de la version';
 -- ddl-end --
-ALTER TABLE filo.dbversion OWNER TO filo;
--- ddl-end --
-
-INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.1', E'2019-06-05');
+ALTER TABLE dbversion OWNER TO filo;
 -- ddl-end --
 
--- object: filo.taxa_template_taxa_template_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS filo.taxa_template_taxa_template_id_seq CASCADE;
-CREATE SEQUENCE filo.taxa_template_taxa_template_id_seq
+INSERT INTO dbversion (dbversion_number, dbversion_date) VALUES (E'1.1', E'2019-06-05');
+-- ddl-end --
+
+-- object: taxa_template_taxa_template_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS taxa_template_taxa_template_id_seq CASCADE;
+CREATE SEQUENCE taxa_template_taxa_template_id_seq
 	INCREMENT BY 1
 	MINVALUE 0
 	MAXVALUE 2147483647
@@ -3401,37 +3403,37 @@ CREATE SEQUENCE filo.taxa_template_taxa_template_id_seq
 	NO CYCLE
 	OWNED BY NONE;
 -- ddl-end --
-ALTER SEQUENCE filo.taxa_template_taxa_template_id_seq OWNER TO filo;
+ALTER SEQUENCE taxa_template_taxa_template_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: filo.taxa_template | type: TABLE --
--- DROP TABLE IF EXISTS filo.taxa_template CASCADE;
-CREATE TABLE filo.taxa_template (
-	taxa_template_id integer NOT NULL DEFAULT nextval('filo.taxa_template_taxa_template_id_seq'::regclass),
+-- object: taxa_template | type: TABLE --
+-- DROP TABLE IF EXISTS taxa_template CASCADE;
+CREATE TABLE taxa_template (
+	taxa_template_id integer NOT NULL DEFAULT nextval('taxa_template_taxa_template_id_seq'::regclass),
 	taxa_template_name varchar NOT NULL,
 	taxa_model json,
 	CONSTRAINT taxa_template_pk PRIMARY KEY (taxa_template_id)
 
 );
 -- ddl-end --
-COMMENT ON TABLE filo.taxa_template IS 'List of templates used to select taxa';
+COMMENT ON TABLE taxa_template IS 'List of templates used to select taxa';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxa_template.taxa_model IS 'Model of emplacement of taxa on screen';
+COMMENT ON COLUMN taxa_template.taxa_model IS 'Model of emplacement of taxa on screen';
 -- ddl-end --
-ALTER TABLE filo.taxa_template OWNER TO filo;
+ALTER TABLE taxa_template OWNER TO filo;
 -- ddl-end --
 
 -- object: taxa_template_fk | type: CONSTRAINT --
--- ALTER TABLE filo.operation DROP CONSTRAINT IF EXISTS taxa_template_fk CASCADE;
-ALTER TABLE filo.operation ADD CONSTRAINT taxa_template_fk FOREIGN KEY (taxa_template_id)
-REFERENCES filo.taxa_template (taxa_template_id) MATCH FULL
+-- ALTER TABLE operation DROP CONSTRAINT IF EXISTS taxa_template_fk CASCADE;
+ALTER TABLE operation ADD CONSTRAINT taxa_template_fk FOREIGN KEY (taxa_template_id)
+REFERENCES taxa_template (taxa_template_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: sequence_fk | type: CONSTRAINT --
--- ALTER TABLE filo.ambience DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
-ALTER TABLE filo.ambience ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
-REFERENCES filo.sequence (sequence_id) MATCH FULL
+-- ALTER TABLE ambience DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
+ALTER TABLE ambience ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
+REFERENCES sequence (sequence_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 

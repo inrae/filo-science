@@ -15,15 +15,25 @@ switch ($t_module["param"]) {
             /**
              * Search parameters
              */
-            $_SESSION["searchCampaign"]->setParam($_REQUEST);
-            $dataSearch = $_SESSION["searchCampaign"]->getParam();
-            if ($_SESSION["searchCampaign"]->isSearch()) {
-                $data = $dataClass->getListSearch($dataSearch);
-                $vue->set($_SESSION["ti_campaign"]->translateList($data), "data");
-                $vue->set(1, "isSearch");
+            $params = $_REQUEST;
+            if (!isset($params["is_active"])) {
+                $params["is_active"] = 1;
             }
+            include_once "modules/classes/project.class.php";
+            $project = new project($bdd, $ObjetBDDParam);
+            $projects = $project->getProjectsActive($params["is_active"], $_SESSION["projects"]);
+            if (strlen($params["project_id"])==0) {
+                $params["project_id"] = $projects[0]["project_id"];
+            }
+            $_SESSION["searchCampaign"]->setParam($params);
+            $dataSearch = $_SESSION["searchCampaign"]->getParam();
 
-            $vue->set($_SESSION["projects"], "projects");
+            $data = $dataClass->getListSearch($dataSearch);
+            $vue->set($_SESSION["ti_campaign"]->translateList($data), "data");
+            $vue->set(1, "isSearch");
+
+
+            $vue->set($projects, "projects");
             $vue->set($dataSearch, "searchCampaign");
             $vue->set("gestion/campaignList.tpl", "corps");
         } catch (Exception $e) {
