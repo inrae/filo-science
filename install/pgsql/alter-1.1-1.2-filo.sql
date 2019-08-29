@@ -203,3 +203,5 @@ group by individual_id
 
 alter table project add column 	is_active boolean DEFAULT true;
 comment on column project.is_active is 'Specify if the project is currently active';
+
+INSERT INTO dbversion (dbversion_number, dbversion_date) VALUES (E'1.2', E'2019-08-29');

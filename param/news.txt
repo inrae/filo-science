@@ -1,5 +1,25 @@
 Nouveautés
 ==========
+Version 1.2.0 du 29/08/2019
+Correction de bugs :
+- il n'était pas possible de saisir le poids total du lot
+- l'affichage des cartes fonctionne maintenant sans avoir à redimensionner la fenêtre
+
+Nouveautés :
+- le numéro du lot est maintenant affiché lors de la saisie des poissons
+- lorsqu'il y a un changement de taxon, un signal d'alerte est affiché
+- les onglets sont affichés au survol (un clic sur un onglet inactive ce mécanisme). Le dernier onglet utilisé est affiché par défaut
+- il est possible de rajouter des pièces à un projet, un protocole ou une opération
+- il est possible de définir une grille de boutons, qui permet de sélectionner rapidement les taxons les plus fréquents
+- il est possible de définir des analyses particulières associées à un protocole
+- il est possible de définir des mesures complémentaires pour un taxon, associées à un protocole
+- les campagnes sont maintenant affichées systématiquement par rapport au premier projet de la liste. Les projets peuvent être positionnés "inactifs" pour éviter de les visualiser lors de la recherche
+- lors de la saisie des poissons, le survol des champs courants de mesure permet de définir le focus
+- pour permettre la saisie automatique des tailles à partir de pieds à coulisse, le signe + est systématiquement enlevé
+- la saisie par pied à coulisse entraînant par défaut la validation de la fiche courante et la création d'une nouvelle fiche de poisson, un bouton permet de désactiver cet appel automatique. Il faut alors cliquer sur les boutons de validation pour enregistrer les informations
+- mise à niveau du framework pour intégrer les exigences de sécurité actuelles
+
+
 Version 1.1.0 du 05/06/2019
 --------------
 Correction de bugs :
