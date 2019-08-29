@@ -7,6 +7,7 @@
             setPosition(long, lat);
         }
     });
+    setTimeout( function() { mapAmbience.updateSize();}, 200);
 
 </script>
 <div class="row">
@@ -125,7 +126,6 @@
     </div>
     <div class="col-md-4">
         {include file="gestion/ambienceMap.tpl"}
-        <br>{t}Si la carte ne s'affiche pas, redimensionnez votre navigateur{/t}
     </div>
         
 </div>

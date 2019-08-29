@@ -1,11 +1,36 @@
 <script>
 $(document).ready(function() {
-    /* select the current tab */
+    /* Management of tabs */
     var activeTab = "{$activeTab}";
-    if (activeTab.length > 0) {
-        //console.log(activeTab);
-        $("#"+activeTab).tab('show');
+    var survol = true;
+    if (activeTab.length == 0) {
+        try {
+        activeTab = Cookies.get("operationDisplayTab");
+        } catch (Exception) {
+            activeTab = "";
+        }
     }
+    try {
+        if (activeTab.length > 0) {
+            $("#"+activeTab).tab('show');
+        } 
+    } catch (Exception) { }
+    $('.nav-tabs > li > a').hover(function() {
+        if (survol) {
+            $(this).tab('show');
+        }
+    });
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+        Cookies.set("operationDisplayTab",$(this).attr("id"));
+    });
+    $('a[data-toggle="tab"]').on("click", function () {
+        survol = false ;
+    });
+    $("#tab-ambience").on ("shown.bs.tab", function() { 
+        setTimeout( function() { mapAmbience.updateSize();}, 200);
+    });
+    
+
     /**
      * set the id to the cookie
      */

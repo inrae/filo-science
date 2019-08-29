@@ -96,8 +96,6 @@ mapAmbience.addLayer(layerPoint);
 mapAmbience.addControl(mousePosition);
 
 function setPosition(lon, lat) {
-    console.log (lon);
-    console.log(lat);
     if (lon.length > 0 && lat.length > 0) {
         var lonlat3857 = ol.proj.transform([parseFloat(lon),parseFloat(lat)], 'EPSG:4326', 'EPSG:3857');
         point.setCoordinates (lonlat3857);

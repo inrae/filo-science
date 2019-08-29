@@ -59,7 +59,7 @@
     });
     var map = new ol.Map({
       controls: ol.control.defaults({ attribution: false }).extend([attribution]),
-      target: 'map',
+      target: 'mapOperation',
       view: view
     });
     

@@ -103,7 +103,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div id="map" class="map">
+            <div id="mapOperation" class="map">
                     {include file="gestion/operationMapChange.tpl"}
             </div>
         </div>
