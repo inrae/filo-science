@@ -77,6 +77,7 @@ $(document).ready(function() {
             if (value) {
                 var name = JSON.parse(value);
                 $("#taxon_name").val(name.scientific_name);
+                $("#taxonNameDisplay").text(name.scientific_name);
             }
         });
 
@@ -398,7 +399,7 @@ $(document).ready(function() {
 
         <div class="col-md-6 form-horizontal">
             <fieldset>
-                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if} <i>{$data.taxon_name}</i>
+                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° : {/t}{$individual.individual_uid}{/if} <i><span id="taxonNameDisplay">{$data.taxon_name}</span></i>
                     {t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto">
                 </legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
