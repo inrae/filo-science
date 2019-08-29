@@ -179,12 +179,14 @@ while (isset($module)) {
     /**
      * Verification du delai entre deux appels, et mise en sommeil
      */
-    if ($moduleRequested == $module && (!in_array($t_module["type"], array("ajax", "json", "ws")) && isset($_SESSION["login"])) && !$t_module["noDelayBeforeCall"] == 1) {
-        $delay = $log->getTimestampFromLastCall($_SESSION["login"]);
-        if ($delay < $APPLI_delay_between_call) {
-            $log->setLog($login, $module, "sleep because too fast");
-            $message->setSyslog("module " . $module . ": sleep because too fast");
-            sleep($APPLI_sleep_duration);
+    if ($APPLI_delay_between_call > 0) {
+        if ($moduleRequested == $module && (!in_array($t_module["type"], array("ajax", "json", "ws")) && isset($_SESSION["login"])) && !$t_module["noDelayBeforeCall"] == 1) {
+            $delay = $log->getTimestampFromLastCall($_SESSION["login"]);
+            if ($delay < $APPLI_delay_between_call) {
+                $log->setLog($login, $module, "sleep because too fast");
+                $message->setSyslog("module " . $module . ": sleep because too fast");
+                sleep($APPLI_sleep_duration);
+            }
         }
     }
     /*
