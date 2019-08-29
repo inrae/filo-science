@@ -9,10 +9,10 @@ $(document).ready(function() {
     var isAuto = Cookies.get("fishAutoMode");
     var defaultField = "{$sequence.measure_default}";
     if (isAuto === undefined) {
-        isAuto = true;
-        Cookies.set("fishAutoMode", true, { expires: 180});
+        isAuto = 1;
+        Cookies.set("fishAutoMode", 1, { expires: 180});
     }
-    if (isAuto == "true") {
+    if (isAuto == "1") {
         $("#modeAuto").prop("checked", true);
         $(".btn").prop("disabled", false);
     } else {
@@ -180,23 +180,21 @@ $(document).ready(function() {
            $(this).focus();
        });
         $(".btn").hover(function() { 
-            if (! isAuto) {
                 $(this).prop("disabled", false);
-            }
         });
         $(".btn").mouseout(function() { 
-            if (! isAuto) {
+            if (isAuto == 0) {
                 $(this).prop("disabled", true);
             }
         });
         $("#modeAuto").on ("change", function (){ 
             if ($(this).prop("checked")) {
-                isAuto = true;
-                Cookies.set("fishAutoMode", true, { expires: 180});
+                isAuto = 1;
+                Cookies.set("fishAutoMode", 1, { expires: 180});
                 $(".btn").prop("disabled", false);
             } else {
-                isAuto = false;
-                Cookies.set("fishAutoMode", false, { expires: 180});
+                isAuto = 0;
+                Cookies.set("fishAutoMode", 0, { expires: 180});
                 $(".btn").prop("disabled", true);
             }
         });
