@@ -76,9 +76,9 @@ class Project extends ObjetBDD
      *
      * @return array
      */
-    function getprojectsFromLogin()
+    function getProjectsFromLogin()
     {
-        return $this->getprojectsFromGroups($_SESSION["groupes"]);
+        return $this->getProjectsFromGroups($_SESSION["groupes"]);
     }
 
     /**
@@ -88,7 +88,7 @@ class Project extends ObjetBDD
      * 
      * @return array
      */
-    function getprojectsFromGroups(array $groups)
+    function getProjectsFromGroups(array $groups)
     {
         if (count($groups) > 0) {
             /*
@@ -166,10 +166,10 @@ class Project extends ObjetBDD
      * @param int $project_id
      * @return array
      */
-    function getAllGroupsFromproject($project_id)
+    function getAllGroupsFromProject($project_id)
     {
         if ($project_id > 0 && is_numeric($project_id)) {
-            $data = $this->getGroupsFromproject($project_id);
+            $data = $this->getGroupsFromProject($project_id);
             $dataGroup = array();
             foreach ($data as $value) {
                 $dataGroup[$value["aclgroup_id"]] = 1;
@@ -190,7 +190,7 @@ class Project extends ObjetBDD
      * @param int $project_id
      * @return array
      */
-    function getGroupsFromproject($project_id)
+    function getGroupsFromProject($project_id)
     {
         $data = array();
         if ($project_id > 0 && is_numeric($project_id)) {
@@ -206,9 +206,9 @@ class Project extends ObjetBDD
     /**
      * Initialise la liste des connexions rattachees au login
      */
-    function initprojects()
+    function initProjects()
     {
-        $_SESSION["projects"] = $this->getprojectsFromLogin();
+        $_SESSION["projects"] = $this->getProjectsFromLogin();
         /*
          * Attribution des droits de gestion si attache a un projet
          */

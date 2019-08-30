@@ -248,7 +248,7 @@ $(document).ready(function() {
         </form>
     </div>
     <div class="col-md-6">
-        <div id="map" class="map">
+        <div id="mapOperation" class="map">
             <div id="radar">
                 <a href="#">
                 <img src="display/images/map-pointer.png" height="30">{t}Repérez votre position !{/t}</a>

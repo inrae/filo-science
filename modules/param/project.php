@@ -27,7 +27,7 @@ switch ($t_module["param"]) {
     case "display":
         $vue->set($dataClass->getDetail($id), "data");
         $vue->set("param/projectDisplay.tpl", "corps");
-        $vue->set($dataClass->getAllGroupsFromproject($id), "groupes");
+        $vue->set($dataClass->getAllGroupsFromProject($id), "groupes");
         include_once 'modules/classes/document.class.php';
         $document = new Document($bdd, $ObjetBDDParam);
         $vue->set($document->getListFromParent("project", $id), "dataDoc");
@@ -45,7 +45,7 @@ switch ($t_module["param"]) {
         /*
          * Recuperation des groupes
          */
-        $vue->set($dataClass->getAllGroupsFromproject($id), "groupes");
+        $vue->set($dataClass->getAllGroupsFromProject($id), "groupes");
         break;
     case "write":
         /*
@@ -58,7 +58,7 @@ switch ($t_module["param"]) {
              * Rechargement eventuel des projects autorises pour l'utilisateur courant
              */
             try {
-                $dataClass->initprojects();
+                $dataClass->initProjects();
             } catch (Exception $e) {
                 if ($APPLI_modeDeveloppement) {
                     $message->set($e->getMessage(), true);

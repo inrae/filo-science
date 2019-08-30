@@ -188,7 +188,7 @@ REFERENCES document (document_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
 -- ddl-end --
 
-alter table taxa_template add column freshwater boolean not null default 1;
+alter table taxa_template add column freshwater boolean not null default true;
 comment on column taxa_template.freshwater is 'Does the template operate for freshwater?';
 
 alter table analysis_template rename column analysis_template_value to analysis_template_schema;
