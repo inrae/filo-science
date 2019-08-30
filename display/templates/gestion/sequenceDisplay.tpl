@@ -33,7 +33,7 @@ $(document).ready(function() {
     /**
      * set the id to the cookie
      */
-     Cookies.set('sequence_uid', "{$data.sequence_uid}", { expires: 1, secure: true});
+     Cookies.set('sequence_uid', "{$data.sequence_uid}", { expires: 1, secure: true, sameSite: "strict"});
 });
 
 </script>

@@ -84,7 +84,8 @@
             var la2 = $("#lat_end").val();
             if (lo2.length == 0 || la2.length == 0) {
                 point2.setCoordinates(lonlat3857);
-                numpoint = 2;
+                $("#long_end").val($("#long_start").val());
+                $("#lat_end").val($("#lat_start").val());
             } 
         } else {
             point2.setCoordinates (lonlat3857);
