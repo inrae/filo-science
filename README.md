@@ -5,4 +5,6 @@ Fish Logger for Science : application for recording the measurements of fish cau
 
 Realisation: Eric Quinton for Irstea Bordeaux (France)
 
-Software recorded at Agence pour la Protection des Programmes, with the number (in progress).
+Copyright © IRSTEA 2019 - Distributed under AGPL License
+
+This software is recorded at Agence pour la Protection des Programmes, with the number IDDN.FR.001.360004.S.C.2019.000.31500.
