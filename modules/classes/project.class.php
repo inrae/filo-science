@@ -6,7 +6,7 @@
  * Encoding : UTF-8
  * Copyright 2016 - All rights reserved
  */
-class project extends ObjetBDD
+class Project extends ObjetBDD
 {
     private $sql = "select project_id, project_name, is_active,
     array_to_string(array_agg(groupe),', ') as groupe
@@ -98,7 +98,7 @@ class project extends ObjetBDD
             $in = "(";
             foreach ($groups as $value) {
                 if (strlen($value["groupe"]) > 0) {
-                    $comma == true ? $in .= ", " : $comma = true;
+                    $comma ? $in .= ", " : $comma = true;
                     $in .= "'" . $value["groupe"] . "'";
                 }
             }

@@ -36,8 +36,9 @@ switch ($t_module["param"]) {
                     'size' => $fdata['size'][$i]
                 );
             }
-        } else
+        } else {
             $files[] = $fdata;
+        }
         foreach ($files as $file) {
             $id = $dataClass->ecrire($file, $_REQUEST["parent_table"], $_REQUEST["parent_id"], $_REQUEST["document_description"], $_REQUEST["document_creation_date"]);
             if ($id > 0) {
@@ -72,8 +73,9 @@ switch ($t_module["param"]) {
                 $param["disposition"] = "attachment";
                 $fn = explode('/', $tmp_name);
                 $param["filename"] = $fn[count($fn) - 1];
-            } else
+            } else {
                 $param["disposition"] = "inline";
+            }
             $vue->setParam($param);
         } else {
             unset($vue);

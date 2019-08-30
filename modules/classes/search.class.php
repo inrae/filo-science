@@ -30,12 +30,14 @@ class SearchParam
 	 */
 	function __construct()
 	{
-		if (!is_array($this->param))
+		if (!is_array($this->param)) {
 			$this->param = array();
+		}
 		$this->isSearch = 0;
 		$this->param["isSearch"] = 0;
-		if (is_array($this->paramNum))
+		if (is_array($this->paramNum)) {
 			$this->paramNum = array_flip($this->paramNum);
+		}
 	}
 	/**
 	 * Stocke les parametres fournis
@@ -59,9 +61,8 @@ class SearchParam
 					/*
 					 * Recherche si la valeur doit etre numerique
 					 */
-					if (isset($this->paramNum[$key])) {
-						if (!is_numeric($data[$key]))
-							$data[$key] = "";
+					if (isset($this->paramNum[$key]) && !is_numeric($data[$key])) {
+						$data[$key] = "";
 					}
 					$this->param[$key] = $data[$key];
 				}
@@ -71,9 +72,8 @@ class SearchParam
 			 * Une donnee unique est fournie
 			 */
 			if (isset($this->param[$data]) && !is_null($valeur)) {
-				if (isset($this->paramNum[$data])) {
-					if (!is_numeric($valeur))
-						$valeur = "";
+				if (isset($this->paramNum[$data]) && !is_numeric($valeur)) {
+					$valeur = "";
 				}
 				$this->param[$data] = $valeur;
 			}
@@ -81,8 +81,9 @@ class SearchParam
 		/*
 		 * Gestion de l'indicateur de recherche
 		 */
-		if ($data["isSearch"] == 1)
+		if ($data["isSearch"] == 1) {
 			$this->isSearch = 1;
+		}
 	}
 	/**
 	 * Retourne les parametres existants

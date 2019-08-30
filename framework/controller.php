@@ -468,13 +468,13 @@ while (isset($module)) {
      * Count all calls to the module
      */
     if ($t_module["maxCountByHour"] > 0) {
-        if ($log->getCallsToModule($module, $t_module["maxCountByHour"], $APPLI_hour_duration) == false) {
+        if (! $log->getCallsToModule($module, $t_module["maxCountByHour"], $APPLI_hour_duration) ) {
             $resident = 0;
             $motifErreur = "callsReached";
         }
     }
     if ($t_module["maxCountByDay"] > 0) {
-        if ($log->getCallsToModule($module, $t_module["maxCountByDay"], $APPLI_day_duration) == false) {
+        if (! $log->getCallsToModule($module, $t_module["maxCountByDay"], $APPLI_day_duration) ) {
             $resident = 0;
             $motifErreur = "callsReached";
         }

@@ -20,7 +20,7 @@ switch ($t_module["param"]) {
                 $params["is_active"] = 1;
             }
             include_once "modules/classes/project.class.php";
-            $project = new project($bdd, $ObjetBDDParam);
+            $project = new Project($bdd, $ObjetBDDParam);
             $projects = $project->getProjectsActive($params["is_active"], $_SESSION["projects"]);
             if (strlen($params["project_id"])==0) {
                 $params["project_id"] = $projects[0]["project_id"];

@@ -755,7 +755,7 @@ class ObjetBDD
                     /*
                      * Verification que la cle soit numerique
                      */
-                    if (is_numeric($data[$value]) == false) {
+                    if (! is_numeric($data[$value]) ) {
                         $this->errorData[] = array(
                             "code" => 1,
                             "colonne" => $key,

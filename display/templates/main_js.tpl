@@ -1,7 +1,4 @@
 <!-- Jquery -->
-<!--
-<script src="display/javascript/jquery-3.3.1.min.js"></script>
--->
 <script src="display/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <link rel="stylesheet"	href="display/javascript/bootstrap/css/bootstrap.min.css">
@@ -23,12 +20,6 @@
 <script src="display/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" />
-<!--
-<link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/media/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/media/css/dataTables.bootstrap.min.css" />
-<script type="text/javascript" src="display/javascript/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="display/javascript/DataTables-1.10.15/media/js/dataTables.bootstrap.min.js"></script>
--->
 
 <!-- Boutons d'export associes aux datatables - classe datatable-export -->
 <script src="display/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -37,28 +28,10 @@
 <script src="display/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
 
-<!--
-<script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="display/javascript/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="display/javascript/DataTables-1.10.15/extensions/Buttons/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="display/javascript/DataTables-1.10.15/extensions/Buttons/js/buttons.print.min.js"></script>
-<link rel="stylesheet" type="text/css" href="display/javascript/DataTables-1.10.15/extensions/Buttons/css/buttons.dataTables.min.css" />
--->
-<!--  <script type="text/javascript" charset="utf-8" src="javascript/pdfmake.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="javascript/vfs_fonts.js"></script>
-<script type="text/javascript" charset="utf-8" src="javascript/jszip.min.js"></script>
- -->
 <!-- Rajout du tri sur la date/heure -->
 <script type="text/javascript" src="display/javascript/moment.min.js"></script>
 <script type="text/javascript" src="display/javascript/datetime-moment.js"></script>
 
-
-
-<!-- datetime
-<link rel="stylesheet" type="text/css" href="javascript/datetimepicker/jquery.datetimepicker.css" />
-<script type="text/javascript" src="javascript/datetimepicker/jquery.datetimepicker.full.min.js"></script>
- -->
- 
 <!-- composant date/heure -->
 <script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-1.12.1.custom/i18n/datepicker-en.js"></script>

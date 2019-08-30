@@ -152,14 +152,13 @@ class Log extends ObjetBDD
             order by log_id desc";
             $date = new DateTime(now);
             $date->sub(new DateInterval("PT" . $duration . "S"));
-            $data = $this->getListeParamAsPrepared(
+            return $this->getListeParamAsPrepared(
                 $sql,
                 array(
                     "login" => $_SESSION["login"],
                     "datefrom" => $date->format(DATELONGMASK),
                 )
             );
-            return $data;
         }
     }
 

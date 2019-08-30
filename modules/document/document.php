@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Eric Quinton
  * @copyright Copyright (c) 2014, IRSTEA / Eric Quinton
@@ -6,14 +7,14 @@
  *  Creation 7 avr. 2014
  */
 include_once 'modules/classes/document.class.php';
-$dataClass = new DocumentAppli( $bdd, $ObjetBDDParam );
+$dataClass = new DocumentAppli($bdd, $ObjetBDDParam);
 $keyName = "document_id";
-$id = $_REQUEST [$keyName];
+$id = $_REQUEST[$keyName];
 
-switch ($t_module ["param"]) {
-	case "list" :
+switch ($t_module["param"]) {
+	case "list":
 		break;
-	case "display" :
+	case "display":
 		/*
 		 * Exemple de code a inserer dans le module display de la table parente :
 		 * 	
@@ -48,56 +49,58 @@ switch ($t_module ["param"]) {
 		 * parentIdName : nom de la cle de la table parente
 		 * parent_id : cle de la table parente
 		 */
-		dataRead ( $dataClass, $id, "document/documentChange.tpl" );
-		$smarty->assign ( "moduleParent", $_REQUEST ["moduleParent"] );
-		$smarty->assign ( "parentType", $_REQUEST ["parentType"] );
-		$smarty->assign ( "parentIdName", $_REQUEST ["parentIdName"] );
-		$smarty->assign ( "parent_id", $_REQUEST ["parent_id"] );
+		dataRead($dataClass, $id, "document/documentChange.tpl");
+		$smarty->assign("moduleParent", $_REQUEST["moduleParent"]);
+		$smarty->assign("parentType", $_REQUEST["parentType"]);
+		$smarty->assign("parentIdName", $_REQUEST["parentIdName"]);
+		$smarty->assign("parent_id", $_REQUEST["parent_id"]);
 		break;
 	case "write":
 		/*
 		 * write record in database
 		 */
-		if (strlen ( $_REQUEST ["parentType"] ) > 0) {
+		if (strlen($_REQUEST["parentType"]) > 0) {
 			/*
 			 * Preparation de files
 			 */
-			$files=array();
-			$fdata=$_FILES['documentName'];
-			if(is_array($fdata['name'])){
-				for($i=0;$i<count($fdata['name']);++$i){
-					$files[]=array(
-							'name'    =>$fdata['name'][$i],
-							'type'  => $fdata['type'][$i],
-							'tmp_name'=>$fdata['tmp_name'][$i],
-							'error' => $fdata['error'][$i],
-							'size'  => $fdata['size'][$i],
-							"document_id"=>$id
+			$files = array();
+			$fdata = $_FILES['documentName'];
+			if (is_array($fdata['name'])) {
+				for ($i = 0; $i < count($fdata['name']); ++$i) {
+					$files[] = array(
+						'name'    => $fdata['name'][$i],
+						'type'  => $fdata['type'][$i],
+						'tmp_name' => $fdata['tmp_name'][$i],
+						'error' => $fdata['error'][$i],
+						'size'  => $fdata['size'][$i],
+						"document_id" => $id
 					);
 				}
-			}else $files[]=$fdata;
-			foreach ( $files as $file ) {
-				$id = $dataClass->ecrire ( $file, $_REQUEST ["document_description"] );
+			} else {
+				$files[] = $fdata;
+			}
+			foreach ($files as $file) {
+				$id = $dataClass->ecrire($file, $_REQUEST["document_description"]);
 				if ($id > 0) {
-					$_REQUEST [$keyName] = $id;
+					$_REQUEST[$keyName] = $id;
 					/*
 					 * Ecriture de l'enregistrement en table liee
 					 */
-					$documentLie = new DocumentLie ( $bdd, $ObjetBDDParam, $_REQUEST ["parentType"] );
-					$data = array (
-							"document_id" => $id,
-							$_REQUEST["parentIdName"] => $_REQUEST ["parent_id"] 
+					$documentLie = new DocumentLie($bdd, $ObjetBDDParam, $_REQUEST["parentType"]);
+					$data = array(
+						"document_id" => $id,
+						$_REQUEST["parentIdName"] => $_REQUEST["parent_id"]
 					);
-					$documentLie->ecrire ( $data );
+					$documentLie->ecrire($data);
 				}
 			}
-			$log -> setLog($_SESSION["login"], get_class($dataClass)."-write",$id);
+			$log->setLog($_SESSION["login"], get_class($dataClass) . "-write", $id);
 		}
 		/*
 		 * Retour au module initial
 		 */
 		$module_coderetour = 1;
-		$t_module ["retourok"] = $_REQUEST['moduleParent'];
+		$t_module["retourok"] = $_REQUEST['moduleParent'];
 		$_REQUEST[$_REQUEST["parentIdName"]] = $_REQUEST["parent_id"];
 		break;
 	case "delete":
@@ -109,13 +112,13 @@ switch ($t_module ["param"]) {
 		/*
 		 * delete record
 		 */
-		dataDelete ( $dataClass, $id );
+		dataDelete($dataClass, $id);
 		/*
 		 * Retour au module initial
 		*/
-		$t_module ["retoursuppr"] = $_REQUEST['moduleParent'];
-		$t_module ["retourok"] = $_REQUEST['moduleParent'];
-		$t_module ["retourko"] = $_REQUEST['moduleParent'];
+		$t_module["retoursuppr"] = $_REQUEST['moduleParent'];
+		$t_module["retourok"] = $_REQUEST['moduleParent'];
+		$t_module["retourko"] = $_REQUEST['moduleParent'];
 		$_REQUEST[$_REQUEST["parentIdName"]] = $_REQUEST["parent_id"];
 		break;
 	case "get":
@@ -123,8 +126,6 @@ switch ($t_module ["param"]) {
 		 * Envoie vers le navigateur le document
 		 */
 		$_REQUEST["attached"] = 1 ? $attached = true : $attached = false;
-		$dataClass->documentSent( $id, $_REQUEST["phototype"], $attached);
+		$dataClass->documentSent($id, $_REQUEST["phototype"], $attached);
 		break;
 }
-
-?>

@@ -47,28 +47,6 @@ private $sql = "select station_id, station_name, station_long, station_lat, stat
     }
 
     /**
-     * Test if a station exists
-     *
-     * @param string $name
-     * @return boolean
-     */
-    function isExists($name)
-    {
-        $id = 0;
-        if (strlen($name) > 0) {
-            $sql = "select station_id from station where station_name = :name";
-            $id = $this->lireParamAsPrepared($sql, array(
-                "name" => $name
-            ));
-        }
-        if ($id > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Get station_id from name
      * 
      * @param string $name

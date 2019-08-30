@@ -62,9 +62,8 @@ function _new($classe)
  */
 function _ecrire($instance, $data)
 {
-    $rep = $instance->ecrire($data);
+    return $instance->ecrire($data);
     //$instance->getErrorData(1);
-    return $rep;
 }
 
 ?>

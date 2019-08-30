@@ -32,14 +32,15 @@ class Param extends ObjetBDD
      */
     function getIdFromName($name, $withCreate = false)
     {
-        if (strlen($name) > 0) { }
-        $sql = "select " . $this->table . "_id  as id
+        if (strlen($name) > 0) {
+            $sql = "select " . $this->table . "_id  as id
                 from $this->table
                 where " . $this->table . "_name = :name";
-        $data = $this->lireParamAsPrepared($sql, array("name" => $name));
-        if ($withCreate && !$data["id"] ) {
-            $data["id"] = $this->ecrire(array($this->table . "_name" => $name));
+            $data = $this->lireParamAsPrepared($sql, array("name" => $name));
+            if ($withCreate && !$data["id"]) {
+                $data["id"] = $this->ecrire(array($this->table . "_name" => $name));
+            }
+            return $data["id"];
         }
-        return $data["id"];
     }
 }

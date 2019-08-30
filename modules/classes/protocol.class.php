@@ -3,7 +3,7 @@
 /**
  * ORM of the table protocol
  */
-class protocol extends ObjetBDD
+class Protocol extends ObjetBDD
 {
 
     /**
