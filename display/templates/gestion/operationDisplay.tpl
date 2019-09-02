@@ -34,7 +34,7 @@ $(document).ready(function() {
     /**
      * set the id to the cookie
      */
-     Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 1, secure: true, sameSite="strict"});
+     Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 1, secure: true, sameSite: "strict"});
 });
 
 </script>
