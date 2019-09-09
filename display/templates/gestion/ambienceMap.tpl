@@ -53,6 +53,13 @@ if ( mapIsChange == true) {
     $("#ambience_long").val(e.latlng.lng);
     $("#ambience_lat").val(e.latlng.lat);
   });
+  $(".position").change(function () {
+		var lon = $("#ambience_long").val();
+		var lat = $("#ambience_lat").val();
+		if (lon.length > 0 && lat.length > 0) {
+			setPositionA(lat, lon);
+		}
+	});
   $("#radar").click(function () { 
 	 if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition( function (position) {

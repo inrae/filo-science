@@ -23,6 +23,22 @@ $(document).ready(function() {
             });
         }
     });
+    function coordChange() {
+    var long_deb = $('#long_start').val();
+		var lat_deb = $('#lat_start').val();
+		var long_fin = $('#long_end').val();
+        var lat_fin = $('#lat_end').val();
+    if (long_deb.length > 0 && lat_deb.length > 0) {
+			 setPosition(1, lat_deb, long_deb);
+		 }
+		if (long_fin.length > 0 && lat_fin.length > 0) {
+			setPosition(2, lat_fin, long_fin);
+        }
+    }
+    $(".coord").change(function() {
+        coordChange();
+    });
+    
 });
 </script>
 
