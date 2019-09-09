@@ -3,12 +3,14 @@
     var map = new L.Map("mapOperation");
     var osmUrl='{literal}https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png{/literal}';
     var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+    var cacheMaxAge = "{mapCacheMaxAge}";
     var osm = new L.TileLayer(osmUrl, { 
         minZoom: 5, 
         maxZoom: 20, 
         attribution: osmAttrib,
         useCache: true,
-        crossOrigin: true
+        crossOrigin: true,
+        cacheMaxAge: cacheMaxAge
         });
     var zoom = 5;
     var mapDefaultZoom = "{$mapDefaultZoom}";

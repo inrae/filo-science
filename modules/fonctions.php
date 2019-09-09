@@ -49,7 +49,7 @@ function setParamToVue($vue, $tablename)
  */
 function setParamMap($vue, $isChange = false) {
     if (isset($vue)) {
-        foreach (array("mapDefaultZoom", "mapDefaultLong", "mapDefaultLat") as $mapParam) {
+        foreach (array("mapDefaultZoom", "mapDefaultLong", "mapDefaultLat, mapCacheMaxAge") as $mapParam) {
             $vue->set($_SESSION[$mapParam], $mapParam);
         }
         if ($isChange) {
