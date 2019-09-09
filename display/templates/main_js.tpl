@@ -10,6 +10,11 @@
 <script type="text/javascript" src="display/javascript/alpaca/js/alpaca-1.5.23.min.js"></script>
 <link type="text/css" href="display/javascript/alpaca/css/alpaca-1.5.23.min.css" rel="stylesheet">
 
+<!-- leaflet -->
+<link rel="stylesheet" href="display/bower_components/leaflet/dist/leaflet.css">
+<script src="display/bower_components/leaflet/dist/leaflet.js"></script>
+<script src="display/bower_components/pouchdb/dist/pouchdb.min.js"></script>
+<script src="display/bower_components/Leaflet.TileLayer.PouchDBCached/L.TileLayer.PouchDBCached.js"></script>
 
 <!-- extension pour le menu -->
 <script src="display/javascript/smartmenus-1.1.0/jquery.smartmenus.min.js" type="text/javascript"></script>

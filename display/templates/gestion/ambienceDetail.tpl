@@ -1,14 +1,5 @@
 <script>
     var mapIsChange = false;
-    $(document).ready(function() { 
-        var long = "{$ambience.ambience_long}";
-        var lat = "{$ambience.ambience_lat}";
-        if (long.length > 0 && lat.length > 0) {
-            setPosition(long, lat);
-        }
-    });
-    setTimeout( function() { mapAmbience.updateSize();}, 200);
-
 </script>
 <div class="row">
 

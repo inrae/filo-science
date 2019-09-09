@@ -4,7 +4,7 @@ $(document).ready(function(){
     function setPos() {
         var lon = $("#ambience_long").val();
         var lat = $("#ambience_lat").val();
-        setPosition(lon, lat);
+        setPositionA(lat, lon);
     };
     $(".position").change(function () {
         setPos();        

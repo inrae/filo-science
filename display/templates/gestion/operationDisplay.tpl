@@ -26,10 +26,10 @@ $(document).ready(function() {
     $('a[data-toggle="tab"]').on("click", function () {
         survol = false ;
     });
-    $("#tab-ambience").on ("shown.bs.tab", function() { 
-        setTimeout( function() { mapAmbience.updateSize();}, 200);
-    });
     
+    $("#tab-ambience").on ("shown.bs.tab", function() { 
+        setTimeout( function() { mapA.invalidateSize();}, 400);
+    });
 
     /**
      * set the id to the cookie

@@ -19,34 +19,10 @@ $(document).ready(function() {
                 var result = JSON.parse(data);
                 $("#long_start").val(result["station_long"]);
                 $("#lat_start").val(result["station_lat"]);
-                coordChange();
+               
             });
         }
     });
-    /*
-     * function for put points on map
-     */
-    function coordChange() {
-    var long_deb = $('#long_start').val();
-		var lat_deb = $('#lat_start').val();
-		var long_fin = $('#long_end').val();
-        var lat_fin = $('#lat_end').val();
-        /*console.log("long:"+long_deb);
-        console.log("lat:"+lat_deb);
-        console.log("longend:"+long_fin);
-        console.log("latend:"+lat_fin);*/
-    if (long_deb.length > 0 && lat_deb.length > 0) {
-			 setPosition(1, long_deb, lat_deb);
-		 }
-		if (long_fin.length > 0 && lat_fin.length > 0) {
-			setPosition(2, long_fin, lat_fin);
-        }
-    }
-    $(".coord").change(function() {
-        coordChange();
-    });
-    /* Initialisation of map */
-    coordChange();
 });
 </script>
 
@@ -248,13 +224,13 @@ $(document).ready(function() {
         </form>
     </div>
     <div class="col-md-6">
-        <div id="map" class="map">
-            <div id="radar">
+        <div id="radar">
                 <a href="#">
                 <img src="display/images/map-pointer.png" height="30">{t}Repérez votre position !{/t}</a>
             </div>
+        <div id="mapOperation" class="map"></div>
+            
             {include file="gestion/operationMapChange.tpl"}
-        </div>
     </div>
 </div>
 <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>
