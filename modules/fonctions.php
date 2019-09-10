@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fonctions specifiques de l'application, chargees systematiquement
  */
@@ -34,7 +35,7 @@ function setParamToVue($vue, $tablename)
         include_once "modules/classes/param.class.php";
         $iclass = new Param($bdd, $tablename);
         $vue->set($iclass->getListe(2), $tablename . "s");
-        unset ($iclass);
+        unset($iclass);
     } catch (Exception $e) {
         $message->set(sprintf(_("Problème de récupération des paramètres de la table %s"), $tablename), true);
         $message->setSyslog($e->getMessage);
@@ -47,10 +48,26 @@ function setParamToVue($vue, $tablename)
  * @param boolean $isChange
  * @return void
  */
-function setParamMap($vue, $isChange = false) {
+function setParamMap($vue, $isChange = false)
+{
     if (isset($vue)) {
-        foreach (array("mapDefaultZoom", "mapDefaultLong", "mapDefaultLat, mapCacheMaxAge") as $mapParam) {
-            $vue->set($_SESSION[$mapParam], $mapParam);
+        foreach (array(
+            "mapDefaultZoom",
+            "mapDefaultLong",
+            "mapDefaultLat",
+            "mapCacheMaxAge",
+            "mapSeedMinZoom",
+            "mapSeedMaxZoom",
+            "mapSeedMaxAge",
+            "mapMinZoom",
+            "mapMaxZoom"
+        ) as $mapParam) {
+            if (isset($_SESSION[$mapParam])) {
+                $vue->set($_SESSION[$mapParam], $mapParam);
+            } else {
+                global $$mapParam;
+                $vue->set($$mapParam, $mapParam);
+            }
         }
         if ($isChange) {
             $vue->set("edit", "mapMode");

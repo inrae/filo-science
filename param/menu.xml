@@ -49,6 +49,8 @@
 		<item module="gearList" label="Engins de pêche" tooltip="Liste des engins de pêche"/>
 		<item module="gear_methodList" label="Méthodes de pêche" tooltip="Méthodes d'utilisation des engins de pêche"/>
 		<item module="electric_current_typeList" label="Types de courant" tooltip="Types de courant électrique"/>
+		<item divider="1"/>
+		<item module="feedCacheMap" label="Mise en cache de la carto" tooltip="Stocker le fonds cartographique pour une utilisation hors Internet"/>
 	</item>
 
 	<item module="administration" label="Administration" tooltip="Administration de l'application" droits="admin">

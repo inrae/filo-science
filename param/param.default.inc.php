@@ -188,9 +188,10 @@ $CAS_CApath=""; // path to the certificate of the CAS
 $mapDefaultX = -0.70;
 $mapDefaultY = 44.77;
 $mapDefaultZoom = 12;
-$mapCacheMaxAge = 10 * 24 * 3600 * 1000;
+$mapCacheMaxAge = 7 * 24 * 3600 * 1000;
 $mapMinZoom = 5;
 $mapMaxZoom = 18;
 $mapSeedMinZoom = 12;
 $mapSeedMaxZoom = 18;
+$mapSeedMaxAge = 7;
 ?>
