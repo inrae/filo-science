@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="display/bower_components/leaflet-draw/dist/leaflet.draw.css">
 <script src="display/bower_components/leaflet-draw/dist/leaflet.draw.js"></script>
+
 <script>
     $(document).ready(function () {
         var map = new L.Map("map", {
-            drawControl: true
+            drawControl: false
         });
         var osmUrl = '{literal}https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png{/literal}';
         var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
@@ -31,45 +32,72 @@
         map.setView([mapDefaultLat, mapDefaultLong], zoom);
         map.addLayer(osm);
         var position;
-        var drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
-        /*var drawControl = L.Control.Draw({
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+        var options = {
             draw: {
-                polygon: false,
-                marker: false,
-                circle: false,
                 polyline: false,
+                polygon: false,
+                circle: false,
+                marker: false,
                 circlemarker: false
             },
             edit: {
-                featureGroup: drawnItems
+                featureGroup: editableLayers,
+                remove: false
             }
-        });*/
-        var toolbar = L.Toolbar();
-        toolbar.addToolbar(map);
-        //map.addControl(drawControl);
-        map.on('draw:created draw:edit', function (e) { 
-            var layer = e.layer;
-            layer.on("mouseover", function() { 
+        };
+        var drawControl = new L.Control.Draw(options);
+
+        map.addControl(drawControl);
+        map.on(L.Draw.Event.CREATED, function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+            editableLayers.addLayer(layer);
+            position = layer.getLatLngs();
+        });
+        map.on(L.Draw.Event.EDITED, function (e) {
+            var layers = e.layers;
+            layers.eachLayer(function (layer) {
                 position = layer.getLatLngs();
-                console.log(position);
             });
         });
+
         $("#zoomLevel").text(zoom);
-        map.zoomlevelschange(function () {
+        map.on("zoomend", function () {
             $("#zoomLevel").text(map.getZoom());
         });
         $("#zoomMin").change(function () {
             var z = $(this).val();
-            if (z < mapSeedMinZoom) {
+            if (z < parseInt(mapSeedMinZoom)) {
                 $(this).val(mapSeedMinZoom);
             }
         });
         $("#zoomMax").change(function () {
             var z = $(this).val();
-            if (z > mapSeedMaxZoom) {
+            if (z > parseInt(mapSeedMaxZoom)) {
                 $(this).val(mapSeedMaxZoom);
             }
+        });
+
+        $("#feedExec").on("click keyup", function () {
+            if (position != undefined) {
+                try {
+                    var zmin = parseInt($("#zoomMin").val());
+                    var zmax = parseInt($("#zoomMax").val());
+                    if (zmin > 0 && zmax > 0) {
+                        $("#seedMessage").text("{t}Patientez pendant le téléchargement...{/t}");
+                        osm.seed(position, zmin, zmax);
+                    }
+                } catch (e) { }
+            }
+        });
+
+        osm.on("seedend", function () { 
+            $("#seedMessage").text("{t}Téléchargement terminé !{/t}");
+        });
+        osm.on("tilecacheerror", function(e) { 
+            $("#seedMessage").html("{t}Une erreur est survenue pendant le téléchargement{/t}<br>" + e.error);
         });
     });
 </script>
@@ -78,7 +106,7 @@
     <div class="col-md-6">
         <div id="map" class="map"></div>
         <br>
-        {t}Niveau de zoom actuel :{/t}&nbsp;<div id="zoomLevel"></div>
+        {t}Niveau de zoom actuel :{/t}&nbsp;<span id="zoomLevel"></span>
     </div>
     <div class="col-md-6  form-horizontal">
         <div class="form-group">
@@ -87,6 +115,7 @@
                 <input id="zoomMin" type="number" class="form-control nombre" value="{$mapSeedMinZoom}">
             </div>
         </div>
+        <div class="center col-md-12" id="seedMessage"></div>
         <div class="form-group">
             <label for="zoomMax" class="control-label col-md-4">{t}Niveau de zoom maximum souhaité :{/t}</label>
             <div class="col-md-8">
@@ -94,10 +123,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="ageMax" class="control-label col-md-4">{t}Durée en jours de conservation du cache souhaitée
+            <label for="ageMax" class="control-label col-md-4">{t}Durée de conservation du cache souhaitée (en jours)
                 :{/t}</label>
             <div class="col-md-8">
                 <input id="ageMax" type="number" class="form-control nombre" value="{$mapSeedMaxAge}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12 center">
+                <button class="btn btn-danger" id="feedExec">{t}Télécharger la cartographie sélectionnée{/t}</button>
             </div>
         </div>
     </div>
