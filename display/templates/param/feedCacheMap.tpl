@@ -30,7 +30,8 @@
         var mapDefaultLong = "{$mapDefaultLong}";
         var mapDefaultLat = "{$mapDefaultLat}";
         map.setView([mapDefaultLat, mapDefaultLong], zoom);
-        map.addLayer(osm);
+        osm.addTo(map);
+        //map.addLayer(osm);
         var position;
         var editableLayers = new L.FeatureGroup();
         map.addLayer(editableLayers);
@@ -48,7 +49,7 @@
             }
         };
         var drawControl = new L.Control.Draw(options);
-
+        L.control.scale().addTo(map);
         map.addControl(drawControl);
         map.on(L.Draw.Event.CREATED, function (e) {
             var type = e.layerType,
@@ -82,21 +83,38 @@
 
         $("#feedExec").on("click keyup", function () {
             if (position != undefined) {
+                console.log(position);
                 try {
                     var zmin = parseInt($("#zoomMin").val());
                     var zmax = parseInt($("#zoomMax").val());
-                    if (zmin > 0 && zmax > 0) {
+                    var bbox = L.latLngBounds(position[0], L.latLngBounds(position[2]));
+                    console.log(bbox);
+                    console.log(zmin);
+                    console.log(zmax);
+                    if (zmin > 0 && zmax > 0 && zmax >= zmin) {
+                        // set the maxCacheAge value
+                        cacheMaxAge = parseInt($("#ageMax").val()) * 3600 * 1000;
+                        if (cacheMaxAge > 0) {
+                            osm.cacheMaxAge = cacheMaxAge;
+                        }
                         $("#seedMessage").text("{t}Patientez pendant le téléchargement...{/t}");
-                        osm.seed(position, zmin, zmax);
+                        osm.seed(bbox, zmin, zmax);
                     }
-                } catch (e) { }
+                } catch (e) {
+                    console.log(e.message);
+                }
             }
         });
-
-        osm.on("seedend", function () { 
+        osm.on("seedstart", function (e) {
+            $("#seedMessage").text(e.queueLength + " {t}dalles à télécharger{/t}");
+        });
+        osm.on("seedprogress", function (e) {
+            $("#seedMessage").text(e.remainingLength + " {t}dalles restantes{/t}");
+        });
+        osm.on("seedend", function (e) {
             $("#seedMessage").text("{t}Téléchargement terminé !{/t}");
         });
-        osm.on("tilecacheerror", function(e) { 
+        osm.on("tilecacheerror", function (e) {
             $("#seedMessage").html("{t}Une erreur est survenue pendant le téléchargement{/t}<br>" + e.error);
         });
     });
@@ -109,13 +127,13 @@
         {t}Niveau de zoom actuel :{/t}&nbsp;<span id="zoomLevel"></span>
     </div>
     <div class="col-md-6  form-horizontal">
+        <div class="center col-md-12" id="seedMessage"></div>
         <div class="form-group">
             <label for="zoomMin" class="control-label col-md-4">{t}Niveau de zoom minimum souhaité :{/t}</label>
             <div class="col-md-8">
                 <input id="zoomMin" type="number" class="form-control nombre" value="{$mapSeedMinZoom}">
             </div>
         </div>
-        <div class="center col-md-12" id="seedMessage"></div>
         <div class="form-group">
             <label for="zoomMax" class="control-label col-md-4">{t}Niveau de zoom maximum souhaité :{/t}</label>
             <div class="col-md-8">
