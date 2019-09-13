@@ -116,7 +116,9 @@
         </fieldset>
     </div>
     <div class="col-md-4">
-        {include file="gestion/ambienceMap.tpl"}
+        {if $ambience.ambience_id > 0}
+            {include file="gestion/ambienceMap.tpl"}
+        {/if}
     </div>
         
 </div>
