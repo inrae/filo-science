@@ -191,7 +191,7 @@ $mapDefaultZoom = 12;
 $mapCacheMaxAge = 7 * 24 * 3600 * 1000;
 $mapMinZoom = 5;
 $mapMaxZoom = 18;
-$mapSeedMinZoom = 10;
-$mapSeedMaxZoom = 18;
+$mapSeedMinZoom = 12;
+$mapSeedMaxZoom = 16;
 $mapSeedMaxAge = 7;
 ?>

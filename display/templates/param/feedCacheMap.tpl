@@ -6,30 +6,49 @@
         var map = new L.Map("map", {
             drawControl: false
         });
+        var variablesNames = ['cacheMaxAge', 'mapSeedMaxZoom', 'mapSeedMinZoom', 'mapSeedMaxAge', 'mapMinZoom', 'mapMaxZoom', 'mapDefaultLong', 'mapDefaultLat', 'mapDefaultZoom'];
+        var mapData = { };
+        mapData.cacheMaxAge = "{$mapCacheMaxAge}";
+        mapData.mapSeedMaxZoom = "{$mapSeedMaxZoom}";
+        mapData.mapSeedMinZoom = "{$mapSeedMinZoom}";
+        mapData.mapSeedMaxAge = "{$mapSeedMaxAge}";
+        mapData.mapMinZoom = "{$mapMinZoom}";
+        mapData.mapMaxZoom = "{$mapMaxZoom}"; 
+        mapData.mapDefaultLong = "{$mapDefaultLong}";
+        mapData.mapDefaultLat = "{$mapDefaultLat}";
+        mapData.mapDefaultZoom = "{$mapDefaultZoom}";
+        variablesNames.forEach(function (item, index, array) {
+            /**
+             * Surround the values with the cookie
+             */
+            try {
+                var value = Cookies.get(item);
+                if (! isNaN (value)) {
+                    mapData[item] = value;
+                }
+                
+            } catch { }
+
+        });
         var osmUrl = '{literal}https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png{/literal}';
         var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-        var cacheMaxAge = "{$mapCacheMaxAge}";
-        var mapSeedMaxZoom = "{$mapSeedMaxZoom}";
-        var mapSeedMinZoom = "{$mapSeedMinZoom}";
-        var mapSeedMaxAge = "{$mapSeedMaxAge}";
-        var mapMinZoom = "{$mapMinZoom}";
-        var mapMaxZoom = "{$mapMaxZoom}";
+        var center = [mapData.mapDefaultLat, mapData.mapDefaultLong];
+
+
         var osm = new L.TileLayer(osmUrl, {
-            minZoom: mapMinZoom,
-            maxZoom: mapMaxZoom,
+            minZoom: mapData.mapMinZoom,
+            maxZoom: mapData.mapMaxZoom,
             attribution: osmAttrib,
             useCache: true,
             crossOrigin: true,
-            cacheMaxAge: cacheMaxAge
+            cacheMaxAge: mapData.cacheMaxAge
         });
         var zoom = 5;
-        var mapDefaultZoom = "{$mapDefaultZoom}";
-        if (!isNaN(mapDefaultZoom)) {
-            zoom = mapDefaultZoom;
+        if (!isNaN(mapData.mapDefaultZoom)) {
+            zoom = mapData.mapDefaultZoom;
         }
-        var mapDefaultLong = "{$mapDefaultLong}";
-        var mapDefaultLat = "{$mapDefaultLat}";
-        map.setView([mapDefaultLat, mapDefaultLong], zoom);
+
+        map.setView(center, zoom);
         osm.addTo(map);
         //map.addLayer(osm);
         var position;
@@ -56,11 +75,14 @@
                 layer = e.layer;
             editableLayers.addLayer(layer);
             position = layer.getLatLngs();
+            center = layer.getCenter();
         });
         map.on(L.Draw.Event.EDITED, function (e) {
             var layers = e.layers;
             layers.eachLayer(function (layer) {
                 position = layer.getLatLngs();
+                center = layer.getCenter();
+
             });
         });
 
@@ -83,20 +105,22 @@
 
         $("#feedExec").on("click keyup", function () {
             if (position != undefined) {
-                console.log(position);
                 try {
                     var zmin = parseInt($("#zoomMin").val());
                     var zmax = parseInt($("#zoomMax").val());
                     var bbox = L.latLngBounds(position[0], L.latLngBounds(position[2]));
-                    console.log(bbox);
-                    console.log(zmin);
-                    console.log(zmax);
                     if (zmin > 0 && zmax > 0 && zmax >= zmin) {
                         // set the maxCacheAge value
-                        cacheMaxAge = parseInt($("#ageMax").val()) * 3600 * 1000;
-                        if (cacheMaxAge > 0) {
-                            osm.cacheMaxAge = cacheMaxAge;
-                        }
+                        mapData.cacheMaxAge = parseInt($("#ageMax").val()) * 24 * 3600 * 1000;
+                        mapData.mapDefaultLong = center.lng;
+                        mapData.mapDefaultLat = center.lat;
+                        mapData.mapDefaultZoom = map.getZoom();
+                        /**
+                         * set cookies
+                         */
+                        variablesNames.forEach(function(item, index, array){
+                            Cookies.set(item, mapData[item], { expires: 180});
+                        });
                         $("#seedMessage").text("{t}Patientez pendant le téléchargement...{/t}");
                         osm.seed(bbox, zmin, zmax);
                     }
