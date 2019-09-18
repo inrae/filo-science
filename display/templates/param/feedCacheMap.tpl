@@ -7,13 +7,13 @@
             drawControl: false
         });
         var variablesNames = ['cacheMaxAge', 'mapSeedMaxZoom', 'mapSeedMinZoom', 'mapSeedMaxAge', 'mapMinZoom', 'mapMaxZoom', 'mapDefaultLong', 'mapDefaultLat', 'mapDefaultZoom'];
-        var mapData = { };
+        var mapData = {};
         mapData.cacheMaxAge = "{$mapCacheMaxAge}";
         mapData.mapSeedMaxZoom = "{$mapSeedMaxZoom}";
         mapData.mapSeedMinZoom = "{$mapSeedMinZoom}";
         mapData.mapSeedMaxAge = "{$mapSeedMaxAge}";
         mapData.mapMinZoom = "{$mapMinZoom}";
-        mapData.mapMaxZoom = "{$mapMaxZoom}"; 
+        mapData.mapMaxZoom = "{$mapMaxZoom}";
         mapData.mapDefaultLong = "{$mapDefaultLong}";
         mapData.mapDefaultLat = "{$mapDefaultLat}";
         mapData.mapDefaultZoom = "{$mapDefaultZoom}";
@@ -23,10 +23,10 @@
              */
             try {
                 var value = Cookies.get(item);
-                if (! isNaN (value)) {
+                if (!isNaN(value)) {
                     mapData[item] = value;
                 }
-                
+
             } catch { }
 
         });
@@ -118,8 +118,8 @@
                         /**
                          * set cookies
                          */
-                        variablesNames.forEach(function(item, index, array){
-                            Cookies.set(item, mapData[item], { expires: 180});
+                        variablesNames.forEach(function (item, index, array) {
+                            Cookies.set(item, mapData[item], { expires: 180 });
                         });
                         $("#seedMessage").text("{t}Patientez pendant le téléchargement...{/t}");
                         osm.seed(bbox, zmin, zmax);
@@ -128,6 +128,10 @@
                     console.log(e.message);
                 }
             }
+        });
+
+        $("#ageMax").change(function () {
+            Cookies.set('cacheMaxAge', parseInt($(this).val()) * 24 * 3600 * 1000);
         });
         osm.on("seedstart", function (e) {
             $("#seedMessage").text(e.queueLength + " {t}dalles à télécharger{/t}");
@@ -151,29 +155,55 @@
         {t}Niveau de zoom actuel :{/t}&nbsp;<span id="zoomLevel"></span>
     </div>
     <div class="col-md-6  form-horizontal">
-        <div class="center col-md-12" id="seedMessage"></div>
-        <div class="form-group">
-            <label for="zoomMin" class="control-label col-md-4">{t}Niveau de zoom minimum souhaité :{/t}</label>
-            <div class="col-md-8">
-                <input id="zoomMin" type="number" class="form-control nombre" value="{$mapSeedMinZoom}">
+        <div class="row">
+            <div class="center col-md-12" id="seedMessage"></div>
+            <div class="form-group">
+                <label for="zoomMin" class="control-label col-md-4">{t}Niveau de zoom minimum souhaité :{/t}</label>
+                <div class="col-md-8">
+                    <input id="zoomMin" type="number" class="form-control nombre" value="{$mapSeedMinZoom}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="zoomMax" class="control-label col-md-4">{t}Niveau de zoom maximum souhaité :{/t}</label>
+                <div class="col-md-8">
+                    <input id="zoomMax" type="number" class="form-control nombre" value="{$mapSeedMaxZoom}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ageMax" class="control-label col-md-4">{t}Durée de conservation du cache (en jours)
+                    :{/t}</label>
+                <div class="col-md-8">
+                    <input id="ageMax" type="number" class="form-control nombre" value="{$mapSeedMaxAge}">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 center">
+                    <button class="btn btn-danger" id="feedExec">{t}Télécharger la cartographie
+                        sélectionnée{/t}</button>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="zoomMax" class="control-label col-md-4">{t}Niveau de zoom maximum souhaité :{/t}</label>
-            <div class="col-md-8">
-                <input id="zoomMax" type="number" class="form-control nombre" value="{$mapSeedMaxZoom}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="ageMax" class="control-label col-md-4">{t}Durée de conservation du cache souhaitée (en jours)
-                :{/t}</label>
-            <div class="col-md-8">
-                <input id="ageMax" type="number" class="form-control nombre" value="{$mapSeedMaxAge}">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12 center">
-                <button class="btn btn-danger" id="feedExec">{t}Télécharger la cartographie sélectionnée{/t}</button>
+        <div class="row">
+            <div class="bg-info">
+                {t}Ce module permet de télécharger les dalles cartographiques pour un usage hors ligne. Vous devez indiquer :{/t}
+                <br>
+                <ul>
+                    <li>{t}le niveau de zoom minimum{/t}</li>
+                    <li>{t}Le niveau de zoom maximum{/t}</li>
+                    <li>{t}La durée de conservation du cache (en jours) : pendant cette période, votre navigateur n'essaiera pas de télécharger de nouvelles versions des dalles téléchargées{/t}</li>
+                </ul>
+                <b>{t}Attention :{/t}</b> {t}plus la zone à télécharger est grande, plus les niveaux de zoom sont nombreux, et plus important sera le temps de téléchargement.{/t}
+                <br>{t}Limitez-vous aux dalles qui vous sont nécessaires : vous risqueriez de vous faire interdire de téléchargement par les serveurs OpenStreetMap en cas d'abus.{/t}
+                <br>
+                {t}Pour télécharger des dalles :{/t}
+                <ul>
+                    <li>{t}vérifiez les niveaux de zoom dont vous avez besoin{/t}</li>
+                    <li>{t}sur la carte, sélectionnez en cliquant sur le carré (draw a rectangle) la zone concernée{/t}</li>
+                    <li>{t}une fois tous les paramètres corrects, cliquez sur le bouton Télécharger la cartographie sélectionnée{/t}</li>
+                </ul>
+                {t}Pour interrompre l'opération, allez sur une autre page de l'application.{/t}
+                <br>
+                {t}La durée de conservation du cache indiquée ici est valable pour toutes les cartes.{/t}
             </div>
         </div>
     </div>
