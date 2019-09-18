@@ -6,9 +6,9 @@
 <script	src="display/javascript/bootstrap/js/bootstrap.min.js"></script>
 
 <!--alpaca -->
-<script type="text/javascript" src="display/javascript/alpaca/js/handlebars.runtime-v4.0.10.js"></script>
-<script type="text/javascript" src="display/javascript/alpaca/js/alpaca-1.5.23.min.js"></script>
-<link type="text/css" href="display/javascript/alpaca/css/alpaca-1.5.23.min.css" rel="stylesheet">
+<script type="text/javascript" src="display/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
+<script type="text/javascript" src="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js"></script>
+<link rel="stylesheet" href="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css" >
 
 <!-- leaflet -->
 <link rel="stylesheet" href="display/node_modules/leaflet/dist/leaflet.css">

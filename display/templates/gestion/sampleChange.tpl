@@ -1,4 +1,4 @@
-<script type="text/javascript" src="display/javascript/alpaca/js/formbuilder.js"></script>
+<script type="text/javascript" src="display/javascript/formbuilder.js"></script>
 <script>
 $(document).ready(function() {
     var mapIsChange = true;
