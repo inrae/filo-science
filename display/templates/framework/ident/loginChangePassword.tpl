@@ -1,4 +1,4 @@
-<script src="display/bower_components/zxcvbn/dist/zxcvbn.js">
+<script src="display/node_modules/zxcvbn/dist/zxcvbn.js">
 </script>
 
 <script >

@@ -1,5 +1,5 @@
 <!-- Jquery -->
-<script src="display/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="display/node_modules/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <link rel="stylesheet"	href="display/javascript/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"	href="display/javascript/bootstrap/css/bootstrap-theme.min.css">
@@ -11,45 +11,46 @@
 <link type="text/css" href="display/javascript/alpaca/css/alpaca-1.5.23.min.css" rel="stylesheet">
 
 <!-- leaflet -->
-<link rel="stylesheet" href="display/bower_components/leaflet/dist/leaflet.css">
-<script src="display/bower_components/leaflet/dist/leaflet.js"></script>
-<script src="display/bower_components/pouchdb/dist/pouchdb.min.js"></script>
-<script src="display/javascript/L.TileLayer.PouchDBCached.js"></script>
+<link rel="stylesheet" href="display/node_modules/leaflet/dist/leaflet.css">
+<script src="display/node_modules/leaflet/dist/leaflet.js"></script>
+<script src="display/node_modules/pouchdb/dist/pouchdb.min.js"></script>
+<script src="display/node_modules/leaflet.tilelayer.pouchdbcached/L.TileLayer.PouchDBCached.js"></script>
 <!-- extension pour le menu -->
-<script src="display/javascript/smartmenus-1.1.0/jquery.smartmenus.min.js" type="text/javascript"></script>
-<link type="text/css" href="display/javascript/smartmenus-1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.css" rel="stylesheet">
-<script src="display/javascript/smartmenus-1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js" type="text/javascript"></script>
+<script src="display/node_modules/smartmenus/dist/jquery.smartmenus.min.js" type="text/javascript"></script>
+<link type="text/css" href="display/node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+<script src="display/node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.min.js" type="text/javascript"></script>
 
 <!-- Datatables -->
-<script src="display/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="display/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" />
+<script src="display/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="display/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="display/node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css" />
 
 <!-- Boutons d'export associes aux datatables - classe datatable-export -->
-<script src="display/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="display/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="display/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="display/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="display/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
+<script src="display/node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="display/node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="display/node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="display/node_modules/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="display/node_modules/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
 
 <!-- Rajout du tri sur la date/heure -->
-<script type="text/javascript" src="display/javascript/moment.min.js"></script>
-<script type="text/javascript" src="display/javascript/datetime-moment.js"></script>
+<script type="text/javascript" src="display/node_modules/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="display/node_modules/datetime-moment/datetime-moment.js"></script>
 
 <!-- composant date/heure -->
-<script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-1.12.1.custom/i18n/datepicker-en.js"></script>
-<script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-1.12.1.custom/i18n/datepicker-fr.js"></script>
+<script type="text/javascript" charset="utf-8" src="display/node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="display/node_modules/jquery-ui/ui/i18n/datepicker-en-GB.js"></script>
+<script type="text/javascript" charset="utf-8" src="display/node_modules/jquery-ui/ui/i18n/datepicker-fr.js"></script>
 <script type="text/javascript" charset="utf-8" src="display/javascript/jquery-timepicker-addon/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="display/javascript/jquery-timepicker-addon/i18n/jquery-ui-timepicker-fr.js"></script>
-<link rel="stylesheet" type="text/css" href="display/javascript/jquery-ui-1.12.1.custom/jquery-ui.min.css"/>
-<link rel="stylesheet" type="text/css" href="display/javascript/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="display/node_modules/jquery-ui-dist/jquery-ui.min.css"/>
+<link rel="stylesheet" type="text/css" href="display/node_modules/jquery-ui-dist/jquery-ui.theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="display/javascript/jquery-timepicker-addon/jquery-ui-timepicker-addon.min.css"/>
-<script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-1.12.1.custom/combobox.js"></script>
+<link rel="stylesheet" type="text/css" href="display/node_modules/combobox/dist/combobox.css"/>
+<script type="text/javascript" charset="utf-8" src="display/node_modules/combobox/dist/combobox.js"></script>
 
 <!-- Affichage des photos -->
-<link rel="stylesheet" href="display/javascript/magnific-popup/magnific-popup.css"> 
-<script src="display/javascript/magnific-popup/jquery.magnific-popup.min.js"></script> 
+<link rel="stylesheet" href="display/node_modules/magnific-popup/dist/magnific-popup.css"> 
+<script src="display/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js"></script> 
 
 <!-- Cookies -->
 <script src="display/javascript/js-cookie-master/src/js.cookie.js"></script> 
@@ -194,7 +195,7 @@ $(document).ready(function() {
 	/*
 	 * Initialisation des combobox
 	 */
-	$(".combobox").combobox();
+	$(".combobox").addClass('autocomplete');
 
 });
 

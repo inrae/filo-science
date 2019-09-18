@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="display/bower_components/leaflet-draw/dist/leaflet.draw.css">
-<script src="display/bower_components/leaflet-draw/dist/leaflet.draw.js"></script>
+<link rel="stylesheet" href="display/node_modules/leaflet-draw/dist/leaflet.draw.css">
+<script src="display/node_modules/leaflet-draw/dist/leaflet.draw.js"></script>
 
 <script>
     $(document).ready(function () {
