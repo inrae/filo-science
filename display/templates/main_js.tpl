@@ -176,6 +176,8 @@ $(document).ready(function() {
 		timeFormat: 'HH:mm:ss',
 		timeInput: true
 	});
+	$('.date, .datepicker, .timepicker, .datetimepicker').attr('autocomplete','off');
+
 	var lib = "{t}Confirmez-vous la suppression ?{/t}" ;
 	$('.button-delete').keypress(function() {
 		if (confirm(lib) == true) {
