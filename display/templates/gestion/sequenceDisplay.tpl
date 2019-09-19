@@ -1,8 +1,35 @@
 <script>
     $(document).ready(function () {
-        /* Management of tabs */
+        $("#tab-ambience").on("shown.bs.tab", function () {
+            if (typeof mapA !== "undefined") {
+                setTimeout(function () { mapA.invalidateSize(); }, 400);
+            }
+        });
+
+        /**
+         * set the id to the cookie
+         */
+        Cookies.set('sequence_uid', "{$data.sequence_uid}", { expires: 1, secure: true });
+
+        /**
+        * Tab management
+        */
+        var tabHover = 0;
+        try {
+            tabHover = Cookies.get("tabHover");
+        } catch (Exception) { }
+        if (tabHover == 1) {
+            $("#tabHoverSelect").prop("checked", true);
+        }
+        $("#tabHoverSelect").change(function () {
+            if ($(this).is(":checked")) {
+                tabHover = 1;
+            } else {
+                tabHover = 0;
+            }
+            Cookies.set("tabHover", tabHover, { expires: 365 });
+        });
         var activeTab = "{$activeTab}";
-        var survol = true;
         if (activeTab.length == 0) {
             try {
                 activeTab = Cookies.get("sequenceDisplayTab");
@@ -16,7 +43,7 @@
             }
         } catch (Exception) { }
         $('.nav-tabs > li > a').hover(function () {
-            if (survol) {
+            if (tabHover == 1) {
                 $(this).tab('show');
             }
         });
@@ -24,18 +51,8 @@
             Cookies.set("sequenceDisplayTab", $(this).attr("id"));
         });
         $('a[data-toggle="tab"]').on("click", function () {
-            survol = false;
+            tabHover = 0;
         });
-        $("#tab-ambience").on("shown.bs.tab", function () {
-            if (typeof mapA !== "undefined") {
-                setTimeout(function () { mapA.invalidateSize(); }, 400);
-            }
-        });
-
-        /**
-         * set the id to the cookie
-         */
-        Cookies.set('sequence_uid', "{$data.sequence_uid}", { expires: 1, secure: true });
     });
 
 </script>
@@ -103,5 +120,11 @@
             </div>
         </div>
 
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 messageBas">
+        {t}Activer le survol des onglets :{/t}
+        <input type="checkbox" id="tabHoverSelect">
     </div>
 </div>
