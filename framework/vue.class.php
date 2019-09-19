@@ -294,7 +294,13 @@ class VueSmarty extends Vue
         /*
          * Declenchement de l'affichage
          */
+        try {
         $this->smarty->display($this->templateMain);
+        }catch (Exception $e) {
+            printr(_("Une erreur a été détectée lors de la création de l'écran. Si le problème persiste, contactez l'administrateur de l'application."));
+            global $message;
+            $message->setSyslog($e->getMessage());
+        }
     }
 
     /**
