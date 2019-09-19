@@ -90,6 +90,7 @@ legend {
 
 .form-display dt {
 	white-space: pre-wrap;
+	text-overflow: clip;
 }
 .form-display dd {
 	word-wrap: break-word;
