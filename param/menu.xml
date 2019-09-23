@@ -50,6 +50,12 @@
 		<item module="gear_methodList" label="Méthodes de pêche" tooltip="Méthodes d'utilisation des engins de pêche"/>
 		<item module="electric_current_typeList" label="Types de courant" tooltip="Types de courant électrique"/>
 		<item divider="1"/>
+		<item module="default" label="Tracking" tooltip="Détection des poissons">
+			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
+			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
+			
+		</item>
+		<item divider="1"/>
 		<item module="feedCacheMap" label="Mise en cache de la carto" tooltip="Stocker le fonds cartographique pour une utilisation hors Internet"/>
 	</item>
 

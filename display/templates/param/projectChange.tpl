@@ -14,6 +14,12 @@
                         </div>
                   </div>
                   <div class="form-group">
+                        <label for="metric_srid" class="control-label col-md-4">{t}Projection (SRID) utilisée pour convertir les coordonnées géographiques en système cartésien :{/t}</label>
+                        <div class="col-md-8">
+                              <input id="metric_srid" type="number" class="form-control" name="metric_srid" value="{$data.metric_srid}">
+                        </div>
+                  </div>
+                  <div class="form-group">
                         <label for="is_active" class="control-label col-md-4">{t}Actif ?{/t}</label>
                         <div class="col-md-8">
                               <input type="radio" name="is_active" value="1" {if $data.is_active == 1}checked{/if}>

@@ -8,7 +8,7 @@
  */
 class Project extends ObjetBDD
 {
-    private $sql = "select project_id, project_name, is_active,
+    private $sql = "select project_id, project_name, is_active, metric_srid,
     array_to_string(array_agg(groupe),', ') as groupe
     from project
     left outer join project_group using (project_id)
@@ -36,6 +36,10 @@ class Project extends ObjetBDD
             "is_active" => array(
                 "type" => 0,
                 "defaultValue" => 1
+            ),
+            "metric_srid" => array(
+                "type" => 1,
+                "defaultValue" => 2154
             )
         );
         parent::__construct($bdd, $param);

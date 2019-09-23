@@ -18,9 +18,6 @@ SET search_path=public,pg_catalog,filo,gacl,tracking,import;
 -- [ Dropped objects ] --
 ALTER TABLE gacl.passwordlost DROP CONSTRAINT IF EXISTS logingestion_passwordlost_fk CASCADE;
 -- ddl-end --
-DROP INDEX IF EXISTS gacl.log_ip_idx CASCADE;
--- ddl-end --
-
 
 -- [ Created objects ] --
 -- object: postgis | type: EXTENSION --
