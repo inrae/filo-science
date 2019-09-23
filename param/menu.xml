@@ -11,6 +11,11 @@
 		<item module="sequenceDisplay" label="Dernière séquence" tooltip="Affichage de la dernière séquence traitée récemment"/>
 	</item>
 
+	<item module="default" label="Télé-détection" tooltip="Suivi des poissons en télé-détection">
+		<item module="trackingStationList" label="Stations utilisées" tooltip="Liste des stations utilisées en télé-détection"/>
+		<item module="individualTrackingList" label="Poissons suivis" tooltip="Liste des poissons suivis"/>
+	</item>
+
 	<item module="param" label="Paramètres" tooltip="Paramètres généraux et tables de référence">
 		<item module="projectList" label="Projets" tooltip="Liste des projets"/>
 		<item module="protocolList" label="Protocoles" tooltip="Liste des protocoles"/>
@@ -50,7 +55,7 @@
 		<item module="gear_methodList" label="Méthodes de pêche" tooltip="Méthodes d'utilisation des engins de pêche"/>
 		<item module="electric_current_typeList" label="Types de courant" tooltip="Types de courant électrique"/>
 		<item divider="1"/>
-		<item module="default" label="Tracking" tooltip="Détection des poissons">
+		<item module="default" label="Télé-détection" tooltip="Paramètres liés à la télé-détection des poissons">
 			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
 			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
 			
