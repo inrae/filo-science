@@ -20,10 +20,49 @@ class StationTracking extends ObjetBDD
     {
         $this->table = "station_tracking";
         $this->colonnes = array(
-            "station_id" => array("type" => 1, "requis" => 1, "key" => 1),
+            "station_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
             "station_type_id" => array("type" => 1, "requis" => 1)
         );
+        $this->id_auto = 0;
         parent::__construct($bdd, $param);
+    }
+    /**
+     * Surcharge pour rajouter les infos de la table station
+     *
+     * @param int $id
+     * @return array
+     */
+    function lire($id)
+    {
+        if ($id == 0) {
+            $data = $this->getDefaultValue();
+        } else {
+            $where = " where station_id = :id";
+            $data = $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
+        }
+        return $data;
+    }
+
+    /**
+     * Surround of write function
+     * Recording first the table station
+     *
+     * @param array $data
+     * @return int
+     */
+    function ecrire(array $data)
+    {
+        require_once 'modules/classes/station.class.php';
+        $station = new Station($this->connection, $this->paramori);
+        $id = $station->ecrire($data);
+        printr($id);
+        if ($id > 0) {
+            $data["station_id"] = $id;
+            printr($data);
+            return parent::ecrire($data);
+        } else {
+            return -1;
+        }
     }
     /**
      * Get the list of the stations attached to a project

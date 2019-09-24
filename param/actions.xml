@@ -292,5 +292,10 @@
 	<transmitter_typeChange action="modules/tracking/transmitter.php" param="change" droits="param" tablename="transmitter_type" tabledescription="Types de stations" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
 	<transmitter_typeWrite action="modules/tracking/transmitter.php" param="write" droits="param" tablename="transmitter_type" retourok="transmitter_typeList" retourko="transmitter_typeChange" modulebefore="transmitter_typeChange" maxCountByHour="60" maxCountByDay="600"/>
 	<transmitter_typeDelete action="modules/tracking/transmitter.php" param="delete" droits="param" tablename="transmitter_type" retourok="transmitter_typeList" retourko="transmitter_typeChange" modulebefore="transmitter_typeChange" maxCountByHour="60" maxCountByDay="600"/>
+	<stationTrackingList action="modules/tracking/stationTracking.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
+	<stationTrackingChange action="modules/tracking/stationTracking.php" param="change" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<stationTrackingDisplay action="modules/tracking/stationTracking.php" param="display" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<stationTrackingWrite action="modules/tracking/stationTracking.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="stationTrackingChange" retourko="stationTrackingChange" retourok="stationTrackingDisplay"/>
+	<stationTrackingDelete action="modules/tracking/stationTracking.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="stationTrackingChange" retourko="stationTrackingChange" retourok="stationTrackingList"/>
 </navigation>
 	
