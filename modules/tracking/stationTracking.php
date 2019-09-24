@@ -19,7 +19,8 @@ switch ($t_module["param"]) {
         $vue->set("tracking/stationTrackingList.tpl", "corps");
         break;
     case "display":
-
+        $vue->set($dataClass->getDetail($id), "data");
+        $vue->set("tracking/stationTrackingDisplay.tpl", "corps");
         break;
     case "change":
         /*
@@ -45,7 +46,7 @@ switch ($t_module["param"]) {
          * Verify if the station is in the authorized projects
          */
         if ($_REQUEST["station_id"] > 0) {
-            $data = $dataClass->lire($_request["id"]);
+            $data = $dataClass->lire($_REQUEST["station_id"]);
             $project_id = $data["project_id"];
         } else {
             $project_id = $_REQUEST["project_id"];
@@ -54,7 +55,6 @@ switch ($t_module["param"]) {
             $module_coderetour = -1;
             $message->set(_("La station n'est pas associée à un projet pour lequel vous disposez des droits de modification"), true);
         } else {
-
             /**
              * write record in database
              */

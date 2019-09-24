@@ -55,10 +55,8 @@ class StationTracking extends ObjetBDD
         require_once 'modules/classes/station.class.php';
         $station = new Station($this->connection, $this->paramori);
         $id = $station->ecrire($data);
-        printr($id);
         if ($id > 0) {
             $data["station_id"] = $id;
-            printr($data);
             return parent::ecrire($data);
         } else {
             return -1;
@@ -74,5 +72,16 @@ class StationTracking extends ObjetBDD
     {
         $where = " where project_id = :project_id";
         return $this->getListeParamAsPrepared($this->sql . $where, array("project_id" => $project_id));
+    }
+    /**
+     * Get the detail of a station
+     *
+     * @param integer $station_id
+     * @return array
+     */
+    function getDetail(int $station_id)
+    {
+        $where = " where station_id = :id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("id" => $station_id));
     }
 }

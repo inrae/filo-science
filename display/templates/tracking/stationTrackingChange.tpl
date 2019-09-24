@@ -6,10 +6,15 @@
     <img src="display/images/list.png" height="25">
     {t}Retour à la liste{/t}
 </a>
+{if $data.station_id > 0}
+    &nbsp;
+    <a href="index.php?module=stationTrackingDisplay&station_id={$data.station_id}">
+        <img src="display/images/display.png" height="25">
+        {t}Retour au détail de la station{/t}
+    </a>
+{/if}
 <div class="row">
     <div class="col-md-6">
-        
-
         <form class="form-horizontal protoform" id="stationForm" method="post" action="index.php">
             <input type="hidden" name="moduleBase" value="stationTracking">
             <input type="hidden" name="action" value="Write">

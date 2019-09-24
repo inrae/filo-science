@@ -81,6 +81,11 @@
                     <th>{t}Longitude{/t}</th>
                     <th>{t}Latitude{/t}</th>
                     <th>{t}PK{/t}</th>
+                    {if $droits.gestion == 1}
+                        <th class="center">
+                            <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
+                        </th>
+                    {/if}
                 </tr>
             </thead>
             <tbody>
@@ -89,7 +94,7 @@
                         <td>{$station.station_id}</td>
                         <td>
                             {if $droits.gestion == 1}
-                                <a href="index.php?module=stationTrackingChange&station_id={$station.station_id}">
+                                <a href="index.php?module=stationTrackingDisplay&station_id={$station.station_id}">
                                 {$station.station_name}
                             </a>
                             {else}
@@ -103,6 +108,13 @@
                         <td>{$station.station_long}</td>
                         <td>{$station.station_lat}</td>
                         <td>{$station.station_pk}</td>
+                        {if $droits.gestion == 1}
+                            <td class="center">
+                                <a href="index.php?module=stationTrackingChange&station_id={$station.station_id}" title="{t}Modifier{/t}">
+                                    <img src="display/images/edit.gif" height="25">
+                                </a>
+                            </td>
+                        {/if}
                     </tr>
                 {/foreach}
             </tbody>
