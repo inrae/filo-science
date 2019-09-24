@@ -21,5 +21,8 @@ Header set Content-Security-Policy "default-src 'self' 'unsafe-inline'; script-s
 <FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|js|css|svg)$">
     Header set Cache-Control "max-age=604800, private"
 </FilesMatch>
+<FilesMatch ".*openstreetmap.*\.png$">
+    Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
 
 
