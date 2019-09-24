@@ -1,5 +1,7 @@
 <script>
+    var mapIsChange = false;
     $(document).ready(function () {
+        
         /**
         * Tab management
         */
@@ -68,8 +70,12 @@
                 aria-selected="true" href="#nav-detail">{t}Détails{/t}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="tab-sample" href="#nav-sample" data-toggle="tab" role="tab"
-                aria-controls="nav-sample" aria-selected="false">{t}Échantillons{/t}</a>
+            <a class="nav-link" id="tab-antenna" href="#nav-antenna" data-toggle="tab" role="tab"
+                aria-controls="nav-antenna" aria-selected="false">{t}Antennes{/t}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab-probe" href="#nav-probe" data-toggle="tab" role="tab"
+                aria-controls="nav-probe" aria-selected="false">{t}Sondes{/t}</a>
         </li>
 
 
@@ -80,9 +86,14 @@
                 {include file="tracking/stationTrackingDetail.tpl"}
             </div>
         </div>
-        <div class="tab-pane fade" id="nav-ambience" role="tabpanel" aria-labelledby="tab-ambience">
+        <div class="tab-pane fade" id="nav-antenna" role="tabpanel" aria-labelledby="tab-antenna">
             <div class="col-md-12">
-                
+                <h3>Antennes de réception</h3>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-probe" role="tabpanel" aria-labelledby="tab-probe">
+            <div class="col-md-12">
+                <h3>Sondes d'analyse</h3>
             </div>
         </div>
     </div>
