@@ -1,7 +1,7 @@
 <?php
 class StationTracking extends ObjetBDD
 {
-    private $sql = "select station_id, station_name, project_id, project_name,
+    private $sql = "select station_id, station_name, project_id, project_name, metric_srid,
             station_long, station_lat, station_pk, river_id, river_name,station_code,
             station_type_id, station_type_name
             from station_tracking
@@ -83,5 +83,20 @@ class StationTracking extends ObjetBDD
     {
         $where = " where station_id = :id";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $station_id));
+    }
+
+    /**
+     * Verify if the station is authorized in the project
+     *
+     * @param integer $station_id
+     * @return boolean
+     */
+    function verifyProject(int $station_id) : bool {
+        $data = $this->lire($station_id);
+        if (verifiyProject($data["project_id"])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -1,8 +1,14 @@
 <?php
 class Antenna extends ObjetBDD
 {
-    private $srid = 4326;
+    private $sridAntenna = 4326;
 
+    /**
+     * Constructor
+     *
+     * @param PDO $bdd
+     * @param array $param
+     */
     function __construct(PDO $bdd, array $param = array())
     {
         $this->table = "antenna";
@@ -35,16 +41,16 @@ class Antenna extends ObjetBDD
              */
             require_once "modules/classes/station.class.php";
             $station = new Station($this->connection, $this->paramori);
-            $dstation = $station->lire($data["station_id"]);
+            $dstation = $station->getDetail($data["station_id"]);
             if (strlen($dstation["station_long"]) > 0 && strlen($dstation["station_lat"]) > 0) {
                 $sql = "update antenna set geom_polygon = 
                         st_transform( 
                             st_buffer ( 
                                 st_transform ( 
-                                    st_geomfromtext('POINT(" . $dstation["station_long"] . " " . $station["station_lat"] . "', " . $this->srid . ")
+                                    st_geomfromtext('POINT(" . $dstation["station_long"] . " " . $dstation["station_lat"] . ")', " . $this->sridAntenna . ")
                                 , " . $dstation["metric_srid"] . ")
                             , " . $data["diameter"] . ")
-                        ," . $this->srid . ")
+                        ," . $this->sridAntenna . ")
                         where antenna_id = $id";
                 $this->execute($sql);
             }

@@ -4,7 +4,6 @@ $dataClass = new StationTracking($bdd, $ObjetBDDParam);
 $keyName = "station_id";
 $id = $_REQUEST[$keyName];
 
-
 switch ($t_module["param"]) {
     case "list":
         include_once 'modules/classes/project.class.php';
@@ -21,6 +20,12 @@ switch ($t_module["param"]) {
     case "display":
         $vue->set($dataClass->getDetail($id), "data");
         $vue->set("tracking/stationTrackingDisplay.tpl", "corps");
+        /**
+         * Get antennas
+         */        
+        require_once "modules/classes/antenna.class.php";
+        $antenna = new Antenna($bdd, $ObjetBDDParam);
+        $vue->set($antenna->getListFromParent($id), "antennas");
         break;
     case "change":
         /*

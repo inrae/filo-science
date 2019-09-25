@@ -88,7 +88,7 @@
         </div>
         <div class="tab-pane fade" id="nav-antenna" role="tabpanel" aria-labelledby="tab-antenna">
             <div class="col-md-12">
-                <h3>Antennes de réception</h3>
+                {include file="tracking/antennaList.tpl"}
             </div>
         </div>
         <div class="tab-pane fade" id="nav-probe" role="tabpanel" aria-labelledby="tab-probe">

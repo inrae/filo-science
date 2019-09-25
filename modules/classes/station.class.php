@@ -132,4 +132,15 @@ class Station extends ObjetBDD
             return $this->lireParamAsPrepared($sql, array("station_id" => $station_id));
         }
     }
+    /**
+     * Get the detail of a station
+     *
+     * @param integer $station_id
+     * @return array
+     */
+    function getDetail(int $station_id): array
+    {
+        $where = " where station_id = :id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("id" => $station_id));
+    }
 }

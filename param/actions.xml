@@ -297,5 +297,9 @@
 	<stationTrackingDisplay action="modules/tracking/stationTracking.php" param="display" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
 	<stationTrackingWrite action="modules/tracking/stationTracking.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="stationTrackingChange" retourko="stationTrackingChange" retourok="stationTrackingDisplay"/>
 	<stationTrackingDelete action="modules/tracking/stationTracking.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="stationTrackingChange" retourko="stationTrackingChange" retourok="stationTrackingList"/>
+	<stationTrackingChange action="modules/tracking/stationTracking.php" param="change" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<antennaChange action="modules/tracking/antenna.php" param="change" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<antennaWrite action="modules/tracking/antenna.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="antennaChange" retourko="antennaChange" retourok="stationTrackingDisplay"/>
+	<antennaDelete action="modules/tracking/antenna.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="antennaChange" retourko="antennaChange" retourok="stationTrackingDisplay"/>
 </navigation>
 	
