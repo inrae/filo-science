@@ -93,7 +93,7 @@
         </div>
         <div class="tab-pane fade" id="nav-probe" role="tabpanel" aria-labelledby="tab-probe">
             <div class="col-md-12">
-                <h3>Sondes d'analyse</h3>
+                {include file="tracking/probeList.tpl"}
             </div>
         </div>
     </div>

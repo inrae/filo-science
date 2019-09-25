@@ -1,5 +1,16 @@
 <h2>{t}Création/Modification d'une antenne - station{/t}&nbsp;{$station.station_name}</h2>
 <div class="row">
+    <a href="index.php?module=stationTrackingList">
+        <img src="display/images/list.png" height="25">
+        {t}Retour à la liste{/t}
+    </a>
+    &nbsp;
+    <a href="index.php?module=stationTrackingDisplay&station_id={$station.station_id}">
+        <img src="display/images/display.png" height="25">
+        {t}Retour à la station{/t}
+    </a>
+</div>
+<div class="row">
     <div class="col-md-6">
         <form class="form-horizontal protoform" id="stationForm" method="post" action="index.php">
             <input type="hidden" name="moduleBase" value="antenna">

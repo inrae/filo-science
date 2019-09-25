@@ -26,6 +26,12 @@ switch ($t_module["param"]) {
         require_once "modules/classes/antenna.class.php";
         $antenna = new Antenna($bdd, $ObjetBDDParam);
         $vue->set($antenna->getListFromParent($id), "antennas");
+        /**
+         * Get probes
+         */
+        require_once 'modules/classes/probe.class.php';
+        $probe = new Probe($bdd, $ObjetBDDParam);
+        $vue->set($probe->getListFromParent($id), "probes");
         break;
     case "change":
         /*
