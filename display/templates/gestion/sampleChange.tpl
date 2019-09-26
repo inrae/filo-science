@@ -366,16 +366,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="taxon_name" class="control-label col-md-4"> {t}Nom du taxon :{/t}<span
-                            class="red">*</span></label>
+                    <label for="taxon_name" class="control-label col-md-4"> <span
+                            class="red">*</span>{t}Nom du taxon :{/t}</label>
                     <div class="col-md-8">
                         <input id="taxon_name" type="text" class="form-control" name="taxon_name"
                             value="{$data.taxon_name}" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="total_number" class="control-label col-md-4"> {t}Nombre total :{/t}<span
-                            class="red">*</span></label>
+                    <label for="total_number" class="control-label col-md-4"> <span
+                            class="red">*</span>{t}Nombre total :{/t}</label>
                     <div class="col-md-8">
                         <input id="total_number" name="total_number" type="text" class="form-control nombre"
                             value="{$data.total_number}" required>
