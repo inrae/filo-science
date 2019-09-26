@@ -189,6 +189,9 @@ td a {
 	color:#009EE0;
 }
 
+.itemSelected {
+	background: #009EE0;
+}
 meter {
 	/* Reset the default appearance */
 	-webkit-appearance: none;

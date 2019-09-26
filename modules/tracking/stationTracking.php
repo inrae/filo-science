@@ -22,7 +22,7 @@ switch ($t_module["param"]) {
         $vue->set("tracking/stationTrackingDisplay.tpl", "corps");
         /**
          * Get antennas
-         */        
+         */
         require_once "modules/classes/antenna.class.php";
         $antenna = new Antenna($bdd, $ObjetBDDParam);
         $vue->set($antenna->getListFromParent($id), "antennas");
@@ -32,6 +32,26 @@ switch ($t_module["param"]) {
         require_once 'modules/classes/probe.class.php';
         $probe = new Probe($bdd, $ObjetBDDParam);
         $vue->set($probe->getListFromParent($id), "probes");
+        if (isset($_REQUEST["probe_id"])) {
+            /**
+             * Get the last measures for the probe
+             */
+            include_once "modules/classes/probe_measure.class.php";
+            $pm = new ProbeMesure($bdd, $ObjetBDDParam);
+            
+            if (!isset ($_REQUEST["limit"])) {
+                $_REQUEST["limit"] = 30;
+            }
+            if (!isset($_REQUEST["offset"])) {
+                $_REQUEST["offset"] = 0;
+            } else if ($_REQUEST["offset"] < 0) {
+                $_REQUEST["offset"] = 0;
+            }
+            $vue->set($pm->getMeasures($_REQUEST["probe_id"], $_REQUEST["limit"], $_REQUEST["offset"]), "measures");
+            $vue->set($_REQUEST["limit"],"limit");
+            $vue->set($_REQUEST["offset"], "offset");
+            $vue->set($_REQUEST["probe_id"], "selectedProbe");
+        }
         break;
     case "change":
         /*
