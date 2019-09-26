@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,282" last-zoom="1" max-obj-count="91"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,422" last-zoom="1" max-obj-count="92"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -112,7 +112,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 </sequence>
 
-<table name="project" layer="0" collapse-mode="1" max-obj-count="4">
+<table name="project" layer="0" collapse-mode="1" max-obj-count="6">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of projects. This table is used for grant rights]]></comment>
@@ -3980,6 +3980,15 @@ group by individual_id]]></expression>
 	 src-table="filo.taxon"
 	 dst-table="tracking.individual_tracking"
 	 src-required="true" dst-required="false"/>
+
+<relationship name="protocol_has_many_project" type="rel1n" layer="0"
+	 src-col-pattern="protocol_default_id"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6e2040"
+	 src-table="filo.protocol"
+	 dst-table="filo.project"
+	 src-required="false" dst-required="false"/>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
