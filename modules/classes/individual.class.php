@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ORM for the table individual
  */
@@ -11,7 +12,9 @@ class Individual extends ObjetBDD
                     ,pathology_name, pathology_code 
                     ,sexe_name, sexe_code
                     ,other_measures
+                    ,release_station_id, transmitter_type_id, project_id, taxon_id
                     from individual 
+                    left outer join individual_tracking using (individual_id)
                     left outer join pathology using (pathology_id)
                     left outer join sexe using (sexe_id)
                     left outer join v_individual_other_measures using (individual_id)
@@ -67,10 +70,33 @@ class Individual extends ObjetBDD
      */
     function lire($id, $getDefault = true, $parentValue = "")
     {
-        $data = parent::lire($id, $getDefault, $parentValue);
+        if ($id > 0) {
+            $where = " where individual_id = :id";
+            $data = $this->lireParamAsPrepared($this->sql.$where, array("id"=>$id));
+        } else {
+            $data = $this->getDefaultValue($parentValue);
+        }
         if ($data["individual_id"] > 0) {
             $data["individual_uid"] = $data["individual_id"];
         }
         return $data;
+    }
+
+    /**
+     * override of write function to record data attached to the tracking
+     *
+     * @param array $data
+     * @return integer
+     */
+    function ecrire(array $data)
+    {
+        $id = parent::ecrire($data);
+        if ($id > 0 && $data["isTracking"]) {
+            $data["individual_id"] = $id;
+            include_once 'modules/classes/individual_tracking.class.php';
+            $it = new IndividualTracking($this->connection, $this->paramori);
+            $it->ecrire($data);
+        }
+        return $id;
     }
 }

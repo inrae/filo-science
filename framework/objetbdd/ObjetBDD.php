@@ -705,7 +705,7 @@ class ObjetBDD
      *
      * @param
      *            array with the name of the columns as identifiers of items
-     * @return Identifier of item, or error code
+     * @return int: key of item, or error code
      */
     function ecrire($dataBrute)
     {

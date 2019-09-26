@@ -184,6 +184,13 @@
                 event.preventDefault();
             }
         });
+        $("#tag_posed").change(function () { 
+            var tag = $("#tag").val();
+            var tagPosed = $(this).val();
+            if (tag.length == 0 && tagPosed.length > 0) {
+                $("#tag").val(tagPosed);
+            }
+        });
 
         $("#modeAuto").on("change", function () {
             if ($(this).prop("checked")) {
@@ -255,8 +262,21 @@
                 callback();
             }
         }
+        $("#isTracking").change(function () {
+            if (this.checked) {
+                $("#div-transmitter").attr("hidden", false);
+            } else {
+                $("#div-transmitter").attr("hidden", true);
+            }
+        })
         /* Init metadata */
         getMetadata();
+        /* Init checkbox isTracking */
+        var taxonFish = "{$individual.taxon_id}";
+        if (taxonFish.length > 0) {
+            $("#isTracking").attr("checked", true);
+            $("#div-transmitter").attr("hidden", false);
+        }
     });
 </script>
 
@@ -417,6 +437,7 @@
                 </legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
                 <input type="hidden" id="individualChange" name="individualChange" value=0>
+                <input type="hidden" id="project_id" name="project_id" value="{$sequence.project_id}">
                 <div class="form-group" id="div-sl">
                     <label for="sl" class="control-label col-md-4"> {t}Longueur standard (mm) :{/t}</label>
                     <div class="col-md-8">
@@ -528,6 +549,28 @@
                         <div class="col-md-8">
                             <input id="tag_posed" type="text" class="fish form-control" name="tag_posed"
                                 value="{$individual.tag_posed}" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group" id="div-isTracking">
+                        <label for="isTracking" class="control-label col-md-4">
+                            {t}Poisson utilisé en télédétection ?{/t}</label>
+                        <div class="col-md-8">
+                            <input id="isTracking" type="checkbox" name="isTracking" class="fish" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group" id="div-transmitter" hidden>
+                        <label for="transmitter" class="control-label col-md-4">
+                            {t}Transmetteur posé :{/t}
+                        </label>
+                        <div class="col-md-8">
+                            <select id="transmitter" name="transmitter_type_id" class="fish form-control">
+                                <option value="" {if $individual.transmitter_type_id == ""}selected{/if}></option>
+                                {foreach $transmitters as $transmitter}
+                                    <option value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $individual.transmitter_type_id}selected{/if}>
+                                        {$transmitter.transmitter_type_name}
+                                    </option>
+                                {/foreach}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group" id="div-individual_comment">
