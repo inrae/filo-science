@@ -79,20 +79,18 @@ switch ($t_module["param"]) {
         break;
 
     case "change":
-        /*
-         * open the form to modify the record
-         * If is a new record, generate a new record with default value :
-         * $_REQUEST["idParent"] contains the identifiant of the parent record
-         */
-        $data = dataRead($dataClass, $id, "gestion/operationChange.tpl", $campaign_id);
-        $data = $_SESSION["ti_campaign"]->translateRow($data);
-        $vue->set($_SESSION["ti_operation"]->translateRow($data), "data");
         /**
          * Get campaign item
          */
         require_once 'modules/classes/campaign.class.php';
         $campaign = new Campaign($bdd, $ObjetBDDParam);
-        $dcampaign = $campaign->lire($campaign_id);
+        $dcampaign = $campaign->getDetail($campaign_id);
+        $data = dataRead($dataClass, $id, "gestion/operationChange.tpl", $campaign_id);
+        if ($data["operation_id"] == 0) {
+            $data["protocol_id"] = $dcampaign["protocol_default_id"];
+        }
+        $data = $_SESSION["ti_campaign"]->translateRow($data);
+        $vue->set($_SESSION["ti_operation"]->translateRow($data), "data");
         /**
          * Preparation of the parameters tables
          */

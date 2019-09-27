@@ -28,6 +28,21 @@
                               non
                         </div>
                   </div>
+                  <div class="form-group">
+                        <label for="is_active" class="control-label col-md-4">{t}Protocole utilisé par défaut :{/t}</label>
+                        <div class="col-md-8">
+                              <select name="protocol_default_id" id="protocol_default_id" class="form-control">
+                                    <option value="" {if $data.protocol_default_id == ""}selected{/if}>
+                                          {t}Sélectionnez...{/t}
+                                    </option>
+                                    {foreach $protocols as $protocol}
+                                          <option value="{$protocol.protocol_id}" {if $data.protocol_default_id == $protocol.protocol_id}selected{/if}>
+                                                {$protocol.protocol_name}
+                                          </option>
+                                    {/foreach}
+                              </select>
+                        </div>
+                  </div>
 
                   <div class="form-group">
                         <label for="groupes"  class="control-label col-md-4">{t}Groupes :{/t}</label>

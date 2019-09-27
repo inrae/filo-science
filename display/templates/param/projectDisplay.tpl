@@ -17,6 +17,10 @@
             <dd>{if $data.is_active == 1}{t}oui{/t}{else}{t}non{/t}{/if}</dd>
         </dl>
         <dl class="dl-horizontal">
+            <dt>{t}Protocole utilisé par défaut :{/t}</dt>
+            <dd>{$data.protocol_name}</dd>
+        </dl>
+        <dl class="dl-horizontal">
             <dt>{t}Projection (SRID) utilisée pour convertir les coordonnées géographiques en système cartésien :{/t}</dt>
             <dd>{$data.metric_srid}</dd>
         </dl>

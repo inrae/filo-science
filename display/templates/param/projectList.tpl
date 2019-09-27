@@ -32,7 +32,7 @@
 						</td>
 						<td class="center">{$data[lst].project_id}</td>
 						<td class="center">{if $data[lst].is_active == 1}{t}oui{/t}{else}{t}non{/t}{/if}</td>
-						<td class="center">{$data[lst]protocol_name}</td>
+						<td class="center">{$data[lst].protocol_name}</td>
 						<td>{$data[lst].groupe}</td>
 						{if $droits.param == 1}
 							<td class="center">
