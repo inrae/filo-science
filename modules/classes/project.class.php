@@ -8,11 +8,14 @@
  */
 class Project extends ObjetBDD
 {
-    private $sql = "select project_id, project_name, is_active, metric_srid,
+    private $sql = "select project_id, project_name, is_active, metric_srid,protocol_id
     array_to_string(array_agg(groupe),', ') as groupe
+    ,protocol_name, measure_default, measure_default_only
     from project
     left outer join project_group using (project_id)
-    left outer join aclgroup using (aclgroup_id)";
+    left outer join aclgroup using (aclgroup_id)
+    left outer join protocol using (protocol_id)
+    ";
     private $group = " group by project_id, project_name, is_active";
     /**
      *
@@ -40,6 +43,9 @@ class Project extends ObjetBDD
             "metric_srid" => array(
                 "type" => 1,
                 "defaultValue" => 2154
+            ),
+            "protocol_default_id" => array(
+                "type" => 1
             )
         );
         parent::__construct($bdd, $param);

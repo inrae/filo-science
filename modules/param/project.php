@@ -46,6 +46,12 @@ switch ($t_module["param"]) {
          * Recuperation des groupes
          */
         $vue->set($dataClass->getAllGroupsFromproject($id), "groupes");
+        /**
+         * Get the list of the protocols
+         */
+        include_once "modules/classes/protocol.class.php";
+        $protocol = new Protocol($bdd, $ObjetBDDParam);
+        $vue -> set($protocol->getListe("protocol_name"), "protocols");
         break;
     case "write":
         /*
