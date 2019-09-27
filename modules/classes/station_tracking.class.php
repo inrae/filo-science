@@ -93,7 +93,7 @@ class StationTracking extends ObjetBDD
      */
     function verifyProject(int $station_id) : bool {
         $data = $this->lire($station_id);
-        if (verifiyProject($data["project_id"])) {
+        if (verifyProject($data["project_id"])) {
             return true;
         } else {
             return false;

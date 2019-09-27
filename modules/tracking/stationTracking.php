@@ -11,7 +11,7 @@ switch ($t_module["param"]) {
         isset($_COOKIE["projectId"]) ? $project_id = $_COOKIE["projectId"] : $project_id = 0;
         isset($_COOKIE["projectActive"]) ? $is_active = $_COOKIE["projectActive"] : $is_active = 1;
         $vue->set($projects = $project->getProjectsActive($is_active, $_SESSION["projects"]), "projects");
-        if ($project_id > 0 && !verifiyProject($project_id)) {
+        if ($project_id > 0 && !verifyProject($project_id)) {
             $project_id = $projects[0]["project_id"];
         }
         if (! $project_id > 0) {
@@ -85,7 +85,7 @@ switch ($t_module["param"]) {
         } else {
             $project_id = $_REQUEST["project_id"];
         }
-        if (!verifiyProject($project_id)) {
+        if (!verifyProject($project_id)) {
             $module_coderetour = -1;
             $message->set(_("La station n'est pas associée à un projet pour lequel vous disposez des droits de modification"), true);
         } else {

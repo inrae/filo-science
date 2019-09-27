@@ -10,7 +10,7 @@
  * @param int $project_id
  * @return boolean
  */
-function verifiyProject($project_id)
+function verifyProject($project_id)
 {
     $retour = false;
     foreach ($_SESSION["projects"] as $value) {

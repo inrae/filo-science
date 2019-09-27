@@ -430,9 +430,7 @@
 
         <div class="col-md-6 form-horizontal">
             <fieldset>
-                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° :
-                    {/t}{$individual.individual_uid}{/if} <i><span id="taxonNameDisplay">{$data.taxon_name}</span></i>
-                    {t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto">
+                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° :{/t}{$individual.individual_uid}{/if} <i><span id="taxonNameDisplay">{$data.taxon_name}</span></i>{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto">
                     <button id="submit2" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                 </legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
@@ -564,7 +562,7 @@
                         </label>
                         <div class="col-md-8">
                             <select id="transmitter" name="transmitter_type_id" class="fish form-control">
-                                <option value="" {if $individual.transmitter_type_id == ""}selected{/if}></option>
+                                <option value="" {if $individual.transmitter_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                                 {foreach $transmitters as $transmitter}
                                     <option value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $individual.transmitter_type_id}selected{/if}>
                                         {$transmitter.transmitter_type_name}

@@ -12,12 +12,14 @@ class Individual extends ObjetBDD
                     ,pathology_name, pathology_code 
                     ,sexe_name, sexe_code
                     ,other_measures
-                    ,release_station_id, transmitter_type_id, project_id, taxon_id
+                    ,release_station_id, transmitter_type_id, project_id
+                    , taxon_id, scientific_name
                     from individual 
                     left outer join individual_tracking using (individual_id)
                     left outer join pathology using (pathology_id)
                     left outer join sexe using (sexe_id)
                     left outer join v_individual_other_measures using (individual_id)
+                    left outer join taxon using (taxon_id)
     ";
     /**
      * Constructor
