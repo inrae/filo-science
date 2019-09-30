@@ -12,7 +12,27 @@
                 }
             }
         }
+        var isAuto = Cookies.get("fishAutoMode");
+        if (isAuto === undefined) {
+            isAuto = 1;
+            Cookies.set("fishAutoMode", 1, { expires: 180 });
+        }
+        if (isAuto == "1") {
+            $("#modeAuto").prop("checked", true);
+        } else {
+            $("#modeAuto").prop("checked", false);
+        }
         var defaultField = "{$project.measure_default}";
+        var transmitter_id = "{$data.transmitter_type_id}";
+        if (transmitter_id == "") {
+            /* get the cookie */
+            try {
+                transmitter_id = Cookies.get("transmitter");
+                if (transmitter_id != undefined) {
+                    $("#transmitter-"+transmitter_id).attr("selected", true);
+                }
+            } catch {}
+        }
         function getMetadata() {
             /*
                 * Recuperation du modele de metadonnees rattache au type d'echantillon
@@ -119,7 +139,39 @@
                 callback();
             }
         }
+        /**
+         * erase the + as first character in numeric fields
+         * for calliper
+         */
+         $(".fish").on("change paste keyup", function (e) {
+            var val = $(this).val();
+            if (val.charAt(0) == "+") {
+                val = val.substr(1, val.length - 1);
+                $(this).val(val);
+            }
+        });
 
+        $(".fish").hover(function () {
+            $(this).focus();
+        });
+       
+        $(".btn").click(function( event ) { 
+            if ($(this).prop("id") != $(':focus').prop("id") && isAuto == 0) {
+                event.preventDefault();
+            }
+        });
+        $("#modeAuto").on("change", function () {
+            if ($(this).prop("checked")) {
+                isAuto = 1;
+                Cookies.set("fishAutoMode", 1, { expires: 180 });
+            } else {
+                isAuto = 0;
+                Cookies.set("fishAutoMode", 0, { expires: 180 });
+            }
+        });
+        $("#transmitter").change(function() { 
+            Cookies.set("transmitter",$(this).val(), { expires: 180});
+        });
         $("#individualForm").submit(function (event) {
             if ($("#action").val() == "Write") {
                 var error = false;
@@ -145,15 +197,26 @@
         getMetadata();
     });
 </script>
+<div class="row">
+    <div class="col-md-12">
+        <a href="index.php?module=individualTrackingList">
+            <img src="display/images/list.png" height="25">
+            {t}Retour à la liste{/t}
+        </a>
+    </div>
+</div>
 
 <div class="col-md-6 form-horizontal">
     <form id="individualForm" method="post" action="index.php">
             <input type="hidden" name="moduleBase" value="individualTracking">
             <input type="hidden" id="action" name="action" value="Write">
+            <input type="hidden" id="isTracking" name="isTracking" value="1">
+            <div class="col-md-4 center">{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto"></div>
+            <div class="col-md-8 center"><button id="submit2" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button></div>
             <div class="form-group">
                 <label for="taxon-search" class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
                 <div class="col-md-8">
-                    <input id="taxon-search" type="text" class="form-control" name="taxon-search" value="">
+                    <input id="taxon-search" type="text" class="form-control" name="taxon-search" value="" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
@@ -296,7 +359,7 @@
                         <select id="transmitter" name="transmitter_type_id" class="fish form-control">
                             <option value="" {if $data.transmitter_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                             {foreach $transmitters as $transmitter}
-                                <option value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $data.transmitter_type_id}selected{/if}>
+                                <option id="transmitter-{$transmitter.transmitter_type_id}" value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $data.transmitter_type_id}selected{/if}>
                                     {$transmitter.transmitter_type_name}
                                 </option>
                             {/foreach}

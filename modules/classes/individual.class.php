@@ -32,7 +32,7 @@ class Individual extends ObjetBDD
         $this->table = "individual";
         $this->colonnes = array(
             "individual_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
-            "sample_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
+            "sample_id" => array("type" => 1, "parentAttrib" => 1),
             "sexe_id" => array("type" => 1),
             "pathology_id" => array("type" => 1),
             "sl" => array("type" => 1),
