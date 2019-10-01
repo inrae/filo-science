@@ -59,6 +59,7 @@
 			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
 			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
 			<item module="technology_typeList" label="Technologies" tooltip="Technologies employées"/>
+			<item module="importDescriptionList" label="Modèles d'import" tooltip="Liste des modèles d'importation de fichiers"/>
 		</item>
 		<item divider="1"/>
 		<item module="feedCacheMap" label="Mise en cache de la carto" tooltip="Stocker le fonds cartographique pour une utilisation hors Internet"/>

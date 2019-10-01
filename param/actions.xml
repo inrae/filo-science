@@ -314,5 +314,12 @@
 	<technology_typeChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="technology_type" type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<technology_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />
 	<technology_typeDelete action="modules/param/param.php" param="delete" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />
+
+	<!-- Imports-->
+	<importDescriptionList action="modules/import/importDescription.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
+	<importDescriptionChange action="modules/import/importDescription.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<importDescriptionDisplay action="modules/import/importDescription.php" param="display" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<importDescriptionWrite action="modules/import/importDescription.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importDescriptionChange" retourko="importDescriptionChange" retourok="importDescriptionDisplay"/>
+	<importDescriptionDelete action="modules/import/importDescription.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importDescriptionChange" retourko="importDescriptionChange" retourok="importDescriptionList"/>
 </navigation>
 	

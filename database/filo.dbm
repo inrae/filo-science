@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,863" last-zoom="1" max-obj-count="96"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,862" last-zoom="1" max-obj-count="96"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3736,6 +3736,7 @@ group by individual_id]]></expression>
 <table name="import_description" layer="3" collapse-mode="2" max-obj-count="7">
 	<schema name="import"/>
 	<role name="filo"/>
+	<comment><![CDATA[Import templates]]></comment>
 	<tag name="import"/>
 	<position x="200" y="1080"/>
 	<column name="import_description_id" not-null="true" sequence="import.import_description_import_description_id">
@@ -3747,7 +3748,7 @@ group by individual_id]]></expression>
 	</column>
 	<column name="separator" not-null="true" default-value="';'">
 		<type name="varchar" length="0"/>
-		<comment><![CDATA[separator used between fields (; , tab)]]></comment>
+		<comment><![CDATA[separator used between fields (; , tab, space)]]></comment>
 	</column>
 	<column name="is_table_er" not-null="true" default-value="'f'">
 		<type name="boolean" length="0"/>
