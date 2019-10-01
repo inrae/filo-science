@@ -264,9 +264,9 @@
         }
         $("#isTracking").change(function () {
             if (this.checked) {
-                $("#div-transmitter").attr("hidden", false);
+                $("#div-transmitter-type").attr("hidden", false);
             } else {
-                $("#div-transmitter").attr("hidden", true);
+                $("#div-transmitter-type").attr("hidden", true);
             }
         })
         /* Init metadata */
@@ -275,7 +275,7 @@
         var taxonFish = "{$individual.taxon_id}";
         if (taxonFish.length > 0) {
             $("#isTracking").attr("checked", true);
-            $("#div-transmitter").attr("hidden", false);
+            $("#div-transmitter-type").attr("hidden", false);
         }
     });
 </script>
@@ -535,18 +535,25 @@
                         </div>
                     </div>
                     <div class="form-group" id="div-tag">
-                        <label for="tag" class="control-label col-md-4"> {t}Marque lue :{/t}</label>
+                        <label for="tag" class="control-label col-md-4"> {t}Marque RFID lue :{/t}</label>
                         <div class="col-md-8">
                             <input id="tag" type="text" class="fish form-control" name="tag"
                                 value="{$individual.tag}" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group" id="div-tag_posed">
-                        <label for="tag_posed" class="control-label col-md-4"> {t}Marque posée
+                        <label for="tag_posed" class="control-label col-md-4"> {t}Marque RFID posée
                             :{/t}</label>
                         <div class="col-md-8">
                             <input id="tag_posed" type="text" class="fish form-control" name="tag_posed"
                                 value="{$individual.tag_posed}" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group" id="div-transmitter">
+                        <label for="transmitter" class="control-label col-md-4"> {t}Code du transmetteur acoustique ou radio posé ou existant :{/t}</label>
+                        <div class="col-md-8">
+                            <input id="transmitter" type="text" class="fish form-control" name="transmitter"
+                                value="{$individual.transmitter}" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group" id="div-isTracking">
@@ -556,12 +563,12 @@
                             <input id="isTracking" type="checkbox" name="isTracking" class="fish" value="1">
                         </div>
                     </div>
-                    <div class="form-group" id="div-transmitter" hidden>
+                    <div class="form-group" id="div-transmitter-type" hidden>
                         <label for="transmitter" class="control-label col-md-4">
-                            {t}Transmetteur posé :{/t}
+                            {t}Modèle de transmetteur posé :{/t}
                         </label>
                         <div class="col-md-8">
-                            <select id="transmitter" name="transmitter_type_id" class="fish form-control">
+                            <select id="transmitter_type_id" name="transmitter_type_id" class="fish form-control">
                                 <option value="" {if $individual.transmitter_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                                 {foreach $transmitters as $transmitter}
                                     <option value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $individual.transmitter_type_id}selected{/if}>

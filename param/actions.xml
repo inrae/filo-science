@@ -306,9 +306,13 @@
 	<probeParameterWrite action="modules/tracking/probeParameter.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange,probeWrite" retourko="probeChange" retourok="probeChange"/>
 	<probeParameterDelete action="modules/tracking/probeParameter.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange,probeWrite" retourko="probeChange" retourok="probeChange"/>
 	<individualTrackingList action="modules/tracking/individualTracking.php" param="list" droits="consult" maxCountByHour="100" maxCountByDay="600" retourlogin="1" type="smarty"/>
-	<individualTrackingChange action="modules/tracking/individualTracking.php" param="change" droits="gestion" maxCountByHour="100" maxCountByDay="600"  type="smarty" retourko="individualTrackingList"/>
+	<individualTrackingChange action="modules/tracking/individualTracking.php" param="change" droits="gestion" maxCountByHour="100" maxCountByDay="600" type="smarty" retourko="individualTrackingList"/>
 	<individualTrackingDisplay action="modules/tracking/individualTracking.php" param="display" droits="gestion" maxCountByHour="100" maxCountByDay="600" type="smarty"/>
 	<individualTrackingWrite action="modules/tracking/individualTracking.php" param="write" droits="gestion" maxCountByHour="100" maxCountByDay="600" modulebefore="individualTrackingChange" retourko="individualTrackingChange" retourok="individualTrackingList"/>
 	<individualTrackingDelete action="modules/tracking/individualTracking.php" param="delete" droits="gestion" maxCountByHour="100" maxCountByDay="600" modulebefore="individualTrackingChange" retourko="individualTrackingChange" retourok="individualTrackingList"/>
+	<technology_typeList action="modules/param/param.php" param="list" droits="consult" tablename="technology_type" tabledescription="Technologies de télédétection utilisées" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<technology_typeChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="technology_type" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<technology_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />
+	<technology_typeDelete action="modules/param/param.php" param="delete" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />
 </navigation>
 	

@@ -8,7 +8,7 @@ class Individual extends ObjetBDD
     private $sql = "select individual_id, individual_id as individual_uid, sample_id, sexe_id, pathology_id
                     , sl, fl, tl, wd, ot, weight
                     ,other_measure, individual_comment, age
-                    ,measure_estimated, pathology_codes, tag, tag_posed
+                    ,measure_estimated, pathology_codes, tag, tag_posed, transmitter
                     ,pathology_name, pathology_code 
                     ,sexe_name, sexe_code
                     ,other_measures
@@ -47,7 +47,8 @@ class Individual extends ObjetBDD
             "individual_comment" => array("type" => 0),
             "pathology_codes" => array("type" => 0),
             "tag" => array("type" => 0),
-            "tag_posed" => array("type" => 0)
+            "tag_posed" => array("type" => 0),
+            "transmitter" => array("type" => 0)
         );
         parent::__construct($bdd, $param);
     }
@@ -74,7 +75,7 @@ class Individual extends ObjetBDD
     {
         if ($id > 0) {
             $where = " where individual_id = :id";
-            $data = $this->lireParamAsPrepared($this->sql.$where, array("id"=>$id));
+            $data = $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
         } else {
             $data = $this->getDefaultValue($parentValue);
         }

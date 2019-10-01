@@ -11,7 +11,8 @@
                 <tr>
                     <th>{t}Id{/t}</th>
                     <th>{t}Code{/t}</th>
-                    <th>{t}Diamètre de réception (en mètres){/t}</th>
+                    <th>{t}Technologie{/t}</th>
+                    <th>{t}Rayon de réception (en mètres){/t}</th>
                     {if $droits.gestion == 1}
                         <th class="center">
                             <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
@@ -24,7 +25,8 @@
                     <tr>
                         <td class="center">{$antenna.antenna_id}</td>
                         <td>{$antenna.antenna_code}</td>
-                        <td>{$antenna.diameter}</td>
+                        <td>{$antenna.technology_type_name}</td>
+                        <td>{$antenna.radius}</td>
                         {if $droits.gestion == 1}
                             <td class="center">
                                 <a href="index.php?module=antennaChange&station_id={$data.station_id}&antenna_id={$antenna.antenna_id}" title="{t}Modifier{/t}">

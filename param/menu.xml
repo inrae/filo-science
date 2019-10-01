@@ -58,7 +58,7 @@
 		<item module="default" label="Télédétection" tooltip="Paramètres liés à la télédétection des poissons">
 			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
 			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
-			
+			<item module="technology_typeList" label="Technologies" tooltip="Technologies employées"/>
 		</item>
 		<item divider="1"/>
 		<item module="feedCacheMap" label="Mise en cache de la carto" tooltip="Stocker le fonds cartographique pour une utilisation hors Internet"/>

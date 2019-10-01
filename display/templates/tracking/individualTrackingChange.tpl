@@ -345,15 +345,21 @@
                     </div>
                 </div>
                 <div class="form-group" id="div-tag_posed">
-                    <label for="tag_posed" class="control-label col-md-4"> {t}Marque posée
-                        :{/t}</label>
+                    <label for="tag_posed" class="control-label col-md-4"> {t}Marque posée :{/t}</label>
                     <div class="col-md-8">
                         <input id="tag_posed" type="text" class="fish form-control" name="tag_posed" value="{$data.tag_posed}" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group" id="div-transmitter">
+                    <label for="transmitter" class="control-label col-md-4"> {t}Code du transmetteur acoustique ou radio posé ou existant :{/t}</label>
+                    <div class="col-md-8">
+                        <input id="transmitter" type="text" class="fish form-control" name="transmitter"
+                            value="{$individual.transmitter}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group" id="div-transmitter-type">
                     <label for="transmitter" class="control-label col-md-4">
-                        {t}Transmetteur posé :{/t}
+                        {t}Modèle de transmetteur posé :{/t}
                     </label>
                     <div class="col-md-8">
                         <select id="transmitter" name="transmitter_type_id" class="fish form-control">

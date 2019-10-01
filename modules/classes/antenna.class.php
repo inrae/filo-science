@@ -2,6 +2,14 @@
 class Antenna extends ObjetBDD
 {
     private $sridAntenna = 4326;
+    private $sql = "select antenna_id, a.station_id, technology_type_id, antenna_code, radius
+                    ,station_name, station_type_name
+                    ,technology_type_name
+                    from antenna a
+                    join station_tracking st on (a.station_id = st.station_id)
+                    join station s on (st.station_id = s.station_id)
+                    join station_type using (station_type_id)
+                    left outer join technology_type using (technology_type_id)";
 
     /**
      * Constructor
@@ -15,8 +23,9 @@ class Antenna extends ObjetBDD
         $this->colonnes = array(
             "antenna_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
             "station_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
+            "technology_type_id" => array("type" => 1),
             "antenna_code" => array("type" => 0, "requis" => 1),
-            "diameter" => array("type" => 1),
+            "radius" => array("type" => 1),
             "geom_polygon" => array("type" => 4)
         );
         parent::__construct($bdd, $param);
@@ -56,5 +65,17 @@ class Antenna extends ObjetBDD
             }
         }
         return $id;
+    }
+    /**
+     * Get the list of the antennas with associated tables
+     *
+     * @param string $order
+     * @return array
+     */
+    function getListFromParent($parentId, $order = "")
+    {
+        $where = " where a.station_id = :parentId";
+        strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
+        return $this->getListeParamAsPrepared($this->sql . $where . $orderby, array("parentId" => $parentId));
     }
 }

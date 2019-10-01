@@ -6,7 +6,7 @@
 class IndividualTracking extends ObjetBDD
 {
     private $sql = "select individual_id, release_station_id, transmitter_type_id, it.project_id, taxon_id
-                    ,tag
+                    ,tag, transmitter
                     , transmitter_type_name
                     ,project_name
                     ,scientific_name

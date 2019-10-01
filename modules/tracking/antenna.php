@@ -14,6 +14,9 @@ if (!$stationTracking->verifyProject($_REQUEST["station_id"])) {
         case "change":
             $data = dataRead($dataClass, $id, "tracking/antennaChange.tpl", $_REQUEST["station_id"]);
             $vue->set($stationTracking->lire($_REQUEST["station_id"]), "station");
+            include_once 'modules/classes/param.class.php';
+            $technology = new Param($bdd, "technology_type");
+            $vue->set($technology->getListe(1), "technologies");
             break;
         case "write":
             /**

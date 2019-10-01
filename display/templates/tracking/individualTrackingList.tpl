@@ -76,8 +76,9 @@
                 <tr>
                     <th>{t}Id{/t}</th>
                     <th>{t}Taxon{/t}</th>
+                    <th>{t}Tag RFID{/t}</th>
+                    <th>{t}Émetteur acoustique ou radio{/t}</th>
                     <th>{t}Modèle d'émetteur{/t}</th>
-                    <th>{t}Tag{/t}</th>
                     {if $droits.gestion == 1}
                     <th class="center">
                         <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
@@ -90,8 +91,9 @@
                 <tr>
                     <td>{$individual.individual_id}</td>
                     <td>{$individual.scientific_name}</td>
-                    <td>{$individual.transmitter_type_name}</td>
                     <td>{$individual.tag}</td>
+                    <td>{$individual.transmitter}</td>
+                    <td>{$individual.transmitter_type_name}</td>
                     {if $droits.gestion == 1}
                     <td class="center">
                         <a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}"

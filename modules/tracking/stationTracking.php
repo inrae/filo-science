@@ -28,7 +28,7 @@ switch ($t_module["param"]) {
          */
         require_once "modules/classes/antenna.class.php";
         $antenna = new Antenna($bdd, $ObjetBDDParam);
-        $vue->set($antenna->getListFromParent($id), "antennas");
+        $vue->set($antenna->getListFromParent($id, "antenna_code"), "antennas");
         /**
          * Get probes
          */

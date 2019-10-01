@@ -24,9 +24,22 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="diameter"  class="control-label col-md-4">{t}Diamètre de réception (en mètres) :{/t}</label>
+                <label for="technology_type_id" class="control-label col-md-4">{t}Technologie employée :{/t}</label>
                 <div class="col-md-8">
-                    <input id="diameter" type="text" class="form-control" name="diameter" value="{$data.diameter}" autofocus required>
+                    <select class="form-control" id="technology_type_id" name="technology_type_id">
+                        <option value="" {if $data.technology_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
+                        {foreach $technologies as $technology}
+                            <option value="{$technology.technology_type_id}" {if $technology.technology_type_id == $data.technology_type_id}selected{/if}>
+                                {$technology.technology_type_name}
+                            </option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="radius"  class="control-label col-md-4">{t}Rayon de réception (en mètres) :{/t}</label>
+                <div class="col-md-8">
+                    <input id="radius" type="text" class="form-control" name="radius" value="{$data.radius}">
                 </div>
             </div>
             <div class="form-group center">
