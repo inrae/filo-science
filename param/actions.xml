@@ -321,5 +321,9 @@
 	<importDescriptionDisplay action="modules/import/importDescription.php" param="display" droits="gestion" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
 	<importDescriptionWrite action="modules/import/importDescription.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importDescriptionChange" retourko="importDescriptionChange" retourok="importDescriptionDisplay"/>
 	<importDescriptionDelete action="modules/import/importDescription.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importDescriptionChange" retourko="importDescriptionChange" retourok="importDescriptionList"/>
+	<importFunctionChange action="modules/import/importFunction.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<importFunctionWrite action="modules/import/importFunction.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importFunctionChange" retourko="importFunctionChange" retourok="importDescriptionDisplay"/>
+	<importFunctionDelete action="modules/import/importFunction.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importFunctionChange" retourko="importFunctionChange" retourok="importDescriptionDisplay"/>
+	<functionTypeGetDescription action="modules/import/importFunction.php" param="getFunctionDescription" droits="gestion" type="ajax"/>
 </navigation>
 	

@@ -29,6 +29,18 @@ class ImportDescription extends ObjetBDD
         parent::__construct($bdd, $param);
     }
     /**
+     * Get the list of the templates
+     *
+     * @param string $order
+     * @return array
+     */
+    public function getListe($order = "")
+    {
+        strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
+        return $this->getListeParam($this->sql . $orderby);
+    }
+
+    /**
      * Get the detail of record
      *
      * @param integer $id
@@ -38,5 +50,22 @@ class ImportDescription extends ObjetBDD
     {
         $where = " where import_description_id = :id";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
+    }
+
+    /**
+     * Delete a record with children
+     *
+     * @param int $id
+     * @return array
+     */
+    public function supprimer(int $id)
+    {
+        include_once "modules/classes/import_function.class.php";
+        $function = new ImportFunction($this->connection);
+        $function->supprimerChamp($id, "import_description_id");
+        include_once "modules/classes/import_column.class.php";
+        $column = new ImportColumn($this->connection);
+        $column->supprimerChamp($id, "import_description_id");
+        return parent::supprimer($id);
     }
 }

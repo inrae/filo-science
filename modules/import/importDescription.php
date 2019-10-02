@@ -31,6 +31,13 @@ switch ($t_module["param"]) {
         }
         break;
     case "delete":
-        dataDelete($dataClass, $id);
+        try {
+            $bdd->beginTransaction();
+            dataDelete($dataClass, $id, true);
+            $bdd->commit();
+            $module_coderetour = 1;
+        } catch (Exception $e) {
+            $bdd->rollback();
+        }
         break;
 }

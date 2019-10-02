@@ -1,5 +1,18 @@
 <h2>{t}Modification d'un modèle d'import{/t}</h2>
 <div class="row">
+    <a href="index.php?module=importDescriptionList">
+        <img src="display/images/list.png" height="25">
+        {t}Retour à la liste{/t}
+    </a>
+    {if $data.import_description_id > 0}
+    &nbsp;
+    <img src="display/images/display.png" height="25">
+    <a href="index.php?module=importDescriptionDisplay&import_description_id={$data.import_description_id}">
+        {t}Retour au détail{/t}
+    </a>
+    {/if}
+</div>
+<div class="row">
         <div class="col-md-6">
             <form class="form-horizontal protoform" id="importForm" method="post" action="index.php">
                 <input type="hidden" name="moduleBase" value="importDescription">
@@ -64,7 +77,7 @@
 
                 <div class="form-group center">
                         <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
-                        {if $data.antenna_id > 0 }
+                        {if $data.import_description_id > 0 }
                             <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
                         {/if}
                     </div>

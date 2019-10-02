@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,862" last-zoom="1" max-obj-count="96"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,859" last-zoom="1" max-obj-count="96"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -4006,7 +4006,7 @@ group by individual_id]]></expression>
 1•testValue•Teste si un champ contient la valeur indiquée⸣
 2•getSecondsFromTime•Transforme un champ de type hh:mm:ss.u en ss.u⸣
 3•extractRightChar•Extrait les n caractères à droite du champ⸣
-4•formatDateTime•Transforme une datetime dans un format reconnu par la base de données, à partir du format indiqué⸣
+4•formatDateTime•Transforme une datetime dans un format reconnu par la base de données, à partir du format indiqué. Exemple : d/m/Y H:i:s pour une date de type 13/01/2019 08:50:00⸣
 5•concatenateDateAndTime•Concatène un champ date et un champ time. L'argument doit correspondre au numéro de la colonne time⸣
 6•transformJulianToDate•Transforme un nombre de jours depuis la date indiquée en référence (au format Y-m-d) en date exploitable au format Y-m-d⸣
 7•verifyTypeNumber•Vérifie si une valeur est numérique ou non⸣
@@ -4094,8 +4094,8 @@ group by individual_id]]></expression>
 	</constraint>
 	<initial-data>
 <![CDATA[import_type_id•import_type_name⸣
-1•'Detection'⸣
-2•'Probe data/données de sonde']]>
+1•Detection⸣
+2•Probe data/données de sonde]]>
 	</initial-data>
 </table>
 

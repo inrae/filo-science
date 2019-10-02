@@ -4,7 +4,9 @@
         <img src="display/images/list.png" height="25">
         {t}Retour à la liste{/t}
     </a>
-    <div class="col-md-6 form-display">
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-8 form-display">
         <dl class="dl-horizontal">
             <dt>{t}Type d'import :{/t}</dt>
             <dd>{$data.import_type_name}</dd>
@@ -22,23 +24,25 @@
             <dd>{$data.separator}</dd>
         </dl>
     </div>
-    <fieldset class="col-md-6">
+</div>
+<div class="row">
+    <fieldset class="col-md-6 col-lg-4">
         <legend>{t}Liste des contrôles et mises en formes réalisés pour chaque ligne à traiter{/t}</legend>
         {if $droits.param == 1}
-            <a href="index.php?module="importFunctionChange&import_description_id={$data.import_description_id}&import_function_id=0">
+            <a href="index.php?module=importFunctionChange&import_description_id={$data.import_description_id}&import_function_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouvelle fonction à exécuter{/t}
             </a>
         {/if}
         <table class="table table-bordered table-hover datatable-nopaging" data-order='[[3,"asc"]]'>
-            <head>
+            <thead>
                 <tr>
                     <th>{t}Nom de la fonction{/t}</th>
                     <th>{t}Numéro de la colonne concernée{/t}</th>
                     <th>{t}Argument associé{/t}</th>
                     <th>{t}Ordre d'exécution{/t}</th>
                 </tr>
-            </head>
+            </thead>
             <tbody>
                 {foreach $functions as $function}
                     <tr>
@@ -48,22 +52,21 @@
                             </a>
                         </td>
                         <td class="center">
-                            {$import.column_number}
+                            {$function.column_number}
                         </td>
                         <td>
-                            {$import.arguments}
+                            {$function.arguments}
                         </td>
                         <td class="center">
-                            {$import.execution_order}
+                            {$function.execution_order}
                         </td>
                     </tr>
                 {/foreach}
             </tbody>
         </table>
     </fieldset>
-</div>
-<div class="row">
-    <fieldset class="col-md-6">
+
+    <fieldset class="col-md-6 col-lg-4">
         <legend>{t}Table d'équivalence entre les colonnes et la table de la base de données{/t}</legend>
     </fieldset>
 </div>

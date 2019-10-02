@@ -20,8 +20,8 @@ class ImportFunction extends ObjetBDD
             "import_function_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
             "import_description_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
             "function_type_id" => array("type" => 1, "requis" => 1),
-            "column_number" => array("type" => 1, "requis" => 1),
-            "order" => array("type" => 1, "requis" => 1),
+            "column_number" => array("type" => 1, "requis" => 1, "defaultValue"=>1),
+            "execution_order" => array("type" => 1, "requis" => 1, "defaultValue"=>1),
             "arguments" => array("type" => 0),
             "column_result" => array("type" => 1)
         );
