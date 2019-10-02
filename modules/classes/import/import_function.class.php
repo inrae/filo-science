@@ -6,7 +6,7 @@
 class ImportFunction extends ObjetBDD
 {
     private $sql = "select import_function_id, import_description_id, function_type_id
-                    ,column_number, execution_order, arguments
+                    ,column_number, execution_order, arguments, column_result
                     ,function_name
                     from import_function
                     join function_type using (function_type_id)";
@@ -23,7 +23,7 @@ class ImportFunction extends ObjetBDD
             "column_number" => array("type" => 1, "requis" => 1, "defaultValue"=>1),
             "execution_order" => array("type" => 1, "requis" => 1, "defaultValue"=>1),
             "arguments" => array("type" => 0),
-            "column_result" => array("type" => 1)
+            "column_result" => array("type" => 1, "defaultValue"=>1)
         );
 
         parent::__construct($bdd, $param);

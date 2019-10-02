@@ -15,6 +15,9 @@ switch ($t_module["param"]) {
         include_once "modules/classes/import/import_function.class.php";
         $importFunction = new ImportFunction($bdd, $ObjetBDDParam);
         $vue->set($importFunction->getListFromParent($id), "functions");
+        include_once "modules/classes/import/import_column.class.php";
+        $importColumn = new ImportColumn($bdd, $ObjetBDDParam);
+        $vue->set($importColumn->getListFromParent($id, "column_order"), "columns");
         break;
     case "change":
         dataRead($dataClass, $id, "import/importDescriptionChange.tpl");

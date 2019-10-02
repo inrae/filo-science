@@ -1,5 +1,8 @@
 <script>
     $(document).ready(function() { 
+        $("#column_number").change(function () { 
+            $("#column_result").val($(this).val());
+        });
         $("#function_type_id").change(function() { 
             getDescription();
         });
@@ -55,10 +58,18 @@
             </div>
             <div class="form-group">
                 <label for="column_number" class="control-label col-md-4">
-                        <span class="red">*</span> {t}Numéro de colonne à traiter :{/t}
+                        <span class="red">*</span> {t}N° de colonne à traiter :{/t}
                 </label>
                 <div class="col-md-8">
-                    <input type="number" class="form-control" id="column_number" name="column_number" value="{$data.column_number}">
+                    <input type="number" class="form-control" id="column_number" name="column_number" value="{$data.column_number}" required>
+                </div>               
+            </div>
+            <div class="form-group">
+                <label for="column_result" class="control-label col-md-4">
+                        <span class="red">*</span> {t}N° de colonne récupérant le résultat (0 pour une fonction de contrôle sans transformation de données) :{/t}
+                </label>
+                <div class="col-md-8">
+                    <input type="number" class="form-control" id="column_result" name="column_result" value="{$data.column_result}">
                 </div>               
             </div>
             <div class="form-group">
@@ -66,7 +77,7 @@
                         <span class="red">*</span> {t}Ordre d'exécution de la fonction :{/t}
                 </label>
                 <div class="col-md-8">
-                    <input type="number" class="form-control" id="execution_order" name="execution_order" value="{$data.execution_order}">
+                    <input type="number" class="form-control" id="execution_order" name="execution_order" value="{$data.execution_order}" required>
                 </div>               
             </div>
             <div class="form-group">

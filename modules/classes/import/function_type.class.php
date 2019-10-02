@@ -158,4 +158,15 @@ class FunctionType extends ObjetBDD
             throw new FunctionTypeException(_("Le nombre de colonnes ne correspond pas à celui attendu"));
         }
     }
+
+    /**
+     * Reformate a decimal field from comma to dot
+     *
+     * @param array $columns
+     * @param array $args
+     * @return float
+     */
+    private function transformDecimalSeparator(array $columns, array $args) {
+        return str_replace(",", ".", $columns[$args["columnNumber"]]);
+    }
 }
