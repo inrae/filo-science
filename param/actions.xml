@@ -329,5 +329,8 @@
 	<importTypeChange action="modules/import/importType.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
 	<importTypeWrite action="modules/import/importType.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importTypeChange" retourko="importTypeChange" retourok="importTypeList"/>
 	<importTypeDelete action="modules/import/importType.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importTypeChange" retourko="importTypeChange" retourok="importTypeList"/>
+	<importColumnChange action="modules/import/importColumn.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<importColumnWrite action="modules/import/importColumn.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importColumnChange" retourko="importColumnChange" retourok="importDescriptionDisplay"/>
+	<importColumnDelete action="modules/import/importColumn.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importColumnChange" retourko="importColumnChange" retourok="importDescriptionDisplay"/>
 </navigation>
 	

@@ -4,6 +4,13 @@
         <img src="display/images/list.png" height="25">
         {t}Retour à la liste{/t}
     </a>
+    {if $droits.param == 1}
+        &nbsp;
+        <a href="index.php?module=importDescriptionChange&import_description_id={$data.import_description_id}">
+            <img src="display/images/edit.gif" height="25">
+            {t}Modifier{/t}
+        </a>
+    {/if}
 </div>
 <div class="row">
     <div class="col-md-12 col-lg-8 form-display">
@@ -72,6 +79,12 @@
 
     <fieldset class="col-md-12 col-lg-6">
         <legend>{t}Table d'équivalence entre les colonnes et la table de la base de données{/t}</legend>
+        {if $droits.param == 1}
+            <a href="index.php?module=importColumnChange&import_description_id={$data.import_description_id}&import_column_id=0">
+                <img src="display/images/new.png" height="25">
+                {t}Nouvelle colonne{/t}
+            </a>
+        {/if}
         <table class="table table-bordered table-hover datatable-nopaging" data-order='[[0,"asc"]]'>
             <thead>
                 <tr>

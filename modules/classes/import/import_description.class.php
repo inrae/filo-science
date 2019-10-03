@@ -7,7 +7,7 @@ class ImportDescription extends ObjetBDD
 {
     private $sql = "select import_description_id, import_type_id, csv_type_id
                     ,import_description_name, separator
-                    ,csv_type_name, import_type_name
+                    ,csv_type_name, import_type_name, tablename, column_list, is_table_er
                     from import_description
                     join import_type using (import_type_id)
                     join csv_type using (csv_type_id)";
@@ -22,8 +22,7 @@ class ImportDescription extends ObjetBDD
             "import_type_id" => array("type" => 1, "requis" => 1),
             "csv_type_id" => array("type" => 1, "requis" => 1),
             "import_description_name" => array("type" => 0, "requis" => 1),
-            "separator" => array("type" => 0, "requis" => 1),
-            /*"is_table_er" => array("type" => 1, "requis" => 1, "defaultValue" => 0)*/
+            "separator" => array("type" => 0, "requis" => 1)
         );
 
         parent::__construct($bdd, $param);
