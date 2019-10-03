@@ -31,7 +31,7 @@ class IndividualTracking extends ObjetBDD
             "release_station_id" => array("type" => 1),
             "transmitter_type_id" => array("type" => 1),
             "project_id" => array("type" => 1, "requis" => 1),
-            "taxon_id" => array("type"=>1, "requis"=>1)
+            "taxon_id" => array("type" => 1, "requis" => 1)
         );
         $this->id_auto = 0;
         parent::__construct($bdd, $param);
@@ -42,8 +42,32 @@ class IndividualTracking extends ObjetBDD
      * @param integer $project_id
      * @return array
      */
-    function getListFromProject(int $project_id) {
+    function getListFromProject(int $project_id)
+    {
         $where = " where it.project_id = :project_id";
-        return ($this->getListeParamAsPrepared($this->sql.$where, array("project_id"=>$project_id)));
+        return ($this->getListeParamAsPrepared($this->sql . $where, array("project_id" => $project_id)));
+    }
+
+    /**
+     * Get the fish from the tag
+     *
+     * @param string $tag
+     * @return array
+     */
+    function getFromTag(string $tag)
+    {
+        $where = " where tag = :tag";
+        return $this->lireParamAsPrepared($this->sql . $where, array("tag" => $tag));
+    }
+    /**
+     * Get the fish from the transmitter
+     *
+     * @param string $transmitter
+     * @return void
+     */
+    function getFromTransmitter(string $transmitter)
+    {
+        $where = " where transmitter = :transmitter";
+        return $this->lireParamAsPrepared($this->sql . $where, array("transmitter" => $transmitter));
     }
 }

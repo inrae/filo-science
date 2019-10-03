@@ -169,4 +169,44 @@ class FunctionType extends ObjetBDD
     private function transformDecimalSeparator(array $columns, array $args) {
         return str_replace(",", ".", $columns[$args["columnNumber"]]);
     }
+
+    /**
+     * Get the individual_id from the tag
+     *
+     * @param array $columns
+     * @param array $args
+     * @return int
+     */
+    private function getIndividualFromTag(array $columns, array $args) {
+        global $individualTracking;
+        if (!isset($individualTracking)) {
+            throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+        }
+        $dindividual = $individualTracking->getFromTag($columns[$args["columnNumber"]]);
+        if ($dindividual["individual_id"] > 0) {
+            return $dindividual["individual_id"];
+        } else {
+            throw new FunctionTypeException(sprintf(_("Le tag %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
+        }
+    }
+    /**
+     * Get the individual_id from the transmitter
+     *
+     * @param array $columns
+     * @param array $args
+     * @return int
+     */
+    private function getIndividualFromTransmitter(array $columns, array $args) {
+        global $individualTracking;
+        if (!isset($individualTracking)) {
+            throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+        }
+        $dindividual = $individualTracking->getFromTransmitter($columns[$args["columnNumber"]]);
+        if ($dindividual["individual_id"] > 0) {
+            return $dindividual["individual_id"];
+        } else {
+            throw new FunctionTypeException(sprintf(_("Le transmetteur %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
+        }
+    }
+
 }
