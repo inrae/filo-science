@@ -1,5 +1,5 @@
 <?php
-require_once 'modules/classes/transmitter_type.class.php';
+require_once 'modules/classes/tracking/transmitter_type.class.php';
 $dataClass = new TransmitterType($bdd, $ObjetBDDParam);
 $keyName = "transmitter_type_id";
 $id = $_REQUEST[$keyName];

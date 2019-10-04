@@ -96,7 +96,7 @@ class Individual extends ObjetBDD
         $id = parent::ecrire($data);
         if ($id > 0 && $data["isTracking"]) {
             $data["individual_id"] = $id;
-            include_once 'modules/classes/individual_tracking.class.php';
+            include_once 'modules/classes/tracking/individual_tracking.class.php';
             $it = new IndividualTracking($this->connection, $this->paramori);
             $it->ecrire($data);
         }

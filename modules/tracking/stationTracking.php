@@ -1,5 +1,5 @@
 <?php
-include_once 'modules/classes/station_tracking.class.php';
+include_once 'modules/classes/tracking/station_tracking.class.php';
 $dataClass = new StationTracking($bdd, $ObjetBDDParam);
 $keyName = "station_id";
 $id = $_REQUEST[$keyName];
@@ -26,20 +26,20 @@ switch ($t_module["param"]) {
         /**
          * Get antennas
          */
-        require_once "modules/classes/antenna.class.php";
+        require_once "modules/classes/tracking/antenna.class.php";
         $antenna = new Antenna($bdd, $ObjetBDDParam);
         $vue->set($antenna->getListFromParent($id, "antenna_code"), "antennas");
         /**
          * Get probes
          */
-        require_once 'modules/classes/probe.class.php';
+        require_once 'modules/classes/tracking/probe.class.php';
         $probe = new Probe($bdd, $ObjetBDDParam);
         $vue->set($probe->getListFromParent($id), "probes");
         if (isset($_REQUEST["probe_id"])) {
             /**
              * Get the last measures for the probe
              */
-            include_once "modules/classes/probe_measure.class.php";
+            include_once "modules/classes/tracking/probe_measure.class.php";
             $pm = new ProbeMesure($bdd, $ObjetBDDParam);
             
             if (!isset ($_REQUEST["limit"])) {

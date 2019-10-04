@@ -102,7 +102,7 @@ switch ($t_module["param"]) {
         /**
          * Get the list of transmitters for tracking
          */
-        include_once 'modules/classes/transmitter_type.class.php';
+        include_once 'modules/classes/tracking/transmitter_type.class.php';
         $tt = new TransmitterType($bdd, $ObjetBDDParam);
         $vue->set($tt->getListe("transmitter_type_name"), "transmitters");
         break;

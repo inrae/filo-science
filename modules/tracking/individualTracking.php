@@ -1,5 +1,5 @@
 <?php
-include_once 'modules/classes/individual_tracking.class.php';
+include_once 'modules/classes/tracking/individual_tracking.class.php';
 $dataClass = new IndividualTracking($bdd, $ObjetBDDParam);
 $keyName = "individual_id";
 $id = $_REQUEST[$keyName];
@@ -37,7 +37,7 @@ switch ($t_module["param"]) {
             require_once 'modules/classes/pathology.class.php';
             $pathology = new Pathology($bdd, $ObjetBDDParam);
             $vue->set($pathology->getListe(3), "pathologys");
-            include_once 'modules/classes/transmitter_type.class.php';
+            include_once 'modules/classes/tracking/transmitter_type.class.php';
             $tt = new TransmitterType($bdd, $ObjetBDDParam);
             $vue->set($tt->getListe("transmitter_type_name"), "transmitters");
             /**

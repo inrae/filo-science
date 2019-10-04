@@ -1,7 +1,7 @@
 <?php
 
-include_once 'modules/classes/probe_parameter.class.php';
-include_once 'modules/classes/station_tracking.class.php';
+include_once 'modules/classes/tracking/probe_parameter.class.php';
+include_once 'modules/classes/tracking/station_tracking.class.php';
 $dataClass = new ProbeParameter($bdd, $ObjetBDDParam);
 $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
 $keyName = "probe_id";

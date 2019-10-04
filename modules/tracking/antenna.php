@@ -1,6 +1,6 @@
 <?php
-include_once 'modules/classes/antenna.class.php';
-include_once 'modules/classes/station_tracking.class.php';
+include_once 'modules/classes/tracking/antenna.class.php';
+include_once 'modules/classes/tracking/station_tracking.class.php';
 $dataClass = new Antenna($bdd, $ObjetBDDParam);
 $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
 $keyName = "antenna_id";

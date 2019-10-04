@@ -1,6 +1,6 @@
 <?php
-include_once 'modules/classes/probe.class.php';
-include_once 'modules/classes/station_tracking.class.php';
+include_once 'modules/classes/tracking/probe.class.php';
+include_once 'modules/classes/tracking/station_tracking.class.php';
 $dataClass = new Probe($bdd, $ObjetBDDParam);
 $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
 $keyName = "probe_id";
@@ -14,7 +14,7 @@ if (!$stationTracking->verifyProject($_REQUEST["station_id"])) {
         case "change":
             $data = dataRead($dataClass, $id, "tracking/probeChange.tpl", $_REQUEST["station_id"]);
             $vue->set($stationTracking->lire($_REQUEST["station_id"]), "station");
-            require_once "modules/classes/probe_parameter.class.php";
+            require_once "modules/classes/tracking/probe_parameter.class.php";
             $pp = new ProbeParameter($bdd, $ObjetBDDParam);
             $vue->set($pp->getListFromParent($id), "parameters");
             if (isset($_REQUEST["probe_parameter_id"])) {
