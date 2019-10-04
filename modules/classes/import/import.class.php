@@ -12,7 +12,7 @@ class ImportException extends Exception
  * @author quinton
  *        
  */
-class Import
+class FiloImport
 {
     private $separator = ",";
     private $utf8_encode = false;

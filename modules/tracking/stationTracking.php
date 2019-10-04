@@ -118,4 +118,15 @@ switch ($t_module["param"]) {
             dataDelete($dataClass, $id);
         }
         break;
+        case "getSensors":
+        if (verifyProject($_REQUEST["project_id"])) {
+            /**
+             * Get the type of import
+             */
+            include_once "modules/classes/import/import_description.class.php";
+            $id = new ImportDescription($bdd);
+            $did = $id->lire($_REQUEST["import_description_id"]);
+            $vue->set($dataClass->getListSensor($_REQUEST["project_id"], $did["import_type_id"]));
+        }
+        break;
 }

@@ -91,12 +91,42 @@ class StationTracking extends ObjetBDD
      * @param integer $station_id
      * @return boolean
      */
-    function verifyProject(int $station_id) : bool {
+    function verifyProject(int $station_id): bool
+    {
         $data = $this->lire($station_id);
         if (verifyProject($data["project_id"])) {
             return true;
         } else {
             return false;
         }
+    }
+    /**
+     * Get the list of antennas or probes according to the type of import
+     *
+     * @param integer $project_id
+     * @param integer $import_type_id
+     * @return array
+     */
+    function getListSensor(int $project_id, int $import_type_id)
+    {
+        switch ($import_type_id) {
+            case 1:
+                $sql = "select probe_id as sensor_id, station_name, station_code, probe_code as sensor_code
+                    from station_tracking
+                    join probe using (station_id)
+                    join station using (station_id)
+                    where project_id = :project_id";
+                break;
+            case 2:
+                $sql = "select antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code
+                    from station_tracking
+                    join antenna using (station_id)
+                    join station using (station_id)
+                    where project_id = :project_id";
+                break;
+            default:
+                return (array());
+        }
+        return $this->getListeParamAsPrepared($sql, array("project_id" => $project_id));
     }
 }
