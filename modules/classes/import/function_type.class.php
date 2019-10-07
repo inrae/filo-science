@@ -29,9 +29,10 @@ class FunctionType extends ObjetBDD
      * @param integer $function_type_id
      * @return array
      */
-    function getDescription (int $function_type_id):array {
+    function getDescription(int $function_type_id): array
+    {
         $sql = "select description from function_type where function_type_id = :id";
-        return $this->lireParamAsPrepared($sql, array("id"=>$function_type_id));
+        return $this->lireParamAsPrepared($sql, array("id" => $function_type_id));
     }
 
     /**
@@ -45,6 +46,9 @@ class FunctionType extends ObjetBDD
     public function functionCall($name, $columns, array $args = array())
     {
         if (is_callable(array($this, $name))) {
+            if ($args["columnNumber"] > 0) {
+                $args["columnNumber"]--;
+            }
             return ($this->$name($columns, $args));
         } else {
             throw new FunctionTypeException(sprintf(_("La fonction %s n'est pas utilisable"), $name));
@@ -60,7 +64,7 @@ class FunctionType extends ObjetBDD
     private function testValue(array $columns, array $args)
     {
         if ($columns[$args["columnNumber"]] != $args["arg"]) {
-            throw new FunctionTypeException(sprintf(_("La colonne %s$1 ne correspond pas à la valeur attendue (%s$2)"), $args["columnNumber"], $args["arg"]));
+            throw new FunctionTypeException(sprintf(_('La colonne %1$s ne correspond pas à la valeur attendue (%2$s)'), $args["columnNumber"] + 1, $args["arg"]));
         }
     }
 
@@ -73,9 +77,9 @@ class FunctionType extends ObjetBDD
      */
     private function getSecondsFromTime(array $columns, array $args)
     {
-        $time = split(":", $columns[$args["columnNumber"]]);
-        if (count(time) != 3) {
-            throw new FunctionTypeException(sprintf(_("La colonne %s n'est pas au format heure:minute:seconde")));
+        $time = explode(":", $columns[$args["columnNumber"]]);
+        if (count($time) != 3) {
+            throw new FunctionTypeException(sprintf(_("La colonne %s n'est pas au format heure:minute:seconde"), $args["columnNumber"] + 1));
         }
         return ($time[0] * 3600 + $time[1] * 60 + $time[2]);
     }
@@ -116,7 +120,7 @@ class FunctionType extends ObjetBDD
      */
     private function concatenateDateAndTime(array $columns, array $args)
     {
-        return $columns[$args["columnNumber"]] . " " . $columns[$args["arg"]];
+        return $columns[$args["columnNumber"]] . " " . $columns[$args["arg"] - 1];
     }
 
     /**
@@ -129,7 +133,7 @@ class FunctionType extends ObjetBDD
     private function transformJulianToDate(array $columns, array $args)
     {
         $myDate = date_create_from_format("Y-m-d", $args["arg"]);
-        $nbdays = $columns[$args["columnNumber"]] - 1;
+        $nbdays = $columns[$args["columnNumber"]];
         $myDate->add(new DateInterval("P" + $nbdays + "D"));
         return $myDate->format("Y-m-d");
     }
@@ -141,9 +145,10 @@ class FunctionType extends ObjetBDD
      * @param array $args
      * @return void
      */
-    private function verifyTypeNumber(array $columns, array $args) {
-        if (! is_numeric($columns[$args["columnNumber"]])) {
-            throw new FunctionTypeException(sprintf(_("La colonne %s n'est pas numérique"), $args["columnNumber"]));
+    private function verifyTypeNumber(array $columns, array $args)
+    {
+        if (!is_numeric($columns[$args["columnNumber"]])) {
+            throw new FunctionTypeException(sprintf(_("La colonne %s n'est pas numérique"), $args["columnNumber"] + 1));
         }
     }
     /**
@@ -153,7 +158,8 @@ class FunctionType extends ObjetBDD
      * @param array $args
      * @return void
      */
-    private function testColumnsNumber(array $columns, array $args) {
+    private function testColumnsNumber(array $columns, array $args)
+    {
         if (count($columns) != $args["arg"]) {
             throw new FunctionTypeException(_("Le nombre de colonnes ne correspond pas à celui attendu"));
         }
@@ -166,7 +172,8 @@ class FunctionType extends ObjetBDD
      * @param array $args
      * @return float
      */
-    private function transformDecimalSeparator(array $columns, array $args) {
+    private function transformDecimalSeparator(array $columns, array $args)
+    {
         return str_replace(",", ".", $columns[$args["columnNumber"]]);
     }
 
@@ -177,7 +184,8 @@ class FunctionType extends ObjetBDD
      * @param array $args
      * @return int
      */
-    private function getIndividualFromTag(array $columns, array $args) {
+    private function getIndividualFromTag(array $columns, array $args)
+    {
         global $individualTracking;
         if (!isset($individualTracking)) {
             throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
@@ -196,7 +204,8 @@ class FunctionType extends ObjetBDD
      * @param array $args
      * @return int
      */
-    private function getIndividualFromTransmitter(array $columns, array $args) {
+    private function getIndividualFromTransmitter(array $columns, array $args)
+    {
         global $individualTracking;
         if (!isset($individualTracking)) {
             throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
@@ -209,4 +218,20 @@ class FunctionType extends ObjetBDD
         }
     }
 
+    /**
+     * Transform a numeric value to hexadecimal value
+     *
+     * @param array $columns
+     * @param array $args
+     * @return string
+     */
+    private function numericToHexa(array $columns, array $args)
+    {
+        $value = $columns[$args["columnNumber"]];
+        if (is_numeric($value) && strlen($value) > 0) {
+            return (dechex($value));
+        } else {
+            return $value;
+        }
+    }
 }

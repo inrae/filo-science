@@ -71,20 +71,28 @@ class FiloImport
     function readLine()
     {
         if ($this->handle) {
-            $line = fgets($this->handle);
-            if ($this->separator == " ") {
-                /**
-                 * Drop consecutive spaces - not really a csv file
-                 */
-                $line = preg_replace('` {2,}`', '', $line);
-            }
-            $data = split($this->separator, $line);
-            if ($data !== false && $this->utf8_encode) {
-                foreach ($data as $key => $value) {
-                    $data[$key] = utf8_encode($value);
+            try {
+                $line = fgets($this->handle);
+                if ($line !== false) {
+                    if ($this->separator == " ") {
+                        /**
+                         * Drop consecutive spaces - not really a csv file
+                         */
+                        $line = preg_replace('/\s+/', ' ', $line);
+                    }
+                    $data = explode($this->separator, $line);
+                    if ($data !== false && $this->utf8_encode) {
+                        foreach ($data as $key => $value) {
+                            $data[$key] = utf8_encode($value);
+                        }
+                    }
+                    return $data;
+                } else {
+                    return false;
                 }
+            } catch (Exception $e) {
+                throw new ImportException($e->getMessage());
             }
-            return $data;
         } else {
             return false;
         }

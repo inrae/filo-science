@@ -400,7 +400,7 @@
                             <option value="" {if $data.transmitter_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                             {foreach $transmitters as $transmitter}
                                 <option value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $data.transmitter_type_id}selected{/if}>
-                                    {$transmitter.transmitter_type_name}
+                                    {$transmitter.transmitter_type_name} <i>{$transmitter.technology}</i>
                                 </option>
                             {/foreach}
                         </select>
