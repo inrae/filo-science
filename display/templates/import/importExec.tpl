@@ -100,7 +100,7 @@
             </div>
             <div class="form-group" hidden id="nbLinesGroup">
                 <label for="nbLines" class="control-label col-md-4">
-                    {t}Nombre de lignes à traiter ?{/t}
+                    {t}Nombre de lignes à afficher ?{/t}
                 </label>
                 <div class="col-md-8">
                     <input type="number" name="nbLines" value="100" class="form-control">
@@ -114,5 +114,44 @@
     <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>
 </div>
 {if $isTreated == 1}
-
+    {if testMode == 1}
+        <fieldset class="col-md-6">
+            <legend>{t}Données prêtes à être importées{/t}</legend>
+            <table class="table table-bordered table-hover datatable-nopaging">
+                <thead>
+                    {foreach $data[0] as $key=>$value}
+                        <th>{$key}</th>
+                    {/foreach}
+                </thead>
+                <tbody>
+                    {foreach $data as $row}
+                        <tr>
+                            {foreach $row as $value}
+                                <td>{$value}</td>
+                            {/foreach}
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </fieldset>
+    {/if}
+    <fieldset class="col-md-6">
+        <legend>{t}Messages d'information ou d'erreur{/t}</legend>
+        <table class="table table-bordered table-hover datatable-nopaging">
+            <thead>
+                <tr>
+                    <th>{t}N° de ligne{/t}</th>
+                    <th>{t}Contenu{/t}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $errors as $error}
+                    <tr>
+                        <td class="center">{$error.lineNumber}</td>
+                        <td class="textareaDisplay">{$error.content}</td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </fieldset>
 {/if}

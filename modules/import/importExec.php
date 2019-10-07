@@ -60,9 +60,24 @@ if (isset($_FILES["fileName"])) {
             /**
              * $data contains the data ready to import
              */
+
+
+             if ($_REQUEST["testMode"] == 1) {
+                 $numLineDisplay = 1 ;
+                 $dataDisplay = array();
+                 foreach ($data as $row) {
+                     $numLineDisplay ++;
+                     if ($numLineDisplay > $_REQUEST["nbLines"]) {
+                         break;
+                     }
+                     $dataDisplay[] = $row;
+                 }
+                 $vue->set($dataDisplay, "data");
+             }
         } catch (ImportException $ie) {
             $errors[]["content"] = $ie->getMessage();
         }
+        $vue->set($errors, "errors");
     }
 }
 
