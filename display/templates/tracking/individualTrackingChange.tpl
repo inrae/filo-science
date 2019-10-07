@@ -23,17 +23,17 @@
             $("#modeAuto").prop("checked", false);
         }
         var defaultField = "{$project.measure_default}";
-        var transmitter_id = "{$data.transmitter_type_id}";
-        if (transmitter_id == "") {
+        var transmitter_type_id = "{$data.transmitter_type_id}";
+        if (transmitter_type_id == "") {
             /* get the cookie */
             try {
-                transmitter_id = Cookies.get("transmitter");
-                if (transmitter_id != undefined) {
-                    $("#transmitter-"+transmitter_id).attr("selected", true);
+                transmitter_type_id = Cookies.get("transmitter_type_id");
+                if (transmitter_type_id != undefined) {
+                    $("#transmitter_type_id option[value="+transmitter_type_id+"]").prop("selected", "selected");
                 }
             } catch {}
         }
-        function getMetadata() {
+        function getMetadata(taxonId) {
             /*
                 * Recuperation du modele de metadonnees rattache au type d'echantillon
                 */
@@ -45,7 +45,6 @@
             }
             var schema;
             var protocolId = $("#protocol_id").val();
-            var taxonId = $("#taxon_id").val();
             if (taxonId) {
                 $.ajax({
                     url: "index.php",
@@ -103,11 +102,16 @@
             if (taxonId === null) {
                 taxonId = 0;
             }
-            if (taxonId > 0) {
-                setTaxonName(taxonId);
-                getMetadata();
-            }
+            setTaxonId(taxonId);
         });
+        function setTaxonId(taxonId) {
+            if (taxonId > 0) {
+                Cookies.set("taxon_id", taxonId, { expires: 7});
+                $("#taxon_id").val(taxonId);
+                setTaxonName(taxonId);
+                getMetadata(taxonId);
+            }
+        }
         /*
          * set the name of the taxon
          */
@@ -127,10 +131,14 @@
         }
         $("#tag_posed").change(function () {
             var tag = $("#tag").val();
-            var tagPosed = $(this).val();
+            var tagPosed = $(this).val().toUpperCase();
             if (tag.length == 0 && tagPosed.length > 0) {
                 $("#tag").val(tagPosed);
             }
+            $(this).val(tagPosed.toUpperCase());
+        });
+        $("#tag,#transmitter").change(function () { 
+            $(this).val($(this).val().toUpperCase());
         });
         function setFocusOnDefaultField(test, callback) {
             if (defaultField.length > 0) {
@@ -169,8 +177,8 @@
                 Cookies.set("fishAutoMode", 0, { expires: 180 });
             }
         });
-        $("#transmitter").change(function() { 
-            Cookies.set("transmitter",$(this).val(), { expires: 180});
+        $("#transmitter_type_id").change(function() { 
+            Cookies.set("transmitter_type_id",$(this).val(), { expires: 180});
         });
         $("#individualForm").submit(function (event) {
             if ($("#action").val() == "Write") {
@@ -193,8 +201,34 @@
                 } catch (e) { }
             }
         });
-        /* Init metadata */
-        getMetadata();
+        
+        /* get the default taxon_id*/
+        var taxon_id = "{$data.taxon_id}";
+        if (! taxon_id > 0) {
+            try {
+                taxon_id = Cookies.get("taxon_id");
+                console.log("taxon_id:"+taxon_id);
+                if (taxon_id != undefined) {
+                    $.ajax({
+                        url: "index.php",
+                        data: { "module": "taxonGetName", "taxon_id": taxon_id }
+                    })
+                    .done(function (value) {
+                        if (value) {
+                            var name = JSON.parse(value);
+                            $("#taxon_name").val(name.scientific_name);
+                            $("#taxonNameDisplay").text(name.scientific_name);
+                            var option = '<option value="'+taxon_id+'" selected>'+name.scientific_name+'</option>';
+                            $("#taxon_id").html(option);
+                            getMetadata(taxon_id);
+                        }
+                    });
+                }
+            } catch {}
+        } else {
+            /* Init metadata */
+        getMetadata(taxon_id);
+        }
     });
 </script>
 <div class="row">
@@ -224,7 +258,7 @@
                 <div class="col-md-8">
                     <select id="taxon_id" class="form-control" name="taxon_id">
                         {if $data.taxon_id > 0}
-                        <option value="{$data.taxon_id}" selected>{$data.scientific_name}</option>
+                            <option value="{$data.taxon_id}" selected>{$data.scientific_name}</option>
                         {/if}
                     </select>
                 </div>
@@ -339,13 +373,13 @@
                     </div>
                 </div>
                 <div class="form-group" id="div-tag">
-                    <label for="tag" class="control-label col-md-4"> {t}Marque lue :{/t}</label>
+                    <label for="tag" class="control-label col-md-4"> {t}Marque RFID lue :{/t}</label>
                     <div class="col-md-8">
                         <input id="tag" type="text" class="fish form-control" name="tag" value="{$data.tag}" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group" id="div-tag_posed">
-                    <label for="tag_posed" class="control-label col-md-4"> {t}Marque posée :{/t}</label>
+                    <label for="tag_posed" class="control-label col-md-4"> {t}Marque RFID posée :{/t}</label>
                     <div class="col-md-8">
                         <input id="tag_posed" type="text" class="fish form-control" name="tag_posed" value="{$data.tag_posed}" autocomplete="off">
                     </div>
@@ -362,10 +396,10 @@
                         {t}Modèle de transmetteur posé :{/t}
                     </label>
                     <div class="col-md-8">
-                        <select id="transmitter" name="transmitter_type_id" class="fish form-control">
+                        <select id="transmitter_type_id" name="transmitter_type_id" class="fish form-control">
                             <option value="" {if $data.transmitter_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                             {foreach $transmitters as $transmitter}
-                                <option id="transmitter-{$transmitter.transmitter_type_id}" value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $data.transmitter_type_id}selected{/if}>
+                                <option value="{$transmitter.transmitter_type_id}" {if $transmitter.transmitter_type_id == $data.transmitter_type_id}selected{/if}>
                                     {$transmitter.transmitter_type_name}
                                 </option>
                             {/foreach}
@@ -382,7 +416,7 @@
                 <div class="center">
                     <button id="submit3" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                     {if $data.individual_id > 0 }
-                        <button id="delete-individual" class="btn btn-danger ">{t}Supprimer{/t}</button>
+                        <button id="delete-individual" class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
                     {/if}
                 </div>
             </fieldset>

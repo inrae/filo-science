@@ -54,10 +54,16 @@ switch ($t_module["param"]) {
     case "write":
         if (verifyProject($_REQUEST["project_id"])) {
             try {
+                $id == 0 ? $isNew = true : $isNew = false;
                 $bdd->beginTransaction();
                 $id = dataWrite($individual, $_REQUEST, true);
                 if ($id > 0) {
+                    if ($isNew) {
+                        $t_module["retourok"] = "individualTrackingChange";
+                        $_REQUEST[$keyName] = 0;
+                    } else {
                     $_REQUEST[$keyName] = $id;
+                    }
                 }
                 $module_coderetour = 1;
                 $bdd->commit();
@@ -75,6 +81,7 @@ switch ($t_module["param"]) {
     case "delete":
         if (verifyProject($_REQUEST["project_id"])) {
             try {
+                $bdd->beginTransaction();
                 dataDelete($individual, $id, true);
                 $bdd->commit();
                 $module_coderetour = 1;

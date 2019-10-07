@@ -102,4 +102,18 @@ class Individual extends ObjetBDD
         }
         return $id;
     }
+
+    /**
+     * Delete a fish, with children tables
+     *
+     * @param integer $id
+     * @return void
+     */
+    function supprimer(int $id)
+    {
+        include_once 'modules/classes/tracking/individual_tracking.class.php';
+        $it = new IndividualTracking($this->connection, $this->paramori);
+        $it->supprimer($id);
+        parent::supprimer($id);
+    }
 }

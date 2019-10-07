@@ -70,4 +70,17 @@ class IndividualTracking extends ObjetBDD
         $where = " where transmitter = :transmitter";
         return $this->lireParamAsPrepared($this->sql . $where, array("transmitter" => $transmitter));
     }
+
+    /**
+     * Delete a tracking fish with children
+     *
+     * @param integer $id
+     * @return void
+     */
+    function supprimer(int $id){
+        include_once "modules/classes/tracking/detection.class.php";
+        $detection = new Detection($this->connection, $this->paramori);
+        $detection->supprimerChamp($id, "individual_id");
+        parent::supprimer($id);
+    }
 }
