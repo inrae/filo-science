@@ -141,7 +141,7 @@
                 <table class="table table-bordered table-hover datatable-nopaging">
                     <thead>
                         {foreach $data[0] as $key=>$value}
-                            <th>{$key + 1}</th>
+                            <th>{$key}</th>
                         {/foreach}
                     </thead>
                     <tbody>

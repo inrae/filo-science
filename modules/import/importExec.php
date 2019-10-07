@@ -29,6 +29,7 @@ if (isset($_FILES["filename"])) {
         include_once "modules/classes/import/import.class.php";
         include_once "modules/classes/import/function_type.class.php";
         include_once "modules/classes/import/import_function.class.php";
+        include_once "modules/classes/import/import_column.class.php";
         /**
          * Instanciate data classes 
          */
@@ -42,6 +43,8 @@ if (isset($_FILES["filename"])) {
         }
         $functionType = new FunctionType($bdd);
         $importFunction = new ImportFunction($bdd);
+        $importColumn = new ImportColumn($bdd, $ObjetBDDParam);
+        $columns = $importColumn->getListByColumnNumber($importParam["import_description_id"]);
         $functions = $importFunction->getListFromParent($importParam["import_description_id"], "execution_order, column_number");
         $import = new FiloImport();
         $numLineDisplay = 0;
@@ -69,13 +72,20 @@ if (isset($_FILES["filename"])) {
                     /**
                      * Traitment of import
                      */
+                    /**
+                     * Generate the result of the read of the line
+                     */
+                    $row = array();
+                    foreach ($columns as $key => $value) {
+                        $row[$value] = $line[$key - 1];
+                    }
 
                     /**
                      * Test mode
                      */
                     if ($_REQUEST["testMode"] == 1) {
                         if ($numLineDisplay < $_REQUEST["nbLines"]) {
-                            $dataDisplay[] = $line;
+                            $dataDisplay[] = $row;
                             $numLineDisplay ++;
                         }
                     }

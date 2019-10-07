@@ -23,4 +23,20 @@ class ImportColumn extends ObjetBDD
 
         parent::__construct($bdd, $param);
     }
+
+    /**
+     * Get the list of the columns of the table reordering by the number of the column in the 
+     * import file
+     *
+     * @param integer $importDescriptionId
+     * @return array
+     */
+    function getListByColumnNumber(int $importDescriptionId):array {
+        $data = array();
+        $dataRaw = $this->getListFromParent($importDescriptionId);
+        foreach ($dataRaw as $value) {
+            $data[$value["column_order"]] = $value["table_column_name"];
+        }
+        return $data;
+    }
 }

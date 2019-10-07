@@ -16,7 +16,6 @@ switch ($t_module["param"]) {
         $vue->set(explode(",", $dDesc["column_list"]),"columns");
         break;
     case "write":
-    printr($_REQUEST);
         $id = dataWrite($dataClass, $_REQUEST);
         if ($id > 0) {
             $_REQUEST[$keyName] = $id;
