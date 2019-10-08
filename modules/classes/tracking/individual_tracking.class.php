@@ -77,10 +77,23 @@ class IndividualTracking extends ObjetBDD
      * @param integer $id
      * @return void
      */
-    function supprimer(int $id){
+    function supprimer(int $id)
+    {
         include_once "modules/classes/tracking/detection.class.php";
         $detection = new Detection($this->connection, $this->paramori);
         $detection->supprimerChamp($id, "individual_id");
         parent::supprimer($id);
+    }
+
+    /**
+     * Get the detail of a fish
+     *
+     * @param integer $id
+     * @return array
+     */
+    function getDetail(int $id)
+    {
+        $where = " where individual_id = :individual_id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("individual_id" => $id));
     }
 }

@@ -111,19 +111,20 @@ class StationTracking extends ObjetBDD
     {
         switch ($import_type_id) {
             case 1:
-                $sql = "select probe_id as sensor_id, station_name, station_code, probe_code as sensor_code
-                    from station_tracking
-                    join probe using (station_id)
-                    join station using (station_id)
-                    where project_id = :project_id";
-                break;
-            case 2:
                 $sql = "select antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code
                     from station_tracking
                     join antenna using (station_id)
                     join station using (station_id)
                     where project_id = :project_id";
                 break;
+            case 2:
+                $sql = "select probe_id as sensor_id, station_name, station_code, probe_code as sensor_code
+                    from station_tracking
+                    join probe using (station_id)
+                    join station using (station_id)
+                    where project_id = :project_id";
+                break;
+
             default:
                 return (array());
         }

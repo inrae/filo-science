@@ -27,7 +27,7 @@ switch ($t_module["param"]) {
             if ($dindividual["project_id"] == $project_id) {
                 include_once "modules/classes/tracking/detection.class.php";
                 $detection = new Detection($bdd, $ObjetBDDParam);
-                $vue->set($detection->getListFromIndividual($_REQUEST["individual_id"], $LANG["date"]["formatdate"] . " HH24:MI:SS.MS"), "detections");
+                $vue->set($detection->getListFromIndividual($_REQUEST["individual_id"]), "detections");
                 $vue->set($_REQUEST["individual_id"], "selectedIndividual");
             }
         }

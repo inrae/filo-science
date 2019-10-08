@@ -78,4 +78,16 @@ class Antenna extends ObjetBDD
         strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
         return $this->getListeParamAsPrepared($this->sql . $where . $orderby, array("parentId" => $parentId));
     }
+
+    /**
+     * Get the list of antennas attached to a project
+     *
+     * @param integer $projectId
+     * @return array
+     */
+    function getListFromProject(int $projectId) {
+        $where = " where project_id = :project_id";
+        $order = " order by station_name, antenna_code";
+        return $this->getListeParamAsPrepared($this->sql.$where.$order, array("project_id"=>$projectId));
+    }
 }

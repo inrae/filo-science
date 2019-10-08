@@ -36,7 +36,7 @@ class Detection extends ObjetBDD
      * @param string $formatDate
      * @return array
      */
-    function getListFromIndividual(int $id, $formatDate = 'DD/MM/YYYY HH24:MI:SS.MS')
+    function getListFromIndividual(int $id, $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS')
     {
         $this->auto_date = 0;
         $sql = "select detection_id, individual_id, antenna_id, location_id, to_char(detection_date, '$formatDate') as detection_date, nb_events, duration, validity, signal_force, observation

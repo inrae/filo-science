@@ -16,7 +16,7 @@ if ($id > 0) {
 } else {
     $individual_id = $_REQUEST["individual_id"];
 }
-$dindividual = $individualTracking->lire($individual_id);
+$dindividual = $individualTracking->getDetail($individual_id);
 if (!verifyProject($dindividual["project_id"])) {
     $module_coderetour = -1;
 }
@@ -29,6 +29,16 @@ if ($module_coderetour != -1) {
             }
             $vue->set($data, "data");
             $vue->set("tracking/detectionChange.tpl", "corps");
+            $vue->set($dindividual, "individual");
+            /**
+             * Get the list of antennas and locations
+             */
+            include_once "modules/classes/tracking/antenna.class.php";
+            $antenna = new Antenna($bdd, $ObjetBDDParam);
+            $vue->set($antenna->getListFromProject($dindividual["project_id"]), "antennas");
+            include_once "modules/classes/tracking/location.class.php";
+            $location = new Location($bdd, $ObjetBDDParam);
+            $vue->set($location->getListFromProject($dindividual["project_id"]), "locations");
             break;
         case "write":
             /**

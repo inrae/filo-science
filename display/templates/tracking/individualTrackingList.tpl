@@ -80,17 +80,22 @@
                     <th>{t}Émetteur acoustique ou radio{/t}</th>
                     <th>{t}Modèle d'émetteur{/t}</th>
                     <th>{t}Détections{/t}</th>
-                    {if $droits.gestion == 1}
-                    <th class="center">
-                        <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
-                    </th>
-                    {/if}
                 </tr>
             </thead>
             <tbody>
                 {foreach $individuals as $individual}
                 <tr>
-                    <td {if $individual.individual_id == $selectedIndividual}class="itemSelected"{/if}>{$individual.individual_id}</td>
+                    
+                    <td class="center {if $individual.individual_id == $selectedIndividual}itemSelected{/if}">
+                        {if $droits.gestion == 1}
+                            <a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}"
+                                title="{t}Modifier{/t}">
+                                {$individual.individual_id}
+                            </a>
+                        {else}
+                            {$individual.individual_id}
+                        {/if}
+                    </td>
                     <td>{$individual.scientific_name}</td>
                     <td>{$individual.tag}</td>
                     <td>{$individual.transmitter}</td>
@@ -100,14 +105,6 @@
                                     <img src="display/images/result.png" height="25">
                                 </a>
                     </td>
-                    {if $droits.gestion == 1}
-                    <td class="center">
-                        <a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}"
-                            title="{t}Modifier{/t}">
-                            <img src="display/images/edit.gif" height="25">
-                        </a>
-                    </td>
-                    {/if}
                 </tr>
                 {/foreach}
             </tbody>
@@ -116,7 +113,7 @@
     {if count($detections) > 0}
         <fieldset class="col-md-12 col-lg-6">
             <legend>{t}Liste des détections{/t}</legend>
-            <table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 0,"asc"]]'>
+            <table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"]]'>
                 <thead>
                     <tr>
                         <th>{t}Id{/t}</th>
@@ -131,7 +128,15 @@
                 <tbody>
                     {foreach $detections as $detection}
                         <tr>
-                            <td class="center">{$detection.detection_id}</td>
+                            <td class="center">
+                                {if $droits.gestion == 1}
+                                <a href="index.php?module=detectionChange&detection_id={$detection.detection_id}&individual_id={$detection.detection_id}">
+                                        {$detection.detection_id}
+                                </a>
+                                {else}
+                                    {$detection.detection_id}
+                                {/if}
+                            </td>
                             <td>{$detection.detection_date}</td>
                             <td class="center">{$detection.nb_events}</td>
                             <td class="center">{$detection.duration}</td>

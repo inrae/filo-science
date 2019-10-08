@@ -315,7 +315,9 @@
 	<technology_typeChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="technology_type" type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<technology_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />
 	<technology_typeDelete action="modules/param/param.php" param="delete" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />
-
+	<detectionChange action="modules/tracking/detection.php" param="change" droits="gestion" retourko="individualTrackingList" type="smarty"/>
+	<detectionWrite action="modules/tracking/detection.php" param="write" droits="gestion" retourko="detectionChange" retourok="individualTrackingList" modulebefore="detectionChange" maxCountByHour="120" maxCountByDay="1200" />
+	<detectionDelete action="modules/tracking/detection.php" param="delete" droits="gestion" retourko="detectionChange" retourok="individualTrackingList" modulebefore="detectionChange" maxCountByHour="60" maxCountByDay="600"/>
 	<!-- Imports-->
 	<importDescriptionList action="modules/import/importDescription.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
 	<importDescriptionChange action="modules/import/importDescription.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
