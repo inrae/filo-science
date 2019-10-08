@@ -33,13 +33,17 @@ if (isset($_FILES["filename"])) {
         /**
          * Instanciate data classes 
          */
-        switch($importParam["import_type_id"]) {
+        switch ($importParam["import_type_id"]) {
             case 1:
-            include_once "modules/classes/tracking/individual_tracking.class.php";
-            $individualTracking = new IndividualTracking($bdd, $ObjetBDDParam);
-            break;
+            case 3:
+                include_once "modules/classes/tracking/individual_tracking.class.php";
+                $individualTracking = new IndividualTracking($bdd, $ObjetBDDParam);
+                include_once "modules/classes/tracking/detection.class.php";
+                $importDataClass = new Detection($bdd, $ObjetBDDParam);
+                $importDataClass->auto_date = 0;
+                break;
             case 2:
-            break;
+                break;
         }
         $functionType = new FunctionType($bdd);
         $importFunction = new ImportFunction($bdd);
@@ -49,6 +53,8 @@ if (isset($_FILES["filename"])) {
         $import = new FiloImport();
         $numLineDisplay = 0;
         $dataDisplay = array();
+        $idMin = 999999999;
+        $idMax = 0;
         try {
             $import->initFile($fdata["tmp_name"], $importParam["separator"]);
             $numLine = 0;
@@ -56,6 +62,9 @@ if (isset($_FILES["filename"])) {
             /**
              * Treatment of each line
              */
+            if (!$_REQUEST["testMode"] == 1) {
+                $bdd->beginTransaction();
+            }
             while (($line = $import->readLine()) !== false) {
                 $numLine++;
                 /**
@@ -70,9 +79,6 @@ if (isset($_FILES["filename"])) {
                         }
                     }
                     /**
-                     * Traitment of import
-                     */
-                    /**
                      * Generate the result of the read of the line
                      */
                     $row = array();
@@ -86,15 +92,39 @@ if (isset($_FILES["filename"])) {
                     if ($_REQUEST["testMode"] == 1) {
                         if ($numLineDisplay < $_REQUEST["nbLines"]) {
                             $dataDisplay[] = $row;
-                            $numLineDisplay ++;
+                            $numLineDisplay++;
                         }
+                    } else {
+                        /**
+                         * Import mode
+                         */
+                        $row["antenna_id"] = $_POST["sensor_id"];
+                        $row["probe_id"] = $_POST["sensor_id"];
+                        $idGenerate = $importDataClass->ecrire($row);
+                        if ($idGenerate < $idMin) {
+                            $idMin = $idGenerate;
+                        }
+                        $idMax = $idGenerate;
                     }
                 } catch (FunctionTypeException $fte) {
                     $errors[] = array("lineNumber" => $numLine, "content" => $fte->getMessage());
                 }
             }
+            if (!$_REQUEST["testMode"] == 1) {
+                $bdd->commit();
+                $errors[] = array("content"=>_("Id mini généré :").$idMin);
+                $errors[] = array("content"=>_("Id maxi généré :").$idMax);
+
+            }
         } catch (ImportException $ie) {
             $errors[]["content"] = $ie->getMessage();
+        } catch (ObjetBDDException $oe) { 
+            if (!$_REQUEST["testMode"] == 1) {
+                $errors[] = array("lineNumber"=>$numLine, "content" => _("Erreur d'écriture en table"));
+                $message->set(_("L'importation a échoué. Consultez les messages dans le tableau"), true);
+                $message->setSyslog($oe->getMessage());
+                $bdd->rollback();
+            }
         } finally {
             $import->fileClose();
         }
