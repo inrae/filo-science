@@ -229,7 +229,8 @@ class FunctionType extends ObjetBDD
     {
         $value = $columns[$args["columnNumber"]];
         if (is_numeric($value) && strlen($value) > 0) {
-            return (dechex($value));
+            $format = "%0".$args["arg"]."s";
+            return strtoupper(sprintf($format,dechex($value)));
         } else {
             return $value;
         }
