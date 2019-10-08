@@ -13,6 +13,7 @@ switch ($t_module["param"]) {
         isset($_COOKIE["projectId"]) ? $project_id = $_COOKIE["projectId"] : $project_id = 0;
         isset($_COOKIE["projectActive"]) ? $is_active = $_COOKIE["projectActive"] : $is_active = 1;
         $vue->set($projects = $project->getProjectsActive($is_active, $_SESSION["projects"]), "projects");
+        $vue->set($is_active, "is_active");
         if ($project_id > 0 && !verifyProject($project_id)) {
             $project_id = $projects[0]["project_id"];
         }
@@ -21,6 +22,15 @@ switch ($t_module["param"]) {
         }
         $vue->set($dataClass->getListFromProject($project_id), "individuals");
         $vue->set("tracking/individualTrackingList.tpl", "corps");
+        if ($_REQUEST["individual_id"] > 0) {
+            $dindividual = $dataClass->lire($_REQUEST["individual_id"]);
+            if ($dindividual["project_id"] == $project_id) {
+                include_once "modules/classes/tracking/detection.class.php";
+                $detection = new Detection($bdd, $ObjetBDDParam);
+                $vue->set($detection->getListFromIndividual($_REQUEST["individual_id"], $LANG["date"]["formatdate"] . " HH24:MI:SS.MS"), "detections");
+                $vue->set($_REQUEST["individual_id"], "selectedIndividual");
+            }
+        }
         break;
     case "change":
         if ($_REQUEST["individual_id"] == 0) {
@@ -45,7 +55,7 @@ switch ($t_module["param"]) {
              */
             include_once 'modules/classes/project.class.php';
             $project = new Project($bdd, $ObjetBDDParam);
-            $vue->set ($project->getDetail($_REQUEST["project_id"]), "project");
+            $vue->set($project->getDetail($_REQUEST["project_id"]), "project");
         } else {
             $module_coderetour = -1;
             $message->set(_("Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"), true);
@@ -62,7 +72,7 @@ switch ($t_module["param"]) {
                         $t_module["retourok"] = "individualTrackingChange";
                         $_REQUEST[$keyName] = 0;
                     } else {
-                    $_REQUEST[$keyName] = $id;
+                        $_REQUEST[$keyName] = $id;
                     }
                 }
                 $module_coderetour = 1;
