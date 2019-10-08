@@ -132,10 +132,14 @@ class FunctionType extends ObjetBDD
      */
     private function transformJulianToDate(array $columns, array $args)
     {
-        $myDate = date_create_from_format("Y-m-d", $args["arg"]);
-        $nbdays = $columns[$args["columnNumber"]];
-        $myDate->add(new DateInterval("P" + $nbdays + "D"));
-        return $myDate->format("Y-m-d");
+        try {
+            $myDate = date_create_from_format("Y-m-d", $args["arg"]);
+            $nbdays = $columns[$args["columnNumber"]] - 1;
+            $myDate->add(new DateInterval("P" . $nbdays . "D"));
+            return $myDate->format("Y-m-d");
+        } catch (Exception $e) {
+            throw new FunctionTypeException(sprintf(_("La colonne %s n'est pas numérique"), $args["columnNumber"]));
+        }
     }
 
     /**
@@ -229,9 +233,33 @@ class FunctionType extends ObjetBDD
     {
         $value = $columns[$args["columnNumber"]];
         if (is_numeric($value) && strlen($value) > 0) {
-            $format = "%0".$args["arg"]."s";
-            return strtoupper(sprintf($format,dechex($value)));
+            $format = "%0" . $args["arg"] . "s";
+            return strtoupper(sprintf($format, dechex($value)));
         } else {
+            return $value;
+        }
+    }
+
+    /**
+     * Concatenate columns or string
+     * First value is the content of the columnNumber
+     * arg is in json format: [{"type":"column","val":4},{type:"string","val":":"}]
+     *
+     * @param array $columns
+     * @param array $args
+     * @return void
+     */
+    private function concatenate(array $columns, array $args)
+    {
+        $value = $columns[$args["columnNumber"]];
+        $fields = json_decode($args["arg"], true);
+        if ($fields == NULL) {
+            throw new FunctionTypeException(_("la fonction concatenate n'a pas pu interpréter l'argument au format JSON"));
+        } else {
+            foreach ($fields as $field) {
+                $field["type"] == "col" ? $content = $columns[$field["val"]] : $content = $field["val"];
+                $value .= $content;
+            }
             return $value;
         }
     }
