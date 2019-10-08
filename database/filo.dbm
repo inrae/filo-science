@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,140" last-zoom="1" max-obj-count="100"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,155" last-zoom="1" max-obj-count="100"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3923,7 +3923,8 @@ group by individual_id]]></expression>
 7•verifyTypeNumber•Vérifie si une valeur est numérique ou non⸣
 8•testColumnsNumber•Vérifie que le nombre de colonnes de la ligne courante correspond bien au nombre attendu⸣
 9•getIndividualFromTag•Récupère l'identifiant du poisson à partir du tag (RFID)⸣
-10•getIndividualFromTransmitter•Récupère l'identifiant du poisson à partir du transmetteur (radio ou acoustique)]]>
+10•getIndividualFromTransmitter•Récupère l'identifiant du poisson à partir du transmetteur (radio ou acoustique)⸣
+11•numericToHexa•Transforme une valeur numérique en valeur Hexa, si celle-ci ne l'est pas. La valeur Hexa doit comprendre au moins une lettre. L'argument doit préciser le nombre de caractères attendus (multiple de 2) pour formater la chaine dans une zone de zéros]]>
 	</initial-data>
 </table>
 
@@ -4235,6 +4236,150 @@ group by individual_id]]></expression>
 	 src-table="tracking.antenna"
 	 dst-table="tracking.antenna_event"
 	 src-required="true" dst-required="false"/>
+
+<index name="individual_tag_idx" table="filo.individual"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="tag"/>
+		</idxelement>
+</index>
+
+<index name="individual_transmitter_idx" table="filo.individual"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="transmitter"/>
+		</idxelement>
+</index>
+
+<index name="individual_tracking_project_id_idx" table="tracking.individual_tracking"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="project_id"/>
+		</idxelement>
+</index>
+
+<index name="probe_measure_probe_id_idx" table="tracking.probe_measure"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="probe_id"/>
+		</idxelement>
+</index>
+
+<index name="probe_measure_probe_measure_date_idx" table="tracking.probe_measure"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="probe_measure_date"/>
+		</idxelement>
+</index>
+
+<index name="detection_individual_id_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="individual_id"/>
+		</idxelement>
+</index>
+
+<index name="detection_detection_date_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="detection_date"/>
+		</idxelement>
+</index>
+
+<index name="detection_antenna_id_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="antenna_id"/>
+		</idxelement>
+</index>
+
+<index name="detection_location_id_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="location_id"/>
+		</idxelement>
+</index>
+
+<index name="individual_sample_id_idx" table="filo.individual"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="sample_id"/>
+		</idxelement>
+</index>
+
+<index name="operation_campaign_id_idx" table="filo.operation"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="campaign_id"/>
+		</idxelement>
+</index>
+
+<index name="operation_station_id_idx" table="filo.operation"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="station_id"/>
+		</idxelement>
+</index>
+
+<index name="station_project_id_idx" table="filo.station"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="project_id"/>
+		</idxelement>
+</index>
+
+<index name="station_river_id_idx" table="filo.station"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="river_id"/>
+		</idxelement>
+</index>
+
+<index name="sample_sequence_id_idx" table="filo.sample"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="sequence_id"/>
+		</idxelement>
+</index>
+
+<index name="sample_taxon_name_idx" table="filo.sample"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="taxon_name"/>
+		</idxelement>
+</index>
+
+<index name="sequence_operation_id_idx" table="filo.sequence"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="operation_id"/>
+		</idxelement>
+</index>
+
+<index name="operation_date_start_idx" table="filo.operation"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="date_start"/>
+		</idxelement>
+</index>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
