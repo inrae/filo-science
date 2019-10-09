@@ -16,7 +16,6 @@ class ProbeMesure extends ObjetBDD
         $this->colonnes = array(
             "probe_measure_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
             "probe_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
-            "probe_parameter_id" => array("type" => 1, "requis" => 1),
             "probe_measure_date" => array("type" => 3, "requis" => 1),
             "probe_measure_value" => array("type" => 1, "requis" => 1)
         );
@@ -37,7 +36,7 @@ class ProbeMesure extends ObjetBDD
          * Get the list of parameters
          */
         $sql = "select distinct parameter from probe_measure
-                join probe_parameter using (probe_parameter_id)
+                join parameter_measure_type using (parameter_measure_type_id)
                 where probe_measure.probe_id = :id order by 1";
         $params = $this->getListeParamAsPrepared($sql, array("id" => $probe_id));
         /**
@@ -45,8 +44,8 @@ class ProbeMesure extends ObjetBDD
          */
         $sql = "select * from crosstab 
                 (
-                    'select probe_measure_date, parameter, probe_measure_value from probe_measure join probe_parameter using (probe_parameter_id) where probe_measure.probe_id = $probe_id order by 1',
-                    'select distinct parameter from probe_measure join probe_parameter using (probe_parameter_id) where probe_measure.probe_id = $probe_id order by 1'
+                    'select probe_measure_date, parameter, probe_measure_value from probe_measure join parameter_measure_type using (parameter_measure_type_id) where probe_measure.probe_id = $probe_id order by 1',
+                    'select distinct parameter from probe_measure join parameter_measure_type using (parameter_measure_type_id) where probe_measure.probe_id = $probe_id order by 1'
                 ) AS (probe_measure_date timestamp, parameter text
                     ";
         foreach ($params as $param) {

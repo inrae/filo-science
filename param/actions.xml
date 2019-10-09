@@ -302,10 +302,8 @@
 	<antennaWrite action="modules/tracking/antenna.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="antennaChange" retourko="antennaChange" retourok="stationTrackingDisplay"/>
 	<antennaDelete action="modules/tracking/antenna.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="antennaChange" retourko="antennaChange" retourok="stationTrackingDisplay"/>
 	<probeChange action="modules/tracking/probe.php" param="change" droits="gestion" maxCountByHour="60" maxCountByDay="600" retourko="probeChange" retourok="probeChange" type="smarty"/>
-	<probeWrite action="modules/tracking/probe.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange,probeWrite" retourko="probeChange" retourok="probeChange"/>
-	<probeDelete action="modules/tracking/probe.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange,probeWrite" retourko="probeChange" retourok="probeChange"/>
-	<probeParameterWrite action="modules/tracking/probeParameter.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange,probeWrite" retourko="probeChange" retourok="probeChange"/>
-	<probeParameterDelete action="modules/tracking/probeParameter.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange,probeWrite" retourko="probeChange" retourok="probeChange"/>
+	<probeWrite action="modules/tracking/probe.php" param="write" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange" retourko="probeChange" retourok="stationTrackingDisplay"/>
+	<probeDelete action="modules/tracking/probe.php" param="delete" droits="gestion" maxCountByHour="60" maxCountByDay="600" modulebefore="probeChange" retourko="probeChange" retourok="stationTrackingDisplay"/>
 	<individualTrackingList action="modules/tracking/individualTracking.php" param="list" droits="consult" maxCountByHour="100" maxCountByDay="600" retourlogin="1" type="smarty"/>
 	<individualTrackingChange action="modules/tracking/individualTracking.php" param="change" droits="gestion" maxCountByHour="100" maxCountByDay="600" type="smarty" retourko="individualTrackingList"/>
 	<individualTrackingDisplay action="modules/tracking/individualTracking.php" param="display" droits="gestion" maxCountByHour="100" maxCountByDay="600" type="smarty"/>
@@ -318,6 +316,11 @@
 	<detectionChange action="modules/tracking/detection.php" param="change" droits="gestion" retourko="individualTrackingList" type="smarty"/>
 	<detectionWrite action="modules/tracking/detection.php" param="write" droits="gestion" retourko="detectionChange" retourok="individualTrackingList" modulebefore="detectionChange" maxCountByHour="120" maxCountByDay="1200" />
 	<detectionDelete action="modules/tracking/detection.php" param="delete" droits="gestion" retourko="detectionChange" retourok="individualTrackingList" modulebefore="detectionChange" maxCountByHour="60" maxCountByDay="600"/>
+	<parameterMeasureTypeList action="modules/tracking/parameter_measure_type.php" param="list" droits="consult"  type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeChange action="modules/tracking/parameter_measure_type.php" param="change" droits="gestion"  type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeWrite action="modules/tracking/parameter_measure_type.php" param="write" droits="gestion"  retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeDelete action="modules/tracking/parameter_measure_type.php" param="delete" droits="gestion"  retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
+
 	<!-- Imports-->
 	<importDescriptionList action="modules/import/importDescription.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
 	<importDescriptionChange action="modules/import/importDescription.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>

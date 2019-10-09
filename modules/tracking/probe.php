@@ -14,15 +14,6 @@ if (!$stationTracking->verifyProject($_REQUEST["station_id"])) {
         case "change":
             $data = dataRead($dataClass, $id, "tracking/probeChange.tpl", $_REQUEST["station_id"]);
             $vue->set($stationTracking->lire($_REQUEST["station_id"]), "station");
-            require_once "modules/classes/tracking/probe_parameter.class.php";
-            $pp = new ProbeParameter($bdd, $ObjetBDDParam);
-            $vue->set($pp->getListFromParent($id), "parameters");
-            if (isset($_REQUEST["probe_parameter_id"])) {
-                /**
-                 * Create the form for the specified parameter
-                 */
-                $vue->set($pp->lire($_REQUEST["probe_parameter_id"],true, $id), "probe_parameter");
-            }
             break;
         case "write":
             /**
