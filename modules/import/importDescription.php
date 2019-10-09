@@ -43,4 +43,23 @@ switch ($t_module["param"]) {
             $bdd->rollback();
         }
         break;
+    case "duplicate":
+        try {
+            $bdd->beginTransaction();
+            $newId = $dataClass->duplicate($id);
+            if ($newId > 0) {
+                $_REQUEST[$keyName] = $newId;
+                $module_coderetour = 1;
+                $bdd->commit();
+                $message->set(_("Duplication effectuée"));
+            } else {
+                $bdd->rollback();
+                $module_coderetour = -1;
+            }
+        } catch (Exception $e) {
+            $message->set(_("La duplication a échoué. Si le problème se reproduit, contactez l'administrateur de l'application"), true);
+            $message->setSyslog($e->getMessage());
+            $bdd->rollback();
+            $module_coderetour = -1;
+        }
 }

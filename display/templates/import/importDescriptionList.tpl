@@ -16,9 +16,8 @@
                     <th>{t}Format du fichier CSV{/t}</th>
                     <th>{t}Séparateur{/t}</th>
                     {if $droits.param == 1}
-                        <th class="center">
-                            <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
-                        </th>
+                        <th>{t}Modifier{/t}</th>
+                        <th>{t}Dupliquer{/t}</th>
                     {/if}
                 </tr>
             </thead>
@@ -27,7 +26,7 @@
                     <tr>
                         <td class="center">{$import.import_description_id}</td>
                         <td>
-                            <a href="index.php?module=importDescriptionDisplay&import_description_id={$import.import_description_id}">
+                            <a href="index.php?module=importDescriptionDisplay&import_description_id={$import.import_description_id}" title="{t}Afficher le détail{/t}">
                                 {$import.import_description_name}
                             </a>
                         </td>
@@ -38,6 +37,11 @@
                             <td class="center">
                                 <a href="index.php?module=importDescriptionChange&import_description_id={$import.import_description_id}">
                                     <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
+                                </a>
+                            </td>
+                            <td class="center">
+                                <a href="index.php?module=importDescriptionDuplicate&import_description_id={$import.import_description_id}">
+                                        <img src="display/images/copy.png" height="25" title="{t}Dupliquer{/t}">
                                 </a>
                             </td>
                         {/if}

@@ -59,12 +59,49 @@ class ImportDescription extends ObjetBDD
      */
     public function supprimer(int $id)
     {
-        include_once "modules/classes/import_function.class.php";
+        include_once "modules/classes/import/import_function.class.php";
         $function = new ImportFunction($this->connection);
         $function->supprimerChamp($id, "import_description_id");
-        include_once "modules/classes/import_column.class.php";
+        include_once "modules/classes/import/import_column.class.php";
         $column = new ImportColumn($this->connection);
         $column->supprimerChamp($id, "import_description_id");
         return parent::supprimer($id);
+    }
+    /**
+     * Duplicate an import_description and his children
+     *
+     * @param integer $id
+     * @return int|void
+     */
+    public function duplicate(int $id)
+    {
+        $data = $this->lire($id);
+        if ($data["import_description_id"] > 0) {
+            $data["import_description_id"] = 0;
+            $data["import_description_name"] .= " - copy";
+            $newId = $this->ecrire($data);
+            if ($newId > 0) {
+                /**
+                 * Prepare the children records
+                 */
+                include_once "modules/classes/import/import_function.class.php";
+                include_once "modules/classes/import/import_column.class.php";
+                $importFunction = new ImportFunction($this->connection);
+                $list = $importFunction->getListFromParent($id);
+                foreach ($list as $row) {
+                    $row["import_function_id"] = 0;
+                    $row["import_description_id"] = $newId;
+                    $importFunction->ecrire($row);
+                }
+                $importColumn = new ImportColumn($this->connection);
+                $list = $importColumn->getListFromParent($id);
+                foreach ($list as $row) {
+                    $row["import_column_id"] = 0;
+                    $row["import_description_id"] = $newId;
+                    $importColumn->ecrire($row);
+                }
+                return $newId;
+            }
+        }
     }
 }
