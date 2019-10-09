@@ -9,8 +9,7 @@ class ImportType extends ObjetBDD {
             "import_type_id"=>array("type"=>1, "requis"=>1, "key"=>1, "defaultValue"=>0),
             "import_type_name"=>array("type"=>0, "requis"=>1),
             "tablename"=>array("type"=>0, "requis"=>1),
-            "column_list"=>array("type"=>0, "requis"=>1),
-            "is_table_er" => array("type" => 1, "requis" => 1, "defaultValue" => 0)
+            "column_list"=>array("type"=>0, "requis"=>1)
         );
         parent::__construct($bdd, $param);
     }

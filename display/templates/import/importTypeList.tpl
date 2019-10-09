@@ -13,7 +13,6 @@
                     <th>{t}Id{/t}</th>
                     <th>{t}Nom{/t}</th>
                     <th>{t}Nom de la table dans la base de données{/t}</th>
-                    <th>{t}Table de type entité-relation ?{/t}</th>
                     <th>{t}Liste des colonnes à renseigner{/t}</th>
                     {if $droits.param == 1}
                     <th class="center">
@@ -28,7 +27,6 @@
                     <td class="center">{$import.import_type_id}</td>
                     <td>{$import.import_type_name}</td>
                     <td>{$import.tablename}</td>
-                    <td class="center">{if $import.is_table_er == 1}oui{/if}</td>
                     <td>{$import.column_list}</td>
                     {if $droits.param == 1}
                     <td class="center">

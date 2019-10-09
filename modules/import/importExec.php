@@ -43,6 +43,9 @@ if (isset($_FILES["filename"])) {
                 $importDataClass->auto_date = 0;
                 break;
             case 2:
+                include_once "modules/classes/tracking/probe_measure.class.php";
+                $importDataClass = new ProbeMeasure($bdd, $ObjetBDDParam);
+                $importDataClass->auto_date = 0;
                 break;
         }
         $functionType = new FunctionType($bdd);

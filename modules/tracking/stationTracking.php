@@ -40,7 +40,7 @@ switch ($t_module["param"]) {
              * Get the last measures for the probe
              */
             include_once "modules/classes/tracking/probe_measure.class.php";
-            $pm = new ProbeMesure($bdd, $ObjetBDDParam);
+            $pm = new ProbeMeasure($bdd, $ObjetBDDParam);
             
             if (!isset ($_REQUEST["limit"])) {
                 $_REQUEST["limit"] = 30;

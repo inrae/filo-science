@@ -263,4 +263,26 @@ class FunctionType extends ObjetBDD
             return $value;
         }
     }
+    /**
+     * search a value corresponding to the data
+     * arg contains a json array as {"valueSearched":correspondingValue, "2ndvalue":corresp2}
+     *
+     * @param array $columns
+     * @param array $args
+     * @return void
+     */
+    private function matchingCode(array $columns, array $args)
+    {
+        $value = "";
+        $fields = json_decode($args["arg"], true);
+        if ($fields == NULL) {
+            throw new FunctionTypeException(_("la fonction matchingCode n'a pas pu interpréter l'argument au format JSON"));
+        } else {
+            $value = $fields[$columns[$args["columnNumber"]]];
+        }
+        if ($value == "") {
+            throw new FunctionTypeException(sprintf(_("Aucune correspondance n'a pu être trouvée pour le paramètre %s"), $columns[$args["columnNumber"]]));
+        }
+        return $value;
+    }
 }

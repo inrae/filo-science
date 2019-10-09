@@ -28,21 +28,6 @@
                 </div>
             </div>
             <div class="form-group">
-                    <label for="isErCheck" class="control-label col-md-4">
-                        {t}La table est-elle de type Entité-Relation (exemple : probe_measure) ?{/t}
-                    </label>
-                    <div class="col-md-8">
-                        <div class="btn-group btn-toggle" data-toggle="buttons">
-                            <label class="radio-inline">
-                                <input type="radio" id="isEr1" name="is_table_er" value="1"  {if $data.is_er ==1}checked{/if}>oui
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" id="isEr0" name="is_table_er" value="0"  {if $data.is_er ==0}checked{/if}>non
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            <div class="form-group">
                     <label for="column_list" class="control-label col-md-4">
                         <span class="red">*</span> {t}Liste des colonnes cibles, séparées par une virgule :{/t}
                     </label>

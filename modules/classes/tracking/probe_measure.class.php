@@ -1,8 +1,9 @@
 <?php
+
 /**
  * ORM of the table probe_measure
  */
-class ProbeMesure extends ObjetBDD
+class ProbeMeasure extends ObjetBDD
 {
     /**
      * Constructor
@@ -16,6 +17,7 @@ class ProbeMesure extends ObjetBDD
         $this->colonnes = array(
             "probe_measure_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
             "probe_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
+            "parameter_measure_type_id" => array("type" => 1, "requis" => 1),
             "probe_measure_date" => array("type" => 3, "requis" => 1),
             "probe_measure_value" => array("type" => 1, "requis" => 1)
         );
@@ -39,25 +41,29 @@ class ProbeMesure extends ObjetBDD
                 join parameter_measure_type using (parameter_measure_type_id)
                 where probe_measure.probe_id = :id order by 1";
         $params = $this->getListeParamAsPrepared($sql, array("id" => $probe_id));
-        /**
-         * Extract the data
-         */
-        $sql = "select * from crosstab 
+        if (count($params) > 0) {
+            /**
+             * Extract the data
+             */
+            $sql = "select * from crosstab 
                 (
                     'select probe_measure_date, parameter, probe_measure_value from probe_measure join parameter_measure_type using (parameter_measure_type_id) where probe_measure.probe_id = $probe_id order by 1',
                     'select distinct parameter from probe_measure join parameter_measure_type using (parameter_measure_type_id) where probe_measure.probe_id = $probe_id order by 1'
-                ) AS (probe_measure_date timestamp, parameter text
+                ) AS (date timestamp
                     ";
-        foreach ($params as $param) {
-            $sql .= "," . $param["parameter"] . " text";
+            foreach ($params as $param) {
+                $sql .= ',"' . $param["parameter"] . '" double precision';
+            }
+            $sql .= " ) order by date desc";
+            if ($limit > 0) {
+                $sql .= " limit $limit ";
+            }
+            if ($offset > 0) {
+                $sql .= " offset $offset";
+            }
+            return $this->getListeParam($sql);
+        } else {
+            return array();
         }
-        $sql .= " ) order by probe_measure_date desc";
-        if ($limit > 0) {
-            $sql .= " limit $limit ";
-        }
-        if ($offset > 0) {
-            $sql .= " offset $offset";
-        }
-        return $this->getListeParam($sql);
     }
 }
