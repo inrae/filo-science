@@ -1,15 +1,15 @@
 <script>
     $(document).ready(function () {
-        
-        $("#project_id").change(function () {
-            Cookies.set("projectId", $(this).val(), { expires: 180, secure: true });
-            $("#stationTrackingSearch").submit();
-        });
-        $("#import_description_id").change(function () { 
-            var import_description_id = $(this).val();
+        var cookieContent;
+        var projectId = "{$projects[0].project_id}";
+        var importDescriptionId = "{$imports[0].import_description_id}";
+        var sensorId;
+
+        $("#import_description_id, #project_id").change(function () { 
+            var import_description_id = $("#import_description_id").val();
             var project_id = $("#project_id").val();
             if (import_description_id > 0 && project_id > 0) {
-                setStations(import_description_id, project_id);
+                setStations(import_description_id, project_id, sensorId);
             }
         });
         $("#testMode:checkbox").change(function () { 
@@ -21,7 +21,7 @@
             }
         });
 
-        function setStations(import_description_id, project_id) {
+        function setStations(import_description_id, project_id, sensor_id = 0) {
             $.ajax({
                 url: "index.php",
                 data: { 
@@ -34,28 +34,61 @@
                 var val = JSON.parse(value);
                 var options = "";
                 val.forEach(function (element) { 
-                    options += '<option value="'+ element.sensor_id + '" >' + element.station_name + ' '+element.station_code + ':'+element.sensor_code+'</option>';
+                    options += '<option value="'+ element.sensor_id + '"';
+                    if (sensor_id == element.sensor_id) {
+                        options += ' selected ';
+                    }
+                    options += ' >' + element.station_name + ' '+element.station_code + ':'+element.sensor_code+'</option>';
                 });
                 $("#sensor_id").html(options);
+                $("#sensor_id option[value"+sensorId+"]").prop("selected", "selected");
             });
         }
 
-        var projectId = "{$projects[0].project_id}";
+        $("#importForm").submit( function (event) { 
+            //event.preventDefault();
+            /**
+             * set the cookie
+             */
+            cookieContent = { 
+                "import_description_id": $("#import_description_id").val(),
+                "project_id": $("#project_id").val(),
+                "sensor_id": $("#sensor_id").val()
+            };
+            if ($("#testMode").is(":checked")) {
+                cookieContent.testMode = "1";
+            } else {
+                cookieContent.testMode = "0";
+            }
+            Cookies.set ("importExec", JSON.stringify(cookieContent), { expires: 60});
+            
+        });
+
+        /**
+         * get the current variables saved in the cookie
+         */
         try {
-            var projectIdCookie= Cookies.get("projectId");
-        } catch { 
-            Cookies.set("projectId", projectId, { expires: 180, secure: true });
-        }
-        if (projectIdCookie != '') {
-            projectId = projectIdCookie;
-        } else {
-            Cookies.set("projectId", projectId, { expires: 180, secure: true });
-        }
-        $("#project option[value="+projectId+"]").prop("selected", "selected");
-        var importDescriptionId = $("#import_description_id").val();
-        if (importDescriptionId > 0 && projectId > 0) {
-            setStations(importDescriptionId, projectId);
-        }
+            cookieContent = JSON.parse(Cookies.get("importExec"));
+            if (cookieContent !== undefined) {
+                $("#project option[value="+cookieContent.project_id+"]").prop("selected", "selected");
+                $("#import_description_id option[value="+cookieContent.import_description_id+"]").prop("selected", "selected");
+                sensorId = cookieContent.sensor_id;
+                if (cookieContent.project_id > 0 && cookieContent.import_description_id > 0) {
+                    setStations(cookieContent.import_description_id, cookieContent.project_id, cookieContent.sensor_id);
+                }
+                if (cookieContent.testMode == "1") {
+                    $("#testMode").prop("checked", true);
+                    $("#nbLinesGroup").show();
+                }
+            } else {
+                /** 
+                 * set default values
+                 */
+                if (importDescriptionId > 0 && projectId > 0) {
+                    setStations(importDescriptionId, projectId);
+                }
+            }
+        } catch {}
     });
 </script>
 
