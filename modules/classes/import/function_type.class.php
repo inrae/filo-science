@@ -285,4 +285,24 @@ class FunctionType extends ObjetBDD
         }
         return $value;
     }
+    /**
+     * convert all data in the row in UTF-8
+     *
+     * @param array $columns
+     * @param array $args
+     * @return void
+     */
+    private function decodeAll (array $columns, array $args) {
+        $result = array();
+       // return (mb_convert_encoding($columns[$args["columnNumber"]], "UTF-8", $args["arg"]));
+        foreach ($columns as $key=>$column) {
+            $val = mb_convert_encoding($column, "UTF-8", $args["arg"]);
+            if (! $val) {
+                throw new FunctionTypeException(_("Le décodage dans le jeu de caractères UTF-8 a échoué"));
+            } else {
+                $result[$key] = $val;
+            }
+        }
+        return $result;
+    }
 }

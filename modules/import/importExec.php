@@ -79,6 +79,10 @@ if (isset($_FILES["filename"])) {
                         $result = $functionType->functionCall($function["function_name"], $line, array("columnNumber" => $numColumn, "arg" => $function["arguments"]));
                         if ($function["column_result"] > 0) {
                             $line[$numColumn - 1] = $result;
+                        } else {
+                            if (is_array($result)) {
+                                $line = $result;
+                            }
                         }
                     }
                     /**
