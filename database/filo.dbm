@@ -3815,7 +3815,8 @@ group by individual_id]]></expression>
 11•numericToHexa•Transforme une valeur numérique en valeur Hexa, si celle-ci ne l'est pas. La valeur Hexa doit comprendre au moins une lettre. L'argument doit préciser le nombre de caractères attendus (multiple de 2) pour formater la chaine dans une zone de zéros⸣
 12•concatenate•Associe le contenu de colonnes ou du texte. L'argument doit etre au format JSON, sous la forme : [{"type":"col","val":4},{type:"str","val":":"}]⸣
 13•matchingCode•Remplace la valeur courante par une autre valeur, définie dans un argument JSON au format : {"valueSearched":correspondingValue, "2ndvalue":corresp2}. Pour la recherche des paramètres de sonde, valueSearched doit correspondre au libellé utilisé par la sonde, et correspondingValue à la valeur de la clé dans la table des paramètres⸣
-14•decodeAll•Transforme un jeu de caractère particulier en UTF-8. L'argument doit comprendre le jeu de caractère à transcoder, par exemple UTF-32LE]]>
+14•decodeAll•Transforme un jeu de caractère particulier en UTF-8. L'argument doit comprendre le jeu de caractère à transcoder, par exemple UTF-32⸣
+15•transformDecimalSeparator•Transforme la virgule en point, pour les champs décimaux en français]]>
 	</initial-data>
 </table>
 

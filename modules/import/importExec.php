@@ -119,15 +119,14 @@ if (isset($_FILES["filename"])) {
             }
             if (!$_REQUEST["testMode"] == 1) {
                 $bdd->commit();
-                $errors[] = array("content"=>_("Id mini généré :").$idMin);
-                $errors[] = array("content"=>_("Id maxi généré :").$idMax);
-
+                $errors[] = array("content" => _("Id mini généré :") . $idMin);
+                $errors[] = array("content" => _("Id maxi généré :") . $idMax);
             }
         } catch (ImportException $ie) {
             $errors[]["content"] = $ie->getMessage();
-        } catch (ObjetBDDException $oe) { 
+        } catch (ObjetBDDException $oe) {
             if (!$_REQUEST["testMode"] == 1) {
-                $errors[] = array("lineNumber"=>$numLine, "content" => _("Erreur d'écriture en table"));
+                $errors[] = array("lineNumber" => $numLine, "content" => _("Erreur d'écriture en table. Message d'erreur de la base de données : ") . $oe->getMessage());
                 $message->set(_("L'importation a échoué. Consultez les messages dans le tableau"), true);
                 $message->setSyslog($oe->getMessage());
                 $bdd->rollback();
