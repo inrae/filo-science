@@ -320,6 +320,9 @@
 	<parameterMeasureTypeChange action="modules/tracking/parameter_measure_type.php" param="change" droits="gestion"  type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<parameterMeasureTypeWrite action="modules/tracking/parameter_measure_type.php" param="write" droits="gestion"  retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
 	<parameterMeasureTypeDelete action="modules/tracking/parameter_measure_type.php" param="delete" droits="gestion"  retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
+	<locationChange action="modules/tracking/location.php" param="change" droits="gestion" retourko="individualTrackingList" type="smarty"/>
+	<locationWrite action="modules/tracking/location.php" param="write" droits="gestion" retourko="locationChange" retourok="individualTrackingList" modulebefore="locationChange" maxCountByHour="120" maxCountByDay="1200" />
+	<locationDelete action="modules/tracking/location.php" param="delete" droits="gestion" retourko="locationChange" retourok="individualTrackingList" modulebefore="locationChange" maxCountByHour="60" maxCountByDay="600"/>
 
 	<!-- Imports-->
 	<importDescriptionList action="modules/import/importDescription.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
