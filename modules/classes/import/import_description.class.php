@@ -7,7 +7,7 @@ class ImportDescription extends ObjetBDD
 {
     private $sql = "select import_description_id, import_type_id, csv_type_id
                     ,import_description_name, separator
-                    ,csv_type_name, import_type_name, tablename, column_list, is_table_er
+                    ,csv_type_name, import_type_name, tablename, column_list
                     from import_description
                     join import_type using (import_type_id)
                     join csv_type using (csv_type_id)";

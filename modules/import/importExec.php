@@ -35,11 +35,17 @@ if (isset($_FILES["filename"])) {
          */
         switch ($importParam["import_type_id"]) {
             case 1:
-            case 3:
                 include_once "modules/classes/tracking/individual_tracking.class.php";
                 $individualTracking = new IndividualTracking($bdd, $ObjetBDDParam);
                 include_once "modules/classes/tracking/detection.class.php";
                 $importDataClass = new Detection($bdd, $ObjetBDDParam);
+                $importDataClass->auto_date = 0;
+                break;
+            case 3:
+                include_once "modules/classes/tracking/individual_tracking.class.php";
+                $individualTracking = new IndividualTracking($bdd, $ObjetBDDParam);
+                include_once "modules/classes/tracking/location.class.php";
+                $importDataClass = new Location($bdd, $ObjetBDDParam);
                 $importDataClass->auto_date = 0;
                 break;
             case 2:
