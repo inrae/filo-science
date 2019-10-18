@@ -113,11 +113,12 @@
     {if count($detections) > 0}
         <fieldset class="col-md-12 col-lg-6">
             <legend>{t}Liste des détections{/t}</legend>
-            <table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"]]'>
+            <table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
                 <thead>
                     <tr>
                         <th>{t}Id{/t}</th>
                         <th>{t}Date/heure de détection{/t}</th>
+                        <th>{t}Type de détection{/t}</th>
                         <th>{t}Nbre d'événements{/t}</th>
                         <th>{t}Durée, en secondes{/t}</th>
                         <th>{t}Force du signal{/t}</th>
@@ -130,14 +131,25 @@
                         <tr>
                             <td class="center">
                                 {if $droits.gestion == 1}
-                                <a href="index.php?module=detectionChange&detection_id={$detection.detection_id}&individual_id={$detection.detection_id}">
-                                        {$detection.detection_id}
-                                </a>
+                                    {if $detection.detection_type == "stationary"}
+                                        <a href="index.php?module=detectionChange&detection_id={$detection.id}&individual_id={$detection.individual_id}">
+                                        {else}
+                                        <a href="index.php?module=locationChange&location_id={$detection.id}&individual_id={$detection.individual_id}">
+                                    {/if}
+                                    {$detection.id}
+                                    </a>
                                 {else}
-                                    {$detection.detection_id}
+                                    {$detection.id}
                                 {/if}
                             </td>
                             <td>{$detection.detection_date}</td>
+                            <td>
+                                {if $detection.detection_type == "stationary"}
+                                    {t}Station fixe{/t}
+                                {else}
+                                    {t}Détection mobile{/t}
+                                {/if}
+                            </td>
                             <td class="center">{$detection.nb_events}</td>
                             <td class="center">{$detection.duration}</td>
                             <td class="right">{$detection.signal_force}</td>

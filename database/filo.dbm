@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="98"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,440" last-zoom="1" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -196,7 +196,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </sequence>
 
 <extension name="postgis">
-	<schema name="pg_catalog"/>
+	<schema name="public"/>
 </extension>
 
 <table name="station" layer="0" collapse-mode="1" max-obj-count="10">
@@ -3358,7 +3358,7 @@ group by individual_id]]></expression>
 	<role name="filo"/>
 </sequence>
 
-<table name="detection" layer="2" collapse-mode="2" max-obj-count="12">
+<table name="detection" layer="2" collapse-mode="2" max-obj-count="10">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
@@ -3397,13 +3397,11 @@ group by individual_id]]></expression>
 	<customidxs object-type="column">
 		<object name="antenna_id" index="2"/>
 		<object name="individual_id" index="1"/>
-		<object name="location_id" index="3"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
 		<object name="antenna_fk" index="2"/>
 		<object name="individual_tracking_fk" index="1"/>
-		<object name="location_fk" index="3"/>
 	</customidxs>
 </table>
 
@@ -3982,14 +3980,18 @@ group by individual_id]]></expression>
 	<role name="filo"/>
 </sequence>
 
-<table name="location" layer="2" collapse-mode="2" max-obj-count="9">
+<table name="location" layer="2" collapse-mode="2" max-obj-count="14">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of locations of manual detections]]></comment>
 	<tag name="individual_tracking"/>
-	<position x="640" y="520"/>
+	<position x="640" y="460"/>
 	<column name="location_id" not-null="true" sequence="tracking.location_location_id_seq">
 		<type name="integer" length="0"/>
+	</column>
+	<column name="detection_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date-time of the detection]]></comment>
 	</column>
 	<column name="location_pk">
 		<type name="float" length="0"/>
@@ -4003,6 +4005,14 @@ group by individual_id]]></expression>
 		<type name="double precision" length="0"/>
 		<comment><![CDATA[Latitude of the location, in wgs84]]></comment>
 	</column>
+	<column name="signal_force">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Force of the signal]]></comment>
+	</column>
+	<column name="observation">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[comment]]></comment>
+	</column>
 	<column name="geom">
 		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="4326"/>
 		<comment><![CDATA[Geographic point of the location]]></comment>
@@ -4013,25 +4023,18 @@ group by individual_id]]></expression>
 
 	<customidxs object-type="column">
 		<object name="antenna_type_id" index="3"/>
+		<object name="individual_id" index="4"/>
 		<object name="project_id" index="1"/>
 		<object name="river_id" index="2"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
 		<object name="antenna_type_fk" index="3"/>
+		<object name="individual_tracking_fk" index="4"/>
 		<object name="project_fk" index="1"/>
 		<object name="river_fk" index="2"/>
 	</customidxs>
 </table>
-
-<relationship name="location_has_many_detection" type="rel1n" layer="2"
-	 src-col-pattern="{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#b0bf7a"
-	 src-table="tracking.location"
-	 dst-table="tracking.detection"
-	 src-required="false" dst-required="false"/>
 
 <relationship name="project_has_many_location" type="rel1n" layer="2"
 	 src-col-pattern="{sc}"
@@ -4197,14 +4200,6 @@ group by individual_id]]></expression>
 		</idxelement>
 </index>
 
-<index name="detection_location_id_idx" table="tracking.detection"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="0">
-		<idxelement use-sorting="false">
-			<column name="location_id"/>
-		</idxelement>
-</index>
-
 <index name="individual_sample_id_idx" table="filo.individual"
 	 concurrent="false" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
@@ -4312,6 +4307,215 @@ group by individual_id]]></expression>
 	 src-table="tracking.parameter_measure_type"
 	 dst-table="tracking.probe_measure"
 	 src-required="true" dst-required="false"/>
+
+<view name="v_station_tracking" layer="2" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of stations used for tracking, with geom object]]></comment>
+	<position x="20" y="1020"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[station_id, station_name, station_long, station_lat, station_pk, geom
+,station_type_id, station_type_name
+,project_id, project_name
+]]></expression>
+	</reference>
+	<reference ref-alias="from">
+		<expression><![CDATA[tracking.station_tracking
+join filo.station using (station_id)
+join tracking.station_type using (station_type_id)
+join filo.project using (project_id)]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<view name="v_individual_tracking" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[View of the fishes tracked]]></comment>
+	<position x="20" y="1100"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[individual_id, scientific_name, taxon_id
+,tag, transmitter
+,project.project_id, project_name
+,transmitter_type_name, transmitter_type_id
+,station_name as release_station_name, release_station_id]]></expression>
+	</reference>
+	<reference ref-alias="from">
+		<expression><![CDATA[filo.individual
+join tracking.individual_tracking using (individual_id)
+join filo.taxon using (taxon_id)
+join filo.project using (project_id)
+left outer join tracking.transmitter_type using (transmitter_type_id)
+left outer join tracking.station_tracking st on (st.station_id = release_station_id)
+left outer join filo.station on (st.station_id = station.station_id)]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<relationship name="individual_tracking_has_many_location" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4bc67b"
+	 src-table="tracking.individual_tracking"
+	 dst-table="tracking.location"
+	 src-required="true" dst-required="false"/>
+
+<function name="v_station_tracking_update"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[BEGIN
+update filo.station set geom = NEW.geom,
+station_long = NEW.station_long,
+station_lat = NEW.station_lat,
+station_pk = NEW.station_pk,
+station_name = NEW.station_name
+where station_id = NEW.station_id ;
+return null;
+END;]]></definition>
+</function>
+
+<trigger name="v_station_tracking_update" firing-type="INSTEAD OF" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="tracking.v_station_tracking">
+		<function signature="tracking.v_station_tracking_update()"/>
+</trigger>
+
+<function name="v_station_tracking_insert"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[BEGIN
+insert into filo.station (station_name, project_id, station_long, station_lat, station_pk, geom)
+values (NEW.station_name, NEW.project_id, NEW.station_long, NEW.station_lat, NEW.station_pk,NEW.geom);
+insert into tracking.station_tracking (station_id, station_type_id) values (lastval(), NEW.station_type_id);
+return null;
+END;]]></definition>
+</function>
+
+<trigger name="v_station_tracking_insert" firing-type="INSTEAD OF" per-line="true" constraint="false"
+	 ins-event="true" del-event="false" upd-event="false" trunc-event="false"
+	 table="tracking.v_station_tracking">
+		<function signature="tracking.v_station_tracking_insert()"/>
+</trigger>
+
+<view name="v_antenna" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<position x="20" y="940"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[antenna_id, station_id, technology_type_id
+,antenna_code, radius, geom_polygon
+,technology_type_name
+,station_type_id, station_type_name
+,project_id, project_name, metric_srid
+,station_name,station_long, station_lat, station_pk
+,geom]]></expression>
+	</reference>
+	<reference ref-alias="from">
+		<expression><![CDATA[tracking.antenna
+join tracking.technology_type using (technology_type_id)
+join tracking.station_tracking using (station_id)
+join filo.station using (station_id)
+join filo.project using(project_id)
+join tracking.station_type using (station_type_id)
+]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<function name="v_antenna_update"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[BEGIN
+if NEW.radius > 0 then
+update tracking.antenna set geom_polygon = 
+st_transform (
+	st_buffer ( 
+		st_transform (
+		  st_setsrid(st_point(new.station_long, new.station_lat),4326)
+		,new.metric_srid)
+      , new.radius)
+,4326),
+radius = new.radius,
+station_id = new.station_id,
+technology_type_id = new.technology_type_id
+where antenna_id = new.antenna_id;
+END IF;
+return null;
+END;]]></definition>
+</function>
+
+<trigger name="v_antenna_update" firing-type="INSTEAD OF" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="tracking.v_antenna">
+		<function signature="tracking.v_antenna_update()"/>
+</trigger>
+
+<view name="v_detection_location" layer="0" collapse-mode="2" max-obj-count="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of all detections and locations for a fish]]></comment>
+	<position x="20" y="1180"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[detection_id as id, individual_id, detection_date
+	, nb_events, duration, validity, signal_force, observation
+	,station_long long, station_lat lat, station_name, station_pk as pk
+	,antenna_code, technology_type_name as antenna_type
+	,geom
+	,'stationary' as detection_type
+from tracking.detection
+	join tracking.antenna using (antenna_id)
+	join filo.station using (station_id)
+	left outer join tracking.technology_type using (technology_type_id)
+union
+select location_id as id, individual_id, detection_date
+	, null nb_events, null duration, true validity, signal_force, observation
+	, location_long, location_lat, null station_name, location_pk as pk
+	,null as antenna_code, antenna_type_name as antenna_type
+	,geom
+	,'mobile' as detection_type
+from tracking.location 
+	left outer join tracking.antenna_type using (antenna_type_id)
+                ]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+</view>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">

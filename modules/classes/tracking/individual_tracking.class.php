@@ -96,4 +96,38 @@ class IndividualTracking extends ObjetBDD
         $where = " where individual_id = :individual_id";
         return $this->lireParamAsPrepared($this->sql . $where, array("individual_id" => $id));
     }
+
+    /**
+     * REturn all detections for an individual
+     *
+     * @param integer $id
+     * @param string $formatDate
+     * @param string $orderBy
+     * @return array
+     */
+    function getListDetection(int $id, string $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', string $orderBy = "") :array {
+        $data = array();
+        $sql = "
+                select detection_id as id, individual_id, to_char(detection_date, :formatDate) as detection_date
+                    , nb_events, duration, validity, signal_force, observation
+                    ,station_long long, station_lat lat, station_name
+                    ,'stationary' as detection_type
+                from detection
+                join antenna using (antenna_id)
+                join station using (station_id)
+                where individual_id = :id
+                union
+                select location_id as id, individual_id, to_char(detection_date, :formatDate) as detection_date
+                    , null nb_events, null duration, true validity, signal_force, observation
+                    , location_long, location_lat, null station_name
+                    ,'mobile' as detection_type
+                from location 
+                where individual_id = :id
+        ";
+        if (strlen ($orderBy)> 0) {
+            $sql = "with req as (".$sql.") select * from req order by $orderBy";
+        }
+        $data = $this->getListeParamAsPrepared($sql, array("id"=>$id, "formatDate"=>$formatDate));
+        return $data;
+    }
 }

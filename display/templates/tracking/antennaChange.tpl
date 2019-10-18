@@ -24,10 +24,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="technology_type_id" class="control-label col-md-4">{t}Technologie employée :{/t}</label>
+                <label for="technology_type_id" class="control-label col-md-4"><span class="red">*</span> {t}Technologie employée :{/t}</label>
                 <div class="col-md-8">
                     <select class="form-control" id="technology_type_id" name="technology_type_id">
-                        <option value="" {if $data.technology_type_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
                         {foreach $technologies as $technology}
                             <option value="{$technology.technology_type_id}" {if $technology.technology_type_id == $data.technology_type_id}selected{/if}>
                                 {$technology.technology_type_name}

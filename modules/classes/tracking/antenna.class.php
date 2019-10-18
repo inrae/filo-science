@@ -38,13 +38,13 @@ class Antenna extends ObjetBDD
      */
     function ecrire($data)
     {
-        if ($data["diameter"] == 0) {
+        if ($data["radius"] == 0) {
             $data["geom_polygon"] = "";
         }
         $id = parent::ecrire($data);
-        if ($data["diameter"] > 0 && is_numeric($data["diameter"])) {
+        if ($data["radius"] > 0 && is_numeric($data["radius"])) {
             /**
-             * Generate a polygon from the center of the station and the diameter
+             * Generate a polygon from the center of the station and the radius
              * 
              * Get the coordinates of the station
              */
@@ -58,7 +58,7 @@ class Antenna extends ObjetBDD
                                 st_transform ( 
                                     st_geomfromtext('POINT(" . $dstation["station_long"] . " " . $dstation["station_lat"] . ")', " . $this->sridAntenna . ")
                                 , " . $dstation["metric_srid"] . ")
-                            , " . $data["diameter"] . ")
+                            , " . $data["radius"] . ")
                         ," . $this->sridAntenna . ")
                         where antenna_id = $id";
                 $this->execute($sql);

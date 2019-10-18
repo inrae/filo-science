@@ -21,15 +21,19 @@ class Location extends ObjetBDD
      */
     function __construct(PDO $bdd, array $param = array())
     {
-        $this->table = "antenna";
+        $this->table = "location";
         $this->colonnes = array(
             "location_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
             "project_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
+            "individual_id"=>array("type"=>1, "requis"=>1),
+            "detection_date" => array("type"=>3, "requis"=>1, "defaultValue"=>"getDateHeure"),
             "river_id" => array("type" => 1),
             "antenna_type_id" => array("type" => 1),
             "location_pk" => array("type" => 1),
             "location_long" => array("type" => 1),
             "location_lat" => array("type" => 1),
+            "signal_force" => array("type" => 1),
+            "observation" => array("type" => 0),
             "geom" => array("type" => 4)
         );
         parent::__construct($bdd, $param);

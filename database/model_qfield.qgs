@@ -1,0 +1,2842 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis projectname="Modèle qfield" version="3.8.1-Zanzibar">
+  <homePath path="/home/quinton/web/filo/database"/>
+  <title>Modèle qfield</title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <trust active="0"/>
+  <projectCrs>
+    <spatialrefsys>
+      <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+      <srsid>3857</srsid>
+      <srid>3857</srid>
+      <authid>EPSG:3857</authid>
+      <description>WGS 84 / Pseudo-Mercator</description>
+      <projectionacronym>merc</projectionacronym>
+      <ellipsoidacronym>WGS84</ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </projectCrs>
+  <layer-tree-group>
+    <customproperties/>
+    <layer-tree-layer name="localisation manuelle des poissons" source="dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='location_id' srid=4326 type=Point checkPrimaryKeyUnicity='1' table=&quot;tracking&quot;.&quot;location&quot; (geom) sql=" id="location_d702658c_8d21_4df2_a100_4bf2639b312c" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer name="Points de mesure du rayon de détection d'une sonde (couche temporaire)" source="../../../points_temporaires.shp" id="points_temporaires_86fee51e_3ef5_437f_98bf_3764d827ad66" checked="Qt::Checked" expanded="1" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer name="stations" source="dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='station_id' srid=4326 type=Point checkPrimaryKeyUnicity='1' table=&quot;tracking&quot;.&quot;v_station_tracking&quot; (geom) sql=" id="v_station_tracking_563f2a21_35e1_47f2_ba81_6ae7ba09a5c1" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer name="périmètre de détection d'une antenne" source="dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='antenna_id' srid=4326 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;tracking&quot;.&quot;v_antenna&quot; (geom_polygon) sql=" id="v_antenna_geom_polygon_0dead538_194e_4300_9e26_7c30a4beda0e" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer name="OpenStreetMap" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://a.tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=19&amp;zmin=0" id="OpenStreetMap_5f85e3cf_abf6_4aaa_9a0f_a745b664db9b" checked="Qt::Checked" expanded="1" providerKey="wms">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer name="v_individual_tracking" source="dbname='filo' host=localhost port=5432 authcfg=6kdc86q key='individual_id' checkPrimaryKeyUnicity='1' table=&quot;tracking&quot;.&quot;v_individual_tracking&quot; sql=&quot;project_id&quot; = 1" id="v_individual_tracking_c3837401_2143_4d21_90e4_9d139c350d3e" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer name="antenna_type" source="dbname='filo' host=localhost port=5432 authcfg=6kdc86q key='antenna_type_id' checkPrimaryKeyUnicity='1' table=&quot;tracking&quot;.&quot;antenna_type&quot; sql=" id="antenna_type_86c52169_d680_4bd9_a45e_2d958320be2c" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer name="project" source="dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='project_id' checkPrimaryKeyUnicity='1' table=&quot;filo&quot;.&quot;project&quot; sql=" id="project_97495662_38fd_45c8_ab28_4d09040d4cb4" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer name="station_type" source="dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='station_type_id' checkPrimaryKeyUnicity='1' table=&quot;tracking&quot;.&quot;station_type&quot; sql=" id="station_type_ee1c3ec9_1257_4169_8e31_ad036002ec8b" checked="Qt::Checked" expanded="1" providerKey="postgres">
+      <customproperties>
+        <property key="expandedLegendNodes"/>
+      </customproperties>
+    </layer-tree-layer>
+    <custom-order enabled="0">
+      <item>OpenStreetMap_5f85e3cf_abf6_4aaa_9a0f_a745b664db9b</item>
+      <item>v_station_tracking_563f2a21_35e1_47f2_ba81_6ae7ba09a5c1</item>
+      <item>location_d702658c_8d21_4df2_a100_4bf2639b312c</item>
+      <item>points_temporaires_86fee51e_3ef5_437f_98bf_3764d827ad66</item>
+      <item>v_antenna_geom_polygon_0dead538_194e_4300_9e26_7c30a4beda0e</item>
+    </custom-order>
+  </layer-tree-group>
+  <snapping-settings enabled="0" intersection-snapping="0" tolerance="12" unit="1" type="1" mode="2">
+    <individual-layer-settings>
+      <layer-setting enabled="0" tolerance="12" id="location_d702658c_8d21_4df2_a100_4bf2639b312c" units="1" type="1"/>
+      <layer-setting enabled="0" tolerance="12" id="v_station_tracking_563f2a21_35e1_47f2_ba81_6ae7ba09a5c1" units="1" type="1"/>
+      <layer-setting enabled="0" tolerance="12" id="points_temporaires_86fee51e_3ef5_437f_98bf_3764d827ad66" units="1" type="1"/>
+      <layer-setting enabled="0" tolerance="12" id="v_antenna_geom_polygon_0dead538_194e_4300_9e26_7c30a4beda0e" units="1" type="1"/>
+    </individual-layer-settings>
+  </snapping-settings>
+  <relations/>
+  <mapcanvas annotationsVisible="1" name="theMapCanvas">
+    <units>meters</units>
+    <extent>
+      <xmin>-71022.388966316182632</xmin>
+      <ymin>5626016.36863877438008785</ymin>
+      <xmax>-67367.55601101164938882</xmax>
+      <ymax>5644380.44302441738545895</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+        <srsid>3857</srsid>
+        <srid>3857</srid>
+        <authid>EPSG:3857</authid>
+        <description>WGS 84 / Pseudo-Mercator</description>
+        <projectionacronym>merc</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>false</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
+  <projectModels/>
+  <legend updateDrawingOrder="true">
+    <legendlayer showFeatureCount="0" name="localisation manuelle des poissons" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="location_d702658c_8d21_4df2_a100_4bf2639b312c" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="Points de mesure du rayon de détection d'une sonde (couche temporaire)" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="points_temporaires_86fee51e_3ef5_437f_98bf_3764d827ad66" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="stations" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="v_station_tracking_563f2a21_35e1_47f2_ba81_6ae7ba09a5c1" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="périmètre de détection d'une antenne" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="v_antenna_geom_polygon_0dead538_194e_4300_9e26_7c30a4beda0e" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="OpenStreetMap" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="OpenStreetMap_5f85e3cf_abf6_4aaa_9a0f_a745b664db9b" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="v_individual_tracking" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="v_individual_tracking_c3837401_2143_4d21_90e4_9d139c350d3e" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="antenna_type" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="antenna_type_86c52169_d680_4bd9_a45e_2d958320be2c" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="project" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="project_97495662_38fd_45c8_ab28_4d09040d4cb4" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" name="station_type" checked="Qt::Checked" drawingOrder="-1" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="station_type_ee1c3ec9_1257_4169_8e31_ad036002ec8b" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapViewDocks3D/>
+  <projectlayers>
+    <maplayer minScale="500000" refreshOnNotifyEnabled="0" autoRefreshTime="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" maxScale="2500" hasScaleBasedVisibilityFlag="1" type="raster" styleCategories="AllStyleCategories">
+      <extent>
+        <xmin>-20037508.34278924390673637</xmin>
+        <ymin>-20037508.34278925508260727</ymin>
+        <xmax>20037508.34278924390673637</xmax>
+        <ymax>20037508.34278924390673637</ymax>
+      </extent>
+      <id>OpenStreetMap_5f85e3cf_abf6_4aaa_9a0f_a745b664db9b</id>
+      <datasource>crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://a.tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=19&amp;zmin=0</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>OpenStreetMap</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+          <srsid>3857</srsid>
+          <srid>3857</srid>
+          <authid>EPSG:3857</authid>
+          <description>WGS 84 / Pseudo-Mercator</description>
+          <projectionacronym>merc</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+            <srsid>3857</srsid>
+            <srid>3857</srid>
+            <authid>EPSG:3857</authid>
+            <description>WGS 84 / Pseudo-Mercator</description>
+            <projectionacronym>merc</projectionacronym>
+            <ellipsoidacronym>WGS84</ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxz="0" miny="5628096.38570000045001507" crs="EPSG:3857" minx="-67544.29910000000381842" maxx="-67326.7495000000053551" minz="0" maxy="5629189.48529999982565641"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider>wms</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="0"/>
+      </noData>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <flags>
+        <Identifiable>0</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>0</Searchable>
+      </flags>
+      <customproperties>
+        <property key="QFieldSync/action" value="no_action"/>
+        <property key="WMSBackgroundLayer" value="false"/>
+        <property key="WMSPublishDataSourceUrl" value="false"/>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Undefined"/>
+      </customproperties>
+      <pipe>
+        <rasterrenderer alphaBand="-1" band="1" type="singlebandcolordata" opacity="1">
+          <rasterTransparency/>
+          <minMaxOrigin>
+            <limits>None</limits>
+            <extent>WholeRaster</extent>
+            <statAccuracy>Estimated</statAccuracy>
+            <cumulativeCutLower>0.02</cumulativeCutLower>
+            <cumulativeCutUpper>0.98</cumulativeCutUpper>
+            <stdDevFactor>2</stdDevFactor>
+          </minMaxOrigin>
+        </rasterrenderer>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation colorizeRed="255" saturation="0" colorizeGreen="128" grayscaleMode="0" colorizeBlue="128" colorizeOn="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minScale="1e+8" readOnly="1" refreshOnNotifyEnabled="0" geometry="No geometry" autoRefreshTime="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" maxScale="0" wkbType="NoGeometry" hasScaleBasedVisibilityFlag="0" type="vector" styleCategories="AllStyleCategories">
+      <id>antenna_type_86c52169_d680_4bd9_a45e_2d958320be2c</id>
+      <datasource>dbname='filo' host=localhost port=5432 authcfg=6kdc86q key='antenna_type_id' checkPrimaryKeyUnicity='1' table="tracking"."antenna_type" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>antenna_type</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="QFieldSync/action" value="offline"/>
+        <property key="dualview/previewExpressions" value="&quot;antenna_type_name&quot;"/>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="antenna_type_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="antenna_type_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="antenna_type_id"/>
+        <alias index="1" name="" field="antenna_type_name"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="antenna_type_id"/>
+        <default applyOnUpdate="0" expression="" field="antenna_type_name"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" field="antenna_type_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="1" unique_strength="0" field="antenna_type_name" exp_strength="0" notnull_strength="1"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="antenna_type_id" desc="" exp=""/>
+        <constraint field="antenna_type_name" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="antenna_type_id" width="-1" type="field" hidden="0"/>
+          <column name="antenna_type_name" width="-1" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression>"antenna_type_name"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer simplifyDrawingHints="0" geometry="Point" type="vector" autoRefreshTime="0" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" simplifyMaxScale="1" refreshOnNotifyMessage="" readOnly="0" simplifyDrawingTol="1" labelsEnabled="1" styleCategories="AllStyleCategories" wkbType="Point" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" minScale="1e+8">
+      <extent>
+        <xmin>-0.69634203651047999</xmin>
+        <ymin>-0.0583648068999715</ymin>
+        <xmax>-0.0225168753651361</xmax>
+        <ymax>45.09619519832980217</ymax>
+      </extent>
+      <id>location_d702658c_8d21_4df2_a100_4bf2639b312c</id>
+      <datasource>dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='location_id' srid=4326 type=Point checkPrimaryKeyUnicity='1' table="tracking"."location" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>localisation manuelle des poissons</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List of locations of manual detections</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+            <srsid>3452</srsid>
+            <srid>4326</srid>
+            <authid>EPSG:4326</authid>
+            <description>WGS 84</description>
+            <projectionacronym>longlat</projectionacronym>
+            <ellipsoidacronym>WGS84</ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxz="0" miny="0" crs="EPSG:4326" minx="0" maxx="0" minz="0" maxy="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins>
+        <join editable="0" memoryCache="1" joinLayerId="antenna_type_86c52169_d680_4bd9_a45e_2d958320be2c" upsertOnEdit="0" cascadedDelete="0" dynamicForm="0" joinFieldName="antenna_type_id" targetFieldName="antenna_type_id"/>
+        <join editable="0" memoryCache="1" joinLayerId="v_individual_tracking_c3837401_2143_4d21_90e4_9d139c350d3e" upsertOnEdit="0" cascadedDelete="0" dynamicForm="0" joinFieldName="individual_id" targetFieldName="individual_id"/>
+      </vectorjoins>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
+        <symbols>
+          <symbol alpha="1" name="0" clip_to_extent="1" type="marker" force_rhr="0">
+            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+              <prop v="0" k="angle"/>
+              <prop v="183,72,75,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <labeling type="simple">
+        <settings>
+          <text-style fontWeight="50" blendMode="0" fontSize="10" fontCapitals="0" useSubstitutions="0" fontUnderline="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontLetterSpacing="0" multilineHeight="1" textColor="0,0,0,255" fontItalic="0" isExpression="0" textOpacity="1" fieldName="individual_id" fontWordSpacing="0" previewBkgrdColor="#ffffff" fontFamily="Cantarell" fontSizeUnit="Point" namedStyle="Regular" fontStrikeout="0">
+            <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferBlendMode="0" bufferSizeUnits="MM" bufferColor="255,255,255,255" bufferOpacity="1" bufferNoFill="1" bufferSize="1" bufferDraw="0"/>
+            <background shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeOpacity="1" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeJoinStyle="64" shapeRadiiX="0" shapeOffsetUnit="MM" shapeFillColor="255,255,255,255" shapeSizeUnit="MM" shapeBlendMode="0" shapeDraw="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeRotation="0" shapeType="0" shapeOffsetY="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeRadiiUnit="MM" shapeOffsetX="0" shapeBorderWidth="0" shapeSizeX="0" shapeRadiiY="0"/>
+            <shadow shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetDist="1" shadowOffsetAngle="135" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100" shadowRadiusUnit="MM" shadowOffsetGlobal="1" shadowRadius="1.5" shadowOpacity="0.7" shadowOffsetUnit="MM" shadowDraw="0" shadowRadiusAlphaOnly="0" shadowUnder="0" shadowColor="0,0,0,255" shadowBlendMode="6"/>
+            <substitutions/>
+          </text-style>
+          <text-format plussign="0" autoWrapLength="0" multilineAlign="3" decimals="3" wrapChar="" addDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0" leftDirectionSymbol="&lt;" placeDirectionSymbol="0" useMaxLineLengthForAutoWrap="1" formatNumbers="0"/>
+          <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" yOffset="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" placementFlags="10" quadOffset="4" dist="0" distMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" geometryGeneratorEnabled="0" fitInPolygonOnly="0" maxCurvedCharAngleOut="-25" centroidWhole="0" centroidInside="0" geometryGenerator="" priority="5" offsetType="0" repeatDistance="0" placement="0" xOffset="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleIn="25" offsetUnits="MM" distUnits="MM" geometryGeneratorType="PointGeometry" preserveRotation="1" repeatDistanceUnits="MM"/>
+          <rendering displayAll="0" obstacle="1" scaleMax="0" scaleVisibility="0" minFeatureSize="0" fontLimitPixelSize="0" fontMinPixelSize="3" upsidedownLabels="0" mergeLines="0" labelPerPart="0" limitNumLabels="0" obstacleFactor="1" obstacleType="0" fontMaxPixelSize="10000" drawLabels="1" scaleMin="0" zIndex="0" maxNumLabels="2000"/>
+          <dd_properties>
+            <Option type="Map">
+              <Option value="" name="name" type="QString"/>
+              <Option name="properties"/>
+              <Option value="collection" name="type" type="QString"/>
+            </Option>
+          </dd_properties>
+        </settings>
+      </labeling>
+      <customproperties>
+        <property key="QFieldSync/action" value="offline"/>
+        <property key="dualview/previewExpressions" value="location_id"/>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory labelPlacementMethod="XHeight" opacity="1" penAlpha="255" scaleDependency="Area" rotationOffset="270" minScaleDenominator="0" sizeScale="3x:0,0,0,0,0,0" backgroundColor="#ffffff" backgroundAlpha="255" lineSizeScale="3x:0,0,0,0,0,0" width="15" penWidth="0" penColor="#000000" minimumSize="0" lineSizeType="MM" maxScaleDenominator="1e+8" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" diagramOrientation="Up" barWidth="5">
+          <fontProperties style="" description="Cantarell,11,-1,5,50,0,0,0,0,0"/>
+          <attribute label="" field="" color="#000000"/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings placement="0" zIndex="0" obstacle="0" dist="0" showAll="1" priority="0" linePlacementFlags="18">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="location_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_id">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option value="1" name="Test" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="3" name="Test non actif" type="QString"/>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="river_id">
+          <editWidget type="Range">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="AllowNull" type="bool"/>
+                <Option value="2147483647" name="Max" type="int"/>
+                <Option value="-2147483648" name="Min" type="int"/>
+                <Option value="0" name="Precision" type="int"/>
+                <Option value="1" name="Step" type="int"/>
+                <Option value="SpinBox" name="Style" type="QString"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="antenna_type_id">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="invalid"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="location_pk">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="location_long">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="location_lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="individual_id">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option value="74" name="43" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="75" name="44" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="76" name="45" type="QString"/>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="signal_force">
+          <editWidget type="Range">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="AllowNull" type="bool"/>
+                <Option value="2147483647" name="Max" type="int"/>
+                <Option value="-2147483648" name="Min" type="int"/>
+                <Option value="0" name="Precision" type="int"/>
+                <Option value="1" name="Step" type="int"/>
+                <Option value="SpinBox" name="Style" type="QString"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="observation">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="detection_date">
+          <editWidget type="DateTime">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="allow_null" type="bool"/>
+                <Option value="true" name="calendar_popup" type="bool"/>
+                <Option value="dd/MM/yyyy HH:mm:ss" name="display_format" type="QString"/>
+                <Option value="yyyy-MM-dd HH:mm:ss" name="field_format" type="QString"/>
+                <Option value="false" name="field_iso_format" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="antenna_type_antenna_type_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_scientific_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_taxon_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_tag">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_transmitter">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_project_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_project_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_transmitter_type_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_transmitter_type_id">
+          <editWidget type="Range">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="AllowNull" type="bool"/>
+                <Option value="2147483647" name="Max" type="int"/>
+                <Option value="-2147483648" name="Min" type="int"/>
+                <Option value="0" name="Precision" type="int"/>
+                <Option value="1" name="Step" type="int"/>
+                <Option value="SpinBox" name="Style" type="QString"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_release_station_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="v_individual_tracking_release_station_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="location_id"/>
+        <alias index="1" name="" field="project_id"/>
+        <alias index="2" name="" field="river_id"/>
+        <alias index="3" name="" field="antenna_type_id"/>
+        <alias index="4" name="" field="location_pk"/>
+        <alias index="5" name="Longitude" field="location_long"/>
+        <alias index="6" name="Latitude" field="location_lat"/>
+        <alias index="7" name="Numéro de l'émetteur (poisson)" field="individual_id"/>
+        <alias index="8" name="Foce du signal" field="signal_force"/>
+        <alias index="9" name="" field="observation"/>
+        <alias index="10" name="Date-heure de détection" field="detection_date"/>
+        <alias index="11" name="" field="antenna_type_antenna_type_name"/>
+        <alias index="12" name="" field="v_individual_tracking_scientific_name"/>
+        <alias index="13" name="" field="v_individual_tracking_taxon_id"/>
+        <alias index="14" name="" field="v_individual_tracking_tag"/>
+        <alias index="15" name="" field="v_individual_tracking_transmitter"/>
+        <alias index="16" name="" field="v_individual_tracking_project_id"/>
+        <alias index="17" name="" field="v_individual_tracking_project_name"/>
+        <alias index="18" name="" field="v_individual_tracking_transmitter_type_name"/>
+        <alias index="19" name="" field="v_individual_tracking_transmitter_type_id"/>
+        <alias index="20" name="" field="v_individual_tracking_release_station_name"/>
+        <alias index="21" name="" field="v_individual_tracking_release_station_id"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="location_id"/>
+        <default applyOnUpdate="0" expression="1" field="project_id"/>
+        <default applyOnUpdate="0" expression="" field="river_id"/>
+        <default applyOnUpdate="0" expression="" field="antenna_type_id"/>
+        <default applyOnUpdate="0" expression="" field="location_pk"/>
+        <default applyOnUpdate="1" expression="$x" field="location_long"/>
+        <default applyOnUpdate="1" expression="$y" field="location_lat"/>
+        <default applyOnUpdate="0" expression="" field="individual_id"/>
+        <default applyOnUpdate="0" expression="" field="signal_force"/>
+        <default applyOnUpdate="0" expression="" field="observation"/>
+        <default applyOnUpdate="0" expression=" now() " field="detection_date"/>
+        <default applyOnUpdate="0" expression="" field="antenna_type_antenna_type_name"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_scientific_name"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_taxon_id"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_tag"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_transmitter"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_project_id"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_project_name"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_transmitter_type_name"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_transmitter_type_id"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_release_station_name"/>
+        <default applyOnUpdate="0" expression="" field="v_individual_tracking_release_station_id"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" field="location_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="1" unique_strength="0" field="project_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" field="river_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="antenna_type_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="location_pk" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="location_long" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="location_lat" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="1" unique_strength="0" field="individual_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" field="signal_force" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="observation" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="1" unique_strength="0" field="detection_date" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="1" unique_strength="0" field="antenna_type_antenna_type_name" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_scientific_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_taxon_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_tag" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_transmitter" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_project_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_project_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_transmitter_type_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_transmitter_type_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_release_station_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="v_individual_tracking_release_station_id" exp_strength="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="location_id" desc="" exp=""/>
+        <constraint field="project_id" desc="" exp=""/>
+        <constraint field="river_id" desc="" exp=""/>
+        <constraint field="antenna_type_id" desc="" exp=""/>
+        <constraint field="location_pk" desc="" exp=""/>
+        <constraint field="location_long" desc="" exp=""/>
+        <constraint field="location_lat" desc="" exp=""/>
+        <constraint field="individual_id" desc="" exp=""/>
+        <constraint field="signal_force" desc="" exp=""/>
+        <constraint field="observation" desc="" exp=""/>
+        <constraint field="detection_date" desc="" exp=""/>
+        <constraint field="antenna_type_antenna_type_name" desc="" exp=""/>
+        <constraint field="v_individual_tracking_scientific_name" desc="" exp=""/>
+        <constraint field="v_individual_tracking_taxon_id" desc="" exp=""/>
+        <constraint field="v_individual_tracking_tag" desc="" exp=""/>
+        <constraint field="v_individual_tracking_transmitter" desc="" exp=""/>
+        <constraint field="v_individual_tracking_project_id" desc="" exp=""/>
+        <constraint field="v_individual_tracking_project_name" desc="" exp=""/>
+        <constraint field="v_individual_tracking_transmitter_type_name" desc="" exp=""/>
+        <constraint field="v_individual_tracking_transmitter_type_id" desc="" exp=""/>
+        <constraint field="v_individual_tracking_release_station_name" desc="" exp=""/>
+        <constraint field="v_individual_tracking_release_station_id" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="location_id" width="-1" type="field" hidden="0"/>
+          <column name="project_id" width="-1" type="field" hidden="0"/>
+          <column name="river_id" width="-1" type="field" hidden="0"/>
+          <column name="antenna_type_id" width="-1" type="field" hidden="0"/>
+          <column name="location_pk" width="-1" type="field" hidden="0"/>
+          <column name="location_long" width="-1" type="field" hidden="0"/>
+          <column name="location_lat" width="-1" type="field" hidden="0"/>
+          <column name="individual_id" width="-1" type="field" hidden="0"/>
+          <column name="signal_force" width="-1" type="field" hidden="0"/>
+          <column name="observation" width="-1" type="field" hidden="0"/>
+          <column name="detection_date" width="-1" type="field" hidden="0"/>
+          <column name="antenna_type_antenna_type_name" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_scientific_name" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_taxon_id" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_tag" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_transmitter" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_project_id" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_project_name" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_transmitter_type_name" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_transmitter_type_id" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_release_station_name" width="-1" type="field" hidden="0"/>
+          <column name="v_individual_tracking_release_station_id" width="-1" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorField showLabel="1" index="10" name="detection_date"/>
+        <attributeEditorField showLabel="1" index="7" name="individual_id"/>
+        <attributeEditorField showLabel="1" index="3" name="antenna_type_id"/>
+        <attributeEditorField showLabel="1" index="1" name="project_id"/>
+        <attributeEditorField showLabel="1" index="5" name="location_long"/>
+        <attributeEditorField showLabel="1" index="6" name="location_lat"/>
+        <attributeEditorField showLabel="1" index="8" name="signal_force"/>
+        <attributeEditorField showLabel="1" index="9" name="observation"/>
+        <attributeEditorField showLabel="1" index="5" name="location_long"/>
+        <attributeEditorField showLabel="1" index="6" name="location_lat"/>
+      </attributeEditorForm>
+      <editable>
+        <field editable="0" name="antenna_type_antenna_type_name"/>
+        <field editable="1" name="antenna_type_id"/>
+        <field editable="1" name="detection_date"/>
+        <field editable="1" name="individual_id"/>
+        <field editable="1" name="location_id"/>
+        <field editable="1" name="location_lat"/>
+        <field editable="1" name="location_long"/>
+        <field editable="1" name="location_pk"/>
+        <field editable="1" name="observation"/>
+        <field editable="0" name="project_id"/>
+        <field editable="1" name="river_id"/>
+        <field editable="1" name="signal_force"/>
+        <field editable="0" name="v_individual_tracking_project_id"/>
+        <field editable="0" name="v_individual_tracking_project_name"/>
+        <field editable="0" name="v_individual_tracking_release_station_id"/>
+        <field editable="0" name="v_individual_tracking_release_station_name"/>
+        <field editable="0" name="v_individual_tracking_scientific_name"/>
+        <field editable="0" name="v_individual_tracking_tag"/>
+        <field editable="0" name="v_individual_tracking_taxon_id"/>
+        <field editable="0" name="v_individual_tracking_transmitter"/>
+        <field editable="0" name="v_individual_tracking_transmitter_type_id"/>
+        <field editable="0" name="v_individual_tracking_transmitter_type_name"/>
+      </editable>
+      <labelOnTop>
+        <field name="antenna_type_antenna_type_name" labelOnTop="0"/>
+        <field name="antenna_type_id" labelOnTop="0"/>
+        <field name="detection_date" labelOnTop="0"/>
+        <field name="individual_id" labelOnTop="0"/>
+        <field name="location_id" labelOnTop="0"/>
+        <field name="location_lat" labelOnTop="0"/>
+        <field name="location_long" labelOnTop="0"/>
+        <field name="location_pk" labelOnTop="0"/>
+        <field name="observation" labelOnTop="0"/>
+        <field name="project_id" labelOnTop="0"/>
+        <field name="river_id" labelOnTop="0"/>
+        <field name="signal_force" labelOnTop="0"/>
+        <field name="v_individual_tracking_project_id" labelOnTop="0"/>
+        <field name="v_individual_tracking_project_name" labelOnTop="0"/>
+        <field name="v_individual_tracking_release_station_id" labelOnTop="0"/>
+        <field name="v_individual_tracking_release_station_name" labelOnTop="0"/>
+        <field name="v_individual_tracking_scientific_name" labelOnTop="0"/>
+        <field name="v_individual_tracking_tag" labelOnTop="0"/>
+        <field name="v_individual_tracking_taxon_id" labelOnTop="0"/>
+        <field name="v_individual_tracking_transmitter" labelOnTop="0"/>
+        <field name="v_individual_tracking_transmitter_type_id" labelOnTop="0"/>
+        <field name="v_individual_tracking_transmitter_type_name" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>location_id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer simplifyDrawingHints="0" geometry="Point" type="vector" autoRefreshTime="0" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" simplifyMaxScale="1" refreshOnNotifyMessage="" readOnly="0" simplifyDrawingTol="1" labelsEnabled="1" styleCategories="AllStyleCategories" wkbType="Point" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" minScale="1e+8">
+      <extent>
+        <xmin>-0.62284172441744545</xmin>
+        <ymin>45.035000322158659</ymin>
+        <xmax>-0.59902579674016443</xmax>
+        <ymax>45.05962941990227222</ymax>
+      </extent>
+      <id>points_temporaires_86fee51e_3ef5_437f_98bf_3764d827ad66</id>
+      <datasource>../../../points_temporaires.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Points de mesure du rayon de détection d'une sonde (couche temporaire)</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxz="0" miny="0" crs="" minx="0" maxx="0" minz="0" maxy="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
+        <symbols>
+          <symbol alpha="1" name="0" clip_to_extent="1" type="marker" force_rhr="0">
+            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+              <prop v="0" k="angle"/>
+              <prop v="227,26,28,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <labeling type="simple">
+        <settings>
+          <text-style fontWeight="50" blendMode="0" fontSize="10" fontCapitals="0" useSubstitutions="0" fontUnderline="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontLetterSpacing="0" multilineHeight="1" textColor="0,0,0,255" fontItalic="0" isExpression="0" textOpacity="1" fieldName="station_id" fontWordSpacing="0" previewBkgrdColor="#ffffff" fontFamily="Cantarell" fontSizeUnit="Point" namedStyle="Regular" fontStrikeout="0">
+            <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferBlendMode="0" bufferSizeUnits="MM" bufferColor="255,255,255,255" bufferOpacity="1" bufferNoFill="1" bufferSize="1" bufferDraw="0"/>
+            <background shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeOpacity="1" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeJoinStyle="64" shapeRadiiX="0" shapeOffsetUnit="MM" shapeFillColor="255,255,255,255" shapeSizeUnit="MM" shapeBlendMode="0" shapeDraw="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeRotation="0" shapeType="0" shapeOffsetY="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeRadiiUnit="MM" shapeOffsetX="0" shapeBorderWidth="0" shapeSizeX="0" shapeRadiiY="0"/>
+            <shadow shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetDist="1" shadowOffsetAngle="135" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100" shadowRadiusUnit="MM" shadowOffsetGlobal="1" shadowRadius="1.5" shadowOpacity="0.7" shadowOffsetUnit="MM" shadowDraw="0" shadowRadiusAlphaOnly="0" shadowUnder="0" shadowColor="0,0,0,255" shadowBlendMode="6"/>
+            <substitutions/>
+          </text-style>
+          <text-format plussign="0" autoWrapLength="0" multilineAlign="3" decimals="3" wrapChar="" addDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0" leftDirectionSymbol="&lt;" placeDirectionSymbol="0" useMaxLineLengthForAutoWrap="1" formatNumbers="0"/>
+          <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" yOffset="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" placementFlags="10" quadOffset="4" dist="0" distMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" geometryGeneratorEnabled="0" fitInPolygonOnly="0" maxCurvedCharAngleOut="-25" centroidWhole="0" centroidInside="0" geometryGenerator="" priority="5" offsetType="0" repeatDistance="0" placement="0" xOffset="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleIn="25" offsetUnits="MM" distUnits="MM" geometryGeneratorType="PointGeometry" preserveRotation="1" repeatDistanceUnits="MM"/>
+          <rendering displayAll="0" obstacle="1" scaleMax="0" scaleVisibility="0" minFeatureSize="0" fontLimitPixelSize="0" fontMinPixelSize="3" upsidedownLabels="0" mergeLines="0" labelPerPart="0" limitNumLabels="0" obstacleFactor="1" obstacleType="0" fontMaxPixelSize="10000" drawLabels="1" scaleMin="0" zIndex="0" maxNumLabels="2000"/>
+          <dd_properties>
+            <Option type="Map">
+              <Option value="" name="name" type="QString"/>
+              <Option name="properties"/>
+              <Option value="collection" name="type" type="QString"/>
+            </Option>
+          </dd_properties>
+        </settings>
+      </labeling>
+      <customproperties>
+        <property key="QFieldSync/action" value="offline"/>
+        <property key="dualview/previewExpressions" value="id"/>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames" value="code_antenne"/>
+        <property key="variableValues" value=""/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory labelPlacementMethod="XHeight" opacity="1" penAlpha="255" scaleDependency="Area" rotationOffset="270" minScaleDenominator="0" sizeScale="3x:0,0,0,0,0,0" backgroundColor="#ffffff" backgroundAlpha="255" lineSizeScale="3x:0,0,0,0,0,0" width="15" penWidth="0" penColor="#000000" minimumSize="0" lineSizeType="MM" maxScaleDenominator="1e+8" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" diagramOrientation="Up" barWidth="5">
+          <fontProperties style="" description="Cantarell,11,-1,5,50,0,0,0,0,0"/>
+          <attribute label="" field="" color="#000000"/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings placement="0" zIndex="0" obstacle="0" dist="0" showAll="1" priority="0" linePlacementFlags="18">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_id">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option value="14" name="test13" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="17" name="test2" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="18" name="station rive gauche" type="QString"/>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="Station concernée" field="station_id"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"/>
+        <default applyOnUpdate="0" expression="" field="station_id"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="0" unique_strength="0" field="id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_id" exp_strength="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="id" desc="" exp=""/>
+        <constraint field="station_id" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="id" width="-1" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+          <column name="station_id" width="-1" type="field" hidden="0"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorField showLabel="1" index="1" name="station_id"/>
+      </attributeEditorForm>
+      <editable>
+        <field editable="1" name="antenna_id"/>
+        <field editable="1" name="id"/>
+        <field editable="1" name="station_id"/>
+      </editable>
+      <labelOnTop>
+        <field name="antenna_id" labelOnTop="0"/>
+        <field name="id" labelOnTop="0"/>
+        <field name="station_id" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer minScale="1e+8" readOnly="1" refreshOnNotifyEnabled="0" geometry="No geometry" autoRefreshTime="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" maxScale="0" wkbType="NoGeometry" hasScaleBasedVisibilityFlag="0" type="vector" styleCategories="AllStyleCategories">
+      <id>project_97495662_38fd_45c8_ab28_4d09040d4cb4</id>
+      <datasource>dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='project_id' checkPrimaryKeyUnicity='1' table="filo"."project" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>project</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List of projects. This table is used for grant rights</abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="QFieldSync/action" value="remove"/>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="project_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="is_active">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="metric_srid">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="protocol_default_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="project_id"/>
+        <alias index="1" name="" field="project_name"/>
+        <alias index="2" name="" field="is_active"/>
+        <alias index="3" name="" field="metric_srid"/>
+        <alias index="4" name="" field="protocol_default_id"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="project_id"/>
+        <default applyOnUpdate="0" expression="" field="project_name"/>
+        <default applyOnUpdate="0" expression="" field="is_active"/>
+        <default applyOnUpdate="0" expression="" field="metric_srid"/>
+        <default applyOnUpdate="0" expression="" field="protocol_default_id"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" field="project_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="1" unique_strength="0" field="project_name" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" field="is_active" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="metric_srid" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="protocol_default_id" exp_strength="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="project_id" desc="" exp=""/>
+        <constraint field="project_name" desc="" exp=""/>
+        <constraint field="is_active" desc="" exp=""/>
+        <constraint field="metric_srid" desc="" exp=""/>
+        <constraint field="protocol_default_id" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer minScale="1e+8" readOnly="1" refreshOnNotifyEnabled="0" geometry="No geometry" autoRefreshTime="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" maxScale="0" wkbType="NoGeometry" hasScaleBasedVisibilityFlag="0" type="vector" styleCategories="AllStyleCategories">
+      <id>station_type_ee1c3ec9_1257_4169_8e31_ad036002ec8b</id>
+      <datasource>dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='station_type_id' checkPrimaryKeyUnicity='1' table="tracking"."station_type" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>station_type</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="QFieldSync/action" value="remove"/>
+        <property key="dualview/previewExpressions" value="&quot;station_type_name&quot;"/>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="station_type_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_type_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="station_type_id"/>
+        <alias index="1" name="" field="station_type_name"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="station_type_id"/>
+        <default applyOnUpdate="0" expression="" field="station_type_name"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" field="station_type_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="1" unique_strength="0" field="station_type_name" exp_strength="0" notnull_strength="1"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="station_type_id" desc="" exp=""/>
+        <constraint field="station_type_name" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="station_type_id" width="-1" type="field" hidden="0"/>
+          <column name="station_type_name" width="379" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression>"station_type_name"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer simplifyDrawingHints="1" geometry="Polygon" type="vector" autoRefreshTime="0" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" simplifyMaxScale="1" refreshOnNotifyMessage="" readOnly="0" simplifyDrawingTol="1" labelsEnabled="0" styleCategories="AllStyleCategories" wkbType="Polygon" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" minScale="1e+8">
+      <extent>
+        <xmin>-0.62619687355183695</xmin>
+        <ymin>45.03400576947920086</ymin>
+        <xmax>-0.60485775928587904</xmax>
+        <ymax>45.05905448383050071</ymax>
+      </extent>
+      <id>v_antenna_geom_polygon_0dead538_194e_4300_9e26_7c30a4beda0e</id>
+      <datasource>dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='antenna_id' srid=4326 type=Polygon checkPrimaryKeyUnicity='1' table="tracking"."v_antenna" (geom_polygon) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>périmètre de détection d'une antenne</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+            <srsid>3452</srsid>
+            <srid>4326</srid>
+            <authid>EPSG:4326</authid>
+            <description>WGS 84</description>
+            <projectionacronym>longlat</projectionacronym>
+            <ellipsoidacronym>WGS84</ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxz="0" miny="0" crs="EPSG:4326" minx="0" maxx="0" minz="0" maxy="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
+        <symbols>
+          <symbol alpha="0.5" name="0" clip_to_extent="1" type="fill" force_rhr="0">
+            <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="178,223,138,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="QFieldSync/action" value="remove"/>
+        <property key="dualview/previewExpressions">
+          <value>technology_type_name</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory labelPlacementMethod="XHeight" opacity="1" penAlpha="255" scaleDependency="Area" rotationOffset="270" minScaleDenominator="0" sizeScale="3x:0,0,0,0,0,0" backgroundColor="#ffffff" backgroundAlpha="255" lineSizeScale="3x:0,0,0,0,0,0" width="15" penWidth="0" penColor="#000000" minimumSize="0" lineSizeType="MM" maxScaleDenominator="1e+8" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" diagramOrientation="Up" barWidth="5">
+          <fontProperties style="" description="Cantarell,11,-1,5,50,0,0,0,0,0"/>
+          <attribute label="" field="" color="#000000"/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings placement="1" zIndex="0" obstacle="0" dist="0" showAll="1" priority="0" linePlacementFlags="18">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="antenna_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="technology_type_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="antenna_code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="radius">
+          <editWidget type="Range">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="AllowNull" type="bool"/>
+                <Option value="2147483647" name="Max" type="int"/>
+                <Option value="-2147483648" name="Min" type="int"/>
+                <Option value="0" name="Precision" type="int"/>
+                <Option value="1" name="Step" type="int"/>
+                <Option value="SpinBox" name="Style" type="QString"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="technology_type_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_type_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_type_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="metric_srid">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_long">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_pk">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="geom">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="antenna_id"/>
+        <alias index="1" name="" field="station_id"/>
+        <alias index="2" name="" field="technology_type_id"/>
+        <alias index="3" name="" field="antenna_code"/>
+        <alias index="4" name="" field="radius"/>
+        <alias index="5" name="" field="technology_type_name"/>
+        <alias index="6" name="" field="station_type_id"/>
+        <alias index="7" name="" field="station_type_name"/>
+        <alias index="8" name="" field="project_id"/>
+        <alias index="9" name="" field="project_name"/>
+        <alias index="10" name="" field="metric_srid"/>
+        <alias index="11" name="" field="station_name"/>
+        <alias index="12" name="" field="station_long"/>
+        <alias index="13" name="" field="station_lat"/>
+        <alias index="14" name="" field="station_pk"/>
+        <alias index="15" name="" field="geom"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="antenna_id"/>
+        <default applyOnUpdate="0" expression="" field="station_id"/>
+        <default applyOnUpdate="0" expression="" field="technology_type_id"/>
+        <default applyOnUpdate="0" expression="" field="antenna_code"/>
+        <default applyOnUpdate="0" expression="" field="radius"/>
+        <default applyOnUpdate="0" expression="" field="technology_type_name"/>
+        <default applyOnUpdate="0" expression="" field="station_type_id"/>
+        <default applyOnUpdate="0" expression="" field="station_type_name"/>
+        <default applyOnUpdate="0" expression="" field="project_id"/>
+        <default applyOnUpdate="0" expression="" field="project_name"/>
+        <default applyOnUpdate="0" expression="" field="metric_srid"/>
+        <default applyOnUpdate="0" expression="" field="station_name"/>
+        <default applyOnUpdate="0" expression="" field="station_long"/>
+        <default applyOnUpdate="0" expression="" field="station_lat"/>
+        <default applyOnUpdate="0" expression="" field="station_pk"/>
+        <default applyOnUpdate="0" expression="" field="geom"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" field="antenna_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" field="station_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="technology_type_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="antenna_code" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="radius" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="technology_type_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_type_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_type_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="project_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="project_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="metric_srid" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_long" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_lat" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_pk" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="geom" exp_strength="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="antenna_id" desc="" exp=""/>
+        <constraint field="station_id" desc="" exp=""/>
+        <constraint field="technology_type_id" desc="" exp=""/>
+        <constraint field="antenna_code" desc="" exp=""/>
+        <constraint field="radius" desc="" exp=""/>
+        <constraint field="technology_type_name" desc="" exp=""/>
+        <constraint field="station_type_id" desc="" exp=""/>
+        <constraint field="station_type_name" desc="" exp=""/>
+        <constraint field="project_id" desc="" exp=""/>
+        <constraint field="project_name" desc="" exp=""/>
+        <constraint field="metric_srid" desc="" exp=""/>
+        <constraint field="station_name" desc="" exp=""/>
+        <constraint field="station_long" desc="" exp=""/>
+        <constraint field="station_lat" desc="" exp=""/>
+        <constraint field="station_pk" desc="" exp=""/>
+        <constraint field="geom" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="antenna_id" width="-1" type="field" hidden="0"/>
+          <column name="station_id" width="-1" type="field" hidden="0"/>
+          <column name="technology_type_id" width="-1" type="field" hidden="0"/>
+          <column name="antenna_code" width="-1" type="field" hidden="0"/>
+          <column name="radius" width="-1" type="field" hidden="0"/>
+          <column name="technology_type_name" width="-1" type="field" hidden="0"/>
+          <column name="station_type_id" width="-1" type="field" hidden="0"/>
+          <column name="station_type_name" width="-1" type="field" hidden="0"/>
+          <column name="project_id" width="-1" type="field" hidden="0"/>
+          <column name="project_name" width="-1" type="field" hidden="0"/>
+          <column name="metric_srid" width="-1" type="field" hidden="0"/>
+          <column name="station_name" width="-1" type="field" hidden="0"/>
+          <column name="station_long" width="-1" type="field" hidden="0"/>
+          <column name="station_lat" width="-1" type="field" hidden="0"/>
+          <column name="station_pk" width="-1" type="field" hidden="0"/>
+          <column name="geom" width="-1" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorField showLabel="1" index="11" name="station_name"/>
+        <attributeEditorField showLabel="1" index="3" name="antenna_code"/>
+        <attributeEditorField showLabel="1" index="4" name="radius"/>
+      </attributeEditorForm>
+      <editable>
+        <field editable="0" name="antenna_code"/>
+        <field editable="1" name="antenna_id"/>
+        <field editable="1" name="geom"/>
+        <field editable="1" name="metric_srid"/>
+        <field editable="1" name="project_id"/>
+        <field editable="1" name="project_name"/>
+        <field editable="1" name="radius"/>
+        <field editable="1" name="station_id"/>
+        <field editable="1" name="station_lat"/>
+        <field editable="1" name="station_long"/>
+        <field editable="0" name="station_name"/>
+        <field editable="1" name="station_pk"/>
+        <field editable="1" name="station_type_id"/>
+        <field editable="1" name="station_type_name"/>
+        <field editable="1" name="technology_type_id"/>
+        <field editable="1" name="technology_type_name"/>
+      </editable>
+      <labelOnTop>
+        <field name="antenna_code" labelOnTop="0"/>
+        <field name="antenna_id" labelOnTop="0"/>
+        <field name="geom" labelOnTop="0"/>
+        <field name="metric_srid" labelOnTop="0"/>
+        <field name="project_id" labelOnTop="0"/>
+        <field name="project_name" labelOnTop="0"/>
+        <field name="radius" labelOnTop="0"/>
+        <field name="station_id" labelOnTop="0"/>
+        <field name="station_lat" labelOnTop="0"/>
+        <field name="station_long" labelOnTop="0"/>
+        <field name="station_name" labelOnTop="0"/>
+        <field name="station_pk" labelOnTop="0"/>
+        <field name="station_type_id" labelOnTop="0"/>
+        <field name="station_type_name" labelOnTop="0"/>
+        <field name="technology_type_id" labelOnTop="0"/>
+        <field name="technology_type_name" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>technology_type_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer minScale="1e+8" readOnly="1" refreshOnNotifyEnabled="0" geometry="No geometry" autoRefreshTime="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" maxScale="0" wkbType="NoGeometry" hasScaleBasedVisibilityFlag="0" type="vector" styleCategories="AllStyleCategories">
+      <id>v_individual_tracking_c3837401_2143_4d21_90e4_9d139c350d3e</id>
+      <datasource>dbname='filo' host=localhost port=5432 authcfg=6kdc86q key='individual_id' checkPrimaryKeyUnicity='1' table="tracking"."v_individual_tracking" sql="project_id" = 1</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>v_individual_tracking</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>View of the fishes tracked</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxz="0" miny="0" crs="" minx="0" maxx="0" minz="0" maxy="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="QFieldSync/action" value="remove"/>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="individual_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="scientific_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="taxon_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tag">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="transmitter">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="transmitter_type_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="transmitter_type_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="release_station_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="release_station_id">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="individual_id"/>
+        <alias index="1" name="" field="scientific_name"/>
+        <alias index="2" name="" field="taxon_id"/>
+        <alias index="3" name="" field="tag"/>
+        <alias index="4" name="" field="transmitter"/>
+        <alias index="5" name="" field="project_id"/>
+        <alias index="6" name="" field="project_name"/>
+        <alias index="7" name="" field="transmitter_type_name"/>
+        <alias index="8" name="" field="transmitter_type_id"/>
+        <alias index="9" name="" field="release_station_name"/>
+        <alias index="10" name="" field="release_station_id"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="individual_id"/>
+        <default applyOnUpdate="0" expression="" field="scientific_name"/>
+        <default applyOnUpdate="0" expression="" field="taxon_id"/>
+        <default applyOnUpdate="0" expression="" field="tag"/>
+        <default applyOnUpdate="0" expression="" field="transmitter"/>
+        <default applyOnUpdate="0" expression="" field="project_id"/>
+        <default applyOnUpdate="0" expression="" field="project_name"/>
+        <default applyOnUpdate="0" expression="" field="transmitter_type_name"/>
+        <default applyOnUpdate="0" expression="" field="transmitter_type_id"/>
+        <default applyOnUpdate="0" expression="" field="release_station_name"/>
+        <default applyOnUpdate="0" expression="" field="release_station_id"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" field="individual_id" exp_strength="0" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" field="scientific_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="taxon_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="tag" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="transmitter" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="project_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="project_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="transmitter_type_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="transmitter_type_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="release_station_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="release_station_id" exp_strength="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="individual_id" desc="" exp=""/>
+        <constraint field="scientific_name" desc="" exp=""/>
+        <constraint field="taxon_id" desc="" exp=""/>
+        <constraint field="tag" desc="" exp=""/>
+        <constraint field="transmitter" desc="" exp=""/>
+        <constraint field="project_id" desc="" exp=""/>
+        <constraint field="project_name" desc="" exp=""/>
+        <constraint field="transmitter_type_name" desc="" exp=""/>
+        <constraint field="transmitter_type_id" desc="" exp=""/>
+        <constraint field="release_station_name" desc="" exp=""/>
+        <constraint field="release_station_id" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="individual_id" width="-1" type="field" hidden="0"/>
+          <column name="scientific_name" width="-1" type="field" hidden="0"/>
+          <column name="taxon_id" width="-1" type="field" hidden="0"/>
+          <column name="tag" width="-1" type="field" hidden="0"/>
+          <column name="transmitter" width="-1" type="field" hidden="0"/>
+          <column name="project_id" width="-1" type="field" hidden="0"/>
+          <column name="project_name" width="-1" type="field" hidden="0"/>
+          <column name="transmitter_type_name" width="-1" type="field" hidden="0"/>
+          <column name="transmitter_type_id" width="-1" type="field" hidden="0"/>
+          <column name="release_station_name" width="-1" type="field" hidden="0"/>
+          <column name="release_station_id" width="-1" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field editable="1" name="individual_id"/>
+        <field editable="1" name="project_id"/>
+        <field editable="1" name="project_name"/>
+        <field editable="1" name="release_station_id"/>
+        <field editable="1" name="release_station_name"/>
+        <field editable="1" name="scientific_name"/>
+        <field editable="1" name="tag"/>
+        <field editable="1" name="taxon_id"/>
+        <field editable="1" name="transmitter"/>
+        <field editable="1" name="transmitter_type_id"/>
+        <field editable="1" name="transmitter_type_name"/>
+      </editable>
+      <labelOnTop>
+        <field name="individual_id" labelOnTop="0"/>
+        <field name="project_id" labelOnTop="0"/>
+        <field name="project_name" labelOnTop="0"/>
+        <field name="release_station_id" labelOnTop="0"/>
+        <field name="release_station_name" labelOnTop="0"/>
+        <field name="scientific_name" labelOnTop="0"/>
+        <field name="tag" labelOnTop="0"/>
+        <field name="taxon_id" labelOnTop="0"/>
+        <field name="transmitter" labelOnTop="0"/>
+        <field name="transmitter_type_id" labelOnTop="0"/>
+        <field name="transmitter_type_name" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>scientific_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer simplifyDrawingHints="0" geometry="Point" type="vector" autoRefreshTime="0" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" simplifyMaxScale="1" refreshOnNotifyMessage="" readOnly="0" simplifyDrawingTol="1" labelsEnabled="1" styleCategories="AllStyleCategories" wkbType="Point" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" minScale="1e+8">
+      <extent>
+        <xmin>-0.61858527408930097</xmin>
+        <ymin>45.03940240026110331</ymin>
+        <xmax>-0.60676076247185196</xmax>
+        <ymax>45.05725559586470297</ymax>
+      </extent>
+      <id>v_station_tracking_563f2a21_35e1_47f2_ba81_6ae7ba09a5c1</id>
+      <datasource>dbname='filo' host=localhost port=5432 sslmode=disable authcfg=6kdc86q key='station_id' srid=4326 type=Point checkPrimaryKeyUnicity='1' table="tracking"."v_station_tracking" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>stations</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List of stations used for tracking, with geom object</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+            <srsid>3452</srsid>
+            <srid>4326</srid>
+            <authid>EPSG:4326</authid>
+            <description>WGS 84</description>
+            <projectionacronym>longlat</projectionacronym>
+            <ellipsoidacronym>WGS84</ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxz="0" miny="0" crs="EPSG:4326" minx="0" maxx="0" minz="0" maxy="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
+        <symbols>
+          <symbol alpha="1" name="0" clip_to_extent="1" type="marker" force_rhr="0">
+            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+              <prop v="0" k="angle"/>
+              <prop v="114,155,111,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <labeling type="simple">
+        <settings>
+          <text-style fontWeight="50" blendMode="0" fontSize="10" fontCapitals="0" useSubstitutions="0" fontUnderline="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontLetterSpacing="0" multilineHeight="1" textColor="0,0,0,255" fontItalic="0" isExpression="0" textOpacity="1" fieldName="station_name" fontWordSpacing="0" previewBkgrdColor="#ffffff" fontFamily="Cantarell" fontSizeUnit="Point" namedStyle="Regular" fontStrikeout="0">
+            <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferBlendMode="0" bufferSizeUnits="MM" bufferColor="255,255,255,255" bufferOpacity="1" bufferNoFill="1" bufferSize="1" bufferDraw="0"/>
+            <background shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeOpacity="1" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeJoinStyle="64" shapeRadiiX="0" shapeOffsetUnit="MM" shapeFillColor="255,255,255,255" shapeSizeUnit="MM" shapeBlendMode="0" shapeDraw="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeRotation="0" shapeType="0" shapeOffsetY="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeRadiiUnit="MM" shapeOffsetX="0" shapeBorderWidth="0" shapeSizeX="0" shapeRadiiY="0"/>
+            <shadow shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetDist="1" shadowOffsetAngle="135" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100" shadowRadiusUnit="MM" shadowOffsetGlobal="1" shadowRadius="1.5" shadowOpacity="0.7" shadowOffsetUnit="MM" shadowDraw="0" shadowRadiusAlphaOnly="0" shadowUnder="0" shadowColor="0,0,0,255" shadowBlendMode="6"/>
+            <substitutions/>
+          </text-style>
+          <text-format plussign="0" autoWrapLength="0" multilineAlign="3" decimals="3" wrapChar="" addDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0" leftDirectionSymbol="&lt;" placeDirectionSymbol="0" useMaxLineLengthForAutoWrap="1" formatNumbers="0"/>
+          <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" yOffset="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" placementFlags="10" quadOffset="4" dist="0" distMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" geometryGeneratorEnabled="0" fitInPolygonOnly="0" maxCurvedCharAngleOut="-25" centroidWhole="0" centroidInside="0" geometryGenerator="" priority="5" offsetType="0" repeatDistance="0" placement="0" xOffset="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleIn="25" offsetUnits="MM" distUnits="MM" geometryGeneratorType="PointGeometry" preserveRotation="1" repeatDistanceUnits="MM"/>
+          <rendering displayAll="0" obstacle="1" scaleMax="0" scaleVisibility="0" minFeatureSize="0" fontLimitPixelSize="0" fontMinPixelSize="3" upsidedownLabels="0" mergeLines="0" labelPerPart="0" limitNumLabels="0" obstacleFactor="1" obstacleType="0" fontMaxPixelSize="10000" drawLabels="1" scaleMin="0" zIndex="0" maxNumLabels="2000"/>
+          <dd_properties>
+            <Option type="Map">
+              <Option value="" name="name" type="QString"/>
+              <Option name="properties"/>
+              <Option value="collection" name="type" type="QString"/>
+            </Option>
+          </dd_properties>
+        </settings>
+      </labeling>
+      <customproperties>
+        <property key="QFieldSync/action" value="offline"/>
+        <property key="dualview/previewExpressions" value="station_name"/>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory labelPlacementMethod="XHeight" opacity="1" penAlpha="255" scaleDependency="Area" rotationOffset="270" minScaleDenominator="0" sizeScale="3x:0,0,0,0,0,0" backgroundColor="#ffffff" backgroundAlpha="255" lineSizeScale="3x:0,0,0,0,0,0" width="15" penWidth="0" penColor="#000000" minimumSize="0" lineSizeType="MM" maxScaleDenominator="1e+8" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" diagramOrientation="Up" barWidth="5">
+          <fontProperties style="" description="Cantarell,11,-1,5,50,0,0,0,0,0"/>
+          <attribute label="" field="" color="#000000"/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings placement="0" zIndex="0" obstacle="0" dist="0" showAll="1" priority="0" linePlacementFlags="18">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="station_id">
+          <editWidget type="Range">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="AllowNull" type="bool"/>
+                <Option value="2147483647" name="Max" type="int"/>
+                <Option value="-2147483648" name="Min" type="int"/>
+                <Option value="0" name="Precision" type="int"/>
+                <Option value="1" name="Step" type="int"/>
+                <Option value="SpinBox" name="Style" type="QString"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_long">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_pk">
+          <editWidget type="Range">
+            <config>
+              <Option type="Map">
+                <Option value="true" name="AllowNull" type="bool"/>
+                <Option value="2147483647" name="Max" type="int"/>
+                <Option value="-2147483648" name="Min" type="int"/>
+                <Option value="0" name="Precision" type="int"/>
+                <Option value="1" name="Step" type="int"/>
+                <Option value="SpinBox" name="Style" type="QString"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_type_id">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option value="1" name="Station de mesure physico-chimique" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="2" name="Station d'enregistrement" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="3" name="Station de lâcher" type="QString"/>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="station_type_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_id">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option value="1" name="Test" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option value="3" name="Test non actif" type="QString"/>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="project_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option value="false" name="IsMultiline" type="bool"/>
+                <Option value="false" name="UseHtml" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="Numéro informatique" field="station_id"/>
+        <alias index="1" name="Nom de la station" field="station_name"/>
+        <alias index="2" name="Longitude (calculée)" field="station_long"/>
+        <alias index="3" name="Latitude (calculée)" field="station_lat"/>
+        <alias index="4" name="pk" field="station_pk"/>
+        <alias index="5" name="Type de station" field="station_type_id"/>
+        <alias index="6" name="" field="station_type_name"/>
+        <alias index="7" name="Projet de rattachement" field="project_id"/>
+        <alias index="8" name="" field="project_name"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="station_id"/>
+        <default applyOnUpdate="0" expression="" field="station_name"/>
+        <default applyOnUpdate="1" expression="$x" field="station_long"/>
+        <default applyOnUpdate="1" expression="$y" field="station_lat"/>
+        <default applyOnUpdate="0" expression="" field="station_pk"/>
+        <default applyOnUpdate="0" expression="2" field="station_type_id"/>
+        <default applyOnUpdate="0" expression="" field="station_type_name"/>
+        <default applyOnUpdate="0" expression="1" field="project_id"/>
+        <default applyOnUpdate="0" expression="" field="project_name"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="2" field="station_id" exp_strength="0" notnull_strength="2"/>
+        <constraint constraints="0" unique_strength="0" field="station_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_long" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_lat" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="station_pk" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="1" unique_strength="0" field="station_type_id" exp_strength="0" notnull_strength="2"/>
+        <constraint constraints="0" unique_strength="0" field="station_type_name" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="project_id" exp_strength="0" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" field="project_name" exp_strength="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="station_id" desc="" exp=""/>
+        <constraint field="station_name" desc="" exp=""/>
+        <constraint field="station_long" desc="" exp=""/>
+        <constraint field="station_lat" desc="" exp=""/>
+        <constraint field="station_pk" desc="" exp=""/>
+        <constraint field="station_type_id" desc="" exp=""/>
+        <constraint field="station_type_name" desc="" exp=""/>
+        <constraint field="project_id" desc="" exp=""/>
+        <constraint field="project_name" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column name="station_id" width="-1" type="field" hidden="0"/>
+          <column name="station_name" width="-1" type="field" hidden="0"/>
+          <column name="station_long" width="-1" type="field" hidden="0"/>
+          <column name="station_lat" width="-1" type="field" hidden="0"/>
+          <column name="station_pk" width="-1" type="field" hidden="0"/>
+          <column name="station_type_id" width="-1" type="field" hidden="0"/>
+          <column name="station_type_name" width="-1" type="field" hidden="0"/>
+          <column name="project_id" width="-1" type="field" hidden="0"/>
+          <column name="project_name" width="-1" type="field" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorField showLabel="1" index="1" name="station_name"/>
+        <attributeEditorField showLabel="1" index="2" name="station_long"/>
+        <attributeEditorField showLabel="1" index="3" name="station_lat"/>
+        <attributeEditorField showLabel="1" index="4" name="station_pk"/>
+        <attributeEditorField showLabel="1" index="5" name="station_type_id"/>
+        <attributeEditorField showLabel="1" index="7" name="project_id"/>
+      </attributeEditorForm>
+      <editable>
+        <field editable="1" name="project_id"/>
+        <field editable="1" name="project_name"/>
+        <field editable="0" name="station_id"/>
+        <field editable="1" name="station_lat"/>
+        <field editable="1" name="station_long"/>
+        <field editable="1" name="station_name"/>
+        <field editable="1" name="station_pk"/>
+        <field editable="1" name="station_type_id"/>
+        <field editable="1" name="station_type_name"/>
+      </editable>
+      <labelOnTop>
+        <field name="project_id" labelOnTop="0"/>
+        <field name="project_name" labelOnTop="0"/>
+        <field name="station_id" labelOnTop="0"/>
+        <field name="station_lat" labelOnTop="0"/>
+        <field name="station_long" labelOnTop="0"/>
+        <field name="station_name" labelOnTop="0"/>
+        <field name="station_pk" labelOnTop="0"/>
+        <field name="station_type_id" labelOnTop="0"/>
+        <field name="station_type_name" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>station_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+  </projectlayers>
+  <layerorder>
+    <layer id="OpenStreetMap_5f85e3cf_abf6_4aaa_9a0f_a745b664db9b"/>
+    <layer id="v_station_tracking_563f2a21_35e1_47f2_ba81_6ae7ba09a5c1"/>
+    <layer id="location_d702658c_8d21_4df2_a100_4bf2639b312c"/>
+    <layer id="points_temporaires_86fee51e_3ef5_437f_98bf_3764d827ad66"/>
+    <layer id="v_antenna_geom_polygon_0dead538_194e_4300_9e26_7c30a4beda0e"/>
+  </layerorder>
+  <properties>
+    <DefaultStyles>
+      <ColorRamp type="QString"></ColorRamp>
+      <Fill type="QString"></Fill>
+      <Line type="QString"></Line>
+      <Marker type="QString"></Marker>
+      <Opacity type="double">1</Opacity>
+      <RandomColors type="bool">true</RandomColors>
+    </DefaultStyles>
+    <Gui>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+    </Gui>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+    <Macros>
+      <pythonCode type="QString"></pythonCode>
+    </Macros>
+    <Measure>
+      <Ellipsoid type="QString">WGS84</Ellipsoid>
+    </Measure>
+    <Measurement>
+      <AreaUnits type="QString">m2</AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+    </Measurement>
+    <PAL>
+      <CandidatesLine type="int">50</CandidatesLine>
+      <CandidatesPoint type="int">16</CandidatesPoint>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <SearchMethod type="int">0</SearchMethod>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <TextFormat type="int">0</TextFormat>
+    </PAL>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <PositionPrecision>
+      <Automatic type="bool">true</Automatic>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+      <DegreeFormat type="QString">MU</DegreeFormat>
+    </PositionPrecision>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+    <WCSLayers type="QStringList"/>
+    <WCSUrl type="QString"></WCSUrl>
+    <WFSLayers type="QStringList"/>
+    <WFSTLayers>
+      <Delete type="QStringList"/>
+      <Insert type="QStringList"/>
+      <Update type="QStringList"/>
+    </WFSTLayers>
+    <WFSUrl type="QString"></WFSUrl>
+    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
+    <WMSContactMail type="QString"></WMSContactMail>
+    <WMSContactOrganization type="QString"></WMSContactOrganization>
+    <WMSContactPerson type="QString"></WMSContactPerson>
+    <WMSContactPhone type="QString"></WMSContactPhone>
+    <WMSContactPosition type="QString"></WMSContactPosition>
+    <WMSDefaultMapUnitsPerMm type="double">1</WMSDefaultMapUnitsPerMm>
+    <WMSFees type="QString">conditions unknown</WMSFees>
+    <WMSImageQuality type="int">90</WMSImageQuality>
+    <WMSKeywordList type="QStringList">
+      <value></value>
+    </WMSKeywordList>
+    <WMSMaxAtlasFeatures type="int">1</WMSMaxAtlasFeatures>
+    <WMSOnlineResource type="QString"></WMSOnlineResource>
+    <WMSPrecision type="QString">8</WMSPrecision>
+    <WMSRootName type="QString"></WMSRootName>
+    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
+    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
+    <WMSServiceTitle type="QString"></WMSServiceTitle>
+    <WMSUrl type="QString"></WMSUrl>
+    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WMTSGrids>
+      <CRS type="QStringList"/>
+      <Config type="QStringList"/>
+    </WMTSGrids>
+    <WMTSJpegLayers>
+      <Group type="QStringList"/>
+      <Layer type="QStringList"/>
+      <Project type="bool">false</Project>
+    </WMTSJpegLayers>
+    <WMTSLayers>
+      <Group type="QStringList"/>
+      <Layer type="QStringList"/>
+      <Project type="bool">false</Project>
+    </WMTSLayers>
+    <WMTSMinScale type="int">5000</WMTSMinScale>
+    <WMTSPngLayers>
+      <Group type="QStringList"/>
+      <Layer type="QStringList"/>
+      <Project type="bool">false</Project>
+    </WMTSPngLayers>
+    <WMTSUrl type="QString"></WMTSUrl>
+    <qfieldsync>
+      <baseMapLayer type="QString">OpenStreetMap_5f85e3cf_abf6_4aaa_9a0f_a745b664db9b</baseMapLayer>
+      <baseMapMupp type="double">10</baseMapMupp>
+      <baseMapTheme type="QString"></baseMapTheme>
+      <baseMapTileSize type="int">1024</baseMapTileSize>
+      <baseMapType type="QString">singleLayer</baseMapType>
+      <createBaseMap type="int">1</createBaseMap>
+      <importedFilesChecksums type="QStringList">
+        <value>4d03de74c028835b834b07ba5517125f</value>
+        <value>598af11d3852a9b2b49606e13500f422</value>
+        <value>42133e8a015c258dc33af3504d58950b</value>
+        <value>068ce0d1c3be46c861a5489c4586617a</value>
+        <value>7464b606dc8a0f999029bc321a5337c6</value>
+      </importedFilesChecksums>
+      <offlineCopyOnlyAoi type="int">0</offlineCopyOnlyAoi>
+    </qfieldsync>
+  </properties>
+  <visibility-presets/>
+  <transformContext/>
+  <projectMetadata>
+    <identifier></identifier>
+    <parentidentifier></parentidentifier>
+    <language></language>
+    <type></type>
+    <title>Modèle qfield</title>
+    <abstract></abstract>
+    <contact>
+      <name></name>
+      <organization></organization>
+      <position></position>
+      <voice></voice>
+      <fax></fax>
+      <email></email>
+      <role></role>
+    </contact>
+    <links/>
+    <author>Eric Quinton</author>
+    <creation>2019-10-14T15:38:04</creation>
+  </projectMetadata>
+  <Annotations/>
+  <Layouts/>
+</qgis>

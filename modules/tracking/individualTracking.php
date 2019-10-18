@@ -25,9 +25,10 @@ switch ($t_module["param"]) {
         if ($_REQUEST["individual_id"] > 0) {
             $dindividual = $dataClass->lire($_REQUEST["individual_id"]);
             if ($dindividual["project_id"] == $project_id) {
-                include_once "modules/classes/tracking/detection.class.php";
+                /*include_once "modules/classes/tracking/detection.class.php";
                 $detection = new Detection($bdd, $ObjetBDDParam);
-                $vue->set($detection->getListFromIndividual($_REQUEST["individual_id"]), "detections");
+                $vue->set($detection->getListFromIndividual($_REQUEST["individual_id"]), "detections");*/
+                $vue->set($dataClass->getListDetection($_REQUEST["individual_id"]), "detections");
                 $vue->set($_REQUEST["individual_id"], "selectedIndividual");
             }
         }
