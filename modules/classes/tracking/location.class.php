@@ -22,9 +22,9 @@ class Location extends ObjetBDD
     function __construct(PDO $bdd, array $param = array())
     {
         $this->table = "location";
+        $this->srid = 4326;
         $this->colonnes = array(
             "location_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
-            "project_id" => array("type" => 1, "requis" => 1),
             "individual_id"=>array("type"=>1, "requis"=>1, "parentAttrib" => 1),
             "antenna_type_id"=>array("type"=>1),
             "detection_date" => array("type"=>3, "requis"=>1, "defaultValue"=>"getDateHeure"),

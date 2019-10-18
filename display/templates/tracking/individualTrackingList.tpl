@@ -110,57 +110,62 @@
             </tbody>
         </table>
     </div>
-    {if count($detections) > 0}
+    {if $selectedIndividual > 0}
         <fieldset class="col-md-12 col-lg-6">
             <legend>{t}Liste des détections{/t}</legend>
-            <table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
-                <thead>
-                    <tr>
-                        <th>{t}Id{/t}</th>
-                        <th>{t}Date/heure de détection{/t}</th>
-                        <th>{t}Type de détection{/t}</th>
-                        <th>{t}Nbre d'événements{/t}</th>
-                        <th>{t}Durée, en secondes{/t}</th>
-                        <th>{t}Force du signal{/t}</th>
-                        <th>{t}Observation{/t}</th>
-                        <th>{t}Valide ?{/t}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {foreach $detections as $detection}
+            <a href="index.php?module=locationChange&location_id=0&individual_id={$selectedIndividual}">
+                {t}Nouvelle détection manuelle{/t}
+            </a>
+            {if count($detections) > 0}
+                <table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
+                    <thead>
                         <tr>
-                            <td class="center">
-                                {if $droits.gestion == 1}
-                                    {if $detection.detection_type == "stationary"}
-                                        <a href="index.php?module=detectionChange&detection_id={$detection.id}&individual_id={$detection.individual_id}">
-                                        {else}
-                                        <a href="index.php?module=locationChange&location_id={$detection.id}&individual_id={$detection.individual_id}">
-                                    {/if}
-                                    {$detection.id}
-                                    </a>
-                                {else}
-                                    {$detection.id}
-                                {/if}
-                            </td>
-                            <td>{$detection.detection_date}</td>
-                            <td>
-                                {if $detection.detection_type == "stationary"}
-                                    {t}Station fixe{/t}
-                                {else}
-                                    {t}Détection mobile{/t}
-                                {/if}
-                            </td>
-                            <td class="center">{$detection.nb_events}</td>
-                            <td class="center">{$detection.duration}</td>
-                            <td class="right">{$detection.signal_force}</td>
-                            <td class="textareaDisplay">{$detection.observation}</td>
-                            <td class="center">
-                                {if $detection.validity == 1}oui{else}<span class="red">non</span>{/if}
-                            </td>
+                            <th>{t}Id{/t}</th>
+                            <th>{t}Date/heure de détection{/t}</th>
+                            <th>{t}Type de détection{/t}</th>
+                            <th>{t}Nbre d'événements{/t}</th>
+                            <th>{t}Durée, en secondes{/t}</th>
+                            <th>{t}Force du signal{/t}</th>
+                            <th>{t}Observation{/t}</th>
+                            <th>{t}Valide ?{/t}</th>
                         </tr>
-                    {/foreach}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {foreach $detections as $detection}
+                            <tr>
+                                <td class="center">
+                                    {if $droits.gestion == 1}
+                                        {if $detection.detection_type == "stationary"}
+                                            <a href="index.php?module=detectionChange&detection_id={$detection.id}&individual_id={$detection.individual_id}">
+                                            {else}
+                                            <a href="index.php?module=locationChange&location_id={$detection.id}&individual_id={$detection.individual_id}">
+                                        {/if}
+                                        {$detection.id}
+                                        </a>
+                                    {else}
+                                        {$detection.id}
+                                    {/if}
+                                </td>
+                                <td>{$detection.detection_date}</td>
+                                <td>
+                                    {if $detection.detection_type == "stationary"}
+                                        {t}Station fixe{/t}
+                                    {else}
+                                        {t}Détection mobile{/t}
+                                    {/if}
+                                </td>
+                                <td class="center">{$detection.nb_events}</td>
+                                <td class="center">{$detection.duration}</td>
+                                <td class="right">{$detection.signal_force}</td>
+                                <td class="textareaDisplay">{$detection.observation}</td>
+                                <td class="center">
+                                    {if $detection.validity == 1}oui{else}<span class="red">non</span>{/if}
+                                </td>
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            {/if}
         </fieldset>
     {/if}
 </div>
