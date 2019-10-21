@@ -15,6 +15,7 @@
 <script src="display/node_modules/leaflet/dist/leaflet.js"></script>
 <script src="display/node_modules/pouchdb/dist/pouchdb.min.js"></script>
 <script src="display/node_modules/leaflet.tilelayer.pouchdbcached/L.TileLayer.PouchDBCached.js"></script>
+<script src="display/node_modules/leaflet.polyline.snakeanim/L.Polyline.SnakeAnim.js"></script>
 <!-- extension pour le menu -->
 <script src="display/node_modules/smartmenus/dist/jquery.smartmenus.min.js" type="text/javascript"></script>
 <link type="text/css" href="display/node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css" rel="stylesheet">

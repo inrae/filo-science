@@ -111,6 +111,9 @@
         </table>
     </div>
     {if $selectedIndividual > 0}
+    <div class="col-md-12 col-lg-6">
+        {include file="tracking/individualTrackingMap.tpl"}
+    </div>
         <fieldset class="col-md-12 col-lg-6">
             <legend>{t}Liste des détections{/t}</legend>
             <a href="index.php?module=locationChange&location_id=0&individual_id={$selectedIndividual}">
@@ -126,6 +129,8 @@
                             <th>{t}Nbre d'événements{/t}</th>
                             <th>{t}Durée, en secondes{/t}</th>
                             <th>{t}Force du signal{/t}</th>
+                            <th>{t}Longitude{/t}</th>
+                            <th>{t}Latitude{/t}</th>
                             <th>{t}Observation{/t}</th>
                             <th>{t}Valide ?{/t}</th>
                         </tr>
@@ -157,6 +162,8 @@
                                 <td class="center">{$detection.nb_events}</td>
                                 <td class="center">{$detection.duration}</td>
                                 <td class="right">{$detection.signal_force}</td>
+                                <td class="right">{$detection.long}</td>
+                                <td class="right">{$detection.lat}</td>
                                 <td class="textareaDisplay">{$detection.observation}</td>
                                 <td class="center">
                                     {if $detection.validity == 1}oui{else}<span class="red">non</span>{/if}
