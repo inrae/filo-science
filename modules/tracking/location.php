@@ -32,7 +32,8 @@ if ($module_coderetour != -1) {
             $vue->set($dindividual, "individual");
             include_once "modules/classes/param.class.php";
             $param = new Param($bdd, "antenna_type");
-            $vue->set($param->getListe("antenna_type_name"), "antennas");            
+            $vue->set($param->getListe("antenna_type_name"), "antennas");
+            setParamMap($vue, true);
             break;
         case "write":
             /**

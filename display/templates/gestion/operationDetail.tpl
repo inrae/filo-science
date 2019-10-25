@@ -1,3 +1,4 @@
+{include file="mapDefault.tpl"}
 <script>
     var mapIsChange = false;
 </script>

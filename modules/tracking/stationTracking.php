@@ -14,7 +14,7 @@ switch ($t_module["param"]) {
         if ($project_id > 0 && !verifyProject($project_id)) {
             $project_id = $projects[0]["project_id"];
         }
-        if (! $project_id > 0) {
+        if (!$project_id > 0) {
             $project_id = $projects[0]["project_id"];
         }
         $vue->set($dataClass->getListFromProject($project_id), "stations");
@@ -23,6 +23,7 @@ switch ($t_module["param"]) {
     case "display":
         $vue->set($dataClass->getDetail($id), "data");
         $vue->set("tracking/stationTrackingDisplay.tpl", "corps");
+        setParamMap($vue, false);
         /**
          * Get antennas
          */
@@ -41,8 +42,8 @@ switch ($t_module["param"]) {
              */
             include_once "modules/classes/tracking/probe_measure.class.php";
             $pm = new ProbeMeasure($bdd, $ObjetBDDParam);
-            
-            if (!isset ($_REQUEST["limit"])) {
+
+            if (!isset($_REQUEST["limit"])) {
                 $_REQUEST["limit"] = 30;
             }
             if (!isset($_REQUEST["offset"])) {
@@ -51,7 +52,7 @@ switch ($t_module["param"]) {
                 $_REQUEST["offset"] = 0;
             }
             $vue->set($pm->getMeasures($_REQUEST["probe_id"], $_REQUEST["limit"], $_REQUEST["offset"]), "measures");
-            $vue->set($_REQUEST["limit"],"limit");
+            $vue->set($_REQUEST["limit"], "limit");
             $vue->set($_REQUEST["offset"], "offset");
             $vue->set($_REQUEST["probe_id"], "selectedProbe");
         }
@@ -60,7 +61,7 @@ switch ($t_module["param"]) {
         /*
 		 * open the form to modify the record
 		 * If is a new record, generate a new record with default value :
-		 * $_REQUEST["idParent"] contains the identifiant of the parent record 
+		 * $_REQUEST["idParent"] contains the identifiant of the parent record
 		 */
         $data = dataRead($dataClass, $id, "tracking/stationTrackingChange.tpl");
         if ($id == 0 && isset($_COOKIE["project_id"])) {
@@ -74,6 +75,7 @@ switch ($t_module["param"]) {
         require_once 'modules/classes/param.class.php';
         $river = new Param($bdd, "river");
         $vue->set($river->getListe("river_name"), "rivers");
+        setParamMap($vue, true);
         break;
     case "write":
         /**
@@ -118,7 +120,7 @@ switch ($t_module["param"]) {
             dataDelete($dataClass, $id);
         }
         break;
-        case "getSensors":
+    case "getSensors":
         if (verifyProject($_REQUEST["project_id"])) {
             /**
              * Get the type of import

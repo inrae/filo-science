@@ -23,10 +23,9 @@
              */
             try {
                 var value = Cookies.get(item);
-                if (!isNaN(value)) {
-                    mapData[item] = value;
+                if (value.length > 0) {
+                    mapData[item] = parsefloat(value);
                 }
-
             } catch { }
 
         });

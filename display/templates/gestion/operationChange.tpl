@@ -1,4 +1,5 @@
 
+{include file="mapDefault.tpl"}
 <script>
 var mapIsChange = true;    
 $(document).ready(function() {

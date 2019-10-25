@@ -1,39 +1,6 @@
 <script>
-    var map = new L.Map("mapOperation");
-    var osmUrl = '{literal}https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png{/literal}';
-    var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-    var cacheMaxAge = "{$mapCacheMaxAge}";
-    var mapDefaultLong = "{$mapDefaultLong}";
-    var mapDefaultLat = "{$mapDefaultLat}";
-    var mapDefaultZoom = "{$mapDefaultZoom}";
-    var mapData = {};
-    var mapFields = {
-        'cacheMaxAge': 'cacheMaxAge',
-        'mapDefaultLong': 'mapDefaultLong',
-        'mapDefaultLat': 'mapDefaultLat',
-        'mapDefaultZoom': 'mapDefaultZoom'
-    };
-    for (var key in mapFields) {
-        try {
-            var value = Cookies.get(mapFields[key]);
-            if (!isNaN(value)) {
-                mapData[key] = value;
-            }
-        } catch { }
-    }
-    var osm = new L.TileLayer(osmUrl, {
-        minZoom: 5,
-        maxZoom: 20,
-        attribution: osmAttrib,
-        useCache: true,
-        crossOrigin: true,
-        cacheMaxAge: cacheMaxAge
-    });
-    var zoom = 5;
-   
-    if (!isNaN(mapData.mapDefaultZoom)) {
-        zoom = mapData.mapDefaultZoom;
-    }
+    var map = setMap("mapOperation");
+
 
     var long_start = "{$data.long_start}";
     var lat_start = "{$data.lat_start}";
@@ -67,8 +34,7 @@
     if (long_end != undefined && lat_end != undefined) {
         point2 = L.marker([lat_end, long_end]);
     }
-    map.setView([mapData.mapDefaultLat, mapData.mapDefaultLong], zoom);
-    map.addLayer(osm);
+    mapDisplay(map);
     if (point1 != undefined) {
         point1.addTo(map).bindPopup("1");
     }
@@ -98,8 +64,6 @@
             navigator.geolocation.getCurrentPosition(function (position) {
                 var lon = position.coords.longitude;
                 var lat = position.coords.latitude;
-                //console.log("longitude calculée : "+ lon);
-                //console.log ("latitude calculée : " + lat);
                 if (pointNumber == 1) {
                     setPosition(1, lat, lon);
                     $("#long_start").val(lon);

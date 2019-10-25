@@ -182,16 +182,10 @@ $CAS_port = 443; //port of CAS server
 $CAS_debug = false; // Activation of debug mode
 $CAS_CApath=""; // path to the certificate of the CAS
 /*
- * Affichage par defaut des cartes Openstreetmap
- * obsolete: now in dbparam table
+ * default values for feedCacheMap (OSM map cache)
  */
-$mapDefaultX = -0.70;
-$mapDefaultY = 44.77;
-$mapDefaultZoom = 12;
-$mapCacheMaxAge = 7 * 24 * 3600 * 1000;
-$mapMinZoom = 5;
-$mapMaxZoom = 18;
 $mapSeedMinZoom = 12;
 $mapSeedMaxZoom = 16;
 $mapSeedMaxAge = 7;
+$mapCacheMaxAge = 7 * 24 * 3600 * 1000;
 ?>

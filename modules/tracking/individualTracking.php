@@ -30,6 +30,7 @@ switch ($t_module["param"]) {
                 $vue->set($detection->getListFromIndividual($_REQUEST["individual_id"]), "detections");*/
                 $vue->set($dataClass->getListDetection($_REQUEST["individual_id"]), "detections");
                 $vue->set($_REQUEST["individual_id"], "selectedIndividual");
+                setParamMap($vue, false);
             }
         }
         break;

@@ -1,42 +1,7 @@
 <div id="map" class="map"></div>
+{include file="mapDefault.tpl"}
 <script>
-	var map = new L.Map("map");
-  var osmUrl='{literal}https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png{/literal}';
-  var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-  var cacheMaxAge = "{$mapCacheMaxAge}";
-  var mapDefaultZoom = "{$mapDefaultZoom}";
-  var mapDefaultLong = "{$mapDefaultLong}";
-  var mapDefaultLat = "{$mapDefaultLat}";
-  var mapData = {};
-  var mapFields = {
-    'cacheMaxAge': 'cacheMaxAge',
-    'mapDefaultZoom': 'mapDefaultZoom',
-    'mapDefaultLong': 'mapDefaultLong',
-    'mapDefaultLat': 'mapDefaultLat'
-  };
-  for (var key in mapFields) {
-    try {
-      var value = Cookies.get(mapFields[key]);
-      if (!isNaN(value)) {
-        mapData[key] = value;
-      }
-    } catch { }
-  }
-
-  var zoom = 5;
-  if (!isNaN(mapData.mapDefaultZoom)) {
-    zoom = mapData.mapDefaultZoom;
-  }
-
-  var osm = new L.TileLayer(osmUrl, { 
-      minZoom: 5, 
-      maxZoom: 20, 
-      attribution: osmAttrib,
-      useCache: true,
-      crossOrigin: true,
-      cacheMaxAge: cacheMaxAge
-      });
-
+var map = setMap("map");
   var long = "{$data.location_long}";
   var lat = "{$data.location_lat}";
   var point;
@@ -64,8 +29,7 @@ if (long.length >0 && lat.length > 0) {
       mapData.mapDefaultLat = lat;
       point = L.marker([lat, long]);
   }
-  map.setView ([mapData.mapDefaultLat, mapData.mapDefaultLong], zoom);
-  map.addLayer(osm);
+  mapDisplay(map);
   if ( point != undefined) {
       point.addTo(map).bindPopup("1");
   }
