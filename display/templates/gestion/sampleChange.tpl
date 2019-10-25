@@ -35,7 +35,7 @@
                 })
                     .done(function (data) {
                         var result = JSON.parse(data);
-                        //options = '<option value="" selected></option>';			
+                        //options = '<option value="" selected></option>';
                         for (var i = 0; i < result.length; i++) {
                             options += '<option value="' + result[i].taxon_id + '">'
                                 + result[i].scientific_name;

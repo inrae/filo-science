@@ -34,7 +34,7 @@ class Taxon extends ObjetBDD
      * @param string $val
      * @return array
      */
-    function search($val, $isFreshcode = false, $noFreshcode = 0)
+    function search($val, $isFreshcode = 0, $noFreshcode = 0)
     {
         $val = strtoupper($this->encodeData($val));
         $sql = "select taxon_id, scientific_name, common_name, fresh_code, sea_code, length_max, weight_max
@@ -43,7 +43,7 @@ class Taxon extends ObjetBDD
             /**
              * search only on the code
              */
-            $isFreshcode ? $field = "fresh_code" : $field = "sea_code";
+            $isFreshcode == 1 ? $field = "fresh_code" : $field = "sea_code";
             $where = " where upper($field) = '$val'";
         } else {
             /**

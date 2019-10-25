@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="94"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="367,1110" last-zoom="1" max-obj-count="94"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -2831,7 +2831,9 @@ Crue•4]]>
 1•APPLI_title•Filo-Science⸣
 2•mapDefaultZoom•9⸣
 3•mapDefaultLong•0⸣
-4•mapDefaultLat•45]]>
+4•mapDefaultLat•45⸣
+5•mapMinZoom•5⸣
+6•mapMaxZoom•18]]>
 	</initial-data>
 </table>
 

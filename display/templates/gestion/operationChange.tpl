@@ -55,6 +55,9 @@ $(document).ready(function() {
             <input type="hidden" name="moduleBase" value="operation">
             <input type="hidden" name="action" value="Write">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
+            <div class="form-group center">
+                <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
+            </div>
             <div class="form-group">
                 <label for="paramName"  class="control-label col-md-4"> {t}Nom de l'opération :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
