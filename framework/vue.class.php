@@ -699,7 +699,7 @@ class VueFile extends Vue
      * @param array $param: list of parameters of file
      * @return void
      */
-    function send(array $param = array())
+    function send($param = array())
     {
         if (count($param) > 0) {
             $this->setParam($param);

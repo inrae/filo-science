@@ -18,7 +18,7 @@ switch ($t_module["param"]) {
         }
         break;
     case "delete":
-        dataDelete($dataClass, $id, true);
+        dataDelete($dataClass, $id);
         break;
     case "getFunctionDescription":
         include_once "modules/classes/import/function_type.class.php";

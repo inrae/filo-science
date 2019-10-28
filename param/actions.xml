@@ -347,4 +347,6 @@
 	<exportModelChange action="modules/import/exportModel.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
 	<exportModelWrite action="modules/import/exportModel.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="exportModelChange" retourko="exportModelChange" retourok="exportModelList"/>
 	<exportModelDelete action="modules/import/exportModel.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="exportModelChange" retourko="exportModelChange" retourok="exportModelList"/>
+	<exportExec action="modules/import/export.php" param="exec" droits="param" maxCountByHour="60" maxCountByDay="600" type="file"/>
+	<exportImportExec action="modules/import/export.php" param="importExec" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty" retourko="default" retourok="default"/>
 </navigation>
