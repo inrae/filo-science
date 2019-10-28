@@ -72,6 +72,7 @@
 			<item module="importTypeList" label="Types d'import" tooltip="Liste des types d'import"/>
 			<item module="importDescriptionList" label="Modèles d'import" tooltip="Liste des modèles d'importation de fichiers"/>
 		</item>
+		<item module="exportModelList" label="Modèles d'export" tooltip="Liste des modèles d'exportation des données"/>
 		<item divider="1"/>
 		<item module="feedCacheMap" label="Mise en cache de la carto" tooltip="Stocker le fonds cartographique pour une utilisation hors Internet"/>
 	</item>

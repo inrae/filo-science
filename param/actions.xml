@@ -343,5 +343,8 @@
 	<importColumnWrite action="modules/import/importColumn.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importColumnChange" retourko="importColumnChange" retourok="importDescriptionDisplay"/>
 	<importColumnDelete action="modules/import/importColumn.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="importColumnChange" retourko="importColumnChange" retourok="importDescriptionDisplay"/>
 	<importExec action="modules/import/importExec.php" droits="gestion" maxCountByHour="600" maxCountByDay="600" retourlogin="1" type="smarty"/>
+	<exportModelList action="modules/import/exportModel.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
+	<exportModelChange action="modules/import/exportModel.php" param="change" droits="param" maxCountByHour="60" maxCountByDay="600" type="smarty"/>
+	<exportModelWrite action="modules/import/exportModel.php" param="write" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="exportModelChange" retourko="exportModelChange" retourok="exportModelList"/>
+	<exportModelDelete action="modules/import/exportModel.php" param="delete" droits="param" maxCountByHour="60" maxCountByDay="600" modulebefore="exportModelChange" retourko="exportModelChange" retourok="exportModelList"/>
 </navigation>
-	
