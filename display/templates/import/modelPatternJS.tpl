@@ -14,10 +14,13 @@
                             "type": "string",
                             "required": true
                         },
+                        "tableAlias": {
+                            "title": "{t}Alias de la table (si elle dépend de plusieurs parents){/t}",
+                            "type": "string"
+                        },
                         "technicalKey": {
                             "title": "{t}Clé primaire{/t}",
-                            "type": "string",
-                            "required": true
+                            "type": "string"
                         },
                         "businessKey": {
                             "title": "{t}Clé métier{/t}",
@@ -25,10 +28,6 @@
                         },
                         "parentKey": {
                             "title": "{t}Nom de la clé étrangère (table parente){/t}",
-                            "type": "string"
-                        },
-                        "functionName": {
-                            "title": "{t}Nom de la fonction à appeler systématiquement pour préparer les données{/t}",
                             "type": "string"
                         },
                         "children": {

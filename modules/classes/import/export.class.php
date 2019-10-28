@@ -30,7 +30,13 @@ class Export
          * Generate the model with tableName as identifier
          */
         foreach ($model as $m) {
-            $this->model[$m["tableName"]] = $m;
+            /**
+             * Set the tableAlias if not defined
+             */
+            if (strlen($m["tableAlias"]) == 0) {
+                $m["tableAlias"] = $m["tableName"];
+            }
+            $this->model[$m["tableAlias"]] = $m;
         }
     }
     /**
@@ -43,7 +49,7 @@ class Export
         $list = array();
         foreach ($this->model as $table) {
             if (strlen($table["parentKey"]) == 0) {
-                $list[] = $table["tableName"];
+                $list[] = $table["tableAlias"];
             }
         }
         return $list;
@@ -51,18 +57,20 @@ class Export
     /**
      * Get the content of a table
      *
-     * @param string $tableName: name of the table
+     * @param string $tableName: alias of the table
      * @param array $keys: list of the keys to extract
      * @param integer $parentKey: value of the technicalKey of the parent (foreign key)
      * @return array
      */
-    function getTableContent(string $tableName, array $keys = array(), int $parentKey = 0): array
+    function getTableContent(string $tableAlias, array $keys = array(), int $parentKey = 0): array
     {
+        $model = $this->model[$tableAlias];
+        $tableName = $model["tableName"];
         $content  = array();
         $args = array();
         $sql = "select * from $tableName";
         if (count($keys) > 0) {
-            $where = " where " . $this->model[$tableName]["technicalKey"] . " in (";
+            $where = " where " . $model["technicalKey"] . " in (";
             $comma = "";
             foreach ($keys as $k) {
                 if (is_numeric($k)) {
@@ -71,24 +79,28 @@ class Export
                 }
             }
             $where .= ")";
-        } else if (strlen($this->model[$tableName]["parentKey"]) > 0 && $parentKey > 0) {
+        } else if (strlen($model["parentKey"]) > 0 && $parentKey > 0) {
             /**
              * Search by parent
              */
-            $where = " where " . $this->model[$tableName]["parentKey"] . " = :parentKey";
+            $where = " where " . $model["parentKey"] . " = :parentKey";
             $args["parentKey"] = $parentKey;
         } else {
             $where = "";
         }
-        $order = " order by " . $this->model[$tableName]["technicalKey"];
+        if (strlen($model["technicalKey"]) > 0) {
+            $order = " order by " . $model["technicalKey"];
+        } else {
+            $order = " order by 1";
+        }
         $content = $this->execute($sql . $where . $order, $args);
         /**
          * Search the data from the children
          */
-        if (count($this->model[$tableName]["children"]) > 0) {
+        if (count($model["children"]) > 0) {
             foreach ($content as $k => $row) {
-                foreach ($this->model[$tableName]["children"] as $child) {
-                    $content[$k]["children"][$child] = $this->getTableContent($child, array(), $row[$this->model[$tableName]["technicalKey"]]);
+                foreach ($model["children"] as $child) {
+                    $content[$k]["children"][$child] = $this->getTableContent($child, array(), $row[$model["technicalKey"]]);
                 }
             }
         }
@@ -122,19 +134,22 @@ class Export
      * @param string $tableName: name of the table
      * @param array $data: all data to be recorded
      * @param integer $parentKey: key of the parent from the table
+     * @param array $setValues: list of values to insert into each row. Used for set a parent key
      * @return void
      */
-    function importDataTable(string $tableName, array $data, int $parentKey = 0)
+    function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array())
     {
-        if (!isset($this->model[$tableName])) {
-            throw new ExportException(sprintf(_("Aucune description trouvée pour la table %s dans le fichier de paramètres"), $tableName));
+        if (!isset($this->model[$tableAlias])) {
+            throw new ExportException(sprintf(_("Aucune description trouvée pour l'alias de table %s dans le fichier de paramètres"), $tableAlias));
         }
         /**
          * prepare sql request for search key
          */
-        $bkeyName = $this->model[$tableName]["businessKey"];
-        $tkeyName = $this->model[$tableName]["technicalKey"];
-        $pkeyName = $this->model[$tableName]["parentKey"];
+        $model = $this->model[$tableAlias];
+        $tableName = $model["tableName"];
+        $bkeyName = $model["businessKey"];
+        $tkeyName = $model["technicalKey"];
+        $pkeyName = $model["parentKey"];
         if (strlen($bkeyName) > 0) {
             $sqlSearchKey = "select $tkeyName as key
                     from $tableName
@@ -143,7 +158,7 @@ class Export
         } else {
             $isBusiness = false;
         }
-        foreach ($data as $key => $row) {
+        foreach ($data as $row) {
             /**
              * search for preexisting record
              */
@@ -159,6 +174,14 @@ class Export
             }
             if ($parentKey > 0 && strlen($pkeyName) > 0) {
                 $row[$pkeyName] = $parentKey;
+            }
+            /**
+             * Set values
+             */
+            if (count($setValues) > 0) {
+                foreach ($setValues as $kv => $dv) {
+                    $row[$kv] = $dv;
+                }
             }
             /**
              * Write data
@@ -184,9 +207,11 @@ class Export
      * @param array $data: data of the record
      * @return integer: technical key generated or updated
      */
-    function writeData(string $tableName, array $data): int
+    function writeData(string $tableAlias, array $data): int
     {
-        $tkeyName = $this->model[$tableName]["technicalKey"];
+        $model = $this->model[$tableAlias];
+        $tableName = $model["tableName"];
+        $tkeyName = $model["technicalKey"];
         $dataSql = array();
         $comma = "";
         $quote = '"';
