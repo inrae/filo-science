@@ -12,6 +12,9 @@
                 <tr>
                     <th>{t}Id{/t}</th>
                     <th>{t}Nom{/t}</th>
+                    {if $droits.param == 1}
+                        <th>{t}Modifier{/t}</th>
+                    {/if}
                 </tr>
             </thead>
             <tbody>
@@ -20,12 +23,19 @@
                         <td class="center">{$row["export_model_id"]}</td>
                         <td>
                             {if $droits.param == 1}
-                                <a href="index.php?module=exportModelChange&export_model_id={$row.export_model_id}">
+                                <a href="index.php?module=exportModelDisplay&export_model_id={$row.export_model_id}">
                                 {$row["export_model_name"]}
                             {else}
                                 {$row["export_model_name"]}
                             {/if}
                         </td>
+                        {if $droits.param == 1}
+                            <td class="center">
+                                <a href="index.php?module=exportModelChange&export_model_id={$row.export_model_id}">
+                                    <img src="display/images/edit.gif" height="25">
+                                </a>
+                            </td>
+                        {/if}
                     </tr>
                 {/foreach}
             </tbody>

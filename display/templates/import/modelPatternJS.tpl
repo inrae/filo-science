@@ -31,7 +31,7 @@
                             "type": "string"
                         },
                         "children": {
-                            "title": "{t}Liste des tables liées{/t}",
+                            "title": "{t}Liste des alias des tables liées{/t}",
                             "type": "array",
                             "items": {
                                 "type": "string"
@@ -51,7 +51,6 @@
                 var value = control.getValue();
                 $("#pattern").val(JSON.stringify(value, null, null));
                 control.on("mouseout", function () {
-                    console.log("mouseout");
                     var value = control.getValue();
                     $("#pattern").val(JSON.stringify(value, null, null));
                 });

@@ -250,8 +250,6 @@ class Export
             $values .= ")";
             $sql = "insert into $tableName $cols values $values RETURNING $tkeyName";
         }
-        printr($sql);
-        printr($dataSql);
         $result = $this->execute($sql, $dataSql);
         if ($mode == "insert") {
             $newKey = $result[0][$tkeyName];

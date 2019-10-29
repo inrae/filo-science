@@ -9,6 +9,12 @@ switch ($t_module["param"]) {
         $vue->set($dataClass->getListe("export_model_name"), "data");
         $vue->set("import/exportModelList.tpl", "corps");
         break;
+        case "display":
+        $data = $dataClass->lire($id);
+        $vue->set($data, "data");
+        $vue->set(json_decode($data["pattern"], true), "pattern");
+        $vue->set("import/exportModelDisplay.tpl", "corps");
+        break;
     case "change":
         dataRead($dataClass, $id, "import/exportModelChange.tpl");
         break;

@@ -115,7 +115,11 @@ $(document).ready(function() {
 		"searching": false,
 		"ordering": false
 	});
-	
+	$('.datatable-nosort').DataTable({
+		"language" : dataTableLanguage,
+		"searching": false,
+		"ordering": false
+	});
 	$('.datatable-export').DataTable({	
 		 dom: 'Bfrtip',
 		"language" : dataTableLanguage,
@@ -151,11 +155,11 @@ $(document).ready(function() {
        ]
 	});
 
-		$(".datatable, .datatable-export-paging, .datatable-searching").on('length.dt', function ( e, settings, len ) { 
+		$(".datatable, .datatable-export-paging, .datatable-searching, .datatable-nosort").on('length.dt', function ( e, settings, len ) {
 		Cookies.set('pageLength', len, { expires: 180, secure:true});
 	});
 	/* Initialisation for paging datatables */
-	$(".datatable, .datatable-export-paging, .datatable-searching").DataTable().page.len(pageLength);
+	$(".datatable, .datatable-export-paging, .datatable-searching, .datatable-nosort").DataTable().page.len(pageLength).draw();
 
 	$('.taux,nombre').attr('title', '{t}Valeur numérique...{/t}');
 	$('.taux').attr({
