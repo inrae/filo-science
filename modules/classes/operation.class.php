@@ -65,7 +65,8 @@ class Operation extends ObjetBDD
             "water_regime_id" => array("type" => 1),
             "fishing_strategy_id" => array("type" => 1),
             "scale_id" => array("type" => 1),
-            "taxa_template_id" => array("type" => 1)
+            "taxa_template_id" => array("type" => 1),
+            "uuid" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

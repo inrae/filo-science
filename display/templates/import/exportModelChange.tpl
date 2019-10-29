@@ -64,7 +64,6 @@
                 <li>{t}La clé étrangère correspond à la colonne permettant d'identifier l'enregistrement parent, pour les tables filles{/t}</li>
                 <li>{t}La clé étrangère secondaire doit être renseignée pour les tables de type n-n dont la clé est composée des deux clés étrangères{/t}</li>
                 <li>{t}La liste des tables liées contient les alias (ou les noms des tables, si ceux-ci ne sont pas renseignés) des tables filles. Chaque alias devra faire l'objet d'une description.{/t}</li>
-                <li>{t}La liste des clés à exporter est en principe générée par l'application. Elle est affichée dans le masque de saisie pour rappeler que l'information existe et peut être renseignée.{/t}</li>
             </ul>
             <h3>Fonctionnement de l'importation</h3>
             <ul>

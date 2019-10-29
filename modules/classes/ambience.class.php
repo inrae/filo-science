@@ -79,6 +79,7 @@ class Ambience extends ObjetBDD
             "sinuosity_id" => array("type" => 1),
             "flow_trend_id" => array("type" => 1),
             "turbidity_id" => array("type" => 1),
+            "uuid" => array("type"=>0)
 
         );
         parent::__construct($bdd, $param);

@@ -685,7 +685,7 @@ class VueFile extends Vue
      *
      * @param array $param
      */
-    function setParam(array $param)
+    function setParam(?array $param)
     {
         if (is_array($param)) {
             foreach ($param as $key => $value) {
@@ -699,7 +699,7 @@ class VueFile extends Vue
      * @param array $param: list of parameters of file
      * @return void
      */
-    function send($param = array())
+    function send(?array $param = array())
     {
         if (count($param) > 0) {
             $this->setParam($param);

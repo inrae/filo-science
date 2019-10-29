@@ -40,13 +40,6 @@
                             "items": {
                                 "type": "string"
                             }
-                        },
-                        "keys": {
-                            "title": "{t}Liste des clés à exporter (normalement renseignée automatiquement par l'application){/t}",
-                            "type": "array",
-                            "items": {
-                                "type":"string"
-                            }
                         }
                     }
                 }

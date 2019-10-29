@@ -9,12 +9,12 @@ class Individual extends ObjetBDD
                     , sl, fl, tl, wd, ot, weight
                     ,other_measure, individual_comment, age
                     ,measure_estimated, pathology_codes, tag, tag_posed, transmitter
-                    ,pathology_name, pathology_code 
+                    ,pathology_name, pathology_code
                     ,sexe_name, sexe_code
                     ,other_measures
                     ,release_station_id, transmitter_type_id, project_id
                     , taxon_id, scientific_name
-                    from individual 
+                    from individual
                     left outer join individual_tracking using (individual_id)
                     left outer join pathology using (pathology_id)
                     left outer join sexe using (sexe_id)
@@ -48,7 +48,8 @@ class Individual extends ObjetBDD
             "pathology_codes" => array("type" => 0),
             "tag" => array("type" => 0),
             "tag_posed" => array("type" => 0),
-            "transmitter" => array("type" => 0)
+            "transmitter" => array("type" => 0),
+            "uuid" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

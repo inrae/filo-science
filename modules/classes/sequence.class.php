@@ -31,7 +31,8 @@ class Sequence extends ObjetBDD
             "sequence_number" => array("requis" => 1),
             "date_start" => array("type" => 3, "defaultValue"=>$this->getDateHeure()),
             "date_end" => array("type" => 3),
-            "fishing_duration" => array("type" => 1)
+            "fishing_duration" => array("type" => 1),
+            "uuid" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

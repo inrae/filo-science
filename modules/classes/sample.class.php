@@ -33,7 +33,8 @@ class Sample extends ObjetBDD
             "total_weight" => array("type" => 1),
             "sample_size_min" => array("type" => 1),
             "sample_size_max" => array("type" => 1),
-            "sample_comment" => array("type" => 0)
+            "sample_comment" => array("type" => 0),
+            "uuid" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

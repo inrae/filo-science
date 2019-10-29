@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="94"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="806,423" last-zoom="1" max-obj-count="94"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -789,7 +789,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</initial-data>
 </table>
 
-<table name="operation" layer="0" collapse-mode="1" max-obj-count="28">
+<table name="operation" layer="0" collapse-mode="1" max-obj-count="30">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Description of operation]]></comment>
@@ -863,6 +863,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 		<type name="float" length="0"/>
 		<comment><![CDATA[Surface parsed, in square meters]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="operation_id_pk" type="pk-constr" table="filo.operation">
 		<columns names="operation_id" ref-type="src-columns"/>
 	</constraint>
@@ -897,7 +900,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	 dst-table="filo.operation"
 	 src-required="true" dst-required="false"/>
 
-<table name="sequence" layer="0" collapse-mode="1" max-obj-count="7">
+<table name="sequence" layer="0" collapse-mode="1" max-obj-count="8">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Catching sequence]]></comment>
@@ -922,6 +925,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 		<type name="float" length="0"/>
 		<comment><![CDATA[Fishing duration, in mn]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="place_id_pk" type="pk-constr" table="filo.sequence">
 		<columns names="sequence_id" ref-type="src-columns"/>
 	</constraint>
@@ -944,7 +950,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	 dst-table="filo.sequence"
 	 src-required="true" dst-required="false"/>
 
-<table name="sample" layer="0" collapse-mode="1" max-obj-count="12">
+<table name="sample" layer="0" collapse-mode="1" max-obj-count="13">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of samplings. One or many for a taxon]]></comment>
@@ -980,6 +986,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="sample_comment">
 		<type name="varchar" length="0"/>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="sample_id_pk" type="pk-constr" table="filo.sample">
 		<columns names="sample_id" ref-type="src-columns"/>
@@ -1019,7 +1028,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="individual" layer="0" collapse-mode="1" max-obj-count="21">
+<table name="individual" layer="0" collapse-mode="1" max-obj-count="22">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of individuals measured]]></comment>
@@ -1082,6 +1091,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<column name="transmitter">
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[Acoustic or radio transmitter identifier]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="individual_id_pk" type="pk-constr" table="filo.individual">
 		<columns names="individual_id" ref-type="src-columns"/>
@@ -1193,7 +1205,7 @@ By default : total_length and weight]]></comment>
 	</constraint>
 </table>
 
-<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="10">
+<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="12">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of gear used during operation]]></comment>
@@ -1218,9 +1230,26 @@ By default : total_length and weight]]></comment>
 		<type name="float" length="0"/>
 		<comment><![CDATA[Depth of the gear]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="sequence_gear_pk" type="pk-constr" table="filo.sequence_gear">
 		<columns names="sequence_gear_id" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="electric_current_type_id" index="8"/>
+		<object name="gear_id" index="6"/>
+		<object name="gear_method_id" index="7"/>
+		<object name="sequence_id" index="5"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="electric_current_type_fk" index="4"/>
+		<object name="gear_fk" index="2"/>
+		<object name="gear_method_fk" index="3"/>
+		<object name="sequence_fk" index="1"/>
+	</customidxs>
 </table>
 
 <sequence name="engine_engine_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
@@ -1282,7 +1311,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="analysis" layer="0" collapse-mode="1" max-obj-count="13">
+<table name="analysis" layer="0" collapse-mode="1" max-obj-count="14">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Water analysis]]></comment>
@@ -1326,6 +1355,9 @@ By default : total_length and weight]]></comment>
 	<column name="other_analysis">
 		<type name="json" length="0"/>
 		<comment><![CDATA[Others analysis performed (cf. analysis_template)]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="analysis_pk" type="pk-constr" table="filo.analysis">
 		<columns names="analysis_id" ref-type="src-columns"/>
@@ -1538,7 +1570,7 @@ By default : total_length and weight]]></comment>
 	</initial-data>
 </table>
 
-<table name="ambience" layer="0" collapse-mode="1" max-obj-count="38">
+<table name="ambience" layer="0" collapse-mode="1" max-obj-count="39">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Description of the ambiences of the operation]]></comment>
@@ -1594,16 +1626,55 @@ By default : total_length and weight]]></comment>
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[Min of height of water, in cm]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="ambience_pk" type="pk-constr" table="filo.ambience">
 		<columns names="ambience_id" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="branch_cache_abundance_id" index="23"/>
+		<object name="clogging_id" index="27"/>
+		<object name="dominant_granulometry_id" index="20"/>
+		<object name="facies_id" index="14"/>
+		<object name="flow_trend_id" index="29"/>
+		<object name="granulometry_cache_abundance_id" index="26"/>
+		<object name="herbarium_cache_abundance_id" index="22"/>
+		<object name="localisation_id" index="18"/>
 		<object name="operation_id" index="1"/>
+		<object name="secondary_granulometry_id" index="21"/>
+		<object name="sequence_id" index="31"/>
+		<object name="shady_id" index="17"/>
+		<object name="sinuosity_id" index="28"/>
+		<object name="situation_id" index="15"/>
+		<object name="speed_id" index="16"/>
+		<object name="subbank_cache_abundance_id" index="25"/>
+		<object name="turbidity_id" index="30"/>
+		<object name="vegetation_cache_abundance_id" index="24"/>
+		<object name="vegetation_id" index="19"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="cache_abundance_fk" index="10"/>
+		<object name="cache_abundance_fk1" index="11"/>
+		<object name="cache_abundance_fk2" index="12"/>
+		<object name="cache_abundance_fk3" index="13"/>
+		<object name="cache_abundance_fk4" index="14"/>
+		<object name="clogging_fk" index="15"/>
+		<object name="facies_fk" index="2"/>
+		<object name="flow_trend_fk" index="17"/>
+		<object name="granulometry_fk" index="8"/>
+		<object name="granulometry_fk1" index="9"/>
+		<object name="localisation_fk" index="6"/>
 		<object name="operation_fk" index="1"/>
+		<object name="sequence_fk" index="19"/>
+		<object name="shady_fk" index="5"/>
+		<object name="sinuosity_fk" index="16"/>
+		<object name="situation_fk" index="3"/>
+		<object name="speed_fk" index="4"/>
+		<object name="turbidity_fk" index="18"/>
+		<object name="vegetation_fk" index="7"/>
 	</customidxs>
 </table>
 
@@ -2833,7 +2904,8 @@ Crue•4]]>
 3•mapDefaultLong•0⸣
 4•mapDefaultLat•45⸣
 5•mapMinZoom•5⸣
-6•mapMaxZoom•18]]>
+6•mapMaxZoom•18⸣
+7•APPLI_code•filoscience]]>
 	</initial-data>
 </table>
 
@@ -3710,7 +3782,7 @@ group by individual_id]]></expression>
 </index>
 
 <extension name="tablefunc">
-	<appended-sql><![CDATA[alter extension tablefunc set schema pg_catalog;]]></appended-sql>
+	<schema name="public"/>
 </extension>
 
 <relationship name="taxon_has_many_individual_tracking" type="rel1n" layer="2"
@@ -4478,6 +4550,10 @@ Structure:
 		<columns names="export_model_id" ref-type="src-columns"/>
 	</constraint>
 </table>
+
+<extension name="pgcrypto">
+	<schema name="public"/>
+</extension>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
