@@ -1,3 +1,10 @@
+<script>
+    $(document).ready(function() {
+        $(".checkSelect").change(function() {
+            $('.check').prop('checked', this.checked);
+        });
+    });
+</script>
 <h2>{t}Détail d'une campagne{/t}</h2>
 <div class="row">
     <div class="col-md-12">
@@ -40,35 +47,53 @@
             {t}Nouvelle opération...{/t}
         </a>
         {/if}
-        <table class="datatable table table-bordered table-hover" data-order='[[1,"desc"]]'>
-            <thead>
-                <th>{t}Nom{/t}</th>
-                <th>{t}Date/heure de début{/t}</th>
-                <th>{t}Station{/t}</th>
-                <th>{t}Protocole{/t}</th>
-                <th>{t}Stratégie de pêche{/t}</th>
-                <th>{t}Échelle{/t}</th>
-                <th>{t}Modèle de saisie{/t}</th>
-            </thead>
-            <tbody>
-                {foreach $operations as $row}
-                <tr>
-                <td>
-                    <a href="index.php?module=operationDisplay&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
-                        {$row.operation_name}
-                    </a>
-                   
-                </td>
-                <td>{$row.date_start}</td>
-                <td>{$row.station_name}</td>
-                <td>{$row.protocol_name}</td>
-                <td>{$row.fishing_strategy_name}</td>
-                <td>{$row.scale_name}</td>
-                <td>{$row.taxa_template_name}</td>
-            </tr>
-                {/foreach}
-            </tbody>
-        </table>
+        <form id="exportForm" method="post" action="index.php">
+            <input type="hidden" name="moduleBase" value="export">
+            <input type="hidden" name="action" value="Exec">
+            <input type="hidden" name="export_model_name" value="operation">
+            <input type="hidden" name="returnko" value="campaignDisplay">
+            <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
+            <table class="datatable table table-bordered table-hover" data-order='[[1,"desc"]]'>
+                <thead>
+                    <th>{t}Nom{/t}</th>
+                    <th>{t}Date/heure de début{/t}</th>
+                    <th>{t}Station{/t}</th>
+                    <th>{t}Protocole{/t}</th>
+                    <th>{t}Stratégie de pêche{/t}</th>
+                    <th>{t}Échelle{/t}</th>
+                    <th>{t}Modèle de saisie{/t}</th>
+                    <th class="center">
+                        <input type="checkbox" id="export" class="checkSelect" checked>
+                    </th>
+                </thead>
+                <tbody>
+                    {foreach $operations as $row}
+                        <tr>
+                            <td>
+                                <a href="index.php?module=operationDisplay&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
+                                    {$row.operation_name}
+                                </a>
+
+                            </td>
+                            <td>{$row.date_start}</td>
+                            <td>{$row.station_name}</td>
+                            <td>{$row.protocol_name}</td>
+                            <td>{$row.fishing_strategy_name}</td>
+                            <td>{$row.scale_name}</td>
+                            <td>{$row.taxa_template_name}</td>
+                            <td class="center">
+                                <input type="checkbox" id="export{$row.operation_id}" name="keys[]" value={$row.operation_id} class="check" checked>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-6">
+                    <button id="exportButton" type="submit" class="btn btn-info">{t}Exporter les opérations sélectionnées{/t}</button>
+                </div>
+            </div>
+        </form>
     </fieldset>
 
 </div>

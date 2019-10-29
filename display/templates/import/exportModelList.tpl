@@ -1,9 +1,9 @@
 <script>
-$(document).ready(function() {
-    $(".checkSelect").change(function() {
-        $('.check').prop('checked', this.checked);
+    $(document).ready(function() {
+        $(".checkSelect").change(function() {
+            $('.check').prop('checked', this.checked);
+        });
     });
-});
 </script>
 
 <h2>{t}Liste des modèles d'exportation des données{/t}</h2>
@@ -17,7 +17,7 @@ $(document).ready(function() {
                     {t}Nouveau...{/t}
                 </a>
             {/if}
- 
+
             <input type="hidden" name="moduleBase" value="export">
             <input type="hidden" name="action" value="Exec">
             <input type="hidden" name="export_model_name" value="export_model">
