@@ -212,22 +212,44 @@ class Export
         $model = $this->model[$tableAlias];
         $tableName = $model["tableName"];
         $tkeyName = $model["technicalKey"];
+        $pkeyName = $model["parentKey"];
+        $skeyName = $model["secondaryParentKey"];
         $dataSql = array();
         $comma = "";
         $quote = '"';
+        $mode = "insert";
         if ($data[$tkeyName] > 0) {
-            /**
-             * update
-             */
             $mode = "update";
-            $sql = "update $tableName set ";
+        } else {
+            /**
+             * Search in case of n-n table
+             */
+            if (strlen($pkeyName) > 0 && strlen($skeyName) > 0) {
+                $sqlSearch = "select $quote$pkeyName$quote, $quote$skeyName$quote
+                from $quote$tableName$quote where $quote$pkeyName$quote = :pkeyName and $quote$skeyName$quote = :skeyName";
+                $dsearch = $this->execute($sqlSearch, array("pkeyName" => $data[$pkeyName], "skeyName" => $data[$skeyName]));
+                if ($dsearch[0][$pkeyName] > 0) {
+                    $mode = "update";
+                }
+            }
+        }
+        /**
+         * update
+         */
+        if ($mode == "update") {
+            $sql = "update $quote$tableName$quote set ";
             foreach ($data as $field => $value) {
                 if ($field != $tkeyName) {
                     $sql .= "$comma$quote$field$quote = :$field";
                     $comma = ", ";
+                    $dataSql[$field] = $value;
                 }
+            }
+            if (strlen($pkeyName) > 0 && strlen($skeyName) > 0) {
+                $where = " where $quote$pkeyName$quote = :$pkeyName and $quote$skeyName$quote = :$skeyName";
+            } else {
                 $where = " where $quote$tkeyName$quote = :$tkeyName";
-                $dataSql[$field] = $value;
+                $dataSql[$tkeyName] = $data[$tkeyName];
             }
             if (!isset($where)) {
                 throw new ExportException(sprintf(_("la clause where n'a pu être construite pour la table %s"), $tableName));
@@ -248,7 +270,7 @@ class Export
             }
             $cols .= ")";
             $values .= ")";
-            $sql = "insert into $tableName $cols values $values RETURNING $tkeyName";
+            $sql = "insert into $quote$tableName$quote $cols values $values RETURNING $tkeyName";
         }
         $result = $this->execute($sql, $dataSql);
         if ($mode == "insert") {

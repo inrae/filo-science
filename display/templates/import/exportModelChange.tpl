@@ -62,6 +62,7 @@
                 <li>{t}La clé primaire correspond à la clé automatique générée par la base de données. Elle ne sera pas renseignée dans le cas d'une table n-n, dont la clé est composée de deux champs{/t}</li>
                 <li>{t}La clé métier est la clé unique utilisée pour identifier un enregistrement. Il peut s'agir soit d'un champ signifiant (nom d'un taxon, par exemple), soit de la clé primaire. Si cette clé est renseignée, le programme d'importation pourra modifier un enregistrement pré-existant en recherchant la clé primaire à partir de cette information{/t}</li>
                 <li>{t}La clé étrangère correspond à la colonne permettant d'identifier l'enregistrement parent, pour les tables filles{/t}</li>
+                <li>{t}La clé étrangère secondaire doit être renseignée pour les tables de type n-n dont la clé est composée des deux clés étrangères{/t}</li>
                 <li>{t}La liste des tables liées contient les alias (ou les noms des tables, si ceux-ci ne sont pas renseignés) des tables filles. Chaque alias devra faire l'objet d'une description.{/t}</li>
                 <li>{t}La liste des clés à exporter est en principe générée par l'application. Elle est affichée dans le masque de saisie pour rappeler que l'information existe et peut être renseignée.{/t}</li>
             </ul>
@@ -69,8 +70,8 @@
             <ul>
                 <li>{t}Si la clé métier est renseignée, le programme va rechercher un enregistrement pré-existant dans la table qui correspond à la valeur indiquée. S'il existe, cet enregistrement sera mis à jour. Sinon, un nouvel enregistrement sera créé{/t}</li>
                 <li>{t}Pour conserver la clé primaire présente dans le fichier d'export, par exemple pour la mise à jour de tables de paramètres, il faut que le nom de la clé métier soit identique à la clé primaire{/t}</li>
-                <li>{t}L'importation de tables de type n-n, c'est à dire dont la clé est composée de deux clés, chacune correspondante à une des deux tables de la relation, n'est possible qu'en mode ajout. Dans le cas contraire, l'importation échouera (tentative d'insertion d'un nouvel enregistrement de même clé). À noter que, dans le cas de tables n-n, le nom de la clé primaire ne doit pas être renseigné.{/t}</li>
-                <li>{t}Dans le cas d'une relation de type 1-1, où une table fille partage la même clé que la table parente (cas des tables individual-individual_tracking dans Filo-Science), la table fille ne doit avoir que le nom de la clé étrangère renseignée{/t}</li>
+                <li>{t}Pour les tables de type n-n, c'est à dire dont la clé est composée de deux clés étrangères, si celles-ci sont renseignées, le programme cherchera à réaliser une mise à jour. Le nom de la clé primaire ne doit pas être renseigné.{/t}</li>
+                <li>{t}Dans le cas d'une relation de type 1-1, où une table fille partage la même clé que la table parente (cas des tables individual-individual_tracking dans Filo-Science), la table fille ne doit avoir la même valeur dans la clé étrangère principale et la clé étrangère secondaire, qui doit correspondre à la clé de la table parente{/t}</li>
 
             </ul>
         </div>

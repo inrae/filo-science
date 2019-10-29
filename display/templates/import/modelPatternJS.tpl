@@ -30,6 +30,10 @@
                             "title": "{t}Nom de la clé étrangère (table parente){/t}",
                             "type": "string"
                         },
+                        "secondaryParentKey": {
+                            "title": "{t}Nom de la seconde clé étrangère{/t}",
+                            "type": "string"
+                        },
                         "children": {
                             "title": "{t}Liste des alias des tables liées{/t}",
                             "type": "array",

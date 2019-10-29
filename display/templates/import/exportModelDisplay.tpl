@@ -22,6 +22,7 @@
                 <th>{t}Clé primaire{/t}</th>
                 <th>{t}Clé métier{/t}</th>
                 <th>{t}Clé étrangère{/t}</th>
+                <th>{t}Clé étrangère secondaire{/t}</th>
                 <th>{t}Tables liées (alias){/t}</th>
             </tr>
         </thead>
@@ -30,9 +31,10 @@
                 <tr>
                     <td>{$row.tableName}</td>
                     <td>{$row.tableAlias}</td>
-                    <td class="center">{$row.technicalKey}</td>
-                    <td class="center">{$row.businessKey}</td>
-                    <td class="center">{$row.parentKey}</td>
+                    <td >{$row.technicalKey}</td>
+                    <td >{$row.businessKey}</td>
+                    <td >{$row.parentKey}</td>
+                    <td >{$row.secondaryParentKey}</td>
                     <td>
                         {foreach $row.children as $key=>$child}
                             {if $key > 0}<br>{/if}
