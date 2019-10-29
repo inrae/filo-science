@@ -3,6 +3,15 @@
         $(".checkSelect").change(function() {
             $('.check').prop('checked', this.checked);
         });
+        $("#documentSpinner").hide();
+		$("#importForm").submit(function(event) {
+            if (confirm("{t}Confirmez-vous l'importation ?{/t}") == true) {
+                $(this.form).submit();
+                $("#documentSpinner").show();
+            } else {
+                return false;
+            }
+		});
     });
 </script>
 
@@ -70,8 +79,30 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <button id="exportButton" type="submit" class="btn btn-info">{t}Exporter les modèles{/t}</button>
+        <div class="col-md-6 center">
+            <button id="exportButton" type="submit" class="btn btn-info">{t}Exporter les modèles sélectionnés{/t}</button>
         </div>
     </div>
 </form>
+
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>{t}Importer des modèles depuis un fichier JSON{/t}</legend>
+        <form id="importForm" class="form-horizontal protoform" method="post"
+        action="index.php" enctype="multipart/form-data">
+        <input type="hidden" name="export_model_name" value="export_model">
+        <div class="form-group">
+            <label for="fileName" class="control-label col-md-4">
+                {t}Fichier JSON à importer :{/t}
+            </label>
+            <div class="col-md-8">
+                <input id="fileName" type="file" class="form-control"
+                    name="fileName" size="40" required>
+            </div>
+        </div>
+        <div class="form-group center">
+            <button type="submit" class="btn btn-danger">{t}Importer le fichier{/t}</button>
+            <img id="documentSpinner" src="display/images/spinner.gif" height="25" >
+        </div>
+    </fieldset>
+</div>
