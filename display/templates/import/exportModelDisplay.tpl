@@ -22,8 +22,10 @@
                 <th>{t}Clé primaire{/t}</th>
                 <th>{t}Clé métier{/t}</th>
                 <th>{t}Clé étrangère{/t}</th>
-                <th>{t}Clé étrangère secondaire{/t}</th>
+                <th>{t}Relation de type 1-1{/t}</th>
                 <th>{t}Tables liées (alias){/t}</th>
+                <th>{t}2nde clé étrangère (table n-n){/t}</th>
+                <th>{t}Alias de la 2nde table{/t}</th>
             </tr>
         </thead>
         <tbody>
@@ -34,13 +36,17 @@
                     <td >{$row.technicalKey}</td>
                     <td >{$row.businessKey}</td>
                     <td >{$row.parentKey}</td>
-                    <td >{$row.secondaryParentKey}</td>
+                    <td class="center">
+                        {if $row.table11 == 1}{t}Oui{/t}{/if}
+                    </td>
                     <td>
                         {foreach $row.children as $key=>$child}
                             {if $key > 0}<br>{/if}
                             {$child}
                         {/foreach}
                     </td>
+                    <td>{$row.tablenn.secondaryParentKey}</td>
+                    <td>{$row.tablenn.tableAlias}</td>
                 </tr>
             {/foreach}
         </tbody>

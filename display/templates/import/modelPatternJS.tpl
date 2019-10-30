@@ -30,9 +30,10 @@
                             "title": "{t}Nom de la clé étrangère (table parente){/t}",
                             "type": "string"
                         },
-                        "secondaryParentKey": {
-                            "title": "{t}Nom de la seconde clé étrangère{/t}",
-                            "type": "string"
+                        "table11": {
+                            "title": "{t}Relation de type 1-1 avec le parent (clé partagée){/t}",
+                            "type": "boolean",
+                            "default": false
                         },
                         "children": {
                             "title": "{t}Liste des alias des tables liées{/t}",
@@ -40,6 +41,37 @@
                             "items": {
                                 "type": "string"
                             }
+                        },
+                        "istablenn":{
+                            "title": "{t}Table de type n-n{/t}",
+                            "type":"boolean",
+                            "default":false
+                        },
+                        "tablenn":{
+                            "type":"object",
+                            "properties": {
+                                "secondaryParentKey": {
+                                    "title": "{t}Nom de la seconde clé étrangère{/t}",
+                                    "type": "string"
+                                },
+                                "tableAlias": {
+                                    "title": "{t}Alias de la seconde table{/t}",
+                                    "type": "string"
+                                }
+                            },
+                            "dependencies":"istablenn"
+                        }
+                    }
+                },
+                "dependencies": {
+                    "istablenn": ["tablenn"]
+                }
+            },
+            "options": {
+                "fields":{
+                    "tablenn": {
+                        "dependencies": {
+                            "istablenn": true
                         }
                     }
                 }

@@ -53,6 +53,7 @@
             <input type="hidden" name="export_model_name" value="operation">
             <input type="hidden" name="returnko" value="campaignDisplay">
             <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
+            <input type="hidden" name="translator" value="ti_operation">
             <table class="datatable table table-bordered table-hover" data-order='[[1,"desc"]]'>
                 <thead>
                     <th>{t}Nom{/t}</th>

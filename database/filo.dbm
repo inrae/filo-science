@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="806,423" last-zoom="1" max-obj-count="94"
+<dbmodel pgmodeler-ver="0.9.2-beta1" author="Eric Quinton" last-position="531,423" last-zoom="1" max-obj-count="94"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -145,7 +145,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="campaign" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="campaign" layer="0" collapse-mode="1" max-obj-count="4">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of campaigns rattached to a project]]></comment>
@@ -157,6 +157,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="campaign_name" not-null="true">
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[Name of the campaign]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="campaign_id_pk" type="pk-constr" table="filo.campaign">
 		<columns names="campaign_id" ref-type="src-columns"/>
@@ -2341,7 +2344,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="operator" layer="0" collapse-mode="2" max-obj-count="4">
+<table name="operator" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of operators]]></comment>
@@ -2361,6 +2364,9 @@ By default : total_length and weight]]></comment>
 	<column name="is_active" not-null="true" default-value="'t'">
 		<type name="boolean" length="0"/>
 		<comment><![CDATA[Is the opérator actually active ?]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="operator_pk" type="pk-constr" table="filo.operator">
 		<columns names="operator_id" ref-type="src-columns"/>
@@ -4544,7 +4550,7 @@ from tracking.location
 		<type name="json" length="0"/>
 		<comment><![CDATA[Pattern of the export/import.
 Structure:
-[{technicalKey:string,businessKey:string,tableName:string,children[table1,table2],parentKey:string,functionName:string,keys[1,2,3]}]]]></comment>
+[{technicalKey:string,businessKey:string,tableName:string,tableAlias:string,children[table1,table2],parentKey:string,secondaryParentKey:string}]]]></comment>
 	</column>
 	<constraint name="export_model_pk" type="pk-constr" table="import.export_model">
 		<columns names="export_model_id" ref-type="src-columns"/>

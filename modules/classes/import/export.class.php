@@ -66,11 +66,20 @@ class Export
     {
         $model = $this->model[$tableAlias];
         $tableName = $model["tableName"];
+        $quote = '"';
         $content  = array();
         $args = array();
-        $sql = "select * from $tableName";
+        $sql = "select * from $quote$tableName$quote";
+        if ($model["istablenn"] == 1) {
+            /**
+             * get the description of the secondary table
+             */
+            $model2 = $this->model[$model["tablenn"]["tableAlias"]];
+            $sql .= " join " . $quote . $model2["tableName"] . $quote .
+                " on ($quote$tableName$quote.$quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = $quote" . $model2["tableName"] . $quote . "." . $quote . $model2["technicalKey"] . $quote . ")";
+        }
         if (count($keys) > 0) {
-            $where = " where " . $model["technicalKey"] . " in (";
+            $where = " where " . $quote . $model["technicalKey"] . $quote . " in (";
             $comma = "";
             foreach ($keys as $k) {
                 if (is_numeric($k)) {
@@ -83,13 +92,13 @@ class Export
             /**
              * Search by parent
              */
-            $where = " where " . $model["parentKey"] . " = :parentKey";
+            $where = " where " . $quote . $model["parentKey"] . $quote . " = :parentKey";
             $args["parentKey"] = $parentKey;
         } else {
             $where = "";
         }
         if (strlen($model["technicalKey"]) > 0) {
-            $order = " order by " . $model["technicalKey"];
+            $order = " order by " . $quote . $model["technicalKey"] . $quote;
         } else {
             $order = " order by 1";
         }

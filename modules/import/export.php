@@ -19,9 +19,20 @@ switch ($t_module["param"]) {
                 foreach ($export->getListPrimaryTables() as $key => $table) {
                     if ($key == 0 && count($_REQUEST["keys"]) > 0) {
                         /**
+                         * Specific to Filo-Science to get the real values of the keys
+                         */
+                        $keys = array();
+                        if (strlen($_REQUEST["translator"])> 0) {
+                            foreach ($_REQUEST["keys"] as $k) {
+                                $keys[] = $_SESSION[$_REQUEST["translator"]]->getValue($k);
+                            }
+                        } else {
+                            $keys = $_REQUEST["keys"];
+                        }
+                        /**
                          * set the list of records for the first item
                          */
-                        $data[$table] = $export->getTableContent($table, $_REQUEST["keys"]);
+                        $data[$table] = $export->getTableContent($table, $keys);
                     } else {
                         $data[$table] = $export->getTableContent($table);
                     }

@@ -16,6 +16,7 @@
     <input type="hidden" name="action" value="Exec">
     <input type="hidden" name="export_model_name" value="campaign">
     <input type="hidden" name="returnko" value="campaignList">
+    <input type="hidden" name="translator" value="ti_campaign">
 
     <div class="row">
         <div class="col-md-6">
