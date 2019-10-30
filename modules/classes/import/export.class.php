@@ -70,14 +70,6 @@ class Export
         $content  = array();
         $args = array();
         $sql = "select * from $quote$tableName$quote";
-        if ($model["istablenn"] == 1) {
-            /**
-             * get the description of the secondary table
-             */
-            $model2 = $this->model[$model["tablenn"]["tableAlias"]];
-            $sql .= " join " . $quote . $model2["tableName"] . $quote .
-                " on ($quote$tableName$quote.$quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = $quote" . $model2["tableName"] . $quote . "." . $quote . $model2["technicalKey"] . $quote . ")";
-        }
         if (count($keys) > 0) {
             $where = " where " . $quote . $model["technicalKey"] . $quote . " in (";
             $comma = "";
@@ -103,6 +95,12 @@ class Export
             $order = " order by 1";
         }
         $content = $this->execute($sql . $where . $order, $args);
+        if ($model["istablenn"] == 1) {
+            /**
+             * get the description of the secondary table
+             */
+            $model2 = $this->model[$model["tablenn"]["tableAlias"]];
+        }
         /**
          * Search the data from the children
          */
@@ -111,6 +109,16 @@ class Export
                 foreach ($model["children"] as $child) {
                     $content[$k]["children"][$child] = $this->getTableContent($child, array(), $row[$model["technicalKey"]]);
                 }
+            }
+        }
+        if ($model["istablenn"] == 1) {
+            foreach ($content as $k => $row) {
+                /**
+                 * Get the record associated with the current record
+                 */
+                $sql = "select * from $quote" . $model2["tableName"] . "$quote where $quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = :secKey";
+                $data = $this->execute($sql, array("secKey" => $row[$model["tablenn"]["secondaryParentKey"]]));
+                $content[$k][$model["tablenn"]["tableAlias"]] = $data[0];
             }
         }
         return $content;
@@ -183,6 +191,9 @@ class Export
             }
             if ($parentKey > 0 && strlen($pkeyName) > 0) {
                 $row[$pkeyName] = $parentKey;
+            }
+            if ($model["table11"] == 1 && $parentKey > 0) {
+                $row[$tkeyName] = $parentKey;
             }
             /**
              * Set values
