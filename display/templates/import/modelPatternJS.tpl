@@ -30,7 +30,7 @@
                             "title": "{t}Nom de la clé étrangère (table parente){/t}",
                             "type": "string"
                         },
-                        "table11": {
+                        "istable11": {
                             "title": "{t}Relation de type 1-1 avec le parent (clé partagée){/t}",
                             "type": "boolean",
                             "default": false

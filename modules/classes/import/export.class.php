@@ -156,6 +156,7 @@ class Export
      */
     function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array())
     {
+        $quote = '"';
         if (!isset($this->model[$tableAlias])) {
             throw new ExportException(sprintf(_("Aucune description trouvée pour l'alias de table %s dans le fichier de paramètres"), $tableAlias));
         }
@@ -168,9 +169,9 @@ class Export
         $tkeyName = $model["technicalKey"];
         $pkeyName = $model["parentKey"];
         if (strlen($bkeyName) > 0) {
-            $sqlSearchKey = "select $tkeyName as key
-                    from $tableName
-                    where $bkeyName = :businessKey";
+            $sqlSearchKey = "select $quote$tkeyName$quote as key
+                    from $quote$tableName$quote
+                    where $quote$bkeyName$quote = :businessKey";
             $isBusiness = true;
         } else {
             $isBusiness = false;
@@ -192,8 +193,27 @@ class Export
             if ($parentKey > 0 && strlen($pkeyName) > 0) {
                 $row[$pkeyName] = $parentKey;
             }
-            if ($model["table11"] == 1 && $parentKey > 0) {
+            if ($model["istable11"] == 1 && $parentKey > 0) {
                 $row[$tkeyName] = $parentKey;
+            }
+            if ($model["istablenn"] == 1) {
+                $stableAlias = $model["tablenn"]["tableAlias"];
+                $parentModel = $this->model[$stableAlias];
+                /**
+                 * Search id of secondary table
+                 */
+                $sqlSearchKey = "select $quote" . $parentModel["tkeyName"] . "$quote as key
+                    from $quote" . $parentModel["tableName"] . "$quote
+                    where $quote" . $parentModel["businessKey"] . "$quote = :businessKey";
+                $sdata = $this->execute($sqlSearchKey, array("businessKey" => $row[$stableAlias][$parentModel["businessKey"]]));
+                $skey = $sdata[0]["key"];
+                if (!$skey > 0) {
+                    /**
+                     * write the secondary parent
+                     */
+                    $skey = $this->writeData($stableAlias, $row["tablenn"]);
+                }
+                $row[$model["tablenn"]["secondaryParentKey"]] = $skey;
             }
             /**
              * Set values
@@ -233,7 +253,7 @@ class Export
         $tableName = $model["tableName"];
         $tkeyName = $model["technicalKey"];
         $pkeyName = $model["parentKey"];
-        $skeyName = $model["secondaryParentKey"];
+        $skeyName = $model["tablenn"]["secondaryParentKey"];
         $dataSql = array();
         $comma = "";
         $quote = '"';
@@ -244,7 +264,7 @@ class Export
             /**
              * Search in case of n-n table
              */
-            if (strlen($pkeyName) > 0 && strlen($skeyName) > 0) {
+            if ($model["istablenn"] == 1) {
                 $sqlSearch = "select $quote$pkeyName$quote, $quote$skeyName$quote
                 from $quote$tableName$quote where $quote$pkeyName$quote = :pkeyName and $quote$skeyName$quote = :skeyName";
                 $dsearch = $this->execute($sqlSearch, array("pkeyName" => $data[$pkeyName], "skeyName" => $data[$skeyName]));
