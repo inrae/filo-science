@@ -49,7 +49,7 @@ class Individual extends ObjetBDD
             "tag" => array("type" => 0),
             "tag_posed" => array("type" => 0),
             "transmitter" => array("type" => 0),
-            "uuid" => array("type"=>0)
+            "uuid" => array("type" => 0)
         );
         parent::__construct($bdd, $param);
     }
@@ -94,6 +94,9 @@ class Individual extends ObjetBDD
      */
     function ecrire(array $data)
     {
+        if (strlen($data["measure_estimated"]) == 0) {
+            $data["measure_estimated"] = 0;
+        }
         $id = parent::ecrire($data);
         if ($id > 0 && $data["isTracking"]) {
             $data["individual_id"] = $id;
@@ -116,5 +119,26 @@ class Individual extends ObjetBDD
         $it = new IndividualTracking($this->connection, $this->paramori);
         $it->supprimer($id);
         parent::supprimer($id);
+    }
+
+    /**
+     * Delete from sample if it's not a tracked fish,
+     * else delete only the reference to the sample
+     *
+     * @param integer $id
+     * @return void
+     */
+    function deleteFromSample(int $id)
+    {
+        $data = $this->lire($id);
+        if ($data["taxon_id"] > 0) {
+            /**
+             * It's a fish tracked!
+             */
+            $data["sample_id"] = "";
+            $this->ecrire($data);
+        } else {
+            parent::supprimer($id);
+        }
     }
 }

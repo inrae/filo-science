@@ -1,6 +1,7 @@
 <?php
 class Sample extends ObjetBDD
 {
+    private $individual;
     private $sql = "select sample_id, sample_id as sample_uid, sequence_id, taxon_id
                     ,taxon_name, total_number, total_measured, total_weight
                     ,sample_size_min, sample_size_max, sample_comment
@@ -34,7 +35,7 @@ class Sample extends ObjetBDD
             "sample_size_min" => array("type" => 1),
             "sample_size_max" => array("type" => 1),
             "sample_comment" => array("type" => 0),
-            "uuid" => array("type"=>0)
+            "uuid" => array("type" => 0)
         );
         parent::__construct($bdd, $param);
     }
@@ -120,26 +121,34 @@ class Sample extends ObjetBDD
         /**
          * Delete individuals
          */
-        require_once 'modules/classes/individual.class.php';
-        $ind = new Individual($this->connection, $this->paramori);
-        if ($ind->supprimerChamp($id, "sample_id")) {
-            parent::supprimer($id);
+        if (!isset($this->individual)) {
+            require_once 'modules/classes/individual.class.php';
+            $this->individual = new Individual($this->connection);
         }
-    }
         /**
+         * get the list of individuals
+         */
+        $individuals = $this->individual->getListFromParent($id);
+        foreach ($individuals as $ind) {
+            $this->individual->deleteFromSample($ind["individual_id"]);
+        }
+        parent::supprimer($id);
+    }
+    /**
      * Get the project of a sample, using the real key
      *
      * @param int $uid
      * @return int
      */
-    function getProject ($uid) {
+    function getProject($uid)
+    {
         $sql = "select project_id
                 from sample
                 join sequence using (sequence_id)
                 join operation using (operation_id)
                 join campaign using (campaign_id)
                 where sample_id = :id";
-        $res = $this->lireParamAsPrepared($sql, array("id"=>$uid));
+        $res = $this->lireParamAsPrepared($sql, array("id" => $uid));
         return ($res["project_id"]);
     }
     /**
@@ -149,10 +158,11 @@ class Sample extends ObjetBDD
      * @param int $uid
      * @return boolean
      */
-    function isGranted(array $projects, $uid) {
+    function isGranted(array $projects, $uid)
+    {
         $project_id = $this->getProject($uid);
         $retour = false;
-        foreach($projects as $project) {
+        foreach ($projects as $project) {
             if ($project["project_id"] == $project_id) {
                 $retour = true;
                 break;

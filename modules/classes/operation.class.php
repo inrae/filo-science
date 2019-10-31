@@ -1,9 +1,11 @@
 <?php
+
 /**
  * ORM for table operation
  */
 class Operation extends ObjetBDD
 {
+    private $sequence, $ambience;
     private $sql = "select o.*
                     ,operation_id as operation_uid
                     ,campaign_name
@@ -66,7 +68,7 @@ class Operation extends ObjetBDD
             "fishing_strategy_id" => array("type" => 1),
             "scale_id" => array("type" => 1),
             "taxa_template_id" => array("type" => 1),
-            "uuid" => array("type"=>0)
+            "uuid" => array("type" => 0)
         );
         parent::__construct($bdd, $param);
     }
@@ -110,18 +112,19 @@ class Operation extends ObjetBDD
         $where = " where operation_id = :operation_id";
         return $this->lireParamAsPrepared($this->sql . $where, array("operation_id" => $operation_id));
     }
-     /**
+    /**
      * Get the project of an operation, using the real key
      *
      * @param int $uid
      * @return int
      */
-    function getProject ($uid) {
+    function getProject($uid)
+    {
         $sql = "select project_id
                 from operation
                 join campaign using (campaign_id)
                 where operation_id = :id";
-        $res = $this->lireParamAsPrepared($sql, array("id"=>$uid));
+        $res = $this->lireParamAsPrepared($sql, array("id" => $uid));
         return ($res["project_id"]);
     }
     /**
@@ -131,15 +134,49 @@ class Operation extends ObjetBDD
      * @param int $uid
      * @return boolean
      */
-    function isGranted(array $projects, $uid) {
+    function isGranted(array $projects, $uid)
+    {
         $project_id = $this->getProject($uid);
         $retour = false;
-        foreach($projects as $project) {
+        foreach ($projects as $project) {
             if ($project["project_id"] == $project_id) {
                 $retour = true;
                 break;
             }
         }
         return $retour;
+    }
+    /**
+     * Delete a sequence and all children
+     *
+     * @param int $id
+     * @return void
+     */
+    function supprimer(int $id)
+    {
+        if (!isset($this->ambience)) {
+            include_once 'modules/classes/ambience.class.php';
+            include_once 'modules/classes/sequence.class.php';
+            $this->ambience = new Ambience($this->connection);
+            $this->sequence = new Sequence($this->connection);
+        }
+        $this->ambience->supprimerChamp($id, "operation_id");
+        /**
+         * Get the list of sequences
+         */
+        $sequences = $this->sequence->getListFromParent($id);
+        foreach ($sequences as $seq) {
+            $this->sequence->supprimer($seq["sequence_id"]);
+        }
+        /**
+         * Delete the operators attached to the operation
+         */
+        $sql = "delete from operation_operator
+                where operation_id = :operation_id";
+        $this->executeAsPrepared($sql, array("operation_id" => $id), true);
+        /**
+         * delete the operation
+         */
+        parent::supprimer($id);
     }
 }

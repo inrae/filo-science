@@ -64,4 +64,20 @@ class Campaign extends ObjetBDD
             return array();
         }
     }
+
+    /**
+     * Delete a campaign with all attached operations
+     *
+     * @param integer $id
+     * @return void
+     */
+    function supprimer(int $id) {
+        include_once 'modules/classes/operation.class.php';
+        $operation = new Operation($this->connection);
+        $operations = $operation->getListFromParent($id);
+        foreach ($operations as $op) {
+            $op->supprimer($op["operation_id"]);
+        }
+        parent::supprimer($id);
+    }
 }
