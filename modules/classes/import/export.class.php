@@ -133,6 +133,8 @@ class Export
      */
     function execute(string $sql, array $data = array()): array
     {
+        printr($sql);
+        printr ($data);
         try {
             $stmt = $this->bdd->prepare($sql);
             $this->lastResultExec = $stmt->execute($data);
@@ -164,7 +166,7 @@ class Export
          * prepare sql request for search key
          */
         $model = $this->model[$tableAlias];
-        $tableName = $model["tableName"];
+        strlen($model["tableName"]) > 0 ? $tableName = $model["tableName"] : $tableName = $tableAlias;
         $bkeyName = $model["businessKey"];
         $tkeyName = $model["technicalKey"];
         $pkeyName = $model["parentKey"];
@@ -220,6 +222,9 @@ class Export
              */
             if (count($setValues) > 0) {
                 foreach ($setValues as $kv => $dv) {
+                    if (strlen($dv) == 0) {
+                        throw new ExportException(sprintf(_("Une valeur vide a été trouvée pour l'attribut ajouté %s"), $kv));
+                    }
                     $row[$kv] = $dv;
                 }
             }
@@ -228,7 +233,7 @@ class Export
              */
             $children = $row["children"];
             unset($row["children"]);
-            $id = $this->writeData($tableName, $row);
+            $id = $this->writeData($tableAlias, $row);
             /**
              * Record the children
              */
@@ -279,6 +284,9 @@ class Export
         if ($mode == "update") {
             $sql = "update $quote$tableName$quote set ";
             foreach ($data as $field => $value) {
+                if (in_array($field, $model["booleanFields"]) && !$value) {
+                    $value = "false";
+                }
                 if ($field != $tkeyName) {
                     $sql .= "$comma$quote$field$quote = :$field";
                     $comma = ", ";
@@ -303,6 +311,9 @@ class Export
             $cols = "(";
             $values = "(";
             foreach ($data as $field => $value) {
+                if (in_array($field, $model["booleanFields"]) && !$value) {
+                    $value = "false";
+                }
                 $cols .= $comma . $quote . $field . $quote;
                 $values .= $comma . ":$field";
                 $dataSql[$field] = $value;

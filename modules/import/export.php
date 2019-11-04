@@ -22,7 +22,7 @@ switch ($t_module["param"]) {
                          * Specific to Filo-Science to get the real values of the keys
                          */
                         $keys = array();
-                        if (strlen($_REQUEST["translator"])> 0) {
+                        if (strlen($_REQUEST["translator"]) > 0) {
                             foreach ($_REQUEST["keys"] as $k) {
                                 $keys[] = $_SESSION[$_REQUEST["translator"]]->getValue($k);
                             }
@@ -53,24 +53,54 @@ switch ($t_module["param"]) {
         break;
 
     case "importExec":
-        if ($_REQUEST["export_model_id"] > 0 && strlen($_REQUEST["filename"]) > 0) {
-            $model = $exportModel->lire($_REQUEST["export_model_id"]);
+    /**
+     * set the return values
+     */
+    if (isset($_REQUEST["returnok"])) {
+        $t_module["retourok"] = $_REQUEST["returnok"];
+    }
+    if (isset($_REQUEST["returnko"])) {
+        $t_module["retourko"] = $_REQUEST["returnok"];
+    }
+        if (($_REQUEST["export_model_id"] > 0 || strlen($_REQUEST["export_model_name"]) > 0) && $_FILES["filename"]["size"] > 0) {
+            if ($_REQUEST["export_model_id"]) {
+                $model = $exportModel->lire($_REQUEST["export_model_id"]);
+            } else {
+                $model = $exportModel->getModelFromName($_REQUEST["export_model_name"]);
+            }
             $export->initModel($model["pattern"]);
-            $filename = $_REQUEST["filename"];
+            $filename = $_FILES["filename"]["tmp_name"];
+            $realFilename = $_FILES["filename"]["name"];
             $handle = fopen($filename, 'r');
             if (!$handle) {
                 $message->set(sprintf(_("Fichier %s non trouvé ou non lisible"), $filename), true);
+                $module_coderetour = -1;
             } else {
                 $contents = fread($handle, filesize($filename));
                 fclose($handle);
                 $data = json_decode($contents, true);
                 try {
                     $bdd->beginTransaction();
+                    $firstTable = true;
                     foreach ($data as $tableName => $values) {
-                        $export->importDataTable($tableName, $values);
+                        if ($firstTable && strlen($_REQUEST["parentKeyName"]) > 0) {
+                            $key = $_REQUEST["parentKey"];
+                            /**
+                             * Specific to Filo-Science
+                             */
+                            if (strlen($_REQUEST["translator"]) > 0) {
+                                /**
+                                 * Get the real value of the parent
+                                 */
+                                $key = $_SESSION[$_REQUEST["translator"]]->getValue($key);
+                            }
+                            $export->importDataTable($tableName, $values, 0, array($_REQUEST["parentKeyName"] => $key));
+                        } else {
+                            $export->importDataTable($tableName, $values);
+                        }
                     }
                     $bdd->commit();
-                    $message->set(_("Importation effectuée"));
+                    $message->set(sprintf(_("Importation effectuée, fichier %s traité."), $realFilename));
                     $module_coderetour = 1;
                 } catch (Exception $e) {
                     $bdd->rollback();
@@ -79,6 +109,7 @@ switch ($t_module["param"]) {
                 }
             }
         } else {
+            $module_coderetour = -1;
             $message->set(_("Paramètres d'importation manquants"), true);
         }
         break;

@@ -42,6 +42,13 @@
                                 "type": "string"
                             }
                         },
+                        "booleanFields": {
+                            "title": "{t}Liste des champs de type booléen{/t}",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
                         "istablenn":{
                             "title": "{t}Table de type n-n{/t}",
                             "type":"boolean",

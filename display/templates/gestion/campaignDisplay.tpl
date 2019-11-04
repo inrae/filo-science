@@ -91,10 +91,38 @@
             </table>
             <div class="row">
                 <div class="col-md-6">
-                    <button id="exportButton" type="submit" class="btn btn-info">{t}Exporter les opérations sélectionnées{/t}</button>
+                    {if $droits.gestion == 1}
+                        <button id="exportButton" type="submit" class="btn btn-info">{t}Exporter les opérations sélectionnées{/t}</button>
+                    {/if}
                 </div>
             </div>
         </form>
     </fieldset>
+</div>
+{if $droits.gestion == 1}
+    <div class="row">
+        <form class="form-horizontal protoform col-md-6" id="importExecForm" method="post" action="index.php"
+        enctype="multipart/form-data">
+            <input type="hidden" name="moduleBase" value="export">
+            <input type="hidden" name="action" value="ImportExec">
+            <input type="hidden" name="export_model_name" value="operation">
+            <input type="hidden" name="returnko" value="campaignDisplay">
+            <input type="hidden" name="returnok" value="campaignDisplay">
+            <input type="hidden" name="parentKey" value="{$data.campaign_id}">
+            <input type="hidden" name="parentKeyName" value="campaign_id">
+            <input type="hidden" name="translator" value="ti_campaign">
+            <div class="form-group">
+                <label for="FileName" class="control-label col-md-4">
+                    <span class="red">*</span> {t}Fichier à importer (format JSON généré par l'opération d'export ci-dessus) :{/t}
+                </label>
+                <div class="col-md-8">
+                    <input id="FileName" type="file" class="form-control" name="filename" size="40" required>
+                </div>
+            </div>
+            <div class="form-group center">
+                <button id="importButton" type="submit" class="btn btn-warning">{t}Importer une opération{/t}</button>
+            </div>
+        </form>
+    {/if}
 
 </div>

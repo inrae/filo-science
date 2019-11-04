@@ -1,10 +1,10 @@
 
 {include file="mapDefault.tpl"}
 <script>
-var mapIsChange = true;    
+var mapIsChange = true;
 $(document).ready(function() {
-    
-    $("#station_id").change(function() { 
+
+    $("#station_id").change(function() {
         var stationId = $(this).val();
         if (stationId > 0) {
             var options = "";
@@ -20,7 +20,7 @@ $(document).ready(function() {
                 var result = JSON.parse(data);
                 $("#long_start").val(result["station_long"]);
                 $("#lat_start").val(result["station_lat"]);
-               
+
             });
         }
     });
@@ -39,7 +39,7 @@ $(document).ready(function() {
     $(".coord").change(function() {
         coordChange();
     });
-    
+
 });
 </script>
 
@@ -115,14 +115,14 @@ $(document).ready(function() {
                 <label for="date_start"  class="control-label col-md-4"> {t}Date/heure de début :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
                     <input id="date_start" name="date_start" class="form-control datetimepicker" value="{$data.date_start}" required>
-                </div>   
-            </div>        
+                </div>
+            </div>
             <div class="form-group">
                 <label for="date_end"  class="control-label col-md-4"> {t}Date/heure de fin :{/t}</label>
                 <div class="col-md-8">
                     <input id="date_end" name="date_end" class="form-control datetimepicker" value="{$data.date_end}" >
-                </div>   
-            </div>        
+                </div>
+            </div>
             <div class="form-group">
                 <label for="freshwater"  class="control-label col-md-4"> {t}Opération réalisée en eau douce ?{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
@@ -134,8 +134,8 @@ $(document).ready(function() {
                         <input  type="radio" name="freshwater" id="freshwater2" value="0" {if $data.freshwater == 0}checked{/if}>
                         {t}non{/t}
                     </label>
-               </div>   
-            </div>        
+               </div>
+            </div>
             <div class="form-group">
                 <label for="long_start"  class="control-label col-md-4"> {t}Longitude de départ :{/t}</label>
                 <div class="col-md-8">
@@ -171,13 +171,13 @@ $(document).ready(function() {
                 <div class="col-md-8">
                     <input id="pk_mouth" name="pk_mouth" class="form-control taux" value="{$data.pk_mouth}">
                 </div>
-            </div>         
+            </div>
             <div class="form-group">
                 <label for="length"  class="control-label col-md-4"> {t}Longueur échantillonnée (en mètres) :{/t}</label>
                 <div class="col-md-8">
                     <input id="length" name="length" class="form-control taux" value="{$data.length}">
                 </div>
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="surface"  class="control-label col-md-4"> {t}Surface échantillonnée (en m²) :{/t}</label>
                 <div class="col-md-8">
@@ -249,7 +249,7 @@ $(document).ready(function() {
                 <img src="display/images/map-pointer.png" height="30">{t}Repérez votre position !{/t}</a>
             </div>
         <div id="mapOperation" class="map"></div>
-            
+
             {include file="gestion/operationMapChange.tpl"}
     </div>
 </div>

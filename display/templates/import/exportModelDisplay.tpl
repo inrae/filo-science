@@ -22,6 +22,7 @@
                 <th>{t}Clé primaire{/t}</th>
                 <th>{t}Clé métier{/t}</th>
                 <th>{t}Clé étrangère{/t}</th>
+                <th>{t}Champs booléens{/t}</th>
                 <th>{t}Relation de type 1-1{/t}</th>
                 <th>{t}Tables liées (alias){/t}</th>
                 <th>{t}2nde clé étrangère (table n-n){/t}</th>
@@ -36,6 +37,11 @@
                     <td >{$row.technicalKey}</td>
                     <td >{$row.businessKey}</td>
                     <td >{$row.parentKey}</td>
+                    <td>
+                        {foreach $row.booleanFields as $field}
+                            {$field}
+                        {/foreach}
+                    </td>
                     <td class="center">
                         {if $row.table11 == 1}{t}Oui{/t}{/if}
                     </td>
