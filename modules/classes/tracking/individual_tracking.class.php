@@ -10,6 +10,7 @@ class IndividualTracking extends ObjetBDD
                     , transmitter_type_name
                     ,project_name
                     ,scientific_name
+                    ,uuid
                     from individual_tracking it
                     join individual using (individual_id)
                     join project p on (it.project_id = p.project_id)

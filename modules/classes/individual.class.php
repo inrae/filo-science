@@ -11,7 +11,7 @@ class Individual extends ObjetBDD
                     ,measure_estimated, pathology_codes, tag, tag_posed, transmitter
                     ,pathology_name, pathology_code
                     ,sexe_name, sexe_code
-                    ,other_measures
+                    ,other_measures, uuid
                     ,release_station_id, transmitter_type_id, project_id
                     , taxon_id, scientific_name
                     from individual
@@ -49,7 +49,7 @@ class Individual extends ObjetBDD
             "tag" => array("type" => 0),
             "tag_posed" => array("type" => 0),
             "transmitter" => array("type" => 0),
-            "uuid" => array("type" => 0)
+            "uuid" => array("type" => 0, "defaultValue"=>"getUUID")
         );
         parent::__construct($bdd, $param);
     }

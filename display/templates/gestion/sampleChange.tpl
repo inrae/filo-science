@@ -586,6 +586,13 @@
                                 class="fish md-textarea form-control">{$individual.individual_comment}</textarea>
                         </div>
                     </div>
+                    <div class="form-group" id="div-uuid">
+                        <label for="uuid" class="fish control-label col-md-4">
+                            {t}Identifiant unique :{/t}</label>
+                        <div class="col-md-8">
+                            <input id="uuid" name="uuid" value="{$individual.uuid}" class="fish form-control">
+                        </div>
+                    </div>
                     <div class="center">
                         <button id="submit3" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                         {if $individual.individual_id > 0 }
@@ -609,6 +616,7 @@
                 <th>{t}Autre{/t}</th>
                 <th>{t}Poids{/t}</th>
                 <th>{t}Mesures complémentaires{/t}</th>
+                <th>{t}Identifiant unique{/t}</th>
             </thead>
             <tbody>
                 {foreach $individuals as $individual}
@@ -626,6 +634,7 @@
                     <td class="center">{$individual.ot}</td>
                     <td class="center">{$individual.weight}</td>
                     <td>{$individual.other_measures}</td>
+                    <td>{$individual.uuid}</td>
                 </tr>
                 {/foreach}
             </tbody>

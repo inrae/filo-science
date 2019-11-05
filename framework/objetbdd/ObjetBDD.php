@@ -1897,5 +1897,16 @@ class ObjetBDD
             }
         }
     }
+
+    /**
+     * Get an UUID generate by the database
+     *
+     * @return string
+     */
+    function getUUID() {
+        $sql = "select gen_random_uuid() as uuid";
+        $data = $this->lireParam($sql);
+        return $data["uuid"];
+    }
 }
 ?>

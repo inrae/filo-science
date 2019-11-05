@@ -79,13 +79,13 @@
                     <th>{t}Tag RFID{/t}</th>
                     <th>{t}Émetteur acoustique ou radio{/t}</th>
                     <th>{t}Modèle d'émetteur{/t}</th>
+                    <th>{t}Identifiant unique{/t}</th>
                     <th>{t}Détections{/t}</th>
                 </tr>
             </thead>
             <tbody>
                 {foreach $individuals as $individual}
                 <tr>
-                    
                     <td class="center {if $individual.individual_id == $selectedIndividual}itemSelected{/if}">
                         {if $droits.gestion == 1}
                             <a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}"
@@ -100,6 +100,7 @@
                     <td>{$individual.tag}</td>
                     <td>{$individual.transmitter}</td>
                     <td>{$individual.transmitter_type_name}</td>
+                    <td>{$individual.uuid}</td>
                     <td class="center">
                             <a href="index.php?module=individualTrackingList&individual_id={$individual.individual_id}">
                                     <img src="display/images/result.png" height="25">
