@@ -53,15 +53,15 @@ switch ($t_module["param"]) {
         break;
 
     case "importExec":
-    /**
-     * set the return values
-     */
-    if (isset($_REQUEST["returnok"])) {
-        $t_module["retourok"] = $_REQUEST["returnok"];
-    }
-    if (isset($_REQUEST["returnko"])) {
-        $t_module["retourko"] = $_REQUEST["returnok"];
-    }
+        /**
+         * set the return values
+         */
+        if (isset($_REQUEST["returnok"])) {
+            $t_module["retourok"] = $_REQUEST["returnok"];
+        }
+        if (isset($_REQUEST["returnko"])) {
+            $t_module["retourko"] = $_REQUEST["returnok"];
+        }
         if (($_REQUEST["export_model_id"] > 0 || strlen($_REQUEST["export_model_name"]) > 0) && $_FILES["filename"]["size"] > 0) {
             if ($_REQUEST["export_model_id"]) {
                 $model = $exportModel->lire($_REQUEST["export_model_id"]);
@@ -95,6 +95,7 @@ switch ($t_module["param"]) {
                                 $key = $_SESSION[$_REQUEST["translator"]]->getValue($key);
                             }
                             $export->importDataTable($tableName, $values, 0, array($_REQUEST["parentKeyName"] => $key));
+                            $firstTable = false;
                         } else {
                             $export->importDataTable($tableName, $values);
                         }
@@ -102,7 +103,7 @@ switch ($t_module["param"]) {
                     $bdd->commit();
                     $message->set(sprintf(_("Importation effectuée, fichier %s traité."), $realFilename));
                     $module_coderetour = 1;
-                } catch (Exception $e) {
+                } catch (ExportException $e) {
                     $bdd->rollback();
                     $message->set($e->getMessage(), true);
                     $module_coderetour = -1;

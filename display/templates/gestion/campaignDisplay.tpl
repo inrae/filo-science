@@ -106,6 +106,7 @@
             <input type="hidden" name="moduleBase" value="export">
             <input type="hidden" name="action" value="ImportExec">
             <input type="hidden" name="export_model_name" value="operation">
+            <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
             <input type="hidden" name="returnko" value="campaignDisplay">
             <input type="hidden" name="returnok" value="campaignDisplay">
             <input type="hidden" name="parentKey" value="{$data.campaign_id}">

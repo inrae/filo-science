@@ -7,6 +7,7 @@ class Export
     private $model = array();
     private $bdd;
     private $lastResultExec;
+    public $modeDebug = false;
     /**
      * Constructor
      *
@@ -133,8 +134,10 @@ class Export
      */
     function execute(string $sql, array $data = array()): array
     {
-        printr($sql);
-        printr ($data);
+        if ($this->modeDebug) {
+            printr($sql);
+            printr($data);
+        }
         try {
             $stmt = $this->bdd->prepare($sql);
             $this->lastResultExec = $stmt->execute($data);
@@ -166,7 +169,7 @@ class Export
          * prepare sql request for search key
          */
         $model = $this->model[$tableAlias];
-        strlen($model["tableName"]) > 0 ? $tableName = $model["tableName"] : $tableName = $tableAlias;
+        $tableName = $model["tableName"];
         $bkeyName = $model["businessKey"];
         $tkeyName = $model["technicalKey"];
         $pkeyName = $model["parentKey"];
@@ -177,6 +180,24 @@ class Export
             $isBusiness = true;
         } else {
             $isBusiness = false;
+        }
+        if ($model["istablenn"] == 1) {
+            /*$stableAlias = $model["tablenn"]["tableAlias"];
+            $parentModel = $this->model[$stableAlias];*/
+            $tableAlias2 = $model["tablenn"]["tableAlias"];
+            $model2 = $this->model[$tableAlias2];
+            if (count($model2) == 0) {
+                throw new ExportException(sprintf(_("Le modèle ne contient pas la description de la table %s"), $model["tablenn"]["tableAlias"]));
+            }
+            $tableName2 = $model2["tableName"];
+            $tkeyName2 = $model2["technicalKey"];
+            $bkey2 = $model2["businessKey"];
+            /**
+             * delete pre-existent rows
+             */
+            $sqlDelete = "delete from $quote$tableName$quote
+            where $quote$pkeyName$quote = :parentKey";
+            $this->execute($sqlDelete, array("parentKey" => $data[$pkeyName]));
         }
         foreach ($data as $row) {
             /**
@@ -199,21 +220,19 @@ class Export
                 $row[$tkeyName] = $parentKey;
             }
             if ($model["istablenn"] == 1) {
-                $stableAlias = $model["tablenn"]["tableAlias"];
-                $parentModel = $this->model[$stableAlias];
                 /**
                  * Search id of secondary table
                  */
-                $sqlSearchKey = "select $quote" . $parentModel["tkeyName"] . "$quote as key
-                    from $quote" . $parentModel["tableName"] . "$quote
-                    where $quote" . $parentModel["businessKey"] . "$quote = :businessKey";
-                $sdata = $this->execute($sqlSearchKey, array("businessKey" => $row[$stableAlias][$parentModel["businessKey"]]));
+                $sqlSearchKey = "select $quote$tkeyName2$quote as key
+                    from $quote$tableName2$quote
+                    where $quote$bkey2$quote = :businessKey";
+                $sdata = $this->execute($sqlSearchKey, array("businessKey" => $row[$tableAlias2][$model2["businessKey"]]));
                 $skey = $sdata[0]["key"];
                 if (!$skey > 0) {
                     /**
                      * write the secondary parent
                      */
-                    $skey = $this->writeData($stableAlias, $row["tablenn"]);
+                    $skey = $this->writeData($tableAlias2, $row[$tableAlias2]);
                 }
                 $row[$model["tablenn"]["secondaryParentKey"]] = $skey;
             }
@@ -252,7 +271,7 @@ class Export
      * @param array $data: data of the record
      * @return integer: technical key generated or updated
      */
-    function writeData(string $tableAlias, array $data): int
+    function writeData(string $tableAlias, array $data): ?int
     {
         $model = $this->model[$tableAlias];
         $tableName = $model["tableName"];
@@ -265,19 +284,8 @@ class Export
         $mode = "insert";
         if ($data[$tkeyName] > 0) {
             $mode = "update";
-        } else {
-            /**
-             * Search in case of n-n table
-             */
-            if ($model["istablenn"] == 1) {
-                $sqlSearch = "select $quote$pkeyName$quote, $quote$skeyName$quote
-                from $quote$tableName$quote where $quote$pkeyName$quote = :pkeyName and $quote$skeyName$quote = :skeyName";
-                $dsearch = $this->execute($sqlSearch, array("pkeyName" => $data[$pkeyName], "skeyName" => $data[$skeyName]));
-                if ($dsearch[0][$pkeyName] > 0) {
-                    $mode = "update";
-                }
-            }
         }
+        $model["istablenn"] == 1 ? $returning = "" : $returning = " RETURNING $tkeyName";
         /**
          * update
          */
@@ -314,17 +322,21 @@ class Export
                 if (in_array($field, $model["booleanFields"]) && !$value) {
                     $value = "false";
                 }
-                $cols .= $comma . $quote . $field . $quote;
-                $values .= $comma . ":$field";
-                $dataSql[$field] = $value;
-                $comma = ", ";
+                if (!($model["istablenn"] == 1 && $field == $model["tablenn"]["tableAlias"])) {
+                    $cols .= $comma . $quote . $field . $quote;
+                    $values .= $comma . ":$field";
+                    $dataSql[$field] = $value;
+                    $comma = ", ";
+                }
             }
             $cols .= ")";
             $values .= ")";
-            $sql = "insert into $quote$tableName$quote $cols values $values RETURNING $tkeyName";
+            $sql = "insert into $quote$tableName$quote $cols values $values $returning";
         }
         $result = $this->execute($sql, $dataSql);
-        if ($mode == "insert") {
+        if ($model["istablenn"] == 1) {
+            $newkey = null;
+        } else if ($mode == "insert") {
             $newKey = $result[0][$tkeyName];
         } else {
             $newKey = $data[$tkeyName];
