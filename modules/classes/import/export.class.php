@@ -197,7 +197,7 @@ class Export
              */
             $sqlDelete = "delete from $quote$tableName$quote
             where $quote$pkeyName$quote = :parentKey";
-            $this->execute($sqlDelete, array("parentKey" => $data[$pkeyName]));
+            $this->execute($sqlDelete, array("parentKey" => $parentKey));
         }
         foreach ($data as $row) {
             /**

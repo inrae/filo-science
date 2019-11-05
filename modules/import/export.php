@@ -77,6 +77,7 @@ switch ($t_module["param"]) {
             } else {
                 $model = $exportModel->getModelFromName($_REQUEST["export_model_name"]);
             }
+            //$export->modeDebug = true;
             $export->initModel($model["pattern"]);
             $filename = $_FILES["filename"]["tmp_name"];
             $realFilename = $_FILES["filename"]["name"];
