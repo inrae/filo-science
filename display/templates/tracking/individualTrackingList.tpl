@@ -1,12 +1,13 @@
 <script>
     $(document).ready(function () {
         var projectId = "{$projects[0].project_id}";
+        console.log("projectId:"+projectId);
         try {
             var projectIdCookie = Cookies.get("projectId");
         } catch {
             Cookies.set("projectId", projectId, { expires: 180, secure: true });
         }
-        if (projectIdCookie != '') {
+        if (projectIdCookie != '' && projectIdCookie != undefined) {
             projectId = projectIdCookie;
         } else {
             Cookies.set("projectId", projectId, { expires: 180, secure: true });
@@ -17,6 +18,8 @@
         } catch { }
         $("#projectActive" + projectActive).attr("checked", "true");
         $("#project" + projectId).attr("selected", true);
+        console.log("projectId:"+projectId);
+        $("#new").attr("href", "index.php?module=individualTrackingChange&individual_id=0&project_id="+projectId);
         $(".is_active").change(function () {
             $("#project_id").val("");
             Cookies.set("projectId", '', { expires: 180, secure: true });
@@ -27,8 +30,6 @@
             Cookies.set("projectId", $(this).val(), { expires: 180, secure: true });
             $("#individualTrackingSearch").submit();
         });
-
-
     });
 </script>
 <h2>{t}Liste des poissons suivis{/t}</h2>
@@ -66,7 +67,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-6">
         {if $droits.gestion == 1}
-        <a href="index.php?module=individualTrackingChange&individual_id=0">
+        <a id="new" href="index.php?module=individualTrackingChange&individual_id=0">
             <img src="display/images/new.png" height="25">
             {t}Nouveau...{/t}
         </a>
