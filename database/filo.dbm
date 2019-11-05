@@ -5,7 +5,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 -->
 <dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="94"
 	 default-schema="import" default-owner="filo"
-	 layers="gacl;tracking;import" active-layers="0;1;2;3">
+	 layers="gacl;tracking;import" active-layers="3">
 <role name="filo"
       login="true"
       encrypted="true"
@@ -4365,7 +4365,7 @@ left outer join filo.station on (st.station_id = station.station_id)]]></express
 	<expression type="from-exp">1</expression>
 </view>
 
-<relationship name="individual_tracking_has_many_location" type="rel1n" layer="0"
+<relationship name="individual_tracking_has_many_location" type="rel1n" layer="2"
 	 src-col-pattern="{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
