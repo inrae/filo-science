@@ -121,9 +121,8 @@
                 </div>
             </div>
             <div class="form-group center">
-                <button id="importButton" type="submit" class="btn btn-warning">{t}Importer une opération{/t}</button>
+                <button id="importButton" type="submit" class="btn btn-warning">{t}Importer une ou plusieurs opérations{/t}</button>
             </div>
         </form>
-    {/if}
-
-</div>
+    </div>
+{/if}

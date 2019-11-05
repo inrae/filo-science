@@ -59,3 +59,46 @@
     </table>
     </div>
 </div>
+{if $droits.param == 1}
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>{t}Exportation de l'ensemble des données concernées par le modèle{/t}</legend>
+            <form class="form-horizontal protoform" id="exportModelExec" method="post" action="index.php">
+                <input type="hidden" name="moduleBase" value="export">
+                <input type="hidden" name="action" value="Exec">
+                <input type="hidden" name="export_model_name" value="{$data.export_model_name}">
+                <input type="hidden" name="returnko" value="exportModelDisplay">
+                <div class="row">
+                        <div class="col-md-12 center">
+                            <button id="exportButton" type="submit" class="btn btn-warning">{t}Exporter toutes les données concernées par le modèle{/t}</button>
+                        </div>
+                    </div>
+            </form>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>{t}Importation de données précédemment exportées{/t}</legend>
+            <form class="form-horizontal protoform col-md-12" id="importExecForm" method="post" action="index.php"
+        enctype="multipart/form-data">
+                <input type="hidden" name="moduleBase" value="export">
+                <input type="hidden" name="action" value="ImportExec">
+                <input type="hidden" name="export_model_name" value="{$data.export_model_name}">
+                <input type="hidden" name="returnko" value="exportModelDisplay">
+                <input type="hidden" name="returnok" value="exportModelDisplay">
+                <div class="form-group">
+                    <label for="FileName" class="control-label col-md-4">
+                        <span class="red">*</span> {t}Fichier à importer (format JSON généré par l'opération d'export ci-dessus) :{/t}
+                    </label>
+                    <div class="col-md-8">
+                        <input id="FileName" type="file" class="form-control" name="filename" size="40" required>
+                    </div>
+                </div>
+                <div class="form-group center">
+                    <button id="importButton" type="submit" class="btn btn-warning">{t}Importer les données{/t}</button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+
+{/if}

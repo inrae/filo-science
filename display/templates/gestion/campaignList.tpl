@@ -66,3 +66,33 @@
         </div>
     </div>
 </form>
+
+{if $droits.gestion == 1}
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>{t}Importation de campagnes précédemment exportées{/t}</legend>
+            <form class="form-horizontal protoform" id="importExecForm" method="post" action="index.php"
+            enctype="multipart/form-data">
+                <input type="hidden" name="moduleBase" value="export">
+                <input type="hidden" name="action" value="ImportExec">
+                <input type="hidden" name="export_model_name" value="campaign">
+                <input type="hidden" name="project_id" value="{$searchCampaign.project_id}">
+                <input type="hidden" name="returnko" value="campaignList">
+                <input type="hidden" name="returnok" value="campaignList">
+                <input type="hidden" name="parentKey" value="{$searchCampaign.project_id}">
+                <input type="hidden" name="parentKeyName" value="project_id">
+                <div class="form-group">
+                    <label for="FileName" class="control-label col-md-4">
+                        <span class="red">*</span> {t}Fichier à importer (format JSON généré par l'opération d'export ci-dessus) :{/t}
+                    </label>
+                    <div class="col-md-8">
+                        <input id="FileName" type="file" class="form-control" name="filename" size="40" required>
+                    </div>
+                </div>
+                <div class="form-group center">
+                    <button id="importButton" type="submit" class="btn btn-warning">{t}Importer une ou plusieurs campagnes{/t}</button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+{/if}

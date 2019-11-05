@@ -62,7 +62,16 @@ switch ($t_module["param"]) {
         if (isset($_REQUEST["returnko"])) {
             $t_module["retourko"] = $_REQUEST["returnok"];
         }
-        if (($_REQUEST["export_model_id"] > 0 || strlen($_REQUEST["export_model_name"]) > 0) && $_FILES["filename"]["size"] > 0) {
+        /**
+         * Verify the project, if it's specified
+         */
+        $testProject = true;
+        if (isset($_REQUEST["project_id"])) {
+            if (!verifyProject($_REQUEST["project_id"])) {
+                $testProject = false;
+            }
+        }
+        if (($_REQUEST["export_model_id"] > 0 || strlen($_REQUEST["export_model_name"]) > 0) && $_FILES["filename"]["size"] > 0 && $testProject) {
             if ($_REQUEST["export_model_id"]) {
                 $model = $exportModel->lire($_REQUEST["export_model_id"]);
             } else {
@@ -111,7 +120,7 @@ switch ($t_module["param"]) {
             }
         } else {
             $module_coderetour = -1;
-            $message->set(_("Paramètres d'importation manquants"), true);
+            $message->set(_("Paramètres d'importation manquants ou droits insuffisants"), true);
         }
         break;
 }
