@@ -27,17 +27,17 @@
             </div>
             <div class="form-group">
                 <label for="function_type_id" class="control-label col-md-4">
-                    <span class="red">*</span> {t}Fonction à exécuter :{/t}
+                    <span class="red">*</span> {t}Champ de la base de données recevant l'information :{/t}
                 </label>
                 <div class="col-md-8">
                     <select id="table_column_name" name="table_column_name" class="form-control">
                         {foreach $columns as $column}
                             <option value="{$column}" {if $data.table_column_name==$column}selected{/if}>
-                                {$column} 
-                            </option> 
-                        {/foreach} 
-                    </select> 
-                </div> 
+                                {$column}
+                            </option>
+                        {/foreach}
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label for="isErCheck" class="control-label col-md-4">

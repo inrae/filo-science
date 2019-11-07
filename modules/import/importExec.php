@@ -64,6 +64,7 @@ if (isset($_FILES["filename"])) {
         $dataDisplay = array();
         $idMin = 999999999;
         $idMax = 0;
+        $continue = true;
         try {
             $import->initFile($fdata["tmp_name"], $importParam["separator"]);
             $numLine = 0;
@@ -74,53 +75,61 @@ if (isset($_FILES["filename"])) {
             if (!$_REQUEST["testMode"] == 1) {
                 $bdd->beginTransaction();
             }
-            while (($line = $import->readLine()) !== false) {
-                $numLine++;
-                /**
-                 * Apply all functions for the current row
-                 */
-                try {
-                    foreach ($functions as $function) {
-                        $numColumn = $function["column_number"];
-                        $result = $functionType->functionCall($function["function_name"], $line, array("columnNumber" => $numColumn, "arg" => $function["arguments"]));
-                        if ($function["column_result"] > 0) {
-                            $line[$numColumn - 1] = $result;
-                        } else {
-                            if (is_array($result)) {
-                                $line = $result;
+            while ($continue) {
+                $line = $import->readLine();
+                if ($line) {
+                    $numLine++;
+                    /**
+                     * Apply all functions for the current row
+                     */
+                    try {
+                        foreach ($functions as $function) {
+                            $numColumn = $function["column_number"];
+                            $result = $functionType->functionCall($function["function_name"], $line, array("columnNumber" => $numColumn, "arg" => $function["arguments"]));
+                            if ($function["column_result"] > 0) {
+                                $line[$numColumn - 1] = $result;
+                            } else {
+                                if (is_array($result)) {
+                                    $line = $result;
+                                }
                             }
                         }
-                    }
-                    /**
-                     * Generate the result of the read of the line
-                     */
-                    $row = array();
-                    foreach ($columns as $key => $value) {
-                        $row[$value] = $line[$key - 1];
-                    }
-
-                    /**
-                     * Test mode
-                     */
-                    if ($_REQUEST["testMode"] == 1) {
-                        if ($numLineDisplay < $_REQUEST["nbLines"]) {
-                            $dataDisplay[] = $row;
-                            $numLineDisplay++;
-                        }
-                    } else {
                         /**
-                         * Import mode
+                         * Generate the result of the read of the line
                          */
-                        $row["antenna_id"] = $_POST["sensor_id"];
-                        $row["probe_id"] = $_POST["sensor_id"];
-                        $idGenerate = $importDataClass->ecrire($row);
-                        if ($idGenerate < $idMin) {
-                            $idMin = $idGenerate;
+                        $row = array();
+                        foreach ($columns as $key => $value) {
+                            $row[$value] = $line[$key - 1];
                         }
-                        $idMax = $idGenerate;
+
+                        /**
+                         * Test mode
+                         */
+                        if ($_REQUEST["testMode"] == 1) {
+                            if ($numLineDisplay < $_REQUEST["nbLines"]) {
+                                $dataDisplay[] = $row;
+                                $numLineDisplay++;
+                            }
+                            if ($numLine == $_REQUEST["nbLines"]) {
+                                $continue = false;
+                            }
+                        } else {
+                            /**
+                             * Import mode
+                             */
+                            $row["antenna_id"] = $_POST["sensor_id"];
+                            $row["probe_id"] = $_POST["sensor_id"];
+                            $idGenerate = $importDataClass->ecrire($row);
+                            if ($idGenerate < $idMin) {
+                                $idMin = $idGenerate;
+                            }
+                            $idMax = $idGenerate;
+                        }
+                    } catch (FunctionTypeException $fte) {
+                        $errors[] = array("lineNumber" => $numLine, "content" => $fte->getMessage());
                     }
-                } catch (FunctionTypeException $fte) {
-                    $errors[] = array("lineNumber" => $numLine, "content" => $fte->getMessage());
+                } else {
+                    $continue = false;
                 }
             }
             if (!$_REQUEST["testMode"] == 1) {
