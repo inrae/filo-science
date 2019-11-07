@@ -5,14 +5,14 @@
         var importDescriptionId = "{$imports[0].import_description_id}";
         var sensorId;
 
-        $("#import_description_id, #project_id").change(function () { 
+        $("#import_description_id, #project_id").change(function () {
             var import_description_id = $("#import_description_id").val();
             var project_id = $("#project_id").val();
             if (import_description_id > 0 && project_id > 0) {
                 setStations(import_description_id, project_id, sensorId);
             }
         });
-        $("#testMode:checkbox").change(function () { 
+        $("#testMode:checkbox").change(function () {
             console.log(this.checked);
             if (this.checked) {
                 $("#nbLinesGroup").show();
@@ -24,8 +24,8 @@
         function setStations(import_description_id, project_id, sensor_id = 0) {
             $.ajax({
                 url: "index.php",
-                data: { 
-                    "module": "stationTrackingGetSensors", 
+                data: {
+                    "module": "stationTrackingGetSensors",
                     "import_description_id": import_description_id,
                     "project_id": project_id
                     }
@@ -33,7 +33,7 @@
             .done(function (value) {
                 var val = JSON.parse(value);
                 var options = "";
-                val.forEach(function (element) { 
+                val.forEach(function (element) {
                     options += '<option value="'+ element.sensor_id + '"';
                     if (sensor_id == element.sensor_id) {
                         options += ' selected ';
@@ -45,12 +45,12 @@
             });
         }
 
-        $("#importForm").submit( function (event) { 
+        $("#importForm").submit( function (event) {
             //event.preventDefault();
             /**
              * set the cookie
              */
-            cookieContent = { 
+            cookieContent = {
                 "import_description_id": $("#import_description_id").val(),
                 "project_id": $("#project_id").val(),
                 "sensor_id": $("#sensor_id").val()
@@ -61,7 +61,7 @@
                 cookieContent.testMode = "0";
             }
             Cookies.set ("importExec", JSON.stringify(cookieContent), { expires: 60});
-            
+
         });
 
         /**
@@ -81,7 +81,7 @@
                     $("#nbLinesGroup").show();
                 }
             } else {
-                /** 
+                /**
                  * set default values
                  */
                 if (importDescriptionId > 0 && projectId > 0) {
@@ -89,6 +89,12 @@
                 }
             }
         } catch {}
+        /**
+         * Get default station
+         */
+         if (importDescriptionId > 0 && projectId > 0) {
+            setStations(importDescriptionId,projectId);
+         }
     });
 </script>
 
