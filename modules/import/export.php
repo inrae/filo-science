@@ -7,6 +7,7 @@ $export = new Export($bdd);
 switch ($t_module["param"]) {
     case "exec":
         try {
+            $export->modeDebug = false;
             $model = array();
             if ($_REQUEST["export_model_id"] > 0) {
                 $model = $exportModel->lire($_REQUEST["export_model_id"]);
@@ -36,6 +37,9 @@ switch ($t_module["param"]) {
                     } else {
                         $data[$table] = $export->getTableContent($table);
                     }
+                }
+                if ($export->modeDebug) {
+                    throw new ExportException ("Debug mode: no file generated");
                 }
                 $vue->setParam(array("filename" => $_SESSION["APPLI_code"] . '-' . date('YmdHis') . ".json"));
                 $vue->set(json_encode($data));

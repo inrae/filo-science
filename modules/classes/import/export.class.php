@@ -49,7 +49,7 @@ class Export
     {
         $list = array();
         foreach ($this->model as $table) {
-            if (strlen($table["parentKey"]) == 0) {
+            if (strlen($table["parentKey"]) == 0 && !$table["isEmpty"]) {
                 $list[] = $table["tableAlias"];
             }
         }
@@ -66,60 +66,78 @@ class Export
     function getTableContent(string $tableAlias, array $keys = array(), int $parentKey = 0): array
     {
         $model = $this->model[$tableAlias];
+        if (count($model) == 0) {
+            throw new ExportException(sprintf(_("L'alias %s n'a pas été décrit dans le modèle"), $tableAlias));
+        }
         $tableName = $model["tableName"];
         $quote = '"';
         $content  = array();
         $args = array();
-        $sql = "select * from $quote$tableName$quote";
-        if (count($keys) > 0) {
-            $where = " where " . $quote . $model["technicalKey"] . $quote . " in (";
-            $comma = "";
-            foreach ($keys as $k) {
-                if (is_numeric($k)) {
-                    $where .= $comma . $k;
-                    $comma = ",";
+        if (!$model["isEmpty"] || count($keys) > 0) {
+            $sql = "select * from $quote$tableName$quote";
+            if (count($keys) > 0) {
+                $where = " where " . $quote . $model["technicalKey"] . $quote . " in (";
+                $comma = "";
+                foreach ($keys as $k) {
+                    if (is_numeric($k)) {
+                        $where .= $comma . $k;
+                        $comma = ",";
+                    }
                 }
-            }
-            $where .= ")";
-        } else if (strlen($model["parentKey"]) > 0 && $parentKey > 0) {
-            /**
-             * Search by parent
-             */
-            $where = " where " . $quote . $model["parentKey"] . $quote . " = :parentKey";
-            $args["parentKey"] = $parentKey;
-        } else {
-            $where = "";
-        }
-        if (strlen($model["technicalKey"]) > 0) {
-            $order = " order by " . $quote . $model["technicalKey"] . $quote;
-        } else {
-            $order = " order by 1";
-        }
-        $content = $this->execute($sql . $where . $order, $args);
-        if ($model["istablenn"] == 1) {
-            /**
-             * get the description of the secondary table
-             */
-            $model2 = $this->model[$model["tablenn"]["tableAlias"]];
-        }
-        /**
-         * Search the data from the children
-         */
-        if (count($model["children"]) > 0) {
-            foreach ($content as $k => $row) {
-                foreach ($model["children"] as $child) {
-                    $content[$k]["children"][$child] = $this->getTableContent($child, array(), $row[$model["technicalKey"]]);
-                }
-            }
-        }
-        if ($model["istablenn"] == 1) {
-            foreach ($content as $k => $row) {
+                $where .= ")";
+            } else if (strlen($model["parentKey"]) > 0 && $parentKey > 0) {
                 /**
-                 * Get the record associated with the current record
+                 * Search by parent
                  */
-                $sql = "select * from $quote" . $model2["tableName"] . "$quote where $quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = :secKey";
-                $data = $this->execute($sql, array("secKey" => $row[$model["tablenn"]["secondaryParentKey"]]));
-                $content[$k][$model["tablenn"]["tableAlias"]] = $data[0];
+                $where = " where " . $quote . $model["parentKey"] . $quote . " = :parentKey";
+                $args["parentKey"] = $parentKey;
+            } else {
+                $where = "";
+            }
+            if (strlen($model["technicalKey"]) > 0) {
+                $order = " order by " . $quote . $model["technicalKey"] . $quote;
+            } else {
+                $order = " order by 1";
+            }
+            $content = $this->execute($sql . $where . $order, $args);
+            if ($model["istablenn"] == 1) {
+                /**
+                 * get the description of the secondary table
+                 */
+                $model2 = $this->model[$model["tablenn"]["tableAlias"]];
+            }
+            /**
+             * Search the data from the children
+             */
+            if (count($model["children"]) > 0) {
+                foreach ($content as $k => $row) {
+                    foreach ($model["children"] as $child) {
+                        $content[$k]["children"][$child["aliasName"]] = $this->getTableContent($child["aliasName"], array(), $row[$model["technicalKey"]]);
+                    }
+                }
+            }
+            /**
+             * Search the parameters
+             */
+            if (count($model["parameters"]) > 0) {
+                foreach ($content as $k => $row) {
+                    foreach ($model["parameters"] as $parameter) {
+                        $id = $row[$parameter["fieldName"]];
+                        if ($id > 0) {
+                        $content[$k]["parameters"][$parameter["aliasName"]] = $this->getTableContent($parameter["aliasName"], array($id))[0];
+                        }
+                    }
+                }
+            }
+            if ($model["istablenn"] == 1) {
+                foreach ($content as $k => $row) {
+                    /**
+                     * Get the record associated with the current record
+                     */
+                    $sql = "select * from $quote" . $model2["tableName"] . "$quote where $quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = :secKey";
+                    $data = $this->execute($sql, array("secKey" => $row[$model["tablenn"]["secondaryParentKey"]]));
+                    $content[$k][$model["tablenn"]["tableAlias"]] = $data[0];
+                }
             }
         }
         return $content;
