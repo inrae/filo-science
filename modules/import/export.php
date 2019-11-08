@@ -3,11 +3,10 @@ include_once "modules/classes/import/export.class.php";
 include_once "modules/classes/import/export_model.class.php";
 $exportModel = new ExportModel($bdd, $ObjetBDDParam);
 $export = new Export($bdd);
-
+$export->modeDebug = false;
 switch ($t_module["param"]) {
     case "exec":
         try {
-            $export->modeDebug = false;
             $model = array();
             if ($_REQUEST["export_model_id"] > 0) {
                 $model = $exportModel->lire($_REQUEST["export_model_id"]);

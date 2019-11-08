@@ -124,7 +124,7 @@ class Export
                     foreach ($model["parameters"] as $parameter) {
                         $id = $row[$parameter["fieldName"]];
                         if ($id > 0) {
-                        $content[$k]["parameters"][$parameter["aliasName"]] = $this->getTableContent($parameter["aliasName"], array($id))[0];
+                            $content[$k]["parameters"][$parameter["aliasName"]] = $this->getTableContent($parameter["aliasName"], array($id))[0];
                         }
                     }
                 }
@@ -255,6 +255,53 @@ class Export
                 $row[$model["tablenn"]["secondaryParentKey"]] = $skey;
             }
             /**
+             * Get the real values for parameters
+             */
+            foreach ($row["parameters"] as $parameterName => $parameter) {
+                $modelParam = $this->model[$parameterName];
+                if (count($modelParam) == 0) {
+                    throw new ExportException(sprintf(_("L'alias %s n'a pas été décrit dans le modèle"), $parameterName));
+                }
+                /**
+                 * Search the id from the parameter
+                 */
+                $paramKey = $modelParam["technicalKey"];
+                $paramBusinessKey = $modelParam["businessKey"];
+                $paramTablename = $modelParam["tableName"];
+                $sqlSearchKey = "select $quote$paramKey$quote as key
+                    from $quote$paramTablename$quote
+                    where $quote$paramBusinessKey$quote = :businessKey";
+                $pdata = $this->execute($sqlSearchKey, array("businessKey" => $parameter[$modelParam["businessKey"]]));
+                $pkey = $pdata[0]["key"];
+                if (!$pkey > 0) {
+                    /**
+                     * write the parameter
+                     */
+                    unset ($parameter[$modelParam["technicalKey"]]);
+                    $pkey = $this->writeData($parameterName, $parameter);
+                }
+                if ($this->modeDebug) {
+                    printr("Parameter ".$parameterName.": key for ".$parameter[$modelParam["businessKey"]]. " is ".$pkey);
+                }
+                if (!$pkey > 0) {
+                    throw new ExportException(sprintf(_("Aucune clé n'a pu être trouvée ou générée pour la table de paramètres %s"), $parameterName));
+                }
+                /**
+                 * Search the name of the attribute corresponding in the row
+                 */
+                $fieldName = "";
+                foreach ($model["parameters"] as $modParam) {
+                    if ($modParam["aliasName"] == $parameterName) {
+                        $fieldName = $modParam["fieldName"];
+                        break;
+                    }
+                }
+                if (strlen($fieldName) == 0) {
+                    throw new ExportException(sprintf(_("Erreur inattendue : impossible de trouver le nom du champ correspondant à la table de paramètres %s"), $parameterName));
+                }
+                $row[$fieldName] = $pkey;
+            }
+            /**
              * Set values
              */
             if (count($setValues) > 0) {
@@ -270,6 +317,7 @@ class Export
              */
             $children = $row["children"];
             unset($row["children"]);
+            unset ($row["parameters"]);
             $id = $this->writeData($tableAlias, $row);
             /**
              * Record the children
