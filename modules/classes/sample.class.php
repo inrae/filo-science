@@ -35,7 +35,7 @@ class Sample extends ObjetBDD
             "sample_size_min" => array("type" => 1),
             "sample_size_max" => array("type" => 1),
             "sample_comment" => array("type" => 0),
-            "uuid" => array("type" => 0)
+            "uuid" => array("type" => 0, "defaultValue"=>"getUUID")
         );
         parent::__construct($bdd, $param);
     }

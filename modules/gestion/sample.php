@@ -115,6 +115,9 @@ switch ($t_module["param"]) {
         $data["sequence_id"] = $sequence_id;
         try {
             $bdd->beginTransaction();
+            if (strlen($data["sample_uuid"]) > 0) {
+                $data["uuid"] = $data["sample_uuid"];
+            }
             $id = dataWrite($dataClass, $data, true);
             if ($id > 0) {
                 $_REQUEST[$keyName] = $_SESSION["ti_sample"]->setValue($id);
@@ -124,6 +127,7 @@ switch ($t_module["param"]) {
                 if ($_REQUEST["individualChange"]) {
                     $data["sample_id"] = $id;
                     $data["individual_id"] = $_SESSION["ti_individual"]->getValue($data["individual_id"]);
+                    $data["uuid"] = $data["individual_uuid"];
                     $ind->ecrire($data);
                 }
                 /**

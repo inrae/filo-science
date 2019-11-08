@@ -5,7 +5,15 @@
         var freshwater = "{$sequence.freshwater}";
         var taxonIdInitial = parseInt("{$data.taxon_id}");
         var sampleId = parseInt("{$data.sample_id}");
+        var metadataInitial = $("#metadataField").val();
+        console.log (metadataInitial);
         var isHide = false;
+        var sampleHide = Cookies.get("sampleHide");
+        if (sampleHide == 1) {
+            isHide = true;
+            $(".hideable").hide();
+            $("#button-hide").text("{t}Afficher{/t}");
+        }
         var isAuto = Cookies.get("fishAutoMode");
         var defaultField = "{$sequence.measure_default}";
         if (isAuto === undefined) {
@@ -17,6 +25,7 @@
         } else {
             $("#modeAuto").prop("checked", false);
         }
+
 
         /* Taxon search */
         $("#taxon-search").keyup(function () {
@@ -156,10 +165,12 @@
             if (isHide) {
                 $(".hideable").show();
                 $("#button-hide").text("{t}Masquer{/t}");
+                Cookies.set("sampleHide", 0, { expires: 180 });
                 isHide = false;
             } else {
                 $(".hideable").hide();
                 isHide = true;
+                Cookies.set("sampleHide", 1, { expires: 180 });
                 $("#button-hide").text("{t}Afficher{/t}");
             }
         });
@@ -178,13 +189,13 @@
         $(".fish").hover(function () {
             $(this).focus();
         });
-       
-        $(".btn").click(function( event ) { 
+
+        $(".btn").click(function( event ) {
             if ($(this).prop("id") != $(':focus').prop("id") && isAuto == 0) {
                 event.preventDefault();
             }
         });
-        $("#tag_posed").change(function () { 
+        $("#tag_posed").change(function () {
             var tag = $("#tag").val();
             var tagPosed = $(this).val();
             if (tag.length == 0 && tagPosed.length > 0) {
@@ -224,6 +235,7 @@
                             $("#complementaryData").prop("hidden", false);
                             var schema = value.replace(/&quot;/g, '"');
                             showForm(JSON.parse(schema), dataParse);
+                            metadataInitial = $("#metadataField").val();
                             $(".alpaca-field-select").combobox();
                             setFocusOnDefaultField("", function () { });
                         } else {
@@ -233,7 +245,6 @@
                     ;
             }
         }
-
         $("#lotform").submit(function (event) {
             if ($("#action").val() == "Write") {
                 var error = false;
@@ -241,9 +252,11 @@
                     $('#metadata').alpaca().refreshValidationState(true);
                     if ($('#metadata').alpaca().isValid()) {
                         var value = $('#metadata').alpaca().getValue();
+                        console.log(value);
                         // met les metadata en JSON dans le champ (name="metadata") qui sera sauvegardé en base
-                        $("#metadataField").val(JSON.stringify(value));
-                        if ($("#metadataField").val().length > 0) {
+                        var valueJson = JSON.stringify(value);
+                        $("#metadataField").val(valueJson);
+                        if ($("#metadataField").val() != metadataInitial && valueJson.length > 2) {
                             $("#individualChange").val(1);
                         }
                     } else {
@@ -418,19 +431,25 @@
                             name="sample_comment">{$data.sample_comment}</textarea>
                     </div>
                 </div>
+                <div class="form-group hideable">
+                    <label for="sample_uuid" class="control-label col-md-4">{t}UUID :{/t}</label>
+                    <div class="col-md-8">
+                        <input id="sample_uuid" name="sample_uuid" value="{$data.uuid}" class="form-control">
+                    </div>
+                </div>
                 <div class="form-group center">
                     <button id="submit1" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                     {if $data.sample_id > 0 }
                         <button id="delete1" class="btn btn-danger button-delete ">{t}Supprimer{/t}</button>
                     {/if}
-                    <button id="mask" class="btn btn-secondary" id="button-hide" title="{t}Informations complémentaires du lot{/t}">{t}Masquer{/t}</button>
+                    <button class="btn btn-secondary" id="button-hide" title="{t}Informations complémentaires du lot{/t}">{t}Masquer{/t}</button>
                 </div>
             </fieldset>
         </div>
 
         <div class="col-md-6 form-horizontal">
             <fieldset>
-                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° :{/t}{$individual.individual_uid}{/if} <i><span id="taxonNameDisplay">{$data.taxon_name}</span></i>{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto">
+                <legend>{t}Poisson mesuré{/t}{if $individual.individual_id > 0} - {t}N° :{/t}{$individual.individual_uid}{/if} <i><span id="taxonNameDisplay">{$data.taxon_name}</span></i>&nbsp;{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto">
                     <button id="submit2" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
                 </legend>
                 <input type="hidden" id="individual_id" name="individual_id" value="{$individual.individual_id}">
@@ -507,25 +526,25 @@
                         <div class="col-md-8">
                             <select id="sexe_id" name="sexe_id" class="fish form-control">
                                 <option value="" {if $row.sexe_id=="" }selected{/if}>{t}Sélectionnez...{/t} </option>
-                                {foreach $sexes as $row} 
+                                {foreach $sexes as $row}
                                 <option value="{$row.sexe_id}" {if $row.sexe_id==$individual.sexe_id}selected{/if}> {$row.sexe_name} </option>
-                                {/foreach} 
-                            </select> 
-                        </div> 
-                    </div> 
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="pathology_id" class="control-label col-md-4">{t}pathologie :{/t}</label>
                         <div class="col-md-8">
                             <select id="pathology_id" name="pathology_id" class="fish form-control combobox">
-                                <option value="" {if $row.pathology_id==""}selected{/if}>{t}Sélectionnez...{/t} </option> 
-                                {foreach $pathologys as $row} 
+                                <option value="" {if $row.pathology_id==""}selected{/if}>{t}Sélectionnez...{/t} </option>
+                                {foreach $pathologys as $row}
                                     <option value="{$row.pathology_id}" {if $row.pathology_id==$individual.pathology_id}selected{/if}>
                                         {$row.pathology_code}:{$row.pathology_name}
-                                    </option> 
+                                    </option>
                                 {/foreach}
-                            </select> 
-                        </div> 
-                    </div> 
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group" id="div-pathology_codes">
                         <label for="pathology_codes" class="fish control-label col-md-4">
                             {t}Pathologies (suite de codes) ou commentaires sur la pathologie :{/t}
@@ -590,7 +609,7 @@
                         <label for="uuid" class="fish control-label col-md-4">
                             {t}Identifiant unique :{/t}</label>
                         <div class="col-md-8">
-                            <input id="uuid" name="uuid" value="{$individual.uuid}" class="fish form-control">
+                            <input id="uuid" name="individual_uuid" value="{$individual.uuid}" class="form-control">
                         </div>
                     </div>
                     <div class="center">
