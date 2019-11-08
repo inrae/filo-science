@@ -19,14 +19,32 @@
             <tr>
                 <th>{t}Table{/t}</th>
                 <th>{t}Alias{/t}</th>
+                <th>{t}Table fournie vide ?{/t}</th>
                 <th>{t}Clé primaire{/t}</th>
                 <th>{t}Clé métier{/t}</th>
                 <th>{t}Clé étrangère{/t}</th>
                 <th>{t}Champs booléens{/t}</th>
                 <th>{t}Relation de type 1-1{/t}</th>
-                <th>{t}Tables liées (alias){/t}</th>
+                <th colspan="2">{t}Tables liées{/t}</th>
+                <th colspan="2">{t}Tables de paramètres{/t}</th>
                 <th>{t}2nde clé étrangère (table n-n){/t}</th>
                 <th>{t}Alias de la 2nde table{/t}</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>{t}Alias{/t}</th>
+                <th>{t}Relation stricte ?{/t}</th>
+                <th>{t}Alias{/t}</th>
+                <th>{t}Colonne{/t}</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +52,7 @@
                 <tr>
                     <td>{$row.tableName}</td>
                     <td>{$row.tableAlias}</td>
+                    <td>{if $row.isEmpty == 1}{t}Oui{/t}{/if}</td>
                     <td >{$row.technicalKey}</td>
                     <td >{$row.businessKey}</td>
                     <td >{$row.parentKey}</td>
@@ -48,7 +67,25 @@
                     <td>
                         {foreach $row.children as $key=>$child}
                             {if $key > 0}<br>{/if}
-                            {$child}
+                            {$child.aliasName}
+                        {/foreach}
+                    </td>
+                    <td>
+                        {foreach $row.children as $key=>$child}
+                            {if $key > 0}<br>{/if}
+                            {if $child.isStrict == 1}{t}Oui{/t}{/if}
+                        {/foreach}
+                    </td>
+                    <td>
+                        {foreach $row.parameters as $key=>$child}
+                        {if $key > 0}<br>{/if}
+                        {$child.aliasName}
+                    {/foreach}
+                    </td>
+                    <td>
+                        {foreach $row.parameters as $key=>$child}
+                            {if $key > 0}<br>{/if}
+                            {$child.fieldName}
                         {/foreach}
                     </td>
                     <td>{$row.tablenn.secondaryParentKey}</td>

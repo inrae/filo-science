@@ -22,6 +22,11 @@
                             "title": "{t}Clé primaire{/t}",
                             "type": "string"
                         },
+                        "isEmpty": {
+                            "title":"{t}Table fournie vide (table de paramètres renseignée par les valeurs  fournies dans les autres enregistrements) ?{/t}",
+                            "type": "boolean",
+                            "default" : false
+                        },
                         "businessKey": {
                             "title": "{t}Clé métier{/t}",
                             "type": "string",
@@ -35,18 +40,46 @@
                             "type": "boolean",
                             "default": false
                         },
-                        "children": {
-                            "title": "{t}Liste des alias des tables liées{/t}",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
                         "booleanFields": {
                             "title": "{t}Liste des champs de type booléen{/t}",
                             "type": "array",
                             "items": {
                                 "type": "string"
+                            }
+                        },
+                        "children": {
+                            "title": "{t}Liste des alias des tables liées{/t}",
+                            "type": "array",
+                            "items" : {
+                                "type": "object",
+                                "properties": {
+                                    "aliasName": {
+                                        "title":"{t}Alias de la table{/t}",
+                                        "type":"string"
+                                    },
+                                    "isStrict": {
+                                        "title":"{t}Relation stricte (les enregistrements enfants sont totalement dépendants de l'enregistrement courant) ?{/t}",
+                                        "type":"boolean",
+                                        "default":true
+                                    }
+                                }
+                            }
+                        },
+                        "parameters": {
+                            "title":"{t}Liste des tables de paramètres associées{/t}",
+                            "type":"array",
+                            "items": {
+                                "type":"object",
+                                "properties": {
+                                    "aliasName": {
+                                        "title": "{t}Alias de la table{/t}",
+                                        "type": "string"
+                                    },
+                                    "fieldName":{
+                                        "title":"{t}Nom de la colonne dans la table courante{/t}",
+                                        "type":"string"
+                                    }
+                                }
                             }
                         },
                         "istablenn":{
