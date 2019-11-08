@@ -62,7 +62,7 @@
                         {/foreach}
                     </td>
                     <td class="center">
-                        {if $row.table11 == 1}{t}Oui{/t}{/if}
+                        {if $row.istable11 == 1}{t}Oui{/t}{/if}
                     </td>
                     <td>
                         {foreach $row.children as $key=>$child}
