@@ -175,9 +175,10 @@ class Export
      * @param array $data: all data to be recorded
      * @param integer $parentKey: key of the parent from the table
      * @param array $setValues: list of values to insert into each row. Used for set a parent key
+     * @param boolean $deleteBeforeInsert: delete all records linked to the parent before insert new records
      * @return void
      */
-    function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array())
+    function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array(), boolean $deleteBeforeInsert = false)
     {
         $quote = '"';
         if (!isset($this->model[$tableAlias])) {
@@ -198,6 +199,10 @@ class Export
             $isBusiness = true;
         } else {
             $isBusiness = false;
+        }
+        if ($deleteBeforeInsert && $parentKey > 0) {
+            $sqlDeleteFromParent = "delete $quote$tableName$quote where $quote$pkeyName$quote = :parent";
+            $this->execute($sqlDeleteFromParent, array("parent"=>$parentKey));
         }
         if ($model["istablenn"] == 1) {
             /*$stableAlias = $model["tablenn"]["tableAlias"];
@@ -329,7 +334,7 @@ class Export
             if ($id > 0) {
                 foreach ($children as $tableChield => $child) {
                     if (count($child) > 0) {
-                        $this->importDataTable($tableChield, $child, $id);
+                        $this->importDataTable($tableChield, $child, $id, array(), $child["isStrict"]);
                     }
                 }
             }

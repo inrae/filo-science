@@ -6,7 +6,6 @@
         var taxonIdInitial = parseInt("{$data.taxon_id}");
         var sampleId = parseInt("{$data.sample_id}");
         var metadataInitial = $("#metadataField").val();
-        console.log (metadataInitial);
         var isHide = false;
         var sampleHide = Cookies.get("sampleHide");
         if (sampleHide == 1) {
@@ -252,7 +251,6 @@
                     $('#metadata').alpaca().refreshValidationState(true);
                     if ($('#metadata').alpaca().isValid()) {
                         var value = $('#metadata').alpaca().getValue();
-                        console.log(value);
                         // met les metadata en JSON dans le champ (name="metadata") qui sera sauvegardé en base
                         var valueJson = JSON.stringify(value);
                         $("#metadataField").val(valueJson);
