@@ -14,7 +14,6 @@
 <form id="exportForm" method="post" action="index.php">
     <input type="hidden" name="moduleBase" value="export">
     <input type="hidden" name="action" value="Exec">
-    <input type="hidden" name="export_model_name" value="campaign">
     <input type="hidden" name="returnko" value="campaignList">
     <input type="hidden" name="translator" value="ti_campaign">
 
@@ -60,13 +59,28 @@
             {/if}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button id="exportButton" type="submit" class="btn btn-info">{t}Exporter les campagnes avec les opérations associées{/t}</button>
+    <div class="row  col-md-6">
+        <div class="form-horizontal protoform">
+            <div class="form-group">
+                <label for="export_model_name1" class="control-label col-md-4">
+                    {t}Modèle d'export :{/t}
+                </label>
+                <div class="col-md-8">
+                    <select name="export_model_name" id="export_model_name1" class="form-control">
+                        <option value="campaign">{t}Campagnes avec les opérations associées{/t}</option>
+                        <option value="campaignOnly">{t}Descriptions des campagnes{/t}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group center">
+                <button id="exportButton" type="submit" class="btn btn-info">
+                    {t}Exporter les campagnes{/t}
+                </button>
+            </div>
         </div>
     </div>
 </form>
-
+<div class="row"></div>
 {if $droits.gestion == 1}
     <div class="row">
         <fieldset class="col-md-6">
@@ -75,7 +89,6 @@
             enctype="multipart/form-data">
                 <input type="hidden" name="moduleBase" value="export">
                 <input type="hidden" name="action" value="ImportExec">
-                <input type="hidden" name="export_model_name" value="campaign">
                 <input type="hidden" name="project_id" value="{$searchCampaign.project_id}">
                 <input type="hidden" name="returnko" value="campaignList">
                 <input type="hidden" name="returnok" value="campaignList">
@@ -89,6 +102,17 @@
                         <input id="FileName" type="file" class="form-control" name="filename" size="40" required>
                     </div>
                 </div>
+                <div class="form-group">
+                        <label for="export_model_name2" class="control-label col-md-4">
+                            {t}Modèle d'export :{/t}
+                        </label>
+                        <div class="col-md-8">
+                            <select name="export_model_name" id="export_model_name2" class="form-control">
+                                <option value="campaign">{t}Campagnes avec les opérations associées{/t}</option>
+                                <option value="campaignOnly">{t}Descriptions des campagnes{/t}</option>
+                            </select>
+                        </div>
+                    </div>
                 <div class="form-group center">
                     <button id="importButton" type="submit" class="btn btn-warning">{t}Importer une ou plusieurs campagnes{/t}</button>
                 </div>
