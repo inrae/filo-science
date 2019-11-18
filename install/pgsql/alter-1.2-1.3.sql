@@ -19,8 +19,21 @@ SET search_path=public,pg_catalog,filo,gacl,tracking,import;
 
 -- object: pgcrypto | type: EXTENSION --
 -- DROP EXTENSION IF EXISTS pgcrypto CASCADE;
-CREATE EXTENSION pgcrypto
-WITH SCHEMA public;
+-- CREATE EXTENSION pgcrypto
+-- WITH SCHEMA public;
+-- ddl-end --
+
+
+-- object: postgis | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS postgis CASCADE;
+-- CREATE EXTENSION postgis
+-- WITH SCHEMA public;
+-- ddl-end --
+
+-- object: tablefunc | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS tablefunc CASCADE;
+-- CREATE EXTENSION tablefunc
+-- WITH SCHEMA public;
 -- ddl-end --
 
 -- [ Dropped objects ] --
@@ -41,13 +54,6 @@ COMMENT ON COLUMN filo.project.metric_srid IS E'Srid in metric referential, for 
 -- object: uuid | type: COLUMN --
 -- ALTER TABLE filo.campaign DROP COLUMN IF EXISTS uuid CASCADE;
 ALTER TABLE filo.campaign ADD COLUMN uuid uuid NOT NULL DEFAULT gen_random_uuid();
--- ddl-end --
-
-
--- object: postgis | type: EXTENSION --
--- DROP EXTENSION IF EXISTS postgis CASCADE;
-CREATE EXTENSION postgis
-WITH SCHEMA public;
 -- ddl-end --
 
 -- object: geom | type: COLUMN --
@@ -477,11 +483,6 @@ CREATE INDEX log_ip_idx ON gacl.log
 	);
 -- ddl-end --
 
--- object: tablefunc | type: EXTENSION --
--- DROP EXTENSION IF EXISTS tablefunc CASCADE;
-CREATE EXTENSION tablefunc
-WITH SCHEMA public;
--- ddl-end --
 
 -- object: import.function_type_function_type_id_seq | type: SEQUENCE --
 -- DROP SEQUENCE IF EXISTS import.function_type_function_type_id_seq CASCADE;
