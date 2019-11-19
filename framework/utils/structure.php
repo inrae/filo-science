@@ -7,7 +7,7 @@ $vue->set("framework/dbstructure.tpl", "corps");
 
 switch ($t_module["param"]) {
     case "html":
-        $dataclass = new Structure($bdd);
+        $dataclass = new Structure($bdd, array(),$t_module["schemas"]);
         $vue->set(
             $dataclass->generateHtml(
                 "tablename",
@@ -20,12 +20,13 @@ switch ($t_module["param"]) {
 
         break;
     case "latex":
-        $dataclass = new Structure($bdd);
+        $dataclass = new Structure($bdd, array(), $t_module["schemas"]);
         $vue->set(
             $dataclass->generateLatex(
                 "subsection",
                 "\\begin{tabular}{|l| p{2cm}|c|c|c| p{3cm}|}",
-                "\\end{tabular}"
+                "\\end{tabular}",
+                $t_module["schemas"]
             ),
             "data"
         );
@@ -49,7 +50,8 @@ switch ($t_module["param"]) {
         $vue->setParam(
             array(
                 "tmp_name" => 'database/filo.png',
-                "filename" => "filo-science.png"
+                "filename" => "filo-science.png",
+                "disposition" => "inline"
             )
         );
         break;

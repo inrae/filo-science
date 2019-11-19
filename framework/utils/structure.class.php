@@ -2,7 +2,7 @@
 
 
 /**
- * Classe utilitaire, permettant de recuperer la structure du 
+ * Classe utilitaire, permettant de recuperer la structure du
  * schéma courant et de le transformer soit en en Latex,
  * soit en tableau html
  * @var mixed
@@ -10,7 +10,9 @@
 class Structure extends ObjetBDD
 {
 
-    private $_schema;
+    private $_schemas = array();
+    private $whereSchema;
+    private $schemaParam = array();
 
     private $_tables;
 
@@ -18,27 +20,28 @@ class Structure extends ObjetBDD
 
     public $tables;
 
+
     /**
      * __construct
      * Realise les interrogations pour extraire les infos de la base de données
-     * 
-     * @param PDO   $p_connection 
-     * @param mixed $param 
-     * 
-     * @return void 
+     *
+     * @param PDO   $p_connection
+     * @param mixed $param
+     *
+     * @return void
      */
-    function __construct(\PDO $p_connection, array $param = array())
+    function __construct(\PDO $p_connection, array $param = array(), $schemas = "")
     {
 
         parent::__construct($p_connection, $param);
-        $this->getSchema();
+        $this->getSchema($schemas);
         $this->getTables();
         $this->getColumns();
         /*
          * Mise en forme du tableau utilisable
          */
         foreach ($this->_tables as $table) {
-            /* 
+            /*
              * Recherche des colonnes attachees
              */
             foreach ($this->_colonnes as $colonne) {
@@ -51,45 +54,56 @@ class Structure extends ObjetBDD
     }
     /**
      * Recupere le schema courant
-     * 
+     *
      * @return void
      */
-    function getSchema()
+    function getSchema($schemas)
     {
-        $sql = "select current_schema()";
-        $res = $this->lireParam($sql);
-        $this->_schema = $res["current_schema"];
+        if (strlen($schemas) > 0) {
+            $this->_schemas = explode(",", $schemas);
+        } else {
+            $sql = "select current_schema()";
+            $res = $this->lireParam($sql);
+            $this->_schemas[] = $res["current_schema"];
+        }
+        $this->whereSchema = " schemaname in (";
+        $comma = "";
+        $i = 0;
+        foreach ($this->_schemas as $schema) {
+            $this->whereSchema .= $comma . ":sc$i";
+            $comma = ",";
+            $this->schemaParam["sc$i"] = $schema;
+            $i++;
+        }
+        $this->whereSchema .= ")";
     }
 
     /**
      * Recupere la liste des tables
-     * 
-     * @return void 
+     *
+     * @return void
      */
     function getTables()
     {
-        $sql = "select relname as tablename, description
+        $sql = "select schemaname, relname as tablename, description
         from pg_catalog.pg_statio_all_tables st
-        join pg_catalog.pg_description on (relid = objoid and objsubid = 0)
-        where schemaname = :schema
-        order by relname"
-        ;
-
+        left outer join pg_catalog.pg_description on (relid = objoid and objsubid = 0)";
+        $order = " order by schemaname, relname";
         $this->_tables = $this->getListeParamAsPrepared(
-            $sql,
-            array("schema" => $this->_schema)
+            $sql . " where " . $this->whereSchema . $order,
+            $this->schemaParam
         );
     }
 
     /**
      * Recupere la liste des colonnes
-     * 
-     * @return void 
+     *
+     * @return void
      */
     function getColumns()
     {
-        $sql = 'with req as 
-        (SELECT DISTINCT on (tablename, field) pg_tables.tablename, 
+        $sql = 'with req as
+        (SELECT DISTINCT on (schemaname, tablename, field) schemaname, pg_tables.tablename,
            attnum,  pg_attribute.attname AS field,
             format_type(pg_attribute.atttypid,NULL) AS "type",
          (SELECT col_description(pg_attribute.attrelid,pg_attribute.attnum)) AS COMMENT,
@@ -115,28 +129,28 @@ class Structure extends ObjetBDD
         LEFT JOIN pg_constraint AS pc2
            ON pc2.contype = \'f\'::"char"
            AND pc2.conrelid = pg_class.oid
-           AND (pg_attribute.attnum = ANY (pc2.conkey))
-        WHERE pg_class.relname = pg_tables.tablename
+           AND (pg_attribute.attnum = ANY (pc2.conkey))';
+        $where = " WHERE pg_class.relname = pg_tables.tablename
         AND   pg_attribute.atttypid <> 0::OID
-        and schemaname = :schema
-       ORDER BY tablename, field ASC)
+        and " . $this->whereSchema;
+        $order = 'ORDER BY schemaname, tablename, field ASC)
         select * from req order by tablename, attnum;
        ';
         $this->_colonnes = $this->getListeParamAsPrepared(
-            $sql,
-            array("schema" => $this->_schema)
+            $sql . $where . $order,
+            $this->schemaParam
         );
     }
     /**
      * Met en forme les donnees sous forme de tableau
-     * 
-     * @param string $classTableName    : Nom de la classe correspondant 
+     *
+     * @param string $classTableName    : Nom de la classe correspondant
      *                                  au nom de la table
-     * @param string $classTableComment : Nom de la classe correspondant 
+     * @param string $classTableComment : Nom de la classe correspondant
      *                                  à la description de la table
      * @param string $classTableColumns : nom de la classe utilisée pour
      *                                  mettre en forme le tableau
-     * 
+     *
      * @return string
      */
     function generateHtml(
@@ -146,7 +160,7 @@ class Structure extends ObjetBDD
     ) {
         $val = "";
         foreach ($this->tables as $table) {
-            $val .= '<div class="' . $classTableName . '">' . $table["tablename"] . "</div>"
+            $val .= '<div class="' . $classTableName . '">' . $table["schemaname"].".".$table["tablename"] . "</div>"
                 . '<br><div class="' . $classTableComment . '">'
                 . $table["description"] . '</div>.<br>';
             $val .= '<table class="' . $classTableColumns . '">';
@@ -178,12 +192,12 @@ class Structure extends ObjetBDD
         $val = "";
         foreach ($this->tables as $table) {
             $val .= "\\" . $structureLevel . "{"
-                . $this->el($table["tablename"]) . "}"
+                . $this->el($table["schemaname"].".".$table["tablename"]) . "}"
                 . "<br>";
             $val .= $this->el($table["description"]) . "<br><br>";
             $val .= $headerTable . "<br>";
             $val .= "\\hline" . "<br>";
-            $val .= "Column name & Type & Not null & Key & Foreign key 
+            $val .= "Column name & Type & Not null & Key & Foreign key
             & Comment \\\\" . "<br>"
                 . "\\hline" . "<br>";
             foreach ($table["columns"] as $column) {
@@ -204,14 +218,11 @@ class Structure extends ObjetBDD
     /**
      * Echappe les _ par \_ pour l'encodage Latex
      * @param string $chaine
-     *  
-     * @return string 
+     *
+     * @return string
      */
     function el($chaine)
     {
         return str_replace("_", "\\_", $chaine);
     }
 }
-
-
-?>

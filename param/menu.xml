@@ -75,6 +75,10 @@
 		<item module="exportModelList" label="Modèles d'export" tooltip="Liste des modèles d'exportation des données"/>
 		<item divider="1"/>
 		<item module="feedCacheMap" label="Mise en cache de la carto" tooltip="Stocker le fonds cartographique pour une utilisation hors Internet"/>
+		<item divider='1'/>
+		<item module="dbstructureSchema" droits="param" label="Schéma de la base de données" tooltip="Schéma de la base de données"/>
+		<item module="dbstructureHtml" droits='param' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes"/>
+		<item module="dbstructureLatex" droits='param' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex"/>
 	</item>
 
 	<item module="administration" label="Administration" tooltip="Administration de l'application" droits="admin">
@@ -84,9 +88,6 @@
 		<item module="groupList" droits="admin" label="ACL - groupes de logins" tooltip="Groupes de logins et logins rattachés aux groupes"/>
 		<item module="dbparamList" droits="admin" label="Paramètres de l'application" tooltip="Liste des paramètres pérennes de l'application" />
 		<item divider='1'/>
-		<item module="dbstructureSchema" droits="admin" label="Schéma de la base de données" tooltip="Schéma de la base de données"/>
-		<item module="dbstructureHtml" droits='admin' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes"/>
-		<item module="dbstructureLatex" droits='admin' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex"/>
 		<item module="dbstructureGacl" droits="admin" label="Structure de la base de données des droits (HTML)" tooltip="Liste des tables et des colonnes de la base de données de gestion des droits"/>
 		<item module="phpinfo" droits="admin" label="PHP info" tooltip="configuration générale du serveur PHP"/>
 	</item>
