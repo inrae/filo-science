@@ -6,8 +6,12 @@ class SequenceGear extends ObjetBDD
                     ,gear_id, gear_name
                     ,gear_method_id, gear_method_name
                     ,electric_current_type_id, electric_current_type_name
+                    ,operation_id, operation_name, campaign_id, campaign_name
                     from sequence_gear
                     join gear using (gear_id)
+                    join sequence using (sequence_id)
+                    join operation using (operation_id)
+                    join campaign using (campaign_id)
                     left outer join gear_method using (gear_method_id)
                     left outer join electric_current_type using (electric_current_type_id)
                     ";

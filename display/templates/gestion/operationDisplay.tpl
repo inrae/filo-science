@@ -4,9 +4,6 @@
             setTimeout(function () { mapA.invalidateSize(); }, 400);
         });
 
-        /**
-         * set the id to the cookie
-         */
         Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 1, secure: true });
 
         /**
@@ -53,14 +50,6 @@
             tabHover = 0;
         });
     });
-</script>
-
-    /**
-     * set the id to the cookie
-     */
-     Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 1, secure: true});
-});
-
 </script>
 <h2>{t}Opération{/t} {$data.operation_name}</h2>
 <div class="row">

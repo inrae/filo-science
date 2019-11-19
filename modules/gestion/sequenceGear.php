@@ -26,6 +26,13 @@ switch ($t_module["param"]) {
 
         $data["sequence_id"] = $_SESSION["ti_sequence"]->setValue($sequence_id);
         $vue->set($data = $_SESSION["ti_sequenceGear"]->translateRow($data), "data");
+        require_once 'modules/classes/sequence.class.php';
+        $sequence = new Sequence($bdd, $ObjetBDDParam);
+        $dsequence = $sequence->getDetail ($sequence_id);
+        $dsequence = $_SESSION["ti_sequence"]->translateRow($dsequence);
+        $dsequence = $_SESSION["ti_operation"]->translateRow($dsequence);
+        $dsequence = $_SESSION["ti_campaign"]->translateRow($dsequence);
+        $vue->set($dsequence, "sequence");
         /**
          * Preparation of the parameters tables
          */

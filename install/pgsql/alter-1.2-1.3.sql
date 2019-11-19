@@ -1703,4 +1703,11 @@ REFERENCES tracking.individual_tracking (individual_id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de mesure physico-chimique');
+-- ddl-end --
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station d''enregistrement');
+-- ddl-end --
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de lacher');
+-- ddl-end --
+
 insert into filo.dbversion (dbversion_number, dbversion_date) values ('1.3', '2019-11-18');

@@ -5022,4 +5022,9 @@ REFERENCES gacl.acllogin (acllogin_id) MATCH SIMPLE
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
-
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de mesure physico-chimique');
+-- ddl-end --
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station d''enregistrement');
+-- ddl-end --
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de lacher');
+-- ddl-end --

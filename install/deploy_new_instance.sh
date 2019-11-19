@@ -3,10 +3,11 @@
 # must be executed with login root
 # creation : Eric Quinton - 2018-08-17
 # tested with debian 9.5
-# php7.0 : if new version, change in the first lines of the script
+# php7.3 : if new version, change in the first lines of the script
+# for install php7.3 on Debian 9: https://tecadmin.net/install-php-debian-9-stretch/
 VERSION=filo-1.3.0
 downloadPath="https://github.com/Irstea/filo-science/archive/master.zip"
-PHPVER=7.2
+PHPVER=7.3
 POSTGRESVER=11
 POSTGISVER=2.5
 phpinifile="/etc/php/$PHPVER/apache2/php.ini"

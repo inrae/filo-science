@@ -18,7 +18,7 @@ $vue->set("import/importExec.tpl", "corps");
 
 if (isset($_FILES["filename"])) {
     $fdata = $_FILES['filename'];
-    if ($fdata["error"] == 0 && $fdata["size"] > 0) {
+    if ($fdata["error"] == 0 && $fdata["size"] > 0 && $_REQUEST["import_description_id"] > 0 && $_POST["sensor_id"] > 0) {
         $importParam = $importDescription->getDetail($_REQUEST["import_description_id"]);
         $vue->set(1, "isTreated");
         /**
@@ -152,5 +152,7 @@ if (isset($_FILES["filename"])) {
         $vue->set($errors, "errors");
         $vue->set($dataDisplay, "data");
         $vue->set($_REQUEST["testMode"], "testMode");
+    } else {
+        $message->set(_("L'import ne peut être effectué, des paramètres sont manquants ou le fichier est vide"), true);
     }
 }

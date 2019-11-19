@@ -1,5 +1,12 @@
 <h2>{t}Rattachement d'un engin à une séquence{/t}</h2>
-<a href="index.php?module=sequenceDisplay&sequence_id={$data.sequence_id}&activeTab=tab-gear">
+<a href="index.php?module=campaignDisplay&campaign_id={$sequence.campaign_id}"><img
+    src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$sequence.campaign_name}</a>
+&nbsp;
+<a
+href="index.php?module=operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
+<img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t}&nbsp;{$sequence.operation_name}</a>
+
+<a href="index.php?module=sequenceDisplay&sequence_id={$sequence.sequence_id}&activeTab=tab-gear">
     <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}
 </a>
 <div class="row">

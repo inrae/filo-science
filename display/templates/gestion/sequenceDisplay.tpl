@@ -53,18 +53,12 @@
         $('a[data-toggle="tab"]').on("click", function () {
             tabHover = 0;
         });
-    });
-    $('a[data-toggle="tab"]').on("click", function () {
-        survol = false ;
-    });
-    $("#tab-ambience").on ("shown.bs.tab", function() { 
-        setTimeout( function() { mapAmbience.updateSize();}, 200);
-    });
-
-    /**
-     * set the id to the cookie
-     */
-     Cookies.set('sequence_uid', "{$data.sequence_uid}", { expires: 1, secure: true});
+        $('a[data-toggle="tab"]').on("click", function () {
+            survol = false ;
+        });
+        $("#tab-ambience").on ("shown.bs.tab", function() {
+            setTimeout( function() { mapAmbience.updateSize();}, 200);
+        });
 });
 
 </script>
@@ -72,15 +66,14 @@
 <h2>{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
 <div class="row">
     <div class="col-md-12">
-        <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img
-                src="display/images/display-red.png" height="25">{t}Retour à la
-            campagne{/t}&nbsp;{$data.campaign_name}</a>
+        <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}">
+            <img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$data.campaign_name}
+        </a>
         &nbsp;
 
-        <a
-            href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
-            <img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t}
-            {$data.operation_name}</a>
+        <a href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
+            <img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t} &nbsp;{$data.operation_name}
+        </a>
     </div>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">

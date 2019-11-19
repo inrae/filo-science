@@ -120,6 +120,7 @@
         enctype="multipart/form-data">
                 <input type="hidden" name="moduleBase" value="export">
                 <input type="hidden" name="action" value="ImportExec">
+                <input type="hidden" name="export_model_id" value="{$data.export_model_id}">
                 <input type="hidden" name="export_model_name" value="{$data.export_model_name}">
                 <input type="hidden" name="returnko" value="exportModelDisplay">
                 <input type="hidden" name="returnok" value="exportModelDisplay">

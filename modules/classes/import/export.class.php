@@ -178,7 +178,7 @@ class Export
      * @param bool $deleteBeforeInsert: delete all records linked to the parent before insert new records
      * @return void
      */
-    function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array(), bool $deleteBeforeInsert = false)
+    function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array(), $deleteBeforeInsert = false)
     {
         $quote = '"';
         if (!isset($this->model[$tableAlias])) {
@@ -332,6 +332,9 @@ class Export
             if ($id > 0) {
                 foreach ($children as $tableChield => $child) {
                     if (count($child) > 0) {
+                        if (!isset($child["isStrict"])) {
+                            $child["isStrict"] = false;
+                        }
                         $this->importDataTable($tableChield, $child, $id, array(), $child["isStrict"]);
                     }
                 }
