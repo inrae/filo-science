@@ -12,7 +12,7 @@ class StationTracking extends ObjetBDD
             ";
     /**
      * Constructor
-     * 
+     *
      * @param PDO $bdd
      * @param array $param
      */
@@ -94,11 +94,7 @@ class StationTracking extends ObjetBDD
     function verifyProject(int $station_id): bool
     {
         $data = $this->lire($station_id);
-        if (verifyProject($data["project_id"])) {
-            return true;
-        } else {
-            return false;
-        }
+        return (verifyProject($data["project_id"]));
     }
     /**
      * Get the list of antennas or probes according to the type of import
