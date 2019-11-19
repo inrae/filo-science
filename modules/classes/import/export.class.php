@@ -205,8 +205,6 @@ class Export
             $this->execute($sqlDeleteFromParent, array("parent"=>$parentKey));
         }
         if ($model["istablenn"] == 1) {
-            /*$stableAlias = $model["tablenn"]["tableAlias"];
-            $parentModel = $this->model[$stableAlias];*/
             $tableAlias2 = $model["tablenn"]["tableAlias"];
             $model2 = $this->model[$tableAlias2];
             if (count($model2) == 0) {

@@ -5,7 +5,6 @@
 class ImportExec {
     private $importDescription, $importFunction, $functionType ;
     private $functions = array();
-    private $data = array();
     /**
      * List of all error messages recorded
      *

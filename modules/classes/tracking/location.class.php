@@ -4,15 +4,6 @@
  */
 class Location extends ObjetBDD
 {
-    private $sridLocation = 4326;
-    private $sql = "select location_id, antenna_type_id, individual_id,
-                    detection_date, signal_force, observation,
-                    location_pk, location_long, location_lat
-                    ,antenna_type_name
-                    from location
-                    left outer join antenna_type using (antenna_type_id)
-                    ";
-
     /**
      * Constructor
      *

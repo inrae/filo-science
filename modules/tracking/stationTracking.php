@@ -46,9 +46,7 @@ switch ($t_module["param"]) {
             if (!isset($_REQUEST["limit"])) {
                 $_REQUEST["limit"] = 30;
             }
-            if (!isset($_REQUEST["offset"])) {
-                $_REQUEST["offset"] = 0;
-            } else if ($_REQUEST["offset"] < 0) {
+            if (!isset($_REQUEST["offset"]) || $_REQUEST["offset"] < 0) {
                 $_REQUEST["offset"] = 0;
             }
             $vue->set($pm->getMeasures($_REQUEST["probe_id"], $_REQUEST["limit"], $_REQUEST["offset"]), "measures");

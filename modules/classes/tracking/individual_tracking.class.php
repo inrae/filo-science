@@ -128,7 +128,6 @@ class IndividualTracking extends ObjetBDD
         if (strlen ($orderBy)> 0) {
             $sql = "with req as (".$sql.") select * from req order by $orderBy";
         }
-        $data = $this->getListeParamAsPrepared($sql, array("id"=>$id, "formatDate"=>$formatDate));
-        return $data;
+        return $this->getListeParamAsPrepared($sql, array("id"=>$id, "formatDate"=>$formatDate));
     }
 }

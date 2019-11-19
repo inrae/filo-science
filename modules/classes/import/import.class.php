@@ -58,6 +58,7 @@ class FiloImport
         /*
          * Ouverture du fichier
          */
+        $filename = str_replace ("../", "", $filename);
         if (!$this->handle = fopen($filename, 'r')) {
             throw new ImportException(sprintf(_("Fichier %s non trouvé ou non lisible"), $filename));
         }

@@ -294,7 +294,6 @@ class FunctionType extends ObjetBDD
      */
     private function decodeAll (array $columns, array $args) {
         $result = array();
-       // return (mb_convert_encoding($columns[$args["columnNumber"]], "UTF-8", $args["arg"]));
         foreach ($columns as $key=>$column) {
             $val = mb_convert_encoding($column, "UTF-8", $args["arg"]);
             if (! $val) {

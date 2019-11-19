@@ -38,7 +38,7 @@ switch ($t_module["param"]) {
                     }
                 }
                 if ($export->modeDebug) {
-                    throw new ExportException ("Debug mode: no file generated");
+                    throw new ExportException("Debug mode: no file generated");
                 }
                 $vue->setParam(array("filename" => $_SESSION["APPLI_code"] . '-' . date('YmdHis') . ".json"));
                 $vue->set(json_encode($data));
@@ -80,10 +80,10 @@ switch ($t_module["param"]) {
             } else {
                 $model = $exportModel->getModelFromName($_REQUEST["export_model_name"]);
             }
-            //$export->modeDebug = true;
             $export->initModel($model["pattern"]);
             $filename = $_FILES["filename"]["tmp_name"];
             $realFilename = $_FILES["filename"]["name"];
+            $filename = str_replace("../", "", $filename);
             $handle = fopen($filename, 'r');
             if (!$handle) {
                 $message->set(sprintf(_("Fichier %s non trouvé ou non lisible"), $filename), true);
