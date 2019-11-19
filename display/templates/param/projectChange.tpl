@@ -14,12 +14,33 @@
                         </div>
                   </div>
                   <div class="form-group">
+                        <label for="metric_srid" class="control-label col-md-4">{t}Projection (SRID) utilisée pour convertir les coordonnées géographiques en système cartésien :{/t}</label>
+                        <div class="col-md-8">
+                              <input id="metric_srid" type="number" class="form-control" name="metric_srid" value="{$data.metric_srid}">
+                        </div>
+                  </div>
+                  <div class="form-group">
                         <label for="is_active" class="control-label col-md-4">{t}Actif ?{/t}</label>
                         <div class="col-md-8">
                               <input type="radio" name="is_active" value="1" {if $data.is_active == 1}checked{/if}>
                               oui
                               <input type="radio" name="is_active" value="0" {if $data.is_active == 0}checked{/if}>
                               non
+                        </div>
+                  </div>
+                  <div class="form-group">
+                        <label for="is_active" class="control-label col-md-4">{t}Protocole utilisé par défaut :{/t}</label>
+                        <div class="col-md-8">
+                              <select name="protocol_default_id" id="protocol_default_id" class="form-control">
+                                    <option value="" {if $data.protocol_default_id == ""}selected{/if}>
+                                          {t}Sélectionnez...{/t}
+                                    </option>
+                                    {foreach $protocols as $protocol}
+                                          <option value="{$protocol.protocol_id}" {if $data.protocol_default_id == $protocol.protocol_id}selected{/if}>
+                                                {$protocol.protocol_name}
+                                          </option>
+                                    {/foreach}
+                              </select>
                         </div>
                   </div>
 

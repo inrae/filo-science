@@ -3,9 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,1150" last-zoom="1" max-obj-count="67"
-	 default-owner="postgres"
-	 layers="gacl" active-layers="0;1">
+<dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="0,986" last-zoom="1" max-obj-count="94"
+	 default-schema="import" default-owner="filo"
+	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
       login="true"
       encrypted="true"
@@ -80,6 +80,27 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<style id="table-schema-name" colors="#000000"/>
 	<style id="table-title" colors="#cc0000,#cc0000,#20486f"/>
 </tag>
+<tag name="individual_tracking">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#00ff00,#00ff00,#20486f"/>
+</tag>
+<tag name="probe">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#ffffff"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#55007f,#55007f,#20486f"/>
+</tag>
+<tag name="import">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#ffffff"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#550000,#550000,#20486f"/>
+</tag>
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
@@ -98,12 +119,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 </sequence>
 
-<table name="project" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="project" layer="0" collapse-mode="1" max-obj-count="6">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of projects. This table is used for grant rights]]></comment>
 	<tag name="projet"/>
-	<position x="500" y="460"/>
+	<position x="1260" y="320"/>
 	<column name="project_id" not-null="true" sequence="filo.project_project_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -115,23 +136,30 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="boolean" length="0"/>
 		<comment><![CDATA[Specify if the project is currently active]]></comment>
 	</column>
+	<column name="metric_srid" default-value="2154">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Srid in metric referential, for calculate circles or other geographic objects]]></comment>
+	</column>
 	<constraint name="project_id_pk" type="pk-constr" table="filo.project">
 		<columns names="project_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="campaign" layer="0" collapse-mode="1" max-obj-count="3">
+<table name="campaign" layer="0" collapse-mode="1" max-obj-count="4">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of campaigns rattached to a project]]></comment>
 	<tag name="projet"/>
-	<position x="280" y="660"/>
+	<position x="1260" y="520"/>
 	<column name="campaign_id" not-null="true" sequence="filo.campaign_campaign_id_seq">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="campaign_name" not-null="true">
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[Name of the campaign]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="campaign_id_pk" type="pk-constr" table="filo.campaign">
 		<columns names="campaign_id" ref-type="src-columns"/>
@@ -170,12 +198,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 </sequence>
 
-<table name="station" layer="0" collapse-mode="1" max-obj-count="9">
+<extension name="postgis">
+	<schema name="public"/>
+</extension>
+
+<table name="station" layer="0" collapse-mode="1" max-obj-count="10">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of the stations used for a project]]></comment>
 	<tag name="projet"/>
-	<position x="20" y="660"/>
+	<position x="1020" y="520"/>
 	<column name="station_id" not-null="true" sequence="filo.station_station_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -199,27 +231,24 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[Code of the station, according to the nomenclature sandre.eaufrance.fr]]></comment>
 	</column>
+	<column name="geom">
+		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="4326"/>
+		<comment><![CDATA[Geographical representation of the situation of the station]]></comment>
+	</column>
 	<constraint name="station_id_pk" type="pk-constr" table="filo.station">
 		<columns names="station_id" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
 		<object name="project_id" index="2"/>
+		<object name="river_id" index="7"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
 		<object name="project_fk" index="1"/>
+		<object name="river_fk" index="2"/>
 	</customidxs>
 </table>
-
-<relationship name="project_has_many_station" type="rel1n" layer="0"
-	 src-col-pattern="{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#c1c7a7"
-	 src-table="filo.project"
-	 dst-table="filo.station"
-	 src-required="false" dst-required="false"/>
 
 <sequence name="taxon_taxon_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
 	<schema name="filo"/>
@@ -236,7 +265,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="filo"/>
 	<comment><![CDATA[List of taxons]]></comment>
 	<tag name="protocol"/>
-	<position x="1240" y="660"/>
+	<position x="1760" y="720"/>
 	<column name="taxon_id" not-null="true" sequence="filo.taxon_taxon_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -763,12 +792,12 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</initial-data>
 </table>
 
-<table name="operation" layer="0" collapse-mode="1" max-obj-count="28">
+<table name="operation" layer="0" collapse-mode="1" max-obj-count="30">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Description of operation]]></comment>
 	<tag name="operation"/>
-	<position x="280" y="920"/>
+	<position x="1260" y="760"/>
 	<column name="operation_id" not-null="true" sequence="filo.operation_operation_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Operations rattached at a campaign]]></comment>
@@ -837,6 +866,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 		<type name="float" length="0"/>
 		<comment><![CDATA[Surface parsed, in square meters]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="operation_id_pk" type="pk-constr" table="filo.operation">
 		<columns names="operation_id" ref-type="src-columns"/>
 	</constraint>
@@ -871,12 +903,12 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	 dst-table="filo.operation"
 	 src-required="true" dst-required="false"/>
 
-<table name="sequence" layer="0" collapse-mode="1" max-obj-count="7">
+<table name="sequence" layer="0" collapse-mode="1" max-obj-count="8">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Catching sequence]]></comment>
 	<tag name="operation"/>
-	<position x="500" y="920"/>
+	<position x="1760" y="960"/>
 	<column name="sequence_id" not-null="true" sequence="filo.place_place_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -895,6 +927,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<column name="fishing_duration">
 		<type name="float" length="0"/>
 		<comment><![CDATA[Fishing duration, in mn]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="place_id_pk" type="pk-constr" table="filo.sequence">
 		<columns names="sequence_id" ref-type="src-columns"/>
@@ -918,12 +953,12 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	 dst-table="filo.sequence"
 	 src-required="true" dst-required="false"/>
 
-<table name="sample" layer="0" collapse-mode="1" max-obj-count="12">
+<table name="sample" layer="0" collapse-mode="1" max-obj-count="13">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of samplings. One or many for a taxon]]></comment>
 	<tag name="operation"/>
-	<position x="780" y="920"/>
+	<position x="1480" y="760"/>
 	<column name="sample_id" not-null="true" sequence="filo.sample_sample_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -954,6 +989,9 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="sample_comment">
 		<type name="varchar" length="0"/>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="sample_id_pk" type="pk-constr" table="filo.sample">
 		<columns names="sample_id" ref-type="src-columns"/>
@@ -993,12 +1031,12 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="individual" layer="0" collapse-mode="1" max-obj-count="20">
+<table name="individual" layer="0" collapse-mode="1" max-obj-count="22">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of individuals measured]]></comment>
 	<tag name="operation"/>
-	<position x="1020" y="920"/>
+	<position x="1020" y="760"/>
 	<column name="individual_id" not-null="true" sequence="filo.item_item_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1047,20 +1085,27 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="tag">
 		<type name="varchar" length="0"/>
-		<comment><![CDATA[Read tag]]></comment>
+		<comment><![CDATA[RFID tag]]></comment>
 	</column>
 	<column name="tag_posed">
 		<type name="varchar" length="0"/>
-		<comment><![CDATA[Tag posed on the fish]]></comment>
+		<comment><![CDATA[RFID tag posed on the fish]]></comment>
+	</column>
+	<column name="transmitter">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Acoustic or radio transmitter identifier]]></comment>
+	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="individual_id_pk" type="pk-constr" table="filo.individual">
 		<columns names="individual_id" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="pathology_id" index="16"/>
+		<object name="pathology_id" index="3"/>
 		<object name="sample_id" index="1"/>
-		<object name="sexe_id" index="15"/>
+		<object name="sexe_id" index="2"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
@@ -1077,7 +1122,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	 custom-color="#dd78a7"
 	 src-table="filo.sample"
 	 dst-table="filo.individual"
-	 src-required="true" dst-required="false"/>
+	 src-required="false" dst-required="false"/>
 
 <sequence name="measure_template_measure_template_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
 	<schema name="filo"/>
@@ -1088,7 +1133,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="1020" y="660"/>
+	<position x="2000" y="520"/>
 	<column name="measure_template_id" not-null="true" sequence="filo.measure_template_measure_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1139,7 +1184,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Gear used for fishery]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="1380"/>
+	<position x="2220" y="960"/>
 	<column name="gear_id" not-null="true" sequence="filo.gear_gear_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1163,12 +1208,12 @@ By default : total_length and weight]]></comment>
 	</constraint>
 </table>
 
-<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="10">
+<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="12">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of gear used during operation]]></comment>
 	<tag name="operation"/>
-	<position x="780" y="1140"/>
+	<position x="2000" y="960"/>
 	<column name="sequence_gear_id" not-null="true" sequence="filo.sequence_gear_sequence_gear_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1188,9 +1233,26 @@ By default : total_length and weight]]></comment>
 		<type name="float" length="0"/>
 		<comment><![CDATA[Depth of the gear]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="sequence_gear_pk" type="pk-constr" table="filo.sequence_gear">
 		<columns names="sequence_gear_id" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="electric_current_type_id" index="8"/>
+		<object name="gear_id" index="6"/>
+		<object name="gear_method_id" index="7"/>
+		<object name="sequence_id" index="5"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="electric_current_type_fk" index="4"/>
+		<object name="gear_fk" index="2"/>
+		<object name="gear_method_fk" index="3"/>
+		<object name="sequence_fk" index="1"/>
+	</customidxs>
 </table>
 
 <sequence name="engine_engine_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
@@ -1208,7 +1270,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[River, estuary, sea...]]></comment>
 	<tag name="projet"/>
-	<position x="20" y="460"/>
+	<position x="820" y="320"/>
 	<column name="river_id" not-null="true" sequence="filo.river_river_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1252,12 +1314,12 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="analysis" layer="0" collapse-mode="1" max-obj-count="13">
+<table name="analysis" layer="0" collapse-mode="1" max-obj-count="14">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Water analysis]]></comment>
 	<tag name="operation"/>
-	<position x="500" y="1140"/>
+	<position x="2000" y="720"/>
 	<column name="analysis_id" not-null="true" sequence="filo.analysis_analysis_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1297,6 +1359,9 @@ By default : total_length and weight]]></comment>
 		<type name="json" length="0"/>
 		<comment><![CDATA[Others analysis performed (cf. analysis_template)]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="analysis_pk" type="pk-constr" table="filo.analysis">
 		<columns names="analysis_id" ref-type="src-columns"/>
 	</constraint>
@@ -1324,7 +1389,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Sexe of fishs]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="920"/>
+	<position x="820" y="1100"/>
 	<column name="sexe_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1366,7 +1431,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of pathologies]]></comment>
 	<tag name="parametres"/>
-	<position x="1240" y="1140"/>
+	<position x="820" y="1240"/>
 	<column name="pathology_id" not-null="true" sequence="filo.pathology_pathology_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1483,7 +1548,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of facies]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="2000"/>
+	<position x="1260" y="1860"/>
 	<column name="facies_id" not-null="true" sequence="filo.facies_facies_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1508,12 +1573,12 @@ By default : total_length and weight]]></comment>
 	</initial-data>
 </table>
 
-<table name="ambience" layer="0" collapse-mode="1" max-obj-count="38">
+<table name="ambience" layer="0" collapse-mode="1" max-obj-count="39">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Description of the ambiences of the operation]]></comment>
 	<tag name="ambience"/>
-	<position x="500" y="1520"/>
+	<position x="1480" y="1380"/>
 	<column name="ambience_id" not-null="true" sequence="filo.ambience_ambience_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1564,16 +1629,55 @@ By default : total_length and weight]]></comment>
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[Min of height of water, in cm]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="ambience_pk" type="pk-constr" table="filo.ambience">
 		<columns names="ambience_id" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="branch_cache_abundance_id" index="23"/>
+		<object name="clogging_id" index="27"/>
+		<object name="dominant_granulometry_id" index="20"/>
+		<object name="facies_id" index="14"/>
+		<object name="flow_trend_id" index="29"/>
+		<object name="granulometry_cache_abundance_id" index="26"/>
+		<object name="herbarium_cache_abundance_id" index="22"/>
+		<object name="localisation_id" index="18"/>
 		<object name="operation_id" index="1"/>
+		<object name="secondary_granulometry_id" index="21"/>
+		<object name="sequence_id" index="31"/>
+		<object name="shady_id" index="17"/>
+		<object name="sinuosity_id" index="28"/>
+		<object name="situation_id" index="15"/>
+		<object name="speed_id" index="16"/>
+		<object name="subbank_cache_abundance_id" index="25"/>
+		<object name="turbidity_id" index="30"/>
+		<object name="vegetation_cache_abundance_id" index="24"/>
+		<object name="vegetation_id" index="19"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="cache_abundance_fk" index="10"/>
+		<object name="cache_abundance_fk1" index="11"/>
+		<object name="cache_abundance_fk2" index="12"/>
+		<object name="cache_abundance_fk3" index="13"/>
+		<object name="cache_abundance_fk4" index="14"/>
+		<object name="clogging_fk" index="15"/>
+		<object name="facies_fk" index="2"/>
+		<object name="flow_trend_fk" index="17"/>
+		<object name="granulometry_fk" index="8"/>
+		<object name="granulometry_fk1" index="9"/>
+		<object name="localisation_fk" index="6"/>
 		<object name="operation_fk" index="1"/>
+		<object name="sequence_fk" index="19"/>
+		<object name="shady_fk" index="5"/>
+		<object name="sinuosity_fk" index="16"/>
+		<object name="situation_fk" index="3"/>
+		<object name="speed_fk" index="4"/>
+		<object name="turbidity_fk" index="18"/>
+		<object name="vegetation_fk" index="7"/>
 	</customidxs>
 </table>
 
@@ -1591,7 +1695,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of situations]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1780"/>
+	<position x="1760" y="1640"/>
 	<column name="situation_id" not-null="true" sequence="filo.situation_situation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1624,7 +1728,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of localisations of the ambience]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1660"/>
+	<position x="1760" y="1520"/>
 	<column name="localisation_id" not-null="true" sequence="filo.localisation_localisation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1646,7 +1750,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Speed of current, in cm/s]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1660"/>
+	<position x="1260" y="1520"/>
 	<column name="speed_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1671,7 +1775,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of shaddies used for ambiences]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1780"/>
+	<position x="1260" y="1640"/>
 	<column name="shady_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1700,7 +1804,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of granulometry]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1520"/>
+	<position x="1260" y="1380"/>
 	<column name="granulometry_id" not-null="true" sequence="filo.granulometry_granulometry_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1737,7 +1841,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of vegetation]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1880"/>
+	<position x="1760" y="1740"/>
 	<column name="vegetation_id" not-null="true" sequence="filo.vegetation_vegetation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1770,7 +1874,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Levels of abundance of caches]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1020" y="1880"/>
+	<position x="2000" y="1740"/>
 	<column name="cache_abundance_id" not-null="true" sequence="filo.cache_abundance_cache_abundance_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1930,7 +2034,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table des droits attribués]]></comment>
 	<tag name="acl"/>
-	<position x="220" y="200"/>
+	<position x="1020" y="180"/>
 	<column name="aclaco_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -1961,7 +2065,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table des droits gérés]]></comment>
 	<tag name="acl"/>
-	<position x="420" y="40"/>
+	<position x="1260" y="20"/>
 	<column name="aclaco_id" not-null="true" sequence="gacl.aclaco_aclaco_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1995,7 +2099,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table des applications gérées]]></comment>
 	<tag name="acl"/>
-	<position x="420" y="200"/>
+	<position x="1260" y="180"/>
 	<column name="aclappli_id" not-null="true" sequence="gacl.aclappli_aclappli_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2021,7 +2125,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Groupes des logins]]></comment>
 	<tag name="acl"/>
-	<position x="20" y="200"/>
+	<position x="820" y="180"/>
 	<column name="aclgroup_id" not-null="true" sequence="gacl.aclgroup_aclgroup_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2055,7 +2159,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table des logins des utilisateurs autorisés]]></comment>
 	<tag name="acl"/>
-	<position x="220" y="40"/>
+	<position x="1020" y="20"/>
 	<column name="acllogin_id" not-null="true" sequence="gacl.acllogin_acllogin_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2080,7 +2184,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table des relations entre les logins et les groupes]]></comment>
 	<tag name="acl"/>
-	<position x="20" y="40"/>
+	<position x="820" y="20"/>
 	<column name="acllogin_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -2106,7 +2210,7 @@ By default : total_length and weight]]></comment>
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Liste des connexions ou des actions enregistrées]]></comment>
-	<position x="740" y="40"/>
+	<position x="2000" y="20"/>
 	<column name="log_id" not-null="true" sequence="gacl.log_log_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2147,7 +2251,7 @@ By default : total_length and weight]]></comment>
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<tag name="login"/>
-	<position x="560" y="200"/>
+	<position x="1480" y="20"/>
 	<column name="id" not-null="true" sequence="gacl.seq_logingestion_id">
 		<type name="integer" length="0"/>
 	</column>
@@ -2210,7 +2314,7 @@ By default : total_length and weight]]></comment>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="projet"/>
-	<position x="280" y="460"/>
+	<position x="1020" y="320"/>
 </table>
 
 <relationship name="project_has_many_project_group" type="rel1n" layer="0"
@@ -2240,12 +2344,12 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="operator" layer="0" collapse-mode="2" max-obj-count="4">
+<table name="operator" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of operators]]></comment>
 	<tag name="operation"/>
-	<position x="20" y="920"/>
+	<position x="1480" y="1240"/>
 	<column name="operator_id" not-null="true" sequence="filo.operator_operator_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2261,6 +2365,9 @@ By default : total_length and weight]]></comment>
 		<type name="boolean" length="0"/>
 		<comment><![CDATA[Is the opérator actually active ?]]></comment>
 	</column>
+	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
 	<constraint name="operator_pk" type="pk-constr" table="filo.operator">
 		<columns names="operator_id" ref-type="src-columns"/>
 	</constraint>
@@ -2271,7 +2378,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Operators rattached to an operation]]></comment>
 	<tag name="operation"/>
-	<position x="20" y="1140"/>
+	<position x="1480" y="1100"/>
 	<column name="is_responsible" default-value="'t'">
 		<type name="bool" length="0"/>
 		<comment><![CDATA[True if the operator is responsible of the operation]]></comment>
@@ -2310,7 +2417,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[Table of types of complementary analysis]]></comment>
 	<tag name="parametres"/>
-	<position x="780" y="800"/>
+	<position x="1760" y="620"/>
 	<column name="analysis_template_id" not-null="true" sequence="filo.analysis_template_analysis_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2337,7 +2444,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of cloggings]]></comment>
 	<tag name="ambience_param"/>
-	<position x="280" y="1880"/>
+	<position x="1260" y="1740"/>
 	<column name="clogging_id" not-null="true" sequence="filo.cloggging_clogging_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2381,7 +2488,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of sinuosities of the river]]></comment>
 	<tag name="ambience_param"/>
-	<position x="780" y="1520"/>
+	<position x="1760" y="1380"/>
 	<column name="sinuosity_id" not-null="true" sequence="filo.sinuosity_sinuosity_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2419,7 +2526,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of trends of flow]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1020" y="1780"/>
+	<position x="2000" y="1640"/>
 	<column name="flow_trend_id" not-null="true" sequence="filo.flow_trend_flow_trend_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2457,7 +2564,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of turbidity]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1020" y="1660"/>
+	<position x="2000" y="1520"/>
 	<column name="turbidity_id" not-null="true" sequence="filo.turbidity_id">
 		<type name="integer" length="0"/>
 	</column>
@@ -2495,7 +2602,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of protocols used]]></comment>
 	<tag name="protocol"/>
-	<position x="500" y="660"/>
+	<position x="1480" y="520"/>
 	<column name="protocol_id" not-null="true" sequence="filo.protocol_protocol_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2563,7 +2670,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of particular species measures used in the protocol]]></comment>
 	<tag name="protocol"/>
-	<position x="780" y="660"/>
+	<position x="1760" y="520"/>
 </table>
 
 <relationship name="protocol_has_many_protocol_measure" type="rel1n" layer="0"
@@ -2609,7 +2716,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of water regimes]]></comment>
 	<tag name="parametres"/>
-	<position x="20" y="1380"/>
+	<position x="1020" y="1240"/>
 	<column name="water_regime_id" not-null="true" sequence="filo.water_regime_water_regime_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2641,7 +2748,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="780" y="1380"/>
+	<position x="1760" y="1240"/>
 	<column name="electric_current_type_id" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -2667,7 +2774,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="20" y="1520"/>
+	<position x="1020" y="1380"/>
 	<column name="fishing_strategy_id" not-null="true" sequence="filo.fishing_strategy_fishing_strategy_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2704,7 +2811,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Scale of the operation (global station, point, ambience)]]></comment>
 	<tag name="parametres"/>
-	<position x="20" y="1660"/>
+	<position x="1020" y="1520"/>
 	<column name="scale_id" not-null="true" sequence="filo.scale_scale_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2741,7 +2848,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Method of usage of the gear (in boat, walk fishing, etc.)]]></comment>
 	<tag name="parametres"/>
-	<position x="1020" y="1380"/>
+	<position x="2000" y="1240"/>
 	<column name="gear_method_id" not-null="true" sequence="filo.gear_method_gear_method_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2781,7 +2888,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des parametres associes de maniere intrinseque a l'instance]]></comment>
-	<position x="20" y="2000"/>
+	<position x="820" y="1860"/>
 	<column name="dbparam_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -2801,7 +2908,10 @@ Crue•4]]>
 1•APPLI_title•Filo-Science⸣
 2•mapDefaultZoom•9⸣
 3•mapDefaultLong•0⸣
-4•mapDefaultLat•45]]>
+4•mapDefaultLat•45⸣
+5•mapMinZoom•5⸣
+6•mapMaxZoom•18⸣
+7•APPLI_code•filoscience]]>
 	</initial-data>
 </table>
 
@@ -2814,7 +2924,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des versions de la base de donnees]]></comment>
-	<position x="20" y="1880"/>
+	<position x="820" y="1740"/>
 	<column name="dbversion_id" not-null="true" sequence="filo.dbversion_dbversion_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2831,7 +2941,7 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbversion_number•dbversion_date⸣
-1.2•2019-08-29]]>
+1.3•2019-11-18]]>
 	</initial-data>
 </table>
 
@@ -2845,7 +2955,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[List of templates used to select taxa]]></comment>
 	<tag name="parametres"/>
-	<position x="280" y="1380"/>
+	<position x="1260" y="1240"/>
 	<column name="taxa_template_id" not-null="true" sequence="filo.taxa_template_taxa_template_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2893,7 +3003,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Documents stocked in the database]]></comment>
 	<tag name="document"/>
-	<position x="1020" y="460"/>
+	<position x="2000" y="320"/>
 	<column name="document_id" not-null="true" sequence="filo.document_document_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2942,7 +3052,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[List of types mime associable to the documents]]></comment>
 	<tag name="document"/>
-	<position x="1240" y="460"/>
+	<position x="2220" y="320"/>
 	<column name="mime_type_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -2990,7 +3100,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Documents associated with a project]]></comment>
 	<tag name="document"/>
-	<position x="780" y="460"/>
+	<position x="1760" y="320"/>
 
 	<customidxs object-type="column">
 		<object name="document_id" index="1"/>
@@ -3031,7 +3141,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[List of the documents associated with a protocol]]></comment>
 	<tag name="document"/>
-	<position x="780" y="560"/>
+	<position x="1760" y="420"/>
 
 	<customidxs object-type="column">
 		<object name="document_id" index="1"/>
@@ -3088,11 +3198,11 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="passwordlost" layer="0" collapse-mode="2" max-obj-count="6">
+<table name="passwordlost" layer="1" collapse-mode="2" max-obj-count="6">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<tag name="login"/>
-	<position x="560" y="40"/>
+	<position x="1760" y="20"/>
 	<column name="passwordlost_id" not-null="true" sequence="gacl.passwordlost_passwordlost_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -3121,7 +3231,7 @@ Crue•4]]>
 	</customidxs>
 </table>
 
-<relationship name="logingestion_has_many_passwordlost" type="rel1n" layer="0"
+<relationship name="logingestion_has_many_passwordlost" type="rel1n" layer="1"
 	 src-col-pattern="{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
@@ -3135,7 +3245,7 @@ Crue•4]]>
 	<role name="filo"/>
 	<comment><![CDATA[Documents associated with an operation]]></comment>
 	<tag name="document"/>
-	<position x="500" y="560"/>
+	<position x="1480" y="420"/>
 </table>
 
 <relationship name="operation_has_many_operation_document" type="rel1n" layer="0"
@@ -3163,7 +3273,7 @@ Crue•4]]>
 <view name="v_individual_other_measures" layer="0" collapse-mode="2" max-obj-count="1">
 	<schema name="filo"/>
 	<role name="filo"/>
-	<position x="1240" y="1280"/>
+	<position x="820" y="1640"/>
 	<reference>
 		<expression><![CDATA[select individual_id, 
 string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures 
@@ -3178,6 +3288,1285 @@ group by individual_id]]></expression>
 	</column>
 	</reference>
 </view>
+
+<schema name="tracking" layer="2" rect-visible="true" fill-color="#e1e1e1">
+	<role name="filo"/>
+</schema>
+
+<sequence name="release_place_release_place_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="individual_tracking" layer="2" collapse-mode="2" max-obj-count="8">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="individual_tracking"/>
+	<position x="640" y="760"/>
+
+	<customidxs object-type="column">
+		<object name="individual_id" index="0"/>
+		<object name="project_id" index="3"/>
+		<object name="release_station_id" index="1"/>
+		<object name="taxon_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="individual_fk" index="1"/>
+		<object name="individual_tracking_pk" index="0"/>
+		<object name="individual_tracking_uq" index="2"/>
+		<object name="project_fk" index="5"/>
+		<object name="station_tracking_fk" index="3"/>
+		<object name="taxon_fk" index="4"/>
+	</customidxs>
+</table>
+
+<relationship name="individual_tracking_has_one_individual" type="rel11" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1ca723"
+	 src-table="filo.individual"
+	 dst-table="tracking.individual_tracking"
+	 src-required="true" dst-required="false">
+	<special-pk-cols indexes="0"/>
+</relationship>
+
+<table name="station_tracking" layer="2" collapse-mode="2" max-obj-count="3">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="projet"/>
+	<position x="460" y="520"/>
+</table>
+
+<relationship name="station_tracking_has_one_station" type="rel11" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f4e1a0"
+	 src-table="filo.station"
+	 dst-table="tracking.station_tracking"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<sequence name="station_type_station_type_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="station_type" layer="2" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="projet"/>
+	<position x="460" y="320"/>
+	<column name="station_type_id" not-null="true" sequence="tracking.station_type_station_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="station_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="station_type_pk" type="pk-constr" table="tracking.station_type">
+		<columns names="station_type_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="station_type_has_many_station_tracking" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4f3a4a"
+	 src-table="tracking.station_type"
+	 dst-table="tracking.station_tracking"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="antenna_antenna_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="antenna" layer="2" collapse-mode="2" max-obj-count="7">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="projet"/>
+	<position x="260" y="760"/>
+	<column name="antenna_id" not-null="true" sequence="tracking.antenna_antenna_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="antenna_code" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Antenna or receiver code]]></comment>
+	</column>
+	<column name="radius">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[radius, in metres, of the useful reception]]></comment>
+	</column>
+	<column name="geom_polygon">
+		<type name="geometry" length="0" spatial-type="POLYGON" variation="0" srid="4326"/>
+		<comment><![CDATA[Geometry of the reception zone, in polygonal form, wgs84]]></comment>
+	</column>
+	<constraint name="antenna_pk" type="pk-constr" table="tracking.antenna">
+		<columns names="antenna_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="station_id" index="1"/>
+		<object name="technology_type_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="station_tracking_fk" index="1"/>
+		<object name="technology_type_fk" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="station_tracking_has_many_antenna" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3984ba"
+	 src-table="tracking.station_tracking"
+	 dst-table="tracking.antenna"
+	 src-required="true" dst-required="false">
+	<label ref-type="name-label">
+		<position x="9.53561" y="3.18349"/>
+	</label>
+</relationship>
+
+<sequence name="detection_detection_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="detection" layer="2" collapse-mode="2" max-obj-count="10">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="individual_tracking"/>
+	<position x="460" y="760"/>
+	<column name="detection_id" not-null="true" sequence="tracking.detection_detection_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="detection_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date-time of the detection]]></comment>
+	</column>
+	<column name="nb_events">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Events number recorded]]></comment>
+	</column>
+	<column name="duration">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Duration of the detection, in seconds with milliseconds]]></comment>
+	</column>
+	<column name="validity" not-null="true" default-value="'t'">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Specifiy if the detection is real (true) or false positive (false)]]></comment>
+	</column>
+	<column name="signal_force">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Force of the signal]]></comment>
+	</column>
+	<column name="observation">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[comment]]></comment>
+	</column>
+	<constraint name="detection_pk" type="pk-constr" table="tracking.detection">
+		<columns names="detection_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="antenna_id" index="2"/>
+		<object name="individual_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="antenna_fk" index="2"/>
+		<object name="individual_tracking_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="individual_tracking_has_many_detection" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e0a131"
+	 src-table="tracking.individual_tracking"
+	 dst-table="tracking.detection"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="station_tracking_has_many_individual_tracking" type="rel1n" layer="2"
+	 src-col-pattern="release_station_id"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3a7797"
+	 src-table="tracking.station_tracking"
+	 dst-table="tracking.individual_tracking"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="probe_probe_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="probe" layer="2" collapse-mode="2" max-obj-count="3">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[Probe used to record the environmental variables]]></comment>
+	<tag name="probe"/>
+	<position x="260" y="520"/>
+	<column name="probe_id" not-null="true" sequence="tracking.probe_probe_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="probe_code" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code of the probe]]></comment>
+	</column>
+	<constraint name="probe_pk" type="pk-constr" table="tracking.probe">
+		<columns names="probe_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="station_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="station_tracking_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="station_tracking_has_many_probe" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a15576"
+	 src-table="tracking.station_tracking"
+	 dst-table="tracking.probe"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="probe_measure_probe_measure_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="probe_measure" layer="2" collapse-mode="2" max-obj-count="6">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of the measures recorded by a probe]]></comment>
+	<tag name="probe"/>
+	<position x="20" y="520"/>
+	<column name="probe_measure_id" not-null="true" sequence="tracking.probe_measure_probe_measure_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="probe_measure_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date-time of the record]]></comment>
+	</column>
+	<column name="probe_measure_value" not-null="true">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Value measured]]></comment>
+	</column>
+	<constraint name="probe_measure_pk" type="pk-constr" table="tracking.probe_measure">
+		<columns names="probe_measure_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="parameter_measure_type_id" index="2"/>
+		<object name="probe_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="parameter_measure_type_fk" index="2"/>
+		<object name="probe_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="probe_has_many_probe_measure" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bc3430"
+	 src-table="tracking.probe"
+	 dst-table="tracking.probe_measure"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="transmitter_type_transmitter_type_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="transmitter_type" layer="2" collapse-mode="2" max-obj-count="4">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="individual_tracking"/>
+	<position x="640" y="1100"/>
+	<column name="transmitter_type_id" not-null="true" sequence="tracking.transmitter_type_transmitter_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="transmitter_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Code or name of the transmitter]]></comment>
+	</column>
+	<column name="characteristics">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[General characteristics of the transmitter]]></comment>
+	</column>
+	<column name="technology">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Technology used by the transmitter]]></comment>
+	</column>
+	<constraint name="transmitter_type_pk" type="pk-constr" table="tracking.transmitter_type">
+		<columns names="transmitter_type_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="transmitter_type_has_many_individual_tracking" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5879c7"
+	 src-table="tracking.transmitter_type"
+	 dst-table="tracking.individual_tracking"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-1.53402" y="3.23934"/>
+	</label>
+</relationship>
+
+<sequence name="position_position_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<relationship name="project_has_many_individual_tracking" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6df184"
+	 src-table="filo.project"
+	 dst-table="tracking.individual_tracking"
+	 src-required="true" dst-required="false"/>
+
+<schema name="import" layer="3" rect-visible="true" fill-color="#e1e1e1">
+	<role name="filo"/>
+</schema>
+
+<sequence name="import_description_import_description_id" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="import_description" layer="3" collapse-mode="2" max-obj-count="6">
+	<schema name="import"/>
+	<role name="filo"/>
+	<comment><![CDATA[Import templates]]></comment>
+	<tag name="import"/>
+	<position x="260" y="20"/>
+	<column name="import_description_id" not-null="true" sequence="import.import_description_import_description_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="import_description_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the description of the import]]></comment>
+	</column>
+	<column name="separator" not-null="true" default-value="';'">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[separator used between fields (; , tab, space)]]></comment>
+	</column>
+	<constraint name="import_type_pk" type="pk-constr" table="import.import_description">
+		<columns names="import_description_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="csv_type_id" index="2"/>
+		<object name="import_type_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="csv_type_fk" index="1"/>
+		<object name="import_type_fk" index="2"/>
+	</customidxs>
+</table>
+
+<table name="csv_type" layer="3" collapse-mode="2" max-obj-count="2">
+	<schema name="import"/>
+	<role name="filo"/>
+	<tag name="import"/>
+	<position x="460" y="180"/>
+	<column name="csv_type_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="csv_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="csv_type_pk" type="pk-constr" table="import.csv_type">
+		<columns names="csv_type_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[csv_type_id•csv_type_name⸣
+1•Data in columns: classic format for CSV⸣
+2•Data in lines: format entity-relation]]>
+	</initial-data>
+</table>
+
+<relationship name="csv_type_has_many_import_type" type="rel1n" layer="3"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#62cfe9"
+	 src-table="import.csv_type"
+	 dst-table="import.import_description"
+	 src-required="true" dst-required="false"/>
+
+<sequence name="column_er_column_er_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<sequence name="import_column_import_column_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="import_column" layer="3" collapse-mode="2" max-obj-count="4">
+	<schema name="import"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of all columns of the file]]></comment>
+	<tag name="import"/>
+	<position x="640" y="180"/>
+	<column name="import_column_id" not-null="true" sequence="import.import_column_import_column_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="column_order" not-null="true" default-value="1">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Place of the column in the file, from 1]]></comment>
+	</column>
+	<column name="table_column_name">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[name of the attribute of the column in the database table]]></comment>
+	</column>
+	<constraint name="column_pk" type="pk-constr" table="import.import_column">
+		<columns names="import_column_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="import_description_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="import_description_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="import_type_has_many_column" type="rel1n" layer="3"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3d0ff3"
+	 src-table="import.import_description"
+	 dst-table="import.import_column"
+	 src-required="true" dst-required="false">
+	<label ref-type="name-label">
+		<position x="3.80123" y="4.03147"/>
+	</label>
+</relationship>
+
+<relationship name="project_has_many_station" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#c1c7a7"
+	 src-table="filo.project"
+	 dst-table="filo.station"
+	 src-required="false" dst-required="false"/>
+
+<index name="log_ip_idx" table="gacl.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="ipaddress"/>
+		</idxelement>
+</index>
+
+<extension name="tablefunc">
+	<schema name="public"/>
+</extension>
+
+<relationship name="taxon_has_many_individual_tracking" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#2bdeef"
+	 src-table="filo.taxon"
+	 dst-table="tracking.individual_tracking"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="protocol_has_many_project" type="rel1n" layer="0"
+	 src-col-pattern="protocol_default_id"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6e2040"
+	 src-table="filo.protocol"
+	 dst-table="filo.project"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="function_type_function_type_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="function_type" layer="3" collapse-mode="2" max-obj-count="3">
+	<schema name="import"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of functions writed in the application, and usable to test or transform the data]]></comment>
+	<tag name="import"/>
+	<position x="260" y="180"/>
+	<column name="function_type_id" not-null="true" sequence="import.function_type_function_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="function_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the function. Must be the same in the application code]]></comment>
+	</column>
+	<column name="description" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Usage of the function]]></comment>
+	</column>
+	<constraint name="function_type_pk" type="pk-constr" table="import.function_type">
+		<columns names="function_type_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[function_type_id•function_name•description⸣
+1•testValue•Teste si un champ contient la valeur indiquée⸣
+2•getSecondsFromTime•Transforme un champ de type hh:mm:ss.u en ss.u⸣
+3•extractRightChar•Extrait les n caractères à droite du champ⸣
+4•formatDateTime•Transforme une datetime dans un format reconnu par la base de données, à partir du format indiqué. Exemple : d/m/Y H:i:s pour une date de type 13/01/2019 08:50:00. La liste des formats autorisés est disponible ici : https://www.php.net/manual/fr/datetime.createfromformat.php⸣
+5•concatenateDateAndTime•Concatène un champ date et un champ time. L'argument doit correspondre au numéro de la colonne time⸣
+6•transformJulianToDate•Transforme un nombre de jours depuis la date indiquée en référence (au format Y-m-d) en date exploitable au format Y-m-d⸣
+7•verifyTypeNumber•Vérifie si une valeur est numérique ou non⸣
+8•testColumnsNumber•Vérifie que le nombre de colonnes de la ligne courante correspond bien au nombre attendu⸣
+9•getIndividualFromTag•Récupère l'identifiant du poisson à partir du tag (RFID)⸣
+10•getIndividualFromTransmitter•Récupère l'identifiant du poisson à partir du transmetteur (radio ou acoustique)⸣
+11•numericToHexa•Transforme une valeur numérique en valeur Hexa, si celle-ci ne l'est pas. La valeur Hexa doit comprendre au moins une lettre. L'argument doit préciser le nombre de caractères attendus (multiple de 2) pour formater la chaine dans une zone de zéros⸣
+12•concatenate•Associe le contenu de colonnes ou du texte. L'argument doit etre au format JSON, sous la forme : [{"type":"col","val":4},{type:"str","val":":"}]⸣
+13•matchingCode•Remplace la valeur courante par une autre valeur, définie dans un argument JSON au format : {"valueSearched":correspondingValue, "2ndvalue":corresp2}. Pour la recherche des paramètres de sonde, valueSearched doit correspondre au libellé utilisé par la sonde, et correspondingValue à la valeur de la clé dans la table des paramètres⸣
+14•decodeAll•Transforme un jeu de caractère particulier en UTF-8. L'argument doit comprendre le jeu de caractère à transcoder, par exemple UTF-32⸣
+15•transformDecimalSeparator•Transforme la virgule en point, pour les champs décimaux en français]]>
+	</initial-data>
+</table>
+
+<sequence name="import_function_import_function_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="import_function" layer="3" collapse-mode="2" max-obj-count="8">
+	<schema name="import"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of functions to be performed for each row of the file]]></comment>
+	<tag name="import"/>
+	<position x="20" y="20"/>
+	<column name="import_function_id" not-null="true" sequence="import.import_function_import_function_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="column_number" not-null="true" default-value="1">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Number of the column, from 1 to n. If 0: entire row]]></comment>
+	</column>
+	<column name="execution_order" not-null="true" default-value="1">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Order of execution of the function]]></comment>
+	</column>
+	<column name="arguments">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Values of arguments, separated by a comma. Arguments are described in function_type.description]]></comment>
+	</column>
+	<column name="column_result">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Number of column that gets the result of the function, from 1 to n. Not used for control functions]]></comment>
+	</column>
+	<constraint name="import_function_pk" type="pk-constr" table="import.import_function">
+		<columns names="import_function_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="function_type_id" index="2"/>
+		<object name="import_description_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="function_type_fk" index="2"/>
+		<object name="import_description_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="import_description_has_many_import_function" type="rel1n" layer="3"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a8d2ff"
+	 src-table="import.import_description"
+	 dst-table="import.import_function"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="function_type_has_many_import_function" type="rel1n" layer="3"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b4d476"
+	 src-table="import.function_type"
+	 dst-table="import.import_function"
+	 src-required="true" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="-7.3825" y="4.725"/>
+	</label>
+</relationship>
+
+<sequence name="import_type_import_type_id_seq" cycle="false" start="3" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="import_type" layer="3" collapse-mode="2" max-obj-count="4">
+	<schema name="import"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of types of import]]></comment>
+	<tag name="import"/>
+	<position x="640" y="20"/>
+	<column name="import_type_id" not-null="true" sequence="import.import_type_import_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="import_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="tablename">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the table to import into]]></comment>
+	</column>
+	<column name="column_list">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[List of the columns used in the table to import into, separed by a comma]]></comment>
+	</column>
+	<constraint name="import_type_pk_1" type="pk-constr" table="import.import_type">
+		<columns names="import_type_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[import_type_id•import_type_name•tablename•column_list⸣
+1•Detection•detection•detection_date,nb_events,duration,signal_force⸣
+2•Probe data/données de sonde•probe_measure•probe_measure_date,probe_measure_value⸣
+3•Manual detection•location•individual_id,detection_date,signal_force,observation,location_long,location_lat,antenna_type_id]]>
+	</initial-data>
+</table>
+
+<sequence name="technology_technology_type_id_seq" cycle="false" start="4" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="technology_type" layer="2" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[Types of technologies used for detection]]></comment>
+	<tag name="projet"/>
+	<position x="260" y="1100"/>
+	<column name="technology_type_id" not-null="true" sequence="import.technology_technology_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="technology_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="technology_type_pk" type="pk-constr" table="tracking.technology_type">
+		<columns names="technology_type_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[technology_type_id•technology_type_name⸣
+1•RFID⸣
+2•Acoustic⸣
+3•Radio]]>
+	</initial-data>
+</table>
+
+<relationship name="technology_type_has_many_antenna" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fca742"
+	 src-table="tracking.technology_type"
+	 dst-table="tracking.antenna"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="import_type_has_many_import_description" type="rel1n" layer="3"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fb8e20"
+	 src-table="import.import_type"
+	 dst-table="import.import_description"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="antenna_has_many_detection" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ad6fca"
+	 src-table="tracking.antenna"
+	 dst-table="tracking.detection"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="location_location_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="location" layer="2" collapse-mode="2" max-obj-count="12">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of locations of manual detections]]></comment>
+	<tag name="individual_tracking"/>
+	<position x="640" y="460"/>
+	<column name="location_id" not-null="true" sequence="tracking.location_location_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="detection_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date-time of the detection]]></comment>
+	</column>
+	<column name="location_pk">
+		<type name="float" length="0"/>
+		<comment><![CDATA[pk of the location]]></comment>
+	</column>
+	<column name="location_long">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Longitude of the location, in wgs84]]></comment>
+	</column>
+	<column name="location_lat">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Latitude of the location, in wgs84]]></comment>
+	</column>
+	<column name="signal_force">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Force of the signal]]></comment>
+	</column>
+	<column name="observation">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[comment]]></comment>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="4326"/>
+		<comment><![CDATA[Geographic point of the location]]></comment>
+	</column>
+	<constraint name="location_pk" type="pk-constr" table="tracking.location">
+		<columns names="location_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="antenna_type_id" index="1"/>
+		<object name="individual_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="antenna_type_fk" index="1"/>
+		<object name="individual_tracking_fk" index="2"/>
+	</customidxs>
+</table>
+
+<sequence name="antenna_type_antenna_type_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="antenna_type" layer="2" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<tag name="individual_tracking"/>
+	<position x="640" y="320"/>
+	<column name="antenna_type_id" not-null="true" sequence="tracking.antenna_type_antenna_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="antenna_type_name" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="antenna_type_pk" type="pk-constr" table="tracking.antenna_type">
+		<columns names="antenna_type_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="antenna_type_has_many_location" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#c33135"
+	 src-table="tracking.antenna_type"
+	 dst-table="tracking.location"
+	 src-required="false" dst-required="false"/>
+
+<sequence name="antenna_event_antenna_event_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="antenna_event" layer="2" collapse-mode="2" max-obj-count="6">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[Events occured on an antenna]]></comment>
+	<tag name="projet"/>
+	<position x="20" y="760"/>
+	<column name="antenna_event_id" not-null="true" sequence="tracking.antenna_event_antenna_event_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="date_start">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Start datetime of the event]]></comment>
+	</column>
+	<column name="date_end">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[End datetime of the event]]></comment>
+	</column>
+	<column name="comment">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Event occurred]]></comment>
+	</column>
+	<constraint name="antenna_event_pk" type="pk-constr" table="tracking.antenna_event">
+		<columns names="antenna_event_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="antenna_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="antenna_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="antenna_has_many_antenna_event" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#aa46f1"
+	 src-table="tracking.antenna"
+	 dst-table="tracking.antenna_event"
+	 src-required="true" dst-required="false"/>
+
+<index name="individual_tag_idx" table="filo.individual"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="tag"/>
+		</idxelement>
+</index>
+
+<index name="individual_transmitter_idx" table="filo.individual"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="transmitter"/>
+		</idxelement>
+</index>
+
+<index name="individual_tracking_project_id_idx" table="tracking.individual_tracking"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="project_id"/>
+		</idxelement>
+</index>
+
+<index name="probe_measure_probe_id_idx" table="tracking.probe_measure"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="probe_id"/>
+		</idxelement>
+</index>
+
+<index name="probe_measure_probe_measure_date_idx" table="tracking.probe_measure"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="probe_measure_date"/>
+		</idxelement>
+</index>
+
+<index name="detection_individual_id_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="individual_id"/>
+		</idxelement>
+</index>
+
+<index name="detection_detection_date_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="detection_date"/>
+		</idxelement>
+</index>
+
+<index name="detection_antenna_id_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="antenna_id"/>
+		</idxelement>
+</index>
+
+<index name="individual_sample_id_idx" table="filo.individual"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="sample_id"/>
+		</idxelement>
+</index>
+
+<index name="operation_campaign_id_idx" table="filo.operation"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="campaign_id"/>
+		</idxelement>
+</index>
+
+<index name="operation_station_id_idx" table="filo.operation"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="station_id"/>
+		</idxelement>
+</index>
+
+<index name="station_project_id_idx" table="filo.station"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="project_id"/>
+		</idxelement>
+</index>
+
+<index name="station_river_id_idx" table="filo.station"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="river_id"/>
+		</idxelement>
+</index>
+
+<index name="sample_sequence_id_idx" table="filo.sample"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="sequence_id"/>
+		</idxelement>
+</index>
+
+<index name="sample_taxon_name_idx" table="filo.sample"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="taxon_name"/>
+		</idxelement>
+</index>
+
+<index name="sequence_operation_id_idx" table="filo.sequence"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="operation_id"/>
+		</idxelement>
+</index>
+
+<index name="operation_date_start_idx" table="filo.operation"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="date_start"/>
+		</idxelement>
+</index>
+
+<sequence name="parameter_measure_type_parameter_measure_type_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="parameter_measure_type" layer="2" collapse-mode="2" max-obj-count="3">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[Types of parameters used with probes]]></comment>
+	<tag name="probe"/>
+	<position x="20" y="320"/>
+	<column name="parameter_measure_type_id" not-null="true" sequence="tracking.parameter_measure_type_parameter_measure_type_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="parameter" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Normalized measured parameter (O2, TEMP, etc.)]]></comment>
+	</column>
+	<column name="unit">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Unit of the parameter]]></comment>
+	</column>
+	<constraint name="parameter_measure_type_pk" type="pk-constr" table="tracking.parameter_measure_type">
+		<columns names="parameter_measure_type_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="parameter_measure_type_has_many_probe_measure" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#38278f"
+	 src-table="tracking.parameter_measure_type"
+	 dst-table="tracking.probe_measure"
+	 src-required="true" dst-required="false"/>
+
+<view name="v_station_tracking" layer="2" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of stations used for tracking, with geom object]]></comment>
+	<position x="20" y="1020"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[station_id, station_name, station_long, station_lat, station_pk, geom
+,station_type_id, station_type_name
+,project_id, project_name
+]]></expression>
+	</reference>
+	<reference ref-alias="from">
+		<expression><![CDATA[tracking.station_tracking
+join filo.station using (station_id)
+join tracking.station_type using (station_type_id)
+join filo.project using (project_id)]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<view name="v_individual_tracking" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[View of the fishes tracked]]></comment>
+	<position x="20" y="1100"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[individual_id, scientific_name, taxon_id
+,tag, transmitter
+,project.project_id, project_name
+,transmitter_type_name, transmitter_type_id
+,station_name as release_station_name, release_station_id]]></expression>
+	</reference>
+	<reference ref-alias="from">
+		<expression><![CDATA[filo.individual
+join tracking.individual_tracking using (individual_id)
+join filo.taxon using (taxon_id)
+join filo.project using (project_id)
+left outer join tracking.transmitter_type using (transmitter_type_id)
+left outer join tracking.station_tracking st on (st.station_id = release_station_id)
+left outer join filo.station on (st.station_id = station.station_id)]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<relationship name="individual_tracking_has_many_location" type="rel1n" layer="2"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4bc67b"
+	 src-table="tracking.individual_tracking"
+	 dst-table="tracking.location"
+	 src-required="true" dst-required="false"/>
+
+<function name="v_station_tracking_update"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[BEGIN
+update filo.station set geom = NEW.geom,
+station_long = NEW.station_long,
+station_lat = NEW.station_lat,
+station_pk = NEW.station_pk,
+station_name = NEW.station_name
+where station_id = NEW.station_id ;
+return null;
+END;]]></definition>
+</function>
+
+<trigger name="v_station_tracking_update" firing-type="INSTEAD OF" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="tracking.v_station_tracking">
+		<function signature="tracking.v_station_tracking_update()"/>
+</trigger>
+
+<function name="v_station_tracking_insert"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[BEGIN
+insert into filo.station (station_name, project_id, station_long, station_lat, station_pk, geom)
+values (NEW.station_name, NEW.project_id, NEW.station_long, NEW.station_lat, NEW.station_pk,NEW.geom);
+insert into tracking.station_tracking (station_id, station_type_id) values (lastval(), NEW.station_type_id);
+return null;
+END;]]></definition>
+</function>
+
+<trigger name="v_station_tracking_insert" firing-type="INSTEAD OF" per-line="true" constraint="false"
+	 ins-event="true" del-event="false" upd-event="false" trunc-event="false"
+	 table="tracking.v_station_tracking">
+		<function signature="tracking.v_station_tracking_insert()"/>
+</trigger>
+
+<view name="v_antenna" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<position x="20" y="940"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[antenna_id, station_id, technology_type_id
+,antenna_code, radius, geom_polygon
+,technology_type_name
+,station_type_id, station_type_name
+,project_id, project_name, metric_srid
+,station_name,station_long, station_lat, station_pk
+,geom]]></expression>
+	</reference>
+	<reference ref-alias="from">
+		<expression><![CDATA[tracking.antenna
+join tracking.technology_type using (technology_type_id)
+join tracking.station_tracking using (station_id)
+join filo.station using (station_id)
+join filo.project using(project_id)
+join tracking.station_type using (station_type_id)
+]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<function name="v_antenna_update"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[BEGIN
+if NEW.radius > 0 then
+update tracking.antenna set geom_polygon = 
+st_transform (
+	st_buffer ( 
+		st_transform (
+		  st_setsrid(st_point(new.station_long, new.station_lat),4326)
+		,new.metric_srid)
+      , new.radius)
+,4326),
+radius = new.radius,
+station_id = new.station_id,
+technology_type_id = new.technology_type_id
+where antenna_id = new.antenna_id;
+END IF;
+return null;
+END;]]></definition>
+</function>
+
+<trigger name="v_antenna_update" firing-type="INSTEAD OF" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="tracking.v_antenna">
+		<function signature="tracking.v_antenna_update()"/>
+</trigger>
+
+<view name="v_detection_location" layer="0" collapse-mode="2" max-obj-count="1">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[List of all detections and locations for a fish]]></comment>
+	<position x="20" y="1180"/>
+	<reference ref-alias="select">
+		<expression><![CDATA[detection_id as id, individual_id, detection_date
+	, nb_events, duration, validity, signal_force, observation
+	,station_long long, station_lat lat, station_name, station_pk as pk
+	,antenna_code, technology_type_name as antenna_type
+	,geom
+	,'stationary' as detection_type
+from tracking.detection
+	join tracking.antenna using (antenna_id)
+	join filo.station using (station_id)
+	left outer join tracking.technology_type using (technology_type_id)
+union
+select location_id as id, individual_id, detection_date
+	, null nb_events, null duration, true validity, signal_force, observation
+	, location_long, location_lat, null station_name, location_pk as pk
+	,null as antenna_code, antenna_type_name as antenna_type
+	,geom
+	,'mobile' as detection_type
+from tracking.location 
+	left outer join tracking.antenna_type using (antenna_type_id)
+                ]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+</view>
+
+<sequence name="export_model_export_model_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="import"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="export_model" layer="3" collapse-mode="2" max-obj-count="3">
+	<schema name="import"/>
+	<role name="filo"/>
+	<comment><![CDATA[Structure of an export/import of table data]]></comment>
+	<tag name="import"/>
+	<position x="20" y="180"/>
+	<column name="export_model_id" not-null="true" sequence="import.export_model_export_model_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="export_model_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the structure of export]]></comment>
+	</column>
+	<column name="pattern">
+		<type name="json" length="0"/>
+		<comment><![CDATA[Pattern of the export/import.
+Structure:
+[{technicalKey:string,businessKey:string,tableName:string,tableAlias:string,children[table1,table2],parentKey:string,secondaryParentKey:string}]]]></comment>
+	</column>
+	<constraint name="export_model_pk" type="pk-constr" table="import.export_model">
+		<columns names="export_model_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[export_model_name•pattern⸣
+operation•[{"tableName":"operation","technicalKey":"operation_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":["freshwater"],"children":[{"aliasName":"sequence","isStrict":false},{"aliasName":"operationAmbience","isStrict":false},{"aliasName":"operation_operator","isStrict":false}],"parameters":[{"aliasName":"station","fieldName":"station_id"},{"aliasName":"protocol","fieldName":"protocol_id"},{"aliasName":"water_regime","fieldName":"water_regime_id"},{"aliasName":"fishing_strategy","fieldName":"fishing_strategy_id"},{"aliasName":"scale","fieldName":"scale_id"},{"aliasName":"taxa_template","fieldName":"taxa_template_id"}],"istablenn":false},{"tableName":"sequence","technicalKey":"sequence_id","isEmpty":false,"businessKey":"uuid","parentKey":"operation_id","istable11":false,"booleanFields":[],"children":[{"aliasName":"sequenceAmbience","isStrict":false},{"aliasName":"sequence_gear","isStrict":false},{"aliasName":"analysis","isStrict":false},{"aliasName":"sample","isStrict":false}],"parameters":[],"istablenn":false},{"tableName":"operation_operator","isEmpty":false,"parentKey":"operation_id","istable11":false,"booleanFields":["is_responsible"],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"operator_id","tableAlias":"operator"}},{"tableName":"operator","technicalKey":"operator_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[],"istablenn":false},{"tableName":"ambience","tableAlias":"operationAmbience","technicalKey":"ambience_id","isEmpty":false,"businessKey":"uuid","parentKey":"operation_id","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"facies","fieldName":"facies_id"},{"aliasName":"situation","fieldName":"situation_id"},{"aliasName":"speed","fieldName":"speed_id"},{"aliasName":"shady","fieldName":"shady_id"},{"aliasName":"localisation","fieldName":"localisation_id"},{"aliasName":"vegetation","fieldName":"vegetation_id"},{"aliasName":"granulometry","fieldName":"dominant_granulometry_id"},{"aliasName":"granulometry","fieldName":"secondary_granulometry_id"},{"aliasName":"cache_abundance","fieldName":"herbarium_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"branch_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"vegetation_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"subbank_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"granulometry_cache_abundance_id"},{"aliasName":"clogging","fieldName":"clogging_id"},{"aliasName":"sinuosity","fieldName":"sinuosity_id"},{"aliasName":"flow_trend","fieldName":"flow_trend_id"},{"aliasName":"turbidity","fieldName":"turbidity_id"}],"istablenn":false},{"tableName":"ambience","tableAlias":"sequenceAmbience","technicalKey":"ambience_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"facies","fieldName":"facies_id"},{"aliasName":"situation","fieldName":"situation_id"},{"aliasName":"speed","fieldName":"speed_id"},{"aliasName":"shady","fieldName":"shady_id"},{"aliasName":"localisation","fieldName":"localisation_id"},{"aliasName":"vegetation","fieldName":"vegetation_id"},{"aliasName":"granulometry","fieldName":"dominant_granulometry_id"},{"aliasName":"granulometry","fieldName":"secondary_granulometry_id"},{"aliasName":"cache_abundance","fieldName":"herbarium_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"branch_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"vegetation_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"subbank_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"granulometry_cache_abundance_id"},{"aliasName":"clogging","fieldName":"clogging_id"},{"aliasName":"sinuosity","fieldName":"sinuosity_id"},{"aliasName":"flow_trend","fieldName":"flow_trend_id"},{"aliasName":"turbidity","fieldName":"turbidity_id"}],"istablenn":false},{"tableName":"sample","technicalKey":"sample_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[{"aliasName":"individual","isStrict":false}],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"sequence_gear","technicalKey":"sequence_gear_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"gear","fieldName":"gear_id"},{"aliasName":"gear_method","fieldName":"gear_method_id"},{"aliasName":"electric_current_type","fieldName":"electric_current_type_id"}],"istablenn":false},{"tableName":"analysis","technicalKey":"analysis_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"individual","technicalKey":"individual_id","isEmpty":false,"businessKey":"uuid","parentKey":"sample_id","istable11":false,"booleanFields":["measure_estimated"],"children":[{"aliasName":"individual_tracking","isStrict":false}],"parameters":[{"aliasName":"sexe","fieldName":"sexe_id"},{"aliasName":"pathology","fieldName":"pathology_id"}],"istablenn":false},{"tableName":"individual_tracking","technicalKey":"individual_id","isEmpty":false,"parentKey":"individual_id","istable11":true,"booleanFields":[],"children":[],"parameters":[{"aliasName":"transmitter_type","fieldName":"transmitter_type_id"},{"aliasName":"taxon","fieldName":"taxon_id"},{"aliasName":"project","fieldName":"project_id"},{"aliasName":"station","fieldName":"release_station_id"}],"istablenn":false},{"tableName":"station","technicalKey":"station_id","isEmpty":true,"businessKey":"station_name","istable11":false,"booleanFields":[],"children":[{"aliasName":"station_tracking","isStrict":false}],"parameters":[{"aliasName":"river","fieldName":"river_id"},{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"station_tracking","technicalKey":"station_id","isEmpty":false,"parentKey":"station_id","istable11":true,"booleanFields":[],"children":[],"parameters":[{"aliasName":"station_type","fieldName":"station_type_id"}],"istablenn":false},{"tableName":"station_type","technicalKey":"station_type_id","isEmpty":true,"businessKey":"station_type_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[],"parameters":[{"aliasName":"analyse_template","fieldName":"analyse_template_id"}],"istablenn":false},{"tableName":"analyse_template","technicalKey":"analyse_template_id","isEmpty":true,"businessKey":"analyse_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"water_regime","technicalKey":"water_regime_id","isEmpty":true,"businessKey":"water_regime_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"fishing_strategy","technicalKey":"fishing_strategy_id","isEmpty":true,"businessKey":"fishing_strategy_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"scale","technicalKey":"scale_id","isEmpty":true,"businessKey":"scale_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"taxa_template","technicalKey":"taxa_template_id","isEmpty":true,"businessKey":"taxa_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"facies","technicalKey":"facies_id","isEmpty":true,"businessKey":"facies_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"situation","technicalKey":"situation_id","isEmpty":true,"businessKey":"situation_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"speed","technicalKey":"speed_id","isEmpty":true,"businessKey":"speed_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"shady","technicalKey":"shady_id","isEmpty":true,"businessKey":"shady_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"localisation","technicalKey":"localisation_id","isEmpty":true,"businessKey":"localisation_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"granulometry","technicalKey":"granulometry_id","isEmpty":true,"businessKey":"granulometry_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"cache_abundance","technicalKey":"cache_abundance_id","isEmpty":true,"businessKey":"cache_abundance_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"clogging","technicalKey":"clogging_id","isEmpty":true,"businessKey":"clogging_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"sinuosity","technicalKey":"sinuosity_id","isEmpty":true,"businessKey":"sinuosity_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"flow_trend","technicalKey":"flow_trend_id","isEmpty":true,"businessKey":"flow_trend_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"turbidity","technicalKey":"turbidity_id","isEmpty":true,"businessKey":"turbidity_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"river","technicalKey":"river_id","isEmpty":true,"businessKey":"river_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"gear","technicalKey":"gear_id","isEmpty":true,"businessKey":"gear_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"gear_method","technicalKey":"gear_method_id","isEmpty":true,"businessKey":"gear_method_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"electric_current_type","technicalKey":"electric_current_type_id","isEmpty":true,"businessKey":"electric_current_type_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"sexe","technicalKey":"sexe_id","isEmpty":true,"businessKey":"sexe_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"vegetation","technicalKey":"vegetation_id","isEmpty":true,"businessKey":"vegetation_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"pathology","technicalKey":"pathology_id","isEmpty":true,"businessKey":"pathology_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"transmitter_type","technicalKey":"transmitter_type_id","isEmpty":true,"businessKey":"transmitter_type_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]⸣
+campaign•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":[],"children":[{"aliasName":"operation","isStrict":false}],"parameters":[{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"operation","technicalKey":"operation_id","isEmpty":false,"businessKey":"uuid","parentKey":"campaign_id","istable11":false,"booleanFields":["freshwater"],"children":[{"aliasName":"sequence","isStrict":false},{"aliasName":"operationAmbience","isStrict":false},{"aliasName":"operation_operator","isStrict":false}],"parameters":[{"aliasName":"station","fieldName":"station_id"},{"aliasName":"protocol","fieldName":"protocol_id"},{"aliasName":"water_regime","fieldName":"water_regime_id"},{"aliasName":"fishing_strategy","fieldName":"fishing_strategy_id"},{"aliasName":"scale","fieldName":"scale_id"},{"aliasName":"taxa_template","fieldName":"taxa_template_id"}],"istablenn":false},{"tableName":"sequence","technicalKey":"sequence_id","isEmpty":false,"businessKey":"uuid","parentKey":"operation_id","istable11":false,"booleanFields":[],"children":[{"aliasName":"sequenceAmbience","isStrict":false},{"aliasName":"sequence_gear","isStrict":false},{"aliasName":"analysis","isStrict":false},{"aliasName":"sample","isStrict":false}],"parameters":[],"istablenn":false},{"tableName":"operation_operator","isEmpty":false,"parentKey":"operation_id","istable11":false,"booleanFields":["is_responsible"],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"operator_id","tableAlias":"operator"}},{"tableName":"operator","technicalKey":"operator_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[],"istablenn":false},{"tableName":"ambience","tableAlias":"operationAmbience","technicalKey":"ambience_id","isEmpty":false,"businessKey":"uuid","parentKey":"operation_id","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"facies","fieldName":"facies_id"},{"aliasName":"situation","fieldName":"situation_id"},{"aliasName":"speed","fieldName":"speed_id"},{"aliasName":"shady","fieldName":"shady_id"},{"aliasName":"localisation","fieldName":"localisation_id"},{"aliasName":"vegetation","fieldName":"vegetation_id"},{"aliasName":"granulometry","fieldName":"dominant_granulometry_id"},{"aliasName":"granulometry","fieldName":"secondary_granulometry_id"},{"aliasName":"cache_abundance","fieldName":"herbarium_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"branch_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"vegetation_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"subbank_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"granulometry_cache_abundance_id"},{"aliasName":"clogging","fieldName":"clogging_id"},{"aliasName":"sinuosity","fieldName":"sinuosity_id"},{"aliasName":"flow_trend","fieldName":"flow_trend_id"},{"aliasName":"turbidity","fieldName":"turbidity_id"}],"istablenn":false},{"tableName":"ambience","tableAlias":"sequenceAmbience","technicalKey":"ambience_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"facies","fieldName":"facies_id"},{"aliasName":"situation","fieldName":"situation_id"},{"aliasName":"speed","fieldName":"speed_id"},{"aliasName":"shady","fieldName":"shady_id"},{"aliasName":"localisation","fieldName":"localisation_id"},{"aliasName":"vegetation","fieldName":"vegetation_id"},{"aliasName":"granulometry","fieldName":"dominant_granulometry_id"},{"aliasName":"granulometry","fieldName":"secondary_granulometry_id"},{"aliasName":"cache_abundance","fieldName":"herbarium_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"branch_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"vegetation_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"subbank_cache_abundance_id"},{"aliasName":"cache_abundance","fieldName":"granulometry_cache_abundance_id"},{"aliasName":"clogging","fieldName":"clogging_id"},{"aliasName":"sinuosity","fieldName":"sinuosity_id"},{"aliasName":"flow_trend","fieldName":"flow_trend_id"},{"aliasName":"turbidity","fieldName":"turbidity_id"}],"istablenn":false},{"tableName":"sample","technicalKey":"sample_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[{"aliasName":"individual","isStrict":false}],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"sequence_gear","technicalKey":"sequence_gear_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"gear","fieldName":"gear_id"},{"aliasName":"gear_method","fieldName":"gear_method_id"},{"aliasName":"electric_current_type","fieldName":"electric_current_type_id"}],"istablenn":false},{"tableName":"analysis","technicalKey":"analysis_id","isEmpty":false,"businessKey":"uuid","parentKey":"sequence_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"individual","technicalKey":"individual_id","isEmpty":false,"businessKey":"uuid","parentKey":"sample_id","istable11":false,"booleanFields":["measure_estimated"],"children":[{"aliasName":"individual_tracking","isStrict":false}],"parameters":[{"aliasName":"sexe","fieldName":"sexe_id"},{"aliasName":"pathology","fieldName":"pathology_id"}],"istablenn":false},{"tableName":"individual_tracking","technicalKey":"individual_id","isEmpty":false,"parentKey":"individual_id","istable11":true,"booleanFields":[],"children":[],"parameters":[{"aliasName":"transmitter_type","fieldName":"transmitter_type_id"},{"aliasName":"taxon","fieldName":"taxon_id"},{"aliasName":"project","fieldName":"project_id"},{"aliasName":"station","fieldName":"release_station_id"}],"istablenn":false},{"tableName":"station","technicalKey":"station_id","isEmpty":true,"businessKey":"station_name","istable11":false,"booleanFields":[],"children":[{"aliasName":"station_tracking","isStrict":false}],"parameters":[{"aliasName":"river","fieldName":"river_id"},{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"station_tracking","technicalKey":"station_id","isEmpty":false,"parentKey":"station_id","istable11":true,"booleanFields":[],"children":[],"parameters":[{"aliasName":"station_type","fieldName":"station_type_id"}],"istablenn":false},{"tableName":"station_type","technicalKey":"station_type_id","isEmpty":true,"businessKey":"station_type_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[],"parameters":[{"aliasName":"analyse_template","fieldName":"analyse_template_id"}],"istablenn":false},{"tableName":"analyse_template","technicalKey":"analyse_template_id","isEmpty":true,"businessKey":"analyse_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"water_regime","technicalKey":"water_regime_id","isEmpty":true,"businessKey":"water_regime_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"fishing_strategy","technicalKey":"fishing_strategy_id","isEmpty":true,"businessKey":"fishing_strategy_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"scale","technicalKey":"scale_id","isEmpty":true,"businessKey":"scale_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"taxa_template","technicalKey":"taxa_template_id","isEmpty":true,"businessKey":"taxa_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"facies","technicalKey":"facies_id","isEmpty":true,"businessKey":"facies_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"situation","technicalKey":"situation_id","isEmpty":true,"businessKey":"situation_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"speed","technicalKey":"speed_id","isEmpty":true,"businessKey":"speed_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"shady","technicalKey":"shady_id","isEmpty":true,"businessKey":"shady_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"localisation","technicalKey":"localisation_id","isEmpty":true,"businessKey":"localisation_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"granulometry","technicalKey":"granulometry_id","isEmpty":true,"businessKey":"granulometry_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"cache_abundance","technicalKey":"cache_abundance_id","isEmpty":true,"businessKey":"cache_abundance_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"clogging","technicalKey":"clogging_id","isEmpty":true,"businessKey":"clogging_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"sinuosity","technicalKey":"sinuosity_id","isEmpty":true,"businessKey":"sinuosity_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"flow_trend","technicalKey":"flow_trend_id","isEmpty":true,"businessKey":"flow_trend_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"turbidity","technicalKey":"turbidity_id","isEmpty":true,"businessKey":"turbidity_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"river","technicalKey":"river_id","isEmpty":true,"businessKey":"river_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"gear","technicalKey":"gear_id","isEmpty":true,"businessKey":"gear_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"gear_method","technicalKey":"gear_method_id","isEmpty":true,"businessKey":"gear_method_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"electric_current_type","technicalKey":"electric_current_type_id","isEmpty":true,"businessKey":"electric_current_type_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"sexe","technicalKey":"sexe_id","isEmpty":true,"businessKey":"sexe_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"vegetation","technicalKey":"vegetation_id","isEmpty":true,"businessKey":"vegetation_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"pathology","technicalKey":"pathology_id","isEmpty":true,"businessKey":"pathology_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"transmitter_type","technicalKey":"transmitter_type_id","isEmpty":true,"businessKey":"transmitter_type_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]⸣
+export_model•[{"tableName":"export_model","businessKey":"export_model_name","istable11":false,"children":[],"booleanFields":[],"istablenn":false}]⸣
+campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[{"aliasName":"protocol_measure","isStrict":true}],"parameters":[{"aliasName":"analysis_template","fieldName":"analysis_template_id"}],"istablenn":false},{"tableName":"analysis_template","technicalKey":"analysis_template_id","isEmpty":true,"businessKey":"analysis_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"measure_template","technicalKey":"measure_template_id","isEmpty":false,"businessKey":"measure_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"protocol_measure","isEmpty":false,"parentKey":"protocol_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"measure_template_id","tableAlias":"measure_template"}},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]]]>
+	</initial-data>
+</table>
+
+<extension name="pgcrypto">
+	<schema name="public"/>
+</extension>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
@@ -3239,9 +4628,9 @@ group by individual_id]]></expression>
 	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclgroup_fk"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="187.64" y="230.733"/>
-	<position x="187.64" y="177"/>
-	<position x="116.427" y="177"/>
+		<position x="987.64" y="210.733"/>
+	<position x="987.64" y="157"/>
+	<position x="916.427" y="157"/>
 	</line>
 </relationship>
 

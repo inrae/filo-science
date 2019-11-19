@@ -6,7 +6,7 @@ SQLSCRIPT=upgradedb-1.1-1.2.sql
 echo "This script will install the release $VERSION"
 echo "have you a backup of your database and a copy of param/param.inc.php?"
 echo "Is your actual version of Filo-Science is $OLDVERSION ?"
-echo "Is your actual version is in the folder /var/www/filo-science/$OLDVERSION, and the symbolic link filo point to $OLDVERSION?" 
+echo "Is your actual version is in the folder /var/www/filo-science/$OLDVERSION, and the symbolic link filo point to $OLDVERSION?"
 read -p "Do you want to continue [Y/n]?" answer
 if [[ $answer = "y"  ||  $answer = "Y"  ||   -z $answer ]];
 then
@@ -56,7 +56,7 @@ chmod -R 770 filo-science/display/templates_c
 chmod -R 770 filo-science/temp
 
 
-echo "Upgrade completed. Check, in the messages, if unexpected behavior occurred during the process" 
+echo "Upgrade completed. Check, in the messages, if unexpected behavior occurred during the process"
 fi
 fi
 

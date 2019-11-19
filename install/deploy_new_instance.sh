@@ -4,16 +4,20 @@
 # creation : Eric Quinton - 2018-08-17
 # tested with debian 9.5
 # php7.0 : if new version, change in the first lines of the script
-VERSION=filo-science-1.0
+VERSION=filo-1.3.0
 downloadPath="https://github.com/Irstea/filo-science/archive/master.zip"
 phpinifile="/etc/php/7.0/apache2/php.ini"
+PHPVER=7.2
+POSTGRESVER=11
+POSTGISVER=2.5
 
 echo "this script will install apache server and php, postgresql and deploy the current version of filo-science"
 read -p "Do you want to continue [y/n]?" response
-if [ "$response" = "y" ] 
+if [ "$response" = "y" ]
 then
 # installing packages
-apt install unzip apache2 libapache2-mod-php7.0 php7.0 php7.0-ldap php7.0-pgsql php7.0-mbstring php7.0-xml php7.0-zip php7.0-imagick php7.0-gd php7.0-ldap php7.0-curl fop postgresql postgresql-client postgresql-9.6-postgis-2.3
+apt-get install unzip apache2 libapache2-mod-evasive libapache2-mod-php$PHPVER php$PHPVER php$PHPVER-ldap php$PHPVER-pgsql php$PHPVER-mbstring php$PHPVER-xml php$PHPVER-zip php$PHPVER-imagick php$PHPVER-gd php$PHPVER-curl postgresql-$POSTGRESVER postgresql-client-$POSTGRESVER postgresql-$POSTGRESVER-postgis-$POSTGISVER
+
 a2enmod ssl
 a2enmod headers
 a2enmod rewrite
@@ -30,7 +34,7 @@ cd filo-science
 # download software
 echo "download software"
 wget $downloadPath
-unzip filo-science-master.zip
+unzip master.zip
 mv filo-science-master $VERSION
 ln -s $VERSION filo-science
 
@@ -45,7 +49,7 @@ cd filo-science/install
 su postgres -c "psql -f init_by_psql.sql"
 cd ../..
 echo "you may verify the configuration of access to postgresql"
-echo "look at /etc/postgresql/10/main/pg_hba.conf (verify your version). Only theses lines must be activate:"
+echo 'look at /etc/postgresql/'$POSTGRESVER'/main/pg_hba.conf (verify your version). Only theses lines must be activate:'
 echo '# "local" is for Unix domain socket connections only
 local   all             all                                     peer
 # IPv4 local connections:

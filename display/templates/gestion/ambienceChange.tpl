@@ -4,7 +4,7 @@ $(document).ready(function(){
     function setPos() {
         var lon = $("#ambience_long").val();
         var lat = $("#ambience_lat").val();
-        setPosition(lon, lat);
+        setPositionA(lat, lon);
     };
     $(".position").change(function () {
         setPos();        
@@ -48,13 +48,13 @@ $(document).ready(function(){
             <div class="form-group">
                 <label for="ambience_long"  class="control-label col-md-4">{t}Longitude :{/t}</label>
                 <div class="col-md-8">
-                    <input id="ambience_long" name="ambience_long" value="{$data.ambience_long}" class="form-control">
+                    <input id="ambience_long" name="ambience_long" value="{$data.ambience_long}" class="form-control position">
                 </div>
             </div>
             <div class="form-group">
                 <label for="ambience_lat"  class="control-label col-md-4">{t}Latitude :{/t}</label>
                 <div class="col-md-8">
-                    <input id="ambience_lat" name="ambience_lat" value="{$data.ambience_lat}" class="form-control">
+                    <input id="ambience_lat" name="ambience_lat" value="{$data.ambience_lat}" class="form-control position">
                 </div>
             </div>
             <div class="form-group">

@@ -14,7 +14,8 @@ class Operator extends ObjetBDD
             "operator_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
             "firstname" => array("type" => 0),
             "name" => array("type" => 0, "requis" => 1),
-            "is_active" => array("type" => 1, "defaultValue" => 1)
+            "is_active" => array("type" => 1, "defaultValue" => 1),
+            "uuid" => array("type" => 0)
         );
         parent::__construct($bdd, $param);
     }

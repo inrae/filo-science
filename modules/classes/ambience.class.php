@@ -4,7 +4,7 @@ class Ambience extends ObjetBDD
 
     private $sql = "select a.*
                     ,o.operation_name, sequence_number
-                    
+
                     ,speed_name, shady_name, clogging_name, facies_name, sinuosity_name
                     ,localisation_name, turbidity_name, situation_name, flow_trend_name
                     ,vegetation_name
@@ -79,6 +79,7 @@ class Ambience extends ObjetBDD
             "sinuosity_id" => array("type" => 1),
             "flow_trend_id" => array("type" => 1),
             "turbidity_id" => array("type" => 1),
+            "uuid" => array("type"=>0)
 
         );
         parent::__construct($bdd, $param);

@@ -1,0 +1,149 @@
+\chapter{Utiliser Qgis avec Filo-Science}
+
+\section{Présentation}
+
+Le module de télédétection des poissons peut s'interfacer facilement avec Qgis, pour corriger le positionnement d'une station d'écoute ou de mesure de paramètres physico-chimiques, ou pour enregistrer la détection des poissons, quand celle-ci est faite manuellement le long du cours d'eau.
+
+Pour que la mise à jour des informations puisse fonctionner, il faut toutefois utiliser les bonnes tables ou vues, prévues à cet effet dans la base de données.
+
+\section{Utilisation avec Qgis}
+
+La table \ref{tab:vuesqgis} récapitule les tables et vues utilisables avec Qgis, soit pour visualiser des informations, soit pour les modifier.
+
+\begin{longtable}{|c|c|>{\raggedright\arraybackslash}p{9cm}|}
+\caption{Liste des tables et des vues utilisables avec Qgis.} \label{tab:vuesqgis} \\
+
+\hline \multicolumn{1}{|c|}{\textbf{Nom de la table}} & \multicolumn{1}{c|}{\textbf{Type}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline 
+\endfirsthead
+
+\multicolumn{3}{c}%
+{{\bfseries \tablename\ \thetable{} -- suite de la page précédente}} \\
+\hline \multicolumn{1}{|c|}{\textbf{Nom de la table}} & \multicolumn{1}{c|}{\textbf{Type}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline 
+\endhead
+
+\hline \multicolumn{3}{|r|}{{Suite sur la page suivante}} \\ \hline
+\endfoot
+
+ \hline
+\endlastfoot
+
+v\_station\_tracking & vue & Liste des stations d'enregistrement des poissons. La liste peut être limitée au projet en rajoutant les critères de sélection adéquats. \\
+v\_individual\_tracking &  vue & Liste des poissons pouvant être détectés. Ceux-ci devraient être filtrés sur le projet. \\
+location & table & Liste des détections de poissons. La liste devrait être filtrée sur les poissons présents dans le projet courant et, pour de nouvelles détections, en rajoutant un filtre sur la date (postérieure aux anciennes détections pour le projet considéré) \\
+antenna\_type & table & Liste des types d'antennes, pour affichage dans les formulaires \\
+project & table & Liste des projets, pour affichage dans les formulaires. La table devrait être filtrée sur le projet courant. \\
+station\_type & table & Liste des types de stations, pour affichage dans les formulaires \\
+
+\hline 
+
+\end{longtable}
+
+Il est possible de modifier ou de créer une station depuis Qgis et de saisir une localisation manuelle d'un poisson. Deux formulaires peuvent être créés à cet effet :
+
+\subsection{Formulaire \textit{Station}}
+
+Le formulaire travaille avec la vue \textit{v\_station\_tracking}.
+
+Champs à afficher :
+\begin{itemize}
+	\item station\_name
+	\item station\_long
+	\item station\_lat
+	\item station\_pk
+	\item station\_type\_id
+	\item project\_id
+\end{itemize}
+
+Caractéristiques particulières de certains champs :
+\begin{itemize}
+	\item station\_name : éditable
+	\item station\_long : éditable, valeur par défaut : \$x, et cocher \textit{Appliquer la valeur par défaut sur la mise à jour}
+	\item station\_lat : éditable, valeur par défaut : \$y, et cocher \textit{Appliquer la valeur par défaut sur la mise à jour}
+	\item pk : éditable
+	\item station\_type\_id : éditable, type d'outil : \textit{Liste de valeurs}, Charger des données depuis la couche \textit{station\_type}, contraintes : \textit{non nul}, valeur par défaut : 2 (à adapter le cas échéant)
+	\item project\_id : éditable, type d'outil : \textit{Liste de valeurs}, charger des données depuis la couche \textit{project}, valeur par défaut : le numéro du projet
+\end{itemize}
+
+\subsection{Formulaire \textit{Localisation manuelle des poissons}}
+
+Le formulaire travaille avec la table \textit{location}. 
+
+Champs à afficher : 
+\begin{itemize}
+	\item detection\_date
+	\item individual\_id
+	\item antenna\_type\_id
+	\item project\_id
+	\item location\_long
+	\item location\_lat
+	\item signal\_force
+	\item observation
+\end{itemize}
+
+Caractéristiques particulières de certains champs :
+\begin{itemize}
+	\item antenna\_type\_id : éditable, type d'outil : \textit{Liste de valeurs}, charger des données depuis la couche antenna\_type
+	\item location\_pk : éditable, type d'outil : \textit{édition de texte}
+	\item location\_long : éditable, valeur par défaut : \$x, et cocher \textit{Appliquer la valeur par défaut sur la mise à jour}
+	\item location\_lat : éditable, valeur par défaut : \$y, et cocher \textit{Appliquer la valeur par défaut sur la mise à jour}
+	\item individual\_id : éditable, type d'outil : \textit{Liste de valeurs}, charger les données depuis la couche \textit{v\_individual\_tracking}. Dans cette couche, chargez comme valeur \textit{individual\_id}, et comme description soit \textit{tag}, soit \textit{transmitter}, selon le type de détection réalisé
+	\item signal\_force : éditable, type d'outil : \textit{plage, éditable, pas 1}
+	\item observation : éditable, type d'outil : \textit{édition de texte}
+	\item detection\_date : éditable, type d'outil : \textit{Date/Heure}, Format du champ : \textit{Date \& Heure}, Affichage : \textit{Personnalisation : dd/MM/yyyy HH:mm:ss}, cocher \textit{Calendrier}, valeur par défaut : \textit{now()}
+\end{itemize}
+
+\subsection{Ajouter un fond de carte OpenStreetMap}
+
+Dans l'explorateur, ajoutez une nouvelle connexion \textit{XYZ Tiles}, avec les paramètres suivants :
+\begin{itemize}
+	\item Nom : OpenStreetMap
+	\item URL : https://tile.openstreetmap.org/{z}/{x}/{y}.png
+	\item Niveau de zoom min. : positionnez à 5 (c'est en général suffisant)
+	\item Niveau de zoom max. : 19
+\end{itemize}
+
+Ajoutez ensuite la couche au projet.
+
+\section{Utilisation en mode embarqué}
+
+Il est possible de charger le projet dans une tablette android, pour permettre la saisie directe sur le terrain, puis de le synchroniser ensuite avec la base de données. La solution proposée est basée sur le produit QField (\href{https://qfield.org/}{https://qfield.org}).
+
+Une documentation complète de la configuration d'un projet est présente sur le site de QField.
+
+QField ne fonctionne qu'avec des objets géographiques de type \textit{point}. Il est adapté au positionnement d'un point sur une carte à partir du GPS intégré ou connecté.
+
+\subsection{Installer l'extension QFieldSync}
+
+Pour faciliter les échanges avec QField, il est préférable d'installer l'extension QFieldSync, disponible dans les extensions Qgis. 
+
+Pour préparer le projet, plusieurs étapes sont nécessaires. Elles sont accessibles depuis le menu \textit{Extension > QFieldSync}.
+
+À partir du menu \textit{Préférences}, définissez les chemins par défaut de stockage des projets. Les dossiers d'exportation (vers la tablette) et d'importation (depuis la tablette) sont volontairement différents, pour éviter d'écraser par erreur une saisie réalisée sur le terrain.
+
+Dans la configuration du projet, indiquez, pour chaque couche, comment elle sera gérée : \textit{édition hors ligne}, \textit{supprimée du projet} ou \textit{aucune action}. 
+Toutes les couches qui pourront être modifiées doivent être positionnées en \textit{édition hors ligne}.
+À noter que la couche \textit{OpenStreetMap} doit être de type \textit{Aucune action}. 
+Indiquez également que vous créez un fond de carte à partir soit du thème de la carte (si vous en avez créé un), soit à partir de la couche OpenStreetMap. Sauf si vous savez ce que vous faites, ne modifiez pas la taille des tuiles ou les unités de carte par pixel.
+
+Enfin, depuis le menu, choisissez l'option \textit{Paquet pour QField}. Le fond de carte va être généré à la taille de la fenêtre : redimensionnez votre projet pour qu'il inclut toute la zone concernée. Dans le cas contraire, vous n'aurez pas accès au fond de carte. Le projet sera alors créé dans le dossier défini préalablement.
+
+
+\subsection{Installer QField dans une tablette Android}
+
+QField est disponible dans le magasin d'applications de Google, l'installation est sans difficulté particulière.
+
+Une fois Qfield installé, il faut recopier le projet Qgis (l'ensemble du dossier généré), dans le dossier \textit{files} de l'application. 
+
+Pour cela, connectez la tablette à votre ordinateur avec le câble USB, et autorisez (sur la tablette) l'ordinateur à accéder aux données.
+
+\underline{Attention} : il existe deux emplacements possibles, l'un dans la tablette elle-même, l'autre dans la carte externe. Il faut impérativement recopier le dossier dans la carte externe. 
+Avec une tablette Samsung, le chemin où déposer les fichiers est ici : 
+\textit{Card/Android/data/ch.opengis.qfield/files}
+
+Il faut ensuite lancer l'application QField, puis ouvrir le projet précédemment recopié.
+
+Une fois les saisies réalisées, pensez à bien fermer l'application QField pour être sûr que toutes les modifications ont bien été sauvegardées. Recopiez ensuite le dossier contenant les données dans le dossier \textit{import} de QFieldSync.
+
+Relancez Qgis, ouvrez le projet que vous venez de récupérer, puis lancez la mise à jour de la base de données depuis le menu : \textit{Extension > QFieldSync > Synchroniser depuis QField}.
+
+

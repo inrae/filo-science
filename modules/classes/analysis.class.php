@@ -21,7 +21,7 @@ class Analysis extends ObjetBDD {
             "conductivity" => array("type"=>1),
             "secchi" => array("type"=>1),
             "other_analysis" => array("type"=>0),
-            
+            "uuid" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

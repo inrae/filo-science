@@ -99,6 +99,12 @@ switch ($t_module["param"]) {
         require_once 'modules/classes/pathology.class.php';
         $pathology = new Pathology($bdd, $ObjetBDDParam);
         $vue->set($pathology->getListe(3), "pathologys");
+        /**
+         * Get the list of transmitters for tracking
+         */
+        include_once 'modules/classes/tracking/transmitter_type.class.php';
+        $tt = new TransmitterType($bdd, $ObjetBDDParam);
+        $vue->set($tt->getListe("transmitter_type_name"), "transmitters");
         break;
     case "write":
         /*
@@ -109,6 +115,9 @@ switch ($t_module["param"]) {
         $data["sequence_id"] = $sequence_id;
         try {
             $bdd->beginTransaction();
+            if (strlen($data["sample_uuid"]) > 0) {
+                $data["uuid"] = $data["sample_uuid"];
+            }
             $id = dataWrite($dataClass, $data, true);
             if ($id > 0) {
                 $_REQUEST[$keyName] = $_SESSION["ti_sample"]->setValue($id);
@@ -118,6 +127,7 @@ switch ($t_module["param"]) {
                 if ($_REQUEST["individualChange"]) {
                     $data["sample_id"] = $id;
                     $data["individual_id"] = $_SESSION["ti_individual"]->getValue($data["individual_id"]);
+                    $data["uuid"] = $data["individual_uuid"];
                     $ind->ecrire($data);
                 }
                 /**
@@ -140,7 +150,7 @@ switch ($t_module["param"]) {
         } catch (Exception $e) {
             $bdd->rollback();
             $message->setSyslog($e->getMessage());
-            $message->setLog(_("Problème lors de l'enregistrement de l'échantillon ou de l'individu"), true);
+            $message->set(_("Problème lors de l'enregistrement de l'échantillon ou de l'individu"), true);
             $module_coderetour = -1;
         }
         $activeTab = "tab-sample";

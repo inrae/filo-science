@@ -1,8 +1,8 @@
 <?php
 class Station extends ObjetBDD
 {
-private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code
-            ,project_id, project_name
+    private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code
+            ,project_id, project_name, metric_srid
             ,river_id, river_name
             from station 
             left outer join project using (project_id)
@@ -41,9 +41,28 @@ private $sql = "select station_id, station_name, station_long, station_lat, stat
                 "type" => 1
             ),
             "station_pk" => array("type" => 1),
-            "river_id" => array("type" => 1)
+            "river_id" => array("type" => 1),
+            "geom" => array("type" => 4)
+
         );
+        $this->srid = 4326;
         parent::__construct($bdd, $param);
+    }
+
+    /**
+     * Add the generation of the geom point to the station
+     *
+     * @param array $data
+     * @return int
+     */
+    function ecrire(array $data)
+    {
+        if (strlen($data["station_long"]) > 0 && strlen($data["station_lat"]) > 0) {
+            $data["geom"] = "POINT(" . $data["station_long"] . " " . $data["station_lat"] . ")";
+        } else {
+            $data["geom"] = "";
+        }
+        return parent::ecrire($data);
     }
 
     /**
@@ -112,5 +131,16 @@ private $sql = "select station_id, station_name, station_long, station_lat, stat
                     where station_id = :station_id";
             return $this->lireParamAsPrepared($sql, array("station_id" => $station_id));
         }
+    }
+    /**
+     * Get the detail of a station
+     *
+     * @param integer $station_id
+     * @return array
+     */
+    function getDetail(int $station_id): array
+    {
+        $where = " where station_id = :id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("id" => $station_id));
     }
 }

@@ -29,7 +29,8 @@ class SequenceGear extends ObjetBDD
             "gear_nb" => array("type" => 1, "requis" => 1, "defaultValue" => 1),
             "voltage" => array("type" => 1),
             "amperage" => array("type" => 1),
-            "depth" => array("type" => 1)
+            "depth" => array("type" => 1),
+            "uuid" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

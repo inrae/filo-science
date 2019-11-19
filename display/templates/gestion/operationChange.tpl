@@ -1,9 +1,10 @@
 
+{include file="mapDefault.tpl"}
 <script>
-var mapIsChange = true;    
+var mapIsChange = true;
 $(document).ready(function() {
-    
-    $("#station_id").change(function() { 
+
+    $("#station_id").change(function() {
         var stationId = $(this).val();
         if (stationId > 0) {
             var options = "";
@@ -19,7 +20,7 @@ $(document).ready(function() {
                 var result = JSON.parse(data);
                 $("#long_start").val(result["station_long"]);
                 $("#lat_start").val(result["station_lat"]);
-                coordChange();
+
             });
         }
     });
@@ -36,17 +37,16 @@ $(document).ready(function() {
         console.log("longend:"+long_fin);
         console.log("latend:"+lat_fin);*/
     if (long_deb.length > 0 && lat_deb.length > 0) {
-			 setPosition(1, long_deb, lat_deb);
+			 setPosition(1, lat_deb, long_deb);
 		 }
 		if (long_fin.length > 0 && lat_fin.length > 0) {
-			setPosition(2, long_fin, lat_fin);
+			setPosition(2, lat_fin, long_fin);
         }
     }
     $(".coord").change(function() {
         coordChange();
     });
-    /* Initialisation of map */
-    coordChange();
+
 });
 </script>
 
@@ -62,6 +62,9 @@ $(document).ready(function() {
             <input type="hidden" name="moduleBase" value="operation">
             <input type="hidden" name="action" value="Write">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
+            <div class="form-group center">
+                <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
+            </div>
             <div class="form-group">
                 <label for="paramName"  class="control-label col-md-4"> {t}Nom de l'opération :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
@@ -119,14 +122,14 @@ $(document).ready(function() {
                 <label for="date_start"  class="control-label col-md-4"> {t}Date/heure de début :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
                     <input id="date_start" name="date_start" class="form-control datetimepicker" value="{$data.date_start}" required>
-                </div>   
-            </div>        
+                </div>
+            </div>
             <div class="form-group">
                 <label for="date_end"  class="control-label col-md-4"> {t}Date/heure de fin :{/t}</label>
                 <div class="col-md-8">
                     <input id="date_end" name="date_end" class="form-control datetimepicker" value="{$data.date_end}" >
-                </div>   
-            </div>        
+                </div>
+            </div>
             <div class="form-group">
                 <label for="freshwater"  class="control-label col-md-4"> {t}Opération réalisée en eau douce ?{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
@@ -138,8 +141,8 @@ $(document).ready(function() {
                         <input  type="radio" name="freshwater" id="freshwater2" value="0" {if $data.freshwater == 0}checked{/if}>
                         {t}non{/t}
                     </label>
-               </div>   
-            </div>        
+               </div>
+            </div>
             <div class="form-group">
                 <label for="long_start"  class="control-label col-md-4"> {t}Longitude de départ :{/t}</label>
                 <div class="col-md-8">
@@ -175,13 +178,13 @@ $(document).ready(function() {
                 <div class="col-md-8">
                     <input id="pk_mouth" name="pk_mouth" class="form-control taux" value="{$data.pk_mouth}">
                 </div>
-            </div>         
+            </div>
             <div class="form-group">
                 <label for="length"  class="control-label col-md-4"> {t}Longueur échantillonnée (en mètres) :{/t}</label>
                 <div class="col-md-8">
                     <input id="length" name="length" class="form-control taux" value="{$data.length}">
                 </div>
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="surface"  class="control-label col-md-4"> {t}Surface échantillonnée (en m²) :{/t}</label>
                 <div class="col-md-8">
@@ -248,11 +251,12 @@ $(document).ready(function() {
         </form>
     </div>
     <div class="col-md-6">
-        <div id="mapOperation" class="map">
-            <div id="radar">
+        <div id="radar">
                 <a href="#">
                 <img src="display/images/map-pointer.png" height="30">{t}Repérez votre position !{/t}</a>
             </div>
+        <div id="mapOperation" class="map"></div>
+
             {include file="gestion/operationMapChange.tpl"}
         </div>
     </div>

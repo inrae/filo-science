@@ -4,14 +4,11 @@
 *UTF-8
 */
 
-$APPLI_modeDeveloppement = true;
+$APPLI_modeDeveloppement = false;
 //$APPLI_notSSL = true;
 $APPLI_modeDeveloppement == true ? $ERROR_display=1 : $_ERROR_display = 0;
 $ERROR_level = E_ERROR ;
 $OBJETBDD_debugmode = 1;
-$APPLI_utf8 = true;
-
-$GACL_aco = "appli";
 
 $ident_type = "BDD";
 /*
@@ -20,7 +17,7 @@ $ident_type = "BDD";
 $BDD_login = "filo";
 $BDD_passwd = "filoPassword";
 $BDD_dsn = "pgsql:host=localhost;dbname=filo;sslmode=require";
-$BDD_schema = "filo,gacl";
+$BDD_schema = "filo, tracking, import, gacl, public";
 
 /*
  * Rights management, logins and logs records database

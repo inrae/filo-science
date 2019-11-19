@@ -5,7 +5,8 @@
  */
 class Campaign extends ObjetBDD
 {
-    private $sql = "select campaign_id, campaign_name, project_id, project_name
+    private $sql = "select campaign_id, campaign_name
+    , project_id, project_name, metric_srid, protocol_default_id
     from campaign
     join project using (project_id)";
     /**
@@ -25,6 +26,17 @@ class Campaign extends ObjetBDD
         parent::__construct($bdd, $param);
     }
     /**
+     * Get the detail of a campaign
+     *
+     * @param integer $id
+     * @return array
+     */
+    function getDetail(int $id): array
+    {
+        $where = " where campaign_id = :id";
+        return $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
+    }
+    /**
      * Search all campaigns from search parameters
      *
      * @param array $param
@@ -41,8 +53,8 @@ class Campaign extends ObjetBDD
             $values["project_id"] = $param["project_id"];
             $and = " and ";
         }
-        if (strlen($param["is_active"])> 0) {
-            $where .= $and." is_active = :is_active";
+        if (strlen($param["is_active"]) > 0) {
+            $where .= $and . " is_active = :is_active";
             $and = " and ";
             $values["is_active"] = $param["is_active"];
         }
@@ -52,15 +64,20 @@ class Campaign extends ObjetBDD
             return array();
         }
     }
+
     /**
-     * Get the detail of a campaign
+     * Delete a campaign with all attached operations
      *
-     * @param int $campaign_id
-     * @return array
+     * @param integer $id
+     * @return void
      */
-    function getDetail($campaign_id)
-    {
-        $where = " where campaign_id = :campaign_id";
-        return ($this->lireParamAsPrepared($this->sql . $where, array("campaign_id" => $campaign_id)));
+    function supprimer(int $id) {
+        include_once 'modules/classes/operation.class.php';
+        $operation = new Operation($this->connection);
+        $operations = $operation->getListFromParent($id);
+        foreach ($operations as $op) {
+            $op->supprimer($op["operation_id"]);
+        }
+        parent::supprimer($id);
     }
 }

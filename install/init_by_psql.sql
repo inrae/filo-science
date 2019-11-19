@@ -26,15 +26,9 @@
   * Creation du compte de connexion et de la base de donnees
   * creation of connection account
   */
-CREATE USER filo WITH
-  LOGIN
-  NOSUPERUSER
-  INHERIT
-  NOCREATEDB
-  NOCREATEROLE
-  NOREPLICATION
- PASSWORD 'filoPassword'  
-;
+CREATE ROLE filo WITH
+	LOGIN
+	ENCRYPTED PASSWORD 'filoPassword';
 
 /*
  * Database creation
@@ -42,6 +36,8 @@ CREATE USER filo WITH
 create database filo owner filo;
 \c "dbname=filo"
 create extension postgis schema public;
+create extension pgcrypto schema public;
+create extension tablefunc schema public;
 
 /*
  * connexion a la base filo, avec l'utilisateur filo, en localhost,

@@ -1,7 +1,38 @@
 News
 ===========
+Release 1.3.0 of 2019-11-18
+---------------------------
+Major release.
+
+News :
+- integration of the radiotracking management module: fish monitoring, definition of listening stations or physico-chemical analysis, field entry from QField (Android component for Qgis), display of movements on a map
+- integration of modules allowing the import of probe data or listening stations and data exchange between two databases
+- addition of the UUID to safely identify the different records managed by the fishing module
+- caching of OpenStreetMap tiles to be able to work in offline mode
+
+Release 1.2.0 of 2019-08-29
+---------------------------
+Bug fixes:
+- it was not possible to enter the total weight of the batch
+- the map display now works without resizing the window
+
+News :
+- the batch number is now displayed when entering fish
+- when there is a taxon change, an alert signal is displayed
+- the tabs are displayed when hovering (a click on a tab disables this mechanism). The last tab used is displayed by default
+- it is possible to add parts to a project, protocol or operation
+- it is possible to define a grid of buttons, which allows to quickly select the most frequent taxa
+- it is possible to define specific analyses associated with a protocol
+- it is possible to define complementary measures for a taxon, associated with a protocol
+- campaigns are now systematically displayed in relation to the first project in the list. Projects can be positioned "inactive" to avoid viewing them during the search
+- when capturing fish, the overflight of the current measurement fields allows to define the focus
+- to allow automatic size entry from calipers, the + sign is systematically removed
+- the entry by caliper leading by default to the validation of the current sheet and the creation of a new fish sheet, a button deactivates this automatic call. You must then click on the validation buttons to save the information
+- upgrading the framework to integrate current security requirements
+
+
 Release 1.1.0 of 2019-06-05
---------------
+---------------------------
 Bug fixes:
 - in some cases, navigation was not carried out correctly, especially for returns to previous pages
 - connection feedback with empty identifiers was poorly managed
