@@ -226,7 +226,13 @@ class Project extends ObjetBDD
             $_SESSION["droits"]["gestion"] = 1;
         }
     }
-
+    /**
+     * Get the list of active projects
+     *
+     * @param bool $is_active
+     * @param array $projects
+     * @return array
+     */
     function getProjectsActive($is_active, $projects)
     {
         /**
@@ -234,12 +240,16 @@ class Project extends ObjetBDD
          */
         $in = "";
         $comma = "";
-        foreach ($projects as $project) {
-            $in .= $comma . $project["project_id"];
-            $comma = ", ";
+        if (count($projects) > 0) {
+            foreach ($projects as $project) {
+                $in .= $comma . $project["project_id"];
+                $comma = ", ";
+            }
+            $where = " where is_active = :is_active and project_id in (" . $in . ")";
+            $order = " order by project_name";
+            return ($this->getListeParamAsPrepared($this->sql . $where . $this->group . $order, array("is_active" => $is_active)));
+        } else {
+            return array();
         }
-        $where = " where is_active = :is_active and project_id in (" . $in . ")";
-        $order = " order by project_name";
-        return ($this->getListeParamAsPrepared($this->sql . $where . $this->group . $order, array("is_active" => $is_active)));
     }
 }
