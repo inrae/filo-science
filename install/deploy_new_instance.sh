@@ -4,7 +4,7 @@
 # creation : Eric Quinton - 2018-08-17
 # tested with debian 9.5
 # php7.0 : if new version, change in the first lines of the script
-VERSION=filo-science-1.0
+VERSION=filo-1.3.0
 downloadPath="https://github.com/Irstea/filo-science/archive/master.zip"
 phpinifile="/etc/php/7.0/apache2/php.ini"
 PHPVER=7.2
@@ -13,7 +13,7 @@ POSTGISVER=2.5
 
 echo "this script will install apache server and php, postgresql and deploy the current version of filo-science"
 read -p "Do you want to continue [y/n]?" response
-if [ "$response" = "y" ] 
+if [ "$response" = "y" ]
 then
 # installing packages
 apt-get install unzip apache2 libapache2-mod-evasive libapache2-mod-php$PHPVER php$PHPVER php$PHPVER-ldap php$PHPVER-pgsql php$PHPVER-mbstring php$PHPVER-xml php$PHPVER-zip php$PHPVER-imagick php$PHPVER-gd php$PHPVER-curl postgresql-$POSTGRESVER postgresql-client-$POSTGRESVER postgresql-$POSTGRESVER-postgis-$POSTGISVER

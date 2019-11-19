@@ -1,8 +1,8 @@
 #!/bin/bash
 # upgrade an instance 2.2.2 to 2.2.3
-OLDVERSION=filo-1.1
-VERSION=filo-1.2.0
-SQLSCRIPT=upgradedb-1.1-1.2.sql
+OLDVERSION=filo-1.2.0
+VERSION=filo-1.3.0
+SQLSCRIPT=upgradedb-1.2-1.3.sql
 echo "This script will install the release $VERSION"
 echo "have you a backup of your database and a copy of param/param.inc.php?"
 echo "Is your actual version of Filo-Science is $OLDVERSION ?"
