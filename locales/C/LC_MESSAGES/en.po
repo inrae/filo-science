@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-18 16:46+0100\n"
+"POT-Creation-Date: 2019-11-19 17:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,8 +46,7 @@ msgid "Affichage de la dernière séquence traitée récemment"
 msgstr "Display of the last sequence processed recently"
 
 #. (itstool) path: menu/item@label
-#. (itstool) path: item/item@label
-#: ../../../param/menu.xml:14 ../../../param/menu.xml:67
+#: ../../../param/menu.xml:14
 msgid "Télédétection"
 msgstr "Remote sensing"
 
@@ -88,11 +87,9 @@ msgid "Réaliser une importation de données"
 msgstr "Perform a data import"
 
 #. (itstool) path: item/item@label
-#. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:18 ../../../param/menu.xml:28
-#, fuzzy
-msgid "Paramètres"
-msgstr "Setting"
+#: ../../../param/menu.xml:18
+msgid "Paramètres &gt;"
+msgstr "Settings >"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:18 ../../../param/menu.xml:67
@@ -161,6 +158,11 @@ msgstr "Templates of import"
 msgid "Liste des modèles d'importation de fichiers"
 msgstr "List of file import templates"
 
+#. (itstool) path: menu/item@label
+#: ../../../param/menu.xml:28
+msgid "Paramètres"
+msgstr "Settings"
+
 #. (itstool) path: menu/item@tooltip
 #: ../../../param/menu.xml:28
 msgid "Paramètres généraux et tables de référence"
@@ -190,7 +192,7 @@ msgstr "List of protocols"
 
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:31
-#: ../../../display/templates/gestion/operationDisplay.tpl:80
+#: ../../../display/templates/gestion/operationDisplay.tpl:76
 #: ../../../display/templates/gestion/operationOperators.tpl:3
 msgid "Opérateurs"
 msgstr "Operators"
@@ -312,8 +314,8 @@ msgstr "Templates of complementary analysis"
 
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:48
-msgid "Ambiances"
-msgstr "Ambiences"
+msgid "Ambiances &gt;"
+msgstr "Ambiences >"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:48
@@ -443,7 +445,7 @@ msgstr "Speed classes"
 
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:63
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:89
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:94
 msgid "Engins de pêche"
 msgstr "Fishing gears"
 
@@ -473,6 +475,11 @@ msgid "Types de courant électrique"
 msgstr "Types of electric current"
 
 #. (itstool) path: item/item@label
+#: ../../../param/menu.xml:67
+msgid "Télédétection &gt;"
+msgstr "Remote sensing >"
+
+#. (itstool) path: item/item@label
 #: ../../../param/menu.xml:75
 msgid "Modèles d'export"
 msgstr "Templates of export"
@@ -493,117 +500,115 @@ msgstr "Caching the cartography"
 msgid "Stocker le fonds cartographique pour une utilisation hors Internet"
 msgstr "Store the map collection for offline use"
 
-#. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:80
-msgid "Administration"
-msgstr "Administration"
-
-#. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:80
-msgid "Administration de l'application"
-msgstr "Application administration"
-
-#. (itstool) path: item/item@label
-#: ../../../param/menu.xml:81
-msgid "Liste des comptes locaux"
-msgstr "local accounts list"
-
-#. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:81
-msgid "Liste des logins - identification via la base de données"
-msgstr "List of logins - identification via the database"
-
-#. (itstool) path: item/item@label
-#: ../../../param/menu.xml:82
-msgid "ACL - droits"
-msgstr "ACL - rights"
-
-#. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:82
-msgid "applications et droits gérés"
-msgstr "applications and rights managed"
-
-#. (itstool) path: item/item@label
-#: ../../../param/menu.xml:83
-msgid "ACL - logins"
-msgstr "ACL - logins"
-
-#. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:83
-msgid "Logins déclarés dans le module de gestion des droits"
-msgstr "Logins declared in the rights management module"
-
-#. (itstool) path: item/item@label
-#: ../../../param/menu.xml:84
-msgid "ACL - groupes de logins"
-msgstr "ACL - login groups"
-
-#. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:84
-#, fuzzy
-msgid "Groupes de logins et logins rattachés aux groupes"
-msgstr "Groups of logins and logins attached to groups"
-
-#. (itstool) path: item/item@label
-#: ../../../param/menu.xml:85
-msgid "Paramètres de l'application"
-msgstr "Application Settings"
-
-#. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:85
-#, fuzzy
-msgid "Liste des paramètres pérennes de l'application"
-msgstr "List of long-term parameters of the application"
-
 #. (itstool) path: item/item@label
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:87
+#: ../../../param/menu.xml:79
 msgid "Schéma de la base de données"
 msgstr "Database schema"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:88
+#: ../../../param/menu.xml:80
 msgid "Structure de la base de données (HTML)"
 msgstr "Database structure (HTML)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:88
+#: ../../../param/menu.xml:80
 msgid "Liste des tables et des colonnes"
 msgstr "List of tables and columns"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:89
+#: ../../../param/menu.xml:81
 msgid "Structure de la base de données (Latex)"
 msgstr "Database structure (Latex)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:89
+#: ../../../param/menu.xml:81
 msgid "Liste des tables et des colonnes sous forme de tableaux Latex"
 msgstr "List of tables and columns in the form of Latex tables"
 
+#. (itstool) path: menu/item@label
+#: ../../../param/menu.xml:84
+msgid "Administration"
+msgstr "Administration"
+
+#. (itstool) path: menu/item@tooltip
+#: ../../../param/menu.xml:84
+msgid "Administration de l'application"
+msgstr "Application administration"
+
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:90
+#: ../../../param/menu.xml:85
+msgid "Liste des comptes locaux"
+msgstr "local accounts list"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:85
+msgid "Liste des logins - identification via la base de données"
+msgstr "List of logins - identification via the database"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:86
+msgid "ACL - droits"
+msgstr "ACL - rights"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:86
+msgid "applications et droits gérés"
+msgstr "applications and rights managed"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:87
+msgid "ACL - logins"
+msgstr "ACL - logins"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:87
+msgid "Logins déclarés dans le module de gestion des droits"
+msgstr "Logins declared in the rights management module"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:88
+msgid "ACL - groupes de logins"
+msgstr "ACL - login groups"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:88
+msgid "Groupes de logins et logins rattachés aux groupes"
+msgstr "Groups of logins and logins attached to groups"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:89
+msgid "Paramètres de l'application"
+msgstr "Application Settings"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:89
+msgid "Liste des paramètres pérennes de l'application"
+msgstr "List of long-term parameters of the application"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:91
 msgid "Structure de la base de données des droits (HTML)"
 msgstr "Rights management database structure (HTML)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:90
+#: ../../../param/menu.xml:91
 msgid ""
 "Liste des tables et des colonnes de la base de données de gestion des droits"
 msgstr "List of the tables and the columns of the rights management database"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:91 ../../../display/templates/phpinfo.tpl:1
+#: ../../../param/menu.xml:92 ../../../display/templates/phpinfo.tpl:1
 msgid "PHP info"
 msgstr "PHP info"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:91
+#: ../../../param/menu.xml:92
 msgid "configuration générale du serveur PHP"
 msgstr "general configuration of the PHP server"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:93 ../../../framework/common.inc.php:293
+#: ../../../param/menu.xml:94 ../../../framework/common.inc.php:293
 #: ../../../framework/identification/disconnect.php:18
 #: ../../../display/templates/entete.tpl:21
 #: ../../../display/templates/entete.tpl:40
@@ -612,33 +617,33 @@ msgid "Connexion"
 msgstr "Sign in"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:93
+#: ../../../param/menu.xml:94
 msgid "S'identifier dans l'application"
 msgstr "Sign in to the app"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:94 ../../../display/templates/entete.tpl:36
+#: ../../../param/menu.xml:95 ../../../display/templates/entete.tpl:36
 #: ../../../display/templates/entete.tpl:37
 msgid "Déconnexion"
 msgstr "Sign out"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:94
+#: ../../../param/menu.xml:95
 msgid "Déconnexion de l'application"
 msgstr "Sign out of the app"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:95
+#: ../../../param/menu.xml:96
 msgid "Dernières connexions"
 msgstr "Last connections"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:95
+#: ../../../param/menu.xml:96
 msgid "Liste des connexions récentes"
 msgstr "List of recently connections"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:96
+#: ../../../param/menu.xml:97
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:82
 #: ../../../display/templates/entete.tpl:32
 #: ../../../display/templates/entete.tpl:33
@@ -646,59 +651,57 @@ msgid "Modifier le mot de passe"
 msgstr "Change your password"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:96
+#: ../../../param/menu.xml:97
 msgid "Modifiez votre mot de passe (identification locale uniquement)"
 msgstr "Change your password (local identification only)"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:98
+#: ../../../param/menu.xml:99
 msgid "?"
 msgstr "?"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:98
+#: ../../../param/menu.xml:99
 msgid "Aide"
 msgstr "Help"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:99
+#: ../../../param/menu.xml:100
 msgid "A propos"
 msgstr "About"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:99
+#: ../../../param/menu.xml:100
 msgid "A propos de Collec-Science"
 msgstr "A propos de"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:100
+#: ../../../param/menu.xml:101
 msgid "Nouveautés"
 msgstr "What's new?"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:100
+#: ../../../param/menu.xml:101
 msgid "Quoi de neuf dans l'application ?"
 msgstr "What's new in the app?"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:101
-#, fuzzy
+#: ../../../param/menu.xml:102
 msgid "Français"
 msgstr "French"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:101
-#, fuzzy
+#: ../../../param/menu.xml:102
 msgid "Libellés en français"
 msgstr "Labels in French"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:102
+#: ../../../param/menu.xml:103
 msgid "English"
 msgstr "English"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:102
+#: ../../../param/menu.xml:103
 msgid "Labels in English"
 msgstr "Labels in English"
 
@@ -968,7 +971,6 @@ msgstr ""
 "operation, please contact the application manager"
 
 #: ../../../framework/identification/loginGestion.class.php:294
-#, fuzzy
 msgid "Modification de votre mot de passe"
 msgstr "Change your password"
 
@@ -1078,7 +1080,7 @@ msgid "%s n'est pas un champ reconnu utilisable lors de l'importation"
 msgstr "%s is not a field recognized as usable at import"
 
 #: ../../../framework/import/import.class.php:77
-#: ../../../modules/classes/import/import.class.php:62
+#: ../../../modules/classes/import/import.class.php:63
 #: ../../../modules/import/export.php:89
 #, php-format
 msgid "Fichier %s non trouvé ou non lisible"
@@ -1106,7 +1108,7 @@ msgstr ""
 "Problem occurred during the registration of the sample or the individual"
 
 #: ../../../modules/gestion/sample.php:177
-#: ../../../modules/tracking/individualTracking.php:102
+#: ../../../modules/tracking/individualTracking.php:99
 msgid "Problème rencontré lors de la suppression du poisson"
 msgstr "Problem encountered when deleting a fish"
 
@@ -1115,8 +1117,8 @@ msgstr "Problem encountered when deleting a fish"
 msgid "La station ne fait partie d'un projet autorisé"
 msgstr "The station is not associated with an authorized project"
 
-#: ../../../modules/tracking/stationTracking.php:92
-#: ../../../modules/tracking/stationTracking.php:115
+#: ../../../modules/tracking/stationTracking.php:90
+#: ../../../modules/tracking/stationTracking.php:113
 msgid ""
 "La station n'est pas associée à un projet pour lequel vous disposez des "
 "droits de modification"
@@ -1124,14 +1126,14 @@ msgstr ""
 "The station is not associated with a project for which you have modification "
 "rights"
 
-#: ../../../modules/tracking/individualTracking.php:63
-#: ../../../modules/tracking/individualTracking.php:90
-#: ../../../modules/tracking/individualTracking.php:108
+#: ../../../modules/tracking/individualTracking.php:60
+#: ../../../modules/tracking/individualTracking.php:87
+#: ../../../modules/tracking/individualTracking.php:105
 msgid ""
 "Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"
 msgstr "This project is not part of the projects authorized for you"
 
-#: ../../../modules/tracking/individualTracking.php:84
+#: ../../../modules/tracking/individualTracking.php:81
 msgid "Problème rencontré lors de l'enregistrement du poisson"
 msgstr "Problem encountered when recording a fish"
 
@@ -1253,12 +1255,12 @@ msgstr ""
 msgid "Aucune correspondance n'a pu être trouvée pour le paramètre %s"
 msgstr "No match can be found for the %s parameter"
 
-#: ../../../modules/classes/import/function_type.class.php:301
+#: ../../../modules/classes/import/function_type.class.php:300
 msgid "Le décodage dans le jeu de caractères UTF-8 a échoué"
 msgstr "Decoding in UTF-8 character set failed"
 
 #: ../../../modules/classes/import/export.class.php:70
-#: ../../../modules/classes/import/export.class.php:272
+#: ../../../modules/classes/import/export.class.php:270
 #, php-format
 msgid "L'alias %s n'a pas été décrit dans le modèle"
 msgstr "The alias %s was not described into the model"
@@ -1270,18 +1272,18 @@ msgid ""
 "paramètres"
 msgstr "No description found for table alias %s in the parameters file"
 
-#: ../../../modules/classes/import/export.class.php:213
+#: ../../../modules/classes/import/export.class.php:211
 #, php-format
 msgid "Le modèle ne contient pas la description de la table %s"
 msgstr "The template don't contains the %s table description"
 
-#: ../../../modules/classes/import/export.class.php:296
+#: ../../../modules/classes/import/export.class.php:294
 #, php-format
 msgid ""
 "Aucune clé n'a pu être trouvée ou générée pour la table de paramètres %s"
 msgstr "No key found or generated for the %s parameter table"
 
-#: ../../../modules/classes/import/export.class.php:309
+#: ../../../modules/classes/import/export.class.php:307
 #, php-format
 msgid ""
 "Erreur inattendue : impossible de trouver le nom du champ correspondant à la "
@@ -1290,12 +1292,12 @@ msgstr ""
 "Unexpected error: unable to find the name of the field corresponding to the "
 "%s parameter table"
 
-#: ../../../modules/classes/import/export.class.php:319
+#: ../../../modules/classes/import/export.class.php:317
 #, php-format
 msgid "Une valeur vide a été trouvée pour l'attribut ajouté %s"
 msgstr "An empty value was found for the %s added attribute"
 
-#: ../../../modules/classes/import/export.class.php:388
+#: ../../../modules/classes/import/export.class.php:389
 #, php-format
 msgid "la clause where n'a pu être construite pour la table %s"
 msgstr "The clause where couldn't be create for the table %s"
@@ -1327,6 +1329,13 @@ msgstr "Error when writing in table. Database error message: "
 #: ../../../modules/import/importExec.php:145
 msgid "L'importation a échoué. Consultez les messages dans le tableau"
 msgstr "The importation failed. Consult the messages into the table"
+
+#: ../../../modules/import/importExec.php:156
+msgid ""
+"L'import ne peut être effectué, des paramètres sont manquants ou le fichier "
+"est vide"
+msgstr ""
+"Import cannot be performed, some parameters are missing or the file is empty"
 
 #: ../../../modules/import/export.php:46
 msgid "Le modèle d'export n'est pas défini ou n'a pas été trouvé"
@@ -1429,7 +1438,7 @@ msgstr "Account used for web service"
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:194
 #: ../../../display/templates/gestion/sampleChange.tpl:499
 #: ../../../display/templates/gestion/campaignSearch.tpl:31
-#: ../../../display/templates/gestion/operationChange.tpl:131
+#: ../../../display/templates/gestion/operationChange.tpl:138
 #: ../../../display/templates/gestion/operationDetail.tpl:53
 #: ../../../display/templates/tracking/stationTrackingList.tpl:57
 #: ../../../display/templates/tracking/individualTrackingList.tpl:59
@@ -1517,7 +1526,7 @@ msgstr "Account used for web service:"
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:197
 #: ../../../display/templates/gestion/sampleChange.tpl:496
 #: ../../../display/templates/gestion/campaignSearch.tpl:32
-#: ../../../display/templates/gestion/operationChange.tpl:135
+#: ../../../display/templates/gestion/operationChange.tpl:142
 #: ../../../display/templates/gestion/operationDetail.tpl:53
 #: ../../../display/templates/tracking/stationTrackingList.tpl:58
 #: ../../../display/templates/tracking/individualTrackingList.tpl:60
@@ -1603,10 +1612,10 @@ msgstr "punctuation or special characters"
 #: ../../../display/templates/gestion/sequenceChange.tpl:43
 #: ../../../display/templates/gestion/analysisChange.tpl:117
 #: ../../../display/templates/gestion/campaignChange.tpl:29
-#: ../../../display/templates/gestion/operationChange.tpl:59
-#: ../../../display/templates/gestion/operationChange.tpl:239
+#: ../../../display/templates/gestion/operationChange.tpl:66
+#: ../../../display/templates/gestion/operationChange.tpl:246
 #: ../../../display/templates/gestion/operationOperators.tpl:32
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:79
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:86
 #: ../../../display/templates/gestion/ambienceChange.tpl:328
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:92
 #: ../../../display/templates/tracking/antennaChange.tpl:45
@@ -1649,8 +1658,8 @@ msgstr "Save and return"
 #: ../../../display/templates/gestion/sequenceChange.tpl:45
 #: ../../../display/templates/gestion/analysisChange.tpl:119
 #: ../../../display/templates/gestion/campaignChange.tpl:31
-#: ../../../display/templates/gestion/operationChange.tpl:241
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:81
+#: ../../../display/templates/gestion/operationChange.tpl:248
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:88
 #: ../../../display/templates/gestion/ambienceChange.tpl:330
 #: ../../../display/templates/gestion/documentList.tpl:49
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:94
@@ -1689,8 +1698,8 @@ msgstr "Delete..."
 #: ../../../display/templates/gestion/sequenceChange.tpl:51
 #: ../../../display/templates/gestion/analysisChange.tpl:125
 #: ../../../display/templates/gestion/campaignChange.tpl:37
-#: ../../../display/templates/gestion/operationChange.tpl:256
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:87
+#: ../../../display/templates/gestion/operationChange.tpl:264
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:94
 #: ../../../display/templates/gestion/ambienceChange.tpl:336
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:103
 #: ../../../display/templates/tracking/antennaChange.tpl:53
@@ -1966,8 +1975,10 @@ msgstr "Hide"
 #: ../../../display/templates/gestion/sampleChange.tpl:299
 #: ../../../display/templates/gestion/sequenceChange.tpl:2
 #: ../../../display/templates/gestion/analysisChange.tpl:37
-#: ../../../display/templates/gestion/operationDisplay.tpl:62
-#: ../../../display/templates/gestion/operationChange.tpl:47
+#: ../../../display/templates/gestion/operationDisplay.tpl:58
+#: ../../../display/templates/gestion/operationChange.tpl:54
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:3
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:70
 #: ../../../display/templates/gestion/ambienceChange.tpl:19
 msgid "Retour à la campagne"
 msgstr "Back to the campaign"
@@ -1975,8 +1986,9 @@ msgstr "Back to the campaign"
 #: ../../../display/templates/gestion/sampleChange.tpl:304
 #: ../../../display/templates/gestion/sequenceChange.tpl:3
 #: ../../../display/templates/gestion/analysisChange.tpl:42
-#: ../../../display/templates/gestion/operationChange.tpl:49
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:70
+#: ../../../display/templates/gestion/operationChange.tpl:56
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:7
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:75
 #: ../../../display/templates/gestion/ambienceChange.tpl:23
 msgid "Retour à l'opération"
 msgstr "Back to the operation"
@@ -1984,7 +1996,7 @@ msgstr "Back to the operation"
 #: ../../../display/templates/gestion/sampleChange.tpl:311
 #: ../../../display/templates/gestion/sequenceChange.tpl:5
 #: ../../../display/templates/gestion/analysisChange.tpl:47
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:3
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:10
 #: ../../../display/templates/gestion/ambienceChange.tpl:27
 msgid "Retour à la séquence"
 msgstr "Back to the sequence"
@@ -2132,12 +2144,12 @@ msgstr "Sexe:"
 #: ../../../display/templates/gestion/sampleChange.tpl:526
 #: ../../../display/templates/gestion/sampleChange.tpl:537
 #: ../../../display/templates/gestion/sampleChange.tpl:589
-#: ../../../display/templates/gestion/operationChange.tpl:78
-#: ../../../display/templates/gestion/operationChange.tpl:104
-#: ../../../display/templates/gestion/operationChange.tpl:215
-#: ../../../display/templates/gestion/operationChange.tpl:229
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:54
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:67
+#: ../../../display/templates/gestion/operationChange.tpl:85
+#: ../../../display/templates/gestion/operationChange.tpl:111
+#: ../../../display/templates/gestion/operationChange.tpl:222
+#: ../../../display/templates/gestion/operationChange.tpl:236
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:61
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:74
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:347
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:358
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:400
@@ -2503,13 +2515,13 @@ msgid "N° de la séquence :"
 msgstr "Sequence number:"
 
 #: ../../../display/templates/gestion/sequenceDetail.tpl:13
-#: ../../../display/templates/gestion/operationChange.tpl:115
+#: ../../../display/templates/gestion/operationChange.tpl:122
 #: ../../../display/templates/gestion/operationDetail.tpl:44
 msgid "Date/heure de début :"
 msgstr "Date-time of start:"
 
 #: ../../../display/templates/gestion/sequenceDetail.tpl:17
-#: ../../../display/templates/gestion/operationChange.tpl:121
+#: ../../../display/templates/gestion/operationChange.tpl:128
 #: ../../../display/templates/gestion/operationDetail.tpl:48
 msgid "Date/heure de fin :"
 msgstr "Date-time of end:"
@@ -2590,7 +2602,7 @@ msgstr "Importing campaign previously exported"
 
 #: ../../../display/templates/gestion/campaignList.tpl:99
 #: ../../../display/templates/gestion/campaignDisplay.tpl:117
-#: ../../../display/templates/import/exportModelDisplay.tpl:128
+#: ../../../display/templates/import/exportModelDisplay.tpl:129
 msgid ""
 "Fichier à importer (format JSON généré par l'opération d'export ci-dessus) :"
 msgstr "File to import (JSON format generated by the above export operation):"
@@ -2627,30 +2639,30 @@ msgstr "Date-time of analysis:"
 msgid "Température (°C) :"
 msgstr "Temperature (#C):"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:58
+#: ../../../display/templates/gestion/operationDisplay.tpl:54
 msgid "Opération"
 msgstr "Operation"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:68
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:77
+#: ../../../display/templates/gestion/operationDisplay.tpl:64
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:82
 #: ../../../display/templates/tracking/stationTrackingDisplay.tpl:70
 msgid "Détails"
 msgstr "Details"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:72
+#: ../../../display/templates/gestion/operationDisplay.tpl:68
 msgid "Ambiance générale"
 msgstr "General ambience"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:76
+#: ../../../display/templates/gestion/operationDisplay.tpl:72
 msgid "Séquences de pêche"
 msgstr "Fishing sequences"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:84
+#: ../../../display/templates/gestion/operationDisplay.tpl:80
 msgid "Documents"
 msgstr "Documents"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:117
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:127
+#: ../../../display/templates/gestion/operationDisplay.tpl:113
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:132
 #: ../../../display/templates/tracking/stationTrackingDisplay.tpl:105
 msgid "Activer le survol des onglets :"
 msgstr "Enable tab hovering:"
@@ -2733,103 +2745,103 @@ msgstr "Back to the list"
 msgid "Nom de la campagne :"
 msgstr "Name of the campaign:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:46
+#: ../../../display/templates/gestion/operationChange.tpl:53
 msgid "Création - Modification d'une opération"
 msgstr "Add / edit an operation"
 
-#: ../../../display/templates/gestion/operationChange.tpl:62
+#: ../../../display/templates/gestion/operationChange.tpl:69
 #: ../../../display/templates/gestion/operationDetail.tpl:15
 msgid "Nom de l'opération :"
 msgstr "Name of the operation:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:68
+#: ../../../display/templates/gestion/operationChange.tpl:75
 msgid "Campagne de rattachement :"
 msgstr "Attachment campaign:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:75
+#: ../../../display/templates/gestion/operationChange.tpl:82
 #: ../../../display/templates/gestion/operationDetail.tpl:23
 msgid "Station :"
 msgstr "Station:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:88
+#: ../../../display/templates/gestion/operationChange.tpl:95
 msgid "Protocole utilisé :"
 msgstr "Protocol used:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:101
+#: ../../../display/templates/gestion/operationChange.tpl:108
 #: ../../../display/templates/gestion/operationDetail.tpl:40
 msgid "Stratégie de pêche :"
 msgstr "Fishing strategy:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:127
+#: ../../../display/templates/gestion/operationChange.tpl:134
 #: ../../../display/templates/param/taxatemplateChange.tpl:87
 msgid "Opération réalisée en eau douce ?"
 msgstr "Operation carried out in fresh water?"
 
-#: ../../../display/templates/gestion/operationChange.tpl:140
+#: ../../../display/templates/gestion/operationChange.tpl:147
 msgid "Longitude de départ :"
 msgstr "Start longitude:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:146
+#: ../../../display/templates/gestion/operationChange.tpl:153
 msgid "Latitude de départ :"
 msgstr "Start latitude:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:152
+#: ../../../display/templates/gestion/operationChange.tpl:159
 msgid "Longitude de fin :"
 msgstr "End longitude:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:158
+#: ../../../display/templates/gestion/operationChange.tpl:165
 msgid "Latitude de fin :"
 msgstr "End latitude:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:164
+#: ../../../display/templates/gestion/operationChange.tpl:171
 #: ../../../display/templates/gestion/operationDetail.tpl:64
 msgid "PK depuis la source :"
 msgstr "KP from the source:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:170
+#: ../../../display/templates/gestion/operationChange.tpl:177
 #: ../../../display/templates/gestion/operationDetail.tpl:68
 msgid "PK depuis l'embouchure :"
 msgstr "KP from the mouth:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:176
+#: ../../../display/templates/gestion/operationChange.tpl:183
 #: ../../../display/templates/gestion/operationDetail.tpl:72
 msgid "Longueur échantillonnée (en mètres) :"
 msgstr "Sampled length (meters):"
 
-#: ../../../display/templates/gestion/operationChange.tpl:182
+#: ../../../display/templates/gestion/operationChange.tpl:189
 msgid "Surface échantillonnée (en m²) :"
 msgstr "Sampled surface (m²):"
 
-#: ../../../display/templates/gestion/operationChange.tpl:188
+#: ../../../display/templates/gestion/operationChange.tpl:195
 #: ../../../display/templates/gestion/operationDetail.tpl:81
 msgid "Emplacement (dans la rivière) :"
 msgstr "Place (in the river):"
 
-#: ../../../display/templates/gestion/operationChange.tpl:194
+#: ../../../display/templates/gestion/operationChange.tpl:201
 #: ../../../display/templates/gestion/operationDetail.tpl:85
 msgid "Altitude :"
 msgstr "Altitude:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:200
+#: ../../../display/templates/gestion/operationChange.tpl:207
 #: ../../../display/templates/gestion/operationDetail.tpl:89
 msgid "Coefficient de marée :"
 msgstr "Tidal coefficient:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:206
+#: ../../../display/templates/gestion/operationChange.tpl:213
 #: ../../../display/templates/gestion/operationDetail.tpl:93
 msgid "Débit (m³/s) :"
 msgstr "Fow rate (m³/s):"
 
-#: ../../../display/templates/gestion/operationChange.tpl:212
+#: ../../../display/templates/gestion/operationChange.tpl:219
 #: ../../../display/templates/gestion/operationDetail.tpl:97
 msgid "Régime d'eau :"
 msgstr "Water regime"
 
-#: ../../../display/templates/gestion/operationChange.tpl:226
+#: ../../../display/templates/gestion/operationChange.tpl:233
 msgid "Grille de sélection des taxons :"
 msgstr "Taxon selection grid:"
 
-#: ../../../display/templates/gestion/operationChange.tpl:249
+#: ../../../display/templates/gestion/operationChange.tpl:256
 #: ../../../display/templates/gestion/ambienceMap.tpl:4
 msgid "Repérez votre position !"
 msgstr "Locate your position!"
@@ -2850,56 +2862,48 @@ msgstr "Is the manager"
 msgid "Rattachement d'un engin à une séquence"
 msgstr "Attachment of a gear to a sequence"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:14
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:21
 msgid "Nombre d'engins :"
 msgstr "Number of gears:"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:20
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:27
 msgid "Voltage utilisé :"
 msgstr "Voltage used:"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:26
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:33
 msgid "Ampérage utilisé :"
 msgstr "Amperage used:"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:32
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:39
 msgid "Profondeur de l'engin, en mètre :"
 msgstr "Depth of the gear, in meter:"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:39
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:46
 msgid "Modèle d'engin utilisé :"
 msgstr "Gear model used:"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:51
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:58
 msgid "Méthode d'utilisation :"
 msgstr "Use method:"
 
-#: ../../../display/templates/gestion/sequenceGearChange.tpl:64
+#: ../../../display/templates/gestion/sequenceGearChange.tpl:71
 msgid "Type de courant électrique :"
 msgstr "Electrical current type:"
 
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:60
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:66
 msgid "Séquence"
 msgstr "Sequence"
 
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:64
-msgid ""
-"Retour à la\n"
-"            campagne"
-msgstr ""
-"Back to the\n"
-"campaign"
-
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:81
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:86
 msgid "Échantillons"
 msgstr "Samples"
 
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:85
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:90
 #: ../../../display/templates/gestion/ambienceDetailOperation.tpl:3
 msgid "Ambiance"
 msgstr "Ambience"
 
-#: ../../../display/templates/gestion/sequenceDisplay.tpl:93
+#: ../../../display/templates/gestion/sequenceDisplay.tpl:98
 msgid "Analyse d'eau"
 msgstr "Water analysis"
 
@@ -4225,7 +4229,7 @@ msgstr "Export all data concerned by the model"
 msgid "Importation de données précédemment exportées"
 msgstr "Importing previously exported data "
 
-#: ../../../display/templates/import/exportModelDisplay.tpl:135
+#: ../../../display/templates/import/exportModelDisplay.tpl:136
 msgid "Importer les données"
 msgstr "Import the data"
 
@@ -4699,6 +4703,13 @@ msgstr ": activate to sort column descending"
 #: ../../../display/templates/main_js.tpl:164
 msgid "Valeur numérique..."
 msgstr "Numerical value..."
+
+#~ msgid ""
+#~ "Retour à la\n"
+#~ "            campagne"
+#~ msgstr ""
+#~ "Back to the\n"
+#~ "campaign"
 
 #~ msgid "Modules de l'application"
 #~ msgstr "Application modules"
