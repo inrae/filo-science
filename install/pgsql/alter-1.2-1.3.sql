@@ -1711,3 +1711,7 @@ INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de lache
 -- ddl-end --
 
 insert into filo.dbversion (dbversion_number, dbversion_date) values ('1.3', '2019-11-18');
+insert into filo.dbparam (dbparam_id, dbparam_name, dbparam_value) values
+(E'5', E'mapMinZoom', E'5'),
+(E'6', E'mapMaxZoom', E'18'),
+(E'7', E'APPLI_code', E'filoscience');
