@@ -72,9 +72,9 @@
 	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" maxCountByHour="60" maxCountByDay="600"/>
 
 	<dbstructureHtml action="framework/utils/structure.php" param="html" schemas="filo,tracking,import" retourlogin="1" type="smarty" droits="param" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="admin" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureGacl action="framework/utils/structure.php" param="gacl" schemas="gacl" retourlogin="1" type="smarty" droits="admin" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureLatex action="framework/utils/structure.php" param="latex" schemas="filo,tracking,import"  retourlogin="1" type="smarty" droits="param" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureSchema action="framework/utils/structure.php" param="schema" retourlogin="1" type="binaire" droits="param" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureSchema action="framework/utils/structure.php" param="schema" realfilename="database/filo.png" generatedfilename="filo-science.png" retourlogin="1" type="binaire" droits="param" maxCountByHour="60" maxCountByDay="600"/>
 	<!-- Parameters of the software -->
 
 	<param action="framework/default.php" type="smarty"/>

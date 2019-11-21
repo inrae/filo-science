@@ -34,7 +34,7 @@ switch ($t_module["param"]) {
 
         break;
     case "gacl":
-        $dataclass = new Structure($bdd_gacl);
+        $dataclass = new Structure($bdd_gacl, array(), $t_module["schemas"]);
         $vue->set(
             $dataclass->generateHtml(
                 "tablename",
@@ -49,8 +49,8 @@ switch ($t_module["param"]) {
     case "schema":
         $vue->setParam(
             array(
-                "tmp_name" => 'database/filo.png',
-                "filename" => "filo-science.png",
+                "tmp_name" => $t_module["realfilename"],
+                "filename" => $t_module["generatedfilename"],
                 "disposition" => "inline"
             )
         );
