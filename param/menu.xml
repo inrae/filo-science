@@ -15,7 +15,7 @@
 		<item module="stationTrackingList" label="Stations utilisées" tooltip="Liste des stations utilisées en télédétection"/>
 		<item module="individualTrackingList" label="Poissons suivis" tooltip="Liste des poissons suivis"/>
 		<item module="importExec" label="Importation" tooltip="Réaliser une importation de données"/>
-		<item module="default" label="Paramètres >" tooltip="Paramètres liés à la télédétection des poissons">
+		<item module="default" label="Paramètres" tooltip="Paramètres liés à la télédétection des poissons">
 			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
 			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
 			<item module="technology_typeList" label="Technologies" tooltip="Technologies employées"/>
@@ -45,7 +45,7 @@
 		<item module="analysisTemplateList" label="Modèles d'analyse" tooltip="Modèles d'analyse complémentaire"/>
 
 		<item divider="1"/>
-		<item module="default" label="Ambiances >" tooltip="Paramètres d'ambiance">
+		<item module="default" label="Ambiances" tooltip="Paramètres d'ambiance">
 			<item module="cache_abundanceList" label="Caches" tooltip="Classes d'abondance des caches"/>
 			<item module="cloggingList" label="Colmatage" tooltip="Types de colmatage du substrat"/>
 			<item module="situationList" label="Emplacements" tooltip="Emplacements particuliers"/>
@@ -64,7 +64,7 @@
 		<item module="gear_methodList" label="Méthodes de pêche" tooltip="Méthodes d'utilisation des engins de pêche"/>
 		<item module="electric_current_typeList" label="Types de courant" tooltip="Types de courant électrique"/>
 		<item divider="1"/>
-		<item module="default" label="Télédétection >" tooltip="Paramètres liés à la télédétection des poissons">
+		<item module="default" label="Télédétection" tooltip="Paramètres liés à la télédétection des poissons">
 			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
 			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
 			<item module="technology_typeList" label="Technologies" tooltip="Technologies employées"/>
