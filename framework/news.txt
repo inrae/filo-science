@@ -1,7 +1,8 @@
 Framework prototypephp © Eric Quinton, 2006-2019
 News
 ============
-Rlease v3.0.2 - september 2019
+
+Release v3.1.0 - september-november 2019
 -------------------------
 Fixed bugs:
 - disabled delay between two calls, and replace it by apache mod-evasive
@@ -10,6 +11,9 @@ New features:
 - add a public cache for openstreetmap tiles (.htaccess at the root of the application)
 - add a global try-catch in controller.php
 - some additions and corrections in ObjetBDD Class
+- menu: add the sign > when the entry has children
+- ObjetBDD: new function to generate an UUID value. Require pgcrypto extension in the postgresql database
+- added a directive for authorize the download of openstreetmap tiles
 
 Release v3.0.1 - august 2019
 --------------------------

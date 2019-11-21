@@ -660,7 +660,7 @@ class VueBinaire extends Vue
      *
      * @param array $param
      */
-    function setParam(array $param)
+    function setParam(?array $param)
     {
         if (is_array($param)) {
             foreach ($param as $key => $value) {
