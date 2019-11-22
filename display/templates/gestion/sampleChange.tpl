@@ -402,7 +402,7 @@
                 <div class="form-group hideable">
                     <label for="total_weight" class="control-label col-md-4"> {t}Poids total (g) :{/t}</label>
                     <div class="col-md-8">
-                        <input id="total_weight" type="text" class="form-control nombre" name="total_weight"
+                        <input id="total_weight" type="text" class="form-control taux" name="total_weight"
                             value="{$data.total_weight}" autocomplete="off">
                     </div>
                 </div>
