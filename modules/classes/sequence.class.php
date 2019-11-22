@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ORM for the table sequence
  */
@@ -127,5 +126,61 @@ class Sequence extends ObjetBDD
          * Delete the sequence
          */
         parent::supprimer($id);
+    }
+
+    /**
+     * Duplicate a sequence associated with an operation
+     * and the children ambience and sequence_gear
+     *
+     * @param integer $id
+     * @param integer $operation_id: new operation_id
+     * @return void
+     */
+    function duplicate(int $id, int $operation_id)
+    {
+        if ($id > 0 && $operation_id > 0) {
+            $newid = 0;
+            $data = $this->lire($id);
+            if ($data["sequence_id"] > 0) {
+                foreach (array("date_end", "fishing_duration", "uuid") as $field) {
+                    $data[$field] = "";
+                }
+                $data["date_start"] = $this->getDateHeure();
+                $data["sequence_id"] = 0;
+                $data["operation_id"] = $operation_id;
+                $newid = $this->ecrire($data);
+                if ($newid > 0) {
+                    /**
+                     * Duplicate the ambience (sequence)
+                     */
+                    include_once "modules/classes/ambience.class.php";
+                    $ambience = new Ambience($this->connection, $this->paramori);
+                    $dambience = $ambience->getFromSequence($id);
+                    if ($dambience["ambience_id"] > 0) {
+                        $dambience["ambience_id"] = 0;
+                        $dambience["sequence_id"] = $newid;
+                        foreach (array("speed_id", "current_speed", "current_speed_min", "current_speed_max", "water_heigh", "water_height_min", "water_height_max", "flow_trend_id", "turbidity_id", "uuid") as $field) {
+                            $dambience[$field] = "";
+                        }
+                        $ambience->ecrire($dambience);
+                    }
+                    /**
+                     * Duplicate the gears
+                     */
+                    include_once "modules/classes/sequence_gear.class.php";
+                    $sequenceGear = new SequenceGear($this->connection, $this->paramori);
+                    foreach ($sequenceGear->getListFromParent($id) as $row) {
+                        $row["uuid"] = "";
+                        $row["sequence_gear_id"] = 0;
+                        $row["sequence_id"] = $newid;
+                        $sequenceGear->ecrire($row);
+                    }
+                }
+            } else {
+                throw new ObjetBDDException(_("Impossible de lire la séquence à dupliquer"));
+            }
+        } else {
+            throw new ObjetBDDException(_("La sequence à dupliquer n'existe pas ou l'opération de rattachement n'est pas indiquée"));
+        }
     }
 }

@@ -149,4 +149,19 @@ switch ($t_module["param"]) {
             $module_coderetour = -1;
         }
         break;
+        case "duplicate":
+        try {
+            $bdd->beginTransaction();
+            $newid = $dataClass->duplicate($id);
+            if ($newid > 0) {
+                $_REQUEST[$keyName] = $_SESSION["ti_operation"]->setValue($newid);
+            }
+            $module_coderetour = 1;
+            $bdd->commit();
+        } catch (ObjetBDDException $e) {
+            $bdd->rollback();
+            $message->set(_("Problème rencontré lors de la duplication de l'opération"), true);
+            $message->setSyslog($e->getMessage());
+            $module_coderetour = -1;
+        }
 }

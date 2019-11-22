@@ -1,15 +1,37 @@
 {include file="mapDefault.tpl"}
 <script>
     var mapIsChange = false;
+    $(document).ready(function() {
+        $("#duplicate").submit(function(event) {
+            if (! confirm( "{t}Confirmez-vous la duplication de l'opération courante ?{/t}")) {
+                event.preventDefault();
+            }
+        });
+    });
 </script>
-<div class="row col-md-12">
+<div class="row">
+    <div class="col-md-1">
         <a href="index.php?module=operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
             <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
+    </div>
+    <div class="col-md-2 col-md-offset-3">
+        {if $droits.gestion == 1}
+            <form id="duplicate" method="post" action="index.php">
+                <input type="hidden" name="moduleBase" value="operation">
+                <input type="hidden" name="action" value="Duplicate">
+                <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
+                <input type="hidden" name="operation_id" value="{$data.operation_id}">
+                <button type="submit" class="btn btn-warning">Dupliquer</button>
+            </form>
+        {/if}
+    </div>
+</div>
+<div class="row col-md-12">
         <fieldset >
         <legend>{t}Informations générales{/t}</legend>
 
-        <div class="col-md-6">          
+        <div class="col-md-6">
             <div class="form-display">
                 <dl class="dl-horizontal">
                     <dt>{t}Nom de l'opération :{/t}</dt>

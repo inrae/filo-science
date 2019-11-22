@@ -102,12 +102,12 @@ class Operation extends ObjetBDD
         $data["operation_geom"] = "MULTIPOINT(";
         $is_geom = false;
         if (strlen($data["long_start"]) > 0 && strlen($data["lat_start"]) > 0) {
-            $data["operation_geom"] .="(".$data["long_start"] . " " . $data["lat_start"] . ")";
+            $data["operation_geom"] .= "(" . $data["long_start"] . " " . $data["lat_start"] . ")";
             $is_geom = true;
         }
         if (strlen($data["long_end"]) > 0 && strlen($data["lat_end"]) > 0) {
             if ($is_geom) {
-                $data["operation_geom"] .=",";
+                $data["operation_geom"] .= ",";
             } else {
                 $is_geom = true;
             }
@@ -208,5 +208,74 @@ class Operation extends ObjetBDD
          * delete the operation
          */
         parent::supprimer($id);
+    }
+
+    /**
+     * Duplicate an operation
+     * and the children operation_operator, ambience and sequence
+     *
+     * @param integer $id
+     * @return integer
+     */
+    function duplicate(int $id): int
+    {
+        $newid = 0;
+        $data = $this->lire($id);
+        if ($data["operation_id"] > 0) {
+            foreach (array( "date_end","debit", "tidal_coef", "water_regime_id", "uuid") as $field) {
+                $data[$field] = "";
+            }
+            $data["operation_id"] = 0;
+            $data["operation_name"].= " - copy";
+            $data["date_start"] = $this->getDateHeure();
+            if ($data["freshwater"] ) {
+                $data["freshwater"] = 1;
+            } else {
+                $data["freshwater"] = 0;
+            }
+            $newid = $this->ecrire($data);
+            if ($newid > 0) {
+                /**
+                 * Recopy the list of operators
+                 */
+                include_once "modules/classes/operator.class.php";
+                $operator = new Operator($this->connection);
+                $operators=array();
+                $isResponsible = 0;
+                foreach ($operator->getListFromOperation($id, false) as $row) {
+                    $operators[] = $row["operator_id"];
+                    if ($row["is_responsible"]) {
+                        $isResponsible = $row["operator_id"];
+                    }
+                }
+                $operator->setOperatorsToOperation($newid,$operators,$isResponsible);
+                /**
+                 * Duplicate the ambience (operation)
+                 */
+                include_once "modules/classes/ambience.class.php";
+                $ambience = new Ambience($this->connection, $this->paramori);
+                $dambience = $ambience->getFromOperation($id);
+                if ($dambience["ambience_id"] > 0) {
+                    $dambience["ambience_id"] = 0;
+                    $dambience["operation_id"] = $newid;
+                    foreach (array("speed_id", "current_speed", "current_speed_min", "current_speed_max", "water_heigh", "water_height_min", "water_height_max", "flow_trend_id", "turbidity_id", "uuid") as $field) {
+                        $dambience[$field] = "";
+                    }
+                    $ambience->ecrire($dambience);
+                }
+                /**
+                 * Duplicate the sequences
+                 */
+                include_once "modules/classes/sequence.class.php";
+                $sequence = new Sequence($this->connection, $this->paramori);
+                $sequences = $sequence->getListFromParent($id);
+                foreach ( $sequences as $row) {
+                    $sequence->duplicate($row["sequence_id"], $newid);
+                }
+            }
+        } else {
+            throw new ObjetBDDException(_("L'opération à dupliquer n'existe pas"));
+        }
+        return $newid;
     }
 }
