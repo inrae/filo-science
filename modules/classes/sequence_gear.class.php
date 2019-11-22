@@ -4,7 +4,7 @@ class SequenceGear extends ObjetBDD
     private $sql = "select sequence_gear_id, voltage, amperage, gear_nb, depth
                     ,sequence_id
                     ,gear_id, gear_name
-                    ,gear_method_id, gear_method_name
+                    ,gear_method_id, gear_method_name, business_code
                     ,electric_current_type_id, electric_current_type_name
                     ,operation_id, operation_name, campaign_id, campaign_name
                     from sequence_gear
@@ -34,7 +34,8 @@ class SequenceGear extends ObjetBDD
             "voltage" => array("type" => 1),
             "amperage" => array("type" => 1),
             "depth" => array("type" => 1),
-            "uuid" => array("type"=>0)
+            "uuid" => array("type"=>0),
+            "business_code"=>array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

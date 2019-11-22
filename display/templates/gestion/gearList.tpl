@@ -9,6 +9,7 @@
                 <thead>
                     <tr>
                         <th>{t}Type d'engin{/t}</th>
+                        <th>{t}Code métier{/t}</th>
                         <th>{t}Nombre{/t}</th>
                         <th>{t}Voltage{/t}</th>
                         <th>{t}Ampérage{/t}</th>
@@ -25,6 +26,7 @@
                                 {$gear.gear_name}
                             </a>
                         </td>
+                        <td>{$gear.business_code}</td>
                         <td class="center">{$gear.gear_nb}</td>
                         <td class="center">{$gear.voltage}</td>
                         <td class="center">{$gear.amperage}</td>

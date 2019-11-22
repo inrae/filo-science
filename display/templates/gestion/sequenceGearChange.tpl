@@ -24,6 +24,24 @@ href="index.php?module=operationDisplay&campaign_id={$sequence.campaign_id}&oper
                 </div>
             </div>
             <div class="form-group">
+                <label for="station_id"  class="control-label col-md-4">{t}Modèle d'engin utilisé :{/t}<span class="red">*</span></label>
+                <div class="col-md-8">
+                    <select id="gear_id" name="gear_id" class="form-control">
+                    {foreach $gears as $row}
+                        <option value="{$row.gear_id}" {if $row.gear_id == $data.gear_id}selected{/if}>
+                        {$row.gear_name}
+                        </option>
+                    {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="business_code"  class="control-label col-md-4"> {t}Code métier de l'engin posé :{/t}</label>
+                <div class="col-md-8">
+                    <input id="business_code" type="text" class="form-control" name="business_code" value="{$data.business_code}">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="voltage"  class="control-label col-md-4"> {t}Voltage utilisé :{/t}</label>
                 <div class="col-md-8">
                     <input id="voltage" type="text" class="form-control taux" name="voltage" value="{$data.voltage}">
@@ -39,19 +57,6 @@ href="index.php?module=operationDisplay&campaign_id={$sequence.campaign_id}&oper
                 <label for="depth"  class="control-label col-md-4"> {t}Profondeur de l'engin, en mètre :{/t}</label>
                 <div class="col-md-8">
                     <input id="depth" type="text" class="form-control taux" name="depth" value="{$data.depth}">
-                </div>
-            </div>
-           
-            <div class="form-group">
-                <label for="station_id"  class="control-label col-md-4">{t}Modèle d'engin utilisé :{/t}<span class="red">*</span></label>
-                <div class="col-md-8">
-                    <select id="gear_id" name="gear_id" class="form-control">
-                    {foreach $gears as $row}
-                        <option value="{$row.gear_id}" {if $row.gear_id == $data.gear_id}selected{/if}>
-                        {$row.gear_name}
-                        </option>
-                    {/foreach}
-                    </select>
                 </div>
             </div>
             <div class="form-group">
