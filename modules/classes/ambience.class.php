@@ -12,7 +12,7 @@ class Ambience extends ObjetBDD
                     ,c2.cache_abundance_name as branch_cache_abundance
                     ,c3.cache_abundance_name as vegetation_cache_abundance
                     ,c4.cache_abundance_name as subbank_cache_abundance
-                    ,c5.cache_abundance_name as granulometry_cache_abundance                   
+                    ,c5.cache_abundance_name as granulometry_cache_abundance
                     ,g1.granulometry_name as dominant_granulometry
                     ,g2.granulometry_name as secondary_granulometry
                     from ambience a
@@ -35,7 +35,7 @@ class Ambience extends ObjetBDD
                     left outer join cache_abundance c5 on (granulometry_cache_abundance_id = c5.cache_abundance_id)
                     left outer join granulometry g1 on (dominant_granulometry_id = g1.granulometry_id)
                     left outer join granulometry g2 on (secondary_granulometry_id = g2.granulometry_id)
-                    
+
                     ";
     /**
      * Constructor
@@ -46,6 +46,7 @@ class Ambience extends ObjetBDD
     function __construct($bdd, $param = array())
     {
         $this->table = "ambience";
+        $this->srid = 4326;
         $this->colonnes = array(
             "ambience_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
             "ambience_name" => array("type" => 0),
@@ -79,7 +80,8 @@ class Ambience extends ObjetBDD
             "sinuosity_id" => array("type" => 1),
             "flow_trend_id" => array("type" => 1),
             "turbidity_id" => array("type" => 1),
-            "uuid" => array("type"=>0)
+            "uuid" => array("type" => 0),
+            "ambience_geom" => array("type" => 4)
 
         );
         parent::__construct($bdd, $param);
@@ -105,5 +107,21 @@ class Ambience extends ObjetBDD
     {
         $where = " where sequence_id = :id";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $sequence_id));
+    }
+
+    /**
+     * Add the generation of the geom point
+     *
+     * @param array $data
+     * @return int
+     */
+    function ecrire(array $data)
+    {
+        if (strlen($data["ambience_long"]) > 0 && strlen($data["ambience_lat"]) > 0) {
+            $data["ambience_geom"] = "POINT(" . $data["ambience_long"] . " " . $data["ambience_lat"] . ")";
+        } else {
+            $data["ambience_geom"] = "";
+        }
+        return parent::ecrire($data);
     }
 }

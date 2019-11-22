@@ -31,6 +31,7 @@ class Operation extends ObjetBDD
     function __construct($bdd, $param = array())
     {
         $this->table = "operation";
+        $this->srid = 4326;
         $this->colonnes = array(
             "operation_id" => array(
                 "type" => 1,
@@ -68,7 +69,8 @@ class Operation extends ObjetBDD
             "fishing_strategy_id" => array("type" => 1),
             "scale_id" => array("type" => 1),
             "taxa_template_id" => array("type" => 1),
-            "uuid" => array("type" => 0)
+            "uuid" => array("type" => 0),
+            "operation_geom" => array("type" => 4)
         );
         parent::__construct($bdd, $param);
     }
@@ -89,7 +91,35 @@ class Operation extends ObjetBDD
         $data["campaign_name"] = $dcamp["campaign_name"];
         return $data;
     }
-
+    /**
+     * Add the generation of the geom multipoint
+     *
+     * @param array $data
+     * @return int
+     */
+    function ecrire(array $data)
+    {
+        $data["operation_geom"] = "MULTIPOINT(";
+        $is_geom = false;
+        if (strlen($data["long_start"]) > 0 && strlen($data["lat_start"]) > 0) {
+            $data["operation_geom"] .="(".$data["long_start"] . " " . $data["lat_start"] . ")";
+            $is_geom = true;
+        }
+        if (strlen($data["long_end"]) > 0 && strlen($data["lat_end"]) > 0) {
+            if ($is_geom) {
+                $data["operation_geom"] .=",";
+            } else {
+                $is_geom = true;
+            }
+            $data["operation_geom"] .= "(" . $data["long_end"] . " " . $data["lat_end"] . ")";
+        }
+        if ($is_geom) {
+            $data["operation_geom"] .= ")";
+        } else {
+            $data["operation_geom"] = "";
+        }
+        return parent::ecrire($data);
+    }
     /**
      * Get list of operation from a campaign
      *
