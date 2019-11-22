@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="0,138" last-zoom="1" max-obj-count="94"
+<dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="688,660" last-zoom="1" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -1208,7 +1208,7 @@ By default : total_length and weight]]></comment>
 	</constraint>
 </table>
 
-<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="12">
+<table name="sequence_gear" layer="0" collapse-mode="1" max-obj-count="13">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of gear used during operation]]></comment>
@@ -1235,6 +1235,10 @@ By default : total_length and weight]]></comment>
 	</column>
 	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
 		<type name="uuid" length="0"/>
+	</column>
+	<column name="business_code">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Business code of the gear, especially for traps]]></comment>
 	</column>
 	<constraint name="sequence_gear_pk" type="pk-constr" table="filo.sequence_gear">
 		<columns names="sequence_gear_id" ref-type="src-columns"/>
@@ -1548,7 +1552,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of facies]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1260" y="1860"/>
+	<position x="2000" y="1380"/>
 	<column name="facies_id" not-null="true" sequence="filo.facies_facies_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -1728,7 +1732,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of localisations of the ambience]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1760" y="1520"/>
+	<position x="1760" y="1380"/>
 	<column name="localisation_id" not-null="true" sequence="filo.localisation_localisation_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2488,7 +2492,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of sinuosities of the river]]></comment>
 	<tag name="ambience_param"/>
-	<position x="1760" y="1380"/>
+	<position x="1760" y="1520"/>
 	<column name="sinuosity_id" not-null="true" sequence="filo.sinuosity_sinuosity_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -2748,7 +2752,7 @@ Crue•4]]>
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
-	<position x="1760" y="1240"/>
+	<position x="2220" y="1240"/>
 	<column name="electric_current_type_id" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -4573,6 +4577,68 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 <extension name="pgcrypto">
 	<schema name="public"/>
 </extension>
+
+<sequence name="sequence_point_sequence_point_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+	<schema name="filo"/>
+	<role name="filo"/>
+</sequence>
+
+<table name="sequence_point" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="filo"/>
+	<role name="filo"/>
+	<comment><![CDATA[Sampling points during the sequence]]></comment>
+	<tag name="operation"/>
+	<position x="1760" y="1240"/>
+	<column name="sequence_point_id" not-null="true" sequence="filo.sequence_point_sequence_point_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fish_number">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Number of fishes detected at this point]]></comment>
+	</column>
+	<constraint name="sequence_point_pk" type="pk-constr" table="filo.sequence_point">
+		<columns names="sequence_point_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="facies_id" index="3"/>
+		<object name="localisation_id" index="2"/>
+		<object name="sequence_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="facies_fk" index="3"/>
+		<object name="localisation_fk" index="2"/>
+		<object name="sequence_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="sequence_has_many_sequence_point" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7fb653"
+	 src-table="filo.sequence"
+	 dst-table="filo.sequence_point"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="localisation_has_many_sequence_point" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f519bc"
+	 src-table="filo.localisation"
+	 dst-table="filo.sequence_point"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="facies_has_many_sequence_point" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#702e5f"
+	 src-table="filo.facies"
+	 dst-table="filo.sequence_point"
+	 src-required="false" dst-required="false"/>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
