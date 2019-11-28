@@ -18,7 +18,7 @@ class Sequence extends ObjetBDD
                     join protocol using (protocol_id)
                     left outer join ambience a using (sequence_id)
                     ";
-    private $ambience, $analysis, $sequenceGear, $sample;
+    private $ambience, $analysis, $sequenceGear, $sequencePoint, $sample;
     /**
      * Constructor
      *
@@ -109,14 +109,17 @@ class Sequence extends ObjetBDD
             include_once 'modules/classes/ambience.class.php';
             include_once 'modules/classes/sequence_gear.class.php';
             include_once 'modules/classes/sample.class.php';
+            include_once 'modules/classes/sequence_point.class.php';
             $this->analysis = new Analysis($this->connection);
             $this->sequenceGear = new SequenceGear($this->connection);
+            $this->sequencePoint = new SequencePoint($this->connection);
             $this->ambience = new Ambience($this->connection);
             $this->sample = new Sample($this->connection);
         }
         $this->analysis->supprimerChamp($id, "sequence_id");
         $this->ambience->supprimerChamp($id, "sequence_id");
         $this->sequenceGear->supprimerChamp($id, "sequence_id");
+        $this->sequencePoint->supprimerChamp($id, "sequence_id");
         /**
          * Get the list of samples
          */
