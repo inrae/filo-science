@@ -4,7 +4,7 @@
             setTimeout(function () { mapA.invalidateSize(); }, 400);
         });
 
-        Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 1, secure: true });
+        Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 7, secure: true });
 
         /**
          * Tab management

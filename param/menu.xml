@@ -7,6 +7,7 @@
 
 	<item module="campaignList" label="Campagnes" tooltip="Campagnes de pêche">
 		<item module="campaignList" label="Campagnes" tooltip="Campagnes de pêche"/>
+		<item module="campaignDisplay" label="Dernière campagne" tooltip="Affichage de la dernière campagne traitée récemment"/>
 		<item module="operationDisplay" label="Dernière opération" tooltip="Affichage de la dernière opération traitée récemment"/>
 		<item module="sequenceDisplay" label="Dernière séquence" tooltip="Affichage de la dernière séquence traitée récemment"/>
 	</item>

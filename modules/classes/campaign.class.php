@@ -5,7 +5,7 @@
  */
 class Campaign extends ObjetBDD
 {
-    private $sql = "select campaign_id, campaign_name
+    private $sql = "select campaign_id, campaign_id as campaign_uid, campaign_name
     , project_id, project_name, metric_srid, protocol_default_id
     from campaign
     join project using (project_id)";
@@ -71,7 +71,8 @@ class Campaign extends ObjetBDD
      * @param integer $id
      * @return void
      */
-    function supprimer(int $id) {
+    function supprimer(int $id)
+    {
         include_once 'modules/classes/operation.class.php';
         $operation = new Operation($this->connection);
         $operations = $operation->getListFromParent($id);
@@ -79,5 +80,25 @@ class Campaign extends ObjetBDD
             $op->supprimer($op["operation_id"]);
         }
         parent::supprimer($id);
+    }
+
+    /**
+     * Test if an operation is granted
+     *
+     * @param array $projects: list of granted projects
+     * @param int $uid
+     * @return boolean
+     */
+    function isGranted(array $projects, $uid)
+    {
+        $data = $this->lire($uid);
+        $retour = false;
+        foreach ($projects as $project) {
+            if ($project["project_id"] == $data["project_id"]) {
+                $retour = true;
+                break;
+            }
+        }
+        return $retour;
     }
 }

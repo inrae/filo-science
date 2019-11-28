@@ -220,7 +220,7 @@
 
 	<!-- modules for projects -->
 	<campaignList action="modules/gestion/campaign.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
-	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty" requiredVar="campaign_id" maxCountByHour="60" maxCountByDay="600" />
+	<campaignDisplay action="modules/gestion/campaign.php" param="display" droits="consult" type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<campaignChange action="modules/gestion/campaign.php" param="change" droits="gestion" type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<campaignWrite action="modules/gestion/campaign.php" param="write" droits="gestion" retourok="campaignDisplay" retourko="campaignChange" modulebefore="campaignChange" maxCountByHour="60" maxCountByDay="600" />
 	<campaignDelete action="modules/gestion/campaign.php" param="delete" droits="gestion" retourok="campaignList" retourko="campaignChange" modulebefore="campaignChange" maxCountByHour="60" maxCountByDay="600" />

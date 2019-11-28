@@ -1,9 +1,18 @@
 <?php
-
 require_once 'modules/classes/campaign.class.php';
 $dataClass = new Campaign($bdd, $ObjetBDDParam);
 $keyName = "campaign_id";
-$id = $_SESSION["ti_campaign"]->getValue($_REQUEST[$keyName]);
+if (strlen($_REQUEST[$keyName]) == 0 && $t_module["param"] == "display") {
+    if (isset($_COOKIE["campaign_uid"]) && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["campaign_uid"]) ) {
+        $id = $_COOKIE["campaign_uid"];
+    } else {
+        $t_module["param"] = "error";
+        $t_module["retourko"] = "default";
+        $module_coderetour = -1;
+    }
+} else {
+    $id = $_SESSION["ti_campaign"]->getValue($_REQUEST[$keyName]);
+}
 
 
 switch ($t_module["param"]) {
@@ -22,7 +31,7 @@ switch ($t_module["param"]) {
             include_once "modules/classes/project.class.php";
             $project = new Project($bdd, $ObjetBDDParam);
             $projects = $project->getProjectsActive($params["is_active"], $_SESSION["projects"]);
-            if (strlen($params["project_id"])==0) {
+            if (strlen($params["project_id"]) == 0) {
                 $params["project_id"] = $projects[0]["project_id"];
             }
             $_SESSION["searchCampaign"]->setParam($params);

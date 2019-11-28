@@ -1,5 +1,6 @@
 <script>
     $(document).ready(function() {
+        Cookies.set('campaign_uid', "{$data.campaign_uid}", { expires: 7, secure: true });
         $(".checkSelect").change(function() {
             $('.check').prop('checked', this.checked);
         });
