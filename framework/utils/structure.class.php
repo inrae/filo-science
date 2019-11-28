@@ -13,11 +13,8 @@ class Structure extends ObjetBDD
     private $_schemas = array();
     private $whereSchema;
     private $schemaParam = array();
-
     private $_tables;
-
     private $_colonnes;
-
     public $tables;
 
 
@@ -66,7 +63,7 @@ class Structure extends ObjetBDD
             $res = $this->lireParam($sql);
             $this->_schemas[] = $res["current_schema"];
         }
-        $this->whereSchema = " schemaname in (";
+        $this->whereSchema = "";
         $comma = "";
         $i = 0;
         foreach ($this->_schemas as $schema) {
@@ -75,7 +72,6 @@ class Structure extends ObjetBDD
             $this->schemaParam["sc$i"] = $schema;
             $i++;
         }
-        $this->whereSchema .= ")";
     }
 
     /**
@@ -90,7 +86,7 @@ class Structure extends ObjetBDD
         left outer join pg_catalog.pg_description on (relid = objoid and objsubid = 0)";
         $order = " order by schemaname, relname";
         $this->_tables = $this->getListeParamAsPrepared(
-            $sql . " where " . $this->whereSchema . $order,
+            $sql . " where  schemaname in (" . $this->whereSchema . ")" . $order,
             $this->schemaParam
         );
     }
@@ -132,7 +128,7 @@ class Structure extends ObjetBDD
            AND (pg_attribute.attnum = ANY (pc2.conkey))';
         $where = " WHERE pg_class.relname = pg_tables.tablename
         AND   pg_attribute.atttypid <> 0::OID
-        and " . $this->whereSchema;
+        and  schemaname in (" . $this->whereSchema . ")";
         $order = 'ORDER BY schemaname, tablename, field ASC)
         select * from req order by tablename, attnum;
        ';
@@ -160,7 +156,7 @@ class Structure extends ObjetBDD
     ) {
         $val = "";
         foreach ($this->tables as $table) {
-            $val .= '<div class="' . $classTableName . '">' . $table["schemaname"].".".$table["tablename"] . "</div>"
+            $val .= '<div id="' . $table["schemaname"] . $table["tablename"] . '" class="' . $classTableName . '">' . $table["schemaname"] . "." . $table["tablename"] . "</div>"
                 . '<br><div class="' . $classTableComment . '">'
                 . $table["description"] . '</div>.<br>';
             $val .= '<table class="' . $classTableColumns . '">';
@@ -179,6 +175,31 @@ class Structure extends ObjetBDD
                 </tr>';
             }
             $val .= '</tbody></table>';
+            /**
+             * Add references
+             */
+            $refs = $this->getReferences($table["schemaname"], $table["tablename"]);
+            if (count($refs) > 0) {
+                $val .= "<h3>References</h3>";
+                foreach ($refs as $ref) {
+                    $val .= $ref["column_name"] . ": " . $ref["foreign_schema_name"]
+                        . '.<a href="#' . $ref["foreign_schema_name"] . $ref["foreign_table_name"] . '">'
+                        . $ref["foreign_table_name"]
+                        . "</a>"
+                        . " (" . $ref["foreign_column_name"] . ")<br>";
+                }
+            }
+            $refs = $this->getReferencedBy($table["schemaname"], $table["tablename"]);
+            if (count($refs) > 0) {
+                $val .= "<h3>Referenced by</h3>";
+                foreach ($refs as $ref) {
+                    $val .= $ref["foreign_column_name"] . ": " . $ref["schema_name"]
+                        . '.<a href="#' . $ref["schema_name"] . $ref["table_name"] . '">'
+                        . $ref["table_name"]
+                        . "</a>"
+                        . " (" . $ref["column_name"] . ")<br>";
+                }
+            }
         }
 
         return $val;
@@ -192,7 +213,7 @@ class Structure extends ObjetBDD
         $val = "";
         foreach ($this->tables as $table) {
             $val .= "\\" . $structureLevel . "{"
-                . $this->el($table["schemaname"].".".$table["tablename"]) . "}"
+                . $this->el($table["schemaname"] . "." . $table["tablename"]) . "}"
                 . "<br>";
             $val .= $this->el($table["description"]) . "<br><br>";
             $val .= $headerTable . "<br>";
@@ -224,5 +245,66 @@ class Structure extends ObjetBDD
     function el($chaine)
     {
         return str_replace("_", "\\_", $chaine);
+    }
+
+    /**
+     * Get references for a table
+     *
+     * @param string $schema
+     * @param string $table
+     * @return array
+     */
+    function getReferences($schema, $table)
+    {
+        return $this->_getReference($schema, $table, false);
+    }
+
+    /**
+     * Return the tables referenced by the table
+     *
+     * @param string $schema
+     * @param string $table
+     * @return array
+     */
+    function getReferencedBy($schema, $table)
+    {
+        return $this->_getReference($schema, $table, true);
+    }
+    /**
+     * Execute the request to get references from a table,
+     * or tables referenced by
+     *
+     * @param [type] $schema
+     * @param [type] $table
+     * @param boolean $referencedBy
+     * @return array
+     */
+    private function _getReference($schema, $table, $referencedBy = false)
+    {
+        if ($referencedBy) {
+            $type = 'y';
+            $schemaType = 'x';
+        } else {
+            $type = 'x';
+            $schemaType = 'y';
+        }
+        $sql = "
+        select distinct c.constraint_name
+          , x.table_schema as schema_name
+           , x.table_name
+            , x.column_name
+           , y.table_schema as foreign_schema_name
+            , y.table_name as foreign_table_name
+            , y.column_name as foreign_column_name
+        from information_schema.referential_constraints c
+        join information_schema.key_column_usage x
+            on x.constraint_name = c.constraint_name
+        join information_schema.key_column_usage y
+           on y.ordinal_position = x.position_in_unique_constraint
+            and y.constraint_name = c.unique_constraint_name
+        where " . $type . ".table_schema = :schema and " . $type . ".table_name = :table
+        order by y.table_schema, y.table_name
+        ";
+        return ($this->getListeParamAsPrepared($sql, array("table" => $table, "schema" => $schema)));
     }
 }
