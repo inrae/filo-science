@@ -91,7 +91,6 @@ switch ($t_module["param"]) {
          * Récupération des analyses complementaires dans un tableau pour l'affichage
          */
         $other_analysis = json_decode($dataAnalysis["other_analysis"], true);
-        
         if ( count($other_analysis) > 0) {
             $vue->set($other_analysis, "other_analysis");
         }
@@ -100,6 +99,19 @@ switch ($t_module["param"]) {
             "analysis"
         );
         $vue->get("analysis");
+        /**
+         * Points
+         */
+        require_once "modules/classes/sequence_point.class.php";
+        $sequencePoint = new SequencePoint($bdd, $ObjetBDDParam);
+        $vue->set(
+            $_SESSION["ti_sequencePoint"]->translateList(
+                $_SESSION["ti_sequence"]->translateList(
+                    $sequencePoint->getListFromSequence($id)
+                )
+            ),
+            "points"
+        );
         /**
          * select the good tab for display
          */

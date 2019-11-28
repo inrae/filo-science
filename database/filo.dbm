@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="684,582" last-zoom="1" max-obj-count="98"
+<dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="435,909" last-zoom="1" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -4589,14 +4589,17 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	<role name="filo"/>
 </sequence>
 
-<table name="sequence_point" layer="0" collapse-mode="2" max-obj-count="6">
+<table name="sequence_point" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Sampling points during the sequence]]></comment>
 	<tag name="operation"/>
-	<position x="1760" y="1240"/>
+	<position x="1760" y="1220"/>
 	<column name="sequence_point_id" not-null="true" sequence="filo.sequence_point_sequence_point_id_seq">
 		<type name="integer" length="0"/>
+	</column>
+	<column name="sequence_point_number" not-null="true">
+		<type name="smallint" length="0"/>
 	</column>
 	<column name="fish_number">
 		<type name="smallint" length="0"/>

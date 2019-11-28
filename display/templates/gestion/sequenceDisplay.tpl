@@ -56,11 +56,7 @@
         $('a[data-toggle="tab"]').on("click", function () {
             survol = false ;
         });
-        $("#tab-ambience").on ("shown.bs.tab", function() {
-            setTimeout( function() { mapAmbience.updateSize();}, 200);
-        });
-});
-
+    });
 </script>
 
 <h2>{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
@@ -97,6 +93,9 @@
             <a class="nav-link" id="tab-analysis" href="#nav-analysis" data-toggle="tab" role="tab"
                 aria-controls="nav-analysis" aria-selected="false">{t}Analyse d'eau{/t}</a>
         </li>
+        <li class="nav-item">
+                <a class="nav-link" id="tab-point" href="#nav-point" data-toggle="tab" role="tab" aria-controls="nav-point" aria-selected="false">{t}Points d'échantillonnage{/t}</a>
+        </li>
     </ul>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane active in" id="nav-detail" role="tabpanel" aria-labelledby="tab-detail">
@@ -124,6 +123,11 @@
                 {include file="gestion/analysisDetail.tpl"}
             </div>
         </div>
+        <div class="tab-pane fade" id="nav-point" role="tabpanel" aria-labelledby="tab-sequence">
+                <div class="col-md-12">
+                    {include file="gestion/sequencePointList.tpl"}
+                </div>
+            </div>
 
     </div>
 </div>
