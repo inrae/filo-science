@@ -5,16 +5,18 @@
 class Sequence extends ObjetBDD
 {
     private $sql = "select sequence_id, sequence_number, s.date_start, s.date_end, fishing_duration
-                    , operation_id, operation_name, freshwater, long_start, lat_start, long_end, lat_end, taxa_template_id
+                    , operation.operation_id, operation_name, freshwater, long_start, lat_start, long_end, lat_end, taxa_template_id
                     ,sequence_id as sequence_uid
                     ,campaign_id, campaign_name
                     ,project_id, project_name
                     ,protocol_id, measure_default, measure_default_only, analysis_template_id
+                    ,ambience_long, ambience_lat
                     from sequence s
                     join operation using (operation_id)
                     join campaign using (campaign_id)
                     join project using (project_id)
                     join protocol using (protocol_id)
+                    left outer join ambience a using (sequence_id)
                     ";
     private $ambience, $analysis, $sequenceGear, $sample;
     /**
@@ -181,6 +183,13 @@ class Sequence extends ObjetBDD
             }
         } else {
             throw new ObjetBDDException(_("La sequence à dupliquer n'existe pas ou l'opération de rattachement n'est pas indiquée"));
+        }
+    }
+
+    function getListFromOperation($id) {
+        if ($id > 0) {
+            $where = " where operation.operation_id = :id";
+            return $this->getListeParamAsPrepared($this->sql.$where, array ("id"=>$id));
         }
     }
 }

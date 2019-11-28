@@ -1,8 +1,15 @@
 <script>
     $(document).ready(function () {
+        $("#tab-detail").on("shown.bs.tab", function () {
+            setTimeout(function () { map.invalidateSize(); }, 400);
+        });
         $("#tab-ambience").on("shown.bs.tab", function () {
             setTimeout(function () { mapA.invalidateSize(); }, 400);
         });
+        $("#tab-sequence").on("shown.bs.tab", function () {
+            setTimeout(function () { mapS.invalidateSize(); }, 400);
+        });
+
 
         Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 7, secure: true });
 

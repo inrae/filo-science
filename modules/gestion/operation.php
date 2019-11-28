@@ -29,7 +29,7 @@ switch ($t_module["param"]) {
          */
         require_once 'modules/classes/sequence.class.php';
         $sequence = new Sequence($bdd, $ObjetBDDParam);
-        $sequences = $sequence->getListFromParent($id);
+        $sequences = $sequence->getListFromOperation($id);
         $sequences = $_SESSION["ti_sequence"]->translateList($sequences);
         $sequences = $_SESSION["ti_operation"]->translateList($sequences);
         $vue->set($sequences, "sequences");

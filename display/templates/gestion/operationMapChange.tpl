@@ -1,6 +1,4 @@
-<script type="text/javascript" charset="utf-8" src="display/javascript/ol-v4.2.0-dist/ol.js"></script>
-<link rel="stylesheet" type="text/css" href="display/javascript/ol-v4.2.0-dist/ol.css">
-<script src="display/javascript/proj4.js"></script>
+
 <script>
     var map = setMap("mapOperation");
 

@@ -5,7 +5,7 @@
                     <img src="display/images/new.png" height="25">{t}Nouvelle séquence{/t}
                 </a>
         <legend>{t}Séquences{/t}</legend>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <table class="table table-bordered table-hover datatable" data-order='[[1,"desc"]]'>
                     <thead>
                         <tr>
@@ -30,6 +30,9 @@
                         {/foreach}
                     </tbody>
                 </table>
+            </div>
+            <div class="col-md-6">
+                {include file="gestion/sequencesMap.tpl"}
             </div>
 
     </fieldset>
