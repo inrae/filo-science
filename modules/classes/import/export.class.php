@@ -1,7 +1,10 @@
 <?php
 class ExportException extends Exception
 { };
-
+/**
+ * Generate a JSON file that contains all records embedded
+ * and import a JSON file previously generated
+ */
 class Export
 {
     private $model = array();
@@ -180,6 +183,7 @@ class Export
      */
     function importDataTable(string $tableAlias, array $data, int $parentKey = 0, array $setValues = array(), $deleteBeforeInsert = false)
     {
+
         $quote = '"';
         if (!isset($this->model[$tableAlias])) {
             throw new ExportException(sprintf(_("Aucune description trouvée pour l'alias de table %s dans le fichier de paramètres"), $tableAlias));
@@ -202,7 +206,7 @@ class Export
         }
         if ($deleteBeforeInsert && $parentKey > 0) {
             $sqlDeleteFromParent = "delete $quote$tableName$quote where $quote$pkeyName$quote = :parent";
-            $this->execute($sqlDeleteFromParent, array("parent"=>$parentKey));
+            $this->execute($sqlDeleteFromParent, array("parent" => $parentKey));
         }
         if ($model["istablenn"] == 1) {
             $tableAlias2 = $model["tablenn"]["tableAlias"];
@@ -221,121 +225,127 @@ class Export
             $this->execute($sqlDelete, array("parentKey" => $parentKey));
         }
         foreach ($data as $row) {
-            /**
-             * search for preexisting record
-             */
-            if ($this->modeDebug) {
-                test($tableName . " key:" . $row[$tkeyName]);
-                test($tableAlias . " tablename:" . $tableName . " businessKey:" . $bkeyName . " technicalKey:" . $tkeyName . " parentKey:" . $pkeyName);
-            }
-            if ($isBusiness && strlen($row[$bkeyName]) > 0) {
-                $previousData = $this->execute($sqlSearchKey, array("businessKey" => $row[$bkeyName]));
-                if ($previousData[0]["key"] > 0) {
-                    $row[$tkeyName] = $previousData[0]["key"];
+            if (strlen($row[$tkeyName]) > 0 || ($model["istablenn"] == 1 && strlen($row[$pkeyName])> 0)) {
+                /**
+                 * search for preexisting record
+                 */
+                if ($this->modeDebug) {
+                    test($tableName . " key:" . $row[$tkeyName]);
+                    test($tableAlias . " tablename:" . $tableName . " businessKey:" . $bkeyName . " technicalKey:" . $tkeyName . " parentKey:" . $pkeyName);
+                }
+                if ($isBusiness && strlen($row[$bkeyName]) > 0) {
+                    $previousData = $this->execute($sqlSearchKey, array("businessKey" => $row[$bkeyName]));
+                    if ($previousData[0]["key"] > 0) {
+                        $row[$tkeyName] = $previousData[0]["key"];
+                    } else {
+                        unset($row[$tkeyName]);
+                    }
                 } else {
                     unset($row[$tkeyName]);
                 }
-            } else {
-                unset($row[$tkeyName]);
-            }
-            if ($parentKey > 0 && strlen($pkeyName) > 0) {
-                $row[$pkeyName] = $parentKey;
-            }
-            if ($model["istable11"] == 1 && $parentKey > 0) {
-                $row[$tkeyName] = $parentKey;
-            }
-            if ($model["istablenn"] == 1) {
-                /**
-                 * Search id of secondary table
-                 */
-                $sqlSearchSecondary = "select $quote$tkeyName2$quote as key
+                if ($parentKey > 0 && strlen($pkeyName) > 0) {
+                    $row[$pkeyName] = $parentKey;
+                }
+                if ($model["istable11"] == 1 && $parentKey > 0) {
+                    $row[$tkeyName] = $parentKey;
+                }
+                if ($model["istablenn"] == 1) {
+                    /**
+                     * Search id of secondary table
+                     */
+                    $sqlSearchSecondary = "select $quote$tkeyName2$quote as key
                     from $quote$tableName2$quote
                     where $quote$bkey2$quote = :businessKey";
-                $sdata = $this->execute($sqlSearchSecondary, array("businessKey" => $row[$tableAlias2][$model2["businessKey"]]));
-                $skey = $sdata[0]["key"];
-                if (!$skey > 0) {
-                    /**
-                     * write the secondary parent
-                     */
-                    $skey = $this->writeData($tableAlias2, $row[$tableAlias2]);
-                }
-                $row[$model["tablenn"]["secondaryParentKey"]] = $skey;
-            }
-            /**
-             * Get the real values for parameters
-             */
-            foreach ($row["parameters"] as $parameterName => $parameter) {
-                $modelParam = $this->model[$parameterName];
-                if (count($modelParam) == 0) {
-                    throw new ExportException(sprintf(_("L'alias %s n'a pas été décrit dans le modèle"), $parameterName));
+                    $sdata = $this->execute($sqlSearchSecondary, array("businessKey" => $row[$tableAlias2][$model2["businessKey"]]));
+                    $skey = $sdata[0]["key"];
+                    if (!$skey > 0) {
+                        /**
+                         * write the secondary parent
+                         */
+                        $skey = $this->writeData($tableAlias2, $row[$tableAlias2]);
+                    }
+                    $row[$model["tablenn"]["secondaryParentKey"]] = $skey;
                 }
                 /**
-                 * Search the id from the parameter
+                 * Get the real values for parameters
                  */
-                $paramKey = $modelParam["technicalKey"];
-                $paramBusinessKey = $modelParam["businessKey"];
-                $paramTablename = $modelParam["tableName"];
-                $sqlSearchParam = "select $quote$paramKey$quote as key
+                foreach ($row["parameters"] as $parameterName => $parameter) {
+                    $modelParam = $this->model[$parameterName];
+                    if (count($modelParam) == 0) {
+                        throw new ExportException(sprintf(_("L'alias %s n'a pas été décrit dans le modèle"), $parameterName));
+                    }
+                    /**
+                     * Search the id from the parameter
+                     */
+                    $paramKey = $modelParam["technicalKey"];
+                    $paramBusinessKey = $modelParam["businessKey"];
+                    $paramTablename = $modelParam["tableName"];
+                    $sqlSearchParam = "select $quote$paramKey$quote as key
                     from $quote$paramTablename$quote
                     where $quote$paramBusinessKey$quote = :businessKey";
-                $pdata = $this->execute($sqlSearchParam, array("businessKey" => $parameter[$modelParam["businessKey"]]));
-                $pkey = $pdata[0]["key"];
-                if (!$pkey > 0) {
+                    $pdata = $this->execute($sqlSearchParam, array("businessKey" => $parameter[$modelParam["businessKey"]]));
+                    $pkey = $pdata[0]["key"];
+                    if (!$pkey > 0) {
+                        /**
+                         * write the parameter
+                         */
+                        unset($parameter[$modelParam["technicalKey"]]);
+                        try {
+                            $pkey = $this->writeData($parameterName, $parameter);
+                        } catch (Exception $e) {
+                            throw new ExportException(sprintf(_("Erreur d'enregistrement dans la table de paramètres %1$s pour la valeur %2$s"), $parameterName, $parameter[$modelParam["businessKey"]]));
+                        }
+                    }
+                    if ($this->modeDebug) {
+                        printr("Parameter " . $parameterName . ": key for " . $parameter[$modelParam["businessKey"]] . " is " . $pkey);
+                    }
+                    if (!$pkey > 0) {
+                        throw new ExportException(sprintf(_("Aucune clé n'a pu être trouvée ou générée pour la table de paramètres %s"), $parameterName));
+                    }
                     /**
-                     * write the parameter
+                     * Search the name of the attribute corresponding in the row
                      */
-                    unset($parameter[$modelParam["technicalKey"]]);
-                    $pkey = $this->writeData($parameterName, $parameter);
-                }
-                if ($this->modeDebug) {
-                    printr("Parameter " . $parameterName . ": key for " . $parameter[$modelParam["businessKey"]] . " is " . $pkey);
-                }
-                if (!$pkey > 0) {
-                    throw new ExportException(sprintf(_("Aucune clé n'a pu être trouvée ou générée pour la table de paramètres %s"), $parameterName));
+                    $fieldName = "";
+                    foreach ($model["parameters"] as $modParam) {
+                        if ($modParam["aliasName"] == $parameterName) {
+                            $fieldName = $modParam["fieldName"];
+                            break;
+                        }
+                    }
+                    if (strlen($fieldName) == 0) {
+                        throw new ExportException(sprintf(_("Erreur inattendue : impossible de trouver le nom du champ correspondant à la table de paramètres %s"), $parameterName));
+                    }
+                    $row[$fieldName] = $pkey;
                 }
                 /**
-                 * Search the name of the attribute corresponding in the row
+                 * Set values
                  */
-                $fieldName = "";
-                foreach ($model["parameters"] as $modParam) {
-                    if ($modParam["aliasName"] == $parameterName) {
-                        $fieldName = $modParam["fieldName"];
-                        break;
-                    }
-                }
-                if (strlen($fieldName) == 0) {
-                    throw new ExportException(sprintf(_("Erreur inattendue : impossible de trouver le nom du champ correspondant à la table de paramètres %s"), $parameterName));
-                }
-                $row[$fieldName] = $pkey;
-            }
-            /**
-             * Set values
-             */
-            if (count($setValues) > 0) {
-                foreach ($setValues as $kv => $dv) {
-                    if (strlen($dv) == 0) {
-                        throw new ExportException(sprintf(_("Une valeur vide a été trouvée pour l'attribut ajouté %s"), $kv));
-                    }
-                    $row[$kv] = $dv;
-                }
-            }
-            /**
-             * Write data
-             */
-            $children = $row["children"];
-            unset($row["children"]);
-            unset($row["parameters"]);
-            $id = $this->writeData($tableAlias, $row);
-            /**
-             * Record the children
-             */
-            if ($id > 0) {
-                foreach ($children as $tableChield => $child) {
-                    if (count($child) > 0) {
-                        if (!isset($child["isStrict"])) {
-                            $child["isStrict"] = false;
+                if (count($setValues) > 0) {
+                    foreach ($setValues as $kv => $dv) {
+                        if (strlen($dv) == 0) {
+                            throw new ExportException(sprintf(_("Une valeur vide a été trouvée pour l'attribut ajouté %s"), $kv));
                         }
-                        $this->importDataTable($tableChield, $child, $id, array(), $child["isStrict"]);
+                        $row[$kv] = $dv;
+                    }
+                }
+                /**
+                 * Write data
+                 */
+                $children = $row["children"];
+                unset($row["children"]);
+                unset($row["parameters"]);
+                $id = $this->writeData($tableAlias, $row);
+                /**
+                 * Record the children
+                 */
+                if ($id > 0) {
+                    foreach ($children as $tableChield => $child) {
+                        if (count($child) > 0) {
+                            if (!isset($child["isStrict"])) {
+                                $child["isStrict"] = false;
+                            }
+                            $this->importDataTable($tableChield, $child, $id, array(), $child["isStrict"]);
+                        }
                     }
                 }
             }

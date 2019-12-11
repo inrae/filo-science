@@ -8,9 +8,9 @@ class ImportException extends Exception
 
 /**
  * Open and read a csv file
- * 
+ *
  * @author quinton
- *        
+ *
  */
 class FiloImport
 {
@@ -20,11 +20,11 @@ class FiloImport
 
     /**
      * Open the file
-     * 
+     *
      * @param string $filename
      * @param string $separator
      * @param bool $utf8_encode
-     * 
+     *
      * @return array
      */
     function readFile(string $filename, string $separator = ",", bool $utf8_encode = false): array
@@ -40,11 +40,11 @@ class FiloImport
 
     /**
      * Fonction d'initialisation du fichier
-     * 
+     *
      * @param string  $filename
      * @param string  $separator
      * @param boolean $utf8_encode
-     * 
+     *
      * @throws ImportException
      */
     function initFile($filename, $separator = ",", $utf8_encode = false)
