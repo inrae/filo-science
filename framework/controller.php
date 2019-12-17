@@ -671,6 +671,7 @@ try {
      * General exception
      */
     echo _("Une erreur indéterminée s'est produite pendant le traitement de la requête. Si le problème persiste, consultez l'administrateur de l'application");
+    $message->setSyslog($e->getMessage());
     if ($APPLI_modeDeveloppement) {
         echo "<br>".$e->getMessage();
     }
