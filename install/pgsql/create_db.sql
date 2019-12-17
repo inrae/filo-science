@@ -7,30 +7,7 @@
 SET check_function_bodies = false;
 -- ddl-end --
 
--- object: filo | type: ROLE --
--- DROP ROLE IF EXISTS filo;
--- CREATE ROLE filo WITH
---	LOGIN
---	ENCRYPTED PASSWORD 'filoPassword';
--- ddl-end --
 
--- object: pgcrypto | type: EXTENSION --
--- DROP EXTENSION IF EXISTS pgcrypto CASCADE;
--- CREATE EXTENSION pgcrypto
--- WITH SCHEMA public;
--- ddl-end --
-
--- object: postgis | type: EXTENSION --
--- DROP EXTENSION IF EXISTS postgis CASCADE;
--- CREATE EXTENSION postgis
--- WITH SCHEMA public;
--- ddl-end --
-
--- object: tablefunc | type: EXTENSION --
--- DROP EXTENSION IF EXISTS tablefunc CASCADE;
--- CREATE EXTENSION tablefunc
--- WITH SCHEMA public;
--- ddl-end --
 
 -- Database creation must be done outside a multicommand file.
 -- These commands were put in this file only as a convenience.
@@ -41,7 +18,7 @@ SET check_function_bodies = false;
 -- -- ddl-end --
 -- COMMENT ON DATABASE filo IS E'Recording of measurements taken during scientific fisheries';
 -- -- ddl-end --
---
+-- 
 
 -- object: filo | type: SCHEMA --
 -- DROP SCHEMA IF EXISTS filo CASCADE;
@@ -194,6 +171,12 @@ CREATE SEQUENCE filo.place_place_id_seq
 	OWNED BY NONE;
 -- ddl-end --
 ALTER SEQUENCE filo.place_place_id_seq OWNER TO filo;
+-- ddl-end --
+
+-- object: postgis | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS postgis CASCADE;
+CREATE EXTENSION postgis
+WITH SCHEMA public;
 -- ddl-end --
 
 -- object: filo.station | type: TABLE --
@@ -1284,6 +1267,7 @@ CREATE TABLE filo.operation (
 	scale_id integer,
 	taxa_template_id integer,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
+	operation_geom geometry(MULTIPOINT, 4326),
 	CONSTRAINT operation_id_pk PRIMARY KEY (operation_id)
 
 );
@@ -1615,6 +1599,7 @@ CREATE TABLE filo.sequence_gear (
 	gear_method_id integer,
 	electric_current_type_id smallint,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
+	business_code varchar,
 	CONSTRAINT sequence_gear_pk PRIMARY KEY (sequence_gear_id)
 
 );
@@ -1628,6 +1613,8 @@ COMMENT ON COLUMN filo.sequence_gear.amperage IS E'List of gear used during oper
 COMMENT ON COLUMN filo.sequence_gear.gear_nb IS E'List of gear used during operation';
 -- ddl-end --
 COMMENT ON COLUMN filo.sequence_gear.depth IS E'List of gear used during operation';
+-- ddl-end --
+COMMENT ON COLUMN filo.sequence_gear.business_code IS E'List of gear used during operation';
 -- ddl-end --
 ALTER TABLE filo.sequence_gear OWNER TO filo;
 -- ddl-end --
@@ -2065,6 +2052,7 @@ CREATE TABLE filo.ambience (
 	turbidity_id integer,
 	sequence_id integer,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
+	ambience_geom geometry(POINT, 4326),
 	CONSTRAINT ambience_pk PRIMARY KEY (ambience_id)
 
 );
@@ -3425,7 +3413,7 @@ COMMENT ON COLUMN filo.dbversion.dbversion_date IS E'Table des versions de la ba
 ALTER TABLE filo.dbversion OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.3', E'2019-11-18');
+INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.4', E'2019-12-17');
 -- ddl-end --
 
 -- object: filo.taxa_template_taxa_template_id_seq | type: SEQUENCE --
@@ -3719,11 +3707,11 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 -- object: filo.v_individual_other_measures | type: VIEW --
 -- DROP VIEW IF EXISTS filo.v_individual_other_measures CASCADE;
 CREATE VIEW filo.v_individual_other_measures
-AS
+AS 
 
-select individual_id,
-string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures
-from individual,
+select individual_id, 
+string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures 
+from individual, 
 json_each_text(individual.other_measure) as metadata
 group by individual_id;
 -- ddl-end --
@@ -3814,6 +3802,13 @@ CREATE TABLE tracking.station_type (
 );
 -- ddl-end --
 ALTER TABLE tracking.station_type OWNER TO filo;
+-- ddl-end --
+
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de mesure physico-chimique');
+-- ddl-end --
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station d''enregistrement');
+-- ddl-end --
+INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de lacher');
 -- ddl-end --
 
 -- object: station_type_fk | type: CONSTRAINT --
@@ -4173,6 +4168,11 @@ CREATE INDEX log_ip_idx ON gacl.log
 	);
 -- ddl-end --
 
+-- object: tablefunc | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS tablefunc CASCADE;
+CREATE EXTENSION tablefunc
+WITH SCHEMA public;
+-- ddl-end --
 
 -- object: taxon_fk | type: CONSTRAINT --
 -- ALTER TABLE tracking.individual_tracking DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
@@ -4727,7 +4727,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 -- object: tracking.v_station_tracking | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_station_tracking CASCADE;
 CREATE VIEW tracking.v_station_tracking
-AS
+AS 
 
 SELECT
    station_id, station_name, station_long, station_lat, station_pk, geom
@@ -4748,7 +4748,7 @@ ALTER VIEW tracking.v_station_tracking OWNER TO filo;
 -- object: tracking.v_individual_tracking | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_individual_tracking CASCADE;
 CREATE VIEW tracking.v_individual_tracking
-AS
+AS 
 
 SELECT
    individual_id, scientific_name, taxon_id
@@ -4782,7 +4782,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 CREATE FUNCTION tracking.v_station_tracking_update ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE
+	VOLATILE 
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
@@ -4815,7 +4815,7 @@ CREATE TRIGGER v_station_tracking_update
 CREATE FUNCTION tracking.v_station_tracking_insert ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE
+	VOLATILE 
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
@@ -4834,7 +4834,7 @@ ALTER FUNCTION tracking.v_station_tracking_insert() OWNER TO filo;
 -- object: v_station_tracking_insert | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS v_station_tracking_insert ON tracking.v_station_tracking CASCADE;
 CREATE TRIGGER v_station_tracking_insert
-	INSTEAD OF INSERT
+	INSTEAD OF INSERT 
 	ON tracking.v_station_tracking
 	FOR EACH ROW
 	EXECUTE PROCEDURE tracking.v_station_tracking_insert();
@@ -4843,7 +4843,7 @@ CREATE TRIGGER v_station_tracking_insert
 -- object: tracking.v_antenna | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_antenna CASCADE;
 CREATE VIEW tracking.v_antenna
-AS
+AS 
 
 SELECT
    antenna_id, station_id, technology_type_id
@@ -4869,16 +4869,16 @@ ALTER VIEW tracking.v_antenna OWNER TO filo;
 CREATE FUNCTION tracking.v_antenna_update ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE
+	VOLATILE 
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
 	AS $$
 BEGIN
 if NEW.radius > 0 then
-update tracking.antenna set geom_polygon =
+update tracking.antenna set geom_polygon = 
 st_transform (
-	st_buffer (
+	st_buffer ( 
 		st_transform (
 		  st_setsrid(st_point(new.station_long, new.station_lat),4326)
 		,new.metric_srid)
@@ -4908,7 +4908,7 @@ CREATE TRIGGER v_antenna_update
 -- object: tracking.v_detection_location | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_detection_location CASCADE;
 CREATE VIEW tracking.v_detection_location
-AS
+AS 
 
 SELECT
    detection_id as id, individual_id, detection_date
@@ -4928,7 +4928,7 @@ select location_id as id, individual_id, detection_date
 	,null as antenna_code, antenna_type_name as antenna_type
 	,geom
 	,'mobile' as detection_type
-from tracking.location
+from tracking.location 
 	left outer join tracking.antenna_type using (antenna_type_id);
 -- ddl-end --
 COMMENT ON VIEW tracking.v_detection_location IS E'List of all detections and locations for a fish';
@@ -4978,7 +4978,66 @@ INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'export_mo
 INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'campaignOnly', E'[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[{"aliasName":"protocol_measure","isStrict":true}],"parameters":[{"aliasName":"analysis_template","fieldName":"analysis_template_id"}],"istablenn":false},{"tableName":"analysis_template","technicalKey":"analysis_template_id","isEmpty":true,"businessKey":"analysis_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"measure_template","technicalKey":"measure_template_id","isEmpty":false,"businessKey":"measure_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"protocol_measure","isEmpty":false,"parentKey":"protocol_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"measure_template_id","tableAlias":"measure_template"}},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]');
 -- ddl-end --
 
+-- object: pgcrypto | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS pgcrypto CASCADE;
+CREATE EXTENSION pgcrypto
+WITH SCHEMA public;
+-- ddl-end --
 
+-- object: filo.sequence_point_sequence_point_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS filo.sequence_point_sequence_point_id_seq CASCADE;
+CREATE SEQUENCE filo.sequence_point_sequence_point_id_seq
+	INCREMENT BY 1
+	MINVALUE 0
+	MAXVALUE 2147483647
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE filo.sequence_point_sequence_point_id_seq OWNER TO filo;
+-- ddl-end --
+
+-- object: filo.sequence_point | type: TABLE --
+-- DROP TABLE IF EXISTS filo.sequence_point CASCADE;
+CREATE TABLE filo.sequence_point (
+	sequence_point_id integer NOT NULL DEFAULT nextval('filo.sequence_point_sequence_point_id_seq'::regclass),
+	sequence_id integer NOT NULL,
+	localisation_id integer,
+	facies_id integer,
+	sequence_point_number smallint NOT NULL,
+	fish_number smallint,
+	CONSTRAINT sequence_point_pk PRIMARY KEY (sequence_point_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE filo.sequence_point IS E'Sampling points during the sequence';
+-- ddl-end --
+COMMENT ON COLUMN filo.sequence_point.fish_number IS E'Sampling points during the sequence';
+-- ddl-end --
+ALTER TABLE filo.sequence_point OWNER TO filo;
+-- ddl-end --
+
+-- object: sequence_fk | type: CONSTRAINT --
+-- ALTER TABLE filo.sequence_point DROP CONSTRAINT IF EXISTS sequence_fk CASCADE;
+ALTER TABLE filo.sequence_point ADD CONSTRAINT sequence_fk FOREIGN KEY (sequence_id)
+REFERENCES filo.sequence (sequence_id) MATCH FULL
+ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: localisation_fk | type: CONSTRAINT --
+-- ALTER TABLE filo.sequence_point DROP CONSTRAINT IF EXISTS localisation_fk CASCADE;
+ALTER TABLE filo.sequence_point ADD CONSTRAINT localisation_fk FOREIGN KEY (localisation_id)
+REFERENCES filo.localisation (localisation_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: facies_fk | type: CONSTRAINT --
+-- ALTER TABLE filo.sequence_point DROP CONSTRAINT IF EXISTS facies_fk CASCADE;
+ALTER TABLE filo.sequence_point ADD CONSTRAINT facies_fk FOREIGN KEY (facies_id)
+REFERENCES filo.facies (facies_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
 
 -- object: aclaco_aclacl_fk | type: CONSTRAINT --
 -- ALTER TABLE gacl.aclacl DROP CONSTRAINT IF EXISTS aclaco_aclacl_fk CASCADE;
@@ -5022,9 +5081,4 @@ REFERENCES gacl.acllogin (acllogin_id) MATCH SIMPLE
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
-INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de mesure physico-chimique');
--- ddl-end --
-INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station d''enregistrement');
--- ddl-end --
-INSERT INTO tracking.station_type (station_type_name) VALUES (E'Station de lacher');
--- ddl-end --
+
