@@ -107,7 +107,6 @@ class IndividualTracking extends ObjetBDD
      * @return array
      */
     function getListDetection(int $id, string $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', string $orderBy = "") :array {
-        $data = array();
         $sql = "
                 select detection_id as id, individual_id, to_char(detection_date, :formatDate) as detection_date
                     , nb_events, duration, validity, signal_force, observation
@@ -122,7 +121,7 @@ class IndividualTracking extends ObjetBDD
                     , null nb_events, null duration, true validity, signal_force, observation
                     , location_long, location_lat, null station_name
                     ,'mobile' as detection_type
-                from location 
+                from location
                 where individual_id = :id
         ";
         if (strlen ($orderBy)> 0) {
