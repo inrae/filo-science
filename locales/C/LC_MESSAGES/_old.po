@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 17:01+0100\n"
+"POT-Creation-Date: 2019-11-19 17:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -89,7 +89,7 @@ msgstr "Perform a data import"
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:18
 msgid "Paramètres &gt;"
-msgstr "Setting &gt;"
+msgstr "Settings >"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:18 ../../../param/menu.xml:67
@@ -315,7 +315,7 @@ msgstr "Templates of complementary analysis"
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:48
 msgid "Ambiances &gt;"
-msgstr "Ambiences &gt;"
+msgstr "Ambiences >"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:48
@@ -477,7 +477,7 @@ msgstr "Types of electric current"
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:67
 msgid "Télédétection &gt;"
-msgstr "Remote sensing &gt;"
+msgstr "Remote sensing >"
 
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:75
@@ -971,7 +971,6 @@ msgstr ""
 "operation, please contact the application manager"
 
 #: ../../../framework/identification/loginGestion.class.php:294
-#, fuzzy
 msgid "Modification de votre mot de passe"
 msgstr "Change your password"
 
