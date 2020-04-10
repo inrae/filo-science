@@ -8,7 +8,7 @@ class Sample extends ObjetBDD
                     ,scientific_name, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max
                     ,sequence_number
                     ,operation_id
-                    ,protocol_id, measure_default, measure_default_only
+                    ,protocol_id, measure_default, measure_default_only, existing_taxon_only
                     from sample
                     join sequence using (sequence_id)
                     join operation using (operation_id)

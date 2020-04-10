@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="measure_default_only"  class="control-label col-md-4">{t}Seule la longueur par défaut est-elle autorisée ?{/t}</label>
+                <label for="measure_default_only"  class="control-label col-md-4">{t}Seule la longueur par défaut est autorisée ?{/t}</label>
                 <div class="col-md-8" id="measure_default_only">
                     <label class="radio-inline">
                         <input  type="radio" name="measure_default_only" id="measure_default_only1" value="1" {if $data.measure_default_only == 1}checked{/if}>
@@ -49,6 +49,19 @@
                     </label>
                     <label class="radio-inline">
                         <input  type="radio" name="measure_default_only" id="measure_default_only2" value="0" {if $data.measure_default_only == 0}checked{/if}>
+                        {t}non{/t}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="existing_taxon_only"  class="control-label col-md-4">{t}Seuls les taxons existants sont autorisés ?{/t}</label>
+                <div class="col-md-8" id="measure_default_only">
+                    <label class="radio-inline">
+                        <input  type="radio" name="existing_taxon_only" id="existing_taxon_only1" value="1" {if $data.existing_taxon_only == 1}checked{/if}>
+                        {t}oui{/t}
+                    </label>
+                    <label class="radio-inline">
+                        <input  type="radio" name="existing_taxon_only" id="existing_taxon_only2" value="0" {if $data.existing_taxon_only == 0}checked{/if}>
                         {t}non{/t}
                     </label>
                 </div>

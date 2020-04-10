@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="290,1486" last-zoom="1" max-obj-count="98"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="805,418" last-zoom="1" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -2607,7 +2607,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="protocol" layer="0" collapse-mode="1" max-obj-count="9">
+<table name="protocol" layer="0" collapse-mode="1" max-obj-count="10">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of protocols used]]></comment>
@@ -2640,6 +2640,10 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<column name="measure_default_only" not-null="true" default-value="false">
 		<type name="boolean" length="0"/>
 		<comment><![CDATA[If true, only the measure_default type is used during the protocol]]></comment>
+	</column>
+	<column name="existing_taxon_only" not-null="true" default-value="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Limit the capacity to add a new taxon which is not defined in the taxon table]]></comment>
 	</column>
 	<constraint name="protocol_pk" type="pk-constr" table="filo.protocol">
 		<columns names="protocol_id" ref-type="src-columns"/>

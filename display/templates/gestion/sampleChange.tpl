@@ -381,7 +381,7 @@
                             class="red">*</span>{t}Nom du taxon :{/t}</label>
                     <div class="col-md-8">
                         <input id="taxon_name" type="text" class="form-control" name="taxon_name"
-                            value="{$data.taxon_name}" required>
+                            value="{$data.taxon_name}" required {if $sequence.existing_taxon_only == 1}readonly{/if}>
                     </div>
                 </div>
                 <div class="form-group">

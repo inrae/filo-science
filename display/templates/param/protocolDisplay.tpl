@@ -38,19 +38,23 @@
                 {/if}
                 </dd>
             </dl>
-            
+
             <dl class="dl-horizontal">
                 <dt>{t}Mesure de longueur réalisée par défaut :{/t}</dt>
                 <dd>
                     {if $data["measure_default"] == "sl"}{t}Longueur standard{/t}
                     {elseif $data.measure_default == "fl"}{t}Longueur fourche{/t}
                     {elseif $data.measure_default == "tl"}{t}Longueur totale{/t}
-                    {/if} 
+                    {/if}
                 </dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>{t}Seule la longueur par défaut est-elle autorisée ?{/t}</dt>
+                <dt>{t}Seule la longueur par défaut est autorisée ?{/t}</dt>
                 <dd>{if $data.measure_default_only == 1}{t}oui{/t}{else}{t}non{/t}{/if}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt>{t}Seuls les taxons existants sont autorisés ?{/t}</dt>
+                <dd>{if $data.existing_taxon_only == 1}{t}oui{/t}{else}{t}non{/t}{/if}</dd>
             </dl>
             <dl class="dl-horizontal">
                 <dt>{t}Modèle d'analyse complémentaire :{/t}</dt>

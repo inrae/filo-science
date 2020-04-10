@@ -29,7 +29,8 @@ class Protocol extends ObjetBDD
             "protocol_description" => array("type" => 0),
             "measure_default" => array('type' => 0, "requis" => 1),
             "measure_default_only" => array("type" => 1, "requis" => 1),
-            "analysis_template_id" => array("type" => 1)
+            "analysis_template_id" => array("type" => 1),
+            "existing_taxon_only" => array("type" => 1, "requis" => 1, "defaultValue" => 1)
         );
         parent::__construct($bdd, $param);
     }
@@ -41,9 +42,9 @@ class Protocol extends ObjetBDD
      */
     function getListProtocol()
     {
-        $sql = "select protocol_id, protocol_name, protocol_url, protocol_description,
-        measure_default, measure_default_only, 
-        analysis_template_id, analysis_template_name
+        $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
+        ,measure_default, measure_default_only, existing_taxon_only
+        ,analysis_template_id, analysis_template_name
         from protocol
         left outer join analysis_template using (analysis_template_id)
         order by protocol_name";
@@ -59,7 +60,7 @@ class Protocol extends ObjetBDD
     function getDetail($protocol_id)
     {
         $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
-                , measure_default, measure_default_only
+                , measure_default, measure_default_only, existing_taxon_only
                 ,analysis_template_id, analysis_template_name, analysis_template_schema
                 from protocol
                 left outer join analysis_template using (analysis_template_id)
