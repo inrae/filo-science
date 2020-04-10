@@ -44,7 +44,7 @@
                                     {$csvType.csv_type_name}
                                 </option>
                             {/foreach}
-                        </select> 
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -60,18 +60,24 @@
                     <div class="col-md-8">
                         <select id="separator" name="separator" class="form-control">
                             <option value=";" {if $data.separator == ";"}selected{/if}>
-                                {t}point-virgule{/t} 
+                                {t}point-virgule{/t}
                             </option>
                             <option value="," {if $data.separator == ","}selected{/if}>
-                                {t}virgule{/t} 
+                                {t}virgule{/t}
                             </option>
                             <option value="tab" {if $data.separator == "tab"}selected{/if}>
-                                {t}tabulation{/t} 
+                                {t}tabulation{/t}
                             </option>
                             <option value="space" {if $data.separator == "space"}selected{/if}>
-                                {t}espace{/t} 
-                            </option>   
+                                {t}espace{/t}
+                            </option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="first_line"  class="control-label col-md-4"><span class="red">*</span> {t}Première ligne à traiter :{/t}</label>
+                    <div class="col-md-8">
+                        <input id="first_line" type="text" class="form-control nombre" name="first_line" value="{$data.first_line}" required>
                     </div>
                 </div>
 
@@ -84,4 +90,4 @@
                 </form>
             </div>
         </div>
-        <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>           
+        <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>

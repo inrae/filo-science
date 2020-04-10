@@ -15,6 +15,7 @@
                     <th>{t}Type{/t}</th>
                     <th>{t}Format du fichier CSV{/t}</th>
                     <th>{t}Séparateur{/t}</th>
+                    <th>{t}1ère ligne à traiter{/t}</th>
                     {if $droits.param == 1}
                         <th>{t}Modifier{/t}</th>
                         <th>{t}Dupliquer{/t}</th>
@@ -33,6 +34,7 @@
                         <td>{$import.import_type_name}</td>
                         <td>{$import.csv_type_name}</td>
                         <td class="center">{$import.separator}</td>
+                        <td class="center">{$import.first_line}</td>
                         {if $droits.param == 1}
                             <td class="center">
                                 <a href="index.php?module=importDescriptionChange&import_description_id={$import.import_description_id}">

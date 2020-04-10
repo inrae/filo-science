@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="98"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="290,1486" last-zoom="1" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -2951,7 +2951,7 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbversion_number•dbversion_date⸣
-1.4•2019-12-17]]>
+1.5•2020-04-10]]>
 	</initial-data>
 </table>
 
@@ -3671,7 +3671,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="import_description" layer="3" collapse-mode="1" max-obj-count="6">
+<table name="import_description" layer="3" collapse-mode="1" max-obj-count="7">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[Import templates]]></comment>
@@ -3687,6 +3687,10 @@ Station de lacher]]>
 	<column name="separator" not-null="true" default-value="';'">
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[separator used between fields (; , tab, space)]]></comment>
+	</column>
+	<column name="first_line">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[First line to treat in the file]]></comment>
 	</column>
 	<constraint name="import_type_pk" type="pk-constr" table="import.import_description">
 		<columns names="import_description_id" ref-type="src-columns"/>

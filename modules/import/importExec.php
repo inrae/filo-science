@@ -31,7 +31,7 @@ if (isset($_FILES["filename"])) {
         include_once "modules/classes/import/import_function.class.php";
         include_once "modules/classes/import/import_column.class.php";
         /**
-         * Instanciate data classes 
+         * Instanciate data classes
          */
         switch ($importParam["import_type_id"]) {
             case 1:
@@ -79,7 +79,7 @@ if (isset($_FILES["filename"])) {
                 $line = $import->readLine();
                 if ($line) {
                     $numLine++;
-                    if ($numLine >= $importParam["num_line"]) {
+                    if ($numLine >= $importParam["first_line"]) {
                         /**
                          * Apply all functions for the current row
                          */
