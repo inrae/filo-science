@@ -1,10 +1,4 @@
 <h2>{t}Liste des types d'import{/t}</h2>
-{if $droits.param == 1}
-<a href="index.php?module=importTypeChange&import_type_id=0">
-    <img src="display/images/new.png" height="25">
-    {t}Nouveau modèle{/t}
-</a>
-{/if}
 <div class="row">
     <div class="col-md-6">
         <table id="importTypeList" class="table table-bordered table-hover datatable-nopaging ">
