@@ -11,7 +11,7 @@
     </a>
     {if $newRightEnabled == 1}
         <a href="index.php?module=acoChange&aclaco_id=0&aclappli_id={$data.aclappli_id}">
-            <img src="display/images/new.png" height="25">
+            <img src="{$display}/images/new.png" height="25">
             {t}Nouveau droit...{/t}
         </a>
     {/if}

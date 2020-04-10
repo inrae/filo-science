@@ -1,5 +1,5 @@
 /*
- * filo - 2018-0/-17
+ * COLLEC-SCIENCE - 2018-07-03
  * Script de creation des tables destinees a recevoir les donnees de l'application
  * database creation script
  * 
@@ -7,9 +7,9 @@
  * 
  * Schemas par defaut : col pour les donnees, et gacl pour les droits. 
  * Default schemas : col for data, gacl for right management
- * Si vous voulez utiliser d'autres schemas, modifiez ce script :
- * If you want use others schemas, change this script:
- * install/pgsql/create_db.sql
+ * Si vous voulez utiliser d'autres schemas, modifiez les scripts :
+ * If you want use others schemas, change these scripts:
+ * gacl_create_2.1.sql et col_create_2.1.sql 
  * Execution de ce script en ligne de commande, en etant connecte root :
  * at prompt, you cas execute this script as root:
  * su postgres -c "psql -f init_by_psql.sql"
@@ -26,29 +26,39 @@
   * Creation du compte de connexion et de la base de donnees
   * creation of connection account
   */
-CREATE ROLE filo WITH
-	LOGIN
-	ENCRYPTED PASSWORD 'filoPassword';
+CREATE USER collec WITH
+  LOGIN
+  NOSUPERUSER
+  INHERIT
+  NOCREATEDB
+  NOCREATEROLE
+  NOREPLICATION
+ PASSWORD 'collecPassword'
+;
 
 /*
  * Database creation
  */
-create database filo owner filo;
-\c "dbname=filo"
-create extension postgis schema public;
-create extension pgcrypto schema public;
-create extension tablefunc schema public;
+create database collec owner collec;
+\c "dbname=collec"
+ create extension if not exists btree_gin schema pg_catalog;
+ create extension if not exists pg_trgm schema pg_catalog;
+ create extension if not exists postgis schema public;
+ create extension if not exists  pgcrypto schema public;
+ -- object: grant_95c2183ced | type: PERMISSION --
+GRANT CREATE,CONNECT,TEMPORARY
+   ON DATABASE collec
+   TO collec;
+-- ddl-end --
 
 /*
- * connexion a la base filo, avec l'utilisateur filo, en localhost,
+ * connexion a la base collec, avec l'utilisateur collec, en localhost,
  * depuis psql
- * Connection to collec database with user filo on localhost server
+ * Connection to collec database with user collec on localhost server
  */
-\c "dbname=filo user=filo password=filoPassword host=localhost"
+\c "dbname=collec user=collec password=collecPassword host=localhost"
 
-
-/*
- * Creation des tables dans le schema col
- * Tables creation in schema col
+/**
+ * create structure
  */
-\ir pgsql/create_db.sql
+\ir pgsql/collec_create.sql

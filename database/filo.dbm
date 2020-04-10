@@ -3,13 +3,22 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="805,418" last-zoom="1" max-obj-count="98"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="0,28" last-zoom="0.3" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
       login="true"
       encrypted="true"
       password="filoPassword">
+</role>
+
+<role name="collec"
+      superuser="true"
+      createdb="true"
+      createrole="true"
+      inherit="true"
+      login="true"
+      password="collecPassword">
 </role>
 
 <database name="filo" is-template="false" allow-conns="true">
@@ -4656,6 +4665,55 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	 src-table="filo.facies"
 	 dst-table="filo.sequence_point"
 	 src-required="false" dst-required="false"/>
+
+<sequence name="request_request_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="filo"/>
+	<role name="collec"/>
+</sequence>
+
+<table name="request" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="filo"/>
+	<role name="collec"/>
+	<comment><![CDATA[Request table in database]]></comment>
+	<position x="1020" y="1740"/>
+	<column name="request_id" not-null="true" sequence="filo.request_request_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="create_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of create of the request]]></comment>
+	</column>
+	<column name="last_exec">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of the last execution]]></comment>
+	</column>
+	<column name="title" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Title of the request]]></comment>
+	</column>
+	<column name="body" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Body of the request. Don't begin it by SELECT, which will be added automatically]]></comment>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[Login of the creator of the request]]></comment>
+	</column>
+	<column name="datefields">
+		<type name="character varying" length="0"/>
+		<comment><![CDATA[List of the date fields used in the request, separated by a comma, for format it]]></comment>
+	</column>
+	<constraint name="request_pk" type="pk-constr" table="filo.request">
+		<columns names="request_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[create_date•last_exec•title•body•login•datefields⸣
+/now()/••Number of samples by collection•collection_name, count(*) as "number of samples"
+from sample
+join collection using (collection_id)
+group by collection_name•admin•]]>
+	</initial-data>
+</table>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">

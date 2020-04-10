@@ -10,6 +10,11 @@
 		<item module="campaignDisplay" label="Dernière campagne" tooltip="Affichage de la dernière campagne traitée récemment"/>
 		<item module="operationDisplay" label="Dernière opération" tooltip="Affichage de la dernière opération traitée récemment"/>
 		<item module="sequenceDisplay" label="Dernière séquence" tooltip="Affichage de la dernière séquence traitée récemment"/>
+		<item divider="1" droits="gestion"/>
+		<item module="dbstructureSchema" droits="gestion" label="Schéma de la base de données" tooltip="Schéma de la base de données"/>
+		<item module="dbstructureHtml" droits='gestion' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes"/>
+		<item module="dbstructureLatex" droits='gestion' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex"/>
+		<item module="requestList" label="Requêtes SQL" tooltip="Exécution de requêtes SQL dans la base de données" droits="param"/>
 	</item>
 
 	<item module="default" label="Télédétection" tooltip="Suivi des poissons en télédétection">
@@ -89,7 +94,7 @@
 		<item module="groupList" droits="admin" label="ACL - groupes de logins" tooltip="Groupes de logins et logins rattachés aux groupes"/>
 		<item module="dbparamList" droits="admin" label="Paramètres de l'application" tooltip="Liste des paramètres pérennes de l'application" />
 		<item divider='1'/>
-		<item module="dbstructureGacl" droits="admin" label="Structure de la base de données des droits (HTML)" tooltip="Liste des tables et des colonnes de la base de données de gestion des droits"/>
+		<item module="logList" droits="admin" label="Logs" tooltip="Consultation des logs enregistrées"/>
 		<item module="phpinfo" droits="admin" label="PHP info" tooltip="configuration générale du serveur PHP"/>
 	</item>
 	<item module="connexion" label="Connexion" tooltip="S'identifier dans l'application" onlynoconnect="1"/>

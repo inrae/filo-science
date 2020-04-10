@@ -154,7 +154,11 @@ class LoginGestion extends ObjetBDD
      */
     public function getListeTriee()
     {
-        $sql = 'select id,login,nom,prenom,mail,actif from LoginGestion order by nom,prenom, login';
+        $sql = "select id,l.login,nom,prenom,mail,actif, is_clientws, count(*) as dbconnect_provisional_nb
+        from logingestion l
+        left outer join log on (l.login = log.login and log_date > datemodif
+                       and commentaire = 'db-ok-expired')
+        group by id, l.login, nom, prenom, mail, actif, is_clientws";
         return ObjetBDD::getListeParam($sql);
     }
 
@@ -171,7 +175,7 @@ class LoginGestion extends ObjetBDD
                 $data["password"] = $this->_encryptPassword($data["pass1"]);
                 $data["is_expired"] = 1;
             } else {
-                throw new IdentificationException(_("Password not enough complex or too small"));
+                throw new IdentificationException(_("Mot de passe insuffisamment complexe ou trop petit"));
             }
         }
         $data["datemodif"] = date($_SESSION["MASKDATELONG"]);
@@ -184,6 +188,18 @@ class LoginGestion extends ObjetBDD
             $data["is_clientws"] = 0;
         }
         return parent::ecrire($data);
+    }
+
+    function getDbconnectProvisionalNb($login)
+    {
+        $sql = "select count(*) as dbconnect_provisional_nb
+        from logingestion l
+        join log on (l.login = log.login and log_date > datemodif
+                       and commentaire = 'db-ok-expired')
+        where l.login = :login";
+        $result = $this->lireParamAsPrepared($sql, array("login" => $login));
+        $result["dbconnect_provisional_db"] > 0 ? $val = $result["dbconnect_provisional_db"] : $val = 0;
+        return $val;
     }
 
     /**
@@ -232,7 +248,7 @@ class LoginGestion extends ObjetBDD
         if (isset($_SESSION["login"])) {
             $oldData = $this->lireByLogin($_SESSION["login"]);
             if ($log->getLastConnexionType($_SESSION["login"]) == "db") {
-                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"]) ) {
+                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"]) == true) {
                     /*
                      * Verifications de validite du mot de passe
                      */
@@ -263,8 +279,10 @@ class LoginGestion extends ObjetBDD
     public function changePasswordAfterLost($login, $pass1, $pass2)
     {
         $retour = 0;
-        if (strlen($login) > 0 && $this->_passwordVerify($pass1, $pass2)) {
-            $retour = $this->writeNewPassword($login, $pass1);
+        if (strlen($login) > 0) {
+            if ($this->_passwordVerify($pass1, $pass2)) {
+                $retour = $this->writeNewPassword($login, $pass1);
+            }
         }
         return $retour;
     }
