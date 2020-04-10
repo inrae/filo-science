@@ -50,11 +50,11 @@
 <script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-custom/combobox.js"></script>
 
 <!-- Affichage des photos -->
-<link rel="stylesheet" href="display/node_modules/magnific-popup/dist/magnific-popup.css"> 
-<script src="display/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js"></script> 
+<link rel="stylesheet" href="display/node_modules/magnific-popup/dist/magnific-popup.css">
+<script src="display/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 
 <!-- Cookies -->
-<script src="display/javascript/js-cookie-master/src/js.cookie.js"></script> 
+<script src="display/javascript/js-cookie-master/src/js.cookie.js"></script>
 
 <!-- Code specifique -->
 <link rel="stylesheet" type="text/css" href="display/CSS/bootstrap-prototypephp.css" >
@@ -120,7 +120,7 @@ $(document).ready(function() {
 		"searching": false,
 		"ordering": false
 	});
-	$('.datatable-export').DataTable({	
+	$('.datatable-export').DataTable({
 		 dom: 'Bfrtip',
 		"language" : dataTableLanguage,
 		"paging" : false,
@@ -136,7 +136,7 @@ $(document).ready(function() {
             'print'
         ]
 	});
-	$('.datatable-export-paging').DataTable({	
+	$('.datatable-export-paging').DataTable({
 		 dom: 'Bfrtip',
 		"language" : dataTableLanguage,
 		"paging" : true,
@@ -170,13 +170,13 @@ $(document).ready(function() {
 		'pattern' : '-?[0-9]+',
 		'maxlength' : "10"
 	});
-	
+
 	$(".date").datepicker( $.datepicker.regional['{$LANG["date"]["locale"]}'] );
 	$(".datepicker").datepicker( $.datepicker.regional['{$LANG["date"]["locale"]}'] );
 	$.datepicker.setDefaults($.datepicker.regional['{$LANG["date"]["locale"]}']);
 	$('.timepicker').attr('pattern', '[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9]');
 	$.timepicker.setDefaults($.timepicker.regional['{$LANG["date"]["locale"]}']);
-	$('.datetimepicker').datetimepicker({ 
+	$('.datetimepicker').datetimepicker({
 		dateFormat: '{$LANG["date"]["formatdatecourt"]}',
 		timeFormat: 'HH:mm:ss',
 		timeInput: true
