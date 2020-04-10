@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2-beta2" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="98"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="0,0" last-zoom="1" max-obj-count="98"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -2354,7 +2354,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="operator" layer="0" collapse-mode="2" max-obj-count="6">
+<table name="operator" layer="0" collapse-mode="1" max-obj-count="6">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of operators]]></comment>
@@ -2383,7 +2383,7 @@ By default : total_length and weight]]></comment>
 	</constraint>
 </table>
 
-<table name="operation_operator" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="operation_operator" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Operators rattached to an operation]]></comment>
@@ -2422,7 +2422,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="analysis_template" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="analysis_template" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table of types of complementary analysis]]></comment>
@@ -2449,7 +2449,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="clogging" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="clogging" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of cloggings]]></comment>
@@ -2493,7 +2493,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="sinuosity" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="sinuosity" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of sinuosities of the river]]></comment>
@@ -2531,7 +2531,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="flow_trend" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="flow_trend" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of trends of flow]]></comment>
@@ -2569,7 +2569,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="turbidity" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="turbidity" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of turbidity]]></comment>
@@ -2607,7 +2607,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="protocol" layer="0" collapse-mode="2" max-obj-count="9">
+<table name="protocol" layer="0" collapse-mode="1" max-obj-count="9">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of protocols used]]></comment>
@@ -2675,7 +2675,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	 dst-table="filo.measure_template"
 	 src-required="true" dst-required="false"/>
 
-<table name="protocol_measure" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="protocol_measure" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of particular species measures used in the protocol]]></comment>
@@ -2721,7 +2721,7 @@ Possible values : sl, fl, tl, wd, ot]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="water_regime" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="water_regime" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of water regimes]]></comment>
@@ -2754,7 +2754,7 @@ Crue•4]]>
 	 dst-table="filo.operation"
 	 src-required="false" dst-required="false"/>
 
-<table name="electric_current_type" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="electric_current_type" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
@@ -2780,7 +2780,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="fishing_strategy" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="fishing_strategy" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<tag name="parametres"/>
@@ -2816,7 +2816,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="scale" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="scale" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Scale of the operation (global station, point, ambience)]]></comment>
@@ -2853,7 +2853,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="gear_method" layer="0" collapse-mode="2" max-obj-count="2">
+<table name="gear_method" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Method of usage of the gear (in boat, walk fishing, etc.)]]></comment>
@@ -2894,7 +2894,7 @@ Crue•4]]>
 	 dst-table="filo.sequence_gear"
 	 src-required="false" dst-required="false"/>
 
-<table name="dbparam" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="dbparam" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des parametres associes de maniere intrinseque a l'instance]]></comment>
@@ -2930,7 +2930,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="dbversion" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="dbversion" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des versions de la base de donnees]]></comment>
@@ -2960,7 +2960,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="taxa_template" layer="0" collapse-mode="2" max-obj-count="4">
+<table name="taxa_template" layer="0" collapse-mode="1" max-obj-count="4">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of templates used to select taxa]]></comment>
@@ -3008,7 +3008,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="document" layer="0" collapse-mode="2" max-obj-count="10">
+<table name="document" layer="0" collapse-mode="1" max-obj-count="10">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Documents stocked in the database]]></comment>
@@ -3057,7 +3057,7 @@ Crue•4]]>
 	</customidxs>
 </table>
 
-<table name="mime_type" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="mime_type" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of types mime associable to the documents]]></comment>
@@ -3105,7 +3105,7 @@ Crue•4]]>
 	 dst-table="filo.document"
 	 src-required="true" dst-required="false"/>
 
-<table name="project_document" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="project_document" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Documents associated with a project]]></comment>
@@ -3146,7 +3146,7 @@ Crue•4]]>
 	 identifier="true"
 />
 
-<table name="protocol_document" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="protocol_document" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of the documents associated with a protocol]]></comment>
@@ -3208,7 +3208,7 @@ Crue•4]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="passwordlost" layer="1" collapse-mode="2" max-obj-count="6">
+<table name="passwordlost" layer="1" collapse-mode="1" max-obj-count="6">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<tag name="login"/>
@@ -3250,7 +3250,7 @@ Crue•4]]>
 	 dst-table="gacl.passwordlost"
 	 src-required="true" dst-required="false"/>
 
-<table name="operation_document" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="operation_document" layer="0" collapse-mode="1" max-obj-count="3">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Documents associated with an operation]]></comment>
@@ -3280,7 +3280,7 @@ Crue•4]]>
 	 identifier="true"
 />
 
-<view name="v_individual_other_measures" layer="0" collapse-mode="2" max-obj-count="1">
+<view name="v_individual_other_measures" layer="0" collapse-mode="1" max-obj-count="1">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<position x="820" y="1640"/>
@@ -3308,7 +3308,7 @@ group by individual_id]]></expression>
 	<role name="filo"/>
 </sequence>
 
-<table name="individual_tracking" layer="2" collapse-mode="2" max-obj-count="8">
+<table name="individual_tracking" layer="2" collapse-mode="1" max-obj-count="8">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
@@ -3342,7 +3342,7 @@ group by individual_id]]></expression>
 	<special-pk-cols indexes="0"/>
 </relationship>
 
-<table name="station_tracking" layer="2" collapse-mode="2" max-obj-count="3">
+<table name="station_tracking" layer="2" collapse-mode="1" max-obj-count="3">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="projet"/>
@@ -3365,7 +3365,7 @@ group by individual_id]]></expression>
 	<role name="filo"/>
 </sequence>
 
-<table name="station_type" layer="2" collapse-mode="2" max-obj-count="2">
+<table name="station_type" layer="2" collapse-mode="1" max-obj-count="2">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="projet"/>
@@ -3401,7 +3401,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="antenna" layer="2" collapse-mode="2" max-obj-count="7">
+<table name="antenna" layer="2" collapse-mode="1" max-obj-count="7">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="projet"/>
@@ -3454,7 +3454,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="detection" layer="2" collapse-mode="2" max-obj-count="10">
+<table name="detection" layer="2" collapse-mode="1" max-obj-count="10">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
@@ -3524,7 +3524,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="probe" layer="2" collapse-mode="2" max-obj-count="3">
+<table name="probe" layer="2" collapse-mode="1" max-obj-count="3">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[Probe used to record the environmental variables]]></comment>
@@ -3564,7 +3564,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="probe_measure" layer="2" collapse-mode="2" max-obj-count="6">
+<table name="probe_measure" layer="2" collapse-mode="1" max-obj-count="6">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of the measures recorded by a probe]]></comment>
@@ -3610,7 +3610,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="transmitter_type" layer="2" collapse-mode="2" max-obj-count="4">
+<table name="transmitter_type" layer="2" collapse-mode="1" max-obj-count="4">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
@@ -3671,7 +3671,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="import_description" layer="3" collapse-mode="2" max-obj-count="6">
+<table name="import_description" layer="3" collapse-mode="1" max-obj-count="6">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[Import templates]]></comment>
@@ -3703,7 +3703,7 @@ Station de lacher]]>
 	</customidxs>
 </table>
 
-<table name="csv_type" layer="3" collapse-mode="2" max-obj-count="2">
+<table name="csv_type" layer="3" collapse-mode="1" max-obj-count="2">
 	<schema name="import"/>
 	<role name="filo"/>
 	<tag name="import"/>
@@ -3743,7 +3743,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="import_column" layer="3" collapse-mode="2" max-obj-count="4">
+<table name="import_column" layer="3" collapse-mode="1" max-obj-count="4">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of all columns of the file]]></comment>
@@ -3830,7 +3830,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="function_type" layer="3" collapse-mode="2" max-obj-count="3">
+<table name="function_type" layer="3" collapse-mode="1" max-obj-count="3">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of functions writed in the application, and usable to test or transform the data]]></comment>
@@ -3875,7 +3875,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="import_function" layer="3" collapse-mode="2" max-obj-count="8">
+<table name="import_function" layer="3" collapse-mode="1" max-obj-count="8">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of functions to be performed for each row of the file]]></comment>
@@ -3942,7 +3942,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="import_type" layer="3" collapse-mode="2" max-obj-count="4">
+<table name="import_type" layer="3" collapse-mode="1" max-obj-count="4">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of types of import]]></comment>
@@ -3967,7 +3967,7 @@ Station de lacher]]>
 	</constraint>
 	<initial-data>
 <![CDATA[import_type_id•import_type_name•tablename•column_list⸣
-1•Detection•detection•detection_date,nb_events,duration,signal_force⸣
+1•Detection•detection•individual_id,detection_date,nb_events,duration,signal_force⸣
 2•Probe data/données de sonde•probe_measure•probe_measure_date,probe_measure_value⸣
 3•Manual detection•location•individual_id,detection_date,signal_force,observation,location_long,location_lat,antenna_type_id]]>
 	</initial-data>
@@ -3978,7 +3978,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="technology_type" layer="2" collapse-mode="2" max-obj-count="2">
+<table name="technology_type" layer="2" collapse-mode="1" max-obj-count="2">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[Types of technologies used for detection]]></comment>
@@ -4033,7 +4033,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="location" layer="2" collapse-mode="2" max-obj-count="12">
+<table name="location" layer="2" collapse-mode="1" max-obj-count="12">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of locations of manual detections]]></comment>
@@ -4090,7 +4090,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="antenna_type" layer="2" collapse-mode="2" max-obj-count="2">
+<table name="antenna_type" layer="2" collapse-mode="1" max-obj-count="2">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
@@ -4120,7 +4120,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="antenna_event" layer="2" collapse-mode="2" max-obj-count="6">
+<table name="antenna_event" layer="2" collapse-mode="1" max-obj-count="6">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[Events occured on an antenna]]></comment>
@@ -4304,7 +4304,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="parameter_measure_type" layer="2" collapse-mode="2" max-obj-count="3">
+<table name="parameter_measure_type" layer="2" collapse-mode="1" max-obj-count="3">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[Types of parameters used with probes]]></comment>
@@ -4335,7 +4335,7 @@ Station de lacher]]>
 	 dst-table="tracking.probe_measure"
 	 src-required="true" dst-required="false"/>
 
-<view name="v_station_tracking" layer="2" collapse-mode="2" max-obj-count="2">
+<view name="v_station_tracking" layer="2" collapse-mode="1" max-obj-count="2">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of stations used for tracking, with geom object]]></comment>
@@ -4356,7 +4356,7 @@ join filo.project using (project_id)]]></expression>
 	<expression type="from-exp">1</expression>
 </view>
 
-<view name="v_individual_tracking" layer="0" collapse-mode="2" max-obj-count="2">
+<view name="v_individual_tracking" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[View of the fishes tracked]]></comment>
@@ -4449,7 +4449,7 @@ END;]]></definition>
 		<function signature="tracking.v_station_tracking_insert()"/>
 </trigger>
 
-<view name="v_antenna" layer="0" collapse-mode="2" max-obj-count="2">
+<view name="v_antenna" layer="0" collapse-mode="1" max-obj-count="2">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<position x="20" y="940"/>
@@ -4514,7 +4514,7 @@ END;]]></definition>
 		<function signature="tracking.v_antenna_update()"/>
 </trigger>
 
-<view name="v_detection_location" layer="0" collapse-mode="2" max-obj-count="1">
+<view name="v_detection_location" layer="0" collapse-mode="1" max-obj-count="1">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of all detections and locations for a fish]]></comment>
@@ -4549,7 +4549,7 @@ from tracking.location
 	<role name="filo"/>
 </sequence>
 
-<table name="export_model" layer="3" collapse-mode="2" max-obj-count="3">
+<table name="export_model" layer="3" collapse-mode="1" max-obj-count="3">
 	<schema name="import"/>
 	<role name="filo"/>
 	<comment><![CDATA[Structure of an export/import of table data]]></comment>
@@ -4589,7 +4589,7 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	<role name="filo"/>
 </sequence>
 
-<table name="sequence_point" layer="0" collapse-mode="2" max-obj-count="7">
+<table name="sequence_point" layer="0" collapse-mode="1" max-obj-count="7">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Sampling points during the sequence]]></comment>
@@ -4709,9 +4709,9 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclgroup_fk"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="987.64" y="210.733"/>
-	<position x="987.64" y="157"/>
-	<position x="916.427" y="157"/>
+		<position x="974.921" y="213.4"/>
+	<position x="974.921" y="157"/>
+	<position x="907.947" y="157"/>
 	</line>
 </relationship>
 
