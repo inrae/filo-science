@@ -1,11 +1,12 @@
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler  version: 0.9.2-beta2
+-- pgModeler  version: 0.9.2
 -- PostgreSQL version: 9.6
 -- Project Site: pgmodeler.io
 -- Model Author: Eric Quinton
 
 SET check_function_bodies = false;
 -- ddl-end --
+
 
 
 
@@ -18,7 +19,7 @@ SET check_function_bodies = false;
 -- -- ddl-end --
 -- COMMENT ON DATABASE filo IS E'Recording of measurements taken during scientific fisheries';
 -- -- ddl-end --
--- 
+--
 
 -- object: filo | type: SCHEMA --
 -- DROP SCHEMA IF EXISTS filo CASCADE;
@@ -97,11 +98,11 @@ CREATE TABLE filo.project (
 -- ddl-end --
 COMMENT ON TABLE filo.project IS E'List of projects. This table is used for grant rights';
 -- ddl-end --
-COMMENT ON COLUMN filo.project.project_name IS E'List of projects. This table is used for grant rights';
+COMMENT ON COLUMN filo.project.project_name IS E'Name of the project';
 -- ddl-end --
-COMMENT ON COLUMN filo.project.is_active IS E'List of projects. This table is used for grant rights';
+COMMENT ON COLUMN filo.project.is_active IS E'Specify if the project is currently active';
 -- ddl-end --
-COMMENT ON COLUMN filo.project.metric_srid IS E'List of projects. This table is used for grant rights';
+COMMENT ON COLUMN filo.project.metric_srid IS E'Srid in metric referential, for calculate circles or other geographic objects';
 -- ddl-end --
 ALTER TABLE filo.project OWNER TO filo;
 -- ddl-end --
@@ -119,7 +120,7 @@ CREATE TABLE filo.campaign (
 -- ddl-end --
 COMMENT ON TABLE filo.campaign IS E'List of campaigns rattached to a project';
 -- ddl-end --
-COMMENT ON COLUMN filo.campaign.campaign_name IS E'List of campaigns rattached to a project';
+COMMENT ON COLUMN filo.campaign.campaign_name IS E'Name of the campaign';
 -- ddl-end --
 ALTER TABLE filo.campaign OWNER TO filo;
 -- ddl-end --
@@ -173,12 +174,6 @@ CREATE SEQUENCE filo.place_place_id_seq
 ALTER SEQUENCE filo.place_place_id_seq OWNER TO filo;
 -- ddl-end --
 
--- object: postgis | type: EXTENSION --
--- DROP EXTENSION IF EXISTS postgis CASCADE;
-CREATE EXTENSION postgis
-WITH SCHEMA public;
--- ddl-end --
-
 -- object: filo.station | type: TABLE --
 -- DROP TABLE IF EXISTS filo.station CASCADE;
 CREATE TABLE filo.station (
@@ -197,17 +192,17 @@ CREATE TABLE filo.station (
 -- ddl-end --
 COMMENT ON TABLE filo.station IS E'List of the stations used for a project';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_name IS E'List of the stations used for a project';
+COMMENT ON COLUMN filo.station.station_name IS E'Name of the station';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_long IS E'List of the stations used for a project';
+COMMENT ON COLUMN filo.station.station_long IS E'Longitude of the station, in WGS84, numeric value';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_lat IS E'List of the stations used for a project';
+COMMENT ON COLUMN filo.station.station_lat IS E'Latitude of the station, in WGS84, numeric value';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_pk IS E'List of the stations used for a project';
+COMMENT ON COLUMN filo.station.station_pk IS E'Kilometer point from source, in meters';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.station_code IS E'List of the stations used for a project';
+COMMENT ON COLUMN filo.station.station_code IS E'Code of the station, according to the nomenclature sandre.eaufrance.fr';
 -- ddl-end --
-COMMENT ON COLUMN filo.station.geom IS E'List of the stations used for a project';
+COMMENT ON COLUMN filo.station.geom IS E'Geographical representation of the situation of the station';
 -- ddl-end --
 ALTER TABLE filo.station OWNER TO filo;
 -- ddl-end --
@@ -259,23 +254,23 @@ CREATE TABLE filo.taxon (
 -- ddl-end --
 COMMENT ON TABLE filo.taxon IS E'List of taxons';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.scientific_name IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.scientific_name IS E'Scientific name of the taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.author IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.author IS E'Author of the description of the taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.common_name IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.common_name IS E'Common name of the taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.taxon_code IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.taxon_code IS E'Code used for reference the taxon in national nomenclature';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.fresh_code IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.fresh_code IS E'code mnemotechnic used for fishing operations in fresh water';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.sea_code IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.sea_code IS E'Code mnemotechnic used for fishing operations in sea water';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.ecotype IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.ecotype IS E'Specific ecotype used for this taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.length_max IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.length_max IS E'Length maximum, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxon.weight_max IS E'List of taxons';
+COMMENT ON COLUMN filo.taxon.weight_max IS E'weight maximum, in g';
 -- ddl-end --
 ALTER TABLE filo.taxon OWNER TO filo;
 -- ddl-end --
@@ -1274,39 +1269,39 @@ CREATE TABLE filo.operation (
 -- ddl-end --
 COMMENT ON TABLE filo.operation IS E'Description of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.operation_id IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.operation_id IS E'Operations rattached at a campaign';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.operation_name IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.operation_name IS E'Name of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.date_start IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.date_start IS E'Start date of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.date_end IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.date_end IS E'Date of end of operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.freshwater IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.freshwater IS E'Is the operation in fresh water ?';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.long_start IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.long_start IS E'Longitude of the first point, in wgs84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.lat_start IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.lat_start IS E'Latitude of the first point, in WGS84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.long_end IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.long_end IS E'Longitude of the last point, in WGS84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.lat_end IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.lat_end IS E'Latitude of the last point, in WGS84 (decimal)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.pk_source IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.pk_source IS E'Distance from the source, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.pk_mouth IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.pk_mouth IS E'Distance from the mouth, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.length IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.length IS E'Length of the sampled zone, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.side IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.side IS E'Position in the river (left side, central, right side, etc.)';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.altitude IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.altitude IS E'Altitude, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.tidal_coef IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.tidal_coef IS E'Tidal coefficient or water high of the tidal';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.debit IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.debit IS E'Debit of the river, in m³/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation.surface IS E'Description of operation';
+COMMENT ON COLUMN filo.operation.surface IS E'Surface parsed, in square meters';
 -- ddl-end --
 ALTER TABLE filo.operation OWNER TO filo;
 -- ddl-end --
@@ -1334,13 +1329,13 @@ CREATE TABLE filo.sequence (
 -- ddl-end --
 COMMENT ON TABLE filo.sequence IS E'Catching sequence';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.sequence_number IS E'Catching sequence';
+COMMENT ON COLUMN filo.sequence.sequence_number IS E'Number of sequence in the operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.date_start IS E'Catching sequence';
+COMMENT ON COLUMN filo.sequence.date_start IS E'Start time of fishing at this place';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.date_end IS E'Catching sequence';
+COMMENT ON COLUMN filo.sequence.date_end IS E'End time of fishing at this place';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence.fishing_duration IS E'Catching sequence';
+COMMENT ON COLUMN filo.sequence.fishing_duration IS E'Fishing duration, in mn';
 -- ddl-end --
 ALTER TABLE filo.sequence OWNER TO filo;
 -- ddl-end --
@@ -1372,17 +1367,17 @@ CREATE TABLE filo.sample (
 -- ddl-end --
 COMMENT ON TABLE filo.sample IS E'List of samplings. One or many for a taxon';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.taxon_name IS E'List of samplings. One or many for a taxon';
+COMMENT ON COLUMN filo.sample.taxon_name IS E'Name of the taxon, issued from the table of taxa or created if a new taxon discovered';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.total_number IS E'List of samplings. One or many for a taxon';
+COMMENT ON COLUMN filo.sample.total_number IS E'Total number of catched elements\n0 : presence of the taxon, but number not estimated';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.total_measured IS E'List of samplings. One or many for a taxon';
+COMMENT ON COLUMN filo.sample.total_measured IS E'Number of elements measured';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.total_weight IS E'List of samplings. One or many for a taxon';
+COMMENT ON COLUMN filo.sample.total_weight IS E'Total weight, in g';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.sample_size_min IS E'List of samplings. One or many for a taxon';
+COMMENT ON COLUMN filo.sample.sample_size_min IS E'Minimal size of fishes in this sample, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.sample.sample_size_max IS E'List of samplings. One or many for a taxon';
+COMMENT ON COLUMN filo.sample.sample_size_max IS E'Maximal size of fishes in this sample, in mm';
 -- ddl-end --
 ALTER TABLE filo.sample OWNER TO filo;
 -- ddl-end --
@@ -1443,31 +1438,31 @@ CREATE TABLE filo.individual (
 -- ddl-end --
 COMMENT ON TABLE filo.individual IS E'List of individuals measured';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.other_measure IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.other_measure IS E'List of others measures realized on an item';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.sl IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.sl IS E'Standard length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.fl IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.fl IS E'Fork length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.tl IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.tl IS E'Total length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.wd IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.wd IS E'Width of disk, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.ot IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.ot IS E'Other length, in mm';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.weight IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.weight IS E'Weight, in g';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.age IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.age IS E'Age of fish, in year';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.measure_estimated IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.measure_estimated IS E'Is the measure estimated ?';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.pathology_codes IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.pathology_codes IS E'List of codes of pathologies or remarks';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.tag IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.tag IS E'RFID tag';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.tag_posed IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.tag_posed IS E'RFID tag posed on the fish';
 -- ddl-end --
-COMMENT ON COLUMN filo.individual.transmitter IS E'List of individuals measured';
+COMMENT ON COLUMN filo.individual.transmitter IS E'Acoustic or radio transmitter identifier';
 -- ddl-end --
 ALTER TABLE filo.individual OWNER TO filo;
 -- ddl-end --
@@ -1503,6 +1498,8 @@ CREATE TABLE filo.measure_template (
 	CONSTRAINT measure_template_pk PRIMARY KEY (measure_template_id)
 
 );
+-- ddl-end --
+COMMENT ON COLUMN filo.measure_template.measure_template_schema IS E'List of all measures usable by a taxon.\nFor each type : name, extended.\nBy default : total_length and weight';
 -- ddl-end --
 ALTER TABLE filo.measure_template OWNER TO filo;
 -- ddl-end --
@@ -1577,11 +1574,11 @@ CREATE TABLE filo.gear (
 -- ddl-end --
 COMMENT ON TABLE filo.gear IS E'Gear used for fishery';
 -- ddl-end --
-COMMENT ON COLUMN filo.gear.gear_length IS E'Gear used for fishery';
+COMMENT ON COLUMN filo.gear.gear_length IS E'Length of the net or other gear, in metter';
 -- ddl-end --
-COMMENT ON COLUMN filo.gear.gear_height IS E'Gear used for fishery';
+COMMENT ON COLUMN filo.gear.gear_height IS E'Height of the net or other gear, in metter';
 -- ddl-end --
-COMMENT ON COLUMN filo.gear.mesh_size IS E'Gear used for fishery';
+COMMENT ON COLUMN filo.gear.mesh_size IS E'Size of the mesh, in textual form';
 -- ddl-end --
 ALTER TABLE filo.gear OWNER TO filo;
 -- ddl-end --
@@ -1606,15 +1603,15 @@ CREATE TABLE filo.sequence_gear (
 -- ddl-end --
 COMMENT ON TABLE filo.sequence_gear IS E'List of gear used during operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.voltage IS E'List of gear used during operation';
+COMMENT ON COLUMN filo.sequence_gear.voltage IS E'Voltage used during electric fishing, in volt';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.amperage IS E'List of gear used during operation';
+COMMENT ON COLUMN filo.sequence_gear.amperage IS E'Amperage used during electric fishing, in ampere';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.gear_nb IS E'List of gear used during operation';
+COMMENT ON COLUMN filo.sequence_gear.gear_nb IS E'Nb of gears';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.depth IS E'List of gear used during operation';
+COMMENT ON COLUMN filo.sequence_gear.depth IS E'Depth of the gear';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_gear.business_code IS E'List of gear used during operation';
+COMMENT ON COLUMN filo.sequence_gear.business_code IS E'Business code of the gear, especially for traps';
 -- ddl-end --
 ALTER TABLE filo.sequence_gear OWNER TO filo;
 -- ddl-end --
@@ -1717,23 +1714,23 @@ CREATE TABLE filo.analysis (
 -- ddl-end --
 COMMENT ON TABLE filo.analysis IS E'Water analysis';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.analysis_date IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.analysis_date IS E'Date/time of the sampling';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.ph IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.ph IS E'pH';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.temperature IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.temperature IS E'Temperature, in °C';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.o2_pc IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.o2_pc IS E'Percentage of oxygen saturation';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.o2_mg IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.o2_mg IS E'Oxygen level, in mg/l';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.salinity IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.salinity IS E'Salinity';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.conductivity IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.conductivity IS E'Conductivity, in µS/cm';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.secchi IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.secchi IS E'Secchi depth, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis.other_analysis IS E'Water analysis';
+COMMENT ON COLUMN filo.analysis.other_analysis IS E'Others analysis performed (cf. analysis_template)';
 -- ddl-end --
 ALTER TABLE filo.analysis OWNER TO filo;
 -- ddl-end --
@@ -1757,7 +1754,7 @@ CREATE TABLE filo.sexe (
 -- ddl-end --
 COMMENT ON TABLE filo.sexe IS E'Sexe of fishs';
 -- ddl-end --
-COMMENT ON COLUMN filo.sexe.sexe_code IS E'Sexe of fishs';
+COMMENT ON COLUMN filo.sexe.sexe_code IS E'Code of the sexe, according to the nomenclature sandre.eaufrance.fr 437';
 -- ddl-end --
 ALTER TABLE filo.sexe OWNER TO filo;
 -- ddl-end --
@@ -1805,11 +1802,11 @@ CREATE TABLE filo.pathology (
 -- ddl-end --
 COMMENT ON TABLE filo.pathology IS E'List of pathologies';
 -- ddl-end --
-COMMENT ON COLUMN filo.pathology.pathology_name IS E'List of pathologies';
+COMMENT ON COLUMN filo.pathology.pathology_name IS E'Name of the pathology';
 -- ddl-end --
-COMMENT ON COLUMN filo.pathology.pathology_code IS E'List of pathologies';
+COMMENT ON COLUMN filo.pathology.pathology_code IS E'Code of the pathology, according to the nomenclature sandre.eaufrance.fr 129';
 -- ddl-end --
-COMMENT ON COLUMN filo.pathology.pathology_description IS E'List of pathologies';
+COMMENT ON COLUMN filo.pathology.pathology_description IS E'Description of the pathology';
 -- ddl-end --
 ALTER TABLE filo.pathology OWNER TO filo;
 -- ddl-end --
@@ -2059,27 +2056,27 @@ CREATE TABLE filo.ambience (
 -- ddl-end --
 COMMENT ON TABLE filo.ambience IS E'Description of the ambiences of the operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_name IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.ambience_name IS E'Name of the point';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_length IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.ambience_length IS E'Length of the point, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_width IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.ambience_width IS E'Width of the point, in meter';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_long IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.ambience_long IS E'Longitude of the point of observation, in decimal WGS84';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.ambience_lat IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.ambience_lat IS E'Latitude of the point of observation, in decimal WGS84';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.current_speed IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.current_speed IS E'Speed measured of the current, in cm/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.current_speed_max IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.current_speed_max IS E'Maximum value of the current, in cm/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.current_speed_min IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.current_speed_min IS E'Minimum speed of the current, in cm/s';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.water_height IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.water_height IS E'Average height of water, in cm';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.water_height_max IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.water_height_max IS E'Max height of water, in cm';
 -- ddl-end --
-COMMENT ON COLUMN filo.ambience.water_height_min IS E'Description of the ambiences of the operation';
+COMMENT ON COLUMN filo.ambience.water_height_min IS E'Min of height of water, in cm';
 -- ddl-end --
 ALTER TABLE filo.ambience OWNER TO filo;
 -- ddl-end --
@@ -2540,9 +2537,9 @@ CREATE TABLE gacl.aclappli (
 -- ddl-end --
 COMMENT ON TABLE gacl.aclappli IS E'Table des applications gérées';
 -- ddl-end --
-COMMENT ON COLUMN gacl.aclappli.appli IS E'Table des applications gérées';
+COMMENT ON COLUMN gacl.aclappli.appli IS E'Nom de l''application pour la gestion des droits';
 -- ddl-end --
-COMMENT ON COLUMN gacl.aclappli.applidetail IS E'Table des applications gérées';
+COMMENT ON COLUMN gacl.aclappli.applidetail IS E'Description de l''application';
 -- ddl-end --
 ALTER TABLE gacl.aclappli OWNER TO filo;
 -- ddl-end --
@@ -2604,7 +2601,7 @@ CREATE TABLE gacl.acllogin (
 -- ddl-end --
 COMMENT ON TABLE gacl.acllogin IS E'Table des logins des utilisateurs autorisés';
 -- ddl-end --
-COMMENT ON COLUMN gacl.acllogin.logindetail IS E'Table des logins des utilisateurs autorisés';
+COMMENT ON COLUMN gacl.acllogin.logindetail IS E'Nom affiché';
 -- ddl-end --
 ALTER TABLE gacl.acllogin OWNER TO filo;
 -- ddl-end --
@@ -2660,11 +2657,11 @@ CREATE TABLE gacl.log (
 -- ddl-end --
 COMMENT ON TABLE gacl.log IS E'Liste des connexions ou des actions enregistrées';
 -- ddl-end --
-COMMENT ON COLUMN gacl.log.log_date IS E'Liste des connexions ou des actions enregistrées';
+COMMENT ON COLUMN gacl.log.log_date IS E'Heure de connexion';
 -- ddl-end --
-COMMENT ON COLUMN gacl.log.commentaire IS E'Liste des connexions ou des actions enregistrées';
+COMMENT ON COLUMN gacl.log.commentaire IS E'Donnees complementaires enregistrees';
 -- ddl-end --
-COMMENT ON COLUMN gacl.log.ipaddress IS E'Liste des connexions ou des actions enregistrées';
+COMMENT ON COLUMN gacl.log.ipaddress IS E'Adresse IP du client';
 -- ddl-end --
 ALTER TABLE gacl.log OWNER TO filo;
 -- ddl-end --
@@ -2795,11 +2792,11 @@ CREATE TABLE filo.operator (
 -- ddl-end --
 COMMENT ON TABLE filo.operator IS E'List of operators';
 -- ddl-end --
-COMMENT ON COLUMN filo.operator.firstname IS E'List of operators';
+COMMENT ON COLUMN filo.operator.firstname IS E'First name of the operator';
 -- ddl-end --
-COMMENT ON COLUMN filo.operator.name IS E'List of operators';
+COMMENT ON COLUMN filo.operator.name IS E'Last name of operator';
 -- ddl-end --
-COMMENT ON COLUMN filo.operator.is_active IS E'List of operators';
+COMMENT ON COLUMN filo.operator.is_active IS E'Is the opérator actually active ?';
 -- ddl-end --
 ALTER TABLE filo.operator OWNER TO filo;
 -- ddl-end --
@@ -2816,7 +2813,7 @@ CREATE TABLE filo.operation_operator (
 -- ddl-end --
 COMMENT ON TABLE filo.operation_operator IS E'Operators rattached to an operation';
 -- ddl-end --
-COMMENT ON COLUMN filo.operation_operator.is_responsible IS E'Operators rattached to an operation';
+COMMENT ON COLUMN filo.operation_operator.is_responsible IS E'True if the operator is responsible of the operation';
 -- ddl-end --
 ALTER TABLE filo.operation_operator OWNER TO filo;
 -- ddl-end --
@@ -2861,9 +2858,9 @@ CREATE TABLE filo.analysis_template (
 -- ddl-end --
 COMMENT ON TABLE filo.analysis_template IS E'Table of types of complementary analysis';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis_template.analysis_template_name IS E'Table of types of complementary analysis';
+COMMENT ON COLUMN filo.analysis_template.analysis_template_name IS E'Name of the template';
 -- ddl-end --
-COMMENT ON COLUMN filo.analysis_template.analysis_template_schema IS E'Table of types of complementary analysis';
+COMMENT ON COLUMN filo.analysis_template.analysis_template_schema IS E'Description of all parameters recorded, in Json format';
 -- ddl-end --
 ALTER TABLE filo.analysis_template OWNER TO filo;
 -- ddl-end --
@@ -2893,7 +2890,7 @@ CREATE TABLE filo.clogging (
 -- ddl-end --
 COMMENT ON TABLE filo.clogging IS E'List of types of cloggings';
 -- ddl-end --
-COMMENT ON COLUMN filo.clogging.clogging_name IS E'List of types of cloggings';
+COMMENT ON COLUMN filo.clogging.clogging_name IS E'Name of the type of clogging';
 -- ddl-end --
 ALTER TABLE filo.clogging OWNER TO filo;
 -- ddl-end --
@@ -3081,23 +3078,26 @@ CREATE TABLE filo.protocol (
 	measure_default varchar NOT NULL DEFAULT 'sl',
 	measure_default_only boolean NOT NULL DEFAULT false,
 	analysis_template_id integer,
+	existing_taxon_only boolean NOT NULL DEFAULT true,
 	CONSTRAINT protocol_pk PRIMARY KEY (protocol_id)
 
 );
 -- ddl-end --
 COMMENT ON TABLE filo.protocol IS E'List of protocols used';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_name IS E'List of protocols used';
+COMMENT ON COLUMN filo.protocol.protocol_name IS E'Name of the protocol';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_url IS E'List of protocols used';
+COMMENT ON COLUMN filo.protocol.protocol_url IS E'Url where the description of the protocol can be found';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_description IS E'List of protocols used';
+COMMENT ON COLUMN filo.protocol.protocol_description IS E'Synthetic description of the protocol';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.protocol_pdf IS E'List of protocols used';
+COMMENT ON COLUMN filo.protocol.protocol_pdf IS E'Document attached in pdf format';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.measure_default IS E'List of protocols used';
+COMMENT ON COLUMN filo.protocol.measure_default IS E'Name of the prefered measure in the protocol\nPossible values : sl, fl, tl, wd, ot';
 -- ddl-end --
-COMMENT ON COLUMN filo.protocol.measure_default_only IS E'List of protocols used';
+COMMENT ON COLUMN filo.protocol.measure_default_only IS E'If true, only the measure_default type is used during the protocol';
+-- ddl-end --
+COMMENT ON COLUMN filo.protocol.existing_taxon_only IS E'Limit the capacity to add a new taxon which is not defined in the taxon table';
 -- ddl-end --
 ALTER TABLE filo.protocol OWNER TO filo;
 -- ddl-end --
@@ -3358,9 +3358,9 @@ CREATE TABLE filo.dbparam (
 -- ddl-end --
 COMMENT ON TABLE filo.dbparam IS E'Table des parametres associes de maniere intrinseque a l''instance';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbparam.dbparam_name IS E'Table des parametres associes de maniere intrinseque a l''instance';
+COMMENT ON COLUMN filo.dbparam.dbparam_name IS E'Nom du parametre';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbparam.dbparam_value IS E'Table des parametres associes de maniere intrinseque a l''instance';
+COMMENT ON COLUMN filo.dbparam.dbparam_value IS E'Valeur du paramètre';
 -- ddl-end --
 ALTER TABLE filo.dbparam OWNER TO filo;
 -- ddl-end --
@@ -3406,14 +3406,14 @@ CREATE TABLE filo.dbversion (
 -- ddl-end --
 COMMENT ON TABLE filo.dbversion IS E'Table des versions de la base de donnees';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbversion.dbversion_number IS E'Table des versions de la base de donnees';
+COMMENT ON COLUMN filo.dbversion.dbversion_number IS E'Numero de la version';
 -- ddl-end --
-COMMENT ON COLUMN filo.dbversion.dbversion_date IS E'Table des versions de la base de donnees';
+COMMENT ON COLUMN filo.dbversion.dbversion_date IS E'Date de la version';
 -- ddl-end --
 ALTER TABLE filo.dbversion OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.4', E'2019-12-17');
+INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.5', E'2020-04-10');
 -- ddl-end --
 
 -- object: filo.taxa_template_taxa_template_id_seq | type: SEQUENCE --
@@ -3443,9 +3443,9 @@ CREATE TABLE filo.taxa_template (
 -- ddl-end --
 COMMENT ON TABLE filo.taxa_template IS E'List of templates used to select taxa';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxa_template.taxa_model IS E'List of templates used to select taxa';
+COMMENT ON COLUMN filo.taxa_template.taxa_model IS E'Model of emplacement of taxa on screen';
 -- ddl-end --
-COMMENT ON COLUMN filo.taxa_template.freshwater IS E'List of templates used to select taxa';
+COMMENT ON COLUMN filo.taxa_template.freshwater IS E'Does the template operate for freshwater?';
 -- ddl-end --
 ALTER TABLE filo.taxa_template OWNER TO filo;
 -- ddl-end --
@@ -3496,17 +3496,17 @@ CREATE TABLE filo.document (
 -- ddl-end --
 COMMENT ON TABLE filo.document IS E'Documents stocked in the database';
 -- ddl-end --
-COMMENT ON COLUMN filo.document.document_name IS E'Documents stocked in the database';
+COMMENT ON COLUMN filo.document.document_name IS E'Name of the document';
 -- ddl-end --
-COMMENT ON COLUMN filo.document.document_description IS E'Documents stocked in the database';
+COMMENT ON COLUMN filo.document.document_description IS E'Description of the document';
 -- ddl-end --
-COMMENT ON COLUMN filo.document.data IS E'Documents stocked in the database';
+COMMENT ON COLUMN filo.document.data IS E'Content of the document, in binary format';
 -- ddl-end --
-COMMENT ON COLUMN filo.document.size IS E'Documents stocked in the database';
+COMMENT ON COLUMN filo.document.size IS E'Total size of the document';
 -- ddl-end --
-COMMENT ON COLUMN filo.document.thumbnail IS E'Documents stocked in the database';
+COMMENT ON COLUMN filo.document.thumbnail IS E'Thumbnail of the document, if it''s an image or a pdf';
 -- ddl-end --
-COMMENT ON COLUMN filo.document.document_creation_date IS E'Documents stocked in the database';
+COMMENT ON COLUMN filo.document.document_creation_date IS E'Date of creation of the document';
 -- ddl-end --
 ALTER TABLE filo.document OWNER TO filo;
 -- ddl-end --
@@ -3523,9 +3523,9 @@ CREATE TABLE filo.mime_type (
 -- ddl-end --
 COMMENT ON TABLE filo.mime_type IS E'List of types mime associable to the documents';
 -- ddl-end --
-COMMENT ON COLUMN filo.mime_type.content_type IS E'List of types mime associable to the documents';
+COMMENT ON COLUMN filo.mime_type.content_type IS E'Normalized description of the type mime';
 -- ddl-end --
-COMMENT ON COLUMN filo.mime_type.extension IS E'List of types mime associable to the documents';
+COMMENT ON COLUMN filo.mime_type.extension IS E'Extension associated with the type mime';
 -- ddl-end --
 ALTER TABLE filo.mime_type OWNER TO filo;
 -- ddl-end --
@@ -3666,6 +3666,12 @@ CREATE TABLE gacl.passwordlost (
 
 );
 -- ddl-end --
+COMMENT ON COLUMN gacl.passwordlost.token IS E'Token used to reinit the password';
+-- ddl-end --
+COMMENT ON COLUMN gacl.passwordlost.expiration IS E'Date of expiration of the token';
+-- ddl-end --
+COMMENT ON COLUMN gacl.passwordlost.usedate IS E'Date of use of the token';
+-- ddl-end --
 ALTER TABLE gacl.passwordlost OWNER TO filo;
 -- ddl-end --
 
@@ -3707,11 +3713,11 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 -- object: filo.v_individual_other_measures | type: VIEW --
 -- DROP VIEW IF EXISTS filo.v_individual_other_measures CASCADE;
 CREATE VIEW filo.v_individual_other_measures
-AS 
+AS
 
-select individual_id, 
-string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures 
-from individual, 
+select individual_id,
+string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures
+from individual,
 json_each_text(individual.other_measure) as metadata
 group by individual_id;
 -- ddl-end --
@@ -3845,6 +3851,12 @@ CREATE TABLE tracking.antenna (
 
 );
 -- ddl-end --
+COMMENT ON COLUMN tracking.antenna.antenna_code IS E'Antenna or receiver code';
+-- ddl-end --
+COMMENT ON COLUMN tracking.antenna.radius IS E'radius, in metres, of the useful reception';
+-- ddl-end --
+COMMENT ON COLUMN tracking.antenna.geom_polygon IS E'Geometry of the reception zone, in polygonal form, wgs84';
+-- ddl-end --
 ALTER TABLE tracking.antenna OWNER TO filo;
 -- ddl-end --
 
@@ -3884,6 +3896,18 @@ CREATE TABLE tracking.detection (
 	CONSTRAINT detection_pk PRIMARY KEY (detection_id)
 
 );
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.detection_date IS E'Date-time of the detection';
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.nb_events IS E'Events number recorded';
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.duration IS E'Duration of the detection, in seconds with milliseconds';
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.validity IS E'Specifiy if the detection is real (true) or false positive (false)';
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.signal_force IS E'Force of the signal';
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.observation IS E'comment';
 -- ddl-end --
 ALTER TABLE tracking.detection OWNER TO filo;
 -- ddl-end --
@@ -3928,7 +3952,7 @@ CREATE TABLE tracking.probe (
 -- ddl-end --
 COMMENT ON TABLE tracking.probe IS E'Probe used to record the environmental variables';
 -- ddl-end --
-COMMENT ON COLUMN tracking.probe.probe_code IS E'Probe used to record the environmental variables';
+COMMENT ON COLUMN tracking.probe.probe_code IS E'Code of the probe';
 -- ddl-end --
 ALTER TABLE tracking.probe OWNER TO filo;
 -- ddl-end --
@@ -3968,9 +3992,9 @@ CREATE TABLE tracking.probe_measure (
 -- ddl-end --
 COMMENT ON TABLE tracking.probe_measure IS E'List of the measures recorded by a probe';
 -- ddl-end --
-COMMENT ON COLUMN tracking.probe_measure.probe_measure_date IS E'List of the measures recorded by a probe';
+COMMENT ON COLUMN tracking.probe_measure.probe_measure_date IS E'Date-time of the record';
 -- ddl-end --
-COMMENT ON COLUMN tracking.probe_measure.probe_measure_value IS E'List of the measures recorded by a probe';
+COMMENT ON COLUMN tracking.probe_measure.probe_measure_value IS E'Value measured';
 -- ddl-end --
 ALTER TABLE tracking.probe_measure OWNER TO filo;
 -- ddl-end --
@@ -4006,6 +4030,12 @@ CREATE TABLE tracking.transmitter_type (
 	CONSTRAINT transmitter_type_pk PRIMARY KEY (transmitter_type_id)
 
 );
+-- ddl-end --
+COMMENT ON COLUMN tracking.transmitter_type.transmitter_type_name IS E'Code or name of the transmitter';
+-- ddl-end --
+COMMENT ON COLUMN tracking.transmitter_type.characteristics IS E'General characteristics of the transmitter';
+-- ddl-end --
+COMMENT ON COLUMN tracking.transmitter_type.technology IS E'Technology used by the transmitter';
 -- ddl-end --
 ALTER TABLE tracking.transmitter_type OWNER TO filo;
 -- ddl-end --
@@ -4060,15 +4090,18 @@ CREATE TABLE import.import_description (
 	csv_type_id smallint NOT NULL,
 	import_description_name varchar NOT NULL,
 	separator varchar NOT NULL DEFAULT ';',
+	first_line smallint,
 	CONSTRAINT import_type_pk PRIMARY KEY (import_description_id)
 
 );
 -- ddl-end --
 COMMENT ON TABLE import.import_description IS E'Import templates';
 -- ddl-end --
-COMMENT ON COLUMN import.import_description.import_description_name IS E'Import templates';
+COMMENT ON COLUMN import.import_description.import_description_name IS E'Name of the description of the import';
 -- ddl-end --
-COMMENT ON COLUMN import.import_description.separator IS E'Import templates';
+COMMENT ON COLUMN import.import_description.separator IS E'separator used between fields (; , tab, space)';
+-- ddl-end --
+COMMENT ON COLUMN import.import_description.first_line IS E'First line to treat in the file';
 -- ddl-end --
 ALTER TABLE import.import_description OWNER TO filo;
 -- ddl-end --
@@ -4138,9 +4171,9 @@ CREATE TABLE import.import_column (
 -- ddl-end --
 COMMENT ON TABLE import.import_column IS E'List of all columns of the file';
 -- ddl-end --
-COMMENT ON COLUMN import.import_column.column_order IS E'List of all columns of the file';
+COMMENT ON COLUMN import.import_column.column_order IS E'Place of the column in the file, from 1';
 -- ddl-end --
-COMMENT ON COLUMN import.import_column.table_column_name IS E'List of all columns of the file';
+COMMENT ON COLUMN import.import_column.table_column_name IS E'name of the attribute of the column in the database table';
 -- ddl-end --
 ALTER TABLE import.import_column OWNER TO filo;
 -- ddl-end --
@@ -4168,11 +4201,7 @@ CREATE INDEX log_ip_idx ON gacl.log
 	);
 -- ddl-end --
 
--- object: tablefunc | type: EXTENSION --
--- DROP EXTENSION IF EXISTS tablefunc CASCADE;
-CREATE EXTENSION tablefunc
-WITH SCHEMA public;
--- ddl-end --
+
 
 -- object: taxon_fk | type: CONSTRAINT --
 -- ALTER TABLE tracking.individual_tracking DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
@@ -4214,9 +4243,9 @@ CREATE TABLE import.function_type (
 -- ddl-end --
 COMMENT ON TABLE import.function_type IS E'List of functions writed in the application, and usable to test or transform the data';
 -- ddl-end --
-COMMENT ON COLUMN import.function_type.function_name IS E'List of functions writed in the application, and usable to test or transform the data';
+COMMENT ON COLUMN import.function_type.function_name IS E'Name of the function. Must be the same in the application code';
 -- ddl-end --
-COMMENT ON COLUMN import.function_type.description IS E'List of functions writed in the application, and usable to test or transform the data';
+COMMENT ON COLUMN import.function_type.description IS E'Usage of the function';
 -- ddl-end --
 ALTER TABLE import.function_type OWNER TO filo;
 -- ddl-end --
@@ -4282,13 +4311,13 @@ CREATE TABLE import.import_function (
 -- ddl-end --
 COMMENT ON TABLE import.import_function IS E'List of functions to be performed for each row of the file';
 -- ddl-end --
-COMMENT ON COLUMN import.import_function.column_number IS E'List of functions to be performed for each row of the file';
+COMMENT ON COLUMN import.import_function.column_number IS E'Number of the column, from 1 to n. If 0: entire row';
 -- ddl-end --
-COMMENT ON COLUMN import.import_function.execution_order IS E'List of functions to be performed for each row of the file';
+COMMENT ON COLUMN import.import_function.execution_order IS E'Order of execution of the function';
 -- ddl-end --
-COMMENT ON COLUMN import.import_function.arguments IS E'List of functions to be performed for each row of the file';
+COMMENT ON COLUMN import.import_function.arguments IS E'Values of arguments, separated by a comma. Arguments are described in function_type.description';
 -- ddl-end --
-COMMENT ON COLUMN import.import_function.column_result IS E'List of functions to be performed for each row of the file';
+COMMENT ON COLUMN import.import_function.column_result IS E'Number of column that gets the result of the function, from 1 to n. Not used for control functions';
 -- ddl-end --
 ALTER TABLE import.import_function OWNER TO filo;
 -- ddl-end --
@@ -4334,14 +4363,14 @@ CREATE TABLE import.import_type (
 -- ddl-end --
 COMMENT ON TABLE import.import_type IS E'List of types of import';
 -- ddl-end --
-COMMENT ON COLUMN import.import_type.tablename IS E'List of types of import';
+COMMENT ON COLUMN import.import_type.tablename IS E'Name of the table to import into';
 -- ddl-end --
-COMMENT ON COLUMN import.import_type.column_list IS E'List of types of import';
+COMMENT ON COLUMN import.import_type.column_list IS E'List of the columns used in the table to import into, separed by a comma';
 -- ddl-end --
 ALTER TABLE import.import_type OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO import.import_type (import_type_id, import_type_name, tablename, column_list) VALUES (E'1', E'Detection', E'detection', E'detection_date,nb_events,duration,signal_force');
+INSERT INTO import.import_type (import_type_id, import_type_name, tablename, column_list) VALUES (E'1', E'Detection', E'detection', E'individual_id,detection_date,nb_events,duration,signal_force');
 -- ddl-end --
 INSERT INTO import.import_type (import_type_id, import_type_name, tablename, column_list) VALUES (E'2', E'Probe data/données de sonde', E'probe_measure', E'probe_measure_date,probe_measure_value');
 -- ddl-end --
@@ -4437,19 +4466,19 @@ CREATE TABLE tracking.location (
 -- ddl-end --
 COMMENT ON TABLE tracking.location IS E'List of locations of manual detections';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.detection_date IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.detection_date IS E'Date-time of the detection';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.location_pk IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.location_pk IS E'pk of the location';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.location_long IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.location_long IS E'Longitude of the location, in wgs84';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.location_lat IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.location_lat IS E'Latitude of the location, in wgs84';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.signal_force IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.signal_force IS E'Force of the signal';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.observation IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.observation IS E'comment';
 -- ddl-end --
-COMMENT ON COLUMN tracking.location.geom IS E'List of locations of manual detections';
+COMMENT ON COLUMN tracking.location.geom IS E'Geographic point of the location';
 -- ddl-end --
 ALTER TABLE tracking.location OWNER TO filo;
 -- ddl-end --
@@ -4515,11 +4544,11 @@ CREATE TABLE tracking.antenna_event (
 -- ddl-end --
 COMMENT ON TABLE tracking.antenna_event IS E'Events occured on an antenna';
 -- ddl-end --
-COMMENT ON COLUMN tracking.antenna_event.date_start IS E'Events occured on an antenna';
+COMMENT ON COLUMN tracking.antenna_event.date_start IS E'Start datetime of the event';
 -- ddl-end --
-COMMENT ON COLUMN tracking.antenna_event.date_end IS E'Events occured on an antenna';
+COMMENT ON COLUMN tracking.antenna_event.date_end IS E'End datetime of the event';
 -- ddl-end --
-COMMENT ON COLUMN tracking.antenna_event.comment IS E'Events occured on an antenna';
+COMMENT ON COLUMN tracking.antenna_event.comment IS E'Event occurred';
 -- ddl-end --
 ALTER TABLE tracking.antenna_event OWNER TO filo;
 -- ddl-end --
@@ -4710,9 +4739,9 @@ CREATE TABLE tracking.parameter_measure_type (
 -- ddl-end --
 COMMENT ON TABLE tracking.parameter_measure_type IS E'Types of parameters used with probes';
 -- ddl-end --
-COMMENT ON COLUMN tracking.parameter_measure_type.parameter IS E'Types of parameters used with probes';
+COMMENT ON COLUMN tracking.parameter_measure_type.parameter IS E'Normalized measured parameter (O2, TEMP, etc.)';
 -- ddl-end --
-COMMENT ON COLUMN tracking.parameter_measure_type.unit IS E'Types of parameters used with probes';
+COMMENT ON COLUMN tracking.parameter_measure_type.unit IS E'Unit of the parameter';
 -- ddl-end --
 ALTER TABLE tracking.parameter_measure_type OWNER TO filo;
 -- ddl-end --
@@ -4727,7 +4756,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 -- object: tracking.v_station_tracking | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_station_tracking CASCADE;
 CREATE VIEW tracking.v_station_tracking
-AS 
+AS
 
 SELECT
    station_id, station_name, station_long, station_lat, station_pk, geom
@@ -4748,7 +4777,7 @@ ALTER VIEW tracking.v_station_tracking OWNER TO filo;
 -- object: tracking.v_individual_tracking | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_individual_tracking CASCADE;
 CREATE VIEW tracking.v_individual_tracking
-AS 
+AS
 
 SELECT
    individual_id, scientific_name, taxon_id
@@ -4782,7 +4811,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 CREATE FUNCTION tracking.v_station_tracking_update ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE 
+	VOLATILE
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
@@ -4815,7 +4844,7 @@ CREATE TRIGGER v_station_tracking_update
 CREATE FUNCTION tracking.v_station_tracking_insert ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE 
+	VOLATILE
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
@@ -4834,7 +4863,7 @@ ALTER FUNCTION tracking.v_station_tracking_insert() OWNER TO filo;
 -- object: v_station_tracking_insert | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS v_station_tracking_insert ON tracking.v_station_tracking CASCADE;
 CREATE TRIGGER v_station_tracking_insert
-	INSTEAD OF INSERT 
+	INSTEAD OF INSERT
 	ON tracking.v_station_tracking
 	FOR EACH ROW
 	EXECUTE PROCEDURE tracking.v_station_tracking_insert();
@@ -4843,7 +4872,7 @@ CREATE TRIGGER v_station_tracking_insert
 -- object: tracking.v_antenna | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_antenna CASCADE;
 CREATE VIEW tracking.v_antenna
-AS 
+AS
 
 SELECT
    antenna_id, station_id, technology_type_id
@@ -4869,16 +4898,16 @@ ALTER VIEW tracking.v_antenna OWNER TO filo;
 CREATE FUNCTION tracking.v_antenna_update ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE 
+	VOLATILE
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
 	AS $$
 BEGIN
 if NEW.radius > 0 then
-update tracking.antenna set geom_polygon = 
+update tracking.antenna set geom_polygon =
 st_transform (
-	st_buffer ( 
+	st_buffer (
 		st_transform (
 		  st_setsrid(st_point(new.station_long, new.station_lat),4326)
 		,new.metric_srid)
@@ -4908,7 +4937,7 @@ CREATE TRIGGER v_antenna_update
 -- object: tracking.v_detection_location | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_detection_location CASCADE;
 CREATE VIEW tracking.v_detection_location
-AS 
+AS
 
 SELECT
    detection_id as id, individual_id, detection_date
@@ -4928,7 +4957,7 @@ select location_id as id, individual_id, detection_date
 	,null as antenna_code, antenna_type_name as antenna_type
 	,geom
 	,'mobile' as detection_type
-from tracking.location 
+from tracking.location
 	left outer join tracking.antenna_type using (antenna_type_id);
 -- ddl-end --
 COMMENT ON VIEW tracking.v_detection_location IS E'List of all detections and locations for a fish';
@@ -4962,9 +4991,9 @@ CREATE TABLE import.export_model (
 -- ddl-end --
 COMMENT ON TABLE import.export_model IS E'Structure of an export/import of table data';
 -- ddl-end --
-COMMENT ON COLUMN import.export_model.export_model_name IS E'Structure of an export/import of table data';
+COMMENT ON COLUMN import.export_model.export_model_name IS E'Name of the structure of export';
 -- ddl-end --
-COMMENT ON COLUMN import.export_model.pattern IS E'Structure of an export/import of table data';
+COMMENT ON COLUMN import.export_model.pattern IS E'Pattern of the export/import.\nStructure:\n[{technicalKey:string,businessKey:string,tableName:string,tableAlias:string,children[table1,table2],parentKey:string,secondaryParentKey:string}]';
 -- ddl-end --
 ALTER TABLE import.export_model OWNER TO filo;
 -- ddl-end --
@@ -4978,11 +5007,6 @@ INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'export_mo
 INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'campaignOnly', E'[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[{"aliasName":"protocol_measure","isStrict":true}],"parameters":[{"aliasName":"analysis_template","fieldName":"analysis_template_id"}],"istablenn":false},{"tableName":"analysis_template","technicalKey":"analysis_template_id","isEmpty":true,"businessKey":"analysis_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"measure_template","technicalKey":"measure_template_id","isEmpty":false,"businessKey":"measure_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"protocol_measure","isEmpty":false,"parentKey":"protocol_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"measure_template_id","tableAlias":"measure_template"}},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]');
 -- ddl-end --
 
--- object: pgcrypto | type: EXTENSION --
--- DROP EXTENSION IF EXISTS pgcrypto CASCADE;
-CREATE EXTENSION pgcrypto
-WITH SCHEMA public;
--- ddl-end --
 
 -- object: filo.sequence_point_sequence_point_id_seq | type: SEQUENCE --
 -- DROP SEQUENCE IF EXISTS filo.sequence_point_sequence_point_id_seq CASCADE;
@@ -5013,7 +5037,7 @@ CREATE TABLE filo.sequence_point (
 -- ddl-end --
 COMMENT ON TABLE filo.sequence_point IS E'Sampling points during the sequence';
 -- ddl-end --
-COMMENT ON COLUMN filo.sequence_point.fish_number IS E'Sampling points during the sequence';
+COMMENT ON COLUMN filo.sequence_point.fish_number IS E'Number of fishes detected at this point';
 -- ddl-end --
 ALTER TABLE filo.sequence_point OWNER TO filo;
 -- ddl-end --
@@ -5037,6 +5061,54 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE filo.sequence_point ADD CONSTRAINT facies_fk FOREIGN KEY (facies_id)
 REFERENCES filo.facies (facies_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: filo.request_request_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS filo.request_request_id_seq CASCADE;
+CREATE SEQUENCE filo.request_request_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE filo.request_request_id_seq OWNER TO filo;
+-- ddl-end --
+
+-- object: filo.request | type: TABLE --
+-- DROP TABLE IF EXISTS filo.request CASCADE;
+CREATE TABLE filo.request (
+	request_id integer NOT NULL DEFAULT nextval('filo.request_request_id_seq'::regclass),
+	create_date timestamp NOT NULL,
+	last_exec timestamp,
+	title character varying NOT NULL,
+	body character varying NOT NULL,
+	login character varying NOT NULL,
+	datefields character varying,
+	CONSTRAINT request_pk PRIMARY KEY (request_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE filo.request IS E'Request table in database';
+-- ddl-end --
+COMMENT ON COLUMN filo.request.create_date IS E'Date of create of the request';
+-- ddl-end --
+COMMENT ON COLUMN filo.request.last_exec IS E'Date of the last execution';
+-- ddl-end --
+COMMENT ON COLUMN filo.request.title IS E'Title of the request';
+-- ddl-end --
+COMMENT ON COLUMN filo.request.body IS E'Body of the request. Don''t begin it by SELECT, which will be added automatically';
+-- ddl-end --
+COMMENT ON COLUMN filo.request.login IS E'Login of the creator of the request';
+-- ddl-end --
+COMMENT ON COLUMN filo.request.datefields IS E'List of the date fields used in the request, separated by a comma, for format it';
+-- ddl-end --
+ALTER TABLE filo.request OWNER TO filo;
+-- ddl-end --
+
+INSERT INTO filo.request (create_date, last_exec, title, body, login, datefields) VALUES (now(), DEFAULT, E'Number of operations by campaign', E'campaign_name, count(*) as operations_nb from campaign join operation using (campaign_id) group by campaign_name', E'admin', DEFAULT);
 -- ddl-end --
 
 -- object: aclaco_aclacl_fk | type: CONSTRAINT --

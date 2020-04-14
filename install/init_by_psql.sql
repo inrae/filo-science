@@ -26,39 +26,47 @@
   * Creation du compte de connexion et de la base de donnees
   * creation of connection account
   */
-CREATE USER collec WITH
-  LOGIN
-  NOSUPERUSER
-  INHERIT
-  NOCREATEDB
-  NOCREATEROLE
-  NOREPLICATION
- PASSWORD 'collecPassword'
-;
+-- object: filo | type: ROLE --
+-- DROP ROLE IF EXISTS filo;
+CREATE ROLE filo WITH
+	LOGIN
+	ENCRYPTED PASSWORD 'filoPassword';
+-- ddl-end --
 
 /*
  * Database creation
  */
-create database collec owner collec;
-\c "dbname=collec"
- create extension if not exists btree_gin schema pg_catalog;
- create extension if not exists pg_trgm schema pg_catalog;
- create extension if not exists postgis schema public;
- create extension if not exists  pgcrypto schema public;
+create database filo owner filo;
+\c "dbname=filo"
+-- object: postgis | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS postgis CASCADE;
+CREATE EXTENSION postgis
+WITH SCHEMA public;
+-- ddl-end --
+-- object: tablefunc | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS tablefunc CASCADE;
+CREATE EXTENSION tablefunc
+WITH SCHEMA public;
+-- ddl-end --
+-- object: pgcrypto | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS pgcrypto CASCADE;
+CREATE EXTENSION pgcrypto
+WITH SCHEMA public;
+-- ddl-end --
+
  -- object: grant_95c2183ced | type: PERMISSION --
 GRANT CREATE,CONNECT,TEMPORARY
-   ON DATABASE collec
-   TO collec;
+   ON DATABASE filo
+   TO filo;
 -- ddl-end --
 
 /*
- * connexion a la base collec, avec l'utilisateur collec, en localhost,
- * depuis psql
- * Connection to collec database with user collec on localhost server
+ * Connection at the database filo with login filo localhost server
+ * from psql
  */
-\c "dbname=collec user=collec password=collecPassword host=localhost"
+\c "dbname=filo user=filo password=filoPassword host=localhost"
 
 /**
  * create structure
  */
-\ir pgsql/collec_create.sql
+\ir pgsql/create_db.sql

@@ -1,9 +1,8 @@
 #!/bin/bash
 # upgrade an instance 2.2.2 to 2.2.3
-OLDVERSION=filo-1.3.0
-VERSION=filo-1.4.0
-SQLSCRIPT=upgradedb-1.3-1.4.sql
-PHPVER=7.3
+OLDVERSION=filo-1.2.0
+VERSION=filo-1.5.0
+SQLSCRIPT=upgradedb-1.2-1.3.sql
 echo "This script will install the release $VERSION"
 echo "have you a backup of your database and a copy of param/param.inc.php?"
 echo "Is your actual version of Filo-Science is $OLDVERSION ?"
@@ -11,36 +10,6 @@ echo "Is your actual version is in the folder /var/www/filo-science/$OLDVERSION,
 read -p "Do you want to continue [Y/n]?" answer
 if [[ $answer = "y"  ||  $answer = "Y"  ||   -z $answer ]];
 then
-echo "This version run only with php7.2 or above"
-echo "Your PHP version is :"
-php -version
-read -p "Do you want to upgrade the php version to 7.3 [Y/n]?" phpanswer
-if [[$phpanswer = "y" || $phpanswer = "Y" || -z $phpanswer]];
-read -p "What is your version of debian? (jessie strech buster)?" debianrelease
-read -p "What is your old version of PHP (only the 2 firsts numbers, as 7.0?" phpoldversion
-then
-apt-get install ca-certificates apt-transport-https
-wget -q https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
-echo "deb https://packages.sury.org/php/ $debianrelease main" | sudo tee /etc/apt/sources.list.d/php.list
-apt-get update
-apt-get install libapache2-mod-php$PHPVER php$PHPVER php$PHPVER-cli php$PHPVER-ldap php$PHPVER-pgsql php$PHPVER-mbstring php$PHPVER-xml php$PHPVER-zip php$PHPVER-imagick php$PHPVER-gd php$PHPVER-curl
-a2dismod php$phpoldversion
-a2enmod php$PHPVER
-phpinifile="/etc/php/$PHPVER/apache2/php.ini"
-# adjust php.ini values
-upload_max_filesize="=100M"
-post_max_size="=50M"
-max_execution_time="=120"
-max_input_time="=240"
-memory_limit="=1024M"
-for key in upload_max_filesize post_max_size max_execution_time max_input_time memory_limit
-do
- sed -i "s/^\($key\).*/\1 $(eval echo \${$key})/" $phpinifile
-done
-service apache2 restart
-echo "end of upgrade of php"
-fi
-
 cd /var/www/html/filo-science
 rm -f *zip
 # download last code
@@ -74,6 +43,8 @@ echo "update database"
 chmod 755 /var/www/html/filo-science
 cd filo-science/install
 su postgres -c "psql -f $SQLSCRIPT"
+su postgres -c "psql -f upgradedb-1.3-1.4.sql"
+su postgres -c "psql -f upgradedb-1.4-1.5.sql"
 cd ../..
 chmod 750 /var/www/html/filo-science
 
@@ -86,6 +57,14 @@ chgrp -R www-data filo-science/
 chmod -R 770 filo-science/display/templates_c
 chmod -R 770 filo-science/temp
 
+# Verify php version
+PHPVER=`php -v|head -n 1|cut -c 5-7`
+PHPINIFILE="/etc/php/$PHPVER/apache2/php.ini"
+sed -i "s/; max_input_vars = .*/max_input_vars=$max_input_vars/" $PHPINIFILE
+systemctl restart apache2
+PHPOLDVERSION=`php -v|grep ^PHP|cut -d " " -f 2|cut -d "." -f 1-2`
+echo "Your version of PHP is $PHPOLDVERSION. If it < 7.2, you must upgrade it with the script:"
+echo "./php_upgrade.sh"
 
 echo "Upgrade completed. Check, in the messages, if unexpected behavior occurred during the process"
 fi
