@@ -8,10 +8,10 @@ Version {$version} du {$versiondate}.
 
 <h3>Liste des contributeurs au projet (ordre alphabétique)</h3>
 <ul>
-<li>Éric Quinton (IRSTEA)</li>
+<li>Éric Quinton (INRAE)</li>
 </ul>
 
-    <h3>Copyright © 2019  Eric Quinton pour IRSTEA</h3>
+    <h3>Copyright © 2019-2020  Eric Quinton pour INRAE</h3>
 <p>
 La version 1.0 du logiciel est en cours de dépôt auprès de l'Agence pour la Protection des Programmes
 <br>
@@ -33,9 +33,3 @@ La version 1.0 du logiciel est en cours de dépôt auprès de l'Agence pour la P
     <li>Icone de l'application : by <a href="http://lorcblog.blogspot.com/">Lorc</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
     <li><a href="https://pixabay.com/photos/fisherman-fishing-boat-boat-fishing-2739115/">Image de la page d'accueil</a> : licence <a href="https://pixabay.com/service/license/">Pixabay License</a></li>
 </ul>
-{* https://www.gnu.org/licenses/gpl-howto.fr.html#TransNote1
-    Traduction française non officielle :
-    Ce programme est un logiciel libre ; vous pouvez le redistribuer ou le modifier suivant les termes de la GNU General Public License telle que publiée par la Free Software Foundation ; soit la version 3 de la licence, soit (à votre gré) toute version ultérieure.
-    Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE ; sans même la garantie tacite de QUALITÉ MARCHANDE ou d'ADÉQUATION à UN BUT PARTICULIER. Consultez la GNU General Public License pour plus de détails.
-    Vous devez avoir reçu une copie de la GNU General Public License en même temps que ce programme ; si ce n'est pas le cas, consultez <http://www.gnu.org/licenses>.
-*}

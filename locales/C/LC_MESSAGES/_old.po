@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 11:58+0200\n"
+"POT-Creation-Date: 2020-04-14 12:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,120 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
-#. (itstool) path: ../../../param/actions.xml/navigation
-#: ../../../param/actions.xml:1
-msgid ""
-"<_:model-1/> <_:default-2/> <_:droitko-3/> <_:droits-4/> <_:gestiondroits-5/"
-"> <_:loginList-6/> <_:loginChange-7/> <_:loginWrite-8/> <_:loginDelete-9/> "
-"<_:loginChangePassword-10/> <_:loginChangePasswordExec-11/> <_:"
-"getLastConnections-12/> <_:administration-13/> <_:gestion-14/> <_:"
-"errorbefore-15/> <_:errorlogin-16/> <_:test-17/> <_:connexion-18/> <_:"
-"disconnect-19/> <_:apropos-20/> <_:phpinfo-21/> <_:news-22/> <_:"
-"setlanguage-23/> <_:setlanguagefr-24/> <_:setlanguageen-25/> <_:"
-"exampleList-26/> <_:exampleDisplay-27/> <_:exampleChange-28/> <_:"
-"exampleWrite-29/> <_:exampleDelete-30/> <_:appliList-31/> <_:appliDisplay-32/"
-"> <_:appliChange-33/> <_:appliWrite-34/> <_:appliDelete-35/> <_:"
-"aclloginList-36/> <_:aclloginChange-37/> <_:aclloginWrite-38/> <_:"
-"aclloginDelete-39/> <_:groupList-40/> <_:groupChange-41/> <_:groupWrite-42/> "
-"<_:groupDelete-43/> <_:acoDisplay-44/> <_:acoChange-45/> <_:acoWrite-46/> <_:"
-"acoDelete-47/> <_:passwordlostIslost-48/> <_:passwordlostSendmail-49/> <_:"
-"passwordlostReinitchange-50/> <_:passwordlostReinitwrite-51/> <_:"
-"dbparamList-52/> <_:dbparamWriteGlobal-53/> <_:dbstructureHtml-54/> <_:"
-"dbstructureGacl-55/> <_:dbstructureLatex-56/> <_:dbstructureSchema-57/> <_:"
-"logList-58/> <_:requestList-59/> <_:requestChange-60/> <_:requestWrite-61/> "
-"<_:requestDelete-62/> <_:requestExec-63/> <_:requestExecList-64/> <_:"
-"requestWriteExec-65/> <_:requestCopy-66/> <_:param-67/> <_:"
-"granulometryList-68/> <_:granulometryChange-69/> <_:granulometryWrite-70/> "
-"<_:granulometryDelete-71/> <_:speedList-72/> <_:speedChange-73/> <_:"
-"speedWrite-74/> <_:speedDelete-75/> <_:shadyList-76/> <_:shadyChange-77/> <_:"
-"shadyWrite-78/> <_:shadyDelete-79/> <_:cloggingList-80/> <_:"
-"cloggingChange-81/> <_:cloggingWrite-82/> <_:cloggingDelete-83/> <_:"
-"faciesList-84/> <_:faciesChange-85/> <_:faciesWrite-86/> <_:faciesDelete-87/"
-"> <_:sinuosityList-88/> <_:sinuosityChange-89/> <_:sinuosityWrite-90/> <_:"
-"sinuosityDelete-91/> <_:localisationList-92/> <_:localisationChange-93/> <_:"
-"localisationWrite-94/> <_:localisationDelete-95/> <_:situationList-96/> <_:"
-"situationChange-97/> <_:situationWrite-98/> <_:situationDelete-99/> <_:"
-"vegetationList-100/> <_:vegetationChange-101/> <_:vegetationWrite-102/> <_:"
-"vegetationDelete-103/> <_:turbidityList-104/> <_:turbidityChange-105/> <_:"
-"turbidityWrite-106/> <_:turbidityDelete-107/> <_:flow_trendList-108/> <_:"
-"flow_trendChange-109/> <_:flow_trendWrite-110/> <_:flow_trendDelete-111/> <_:"
-"cache_abundanceList-112/> <_:cache_abundanceChange-113/> <_:"
-"cache_abundanceWrite-114/> <_:cache_abundanceDelete-115/> <_:"
-"fishing_strategyList-116/> <_:fishing_strategyChange-117/> <_:"
-"fishing_strategyWrite-118/> <_:fishing_strategyDelete-119/> <_:scaleList-120/"
-"> <_:scaleChange-121/> <_:scaleWrite-122/> <_:scaleDelete-123/> <_:"
-"electric_current_typeList-124/> <_:electric_current_typeChange-125/> <_:"
-"electric_current_typeWrite-126/> <_:electric_current_typeDelete-127/> <_:"
-"gear_methodList-128/> <_:gear_methodChange-129/> <_:gear_methodWrite-130/> "
-"<_:gear_methodDelete-131/> <_:sexeList-132/> <_:sexeChange-133/> <_:"
-"sexeWrite-134/> <_:sexeDelete-135/> <_:pathologyList-136/> <_:"
-"pathologyChange-137/> <_:pathologyWrite-138/> <_:pathologyDelete-139/> <_:"
-"gearList-140/> <_:gearChange-141/> <_:gearWrite-142/> <_:gearDelete-143/> <_:"
-"taxonList-144/> <_:taxonChange-145/> <_:taxonWrite-146/> <_:taxonDelete-147/"
-"> <_:taxonSearchAjax-148/> <_:taxonGetName-149/> <_:taxonGetListCode-150/> "
-"<_:taxonGetFromCode-151/> <_:projectList-152/> <_:projectDisplay-153/> <_:"
-"projectChange-154/> <_:projectWrite-155/> <_:projectDelete-156/> <_:"
-"protocolList-157/> <_:protocolDisplay-158/> <_:protocolChange-159/> <_:"
-"protocolWrite-160/> <_:protocolDelete-161/> <_:riverList-162/> <_:"
-"riverChange-163/> <_:riverWrite-164/> <_:riverDelete-165/> <_:"
-"stationList-166/> <_:stationChange-167/> <_:stationWrite-168/> <_:"
-"stationDelete-169/> <_:stationImport-170/> <_:stationGetCoordinate-171/> <_:"
-"operatorList-172/> <_:operatorChange-173/> <_:operatorWrite-174/> <_:"
-"operatorDelete-175/> <_:campaignList-176/> <_:campaignDisplay-177/> <_:"
-"campaignChange-178/> <_:campaignWrite-179/> <_:campaignDelete-180/> <_:"
-"operationDisplay-181/> <_:operationChange-182/> <_:operationWrite-183/> <_:"
-"operationDelete-184/> <_:operationOperatorsChange-185/> <_:"
-"operationDuplicate-186/> &gt; <_:sequenceDisplay-187/> <_:sequenceChange-188/"
-"> <_:sequenceWrite-189/> <_:sequenceDelete-190/> <_:sequenceGearChange-191/> "
-"<_:sequenceGearWrite-192/> <_:sequenceGearDelete-193/> <_:"
-"sequencePointChange-194/> <_:sequencePointWrite-195/> <_:"
-"sequencePointDelete-196/> <_:sampleChange-197/> <_:sampleWrite-198/> <_:"
-"sampleDelete-199/> <_:sampleDeleteIndividual-200/> <_:ambienceChange-201/> "
-"<_:ambiencesequenceWrite-202/> <_:ambiencesequenceDelete-203/> <_:"
-"ambienceoperationWrite-204/> <_:ambienceoperationDelete-205/> <_:"
-"analysisChange-206/> <_:analysisWrite-207/> <_:analysisDelete-208/> <_:"
-"projectdocumentWrite-209/> <_:projectdocumentDelete-210/> <_:"
-"protocoldocumentWrite-211/> <_:protocoldocumentDelete-212/> <_:"
-"operationdocumentWrite-213/> <_:operationdocumentDelete-214/> <_:"
-"documentGet-215/> <_:taxatemplateList-216/> <_:taxatemplateChange-217/> <_:"
-"taxatemplateWrite-218/> <_:taxatemplateDelete-219/> <_:"
-"analysisTemplateList-220/> <_:analysisTemplateChange-221/> <_:"
-"analysisTemplateWrite-222/> <_:analysisTemplateDelete-223/> <_:"
-"measureTemplateList-224/> <_:measureTemplateChange-225/> <_:"
-"measureTemplateWrite-226/> <_:measureTemplateDelete-227/> <_:"
-"protocolMeasureChange-228/> <_:protocolMeasureWrite-229/> <_:"
-"protocolGetTaxonTemplate-230/> <_:feedCacheMap-231/> <_:station_typeList-232/"
-"> <_:station_typeChange-233/> <_:station_typeWrite-234/> <_:"
-"station_typeDelete-235/> <_:transmitter_typeList-236/> <_:"
-"transmitter_typeChange-237/> <_:transmitter_typeWrite-238/> <_:"
-"transmitter_typeDelete-239/> <_:stationTrackingList-240/> <_:"
-"stationTrackingChange-241/> <_:stationTrackingDisplay-242/> <_:"
-"stationTrackingWrite-243/> <_:stationTrackingDelete-244/> <_:"
-"stationTrackingGetSensors-245/> <_:antennaChange-246/> <_:antennaWrite-247/> "
-"<_:antennaDelete-248/> <_:probeChange-249/> <_:probeWrite-250/> <_:"
-"probeDelete-251/> <_:individualTrackingList-252/> <_:"
-"individualTrackingChange-253/> <_:individualTrackingDisplay-254/> <_:"
-"individualTrackingWrite-255/> <_:individualTrackingDelete-256/> <_:"
-"individualTrackingExport-257/> <_:technology_typeList-258/> <_:"
-"technology_typeChange-259/> <_:technology_typeWrite-260/> <_:"
-"technology_typeDelete-261/> <_:detectionChange-262/> <_:detectionWrite-263/> "
-"<_:detectionDelete-264/> <_:parameterMeasureTypeList-265/> <_:"
-"parameterMeasureTypeChange-266/> <_:parameterMeasureTypeWrite-267/> <_:"
-"parameterMeasureTypeDelete-268/> <_:locationChange-269/> <_:"
-"locationWrite-270/> <_:locationDelete-271/> <_:importDescriptionList-272/> "
-"<_:importDescriptionChange-273/> <_:importDescriptionDisplay-274/> <_:"
-"importDescriptionWrite-275/> <_:importDescriptionDelete-276/> <_:"
-"importDescriptionDuplicate-277/> <_:importFunctionChange-278/> <_:"
-"importFunctionWrite-279/> <_:importFunctionDelete-280/> <_:"
-"functionTypeGetDescription-281/> <_:importTypeList-282/> <_:"
-"importTypeChange-283/> <_:importTypeWrite-284/> <_:importTypeDelete-285/> <_:"
-"importColumnChange-286/> <_:importColumnWrite-287/> <_:"
-"importColumnDelete-288/> <_:importExec-289/> <_:exportModelList-290/> <_:"
-"exportModelDisplay-291/> <_:exportModelChange-292/> <_:exportModelWrite-293/"
-"> <_:exportModelDelete-294/> <_:exportModelDuplicate-295/> <_:exportExec-296/"
-"> <_:exportImportExec-297/>"
-msgstr ""
 
 #. (itstool) path: menu/item@label
 #. (itstool) path: item/item@label
@@ -198,13 +84,12 @@ msgstr "List of tables and columns in the form of Latex tables"
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:17
 msgid "Requêtes SQL"
-msgstr ""
+msgstr "SQL requests"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:17
-#, fuzzy
 msgid "Exécution de requêtes SQL dans la base de données"
-msgstr "Name of the table in the database"
+msgstr "Run SQL requests on the database"
 
 #. (itstool) path: menu/item@label
 #. (itstool) path: item/item@label
@@ -232,7 +117,6 @@ msgstr "List of stations used in remote sensing"
 msgid "Poissons suivis"
 msgstr "Tracked fish"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:22
 #: ../../../display/templates/tracking/individualTrackingList.tpl:42
@@ -275,7 +159,6 @@ msgstr "List of types of station"
 msgid "Types d'émetteurs"
 msgstr "Types of transmitters"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:26 ../../../param/menu.xml:75
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:1
@@ -307,7 +190,6 @@ msgstr "Measurement parameters recorded by the probes"
 msgid "Types d'import"
 msgstr "Types of import"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:29 ../../../param/menu.xml:78
 #: ../../../display/templates/import/importTypeList.tpl:1
@@ -334,7 +216,6 @@ msgstr "General parameters and reference tables"
 msgid "Projets"
 msgstr "Projects"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:35
 #: ../../../display/templates/param/projectList.tpl:1
@@ -346,14 +227,12 @@ msgstr "List of projects"
 msgid "Protocoles"
 msgstr "Protocols"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:36
 #: ../../../display/templates/param/protocolList.tpl:1
 msgid "Liste des protocoles"
 msgstr "List of protocols"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:37
 #: ../../../display/templates/gestion/operationDisplay.tpl:83
@@ -366,7 +245,6 @@ msgstr "Operators"
 msgid "Liste des opérateurs"
 msgstr "List of operators"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:39
 #: ../../../display/templates/tracking/stationTrackingList.tpl:79
@@ -379,7 +257,6 @@ msgstr "watercourse"
 msgid "Liste des cours d'eau"
 msgstr "List of watercourses"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:40
 #: ../../../display/templates/param/stationList.tpl:1
@@ -391,7 +268,6 @@ msgstr "Stations"
 msgid "Liste des stations"
 msgstr "List of stations"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:42
 #: ../../../display/templates/gestion/sampleList.tpl:12
@@ -401,7 +277,6 @@ msgstr "List of stations"
 msgid "Taxon"
 msgstr "Taxon"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:42 ../../../display/templates/param/taxonList.tpl:1
 msgid "Liste des taxons"
@@ -417,7 +292,6 @@ msgstr "Grid of taxons"
 msgid "Modèles de grilles de sélection des taxons"
 msgstr "Templates of taxon selection grid"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:44
 #: ../../../display/templates/gestion/sampleChange.tpl:635
@@ -436,7 +310,6 @@ msgstr "Templates of taxon complementary measures"
 msgid "Sexe"
 msgstr "Sexe"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:45 ../../../display/templates/param/sexeList.tpl:1
 msgid "Liste des sexes"
@@ -522,7 +395,6 @@ msgstr "Locations"
 msgid "Emplacements particuliers"
 msgstr "Particular locations"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:58
 #: ../../../display/templates/gestion/sequencePointList.tpl:12
@@ -554,7 +426,6 @@ msgstr "Granulometry"
 msgid "Classes de granulométrie du substrat"
 msgstr "Substrate granulometry classes"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:61
 #: ../../../display/templates/gestion/sequencePointList.tpl:11
@@ -617,14 +488,12 @@ msgstr "Speed"
 msgid "Classes de vitesse"
 msgstr "Speed classes"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:69
 #: ../../../display/templates/gestion/sequenceDisplay.tpl:90
 msgid "Engins de pêche"
 msgstr "Fishing gears"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:69 ../../../display/templates/param/gearList.tpl:1
 msgid "Liste des engins de pêche"
@@ -655,7 +524,6 @@ msgstr "Types of electric current"
 msgid "Modèles d'export"
 msgstr "Templates of export"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:81
 #: ../../../display/templates/import/exportModelList.tpl:18
@@ -735,15 +603,13 @@ msgstr "List of long-term parameters of the application"
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:97
 msgid "Logs"
-msgstr ""
+msgstr "Logs"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:97
-#, fuzzy
 msgid "Consultation des logs enregistrées"
-msgstr "Recorded measures"
+msgstr "Consultation of recorded logs"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:98 ../../../display/templates/phpinfo.tpl:1
 msgid "PHP info"
@@ -754,7 +620,6 @@ msgstr "PHP info"
 msgid "configuration générale du serveur PHP"
 msgstr "general configuration of the PHP server"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: menu/item@label
 #: ../../../param/menu.xml:100 ../../../framework/common.inc.php:293
 #: ../../../framework/identification/disconnect.php:18
@@ -769,7 +634,6 @@ msgstr "Sign in"
 msgid "S'identifier dans l'application"
 msgstr "Sign in to the app"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: menu/item@label
 #: ../../../param/menu.xml:101 ../../../display/templates/entete.tpl:36
 #: ../../../display/templates/entete.tpl:37
@@ -791,7 +655,6 @@ msgstr "Last connections"
 msgid "Liste des connexions récentes"
 msgstr "List of recently connections"
 
-#. #-#-#-#-#  _xml.pot (PACKAGE VERSION)  #-#-#-#-#
 #. (itstool) path: item/item@label
 #: ../../../param/menu.xml:103
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:86
@@ -1013,9 +876,8 @@ msgid "Problème lors de la suppression"
 msgstr "Problem when deleting"
 
 #: ../../../framework/fonctions.php:150
-#, fuzzy
 msgid "Suppression non réalisée"
-msgstr "Deletion done"
+msgstr "Unrealized deletion"
 
 #: ../../../framework/fonctions.php:159
 msgid ""
@@ -1103,7 +965,7 @@ msgstr "Your password is about to expire. Please, change it immediately"
 
 #: ../../../framework/identification/loginGestion.class.php:178
 msgid "Mot de passe insuffisamment complexe ou trop petit"
-msgstr ""
+msgstr "Password not enough complex or too small"
 
 #: ../../../framework/identification/loginGestion.class.php:258
 msgid "La modification du mot de passe a échoué"
@@ -1156,15 +1018,16 @@ msgid "Le mot de passe n'est pas identique dans les deux zones"
 msgstr "Passwords don't match in both fields"
 
 #: ../../../framework/identification/identification.class.php:394
-#, fuzzy
 msgid "Nouvel utilisateur"
-msgstr "Username:"
+msgstr "New user:"
 
 #: ../../../framework/identification/identification.class.php:403
 msgid ""
 "Votre compte a été créé, mais est inactif. Un mail a été adressé aux "
 "administrateurs pour son activation"
 msgstr ""
+"Your account was create, but it's inactive. An email was send to the "
+"administrators for its activation"
 
 #. traduction: conserver inchangées les chaînes :keyword"
 #: ../../../framework/identification/passwordLost.php:32
@@ -1254,7 +1117,7 @@ msgstr "File %s not found or not readable"
 
 #: ../../../param/param.default.inc.php:11
 msgid "14/04/2020"
-msgstr ""
+msgstr "2020-04-14"
 
 #: ../../../modules/gestion/campaign.php:88
 #: ../../../modules/gestion/campaign.php:99
@@ -1309,9 +1172,8 @@ msgid "Problème rencontré lors de l'enregistrement du poisson"
 msgstr "Problem encountered when recording a fish"
 
 #: ../../../modules/tracking/individualTracking.php:123
-#, fuzzy
 msgid "Aucun poisson n'a été sélectionné"
-msgstr "Fish monitoring in remote sensing"
+msgstr "No fish has been selected"
 
 #: ../../../modules/param/station.php:83
 #, php-format
@@ -1360,7 +1222,7 @@ msgstr "Generation error for image %s"
 
 #: ../../../modules/classes/operation.class.php:277
 msgid "L'opération à dupliquer n'existe pas"
-msgstr ""
+msgstr "The operation to duplicate don't exists"
 
 #: ../../../modules/classes/import.class.php:66
 #, php-format
@@ -1381,6 +1243,8 @@ msgid ""
 "La sequence à dupliquer n'existe pas ou l'opération de rattachement n'est "
 "pas indiquée"
 msgstr ""
+"The sequence to duplicate don't exists or the operation of attachment is not "
+"provided"
 
 #: ../../../modules/classes/import/function_type.class.php:54
 #, php-format
@@ -1546,22 +1410,20 @@ msgid "Structure de la base de données"
 msgstr "Database structure"
 
 #: ../../../display/templates/framework/logList.tpl:9
-#, fuzzy
 msgid "Nom du module :"
-msgstr "Name of the model:"
+msgstr "Module name:"
 
 #: ../../../display/templates/framework/logList.tpl:18
-#, fuzzy
 msgid "Login concerné :"
-msgstr "Taxon concerned"
+msgstr "Related login:"
 
 #: ../../../display/templates/framework/logList.tpl:29
 msgid "du :"
-msgstr ""
+msgstr "from :"
 
 #: ../../../display/templates/framework/logList.tpl:33
 msgid "au :"
-msgstr ""
+msgstr "to:"
 
 #: ../../../display/templates/framework/logList.tpl:38
 #: ../../../display/templates/gestion/campaignSearch.tpl:25
@@ -1577,7 +1439,7 @@ msgstr "Date"
 
 #: ../../../display/templates/framework/logList.tpl:49
 msgid "Module"
-msgstr ""
+msgstr "Module"
 
 #: ../../../display/templates/framework/logList.tpl:50
 #: ../../../display/templates/gestion/sampleList.tpl:19
@@ -1717,7 +1579,7 @@ msgstr "Account used for web service"
 
 #: ../../../display/templates/framework/ident/loginliste.tpl:13
 msgid "Mot de passe en attente de changement"
-msgstr ""
+msgstr "Password waiting to be change"
 
 #: ../../../display/templates/framework/ident/loginliste.tpl:22
 #: ../../../display/templates/framework/ident/loginliste.tpl:23
@@ -1747,7 +1609,7 @@ msgstr "yes"
 
 #: ../../../display/templates/framework/ident/loginliste.tpl:25
 msgid "Compte bloqué"
-msgstr ""
+msgstr "Account blocked"
 
 #: ../../../display/templates/framework/ident/identMailInput.tpl:2
 msgid "lancement de la procédure de récupération"
@@ -1856,6 +1718,7 @@ msgid ""
 "Le compte est verrouillé, le mot de passe n'a pas été changé après 3 "
 "connexions"
 msgstr ""
+"The account is blocked, the password was not changed after 3 connections"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:162
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:125
@@ -1875,19 +1738,16 @@ msgid "Mot de passe généré"
 msgstr "Password generated"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:183
-#, fuzzy
 msgid "Caractéristiques du mot de passe :"
-msgstr "Flow characteristics"
+msgstr "Password characteristics:"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:185
-#, fuzzy
 msgid "Longueur minimale : "
-msgstr "Length (in meters):"
+msgstr "Minimum length:"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:186
-#, fuzzy
 msgid "Au minimum 3 types de caractères différents parmi :"
-msgstr "be composed of at least 3 different types of characters among:"
+msgstr "At least 3 different types of characters among:"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:188
 msgid "des minuscules"
@@ -1996,7 +1856,7 @@ msgstr "The worst"
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:8
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:9
 msgid "Ajoutez un mot ou deux. Les mots inconnus sont meilleurs."
-msgstr ""
+msgstr "add one or two words. Unknown words are better."
 
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:8
 msgid "Mauvais"
@@ -2015,6 +1875,8 @@ msgid ""
 "Ajoutez un ou deux autres mots. Les mots peu communs sont meilleurs, les "
 "mots inversés ne sont pas beaucoup plus difficiles à deviner."
 msgstr ""
+"Add one or two words. Uncommon words are better, inverted words are not much "
+"harder to guess."
 
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:11
 msgid "Robuste"
@@ -2221,14 +2083,12 @@ msgid "Dernières connexions enregistrées"
 msgstr "Last connections recorded"
 
 #: ../../../display/templates/framework/request/requestList.tpl:1
-#, fuzzy
 msgid "Liste des requêtes SQL"
-msgstr "List of projects"
+msgstr "List of SQL requests"
 
 #: ../../../display/templates/framework/request/requestList.tpl:4
-#, fuzzy
 msgid "Nouvelle requête..."
-msgstr "New operation..."
+msgstr "New request..."
 
 #: ../../../display/templates/framework/request/requestList.tpl:9
 #: ../../../display/templates/gestion/sampleChange.tpl:628
@@ -2259,72 +2119,60 @@ msgid "Id"
 msgstr "Id"
 
 #: ../../../display/templates/framework/request/requestList.tpl:11
-#, fuzzy
 msgid "Date de création"
-msgstr ""
-"Date of\n"
-"creation"
+msgstr "Date of creation"
 
 #: ../../../display/templates/framework/request/requestList.tpl:12
-#, fuzzy
 msgid "Date de dernière exécution"
-msgstr "Last operation"
+msgstr "Date of last execution"
 
 #: ../../../display/templates/framework/request/requestList.tpl:13
 msgid "Créateur (login)"
-msgstr ""
+msgstr "Creator (login)"
 
 #: ../../../display/templates/framework/request/requestList.tpl:31
 msgid "Exécuter la requête"
-msgstr ""
+msgstr "Run the request"
 
 #: ../../../display/templates/framework/request/requestList.tpl:36
 msgid "Créer une nouvelle requête"
-msgstr ""
+msgstr "Create a new request"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:4
-#, fuzzy
 msgid "Confirmez la suppression de la requête"
-msgstr "Do you confirm the deletion?"
+msgstr "Do you confirm the deletion of the request?"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:48
-#, fuzzy
 msgid "Code SQL :"
-msgstr "Code:"
+msgstr "SQL code:"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:55
-#, fuzzy
 msgid "Champs dates de la requête (séparés par une virgule) :"
-msgstr "List of target columns, separated by a comma:"
+msgstr "Date fields of the request (separated by a comma):"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:61
-#, fuzzy
 msgid "date de création :"
-msgstr ""
-"Date of\n"
-"creation"
+msgstr "Date of creation:"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:67
 msgid "par :"
-msgstr ""
+msgstr "by:"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:73
-#, fuzzy
 msgid "Date de dernière exécution :"
-msgstr "Last operation"
+msgstr "Date of last execution:"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:81
 msgid "Enregistrer"
 msgstr "Save"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:83
-#, fuzzy
 msgid "Enregistrer et exécuter"
-msgstr "Saved"
+msgstr "Save and run"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:84
 msgid "Exécuter"
-msgstr ""
+msgstr "Run"
 
 #: ../../../display/templates/gestion/sampleChange.tpl:14
 #: ../../../display/templates/gestion/sampleChange.tpl:160
@@ -3011,7 +2859,7 @@ msgstr "Enable tab hovering:"
 
 #: ../../../display/templates/gestion/sequencePointChange.tpl:26
 msgid "Saisie d'un point d'échantillonnage"
-msgstr ""
+msgstr "Add/edit a sampling point"
 
 #: ../../../display/templates/gestion/sequencePointChange.tpl:46
 msgid "N° du point :"
@@ -3289,7 +3137,7 @@ msgstr "Water analysis"
 
 #: ../../../display/templates/gestion/sequenceDisplay.tpl:97
 msgid "Points d'échantillonnage"
-msgstr ""
+msgstr "Sampling points"
 
 #: ../../../display/templates/gestion/sampleList.tpl:13
 msgid "Nombre total"
@@ -3751,9 +3599,8 @@ msgid "Unité de mesure :"
 msgstr "Measure unit:"
 
 #: ../../../display/templates/tracking/individualTrackingList.tpl:87
-#, fuzzy
 msgid "Exporter les détections"
-msgstr "Export the selected models"
+msgstr "Export the detections"
 
 #: ../../../display/templates/tracking/individualTrackingList.tpl:98
 msgid "Émetteur acoustique ou radio"
@@ -4083,14 +3930,13 @@ msgstr "Length measure by default:"
 
 #: ../../../display/templates/param/protocolChange.tpl:44
 #: ../../../display/templates/param/protocolDisplay.tpl:52
-#, fuzzy
 msgid "Seule la longueur par défaut est autorisée ?"
 msgstr "Is only the default length allowed?"
 
 #: ../../../display/templates/param/protocolChange.tpl:57
 #: ../../../display/templates/param/protocolDisplay.tpl:56
 msgid "Seuls les taxons existants sont autorisés ?"
-msgstr ""
+msgstr "Only existing taxa are allowed?"
 
 #: ../../../display/templates/param/protocolChange.tpl:70
 #: ../../../display/templates/param/protocolDisplay.tpl:60
@@ -4489,9 +4335,8 @@ msgid "espace"
 msgstr "space"
 
 #: ../../../display/templates/import/importDescriptionChange.tpl:78
-#, fuzzy
 msgid "Première ligne à traiter :"
-msgstr "Column number to treat:"
+msgstr "First line to treat:"
 
 #: ../../../display/templates/import/importColumnChange.tpl:1
 msgid "Modification de la description d'une colonne du fichier"
@@ -4532,9 +4377,8 @@ msgid "Séparateur"
 msgstr "Separator"
 
 #: ../../../display/templates/import/importDescriptionList.tpl:18
-#, fuzzy
 msgid "1ère ligne à traiter"
-msgstr "Column number to treat:"
+msgstr "First line to treat"
 
 #: ../../../display/templates/import/importDescriptionList.tpl:21
 #: ../../../display/templates/import/importDescriptionList.tpl:46
@@ -4646,7 +4490,7 @@ msgstr "File to import:"
 
 #: ../../../display/templates/import/importExec.tpl:119
 msgid "Type d'import à réaliser :"
-msgstr "type of import to process:"
+msgstr "Type of import to process:"
 
 #: ../../../display/templates/import/importExec.tpl:145
 msgid "Antenne ou sonde concernée :"
@@ -5100,14 +4944,12 @@ msgid ": activer pour trier la colonne par ordre décroissant"
 msgstr ": activate to sort column descending"
 
 #: ../../../display/templates/main_js.tpl:104
-#, fuzzy
 msgid "Afficher %d éléments"
-msgstr "Show _MENU_ entries"
+msgstr "Show %d items"
 
 #: ../../../display/templates/main_js.tpl:105
-#, fuzzy
 msgid "Tout afficher"
-msgstr "Display"
+msgstr "Display All"
 
 #: ../../../display/templates/main_js.tpl:208
 msgid "Valeur numérique..."

@@ -8,10 +8,10 @@ Version {$version} of {$versiondate}.
 
 <h3>List of contributors to the project (alphabetical order)</h3>
 <ul>
-<li>Éric Quinton (IRSTEA)</li>
+<li>Éric Quinton (INRAE)</li>
 </ul>
 
-    <h3>Copyright © 2016-2018 Eric Quinton for IRSTEA (France)</h3>
+    <h3>Copyright © 2019-2020 Eric Quinton for INRAE (France)</h3>
 <p>
 Version 1.0 of the software has been registered with the Agency for the Protection of Programs under number (in progress)
 <br>
