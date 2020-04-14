@@ -37,8 +37,8 @@ if ($module_coderetour != -1) {
             $antenna = new Antenna($bdd, $ObjetBDDParam);
             $vue->set($antenna->getListFromProject($dindividual["project_id"]), "antennas");
             include_once "modules/classes/tracking/location.class.php";
-            $location = new Location($bdd, $ObjetBDDParam);
-            $vue->set($location->getListFromProject($dindividual["project_id"]), "locations");
+            //$location = new Location($bdd, $ObjetBDDParam);
+            //$vue->set($location->getListFromProject($dindividual["project_id"]), "locations");
             break;
         case "write":
             /**
