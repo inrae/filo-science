@@ -1,10 +1,31 @@
 News
 ===========
+Version 1.5.0 of 2020-04-14
+---------------------------
+News:
+- it is now possible to inhibit the manual entry of the taxon when it does not exist in the database (parameter of the protocol)
+- when importing CSV files containing the detections, it is possible to define one or more header lines not to be processed
+- it is now possible to export all detections of all (selected) fishes of a tracking campaign
+- Users with param permission can create and execute SQL queries directly in the database.
+
+Version 1.4.0 of 2019-12-17
+---------------------------
+News:
+- addition of the table sequence_point, to manage inventories by collection points
+- addition of the geom attribute on the operation and ambience tables to facilitate cartographic representation with third party software
+- a business code can be indicated for an installed machine
+- it is now possible to duplicate an operation, at least the general information
+- the last processed campaign can now be recalled from the menu
+- in the detail of an operation, the location of the sequences is displayed on a map
+
+Bug fixes:
+- entering the total weight of a sample did not support decimals
+- the display of the database table structure has been improved to facilitate its reading
+- importing files in Json format failed in some cases
+
 Release 1.3.0 of 2019-11-18
 ---------------------------
-Major release.
-
-News :
+News:
 - integration of the radiotracking management module: fish monitoring, definition of listening stations or physico-chemical analysis, field entry from QField (Android component for Qgis), display of movements on a map
 - integration of modules allowing the import of probe data or listening stations and data exchange between two databases
 - addition of the UUID to safely identify the different records managed by the fishing module

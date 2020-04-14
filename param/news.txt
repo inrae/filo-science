@@ -1,9 +1,15 @@
 Nouveautés
 ==========
+Version 1.5.0 du 14/04/2020
+---------------------------
+Nouveautés :
+- il est maintenant possible d'inhiber la saisie manuelle du taxon quand celui-ci n'existe pas dans la base (paramètre du protocole)
+- lors de l'importation des fichiers CSV contenant les détections, il est possible de définir une ou plusieurs lignes d'entête à ne pas traiter
+- il est maintenant possible d'exporter toutes les détections de tous les poissons (sélectionnés) d'une campagne de tracking
+- les utilisateurs disposant du droit param peuvent créer et exécuter directement des requêtes SQL dans la base de données
+
 Version 1.4.0 du 17/12/2019
 ---------------------------
-Mise à jour de la base de données nécessaire.
-
 Nouveautés :
 - ajout de la table sequence_point, pour gérer les inventaires par points de rélèvement
 - ajout de l'attribut geom sur les tables operation et ambience pour faciliter la représentation cartographique avec des logiciels tiers

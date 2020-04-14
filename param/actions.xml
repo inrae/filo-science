@@ -1,7 +1,5 @@
-<navigation xmlns:its="http://www.w3.org/2005/11/its" its:version="2.0">
-	<its:rules version="2.0">
-		<its:translateRule selector="//item/@tabledescription" translate="yes"/>
-	</its:rules>
+<navigation>
+
 	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
 	<default action="framework/default.php" type="smarty" noDelayBeforeCall="1"/>
 	<droitko action="framework/droitko.php" type="smarty"/>
@@ -70,7 +68,7 @@
 
 	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
 	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" maxCountByHour="60" maxCountByDay="600"/>
-    <dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="gestion" schemas="gacl" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="smarty" droits="gestion" schemas="col,gacl" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureSchema action="framework/utils/structure.php" param="schema" realfilename="database/filo.png" generatedfilename="filo-science.png" retourlogin="1" type="binaire" maxCountByHour="60" maxCountByDay="600"/>
@@ -85,7 +83,7 @@
 	<requestExecList action="framework/request/request.php" param="execList" droits="param" type="html"/>
 	<requestWriteExec action="framework/request/request.php" param="write" droits="param" modulebefore="requestChange,requestExec,requestWriteExec,requestExecList" retourok="requestExec" retourko="requestChange"/>
 	<requestCopy action="framework/request/request.php" param="copy" droits="param" type="smarty"/>
-	
+
 	<!-- Parameters of the software -->
 
 	<param action="framework/default.php" type="smarty"/>
@@ -241,7 +239,8 @@
 	<operationWrite action="modules/gestion/operation.php" param="write" droits="gestion" retourok="operationDisplay" retourko="operationChange" modulebefore="operationChange" maxCountByHour="60" maxCountByDay="600" />
 	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignDisplay" retourko="operationChange" modulebefore="operationChange" maxCountByHour="60" maxCountByDay="600" />
 	<operationOperatorsChange action="modules/gestion/operation.php" param="operatorsChange" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByHour="60" maxCountByDay="600" />
-	<operationDuplicate action="modules/gestion/operation.php" param="duplicate" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>>
+	<operationDuplicate action="modules/gestion/operation.php" param="duplicate" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
+>
 
 	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id,sequence_uid" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
@@ -333,10 +332,10 @@
 	<detectionChange action="modules/tracking/detection.php" param="change" droits="gestion" retourko="individualTrackingList" type="smarty"/>
 	<detectionWrite action="modules/tracking/detection.php" param="write" droits="gestion" retourko="detectionChange" retourok="individualTrackingList" modulebefore="detectionChange" maxCountByHour="120" maxCountByDay="1200" />
 	<detectionDelete action="modules/tracking/detection.php" param="delete" droits="gestion" retourko="detectionChange" retourok="individualTrackingList" modulebefore="detectionChange" maxCountByHour="60" maxCountByDay="600"/>
-	<parameterMeasureTypeList action="modules/tracking/parameter_measure_type.php" param="list" droits="consult"  type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
-	<parameterMeasureTypeChange action="modules/tracking/parameter_measure_type.php" param="change" droits="gestion"  type="smarty" maxCountByHour="60" maxCountByDay="600" />
-	<parameterMeasureTypeWrite action="modules/tracking/parameter_measure_type.php" param="write" droits="gestion"  retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
-	<parameterMeasureTypeDelete action="modules/tracking/parameter_measure_type.php" param="delete" droits="gestion"  retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeList action="modules/tracking/parameter_measure_type.php" param="list" droits="consult" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeChange action="modules/tracking/parameter_measure_type.php" param="change" droits="gestion" type="smarty" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeWrite action="modules/tracking/parameter_measure_type.php" param="write" droits="gestion" retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
+	<parameterMeasureTypeDelete action="modules/tracking/parameter_measure_type.php" param="delete" droits="gestion" retourok="parameterMeasureTypeList" retourko="parameterMeasureTypeChange" modulebefore="parameterMeasureTypeChange" maxCountByHour="60" maxCountByDay="600" />
 	<locationChange action="modules/tracking/location.php" param="change" droits="gestion" retourko="individualTrackingList" type="smarty"/>
 	<locationWrite action="modules/tracking/location.php" param="write" droits="gestion" retourko="locationChange" retourok="individualTrackingList" modulebefore="locationChange" maxCountByHour="120" maxCountByDay="1200" />
 	<locationDelete action="modules/tracking/location.php" param="delete" droits="gestion" retourko="locationChange" retourok="individualTrackingList" modulebefore="locationChange" maxCountByHour="60" maxCountByDay="600"/>

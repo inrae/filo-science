@@ -42,7 +42,7 @@ itstool -v >/dev/null 2>&1 || { echo >&2 "Erreur : itstool doit être installé.
 #	<its:translateRule selector="//item/@label" translate="yes"/>
 #	<its:translateRule selector="//item/@tooltip" translate="yes"/> 
 #</its:rules>
-itstool ../../../param/*.xml -o _xml.pot 
+itstool ../../../param/menu.xml -o _xml.pot 
 
 #agrége les fichiers .pot (provenant des templates smarty et du code php)
 msgcat _xml.pot _php.pot _tpl.pot -o _todo.pot
