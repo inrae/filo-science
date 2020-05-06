@@ -189,7 +189,7 @@
                                 <td class="right">{$detection.lat}</td>
                                 <td class="textareaDisplay">{$detection.observation}</td>
                                 <td class="center">
-                                    {if $detection.validity == 1}oui{else}<span class="red">non</span>{/if}
+                                    {if $detection.validity == 1}{t}oui{/t}{else}<span class="red">{t}non{/t}</span>{/if}
                                 </td>
                             </tr>
                         {/foreach}
