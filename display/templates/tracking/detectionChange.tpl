@@ -104,10 +104,10 @@
                     <div class="col-md-8">
                         <div class="btn-group btn-toggle" data-toggle="buttons">
                             <label class="radio-inline">
-                                <input type="radio" id="validity1" name="validity" value="1"  {if $data.validity ==1}checked{/if}>oui
+                                <input type="radio" id="validity1" name="validity" value="1"  {if $data.validity ==1}checked{/if}>{t}oui{/t}
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" id="validity0" name="validity" value="0"  {if $data.validity ==0}checked{/if}>non
+                                <input type="radio" id="validity0" name="validity" value="0"  {if $data.validity ==0}checked{/if}>{t}non{/t}
                             </label>
                         </div>
                     </div>

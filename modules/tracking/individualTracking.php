@@ -26,7 +26,7 @@ switch ($t_module["param"]) {
     if ($_REQUEST["individual_id"] > 0) {
       $dindividual = $dataClass->lire($_REQUEST["individual_id"]);
       if ($dindividual["project_id"] == $project_id) {
-        $vue->set($dataClass->getListDetection($_REQUEST["individual_id"]), "detections");
+        $vue->set($dataClass->getListDetection($_REQUEST["individual_id"], 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date asc"), "detections");
         $vue->set($_REQUEST["individual_id"], "selectedIndividual");
         setParamMap($vue, false);
       }
