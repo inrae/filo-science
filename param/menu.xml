@@ -17,7 +17,7 @@
 		<item module="requestList" label="Requêtes SQL" tooltip="Exécution de requêtes SQL dans la base de données" droits="param"/>
 	</item>
 
-	<item module="default" label="Télédétection" tooltip="Suivi des poissons en télédétection">
+	<item module="default" label="Télémétrie" tooltip="Suivi des poissons en télémétrie">
 		<item module="stationTrackingList" label="Stations utilisées" tooltip="Liste des stations utilisées en télédétection"/>
 		<item module="individualTrackingList" label="Poissons suivis" tooltip="Liste des poissons suivis"/>
 		<item module="importExec" label="Importation" tooltip="Réaliser une importation de données"/>
