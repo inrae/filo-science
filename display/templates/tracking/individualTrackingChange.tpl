@@ -81,7 +81,7 @@
                 })
                     .done(function (data) {
                         var result = JSON.parse(data);
-                        //options = '<option value="" selected></option>';			
+                        //options = '<option value="" selected></option>';
                         for (var i = 0; i < result.length; i++) {
                             options += '<option value="' + result[i].taxon_id + '">'
                                 + result[i].scientific_name;
@@ -137,7 +137,7 @@
             }
             $(this).val(tagPosed.toUpperCase());
         });
-        $("#tag,#transmitter").change(function () { 
+        $("#tag,#transmitter").change(function () {
             $(this).val($(this).val().toUpperCase());
         });
         function setFocusOnDefaultField(test, callback) {
@@ -162,8 +162,8 @@
         $(".fish").hover(function () {
             $(this).focus();
         });
-       
-        $(".btn").click(function( event ) { 
+
+        $(".btn").click(function( event ) {
             if ($(this).prop("id") != $(':focus').prop("id") && isAuto == 0) {
                 event.preventDefault();
             }
@@ -177,7 +177,7 @@
                 Cookies.set("fishAutoMode", 0, { expires: 180 });
             }
         });
-        $("#transmitter_type_id").change(function() { 
+        $("#transmitter_type_id").change(function() {
             Cookies.set("transmitter_type_id",$(this).val(), { expires: 180});
         });
         $("#individualForm").submit(function (event) {
@@ -201,7 +201,7 @@
                 } catch (e) { }
             }
         });
-        
+
         /* get the default taxon_id*/
         var taxon_id = "{$data.taxon_id}";
         if (! taxon_id > 0) {
@@ -313,12 +313,12 @@
                     <label for="measure_estimated" class="control-label col-md-4">{t}Mesure estimée ?{/t}</label>
                     <div class="col-md-8" id="measure_estimated">
                         <label class="radio-inline">
-                            <input class="fish" type="radio" name="measure_estimated" id="measure_estimated0" value="0" {if $data.measure_estimated==0}checked{/if}> {t}non{/t} 
-                        </label> 
+                            <input class="fish" type="radio" name="measure_estimated" id="measure_estimated0" value="0" {if $data.measure_estimated==0}checked{/if}> {t}non{/t}
+                        </label>
                         <label class="radio-inline">
-                            <input class="fish" type="radio" name="measure_estimated" id="measure_estimated1" value="1" {if $data.measure_estimated==1}checked{/if}> {t}oui{/t} 
-                        </label> 
-                    </div> 
+                            <input class="fish" type="radio" name="measure_estimated" id="measure_estimated1" value="1" {if $data.measure_estimated==1}checked{/if}> {t}oui{/t}
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group" id="div-weight">
                     <label for="weight" class="control-label col-md-4"> {t}Poids (g) :{/t}</label>
@@ -345,25 +345,25 @@
                     <div class="col-md-8">
                         <select id="sexe_id" name="sexe_id" class="fish form-control">
                             <option value="" {if $row.sexe_id=="" }selected{/if}>{t}Sélectionnez...{/t} </option>
-                            {foreach $sexes as $row} 
+                            {foreach $sexes as $row}
                             <option value="{$row.sexe_id}" {if $row.sexe_id==$data.sexe_id}selected{/if}> {$row.sexe_name} </option>
-                            {/foreach} 
-                        </select> 
-                    </div> 
-                </div> 
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="pathology_id" class="control-label col-md-4">{t}pathologie :{/t}</label>
                     <div class="col-md-8">
                         <select id="pathology_id" name="pathology_id" class="fish form-control combobox">
-                            <option value="" {if $row.pathology_id==""}selected{/if}>{t}Sélectionnez...{/t} </option> 
-                            {foreach $pathologys as $row} 
+                            <option value="" {if $row.pathology_id==""}selected{/if}>{t}Sélectionnez...{/t} </option>
+                            {foreach $pathologys as $row}
                                 <option value="{$row.pathology_id}" {if $row.pathology_id==$data.pathology_id}selected{/if}>
                                     {$row.pathology_code}:{$row.pathology_name}
-                                </option> 
+                                </option>
                             {/foreach}
-                        </select> 
-                    </div> 
-                </div> 
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group" id="div-pathology_codes">
                     <label for="pathology_codes" class="fish control-label col-md-4">
                         {t}Pathologies (suite de codes) ou commentaires sur la pathologie :{/t}
@@ -388,7 +388,7 @@
                     <label for="transmitter" class="control-label col-md-4"> {t}Code du transmetteur acoustique ou radio posé ou existant :{/t}</label>
                     <div class="col-md-8">
                         <input id="transmitter" type="text" class="fish form-control" name="transmitter"
-                            value="{$individual.transmitter}" autocomplete="off">
+                            value="{$data.transmitter}" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group" id="div-transmitter-type">
