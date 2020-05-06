@@ -49,7 +49,7 @@
     {/if}
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-6 col-md-12">
         <form class="form-horizontal protoform" id="individualTrackingSearch" action="index.php" method="GET">
             <input id="moduleSearch" type="hidden" name="module" value="individualTrackingList">
             <input id="isSearch" type="hidden" name="isSearch" value="1">
@@ -79,7 +79,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12 col-lg-6">
+    <div class="col-md-12 col-lg-8">
         <form id="findividualList" method="POST" action="index.php">
             <input type="hidden" name="module" id="module" value="individualTrackingList">
             <input type="hidden" name="project_id" value="{$project_id}">
@@ -134,10 +134,10 @@
         </form>
     </div>
     {if $selectedIndividual > 0}
-    <div class="col-md-12 col-lg-6">
+    <div class="col-md-12 col-lg-4">
         {include file="tracking/individualTrackingMap.tpl"}
     </div>
-        <fieldset class="col-md-12 col-lg-6">
+        <fieldset class="col-lg-12">
             <legend>{t}Liste des détections{/t}</legend>
             <a href="index.php?module=locationChange&location_id=0&individual_id={$selectedIndividual}">
                 {t}Nouvelle détection manuelle{/t}
