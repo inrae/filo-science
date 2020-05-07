@@ -1,18 +1,50 @@
+<script type="text/javascript" src="display/javascript/formbuilder.js"></script>
 <script>
     var mapIsChange = true;
-$(document).ready(function(){ 
+$(document).ready(function(){
     function setPos() {
         var lon = $("#ambience_long").val();
         var lat = $("#ambience_lat").val();
         setPositionA(lat, lon);
     };
     $(".position").change(function () {
-        setPos();        
+        setPos();
     });
     /*
      * Initialisation of map
      */
     setPos();
+    /*
+     * complementary measures
+     */
+    $("#paramForm").submit(function(event) {
+        if ($("#action").val()=="Write"){
+            var error = false;
+            $('#metadata').alpaca().refreshValidationState(true);
+            if($('#metadata').alpaca().isValid()){
+                var value = $('#metadata').alpaca().getValue();
+                // met les metadata en JSON dans le champ qui sera sauvegardé en base
+                $("#metadataField").val(JSON.stringify(value));
+            } else {
+                console.log("Error in analysis of metadata");
+                error = true;
+            }
+            if (error) {
+                event.preventDefault();
+            }
+        }
+    });
+    var dataParse = $("#metadataField").val();
+    dataParse = dataParse.replace(/&quot;/g,'"');
+    dataParse = dataParse.replace(/\n/g,"\\n");
+    if (dataParse.length > 2) {
+        dataParse = JSON.parse(dataParse);
+    }
+    var schema = "{$ambience_template_schema}";
+    if (schema.length > 0) {
+        schema = schema.replace(/&quot;/g,'"');
+        showForm(JSON.parse(schema),dataParse);
+    }
 });
 </script>
 <div class="row">
@@ -29,7 +61,7 @@ $(document).ready(function(){
     {/if}
 </div>
 <div class="row form-display">
-    
+
 
     <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
         <input type="hidden" name="moduleBase" value="ambience{$origin}">
@@ -37,8 +69,10 @@ $(document).ready(function(){
         <input type="hidden" name="ambience_id" value="{$data.ambience_id}">
         <input type="hidden" name="operation_id" value="{$data.operation_id}">
         <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
+        <input type="hidden" name="other_measures" id="metadataField" value="{$data.other_measures}">
+
         <input type="hidden" name="activeTab" value="tab-ambience">
-        <div class="col-md-4 ">       
+        <div class="col-md-4 ">
             <div class="form-group">
                 <label for="ambience_name"  class="control-label col-md-4">{t}Nom de l'ambiance :{/t}</label>
                 <div class="col-md-8">
@@ -115,7 +149,7 @@ $(document).ready(function(){
                     <div class="col-md-8">
                         <input id="current_speed" name="current_speed" value="{$data.current_speed}" class="form-control">
                         <input id=current_speed_min" name="current_speed_min" value="{$data.current_speed_min}" class="form-control" placeholder="{t}Valeur mini{/t}">
-                        <input id="current_speed_max" name="current_speed_max" value="{$data.current_speed_max}" class="form-control"placeholder="{t}Valeur maxi{/t}"> 
+                        <input id="current_speed_max" name="current_speed_max" value="{$data.current_speed_max}" class="form-control"placeholder="{t}Valeur maxi{/t}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -123,7 +157,7 @@ $(document).ready(function(){
                     <div class="col-md-8">
                         <input id="water_height" name="water_height" value="{$data.water_height}" class="form-control">
                         <input id=water_height_min" name="water_height_min" value="{$data.water_height_min}" class="form-control" placeholder="{t}Valeur mini{/t}">
-                        <input id="water_height_max" name="water_height_max" value="{$data.water_height_max}" class="form-control"placeholder="{t}Valeur maxi{/t}"> 
+                        <input id="water_height_max" name="water_height_max" value="{$data.water_height_max}" class="form-control"placeholder="{t}Valeur maxi{/t}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -151,10 +185,10 @@ $(document).ready(function(){
                             {/foreach}
                         </select>
                     </div>
-                </div>                
+                </div>
             </fieldset>
         </div>
-    
+
         <div class="col-md-4">
             <fieldset>
                 <legend>{t}Caractéristiques du milieu{/t}</legend>
@@ -235,7 +269,7 @@ $(document).ready(function(){
                             {/foreach}
                         </select>
                     </div>
-                </div>                                    
+                </div>
                 <div class="form-group">
                     <label for="clogging_id"  class="control-label col-md-4">{t}Colmatage :{/t}</label>
                     <div class="col-md-8">
@@ -318,6 +352,14 @@ $(document).ready(function(){
                     </div>
                 </div>
             </fieldset>
+            <fieldset>
+                <legend>{t}Mesures complémentaires{/t}</legend>
+                <div class="form-group">
+                    <div class="col-md-10 col-sm-offset-1">
+                        <div id="metadata"></div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
         <div class="col-md-4">
                 {include file="gestion/ambienceMap.tpl"}
@@ -331,6 +373,6 @@ $(document).ready(function(){
                 {/if}
             </div>
         </div>
-    </form>  
+    </form>
 </div>
 <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>

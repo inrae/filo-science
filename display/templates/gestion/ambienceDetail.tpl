@@ -55,9 +55,9 @@
                 <dt>{t}Turbidité :{/t}</dt>
                 <dd>{$ambience.turbidity_name}</dd>
             </dl>
-                        
+
         </fieldset>
-        
+
     </div>
     <div class="col-md-4 form-display">
         <fieldset>
@@ -85,11 +85,11 @@
             <dl class="dl-horizontal">
                 <dt>{t}Granulométrie secondaire :{/t}</dt>
                 <dd>{$ambience.secondary_granulometry}</dd>
-            </dl>                                    
+            </dl>
             <dl class="dl-horizontal">
                 <dt>{t}Colmatage :{/t}</dt>
                 <dd>{$ambience.clogging_name}</dd>
-            </dl>                               
+            </dl>
         </fieldset>
         <fieldset>
             <legend>{t}Abondance des caches{/t}</legend>
@@ -114,17 +114,42 @@
                 <dd>{$ambience.granulometry_cache_abundance}</dd>
             </dl>
         </fieldset>
+        {if count($other_measures) >0}
+            <fieldset>
+                <legend>{t}mesures complémentaires{/t}</legend>
+                {foreach $other_measures as $key=>$value}
+                    {if strlen($value) > 0 || count($value) > 0}
+                        <dl class="dl-horizontal">
+                            <dt>{t 1=$key}%1 :{/t}</dt>
+                            <dd>
+                            {if is_array($value) }
+                                {foreach $value as $val}
+                                    {$val}<br>
+                                {/foreach}
+                            {else}
+                                {if substr($value, 0, 5) == "http:" || substr($value, 0, 6) == "https:"}
+                                    <a href="{$value}" target="_blank">{$value}</a>
+                                {else}
+                                    {$value}
+                                {/if}
+                            {/if}
+                            </dd>
+                        </dl>
+                    {/if}
+                {/foreach}
+            </fieldset>
+        {/if}
     </div>
     <div class="col-md-4">
         {if $ambience.ambience_id > 0}
             {include file="gestion/ambienceMap.tpl"}
         {/if}
     </div>
-        
+
 </div>
 
 
 
 
 
-        
+

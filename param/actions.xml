@@ -293,6 +293,11 @@
 	<measureTemplateWrite action="modules/param/measureTemplate.php" param="write" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 	<measureTemplateDelete action="modules/param/measureTemplate.php" param="delete" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 
+	<ambienceTemplateList action="modules/param/ambienceTemplate.php" param="list" droits="consult" type="smarty" maxCountByHour="60" maxCountByDay="600" retourlogin="1"/>
+	<ambienceTemplateChange action="modules/param/ambienceTemplate.php" param="change" droits="param" type="smarty" requiredVar="ambience_template_id" maxCountByHour="60" maxCountByDay="600" />
+	<ambienceTemplateWrite action="modules/param/ambienceTemplate.php" param="write" droits="param" retourok="ambienceTemplateList" retourko="ambienceTemplateChange" modulebefore="ambienceTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+	<ambienceTemplateDelete action="modules/param/ambienceTemplate.php" param="delete" droits="param" retourok="ambienceTemplateList" retourko="ambienceTemplateChange" modulebefore="ambienceTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+
 	<protocolMeasureChange action="modules/param/protocolMeasure.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" requiredVar="protocol_id"/>
 	<protocolMeasureWrite action="modules/param/protocolMeasure.php" param="write" droits="param" retourok="protocolDisplay" retourko="protocolMeasureChange" modulebefore="protocolMeasureChange"/>
 	<protocolGetTaxonTemplate action="modules/param/protocol.php" param="getTaxonTemplate" droits="gestion" type="ajax"/>

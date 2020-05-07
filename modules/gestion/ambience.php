@@ -41,6 +41,15 @@ switch ($t_module["param"]) {
             );
         }
         $vue->set($dparent, "dataParent");
+        if ($dparent["ambience_template_id"] > 0) {
+            /**
+             * Get the complementary measures template
+             */
+            include_once "modules/classes/ambience_template.class.php";
+            $at = new AmbienceTemplate($bdd, $ObjetBDDParam);
+            $dat = $at->lire($dparent["ambience_template_id"]);
+            $vue->set($dat["ambience_template_schema"], "ambience_template_schema");
+        }
         if ($id == 0) {
             $data["operation_id"] = $operation_id;
             $data["sequence_id"] = $sequence_id;

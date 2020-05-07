@@ -9,8 +9,10 @@ class Sequence extends ObjetBDD
                     ,sequence_id as sequence_uid
                     ,campaign_id, campaign_name
                     ,project_id, project_name
-                    ,protocol_id, measure_default, measure_default_only, analysis_template_id, existing_taxon_only
+                    ,protocol_id, measure_default, measure_default_only
+                    , analysis_template_id, existing_taxon_only
                     ,ambience_long, ambience_lat
+                    ,ambience_template_id
                     from sequence s
                     join operation using (operation_id)
                     join campaign using (campaign_id)

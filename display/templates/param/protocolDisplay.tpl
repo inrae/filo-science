@@ -60,6 +60,10 @@
                 <dt>{t}Modèle d'analyse complémentaire :{/t}</dt>
                 <dd>{$data.analysis_template_name}</dd>
             </dl>
+            <dl class="dl-horizontal">
+                <dt>{t}Modèle de mesures complémentaires d'ambiance :{/t}</dt>
+                <dd>{$data.ambience_template_name}</dd>
+            </dl>
         </div>
     </fieldset>
 

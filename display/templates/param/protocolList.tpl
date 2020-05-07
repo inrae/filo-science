@@ -17,6 +17,7 @@
             <th>{t}Fichier de description{/t}</th>
             <th>{t}Unité de mesure par défaut{/t}</th>
             <th>{t}Modèle d'analyse complémentaire{/t}</th>
+            <th>{t}Modèle de mesures complémentaires d'ambiance{/t}</th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +42,7 @@
                     {/if} 
                 </td>
                 <td>{$row.analysis_template_name}</td>
+                <td>{$row.ambience_template_name}</td>
             </tr>
         {/foreach}
     </tbody>

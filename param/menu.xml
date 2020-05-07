@@ -64,6 +64,7 @@
 			<item module="turbidityList" label="Turbidité" tooltip="Classes de turbidité"/>
 			<item module="vegetationList" label="Végétation" tooltip="Nature de la végétation"/>
 			<item module="speedList" label="Vitesse" tooltip="Classes de vitesse"/>
+			<item module="ambienceTemplateList" label="Mesures complémentaires" tooltip="Mesures complémentaires associées à une ambience"/>
 		</item>
 		<item divider="1"/>
 		<item module="gearList" label="Engins de pêche" tooltip="Liste des engins de pêche"/>
