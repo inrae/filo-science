@@ -25,13 +25,10 @@ switch ($t_module["param"]) {
             $dataclass->generateLatex(
                 "subsection",
                 "\\begin{tabular}{|l| p{2cm}|c|c|c| p{3cm}|}",
-                "\\end{tabular}",
-                $t_module["schemas"]
-            ),
-            "data"
+                "\\end{tabular}"
+            )
         );
-        $vue->htmlVars[] = "data";
-
+        //$vue->htmlVars[] = "data";
         break;
     case "gacl":
         $dataclass = new Structure($bdd_gacl, array(), $t_module["schemas"]);

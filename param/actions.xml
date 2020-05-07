@@ -1,6 +1,6 @@
 <navigation>
 
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
+	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire|file" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
 	<default action="framework/default.php" type="smarty" noDelayBeforeCall="1"/>
 	<droitko action="framework/droitko.php" type="smarty"/>
 	<droits menudroits="admin" droits="admin" />
@@ -68,9 +68,9 @@
 
 	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
 	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import,gacl" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="gestion" schemas="gacl" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="smarty" droits="gestion" schemas="col,gacl" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="file" droits="gestion" schemas="filo,tracking,import,gacl" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureSchema action="framework/utils/structure.php" param="schema" realfilename="database/filo.png" generatedfilename="filo-science.png" retourlogin="1" type="binaire" maxCountByHour="60" maxCountByDay="600"/>
 
 	<logList action="framework/log/log.php" param="list" retourlogin="1" type="smarty" droits="admin"/>

@@ -198,12 +198,14 @@ class Structure extends ObjetBDD
      * @param string $structureLevel: first level of the structure in the latex document
      * @param string $headerTable: definition of the table
      * @param string $closeTable: end tag for table
+     * @param boolean $hline: add a hline between each column
      * @return string
      */
     function generateLatex(
         $structureLevel = "subsection",
         $headerTable = "\\begin{tabular}{|l|l|c|l|l|}",
-        $closeTable = "\\end{tabular}"
+        $closeTable = "\\end{tabular}",
+        $hline = false
     ) {
         $val = "";
         $currentSchema = "";
@@ -226,8 +228,13 @@ class Structure extends ObjetBDD
                 ($column["notnull"] == 1) ? $val .= "X & " : $val .= " & ";
                 strlen($column["key"]) > 0 ? $val .= "X & " : $val .= " & ";
                 $val .= $this->el($column["comment"])
-                    . "\\\\" . PHP_EOL
-                    . "\\hline" . PHP_EOL;
+                    . "\\\\" . PHP_EOL;
+                if ($hline) {
+                    $val .= "\\hline" . PHP_EOL;
+                }
+            }
+            if (!$hline) {
+                $val .= "\\hline" . PHP_EOL;
             }
             $val .= $closeTable . PHP_EOL;
 
