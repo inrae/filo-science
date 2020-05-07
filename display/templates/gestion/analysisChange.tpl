@@ -1,14 +1,14 @@
 <script type="text/javascript" src="display/javascript/formbuilder.js"></script>
 <script>
-$(document).ready(function() { 
-    $("#paramForm").submit(function(event) { 
+$(document).ready(function() {
+    $("#paramForm").submit(function(event) {
         if ($("#action").val()=="Write"){
             var error = false;
             $('#metadata').alpaca().refreshValidationState(true);
             if($('#metadata').alpaca().isValid()){
                 var value = $('#metadata').alpaca().getValue();
                 // met les metadata en JSON dans le champ qui sera sauvegardé en base
-                $("#metadataField").val(JSON.stringify(value));                   
+                $("#metadataField").val(JSON.stringify(value));
             } else {
                 console.log("Error in analysis of metadata");
                 error = true;
@@ -61,19 +61,19 @@ $(document).ready(function() {
             <div class="col-md-8">
                 <input id="analysis_date" type="text" class="form-control datetimepicker" name="analysis_date" value="{$data.analysis_date}" autofocus>
             </div>
-        </div>     
+        </div>
         <div class="form-group">
             <label for="ph"  class="control-label col-md-4">{t}pH :{/t}</label>
             <div class="col-md-8">
                 <input id="ph" type="text" class="form-control taux" name="ph" value="{$data.ph}" >
             </div>
-        </div>      
+        </div>
         <div class="form-group">
             <label for="temperature"  class="control-label col-md-4">{t}Température (°C) :{/t}</label>
             <div class="col-md-8">
                 <input id="temperature" type="text" class="form-control taux" name="temperature" value="{$data.temperature}" >
             </div>
-        </div>    
+        </div>
         <div class="form-group">
             <label for="o2_pc"  class="control-label col-md-4">{t}% de saturation O2 :{/t}</label>
             <div class="col-md-8">
@@ -91,13 +91,13 @@ $(document).ready(function() {
             <div class="col-md-8">
                 <input id="salinity" type="text" class="form-control taux" name="salinity" value="{$data.salinity}" >
             </div>
-        </div>     
+        </div>
         <div class="form-group">
             <label for="conductivity"  class="control-label col-md-4">{t}Conductivité, en µS/cm :{/t}</label>
             <div class="col-md-8">
                 <input id="conductivity" type="text" class="form-control taux" name="conductivity" value="{$data.conductivity}" >
             </div>
-        </div>   
+        </div>
         <div class="form-group">
             <label for="secchi"  class="control-label col-md-4">{t}Secchi, en mètre :{/t}</label>
             <div class="col-md-8">
@@ -120,6 +120,6 @@ $(document).ready(function() {
                 {/if}
             </div>
         </div>
-    </form>  
+    </form>
 </div>
 <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>
