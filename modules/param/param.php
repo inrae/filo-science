@@ -11,6 +11,7 @@ if (!function_exists("generateSet")) {
 	{
 		$vue->set($tablename . "_id", "fieldid");
 		$vue->set($tablename . "_name", "fieldname");
+		$vue->set($tablename . "_code", "fieldcode");
 		$vue->set(_($description), "tabledescription");
 		$vue->set($tablename, "tablename");
 	}
