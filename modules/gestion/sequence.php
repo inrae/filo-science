@@ -73,6 +73,10 @@ switch ($t_module["param"]) {
             $dataAmbience["ambience_id"] = 0;
         }
         $vue->set($dataAmbience, "ambience");
+        $other_measures = json_decode($dataAmbience["other_measures"], true);
+        if ( count($other_measures) > 0) {
+            $vue->set($other_measures, "other_measures");
+        }
 
         /**
          * Analysis
@@ -98,7 +102,6 @@ switch ($t_module["param"]) {
             $dataAnalysis,
             "analysis"
         );
-        $vue->get("analysis");
         /**
          * Points
          */
