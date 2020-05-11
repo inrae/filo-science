@@ -7,6 +7,7 @@ class Individual extends ObjetBDD
 {
     private $sql = "select individual_id, individual_id as individual_uid, sample_id, sexe_id, pathology_id
                     , sl, fl, tl, wd, ot, weight
+                    ,individual_code
                     ,other_measure, individual_comment, age
                     ,measure_estimated, pathology_codes, tag, tag_posed, transmitter
                     ,pathology_name, pathology_code
@@ -49,7 +50,8 @@ class Individual extends ObjetBDD
             "tag" => array("type" => 0),
             "tag_posed" => array("type" => 0),
             "transmitter" => array("type" => 0),
-            "uuid" => array("type" => 0, "defaultValue"=>"getUUID")
+            "uuid" => array("type" => 0, "defaultValue"=>"getUUID"),
+            "individual_code"=>array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

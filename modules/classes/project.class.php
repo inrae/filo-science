@@ -8,7 +8,8 @@
  */
 class Project extends ObjetBDD
 {
-    private $sql = "select project_id, project_name, is_active, metric_srid, protocol_default_id, protocol_id
+    private $sql = "select project_id, project_name, is_active, metric_srid
+    ,protocol_default_id, protocol_id
     ,array_to_string(array_agg(groupe),', ') as groupe
     ,protocol_name, measure_default, measure_default_only
     from project
