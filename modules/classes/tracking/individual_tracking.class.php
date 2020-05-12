@@ -20,6 +20,7 @@ class IndividualTracking extends ObjetBDD
                     left outer join transmitter_type using (transmitter_type_id)
                     left outer join station_tracking on (station_id = release_station_id)
                     left outer join station using (station_id)";
+  public $project_id;
   /**
    * Constructor
    *
@@ -51,27 +52,47 @@ class IndividualTracking extends ObjetBDD
     return ($this->getListeParamAsPrepared($this->sql . $where, array("project_id" => $project_id)));
   }
 
+  private function _getFromField(string $fieldname, string $value, int $project_id = 0)
+  {
+    if ($project_id == 0) {
+      $project_id = $this->project_id;
+    }
+    $where = " where $fieldname = :value and it.project_id = :project_id";
+    return $this->lireParamAsPrepared(
+      $this->sql . $where,
+      array("value" => $value, "project_id" => $project_id)
+    );
+  }
   /**
    * Get the fish from the tag
    *
    * @param string $tag
    * @return array
    */
-  function getFromTag(string $tag)
+  function getFromTag(string $tag, int $project_id = 0)
   {
-    $where = " where tag = :tag";
-    return $this->lireParamAsPrepared($this->sql . $where, array("tag" => $tag));
+    return $this->_getFromField("tag", $tag, $project_id);
   }
   /**
    * Get the fish from the transmitter
    *
    * @param string $transmitter
-   * @return void
+   * @return void|string
    */
-  function getFromTransmitter(string $transmitter)
+  function getFromTransmitter(string $transmitter, int $project_id = 0)
   {
-    $where = " where transmitter = :transmitter";
-    return $this->lireParamAsPrepared($this->sql . $where, array("transmitter" => $transmitter));
+    return $this->_getFromField("transmitter", $transmitter, $project_id);
+  }
+
+  /**
+   * Get the fish from the individual_code
+   *
+   * @param string $code
+   * @return void|string
+   */
+  function getFromCode(string $code, int $project_id = 0)
+  {
+    return $this->_getFromField("individual_code", $code, $project_id);
   }
 
   /**
@@ -88,6 +109,20 @@ class IndividualTracking extends ObjetBDD
     parent::supprimer($id);
   }
 
+  /**
+   * Set the current project_id
+   *
+   * @param int $project_id
+   * @return void
+   */
+  function setProjectId(int $project_id)
+  {
+    if ($project_id > 0) {
+      $this->project_id = $project_id;
+    } else {
+      throw new IndividualTrackingException(_("Le numéro du projet n'est pas conforme"));
+    }
+  }
   /**
    * Get the detail of a fish
    *

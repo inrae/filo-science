@@ -253,4 +253,22 @@ class Project extends ObjetBDD
             return array();
         }
     }
+    /**
+     * Verify if the project is authorized
+     *
+     * @param integer $project_id
+     * @param array $projects
+     * @return boolean
+     */
+    function isAuthorized(int $project_id, array $projects): bool
+    {
+        $ok = false;
+        foreach ($projects as $project) {
+            if ($project_id == $project["project_id"]) {
+                $ok = true;
+                break;
+            }
+        }
+        return $ok;
+    }
 }
