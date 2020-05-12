@@ -249,11 +249,26 @@
 			<input type="hidden" name="moduleBase" value="individualTracking">
 			<input type="hidden" id="action" name="action" value="Write">
 			<input type="hidden" id="isTracking" name="isTracking" value="1">
-			<div class="col-md-4 center">{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto"></div>
+			<div class="row">
+				<div class="col-md-4 center">{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto"></div>
 			<div class="col-md-8 center"><button id="submit2" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button></div>
+			</div>
+			<div class="form-group">
+				<label for="project_id" class="col-md-4 control-label">{t}Projet :{/t}</label>
+				<div class="col-md-8">
+					<select id="project_id" name="project_id" class="form-control">
+						{foreach $projects as $row}
+						<option id="project{$row.project_id}" value="{$row.project_id}" {if $row.project_id == $data.project_id}selected{/if}>
+							{$row.project_name}
+						</option>
+						{/foreach}
+					</select>
+				</div>
+			</div>
+			<div class="row">
 			<fieldset>
 				<legend>{t}Taxon{/t}</legend>
-					<div class="form-group">
+				<div class="form-group">
 					<label for="taxon-search" class="control-label col-md-4"> {t}Code ou nom à rechercher :{/t}</label>
 					<div class="col-md-8">
 						<input id="taxon-search" type="text" class="form-control" name="taxon-search" value="" autocomplete="off">
@@ -440,6 +455,7 @@
 					{/if}
 				</div>
 			</fieldset>
+		</div>
 		</div>
 	</form>
 </div>

@@ -3,7 +3,7 @@
         var cookieContent;
         var projectId = "{$projects[0].project_id}";
         var importDescriptionId = "{$imports[0].import_description_id}";
-        var sensorId;
+        var sensorId = 0;
 
         $("#import_description_id, #project_id").change(function () {
             var import_description_id = $("#import_description_id").val();
@@ -13,7 +13,6 @@
             }
         });
         $("#testMode:checkbox").change(function () {
-            console.log(this.checked);
             if (this.checked) {
                 $("#nbLinesGroup").show();
             } else {
@@ -93,7 +92,7 @@
          * Get default station
          */
          if (importDescriptionId > 0 && projectId > 0) {
-            setStations(importDescriptionId,projectId);
+            setStations(importDescriptionId,projectId, sensorId);
          }
     });
 </script>

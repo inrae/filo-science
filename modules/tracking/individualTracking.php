@@ -56,6 +56,7 @@ switch ($t_module["param"]) {
       include_once 'modules/classes/project.class.php';
       $project = new Project($bdd, $ObjetBDDParam);
       $vue->set( $project->getDetail($_REQUEST["project_id"]), "project");
+      $vue->set($_SESSION["projects"], "projects");
     } else {
       $module_coderetour = -1;
       $message->set(_("Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"), true);
