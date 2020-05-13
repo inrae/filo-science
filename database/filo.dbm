@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="756,502" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="0,0" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3958,7 +3958,8 @@ Station de lacher]]>
 12•concatenate•Associe le contenu de colonnes ou du texte. L'argument doit etre au format JSON, sous la forme : [{"type":"col","val":4},{type:"str","val":":"}]⸣
 13•matchingCode•Remplace la valeur courante par une autre valeur, définie dans un argument JSON au format : {"valueSearched":correspondingValue, "2ndvalue":corresp2}. Pour la recherche des paramètres de sonde, valueSearched doit correspondre au libellé utilisé par la sonde, et correspondingValue à la valeur de la clé dans la table des paramètres⸣
 14•decodeAll•Transforme un jeu de caractère particulier en UTF-8. L'argument doit comprendre le jeu de caractère à transcoder, par exemple UTF-32⸣
-15•transformDecimalSeparator•Transforme la virgule en point, pour les champs décimaux en français]]>
+15•transformDecimalSeparator•Transforme la virgule en point, pour les champs décimaux en français⸣
+16•getIndividualFromCode•Récupère l'identifiant du poisson à partir de son code]]>
 	</initial-data>
 </table>
 

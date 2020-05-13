@@ -6,7 +6,7 @@
     </a>
 {/if}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-12">
         <table id="stationList" class="table table-bordered table-hover datatable-nopaging " >
             <thead>
                 <tr>
