@@ -188,21 +188,31 @@ class IndividualTracking extends ObjetBDD
     return $this->getListeParamAsPrepared($sql, $param);
   }
 
-  function getIdFromField($field, $value, $project_id = 0)
+  /**
+   * Get the individual_id of a fish, searched from a field, with or without the project_id
+   *
+   * @param string $field
+   * @param any $value
+   * @param integer $project_id
+   * @return int: individual_id or 0
+   */
+  function getIdFromField(string $field, $value, $project_id = 0): int
   {
-    $sql = "select individual_id from individual_tracking
+    $id = 0;
+    if (strlen($value) > 0) {
+      $sql = "select individual_id from individual_tracking
             join individual using (individual_id)
             where $field = :value";
-    $param = array("value" => $value);
-    if ($project_id > 0 && $field != "uuid") {
-      $sql .= " and project_id = :project_id";
-      $param["project_id"] = $project_id;
+      $param = array("value" => $value);
+      if ($project_id > 0 && $field != "uuid") {
+        $sql .= " and project_id = :project_id";
+        $param["project_id"] = $project_id;
+      }
+      $data = $this->lireParamAsPrepared($sql, $param);
+      if ($data["individual_id"] > 0) {
+        $id = $data["individual_id"];
+      }
     }
-    $data = $this->lireParamAsPrepared($sql, $param);
-    if ($data["individual_id"] > 0) {
-      return $data["individual_id"];
-    } else {
-      return 0;
-    }
+    return $id;
   }
 }

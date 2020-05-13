@@ -100,6 +100,9 @@ class Individual extends ObjetBDD
         if (strlen($data["measure_estimated"]) == 0) {
             $data["measure_estimated"] = 0;
         }
+        if (strlen($data["uuid"]) != 36) {
+            unset ($data["uuid"]);
+        }
         $id = parent::ecrire($data);
         if ($id > 0 && $data["isTracking"]) {
             $data["individual_id"] = $id;

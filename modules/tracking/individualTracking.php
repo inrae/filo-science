@@ -143,56 +143,68 @@ switch ($t_module["param"]) {
     break;
   case "importExec":
     if (verifyProject($_POST["project_id"])) {
+      $fdata = $_FILES['filename'];
       if ($fdata["error"] == 0 && $fdata["size"] > 0) {
         /**
          * $errors: list of errors
          * Structure: array ["lineNumber", "content"]
          */
         $errors = array();
-        $import = new FiloImport();
         $numLine = 1;
         $idMin = 999999999;
         $idMax = 0;
         $continue = true;
         include_once "modules/classes/tracking/import.class.php";
-        $import = new Import($fdata["tmp_name"], $_POST["separator"]);
         try {
           $bdd->beginTransaction();
           $individual->individualTracking = $dataClass;
-          $import = new Import($fdata["tmp_name"], $_POST["separator"]);
+          $import = new ImportTracking($fdata["tmp_name"], $_POST["separator"]);
           $lines = $import->getContentAsArray();
           $fields = array("uuid", "individual_code", "tag", "transmitter");
           foreach ($lines as $line) {
             $numLine++;
             /**
-             * Search if the fish exists
+             * Search if the line is empty (taxon_id empty)
              */
-            $isNew = true;
-            foreach ($fields as $field) {
-              if ($idExistent = $dataClass->getIdFromField($field, $line[$field], $POST["project_id"]) > 0) {
-                $isNew = false;
-                break;
+            if (strlen($line["taxon_id"]) > 0) {
+              /**
+               * Search if the fish exists
+               */
+              $isNew = true;
+              foreach ($fields as $field) {
+                if ($idExistent = $dataClass->getIdFromField($field, $line[$field], $POST["project_id"]) > 0) {
+                  $isNew = false;
+                  break;
+                }
               }
-            }
-            if ($isnew) {
-              $line["project_id"] = $_POST["project_id"];
-              $id = $individual->ecrire($line);
-              if ($id < $idMin) {
-                $idMin = $id;
-              }
-              if ($id > $idMax) {
-                $idMax = $id;
+              if ($isnew) {
+                $line["project_id"] = $_POST["project_id"];
+                $line["individual_id"] = 0;
+                printr($line);
+                $id = $individual->ecrire($line);
+                if ($id < $idMin) {
+                  $idMin = $id;
+                }
+                if ($id > $idMax) {
+                  $idMax = $id;
+                }
+              } else {
+                $errors[] = array(
+                  "lineNumber" => $numLine,
+                  "content" => sprintf(_("Le poisson existe déjà (id : %s)"), $idExistent)
+                );
               }
             } else {
               $errors[] = array(
                 "lineNumber" => $numLine,
-                "content" => sprintf(_("Le poisson existe déjà (id : %s)"), $idExistent)
+                "content" => _("La ligne est vide ou le taxon_id n'a pas été renseigné - ligne non traitée")
               );
             }
           }
           $bdd->commit();
           $errors[] = array("content" => _("Id mini généré :") . $idMin);
           $errors[] = array("content" => _("Id maxi généré :") . $idMax);
+          $module_coderetour = 1;
         } catch (ImportException $ie) {
           $message->set(_("L'importation a échoué, le fichier n'a pas été correctement lu"), true);
           $message->setSyslog($ie->getMessage());
@@ -206,6 +218,9 @@ switch ($t_module["param"]) {
             $bdd->rollback();
             $module_coderetour = -1;
           }
+        } catch (Exception $e) {
+          $bdd->rollback();
+          $module_coderetour = -1;
         } finally {
           $import->fileClose();
         }
