@@ -40,6 +40,29 @@
 		$("#individualTrackingSearch").submit(function(event) { 
 			Cookies.set("projectId", $("#project_id").val(), { expires: 180, secure: true });
 		});
+
+		/* Tab Management */
+    documentName = "operationDisplayTab";
+    activeTab = "";
+    try {
+      activeTab = Cookies.get(documentName);
+    } catch (Exception) {
+      activeTab = "";
+    }
+    try {
+      if (activeTab.length > 0) {
+        $("#" + activeTab).tab('show');
+      }
+    } catch (Exception) { }
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+      Cookies.set(documentName, $(this).attr("id"));
+		});
+		$("#tab-map").on("shown.bs.tab", function () {
+			setTimeout(function () {
+				 map.invalidateSize();
+				}, 400);
+				display();
+		});
 	});
 </script>
 <h2>{t}Liste des poissons suivis{/t}</h2>
@@ -81,7 +104,25 @@
 		</form>
 	</div>
 </div>
-<div class="row">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item active">
+    <a class="nav-link" id="tab-list" data-toggle="tab" role="tab" aria-controls="nav-list" aria-selected="true"
+      href="#nav-list">{t}Liste{/t}</a>
+	</li>
+	{if $selectedIndividual > 0}
+  <li class="nav-item">
+    <a class="nav-link" id="tab-detection" href="#nav-detection" data-toggle="tab" role="tab" aria-controls="nav-detection"
+      aria-selected="false">{t}Détections{/t}&nbsp;{$individual.individual_id}&nbsp;<i>{$individual.scientific_name}</i>&nbsp;{$individual.individual_code}</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-map" href="#nav-map" data-toggle="tab" role="tab" aria-controls="nav-detection"
+		aria-selected="false">{t}Carte correspondante{/t}</a>
+	</li>
+	{/if}
+</ul>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane active in" id="nav-list" role="tabpanel" aria-labelledby="tab-list">
 	<div class="col-md-12 col-lg-8">
 		<form id="findividualList" method="POST" action="index.php">
 			<input type="hidden" name="module" id="module" value="individualTrackingList">
@@ -103,6 +144,9 @@
 						<th>{t}Émetteur acoustique ou radio{/t}</th>
 						<th>{t}Modèle d'émetteur{/t}</th>
 						<th>{t}Identifiant unique{/t}</th>
+						{if $droits.gestion == 1}
+							<th class="center" title="{t}Modifier{/t}"><img src="display/images/edit.gif" height="25"></th>
+						{/if}
 					</tr>
 				</thead>
 				<tbody>
@@ -111,20 +155,13 @@
 						<td class="center">
 							<input type="checkbox" class="checkId" name="uids[]" value="{$individual.individual_id}" checked>
 						</td>
-						<td class="center">
+						<td class="center {if $individual.individual_id == $selectedIndividual}itemSelected{/if}">
 							<a href="index.php?module=individualTrackingList&individual_id={$individual.individual_id}">
 									<img src="display/images/result.png" height="25">
 								</a>
 					</td>
-						<td class="center {if $individual.individual_id == $selectedIndividual}itemSelected{/if}">
-							{if $droits.gestion == 1}
-								<a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}"
-									title="{t}Modifier{/t}">
-									{$individual.individual_id}
-								</a>
-							{else}
+						<td class="center">
 								{$individual.individual_id}
-							{/if}
 						</td>
 						<td>{$individual.scientific_name}</td>
 						<td>{$individual.individual_code}</td>
@@ -132,16 +169,22 @@
 						<td>{$individual.transmitter}</td>
 						<td>{$individual.transmitter_type_name}</td>
 						<td>{$individual.uuid}</td>
+						{if $droits.gestion == 1}
+						<td class="center" title="{t}Modifier{/t}">
+							<a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}">
+								<img src="display/images/edit.gif" height="25">
+							</a>
+							</td>
+							{/if}
 					</tr>
 					{/foreach}
 				</tbody>
 			</table>
 		</form>
 	</div>
-	{if $selectedIndividual > 0}
-	<div class="col-md-12 col-lg-4">
-		{include file="tracking/individualTrackingMap.tpl"}
 	</div>
+	{if $selectedIndividual > 0}
+	<div class="tab-pane fade" id="nav-detection" role="tabpanel" aria-labelledby="tab-detection">
 		<fieldset class="col-lg-12">
 			<legend>{t}Liste des détections{/t}</legend>
 			<a href="index.php?module=locationChange&location_id=0&individual_id={$selectedIndividual}">
@@ -202,5 +245,13 @@
 				</table>
 			{/if}
 		</fieldset>
+	</div>
+	<div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="tab-map">
+		<div class="row">
+			<div class="col-md-12">
+				{include file="tracking/individualTrackingMap.tpl"}
+			</div>
+		</div>
+	</div>
 	{/if}
 </div>
