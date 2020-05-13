@@ -135,9 +135,14 @@ switch ($t_module["param"]) {
     break;
   case "import":
     $vue->set("tracking/individualTrackingImport.tpl", "corps");
+    $vue->set($_SESSION["projects"], "projects");
+    if (isset($errors)) {
+      $vue->set($errors, "errors");
+      $vue->set(1, "error");
+    }
     break;
   case "importExec":
-    if (verifyProject($_REQUEST["project_id"])) {
+    if (verifyProject($_POST["project_id"])) {
       if ($fdata["error"] == 0 && $fdata["size"] > 0) {
         /**
          * $errors: list of errors
@@ -145,16 +150,46 @@ switch ($t_module["param"]) {
          */
         $errors = array();
         $import = new FiloImport();
-        $numLine = 0;
+        $numLine = 1;
         $idMin = 999999999;
         $idMax = 0;
         $continue = true;
-        include_once "modules/classes/import/import.class.php";
+        include_once "modules/classes/tracking/import.class.php";
+        $import = new Import($fdata["tmp_name"], $_POST["separator"]);
         try {
-          $import->initFile($fdata["tmp_name"], $_POST["separator"]);
-
           $bdd->beginTransaction();
-
+          $individual->individualTracking = $dataClass;
+          $import = new Import($fdata["tmp_name"], $_POST["separator"]);
+          $lines = $import->getContentAsArray();
+          $fields = array("uuid", "individual_code", "tag", "transmitter");
+          foreach ($lines as $line) {
+            $numLine++;
+            /**
+             * Search if the fish exists
+             */
+            $isNew = true;
+            foreach ($fields as $field) {
+              if ($idExistent = $dataClass->getIdFromField($field, $line[$field], $POST["project_id"]) > 0) {
+                $isNew = false;
+                break;
+              }
+            }
+            if ($isnew) {
+              $line["project_id"] = $_POST["project_id"];
+              $id = $individual->ecrire($line);
+              if ($id < $idMin) {
+                $idMin = $id;
+              }
+              if ($id > $idMax) {
+                $idMax = $id;
+              }
+            } else {
+              $errors[] = array(
+                "lineNumber" => $numLine,
+                "content" => sprintf(_("Le poisson existe déjà (id : %s)"), $idExistent)
+              );
+            }
+          }
           $bdd->commit();
           $errors[] = array("content" => _("Id mini généré :") . $idMin);
           $errors[] = array("content" => _("Id maxi généré :") . $idMax);

@@ -187,4 +187,22 @@ class IndividualTracking extends ObjetBDD
     }
     return $this->getListeParamAsPrepared($sql, $param);
   }
+
+  function getIdFromField($field, $value, $project_id = 0)
+  {
+    $sql = "select individual_id from individual_tracking
+            join individual using (individual_id)
+            where $field = :value";
+    $param = array("value" => $value);
+    if ($project_id > 0 && $field != "uuid") {
+      $sql .= " and project_id = :project_id";
+      $param["project_id"] = $project_id;
+    }
+    $data = $this->lireParamAsPrepared($sql, $param);
+    if ($data["individual_id"] > 0) {
+      return $data["individual_id"];
+    } else {
+      return 0;
+    }
+  }
 }

@@ -1,3 +1,27 @@
+<!-- Displaying found errors -->
+{if $error == 1}
+  <div class="row">
+    <div class="col-md-12">
+      <table id="containerList" class="table table-bordered table-hover datatable " >
+        <thead>
+          <tr>
+            <th>{t}N° de ligne{/t}</th>
+            <th>{t}Anomalie(s) détectée(s){/t}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foreach $errors as $err}
+            <tr>
+              <td class="center">{$err.lineNumber}</td>
+              <td>{$err.content}</td>
+            </tr>
+          {/foreach}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+{/if}
 <div class="row">
   <div class="col-md-6">
     <form class="form-horizontal protoform" id="importForm" method="post" action="index.php"
@@ -41,38 +65,17 @@
       </div>
     </form>
   </div>
-</div>
 
-<!-- Displaying found errors -->
-{if $error == 1}
-  <div class="row col-md-12">
-    <table id="containerList" class="table table-bordered table-hover datatable " >
-      <thead>
-        <tr>
-          <th>{t}N° de ligne{/t}</th>
-          <th>{t}Anomalie(s) détectée(s){/t}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {foreach $errors as $err}
-          <tr>
-            <td class="center">{$err.lineNumber}</td>
-            <td>{$err.content}</td>
-          </tr>
-        {/foreach}
-      </tbody>
-    </table>
-  </div>
-{/if}
 
-<div class="row">
+
+
   <div class="col-md-6 bg-info">
     {t}Ce module permet d'importer des poissons utilisés en télémétrie.{/t}
     <br>
-    {t}Il n'accepte que des fichiers au format CSV. La ligne d'entête doit comprendre exclusivement les colonnes suivantes :{/t}
+    {t}Il n'accepte que des fichiers au format CSV. La ligne d'entête doit comprendre exclusivement les colonnes suivantes (toutes les colonnes peuvent ne pas être présentes, sauf la colonne taxon_id, obligatoire) :{/t}
     <br>
     <ul>
-      <li><b>taxon_id</b>{t} : identifiant du taxon (voir la table correspondante dans les paramètres){/t}</li>
+      <li><b>taxon_id</b>{t} (obligatoire) : identifiant du taxon (voir la table correspondante dans les paramètres){/t}</li>
       <li><b>individual_code</b>{t} : code métier (code attribué pour l'expérimentation en cours){/t}</li>
       <li><b>tag</b>{t} : code du tag radio{/t}</li>
       <li><b>transmitter</b>{t} : code du transmetteur acoustique{/t}</li>

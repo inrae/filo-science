@@ -22,6 +22,7 @@ class Individual extends ObjetBDD
                     left outer join v_individual_other_measures using (individual_id)
                     left outer join taxon using (taxon_id)
     ";
+    public $individualTracking;
     /**
      * Constructor
      *
@@ -102,9 +103,11 @@ class Individual extends ObjetBDD
         $id = parent::ecrire($data);
         if ($id > 0 && $data["isTracking"]) {
             $data["individual_id"] = $id;
-            include_once 'modules/classes/tracking/individual_tracking.class.php';
-            $it = new IndividualTracking($this->connection, $this->paramori);
-            $it->ecrire($data);
+            if (! $this->individualTracking) {
+                include_once 'modules/classes/tracking/individual_tracking.class.php';
+            $this->individualTracking = new IndividualTracking($this->connection, $this->paramori);
+            }
+            $this->individualTracking->ecrire($data);
         }
         return $id;
     }
