@@ -56,7 +56,7 @@ switch ($t_module["param"]) {
        */
       include_once 'modules/classes/project.class.php';
       $project = new Project($bdd, $ObjetBDDParam);
-      $vue->set( $project->getDetail($_REQUEST["project_id"]), "project");
+      $vue->set($project->getDetail($_REQUEST["project_id"]), "project");
       $vue->set($_SESSION["projects"], "projects");
     } else {
       $module_coderetour = -1;
@@ -131,6 +131,56 @@ switch ($t_module["param"]) {
       $message->set($ite->getMessage(), true);
       $module_coderetour = -1;
       unset($vue);
+    }
+    break;
+  case "import":
+    $vue->set("tracking/individualTrackingImport.tpl", "corps");
+    break;
+  case "importExec":
+    if (verifyProject($_REQUEST["project_id"])) {
+      if ($fdata["error"] == 0 && $fdata["size"] > 0) {
+        /**
+         * $errors: list of errors
+         * Structure: array ["lineNumber", "content"]
+         */
+        $errors = array();
+        $import = new FiloImport();
+        $numLine = 0;
+        $idMin = 999999999;
+        $idMax = 0;
+        $continue = true;
+        include_once "modules/classes/import/import.class.php";
+        try {
+          $import->initFile($fdata["tmp_name"], $_POST["separator"]);
+
+          $bdd->beginTransaction();
+
+          $bdd->commit();
+          $errors[] = array("content" => _("Id mini généré :") . $idMin);
+          $errors[] = array("content" => _("Id maxi généré :") . $idMax);
+        } catch (ImportException $ie) {
+          $message->set(_("L'importation a échoué, le fichier n'a pas été correctement lu"), true);
+          $message->setSyslog($ie->getMessage());
+          $bdd->rollback();
+          $module_coderetour = -1;
+        } catch (ObjetBDDException $oe) {
+          if (!$_REQUEST["testMode"] == 1) {
+            $errors[] = array("lineNumber" => $numLine, "content" => _("Erreur d'écriture en table. Message d'erreur de la base de données : ") . $oe->getMessage());
+            $message->set(_("L'importation a échoué. Consultez les messages dans le tableau"), true);
+            $message->setSyslog($oe->getMessage());
+            $bdd->rollback();
+            $module_coderetour = -1;
+          }
+        } finally {
+          $import->fileClose();
+        }
+      } else {
+        $module_coderetour = -1;
+        $message->set(_("Le fichier fourni est vide ou n'a pu être téléchargé"), true);
+      }
+    } else {
+      $module_coderetour = -1;
+      $message->set(_("Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"), true);
     }
     break;
 }
