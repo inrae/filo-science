@@ -154,6 +154,7 @@ switch ($t_module["param"]) {
         $idMin = 999999999;
         $idMax = 0;
         $continue = true;
+        $totalNumber = 0;
         include_once "modules/classes/tracking/import.class.php";
         try {
           $bdd->beginTransaction();
@@ -172,15 +173,16 @@ switch ($t_module["param"]) {
                */
               $isNew = true;
               foreach ($fields as $field) {
-                if ($idExistent = $dataClass->getIdFromField($field, $line[$field], $POST["project_id"]) > 0) {
+                $idExistent = $dataClass->getIdFromField($field, $line[$field], $_POST["project_id"]);
+                if ($idExistent > 0) {
                   $isNew = false;
                   break;
                 }
               }
-              if ($isnew) {
+              if ($isNew) {
                 $line["project_id"] = $_POST["project_id"];
                 $line["individual_id"] = 0;
-                printr($line);
+                $line["isTracking"] = 1;
                 $id = $individual->ecrire($line);
                 if ($id < $idMin) {
                   $idMin = $id;
@@ -188,6 +190,7 @@ switch ($t_module["param"]) {
                 if ($id > $idMax) {
                   $idMax = $id;
                 }
+                $totalNumber++;
               } else {
                 $errors[] = array(
                   "lineNumber" => $numLine,
@@ -202,8 +205,11 @@ switch ($t_module["param"]) {
             }
           }
           $bdd->commit();
-          $errors[] = array("content" => _("Id mini généré :") . $idMin);
-          $errors[] = array("content" => _("Id maxi généré :") . $idMax);
+          $errors[] = array("content" => _("Nombre total de poissons créés :") . $totalNumber);
+          if ($totalNumber > 0) {
+            $errors[] = array("content" => _("Id mini généré :") . $idMin);
+            $errors[] = array("content" => _("Id maxi généré :") . $idMax);
+          }
           $module_coderetour = 1;
         } catch (ImportException $ie) {
           $message->set(_("L'importation a échoué, le fichier n'a pas été correctement lu"), true);
