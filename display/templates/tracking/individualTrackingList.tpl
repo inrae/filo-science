@@ -7,7 +7,7 @@
 		} catch {
 			Cookies.set("projectId", projectId, { expires: 180, secure: true });
 		}
-		if (projectIdCookie != '' && projectIdCookie != undefined) {
+		if (projectIdCookie ) {
 			projectId = projectIdCookie;
 		} else {
 			Cookies.set("projectId", projectId, { expires: 180, secure: true });
@@ -18,11 +18,9 @@
 		} catch { }
 		$("#projectActive" + projectActive).attr("checked", "true");
 		$("#project" + projectId).attr("selected", true);
-		console.log("projectId:"+projectId);
 		$("#new").attr("href", "index.php?module=individualTrackingChange&individual_id=0&project_id="+projectId);
 		$(".is_active").change(function () {
 			$("#project_id").val("");
-			Cookies.set("projectId", '', { expires: 180, secure: true });
 			Cookies.set("projectActive", $(this).val(), { expires: 180, secure: true });
 			$("#individualTrackingSearch").submit();
 		});
@@ -37,8 +35,12 @@
 			$("#module").val("individualTrackingExport");
 			$(this.form).prop('target', '_self').submit();
 		});
-		$("#individualTrackingSearch").submit(function(event) { 
-			Cookies.set("projectId", $("#project_id").val(), { expires: 180, secure: true });
+		$("#individualTrackingSearch").submit(function(event) {
+			var pj = $("#project_id").val();
+			if (pj == null) {
+				pj = 0;
+			}
+			Cookies.set("projectId", pj , { expires: 180, secure: true });
 		});
 
 		/* Tab Management */
