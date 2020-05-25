@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 12:00+0200\n"
+"POT-Creation-Date: 2020-04-14 13:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -250,7 +250,7 @@ msgstr "List of operators"
 #: ../../../display/templates/tracking/stationTrackingList.tpl:79
 #: ../../../display/templates/param/stationList.tpl:16
 msgid "Cours d'eau"
-msgstr "watercourse"
+msgstr "Watercourse"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:39
@@ -3369,7 +3369,7 @@ msgstr "Connection project:"
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:20
 #: ../../../display/templates/param/stationChange.tpl:43
 msgid "Cours d'eau :"
-msgstr "Watercourse"
+msgstr "Watercourse:"
 
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:84
 #: ../../../display/templates/param/stationChange.tpl:68
@@ -4286,11 +4286,11 @@ msgstr "Add / edit a pathology"
 
 #: ../../../display/templates/enpied.tpl:3
 msgid ""
-"Copyright © 2019 - Tous droits réservés. Auteur : Éric Quinton, pour IRSTEA "
-"- Logiciel diffusé sous licence AGPL"
+"Copyright © 2019-2020 - Tous droits réservés. Auteur : Éric Quinton, pour "
+"INRAE - Logiciel diffusé sous licence AGPL"
 msgstr ""
-"Copyright © 2019 - All rights reserved. Author: Eric Quinton, for IRSTEA - "
-"Software released under AGPL license"
+"Copyright © 2019-2020 - All rights reserved. Author: Eric Quinton, for INRAE "
+"- Software released under AGPL license"
 
 #: ../../../display/templates/enpied.tpl:5
 msgid "Pour tout problème :"

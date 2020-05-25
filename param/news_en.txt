@@ -1,5 +1,26 @@
 News
 ===========
+Version 1.6.0 of 2020-05-25
+---------------------------
+News :
+Telemetry module :
+- it's now possible to import fish from a CSV file
+- the display of the list of tracked fishes has been revised, with a switch to a tab box
+- the description of the models for importing remote sensing or probe analysis has been reviewed
+- it is now possible to enter a business code for a fish. This code can be used to retrieve it when importing remote detections.
+Fishing module :
+- all the parameter tables can receive a business code
+- it is now possible to duplicate a sequence
+- it is possible to define specific measures to describe the environments (same operation as for complementary fish measurements or water analyses)
+
+Bug fixes :
+- when entering additional information, multiple choice lists were not saved.
+- The procedure for exporting the database structure has been corrected.
+- the term "remote sensing" has been replaced by "Telemetry".
+- the modification of a location was not successful
+- some English translations were not done
+- when modifying a fish, the acoustic transmitter code was not displayed.
+
 Version 1.5.0 of 2020-04-14
 ---------------------------
 News:

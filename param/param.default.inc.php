@@ -6,9 +6,9 @@
 * Parametres par defaut de l'application
 * Si des modifications doivent etre apportees, faites-les dans le fichier param.inc.php
 */
-$APPLI_version = "1.5.0";
-$APPLI_dbversion = "1.5";
-$APPLI_versiondate = _("14/04/2020");
+$APPLI_version = "1.6.0";
+$APPLI_dbversion = "1.6";
+$APPLI_versiondate = _("25/05/2020");
 //$APPLI_versiondate = "3/7/2018";
 $language = "fr";
 $DEFAULT_formatdate = "fr";
@@ -98,7 +98,7 @@ $APPLI_modeDeveloppementDroit = false;
 $APPLI_utf8 = true;
 $APPLI_menufile = "param/menu.xml";
 $APPLI_temp = "temp";
-$APPLI_assist_address = "https://github.com/Irstea/filo-science/issues/new";
+$APPLI_assist_address = "https://github.com/inrae/filo-science/issues/new";
 $APPLI_isFullDns = false;
 /*
  * Variables systematiques pour SMARTY

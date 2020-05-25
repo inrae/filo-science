@@ -1,5 +1,26 @@
 Nouveautés
 ==========
+Version 1.6.0 du 25/05/2020
+---------------------------
+Nouveautés :
+Module de télémétrie :
+- il est maintenant possible d'importer les poissons à partir d'un fichier CSV
+- l'affichage de la liste des poissons suivis a été revu, avec bascule vers une boite d'onglets
+- la description des modèles d'importation des télé-détections ou des analyses de sondes a été revu
+- il est maintenant possible de saisir un code métier pour un poisson. Ce code peut être utilisé pour le retrouver lors des importations des télé-détections
+Module de pêche :
+- toutes les tables de paramètres peuvent recevoir un code métier
+- il est maintenant possible de dupliquer une séquence
+- il est possible de définir des mesures particulières pour décrire les ambiances (même fonctionnement que pour les mesures complémentaires des poissons ou des analyses d'eau)
+
+Corrections de bugs :
+- lors de la saisie des informations complémentaires, les listes à choix multiples n'étaient pas enregistrées
+- la procédure d'exportation de la structure de la base de données a été corrigée
+- le terme "télédétection" a été remplacé par "Télémétrie"
+- la modification d'une localisation n'aboutissait pas
+- certaines traductions en anglais n'étaient pas réalisées
+- en modification d'un poisson, le code de l'émetteur acoustique n'était pas affiché
+
 Version 1.5.0 du 14/04/2020
 ---------------------------
 Nouveautés :
