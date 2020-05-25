@@ -1,6 +1,6 @@
 <navigation>
 
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
+	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire|file" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
 	<default action="framework/default.php" type="smarty" noDelayBeforeCall="1"/>
 	<droitko action="framework/droitko.php" type="smarty"/>
 	<droits menudroits="admin" droits="admin" />
@@ -68,9 +68,9 @@
 
 	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
 	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import,gacl" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="gestion" schemas="gacl" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="smarty" droits="gestion" schemas="col,gacl" maxCountByHour="60" maxCountByDay="600"/>
+	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="file" droits="gestion" schemas="filo,tracking,import,gacl" maxCountByHour="60" maxCountByDay="600"/>
 	<dbstructureSchema action="framework/utils/structure.php" param="schema" realfilename="database/filo.png" generatedfilename="filo-science.png" retourlogin="1" type="binaire" maxCountByHour="60" maxCountByDay="600"/>
 
 	<logList action="framework/log/log.php" param="list" retourlogin="1" type="smarty" droits="admin"/>
@@ -246,7 +246,7 @@
 	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
-
+  <sequenceDuplicate action="modules/gestion/sequence.php" param="duplicate" droits="gestion" retourok="sequenceDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
 	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_gear_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
@@ -293,6 +293,11 @@
 	<measureTemplateWrite action="modules/param/measureTemplate.php" param="write" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 	<measureTemplateDelete action="modules/param/measureTemplate.php" param="delete" droits="param" retourok="measureTemplateList" retourko="measureTemplateChange" modulebefore="measureTemplateChange" maxCountByHour="60" maxCountByDay="600" />
 
+	<ambienceTemplateList action="modules/param/ambienceTemplate.php" param="list" droits="consult" type="smarty" maxCountByHour="60" maxCountByDay="600" retourlogin="1"/>
+	<ambienceTemplateChange action="modules/param/ambienceTemplate.php" param="change" droits="param" type="smarty" requiredVar="ambience_template_id" maxCountByHour="60" maxCountByDay="600" />
+	<ambienceTemplateWrite action="modules/param/ambienceTemplate.php" param="write" droits="param" retourok="ambienceTemplateList" retourko="ambienceTemplateChange" modulebefore="ambienceTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+	<ambienceTemplateDelete action="modules/param/ambienceTemplate.php" param="delete" droits="param" retourok="ambienceTemplateList" retourko="ambienceTemplateChange" modulebefore="ambienceTemplateChange" maxCountByHour="60" maxCountByDay="600" />
+
 	<protocolMeasureChange action="modules/param/protocolMeasure.php" param="change" droits="param" type="smarty" maxCountByHour="60" maxCountByDay="600" requiredVar="protocol_id"/>
 	<protocolMeasureWrite action="modules/param/protocolMeasure.php" param="write" droits="param" retourok="protocolDisplay" retourko="protocolMeasureChange" modulebefore="protocolMeasureChange"/>
 	<protocolGetTaxonTemplate action="modules/param/protocol.php" param="getTaxonTemplate" droits="gestion" type="ajax"/>
@@ -325,6 +330,8 @@
 	<individualTrackingWrite action="modules/tracking/individualTracking.php" param="write" droits="gestion" maxCountByHour="100" maxCountByDay="600" modulebefore="individualTrackingChange" retourko="individualTrackingChange" retourok="individualTrackingList"/>
 	<individualTrackingDelete action="modules/tracking/individualTracking.php" param="delete" droits="gestion" maxCountByHour="100" maxCountByDay="600" modulebefore="individualTrackingChange" retourko="individualTrackingChange" retourok="individualTrackingList"/>
 	<individualTrackingExport action="modules/tracking/individualTracking.php" param="export" droits="gestion" type="csv" modulebefore="individualTrackingList" retourko="individualTrackingList"/>
+	<individualTrackingImport action="modules/tracking/individualTracking.php" param="import" droits="gestion" type="smarty" maxCountByHour="100" maxCountByDay="600" retourlogin="1" />
+	<individualTrackingImportExec action="modules/tracking/individualTracking.php" param="importExec" droits="gestion" modulebefore="individualTrackingImport" retourok="individualTrackingImport" retourko="individualTrackingImport"/>
 	<technology_typeList action="modules/param/param.php" param="list" droits="consult" tablename="technology_type" tabledescription="Technologies de télédétection utilisées" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600" />
 	<technology_typeChange action="modules/param/param.php" param="change" droits="param" tabledescription="Méthodes d'utilisation des engins" tablename="technology_type" type="smarty" maxCountByHour="60" maxCountByDay="600" />
 	<technology_typeWrite action="modules/param/param.php" param="write" droits="param" tablename="technology_type" retourok="technology_typeList" retourko="technology_typeChange" modulebefore="technology_typeChange" maxCountByHour="60" maxCountByDay="600" />

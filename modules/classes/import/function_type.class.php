@@ -221,7 +221,25 @@ class FunctionType extends ObjetBDD
             throw new FunctionTypeException(sprintf(_("Le transmetteur %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
         }
     }
-
+    /**
+     * Get the individual_id from the individual_code
+     *
+     * @param array $columns
+     * @param array $args
+     * @return int
+     */
+    private function getIndividualFromCode(array $columns, array $args) {
+        global $individualTracking;
+        if (!isset($individualTracking)) {
+            throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+        }
+        $dindividual = $individualTracking->getFromCode($columns[$args["columnNumber"]]);
+        if ($dindividual["individual_id"] > 0) {
+            return $dindividual["individual_id"];
+        } else {
+            throw new FunctionTypeException(sprintf(_("Le code %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
+        }
+    }
     /**
      * Transform a numeric value to hexadecimal value
      *

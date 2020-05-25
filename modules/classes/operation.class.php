@@ -14,6 +14,7 @@ class Operation extends ObjetBDD
                     ,water_regime_name, fishing_strategy_name
                     ,scale_id
                     , taxa_template_name, taxa_model
+                    ,ambience_template_id
                     from operation o
                     join campaign using (campaign_id)
                     left outer join station using (station_id)

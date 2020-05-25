@@ -8,7 +8,8 @@
  */
 class Project extends ObjetBDD
 {
-    private $sql = "select project_id, project_name, is_active, metric_srid, protocol_default_id, protocol_id
+    private $sql = "select project_id, project_name, is_active, metric_srid
+    ,protocol_default_id, protocol_id
     ,array_to_string(array_agg(groupe),', ') as groupe
     ,protocol_name, measure_default, measure_default_only
     from project
@@ -251,5 +252,23 @@ class Project extends ObjetBDD
         } else {
             return array();
         }
+    }
+    /**
+     * Verify if the project is authorized
+     *
+     * @param integer $project_id
+     * @param array $projects
+     * @return boolean
+     */
+    function isAuthorized(int $project_id, array $projects): bool
+    {
+        $ok = false;
+        foreach ($projects as $project) {
+            if ($project_id == $project["project_id"]) {
+                $ok = true;
+                break;
+            }
+        }
+        return $ok;
     }
 }

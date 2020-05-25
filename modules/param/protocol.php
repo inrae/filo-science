@@ -15,6 +15,9 @@ switch ($t_module["param"]) {
         require_once "modules/classes/analysis_template.class.php";
         $at = new AnalysisTemplate($bdd, $ObjetBDDParam);
         $vue->set($at->getListe(1), "dataat");
+        require_once "modules/classes/ambience_template.class.php";
+        $ambienceTemplate = new AmbienceTemplate($bdd, $ObjetBDDParam);
+        $vue->set($ambienceTemplate->getListe(1), "ambiences");
         break;
     case "display":
         $vue->set($dataClass->getDetail($id), "data");
@@ -52,6 +55,8 @@ switch ($t_module["param"]) {
         dataDelete($dataClass, $id);
         break;
     case "getTaxonTemplate":
-        $vue->setJson($dataClass->getTaxonTemplate($id, $_REQUEST["taxon_id"]));
+        if ($id > 0 && $_REQUEST["taxon_id"] > 0) {
+            $vue->setJson($dataClass->getTaxonTemplate($id, $_REQUEST["taxon_id"]));
+        }
         break;
 }

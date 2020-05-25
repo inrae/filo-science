@@ -22,7 +22,15 @@ function getSchema(formdef) {
             "type": value.type
         };
 
-        if (value.type == "select" || value.type == "radio") {
+        if ( value.type == "radio") {
+            prop.enum = value.choiceList;
+            if (value.required && prop.enum && prop.enum.length > 0) {
+                prop.default = prop.enum[0];
+                prop.emptySelectFirst = true;
+            }
+        }
+        if (value.type == "select" ) {
+            prop.type = "string";
             prop.enum = value.choiceList;
             if (value.required && prop.enum && prop.enum.length > 0) {
                 prop.default = prop.enum[0];
@@ -76,6 +84,16 @@ var baseFields = function (index, value) {
         field.default = value.defaultValue;
     }
 
+    /*if (value.enum) {
+        field.optionLabels = $.map(value.enum, function (v, i) {
+            return v.text;
+        });
+        field.sort = function (a, b) {
+            return 0;
+        }
+        field.removeDefaultNone = false;
+
+    }*/
 
     if (value.choiceList) {
         field.optionLabels = $.map(value.choiceList, function (v, i) {

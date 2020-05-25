@@ -30,7 +30,8 @@ class Protocol extends ObjetBDD
             "measure_default" => array('type' => 0, "requis" => 1),
             "measure_default_only" => array("type" => 1, "requis" => 1),
             "analysis_template_id" => array("type" => 1),
-            "existing_taxon_only" => array("type" => 1, "requis" => 1, "defaultValue" => 1)
+            "existing_taxon_only" => array("type" => 1, "requis" => 1, "defaultValue" => 1),
+            "ambience_template_id" => array("type"=>1)
         );
         parent::__construct($bdd, $param);
     }
@@ -45,8 +46,10 @@ class Protocol extends ObjetBDD
         $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
         ,measure_default, measure_default_only, existing_taxon_only
         ,analysis_template_id, analysis_template_name
+        ,ambience_template_id, ambience_template_name
         from protocol
         left outer join analysis_template using (analysis_template_id)
+        left outer join ambience_template using (ambience_template_id)
         order by protocol_name";
         return $this->getListeParam($sql);
     }
@@ -62,8 +65,10 @@ class Protocol extends ObjetBDD
         $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
                 , measure_default, measure_default_only, existing_taxon_only
                 ,analysis_template_id, analysis_template_name, analysis_template_schema
+                ,ambience_template_id, ambience_template_name, ambience_template_schema
                 from protocol
                 left outer join analysis_template using (analysis_template_id)
+                left outer join ambience_template using (ambience_template_id)
                 where protocol_id = :protocol_id";
         return $this->lireParamAsPrepared($sql, array("protocol_id" => $protocol_id));
     }

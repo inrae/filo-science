@@ -19,7 +19,8 @@ class Param extends ObjetBDD
         $this->table = $tablename;
         $this->colonnes = array(
             $tablename . "_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
-            $tablename . "_name" => array("type" => 0, "requis" => 1)
+            $tablename . "_name" => array("type" => 0, "requis" => 1),
+            $tablename . "_code" => array("type" => 0)
         );
         parent::__construct($bdd);
     }

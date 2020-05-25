@@ -73,6 +73,10 @@ switch ($t_module["param"]) {
             $dataAmbience["ambience_id"] = 0;
         }
         $vue->set($dataAmbience, "ambience");
+        $other_measures = json_decode($dataAmbience["other_measures"], true);
+        if (count($other_measures) > 0) {
+            $vue->set($other_measures, "other_measures");
+        }
 
         /**
          * Analysis
@@ -91,14 +95,13 @@ switch ($t_module["param"]) {
          * Récupération des analyses complementaires dans un tableau pour l'affichage
          */
         $other_analysis = json_decode($dataAnalysis["other_analysis"], true);
-        if ( count($other_analysis) > 0) {
+        if (count($other_analysis) > 0) {
             $vue->set($other_analysis, "other_analysis");
         }
         $vue->set(
             $dataAnalysis,
             "analysis"
         );
-        $vue->get("analysis");
         /**
          * Points
          */
@@ -169,5 +172,57 @@ switch ($t_module["param"]) {
 
         dataDelete($dataClass, $id);
         $activeTab = "tab-sequence";
+        break;
+    case "duplicate":
+        if ($id > 0) {
+            /**
+             * Get the record to duplicate
+             */
+            $data = $dataClass->lire($id);
+            $data["sequence_number"] = $dataClass->getLastSequenceNumber($operation_id);
+            $data["sequence_id"] = 0;
+            $data["uuid"] = $dataClass->getUUID();
+            $dataClass->auto_date = 0;
+            unset($data["date_end"]);
+            $data["date_start"] = date("Y-m-d H:i:s");
+            $newid = $dataClass->ecrire($data);
+            $dataClass->auto_date = 1;
+            if ($newid > 0) {
+                $data["sequence_id"] = $newid;
+                /**
+                 * Duplicate ambience
+                 */
+                include_once "modules/classes/ambience.class.php";
+                $ambience = new Ambience($bdd, $ObjetBDDParam);
+                $dataAmbience = $ambience->getFromSequence($id);
+                if ($dataAmbience["sequence_id"] > 0) {
+                    $dataAmbience["ambience_id"] = 0;
+                    $dataAmbience["sequence_id"] = $newid;
+                    unset ($dataAmbience["uuid"]);
+                    $ambience->ecrire($dataAmbience);
+                }
+                /**
+                 * Duplicate gears
+                 */
+                require_once "modules/classes/sequence_gear.class.php";
+                $sg = new SequenceGear($bdd, $ObjetBDDParam);
+                $gears = $sg->getListFromSequence($id);
+                foreach ($gears as $gear) {
+                    unset ($gear["uuid"]);
+                    $gear["sequence_id"] = $newid;
+                    $gear["sequence_gear_id"] = 0;
+                    $sg->ecrire($gear);
+                }
+                /**
+                 * Set the new key for opening the new sequence
+                 */
+                $_COOKIE["sequence_uid"] = $newid;
+                unset ($_REQUEST["sequence_id"]);
+                $module_coderetour = 1;
+            } else {
+                $message->set(_("Une erreur est survenue pendant la duplication de la séquence"), true);
+                $module_coderetour = -1;
+            }
+        }
         break;
 }

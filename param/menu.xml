@@ -17,11 +17,12 @@
 		<item module="requestList" label="Requêtes SQL" tooltip="Exécution de requêtes SQL dans la base de données" droits="param"/>
 	</item>
 
-	<item module="default" label="Télédétection" tooltip="Suivi des poissons en télédétection">
+	<item module="default" label="Télémétrie" tooltip="Suivi des poissons en télémétrie">
 		<item module="stationTrackingList" label="Stations utilisées" tooltip="Liste des stations utilisées en télédétection"/>
 		<item module="individualTrackingList" label="Poissons suivis" tooltip="Liste des poissons suivis"/>
-		<item module="importExec" label="Importation" tooltip="Réaliser une importation de données"/>
-		<item module="default" label="Paramètres" tooltip="Paramètres liés à la télédétection des poissons">
+		<item module="importExec" label="Import détection et données sondes" tooltip="Réaliser une importation de données de télémétrie ou des relevés de sondes"/>
+		<item module="individualTrackingImport" label="Import des poissons" tooltip="Importer les poissons concernés par l'opération de télémétrie"/>
+		<item module="default" label="Paramètres" tooltip="Paramètres liés à la télémétrie des poissons">
 			<item module="station_typeList" label="Types de stations" tooltip="Liste des types de station"/>
 			<item module="transmitter_typeList" label="Types d'émetteurs" tooltip="Liste des types d'émetteurs"/>
 			<item module="technology_typeList" label="Technologies" tooltip="Technologies employées"/>
@@ -64,6 +65,7 @@
 			<item module="turbidityList" label="Turbidité" tooltip="Classes de turbidité"/>
 			<item module="vegetationList" label="Végétation" tooltip="Nature de la végétation"/>
 			<item module="speedList" label="Vitesse" tooltip="Classes de vitesse"/>
+			<item module="ambienceTemplateList" label="Mesures complémentaires" tooltip="Mesures complémentaires associées à une ambience"/>
 		</item>
 		<item divider="1"/>
 		<item module="gearList" label="Engins de pêche" tooltip="Liste des engins de pêche"/>

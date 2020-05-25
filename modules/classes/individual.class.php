@@ -7,6 +7,7 @@ class Individual extends ObjetBDD
 {
     private $sql = "select individual_id, individual_id as individual_uid, sample_id, sexe_id, pathology_id
                     , sl, fl, tl, wd, ot, weight
+                    ,individual_code
                     ,other_measure, individual_comment, age
                     ,measure_estimated, pathology_codes, tag, tag_posed, transmitter
                     ,pathology_name, pathology_code
@@ -21,6 +22,7 @@ class Individual extends ObjetBDD
                     left outer join v_individual_other_measures using (individual_id)
                     left outer join taxon using (taxon_id)
     ";
+    public $individualTracking;
     /**
      * Constructor
      *
@@ -49,7 +51,8 @@ class Individual extends ObjetBDD
             "tag" => array("type" => 0),
             "tag_posed" => array("type" => 0),
             "transmitter" => array("type" => 0),
-            "uuid" => array("type" => 0, "defaultValue"=>"getUUID")
+            "uuid" => array("type" => 0, "defaultValue"=>"getUUID"),
+            "individual_code"=>array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }
@@ -97,12 +100,17 @@ class Individual extends ObjetBDD
         if (strlen($data["measure_estimated"]) == 0) {
             $data["measure_estimated"] = 0;
         }
+        if (strlen($data["uuid"]) != 36) {
+            unset ($data["uuid"]);
+        }
         $id = parent::ecrire($data);
         if ($id > 0 && $data["isTracking"]) {
             $data["individual_id"] = $id;
-            include_once 'modules/classes/tracking/individual_tracking.class.php';
-            $it = new IndividualTracking($this->connection, $this->paramori);
-            $it->ecrire($data);
+            if (! $this->individualTracking) {
+                include_once 'modules/classes/tracking/individual_tracking.class.php';
+            $this->individualTracking = new IndividualTracking($this->connection, $this->paramori);
+            }
+            $this->individualTracking->ecrire($data);
         }
         return $id;
     }
