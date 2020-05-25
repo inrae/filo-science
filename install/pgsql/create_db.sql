@@ -1,13 +1,11 @@
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
 -- pgModeler  version: 0.9.2
--- PostgreSQL version: 9.6
+-- PostgreSQL version: 10.0
 -- Project Site: pgmodeler.io
 -- Model Author: Eric Quinton
 
 SET check_function_bodies = false;
 -- ddl-end --
-
-
 
 
 -- Database creation must be done outside a multicommand file.
@@ -92,6 +90,7 @@ CREATE TABLE filo.project (
 	is_active boolean DEFAULT true,
 	metric_srid smallint DEFAULT 2154,
 	protocol_default_id integer,
+	project_code varchar,
 	CONSTRAINT project_id_pk PRIMARY KEY (project_id)
 
 );
@@ -113,6 +112,7 @@ CREATE TABLE filo.campaign (
 	campaign_id integer NOT NULL DEFAULT nextval('filo.campaign_campaign_id_seq'::regclass),
 	project_id integer NOT NULL,
 	campaign_name varchar NOT NULL,
+	campaign_code varchar,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
 	CONSTRAINT campaign_id_pk PRIMARY KEY (campaign_id)
 
@@ -173,6 +173,7 @@ CREATE SEQUENCE filo.place_place_id_seq
 -- ddl-end --
 ALTER SEQUENCE filo.place_place_id_seq OWNER TO filo;
 -- ddl-end --
+
 
 -- object: filo.station | type: TABLE --
 -- DROP TABLE IF EXISTS filo.station CASCADE;
@@ -1263,6 +1264,7 @@ CREATE TABLE filo.operation (
 	taxa_template_id integer,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
 	operation_geom geometry(MULTIPOINT, 4326),
+	operation_code varchar,
 	CONSTRAINT operation_id_pk PRIMARY KEY (operation_id)
 
 );
@@ -1361,6 +1363,7 @@ CREATE TABLE filo.sample (
 	sample_comment varchar,
 	taxon_id integer,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
+	sample_code varchar,
 	CONSTRAINT sample_id_pk PRIMARY KEY (sample_id)
 
 );
@@ -1432,6 +1435,7 @@ CREATE TABLE filo.individual (
 	tag_posed varchar,
 	transmitter varchar,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
+	individual_code varchar,
 	CONSTRAINT individual_id_pk PRIMARY KEY (individual_id)
 
 );
@@ -1649,6 +1653,7 @@ ALTER SEQUENCE filo.river_river_id_seq OWNER TO filo;
 CREATE TABLE filo.river (
 	river_id integer NOT NULL DEFAULT nextval('filo.river_river_id_seq'::regclass),
 	river_name varchar NOT NULL,
+	river_code varchar,
 	CONSTRAINT river_pk PRIMARY KEY (river_id)
 
 );
@@ -1983,6 +1988,7 @@ ALTER SEQUENCE filo.situation_situation_id_seq OWNER TO filo;
 CREATE TABLE filo.facies (
 	facies_id integer NOT NULL DEFAULT nextval('filo.facies_facies_id_seq'::regclass),
 	facies_name varchar NOT NULL,
+	facies_code varchar,
 	CONSTRAINT facies_pk PRIMARY KEY (facies_id)
 
 );
@@ -1992,25 +1998,25 @@ COMMENT ON TABLE filo.facies IS E'List of facies';
 ALTER TABLE filo.facies OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'1', E'Rapide');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'1', E'Rapide', E'10');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'2', E'Radier');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'2', E'Radier', E'9');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'3', E'Plat courant');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'3', E'Plat courant', E'8');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'4', E'Plat lent');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'4', E'Plat lent', E'6');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'5', E'Mouille ou profond');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'5', E'Mouille ou profond', E'7');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'6', E'Chenal lotique (profond courant)');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'6', E'Chenal lotique (profond courant)', E'1');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'7', E'Chenal lentique (profond lent)');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'7', E'Chenal lentique (profond lent)', E'2');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'8', E'Remous ou contre-courant');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'8', E'Remous ou contre-courant', DEFAULT);
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'9', E'Bras mort ou lône');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'9', E'Bras mort ou lône', E'4');
 -- ddl-end --
-INSERT INTO filo.facies (facies_id, facies_name) VALUES (E'10', E'Darse');
+INSERT INTO filo.facies (facies_id, facies_name, facies_code) VALUES (E'10', E'Darse', E'26');
 -- ddl-end --
 
 -- object: filo.ambience | type: TABLE --
@@ -2050,6 +2056,7 @@ CREATE TABLE filo.ambience (
 	sequence_id integer,
 	uuid uuid NOT NULL DEFAULT gen_random_uuid(),
 	ambience_geom geometry(POINT, 4326),
+	other_measures json,
 	CONSTRAINT ambience_pk PRIMARY KEY (ambience_id)
 
 );
@@ -2078,6 +2085,8 @@ COMMENT ON COLUMN filo.ambience.water_height_max IS E'Max height of water, in cm
 -- ddl-end --
 COMMENT ON COLUMN filo.ambience.water_height_min IS E'Min of height of water, in cm';
 -- ddl-end --
+COMMENT ON COLUMN filo.ambience.other_measures IS E'Other measures attached to an ambience';
+-- ddl-end --
 ALTER TABLE filo.ambience OWNER TO filo;
 -- ddl-end --
 
@@ -2093,6 +2102,7 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 CREATE TABLE filo.situation (
 	situation_id integer NOT NULL DEFAULT nextval('filo.situation_situation_id_seq'::regclass),
 	situation_name varchar NOT NULL,
+	situation_code varchar,
 	CONSTRAINT situation_pk PRIMARY KEY (situation_id)
 
 );
@@ -2138,6 +2148,7 @@ ALTER SEQUENCE filo.localisation_localisation_id_seq OWNER TO filo;
 CREATE TABLE filo.localisation (
 	localisation_id integer NOT NULL DEFAULT nextval('filo.localisation_localisation_id_seq'::regclass),
 	localisation_name varchar NOT NULL,
+	localisation_code varchar,
 	CONSTRAINT localisation_pk PRIMARY KEY (localisation_id)
 
 );
@@ -2157,6 +2168,7 @@ INSERT INTO filo.localisation (localisation_id, localisation_name) VALUES (E'2',
 CREATE TABLE filo.speed (
 	speed_id integer NOT NULL,
 	speed_name varchar NOT NULL,
+	speed_code varchar,
 	CONSTRAINT speed_pk PRIMARY KEY (speed_id)
 
 );
@@ -2182,6 +2194,7 @@ INSERT INTO filo.speed (speed_id, speed_name) VALUES (E'5', E'> 151 cm/s');
 CREATE TABLE filo.shady (
 	shady_id integer NOT NULL,
 	shady_name varchar NOT NULL,
+	shady_code varchar,
 	CONSTRAINT shady_pk PRIMARY KEY (shady_id)
 
 );
@@ -2219,6 +2232,7 @@ ALTER SEQUENCE filo.granulometry_granulometry_id_seq OWNER TO filo;
 CREATE TABLE filo.granulometry (
 	granulometry_id integer NOT NULL DEFAULT nextval('filo.granulometry_granulometry_id_seq'::regclass),
 	granulometry_name varchar NOT NULL,
+	granulometry_code varchar,
 	CONSTRAINT granulometry_pk PRIMARY KEY (granulometry_id)
 
 );
@@ -2228,29 +2242,29 @@ COMMENT ON TABLE filo.granulometry IS E'List of types of granulometry';
 ALTER TABLE filo.granulometry OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'1', E'Argile (<3,9 µm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'1', E'Argile (<3,9 µm)', E'A');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'2', E'Limons (de 3,9 à 62,5 µm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'2', E'Limons (de 3,9 à 62,5 µm)', E'L');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'3', E'Sables fins (de 62,5 à 0,5 µm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'3', E'Sables fins (de 62,5 à 0,5 µm)', E'SF');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'4', E'Sables grossiers (de 0,5 µm à 2 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'4', E'Sables grossiers (de 0,5 µm à 2 mm)', E'SG');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'5', E'Graviers (de 2 à 16 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'5', E'Graviers (de 2 à 16 mm)', E'G');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'6', E'Cailloux fins (de 16 à 32 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'6', E'Cailloux fins (de 16 à 32 mm)', E'CF');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'7', E'Cailloux grossiers (de 32 à 64 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'7', E'Cailloux grossiers (de 32 à 64 mm)', E'CG');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'8', E'Pierres fines (de 64 à 128 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'8', E'Pierres fines (de 64 à 128 mm)', E'PF');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'9', E'Pierres grossières (de 128 à 256 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'9', E'Pierres grossières (de 128 à 256 mm)', E'PG');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'10', E'Blocs (de 256 à 1024 mm)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'10', E'Blocs (de 256 à 1024 mm)', E'B');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'11', E'Rochers (substra immergé avec protubérance)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'11', E'Rochers (substra immergé avec protubérance)', E'R');
 -- ddl-end --
-INSERT INTO filo.granulometry (granulometry_id, granulometry_name) VALUES (E'12', E'Dalle (substrat immergé sans protubérance)');
+INSERT INTO filo.granulometry (granulometry_id, granulometry_name, granulometry_code) VALUES (E'12', E'Dalle (substrat immergé sans protubérance)', E'D');
 -- ddl-end --
 
 -- object: filo.vegetation_vegetation_id_seq | type: SEQUENCE --
@@ -2272,6 +2286,7 @@ ALTER SEQUENCE filo.vegetation_vegetation_id_seq OWNER TO filo;
 CREATE TABLE filo.vegetation (
 	vegetation_id integer NOT NULL DEFAULT nextval('filo.vegetation_vegetation_id_seq'::regclass),
 	vegetation_name varchar NOT NULL,
+	vegetation_code varchar,
 	CONSTRAINT vegetation_pk PRIMARY KEY (vegetation_id)
 
 );
@@ -2317,6 +2332,7 @@ ALTER SEQUENCE filo.cache_abundance_cache_abundance_id_seq OWNER TO filo;
 CREATE TABLE filo.cache_abundance (
 	cache_abundance_id integer NOT NULL DEFAULT nextval('filo.cache_abundance_cache_abundance_id_seq'::regclass),
 	cache_abundance_name varchar NOT NULL,
+	cache_abundance_code varchar,
 	CONSTRAINT cache_abundance_pk PRIMARY KEY (cache_abundance_id)
 
 );
@@ -2884,6 +2900,7 @@ ALTER SEQUENCE filo.cloggging_clogging_id_seq OWNER TO filo;
 CREATE TABLE filo.clogging (
 	clogging_id integer NOT NULL DEFAULT nextval('filo.cloggging_clogging_id_seq'::regclass),
 	clogging_name varchar NOT NULL,
+	clogging_code varchar,
 	CONSTRAINT clogging_pk PRIMARY KEY (clogging_id)
 
 );
@@ -2940,6 +2957,7 @@ ALTER SEQUENCE filo.sinuosity_sinuosity_id_seq OWNER TO filo;
 CREATE TABLE filo.sinuosity (
 	sinuosity_id integer NOT NULL DEFAULT nextval('filo.sinuosity_sinuosity_id_seq'::regclass),
 	sinuosity_name varchar NOT NULL,
+	sinuosity_code varchar,
 	CONSTRAINT sinuosity_pk PRIMARY KEY (sinuosity_id)
 
 );
@@ -2984,6 +3002,7 @@ ALTER SEQUENCE filo.flow_trend_flow_trend_id_seq OWNER TO filo;
 CREATE TABLE filo.flow_trend (
 	flow_trend_id integer NOT NULL DEFAULT nextval('filo.flow_trend_flow_trend_id_seq'::regclass),
 	flow_trend_name varchar NOT NULL,
+	flow_trend_code varchar,
 	CONSTRAINT flow_trend_pk PRIMARY KEY (flow_trend_id)
 
 );
@@ -2993,13 +3012,13 @@ COMMENT ON TABLE filo.flow_trend IS E'List of trends of flow';
 ALTER TABLE filo.flow_trend OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'1', E'Augmentation (en crue)');
+INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name, flow_trend_code) VALUES (E'1', E'Augmentation (en crue)', E'2');
 -- ddl-end --
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'2', E'Diminution (en décrue)');
+INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name, flow_trend_code) VALUES (E'2', E'Diminution (en décrue)', E'3');
 -- ddl-end --
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'3', E'Stabilité');
+INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name, flow_trend_code) VALUES (E'3', E'Stabilité', E'1');
 -- ddl-end --
-INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name) VALUES (E'4', E'Irrégularité');
+INSERT INTO filo.flow_trend (flow_trend_id, flow_trend_name, flow_trend_code) VALUES (E'4', E'Irrégularité', E'4');
 -- ddl-end --
 
 -- object: flow_trend_fk | type: CONSTRAINT --
@@ -3028,6 +3047,7 @@ ALTER SEQUENCE filo.turbidity_id OWNER TO filo;
 CREATE TABLE filo.turbidity (
 	turbidity_id integer NOT NULL DEFAULT nextval('filo.turbidity_id'::regclass),
 	turbidity_name varchar NOT NULL,
+	turbidity_code varchar,
 	CONSTRAINT turbidity_pk PRIMARY KEY (turbidity_id)
 
 );
@@ -3079,6 +3099,8 @@ CREATE TABLE filo.protocol (
 	measure_default_only boolean NOT NULL DEFAULT false,
 	analysis_template_id integer,
 	existing_taxon_only boolean NOT NULL DEFAULT true,
+	protocol_code varchar,
+	ambience_template_id integer,
 	CONSTRAINT protocol_pk PRIMARY KEY (protocol_id)
 
 );
@@ -3173,6 +3195,7 @@ ALTER SEQUENCE filo.water_regime_water_regime_id_seq OWNER TO filo;
 CREATE TABLE filo.water_regime (
 	water_regime_id integer NOT NULL DEFAULT nextval('filo.water_regime_water_regime_id_seq'::regclass),
 	water_regime_name varchar NOT NULL,
+	water_regime_code varchar,
 	CONSTRAINT water_regime_pk PRIMARY KEY (water_regime_id)
 
 );
@@ -3203,6 +3226,7 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 CREATE TABLE filo.electric_current_type (
 	electric_current_type_id smallint NOT NULL,
 	electric_current_type_name varchar NOT NULL,
+	electric_current_type_code varchar,
 	CONSTRAINT electric_current_type_pk PRIMARY KEY (electric_current_type_id)
 
 );
@@ -3234,6 +3258,7 @@ ALTER SEQUENCE filo.fishing_strategy_fishing_strategy_id_seq OWNER TO filo;
 CREATE TABLE filo.fishing_strategy (
 	fishing_strategy_id integer NOT NULL DEFAULT nextval('filo.fishing_strategy_fishing_strategy_id_seq'::regclass),
 	fishing_strategy_name varchar NOT NULL,
+	fishing_strategy_code varchar,
 	CONSTRAINT fishing_strategy_pk PRIMARY KEY (fishing_strategy_id)
 
 );
@@ -3274,6 +3299,7 @@ ALTER SEQUENCE filo.scale_scale_id_seq OWNER TO filo;
 CREATE TABLE filo.scale (
 	scale_id integer NOT NULL DEFAULT nextval('filo.scale_scale_id_seq'::regclass),
 	scale_name varchar NOT NULL,
+	scale_code varchar,
 	CONSTRAINT scale_pk PRIMARY KEY (scale_id)
 
 );
@@ -3316,6 +3342,7 @@ ALTER SEQUENCE filo.gear_method_gear_method_id_seq OWNER TO filo;
 CREATE TABLE filo.gear_method (
 	gear_method_id integer NOT NULL DEFAULT nextval('filo.gear_method_gear_method_id_seq'::regclass),
 	gear_method_name varchar NOT NULL,
+	gear_method_code varchar,
 	CONSTRAINT gear_method_pk PRIMARY KEY (gear_method_id)
 
 );
@@ -3413,7 +3440,7 @@ COMMENT ON COLUMN filo.dbversion.dbversion_date IS E'Date de la version';
 ALTER TABLE filo.dbversion OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.5', E'2020-04-10');
+INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.6', E'2020-05-25');
 -- ddl-end --
 
 -- object: filo.taxa_template_taxa_template_id_seq | type: SEQUENCE --
@@ -4201,8 +4228,6 @@ CREATE INDEX log_ip_idx ON gacl.log
 	);
 -- ddl-end --
 
-
-
 -- object: taxon_fk | type: CONSTRAINT --
 -- ALTER TABLE tracking.individual_tracking DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
 ALTER TABLE tracking.individual_tracking ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
@@ -4279,6 +4304,8 @@ INSERT INTO import.function_type (function_type_id, function_name, description) 
 INSERT INTO import.function_type (function_type_id, function_name, description) VALUES (E'14', E'decodeAll', E'Transforme un jeu de caractère particulier en UTF-8. L''argument doit comprendre le jeu de caractère à transcoder, par exemple UTF-32');
 -- ddl-end --
 INSERT INTO import.function_type (function_type_id, function_name, description) VALUES (E'15', E'transformDecimalSeparator', E'Transforme la virgule en point, pour les champs décimaux en français');
+-- ddl-end --
+INSERT INTO import.function_type (function_type_id, function_name, description) VALUES (E'16', E'getIndividualFromCode', E'Récupère l''identifiant du poisson à partir de son code');
 -- ddl-end --
 
 -- object: import.import_function_import_function_id_seq | type: SEQUENCE --
@@ -5007,7 +5034,6 @@ INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'export_mo
 INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'campaignOnly', E'[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[{"aliasName":"protocol_measure","isStrict":true}],"parameters":[{"aliasName":"analysis_template","fieldName":"analysis_template_id"}],"istablenn":false},{"tableName":"analysis_template","technicalKey":"analysis_template_id","isEmpty":true,"businessKey":"analysis_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"measure_template","technicalKey":"measure_template_id","isEmpty":false,"businessKey":"measure_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"protocol_measure","isEmpty":false,"parentKey":"protocol_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"measure_template_id","tableAlias":"measure_template"}},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]');
 -- ddl-end --
 
-
 -- object: filo.sequence_point_sequence_point_id_seq | type: SEQUENCE --
 -- DROP SEQUENCE IF EXISTS filo.sequence_point_sequence_point_id_seq CASCADE;
 CREATE SEQUENCE filo.sequence_point_sequence_point_id_seq
@@ -5109,6 +5135,32 @@ ALTER TABLE filo.request OWNER TO filo;
 -- ddl-end --
 
 INSERT INTO filo.request (create_date, last_exec, title, body, login, datefields) VALUES (now(), DEFAULT, E'Number of operations by campaign', E'campaign_name, count(*) as operations_nb from campaign join operation using (campaign_id) group by campaign_name', E'admin', DEFAULT);
+-- ddl-end --
+
+-- object: filo.ambience_template | type: TABLE --
+-- DROP TABLE IF EXISTS filo.ambience_template CASCADE;
+CREATE TABLE filo.ambience_template (
+	ambience_template_id serial NOT NULL,
+	ambience_template_name varchar NOT NULL,
+	ambience_template_schema json,
+	CONSTRAINT ambience_template_pk PRIMARY KEY (ambience_template_id)
+
+);
+-- ddl-end --
+COMMENT ON TABLE filo.ambience_template IS E'List of other measures that can be attached to an ambience';
+-- ddl-end --
+COMMENT ON COLUMN filo.ambience_template.ambience_template_name IS E'Name of the template';
+-- ddl-end --
+COMMENT ON COLUMN filo.ambience_template.ambience_template_schema IS E'List of fields of the template';
+-- ddl-end --
+ALTER TABLE filo.ambience_template OWNER TO filo;
+-- ddl-end --
+
+-- object: ambience_template_fk | type: CONSTRAINT --
+-- ALTER TABLE filo.protocol DROP CONSTRAINT IF EXISTS ambience_template_fk CASCADE;
+ALTER TABLE filo.protocol ADD CONSTRAINT ambience_template_fk FOREIGN KEY (ambience_template_id)
+REFERENCES filo.ambience_template (ambience_template_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE DEFERRABLE INITIALLY IMMEDIATE;
 -- ddl-end --
 
 -- object: aclaco_aclacl_fk | type: CONSTRAINT --

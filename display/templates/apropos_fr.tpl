@@ -8,7 +8,8 @@ Version {$version} du {$versiondate}.
 
 <h3>Liste des contributeurs au projet (ordre alphabétique)</h3>
 <ul>
-<li>Éric Quinton (INRAE)</li>
+    <li>Marie Coll (MIGADO)</li>
+    <li>Éric Quinton (INRAE)</li>
 </ul>
 
     <h3>Copyright © 2019-2020  Eric Quinton pour INRAE</h3>

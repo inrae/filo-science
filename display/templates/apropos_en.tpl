@@ -4,11 +4,10 @@
 Version {$version} of {$versiondate}.
 </p>
 
-
-
 <h3>List of contributors to the project (alphabetical order)</h3>
 <ul>
-<li>Éric Quinton (INRAE)</li>
+    <li>Marie Coll (MIGADO)</li>
+    <li>Éric Quinton (INRAE)</li>
 </ul>
 
     <h3>Copyright © 2019-2020 Eric Quinton for INRAE (France)</h3>
@@ -30,6 +29,6 @@ Version 1.0 of the software has been registered with the Agency for the Protecti
 
 <h3>Attributions</h3>
 <ul>
-    <li>Iconof the software: by <a href="http://lorcblog.blogspot.com/">Lorc</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
+    <li>Icon of the software: by <a href="http://lorcblog.blogspot.com/">Lorc</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
     <li><a href="https://pixabay.com/photos/fisherman-fishing-boat-boat-fishing-2739115/">Image of the home page</a>: <a href="https://pixabay.com/service/license/">Pixabay License</a></li>
 </ul>
