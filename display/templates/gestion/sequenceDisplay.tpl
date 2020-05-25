@@ -64,7 +64,7 @@
 	});
 </script>
 
-<h2>{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
+
 <div class="row">
 	<div class="col-md-8">
 		<a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}">
@@ -75,8 +75,11 @@
 		<a href="index.php?module=operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
 			<img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t} &nbsp;{$data.operation_name}
 		</a>
-  </div>
-  <div class="col-md-2 col-md-offset-2">
+	</div>
+</div>
+<div class="row">
+	<h2 class="col-sm-6">{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
+  <div class="col-sm-2 col-sm-offset-2">
 		<form id="seq_duplicate" method="POST" action="index.php">
       <input type="hidden" name="module" value="sequenceDuplicate">
       <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
@@ -85,7 +88,8 @@
       <button type="submit" class="btn btn-warning">{t}Dupliquer la séquence{/t}</button>
 		</form>
 	</div>
-
+</div>
+<div class="row">
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item active">
 			<a class="nav-link" id="tab-detail" data-toggle="tab" role="tab" aria-controls="nav-detail"

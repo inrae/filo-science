@@ -259,8 +259,9 @@ meter[value="4"]::-moz-meter-bar { background: #A4C400; }
 	background-color:rgba(0,158,224,0.2);
 }*/
 .tab-content{
-    background-color: rgba(0, 158, 224);
-    padding:2px
+		/*background-color: rgba(0, 158, 224, 0.1);*/
+		border-top: 2px solid rgba(0,158,224);
+    padding:10px;
 }
 .tab-content-white{
 	background-color: white;
@@ -271,13 +272,13 @@ meter[value="4"]::-moz-meter-bar { background: #A4C400; }
 	background-color:  rgba(0,158,224,0.2) !important;
 }
 .nav-tabs > li.active a,
-.nav-tabs > li > a:hover,
-.nav-tabs > li > a:focus
-,.nav-tabs > li > a:visited{
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus
+,.nav-tabs > li.active > a:visited{
 	background-color: rgba(0,158,224) !important;
 	color:#fff;
 	border: medium none;
-			border-radius: 0.2;
+			border-radius: 0.5;
 }
 
 .trashed {

@@ -63,13 +63,16 @@
         });
     });
 </script>
-<h2>{t}Opération{/t} {$data.operation_name}</h2>
 <div class="row">
-    <div class="col-md-8">
-        <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img
-                src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
-    </div>
-    <div class="col-md-2 col-md-offset-2">
+     <div class="col-md-8">
+            <a href="index.php?module=campaignDisplay&campaign_id={$data.campaign_id}"><img
+                    src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t} {$data.campaign_name}</a>
+        </div>
+
+</div>
+<div class="row">
+    <h2 class="col-sm-8">{t}Opération{/t} {$data.operation_name}</h2>
+    <div class="col-sm-2 col-sm-offset-2">
         {if $droits.gestion == 1}
             <form id="duplicate" method="post" action="index.php">
                 <input type="hidden" name="moduleBase" value="operation">
@@ -80,7 +83,9 @@
             </form>
         {/if}
     </div>
+</div>
 
+<div class="row">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item active">
             <a class="nav-link" id="tab-detail" data-toggle="tab" role="tab" aria-controls="nav-detail"
