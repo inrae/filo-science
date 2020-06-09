@@ -1,5 +1,5 @@
 /*
- * COLLEC-SCIENCE - 2018-07-03
+ * filo-SCIENCE - 2018-07-03
  * Script de creation des tables destinees a recevoir les donnees de l'application
  * database creation script
  *
@@ -16,10 +16,10 @@
  *
  * dans la configuration de postgresql : / postgresql configuration:
  * /etc/postgresql/version/main/pg_hba.conf
- * inserez les lignes suivantes (connexion avec uniquement le compte collec en local) :
- * insert theses lines (connection only with the account collec on local server):
- * host    collec             collec             127.0.0.1/32            md5
- * host    all            collec                  0.0.0.0/0               reject
+ * inserez les lignes suivantes (connexion avec uniquement le compte filo en local) :
+ * insert theses lines (connection only with the account filo on local server):
+ * host    filo             filo             127.0.0.1/32            md5
+ * host    all            filo                  0.0.0.0/0               reject
  */
 
  /*
