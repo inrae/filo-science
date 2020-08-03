@@ -164,7 +164,7 @@ class IndividualTracking extends ObjetBDD
     $sql = "
             select detection_id as id, individual_id, scientific_name, to_char(detection_date, :formatDate) as detection_date
                 , nb_events, duration, validity, signal_force, observation
-                ,station_long long, station_lat lat, station_name
+                ,station_long long, station_lat lat, station_name, station_code, station_number
                 ,'stationary' as detection_type
             from detection
             join antenna using (antenna_id)
@@ -175,7 +175,7 @@ class IndividualTracking extends ObjetBDD
             union
             select location_id as id, individual_id, scientific_name, to_char(detection_date, :formatDate) as detection_date
                 , null nb_events, null duration, true validity, signal_force, observation
-                , location_long, location_lat, null station_name
+                , location_long, location_lat, null station_name, null station_code, null station_number
                 ,'mobile' as detection_type
             from location
             join individual_tracking using (individual_id)

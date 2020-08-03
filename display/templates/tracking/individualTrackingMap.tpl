@@ -15,7 +15,7 @@
   if (lat != latBefore && long != longBefore) {
     var latlong = [lat, long];
     latlngs.push(latlong);
-    var titre= "{if $detection.detection_type == 'stationary'}{$detection.station_name} {$detection.id}{else}{t}mobile : {/t}{$detection.id}{/if}";
+    var titre= "{if $detection.detection_type == 'stationary'}{$detection.station_number} {$detection.station_name}{else}{t}mobile{/t}{/if}{t} - n° détection :{/t} {$detection.id}";
     var id = "{$detection.id}";
     var marker = L.marker(latlong)
       .bindTooltip(titre,
