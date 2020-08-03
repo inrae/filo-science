@@ -28,7 +28,7 @@
                 </dl>
                 <dl class="dl-horizontal">
                     <dt>{t}Station :{/t}</dt>
-                    <dd>{$data.station_name}</dd>
+                    <dd>{$data.station_number} {$data.station_name} <i>{$data.station_code}</i></dd>
                 </dl>
                 <dl class="dl-horizontal">
                     <dt>{t}Protocole :{/t}</dt>

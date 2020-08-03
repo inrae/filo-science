@@ -53,7 +53,8 @@ switch ($t_module["param"]) {
                     "long",
                     "lat",
                     "pk",
-                    "river"
+                    "river",
+                    "number"
                 ));
                 require_once 'modules/classes/param.class.php';
                 $river = new Param($bdd, "river");
@@ -70,6 +71,7 @@ switch ($t_module["param"]) {
                             "station_long" => $row["long"],
                             "station_lat" => $row["lat"],
                             "station_pk" => $row["pk"],
+                            "station_number" => $row["number"],
                             "station_id" => $dataClass->getIdFromName($row["name"])
                         );
                         if (strlen($row["river"]) > 0) {

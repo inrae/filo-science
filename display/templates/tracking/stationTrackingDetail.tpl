@@ -17,6 +17,10 @@
             <dd>{$data.station_code}</dd>
         </dl>
         <dl class="dl-horizontal">
+            <dt>{t}N° métier de la station :{/t}</dt>
+            <dd>{$data.station_number}</dd>
+        </dl>
+        <dl class="dl-horizontal">
             <dt>{t}Cours d'eau :{/t}</dt>
             <dd>{$data.river_name}</dd>
         </dl>

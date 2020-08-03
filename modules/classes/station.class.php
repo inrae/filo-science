@@ -1,16 +1,16 @@
 <?php
 class Station extends ObjetBDD
 {
-    private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code
+    private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code, station_number
             ,project_id, project_name, metric_srid
             ,river_id, river_name
-            from station 
+            from station
             left outer join project using (project_id)
             left outer join river using (river_id)
             ";
     /**
      * Constructor
-     * 
+     *
      * @param PDO $bdd
      * @param array $param
      */
@@ -42,7 +42,8 @@ class Station extends ObjetBDD
             ),
             "station_pk" => array("type" => 1),
             "river_id" => array("type" => 1),
-            "geom" => array("type" => 4)
+            "geom" => array("type" => 4),
+            "station_number" => array("type" => 1)
 
         );
         $this->srid = 4326;
@@ -67,7 +68,7 @@ class Station extends ObjetBDD
 
     /**
      * Get station_id from name
-     * 
+     *
      * @param string $name
      * @return int
      */
@@ -99,7 +100,7 @@ class Station extends ObjetBDD
     {
 
         $where = "";
-        $order = " order by station_code, station_name";
+        $order = " order by station_number, station_code, station_name";
         if ($with_noaffected) {
             $where = " where project_id is null";
         }

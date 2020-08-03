@@ -9,7 +9,7 @@ class Operation extends ObjetBDD
     private $sql = "select o.*
                     ,operation_id as operation_uid
                     ,campaign_name
-                    , station_name
+                    , station_name, station_code, station_number
                     , protocol_name, measure_default, measure_default_only
                     ,water_regime_name, fishing_strategy_name
                     ,scale_id

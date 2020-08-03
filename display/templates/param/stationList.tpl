@@ -13,6 +13,7 @@
                     <th>{t}Id{/t}</th>
                     <th>{t}Nom{/t}</th>
                     <th>{t}Code métier{/t}</th>
+                    <th>{t}N° métier{/t}</th>
                     <th>{t}Cours d'eau{/t}</th>
                     <th>{t}Projet{/t}</th>
                     <th>{t}Longitude{/t}</th>
@@ -34,6 +35,7 @@
                             {/if}
                         </td>
                         <td>{$data[lst].station_code}</td>
+                        <td class="center">{$data[lst].station_number}</td>
                         <td>{$data[lst].river_name}</td>
                         <td>{$data[lst].project_name}</td>
                         <td>{$data[lst].station_long}</td>
@@ -91,6 +93,7 @@
                     <ul>
                         <li>{t}name : nom du lieu de prélèvement (obligatoire){/t}</li>
                         <li>{t}code : code métier de la station{/t}</li>
+                        <li>{t}number : n° métier de la station{/t}</li>
                         <li>{t}long : longitude du point en projection WGS84, sous forme numérique (séparateur : point){/t}</li>
                         <li>{t}lat : latitude du point{/t}</li>
                         <li>{t}pk : point kilométrique de la station{/t}</li>

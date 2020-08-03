@@ -76,6 +76,7 @@
                     <th>{t}Nom{/t}</th>
                     <th>{t}Type de station{/t}</th>
                     <th>{t}Code métier{/t}</th>
+                    <th>{t}N° métier{/t}</th>
                     <th>{t}Cours d'eau{/t}</th>
                     <th>{t}Projet{/t}</th>
                     <th>{t}Longitude{/t}</th>
@@ -103,6 +104,7 @@
                         </td>
                         <td>{$station.station_type_name}</td>
                         <td>{$station.station_code}</td>
+                        <td>{$station.station_number}</td>
                         <td>{$station.river_name}</td>
                         <td>{$station.project_name}</td>
                         <td>{$station.station_long}</td>
