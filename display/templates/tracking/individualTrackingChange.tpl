@@ -440,6 +440,57 @@
 						<input id="spaghetti_brand" type="text" class="fish form-control" name="spaghetti_brand" value="{$data.spaghetti_brand}" autocomplete="off">
 					</div>
 				</div>
+				<fieldset>
+					<legend>{t}Données de capture et de remise à l'eau{/t}</legend>
+					<div class="form-group" id="div-catching_time">
+						<label for="catching_time" class="control-label col-md-4"> {t}Heure de capture :{/t}</label>
+						<div class="col-md-8">
+							<input id="catching_time" type="text" class="fish timepicker form-control" name="catching_time" value="{$data.catching_time}" >
+						</div>
+					</div>
+					<div class="form-group" id="div-anesthesia_duration">
+						<label for="anesthesia_duration" class="control-label col-md-4"> {t}Durée d'anesthésie :{/t}</label>
+						<div class="col-md-8">
+							<input id="anesthesia_duration" type="text" class="fish timepicker form-control" name="anesthesia_duration" value="{$data.anesthesia_duration}" >
+						</div>
+					</div>
+					<div class="form-group" id="div-marking_duration">
+						<label for="marking_duration" class="control-label col-md-4"> {t}Durée de marquage (secondes) :{/t}</label>
+						<div class="col-md-8">
+							<input id="marking_duration" type="text" class="fish nombre form-control" name="marking_duration" value="{$data.marking_duration}" >
+						</div>
+					</div>
+					<div class="form-group" id="div-anesthesia_product">
+						<label for="anesthesia_product" class="control-label col-md-4"> {t}Produit d'anesthésie utilisé :{/t}</label>
+						<div class="col-md-8">
+							<input id="anesthesia_product" type="text" class="fish form-control" name="anesthesia_product" value="{$data.anesthesia_product}" >
+						</div>
+					</div>
+					<div class="form-group" id="div-product_concentration">
+						<label for="product_concentration" class="control-label col-md-4"> {t}Concentration du produit :{/t}</label>
+						<div class="col-md-8">
+							<input id="product_concentration" type="text" class="fish form-control" name="product_concentration" value="{$data.product_concentration}" >
+						</div>
+					</div>
+					<div class="form-group" id="div-release_time">
+						<label for="release_time" class="control-label col-md-4"> {t}Heure de lâcher :{/t}</label>
+						<div class="col-md-8">
+							<input id="release_time" type="text" class="fish form-control" name="release_time" value="{$data.release_time}">
+						</div>
+					</div>
+					<div class="form-group" id="div-release_station_id">
+						<label for="release_station_id" class="control-label col-md-4">{t}Station de lâcher :{/t}</label>
+						<div class="col-md-8">
+							<select class="form-control" id="release_station_id" name="release_station_id">
+								<option value="" {if $data.release_station_id == ""}selected{/if}>{t}Sélectionnez{/t}</option>
+								{foreach $releaseStations as $station}
+									<option value="{$station.station_id}" {if $station.station_id == $data.release_station_id}selected{/if}>
+										{$station.station_name}
+									</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
 				<div class="form-group" id="div-individual_comment">
 					<label for="individual_comment" class="fish control-label col-md-4">
 						{t}Commentaires :{/t}</label>

@@ -13,6 +13,7 @@ class Individual extends ObjetBDD
                     ,pathology_name, pathology_code
                     ,sexe_name, sexe_code
                     ,other_measures, uuid
+                    ,catching_time, release_time, anesthesia_duration, marking_duration, anesthesia_product, product_concentration
                     ,release_station_id, transmitter_type_id, project_id
                     , taxon_id, scientific_name
                     from individual
@@ -53,7 +54,13 @@ class Individual extends ObjetBDD
             "transmitter" => array("type" => 0),
             "uuid" => array("type" => 0, "defaultValue" => "getUUID"),
             "individual_code" => array("type" => 0),
-            "spaghetti_brand" => array("type" => 0)
+            "spaghetti_brand" => array("type" => 0),
+            "catching_time" => array("type"=>0),
+            "release_time" => array("type"=>0),
+            "anesthesia_duration" => array("type"=>0),
+            "marking_duration" => array("type"=>1),
+            "anesthesia_product" => array("type"=>0),
+            "product_concentration" => array("type"=>0)
         );
         parent::__construct($bdd, $param);
     }

@@ -66,12 +66,18 @@ class StationTracking extends ObjetBDD
      * Get the list of the stations attached to a project
      *
      * @param int $project_id
+     * @param int $station_type_id
      * @return array
      */
-    function getListFromProject(int $project_id)
+    function getListFromProject(int $project_id, int $station_type_id = 0)
     {
         $where = " where project_id = :project_id";
-        return $this->getListeParamAsPrepared($this->sql . $where, array("project_id" => $project_id));
+        $params = array("project_id" => $project_id);
+        if ($station_type_id > 0) {
+            $where .= " and station_type_id = :station_type_id";
+            $params["station_type_id"] = $station_type_id;
+        }
+        return $this->getListeParamAsPrepared($this->sql . $where, $params);
     }
     /**
      * Get the detail of a station

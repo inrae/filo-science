@@ -58,6 +58,12 @@ switch ($t_module["param"]) {
       $project = new Project($bdd, $ObjetBDDParam);
       $vue->set($project->getDetail($_REQUEST["project_id"]), "project");
       $vue->set($_SESSION["projects"], "projects");
+      /**
+       * Set the list of release stations
+       */
+      include_once "modules/classes/tracking/stationTracking.class.php";
+      $station = new StationTracking($bdd, $ObjetBDDParam);
+      $vue->set($station->getListFromProject($ds["project_id"], 3), "releaseStations");
     } else {
       $module_coderetour = -1;
       $message->set(_("Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"), true);

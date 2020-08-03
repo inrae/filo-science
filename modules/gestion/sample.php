@@ -105,6 +105,12 @@ switch ($t_module["param"]) {
         include_once 'modules/classes/tracking/transmitter_type.class.php';
         $tt = new TransmitterType($bdd, $ObjetBDDParam);
         $vue->set($tt->getListe("transmitter_type_name"), "transmitters");
+        /**
+         * Get the list of release stations
+         */
+        require_once "modules/classes/tracking/station_tracking.class.php";
+        $station = new StationTracking($bdd, $ObjetBDDParam);
+        $vue->set($station->getListFromProject($ds["project_id"], 3), "releaseStations");
         break;
     case "write":
         /*
