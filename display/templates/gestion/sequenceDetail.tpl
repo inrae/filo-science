@@ -10,6 +10,10 @@
                 <dd>{$data.sequence_number}</dd>
             </dl>
             <dl class="dl-horizontal">
+                <dt>{t}Nom de la séquence :{/t}</dt>
+                <dd>{$data.sequence_name}</dd>
+            </dl>
+            <dl class="dl-horizontal">
                 <dt>{t}Date/heure de début :{/t}</dt>
                 <dd>{$data.date_start}</dd>
             </dl>

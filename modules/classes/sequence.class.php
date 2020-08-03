@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ORM for the table sequence
  */
@@ -6,7 +7,7 @@ class Sequence extends ObjetBDD
 {
     private $sql = "select sequence_id, sequence_number, s.date_start, s.date_end, fishing_duration
                     , operation.operation_id, operation_name, freshwater, long_start, lat_start, long_end, lat_end, taxa_template_id
-                    ,sequence_id as sequence_uid
+                    ,sequence_id as sequence_uid, sequence_name
                     ,campaign_id, campaign_name
                     ,project_id, project_name
                     ,protocol_id, measure_default, measure_default_only
@@ -37,7 +38,8 @@ class Sequence extends ObjetBDD
             "date_start" => array("type" => 3, "defaultValue" => $this->getDateHeure()),
             "date_end" => array("type" => 3),
             "fishing_duration" => array("type" => 1),
-            "uuid" => array("type" => 0)
+            "uuid" => array("type" => 0),
+            "sequence_name" => array("type" => 0)
         );
         parent::__construct($bdd, $param);
     }
@@ -191,10 +193,11 @@ class Sequence extends ObjetBDD
         }
     }
 
-    function getListFromOperation($id) {
+    function getListFromOperation($id)
+    {
         if ($id > 0) {
             $where = " where operation.operation_id = :id";
-            return $this->getListeParamAsPrepared($this->sql.$where, array ("id"=>$id));
+            return $this->getListeParamAsPrepared($this->sql . $where, array("id" => $id));
         }
     }
 }

@@ -19,16 +19,20 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="sequence_name"  class="control-label col-md-4"> {t}Nom de la séquence :{/t}</label>
+                <div class="col-md-8">
+                    <input id="sequence_name" type="text" class="form-control" name="sequence_name" value="{$data.sequence_name}" >
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="date_start"  class="control-label col-md-4"> {t}Date-heure de début :{/t}<span class="red">*</span></label>
                 <div class="col-md-8">
-                
                     <input id="date_start" name="date_start" class="form-control datetimepicker" value="{$data.date_start}" autofocus required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="date_end"  class="control-label col-md-4"> {t}Date-heure de fin :{/t}</label>
                 <div class="col-md-8">
-                
                     <input id="date_end" name="date_end" class="form-control datetimepicker" value="{$data.date_end}" >
                 </div>
             </div>
@@ -38,7 +42,6 @@
                     <input id="fishing_duration" type="text" class="form-control nombre" name="fishing_duration" value="{$data.fishing_duration}">
                 </div>
             </div>
-          
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
                 {if $data.sequence_id > 0 }

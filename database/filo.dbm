@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="269,1054" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="268,525" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -923,7 +923,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	 dst-table="filo.operation"
 	 src-required="true" dst-required="false"/>
 
-<table name="sequence" layer="0" collapse-mode="1" max-obj-count="8">
+<table name="sequence" layer="0" collapse-mode="1" max-obj-count="9">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Catching sequence]]></comment>
@@ -950,6 +950,10 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="uuid" not-null="true" default-value="gen_random_uuid()">
 		<type name="uuid" length="0"/>
+	</column>
+	<column name="sequence_name">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Name of the sequence]]></comment>
 	</column>
 	<constraint name="place_id_pk" type="pk-constr" table="filo.sequence">
 		<columns names="sequence_id" ref-type="src-columns"/>

@@ -11,6 +11,7 @@
                     <thead>
                         <tr>
                             <th>{t}Numéro d'ordre{/t}</th>
+                            <th>{t}Nom{/t}</th>
                             <th>{t}Date-heure de début{/t}</th>
                             <th>{t}Date-heure de fin{/t}</th>
                             <th>{t}Durée de pêche (mn){/t}</th>
@@ -29,6 +30,7 @@
                                     {$sequence.sequence_number}
                                 </a>
                             </td>
+                            <td>{$sequence.sequence_name}</td>
                             <td>{$sequence.date_start}</td>
                             <td>{$sequence.date_end}</td>
                             <td class="center">{$sequence.fishing_duration}</td>

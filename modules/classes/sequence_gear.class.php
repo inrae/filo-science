@@ -2,7 +2,7 @@
 class SequenceGear extends ObjetBDD
 {
     private $sql = "select sequence_gear_id, voltage, amperage, gear_nb, depth
-                    ,sequence_id
+                    ,sequence_id ,sequence_name
                     ,gear_id, gear_name
                     ,gear_method_id, gear_method_name, business_code
                     ,electric_current_type_id, electric_current_type_name
