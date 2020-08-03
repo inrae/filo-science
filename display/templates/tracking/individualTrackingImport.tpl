@@ -79,6 +79,7 @@
       <li><b>individual_code</b>{t} : code métier (code attribué pour l'expérimentation en cours){/t}</li>
       <li><b>tag</b>{t} : code du tag radio{/t}</li>
       <li><b>transmitter</b>{t} : code du transmetteur acoustique{/t}</li>
+      <li><b>spaghetti_brand</b>{t} : marque spaghetti{/t}</li>
       <li><b>uuid</b>{t} : code UUID permettant d'identifier de manière unique le poisson{/t}</li>
       <li><b>sl</b>{t} : longueur standard (mm){/t}</li>
       <li><b>fl</b>{t} : longueur à la fourche (mm){/t}</li>

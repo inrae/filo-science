@@ -145,6 +145,7 @@
 						<th>{t}Tag RFID{/t}</th>
 						<th>{t}Émetteur acoustique ou radio{/t}</th>
 						<th>{t}Modèle d'émetteur{/t}</th>
+						<th>{t}Marque spaghetti{/t}</th>
 						<th>{t}Identifiant unique{/t}</th>
 						{if $droits.gestion == 1}
 							<th class="center" title="{t}Modifier{/t}"><img src="display/images/edit.gif" height="25"></th>
@@ -170,6 +171,7 @@
 						<td>{$individual.tag}</td>
 						<td>{$individual.transmitter}</td>
 						<td>{$individual.transmitter_type_name}</td>
+						<td>{$individual.spaghetti_brand}</td>
 						<td>{$individual.uuid}</td>
 						{if $droits.gestion == 1}
 						<td class="center" title="{t}Modifier{/t}">

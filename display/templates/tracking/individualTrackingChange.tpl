@@ -434,6 +434,12 @@
 						</select>
 					</div>
 				</div>
+				<div class="form-group" id="div-spaghetti_brand">
+					<label for="spaghetti_brand" class="control-label col-md-4"> {t}Marque spaghetti :{/t}</label>
+					<div class="col-md-8">
+						<input id="spaghetti_brand" type="text" class="fish form-control" name="spaghetti_brand" value="{$data.spaghetti_brand}" autocomplete="off">
+					</div>
+				</div>
 				<div class="form-group" id="div-individual_comment">
 					<label for="individual_comment" class="fish control-label col-md-4">
 						{t}Commentaires :{/t}</label>

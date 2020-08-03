@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="0,0" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.2" author="Eric Quinton" last-position="0,264" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -250,7 +250,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<comment><![CDATA[Geographical representation of the situation of the station]]></comment>
 	</column>
 	<column name="station_number">
-		<type name="varchar" length="0"/>
+		<type name="integer" length="0"/>
 		<comment><![CDATA[working number of the station]]></comment>
 	</column>
 	<constraint name="station_id_pk" type="pk-constr" table="filo.station">
@@ -1062,7 +1062,7 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="individual" layer="0" collapse-mode="1" max-obj-count="24">
+<table name="individual" layer="0" collapse-mode="1" max-obj-count="25">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of individuals measured]]></comment>
@@ -1131,6 +1131,10 @@ Zosterisessor ophiocephalus•Pallas 1814•Gobie lotte•19462••••]]>
 	</column>
 	<column name="individual_code">
 		<type name="varchar" length="0"/>
+	</column>
+	<column name="spaghetti_brand">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[Number or others informations on the spaghetti brand]]></comment>
 	</column>
 	<constraint name="individual_id_pk" type="pk-constr" table="filo.individual">
 		<columns names="individual_id" ref-type="src-columns"/>

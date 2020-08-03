@@ -582,6 +582,12 @@
 								value="{$individual.transmitter}" autocomplete="off">
 						</div>
 					</div>
+					<div class="form-group" id="div-spaghetti_brand">
+						<label for="spaghetti_brand" class="control-label col-md-4"> {t}Marque spaghetti :{/t}</label>
+						<div class="col-md-8">
+							<input id="spaghetti_brand" type="text" class="fish form-control" name="spaghetti_brand" value="{$individual.spaghetti_brand}" autocomplete="off">
+						</div>
+					</div>
 					<div class="form-group" id="div-isTracking">
 						<label for="isTracking" class="control-label col-md-4">
 							{t}Poisson utilisé en télédétection ?{/t}</label>
