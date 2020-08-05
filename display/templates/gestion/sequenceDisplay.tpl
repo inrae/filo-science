@@ -78,7 +78,7 @@
 	</div>
 </div>
 <div class="row">
-	<h2 class="col-sm-6">{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
+	<h2 class="col-sm-4">{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
   <div class="col-sm-2 col-sm-offset-2">
 		<form id="seq_duplicate" method="POST" action="index.php">
       <input type="hidden" name="module" value="sequenceDuplicate">
@@ -86,6 +86,15 @@
       <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
       <input type="hidden" name="operation_id" value="{$data.operation_id}">
       <button type="submit" class="btn btn-warning">{t}Dupliquer la séquence{/t}</button>
+		</form>
+	</div>
+	<div class="col-sm-2 ">
+		<form id="seq_attach" method="POST" action="index.php">
+      <input type="hidden" name="module" value="sequenceAddTelemetryFish">
+      <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
+      <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
+      <input type="hidden" name="operation_id" value="{$data.operation_id}">
+      <button type="submit" class="btn btn-info">{t}Ajouter des poissons saisis dans le module de télémétrie{/t}</button>
 		</form>
 	</div>
 </div>
