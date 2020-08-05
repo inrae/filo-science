@@ -225,6 +225,9 @@
 			$( ".datepicker" ).datepicker( $.datepicker.regional[ '{$LANG["date"]["locale"]}' ] );
 			$.datepicker.setDefaults( $.datepicker.regional[ '{$LANG["date"]["locale"]}' ] );
 			$( '.timepicker' ).attr( 'pattern', '[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9]' );
+			$(".timepicker").timepicker({
+				timeFormat: 'HH:mm:ss'
+			});
 			$.timepicker.setDefaults( $.timepicker.regional[ '{$LANG["date"]["locale"]}' ] );
 			$( '.datetimepicker' ).datetimepicker( {
 				dateFormat: '{$LANG["date"]["formatdatecourt"]}',

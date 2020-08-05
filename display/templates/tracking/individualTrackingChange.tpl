@@ -475,7 +475,7 @@
 					<div class="form-group" id="div-release_time">
 						<label for="release_time" class="control-label col-md-4"> {t}Heure de lâcher :{/t}</label>
 						<div class="col-md-8">
-							<input id="release_time" type="text" class="fish form-control" name="release_time" value="{$data.release_time}">
+							<input id="release_time" type="text" class="fish form-control timepicker" name="release_time" value="{$data.release_time}">
 						</div>
 					</div>
 					<div class="form-group" id="div-release_station_id">
@@ -487,11 +487,14 @@
 									<option value="{$station.station_id}" {if $station.station_id == $data.release_station_id}selected{/if}>
 										{$station.station_name}
 									</option>
+								{/foreach}
 							</select>
 						</div>
 					</div>
 				</fieldset>
-				<div class="form-group" id="div-individual_comment">
+				<fieldset>
+					<legend>{t}Divers{/t}</legend>
+					<div class="form-group" id="div-individual_comment">
 					<label for="individual_comment" class="fish control-label col-md-4">
 						{t}Commentaires :{/t}</label>
 					<div class="col-md-8">
@@ -505,6 +508,7 @@
 						<input id="uuid" name="uuid" value="{$data.uuid}" class="fish form-control">
 					</div>
 				</div>
+				</fieldset>
 				<div class="center">
 					<button id="submit3" type="submit" class="btn btn-primary button-valid ">{t}Valider{/t}</button>
 					{if $data.individual_id > 0 }
