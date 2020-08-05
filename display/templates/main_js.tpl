@@ -190,7 +190,9 @@
 				'pageLength',
 				'copyHtml5',
 				'excelHtml5',
-				'csvHtml5',
+				{ extend: 'csvHtml5',
+					filename: 'export_'+ new Date().toISOString()
+				},
 				/* {
 					 extend: 'pdfHtml5',
 					 orientation: 'landscape'
