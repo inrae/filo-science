@@ -10,6 +10,7 @@ class IndividualTracking extends ObjetBDD
   private $sql = "select individual_id, release_station_id, transmitter_type_id, it.project_id, taxon_id
                     ,tag, transmitter, spaghetti_brand
                     , transmitter_type_name
+                    , individual_id as individual_uid
                     ,project_name
                     ,scientific_name
                     ,individual_code
@@ -214,5 +215,36 @@ class IndividualTracking extends ObjetBDD
       }
     }
     return $id;
+  }
+  /**
+   * Get the list of fish not associated with a sequence
+   *
+   * @param integer $project_id
+   * @return array|null
+   */
+  function getListNotInSequence(int $project_id): ?array
+  {
+    $where = " where it.project_id = :project_id and sample_id is null";
+    return $this->getListeParamAsPrepared($this->sql . $where, array("project_id" => $project_id));
+  }
+  /**
+   * Get the list of individuals from an array contains a list of individual_id
+   *
+   * @param array $uids
+   * @return array|null
+   */
+  function getListFromUids(array $uids): ?array
+  {
+    $isComma = false;
+    $where = " where individual_id in (";
+    foreach ($uids as $uid) {
+      if (is_numeric($uid) && $uid > 0) {
+        $isComma ? $where .= "," : $isComma = true;
+        $where .= $uid;
+      }
+    }
+    $where .= ")";
+    $order = " order by scientific_name, individual_code";
+    return $this->getListeParam($this->sql . $where . $order);
   }
 }

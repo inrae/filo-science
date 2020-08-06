@@ -246,10 +246,12 @@
 	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
-  <sequenceDuplicate action="modules/gestion/sequence.php" param="duplicate" droits="gestion" retourok="sequenceDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
+	ll<sequenceDuplicate action="modules/gestion/sequence.php" param="duplicate" droits="gestion" retourok="sequenceDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
 	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_gear_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
+	<sequenceAddTelemetryFish action="modules/gestion/sequence.php" param="addTelemetryFish" droits="gestion" retourko="sequenceDisplay" type="smarty" maxCountByDay="600" maxCountByHour="60"/>
+	<sequenceAddTelemetryFishExec action="modules/gestion/sequence.php" param="addTelemetryFishExec" droits="gestion" retourok="sequenceDisplay" retourko="sequenceAddTelemetryFish" modulebefore="sequenceAddTelemetryFish" maxCountByDay="600" maxCountByHour="60"/>
 
 	<sequencePointChange action="modules/gestion/sequencePoint.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_point_id" />
 	<sequencePointWrite action="modules/gestion/sequencePoint.php" param="write" droits="gestion" retourok="sequencePointChange" retourko="sequencePointChange" modulebefore="sequencePointChange" />
