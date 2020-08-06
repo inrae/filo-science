@@ -201,6 +201,7 @@
 							<th>{t}Id{/t}</th>
 							<th>{t}Date/heure de détection{/t}</th>
 							<th>{t}Type de détection{/t}</th>
+							<th>{t}Station{/t}</th>
 							<th>{t}Nbre d'événements{/t}</th>
 							<th>{t}Durée, en secondes{/t}</th>
 							<th>{t}Force du signal{/t}</th>
@@ -234,6 +235,7 @@
 										{t}Détection mobile{/t}
 									{/if}
 								</td>
+								<td>{$detection.station_name} {$detection.antenna_code}</td>
 								<td class="center">{$detection.nb_events}</td>
 								<td class="center">{$detection.duration}</td>
 								<td class="right">{$detection.signal_force}</td>

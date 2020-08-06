@@ -59,6 +59,11 @@
             } else {
                 cookieContent.testMode = "0";
             }
+            if ($("#rewrite").is(":checked")) {
+                cookieContent.rewrite = "1";
+            } else {
+                cookieContent.rewrite = "0";
+            }
             Cookies.set ("importExec", JSON.stringify(cookieContent), { expires: 60});
 
         });
@@ -78,6 +83,11 @@
                 if (cookieContent.testMode == "1") {
                     $("#testMode").prop("checked", true);
                     $("#nbLinesGroup").show();
+                }
+                if (cookieContent.rewrite == "1") {
+                    $("#rewrite").prop("checked", true);
+                } else {
+                    $("#rewrite").prop("checked", false);
                 }
             } else {
                 /**
@@ -146,6 +156,14 @@
                 <div class="col-md-8">
                     <select id="sensor_id" name="sensor_id" class="form-control">
                     </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rewrite" class="control-label col-md-4">
+                    {t}Écraser les importations précédentes ?{/t}
+                </label>
+                <div class="col-md-1">
+                    <input type="checkbox" id="rewrite" value="1" name="rewrite" class="form-control" checked>
                 </div>
             </div>
             <div class="form-group">

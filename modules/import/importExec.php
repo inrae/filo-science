@@ -22,7 +22,7 @@ if (isset($_FILES["filename"])) {
    */
   if ($project->isAuthorized($_POST["project_id"], $_SESSION["projects"])) {
     $fdata = $_FILES['filename'];
-    if ($fdata["error"] == 0 && $fdata["size"] > 0 && $_REQUEST["import_description_id"] > 0 && $_POST["sensor_id"] > 0) {
+    if ($fdata["error"] == 0 && $fdata["size"] > 0 && $_REQUEST["import_description_id"] > 0 /*&& $_POST["sensor_id"] > 0*/) {
       $importParam = $importDescription->getDetail($_REQUEST["import_description_id"]);
       $vue->set(1, "isTreated");
       /**
@@ -86,6 +86,7 @@ if (isset($_FILES["filename"])) {
         $import->initFile($fdata["tmp_name"], $importParam["separator"]);
         $numLine = 0;
         $data = array();
+        $_POST["rewrite"] == 1 ? $rewrite_mod = true : $rewrite_mod = false;
         /**
          * Treatment of each line
          */
@@ -139,11 +140,12 @@ if (isset($_FILES["filename"])) {
                     $row["antenna_id"] = $_POST["sensor_id"];
                   }
                   $row["probe_id"] = $_POST["sensor_id"];
-                  $idGenerate = $importDataClass->ecrire($row);
+                  $idGenerate = $importDataClass->importData($row, $rewrite_mod);
                   if ($idGenerate < $idMin) {
                     $idMin = $idGenerate;
-                  }
+                  }if ($idGenerate > $idMax) {
                   $idMax = $idGenerate;
+                  }
                 }
               } catch (FunctionTypeException $fte) {
                 $errors[] = array("lineNumber" => $numLine, "content" => $fte->getMessage());

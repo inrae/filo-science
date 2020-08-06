@@ -167,6 +167,7 @@ class IndividualTracking extends ObjetBDD
                 , nb_events, duration, validity, signal_force, observation
                 ,station_long long, station_lat lat, station_name, station_code, station_number
                 ,'stationary' as detection_type
+                ,antenna_code
             from detection
             join antenna using (antenna_id)
             join station using (station_id)
@@ -178,6 +179,7 @@ class IndividualTracking extends ObjetBDD
                 , null nb_events, null duration, true validity, signal_force, observation
                 , location_long, location_lat, null station_name, null station_code, null station_number
                 ,'mobile' as detection_type
+                ,null as antenna_code
             from location
             join individual_tracking using (individual_id)
             join taxon using (taxon_id)
