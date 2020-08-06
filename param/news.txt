@@ -1,5 +1,20 @@
 Nouveautés
 ==========
+Version 1.7.0 du 07/08/2020
+---------------------------
+Nouveautés :
+- ajout d'informations aux poissons pour préciser les conditions de capture, d'anesthésie, de lâcher, etc.
+- ajout d'un champ dédié à marque "spaghetti" pour les poissons
+- il est possible d'attribuer un code métier à une station
+- les séquences de pêche peuvent se voir attribuer un nom
+- si des poissons ont été saisis uniquement dans le module de télémétrie, il est maintenant possible de les rattacher ultérieurement à une séquence de pêche
+- en importation des détections (module télémétrie), il est possible d'utiliser un fichier contenant toutes les antennes (auparavant, l'importation était réalisée antenne par antenne). On peut également activer un mode "écrasement", qui réécrira les détections déjà importées sans les dupliquer
+
+Corrections de bugs :
+- dans le module télémétrie, sur la carte de visualisation des déplacements des poissons, les informations des stations affichées au survol de la souris n'étaient pas claires
+- dans certains cas de figure, la modification du mot de passe pouvait ne pas aboutir
+- dans le module de requêtes SQL, l'exportation des résultats au format CSV ne fonctionnait pas correctement
+
 Version 1.6.0 du 25/05/2020
 ---------------------------
 Nouveautés :

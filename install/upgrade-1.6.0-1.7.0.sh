@@ -1,8 +1,8 @@
 #!/bin/bash
 # upgrade an instance 2.2.2 to 2.2.3
-OLDVERSION=filo-1.4.0
-VERSION=filo-1.6.0
-SQLSCRIPT=upgradedb-1.4-1.5.sql
+OLDVERSION=filo-1.6.0
+VERSION=filo-1.7.0
+SQLSCRIPT=upgradedb-1.6-1.7.sql
 PHPVER=7.3
 echo "This script will install the release $VERSION"
 echo "have you a backup of your database and a copy of param/param.inc.php?"
@@ -45,7 +45,6 @@ echo "update database"
 chmod 755 /var/www/html/filo-science
 cd filo-science/install
 su postgres -c "psql -f $SQLSCRIPT"
-su postgres -c "psql -f upgradedb-1.5-1.6.sql"
 cd ../..
 chmod 750 /var/www/html/filo-science
 

@@ -1,5 +1,20 @@
 News
 ===========
+Version 1.7.0 of 2020-08-07
+---------------------------
+What's New :
+- addition of information to the fish to specify the conditions of capture, anaesthesia, release, etc.
+- addition of a field dedicated to "spaghetti" mark for fishes
+- it is possible to assign a business code to a station
+- fishing sequences can be given a name
+- if fish have been entered only in the telemetry module, it is now possible to link them to a fishing sequence at a later date.
+- in importing detections (telemetry module), it is possible to use a file containing all antennas (previously, import was done antenna by antenna). It is also possible to activate an "overwrite" mode, which will rewrite the already imported detections without duplicating them.
+
+Bug fixes :
+- in the telemetry module, on the fish movement map, the information of the stations displayed when the mouse is hovering was not clear.
+- in some cases, changing the password may not be successful.
+- in the SQL query module, the export of results in CSV format did not work properly
+
 Version 1.6.0 of 2020-05-25
 ---------------------------
 News :
