@@ -1,8 +1,8 @@
 <?php
 class Antenna extends ObjetBDD
 {
-    private $sridAntenna = 4326;
-    private $sql = "select antenna_id, a.station_id, technology_type_id, antenna_code, radius
+  private $sridAntenna = 4326;
+  private $sql = "select antenna_id, a.station_id, technology_type_id, antenna_code, radius
                     ,station_name, station_type_name
                     ,technology_type_name
                     from antenna a
@@ -11,83 +11,98 @@ class Antenna extends ObjetBDD
                     join station_type using (station_type_id)
                     left outer join technology_type using (technology_type_id)";
 
-    /**
-     * Constructor
-     *
-     * @param PDO $bdd
-     * @param array $param
-     */
-    function __construct(PDO $bdd, array $param = array())
-    {
-        $this->table = "antenna";
-        $this->colonnes = array(
-            "antenna_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
-            "station_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
-            "technology_type_id" => array("type" => 1),
-            "antenna_code" => array("type" => 0, "requis" => 1),
-            "radius" => array("type" => 1),
-            "geom_polygon" => array("type" => 4)
-        );
-        parent::__construct($bdd, $param);
+  /**
+   * Constructor
+   *
+   * @param PDO $bdd
+   * @param array $param
+   */
+  function __construct(PDO $bdd, array $param = array())
+  {
+    $this->table = "antenna";
+    $this->colonnes = array(
+      "antenna_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
+      "station_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
+      "technology_type_id" => array("type" => 1),
+      "antenna_code" => array("type" => 0, "requis" => 1),
+      "radius" => array("type" => 1),
+      "geom_polygon" => array("type" => 4)
+    );
+    parent::__construct($bdd, $param);
+  }
+  /**
+   * overwrite of ecrire to generate the polygon of type circle
+   *
+   * @param array $data
+   * @return int
+   */
+  function ecrire($data)
+  {
+    if ($data["radius"] == 0) {
+      $data["geom_polygon"] = "";
     }
-    /**
-     * overwrite of ecrire to generate the polygon of type circle 
-     *
-     * @param array $data
-     * @return int
-     */
-    function ecrire($data)
-    {
-        if ($data["radius"] == 0) {
-            $data["geom_polygon"] = "";
-        }
-        $id = parent::ecrire($data);
-        if ($data["radius"] > 0 && is_numeric($data["radius"])) {
-            /**
-             * Generate a polygon from the center of the station and the radius
-             * 
-             * Get the coordinates of the station
-             */
-            require_once "modules/classes/station.class.php";
-            $station = new Station($this->connection, $this->paramori);
-            $dstation = $station->getDetail($data["station_id"]);
-            if (strlen($dstation["station_long"]) > 0 && strlen($dstation["station_lat"]) > 0) {
-                $sql = "update antenna set geom_polygon = 
-                        st_transform( 
-                            st_buffer ( 
-                                st_transform ( 
+    $id = parent::ecrire($data);
+    if ($data["radius"] > 0 && is_numeric($data["radius"])) {
+      /**
+       * Generate a polygon from the center of the station and the radius
+       *
+       * Get the coordinates of the station
+       */
+      require_once "modules/classes/station.class.php";
+      $station = new Station($this->connection, $this->paramori);
+      $dstation = $station->getDetail($data["station_id"]);
+      if (strlen($dstation["station_long"]) > 0 && strlen($dstation["station_lat"]) > 0) {
+        $sql = "update antenna set geom_polygon =
+                        st_transform(
+                            st_buffer (
+                                st_transform (
                                     st_geomfromtext('POINT(" . $dstation["station_long"] . " " . $dstation["station_lat"] . ")', " . $this->sridAntenna . ")
                                 , " . $dstation["metric_srid"] . ")
                             , " . $data["radius"] . ")
                         ," . $this->sridAntenna . ")
                         where antenna_id = $id";
-                $this->execute($sql);
-            }
-        }
-        return $id;
+        $this->execute($sql);
+      }
     }
-    /**
-     * Get the list of the antennas with associated tables
-     *
-     * @param string $order
-     * @return array
-     */
-    function getListFromParent($parentId, $order = "")
-    {
-        $where = " where a.station_id = :parentId";
-        strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
-        return $this->getListeParamAsPrepared($this->sql . $where . $orderby, array("parentId" => $parentId));
-    }
+    return $id;
+  }
+  /**
+   * Get the list of the antennas with associated tables
+   *
+   * @param string $order
+   * @return array
+   */
+  function getListFromParent($parentId, $order = "")
+  {
+    $where = " where a.station_id = :parentId";
+    strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
+    return $this->getListeParamAsPrepared($this->sql . $where . $orderby, array("parentId" => $parentId));
+  }
 
-    /**
-     * Get the list of antennas attached to a project
-     *
-     * @param integer $projectId
-     * @return array
-     */
-    function getListFromProject(int $projectId) {
-        $where = " where project_id = :project_id";
-        $order = " order by station_name, antenna_code";
-        return $this->getListeParamAsPrepared($this->sql.$where.$order, array("project_id"=>$projectId));
-    }
+  /**
+   * Get the list of antennas attached to a project
+   *
+   * @param integer $projectId
+   * @return array
+   */
+  function getListFromProject(int $projectId)
+  {
+    $where = " where project_id = :project_id";
+    $order = " order by station_name, antenna_code";
+    return $this->getListeParamAsPrepared($this->sql . $where . $order, array("project_id" => $projectId));
+  }
+
+  /**
+   * Get the id of an antenna from its code
+   *
+   * @param string $code
+   * @return integer
+   */
+  function getIdFromCode(string $code): int
+  {
+    $sql = "select antenna_id from antenna where antenna_code = :code";
+    $data = $this->lireParamAsPrepared($sql, array("code" => $code));
+    $data["antenna_id"] > 0 ? $id = $data["antenna_id"] : $id = 0;
+    return $id;
+  }
 }

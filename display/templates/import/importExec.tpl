@@ -31,7 +31,7 @@
             })
             .done(function (value) {
                 var val = JSON.parse(value);
-                var options = "";
+                var options = '<option value="">{t}Sélectionnez{/t}</option>';
                 val.forEach(function (element) {
                     options += '<option value="'+ element.sensor_id + '"';
                     if (sensor_id == element.sensor_id) {
@@ -141,7 +141,7 @@
             </div>
             <div class="form-group">
                 <label for="sensor_id" class="control-label col-md-4">
-                    <span class="red">*</span> {t}Antenne ou sonde concernée :{/t}
+                    <span class="red">*</span> {t}Antenne ou sonde concernée (si vide, le code de l'antenne doit être présent dans le fichier) :{/t}
                 </label>
                 <div class="col-md-8">
                     <select id="sensor_id" name="sensor_id" class="form-control">

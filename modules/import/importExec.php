@@ -48,6 +48,8 @@ if (isset($_FILES["filename"])) {
           include_once "modules/classes/tracking/detection.class.php";
           $importDataClass = new Detection($bdd, $ObjetBDDParam);
           $importDataClass->auto_date = 0;
+          include_once "modules/classes/tracking/antenna.class.php";
+          $antennaClass = new Antenna($bdd, $ObjetBDDParam);
           break;
         case 3:
           /**
@@ -133,7 +135,9 @@ if (isset($_FILES["filename"])) {
                   /**
                    * Import mode
                    */
-                  $row["antenna_id"] = $_POST["sensor_id"];
+                  if (!isset($row["antenna_id"])) {
+                    $row["antenna_id"] = $_POST["sensor_id"];
+                  }
                   $row["probe_id"] = $_POST["sensor_id"];
                   $idGenerate = $importDataClass->ecrire($row);
                   if ($idGenerate < $idMin) {
