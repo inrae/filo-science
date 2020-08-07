@@ -14,7 +14,7 @@ cd /var/www/html/filo-science
 rm -f *zip
 # download last code
 echo "download software"
-wget https://github.com/Irstea/filo-science/archive/master.zip
+wget https://github.com/inrae/filo-science/archive/master.zip
 read -p "Ok to install this release [Y/n]?" answer
 
 if [[  $answer = "y"  ||  $answer = "Y"  ||   -z $answer ]];
