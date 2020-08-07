@@ -92,6 +92,12 @@
       <li><b>sexe_id</b>{t} : sexe : 1: femelle, 2: mâle, 3: inconnu, 4: non identifié{/t}</li>
       <li><b>pathology_id</b>{t} : identifiant de la pathologie (voir la table correspondante dans les paramètres){/t}</li>
       <li><b>transmitter_type_id</b>{t} : identifiant du type de transmetteur (voir la table correspondante dans les paramètres){/t}</li>
+      <li><b>catching_time</b>{t} : heure de capture (format : hh:mm:ss ou hh:mm){/t}</li>
+      <li><b>release_time</b>{t} : heure de lâcher (format : hh:mm:ss ou hh:mm){/t}</li>
+      <li><b>anesthesia_duration</b>{t} : durée d'anesthésie (format : hh:mm:ss ou hh:mm){/t}</li>
+      <li><b>marking_duration</b>{t} : durée de marquage, en secondes{/t}</li>
+      <li><b>anesthesia_product</b>{t} : produit utilisé pour l'anesthésie{/t}</li>
+      <li><b>product_concentration</b>{t} : concentration du produit utilisé pour l'anesthésie{/t}</li>
       <li><b>release_station_id</b>{t} : identifiant de la station de lâcher (voir la table correspondante dans les paramètres){/t}</li>
     </ul>
   </div>
