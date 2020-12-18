@@ -17,7 +17,6 @@ class Menu
      * Charge la classe avec les informations fournies
      *
      * @param string $filename
-     * @param string $language
      */
     function __construct($filename)
     {
@@ -37,7 +36,7 @@ class Menu
     {
         $this->menuList = "";
         foreach ($this->menuArray["item"] as $value) {
-            $this->menuList .= $this->lireItem($value);
+            $this->menuList .= $this->lireItem($value, 0);
         }
         return $this->menuList;
     }
@@ -77,6 +76,12 @@ class Menu
         if ($attributes["onlynoconnect"] == 1 && isset($_SESSION["login"])) {
             $ok = false;
         }
+        /**
+         * Search for language
+         */
+        if(isset($attributes["language"])&& $attributes["language"] != $_SESSION["FORMATDATE"]) {
+            $ok = false;
+        }
         if ($ok) {
             if (isset($attributes["divider"])) {
                 $texte = '<li class="divider"></li>';
@@ -88,6 +93,9 @@ class Menu
                 if (isset($valeur["item"]) && $level > 0) {
                     $label .= " >";
                 }
+                if ($level == 0) {
+                    $level = 1;
+                }
                 $texte = '<li><a href="index.php?module=' . $attributes["module"] . '" title="' . gettext($attributes["tooltip"]) . '">' .  $label . '</a>';
                 if (isset($valeur["item"])) {
                     /*
@@ -95,7 +103,7 @@ class Menu
                      */
                     $texte .= '<ul class="dropdown-menu">';
                     if (count($valeur["item"]) == 1) {
-                        $texte .= $this->lireItem($valeur["item"]);
+                        $texte .= $this->lireItem($valeur["item"], $level);
                     } else {
                         foreach ($valeur["item"] as $value) {
                             $texte .= $this->lireItem($value, $level ++);

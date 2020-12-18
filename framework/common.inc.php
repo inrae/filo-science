@@ -96,9 +96,7 @@ if (!isset($_SESSION['CREATED'])) {
  */
 $cookieParam = session_get_cookie_params();
 $cookieParam["lifetime"] = $APPLI_session_ttl;
-if (!$APPLI_modeDeveloppement) {
-    $cookieParam["secure"] = true;
-}
+$cookieParam["secure"] = true;
 $cookieParam["httponly"] = true;
 setcookie(
     session_name(),
@@ -145,15 +143,7 @@ if ($ident_type == "CAS") {
     include_once "vendor/jasig/phpcas/CAS.php";
     $identification->init_CAS($CAS_address, $CAS_port, "", $CAS_debug, $CAS_CApath);
 } elseif ($ident_type == "LDAP" || $ident_type == "LDAP-BDD") {
-    $identification->init_LDAP(
-        $LDAP["address"],
-        $LDAP["port"],
-        $LDAP["basedn"],
-        $LDAP["user_attrib"],
-        $LDAP["v3"],
-        $LDAP["tls"],
-        $LDAP["upn_suffix"]
-    );
+    $identification->init_LDAP($LDAP);
 }
 /*
  * Chargement des fonction generiques
@@ -210,7 +200,7 @@ if (!isset($bdd)) {
             /*
              * Positionnement des messages dans la langue courante
              */
-            switch ($LANG["date"]["locale"]) {
+            /*switch ($LANG["date"]["locale"]) {
                 case "en":
                     $bdd->exec("set lc_messages to 'en_US.UTF-8'");
                     break;
@@ -219,6 +209,7 @@ if (!isset($bdd)) {
                     $bdd->exec("set lc_messages to 'fr_FR.UTF-8'");
                     break;
             }
+            */
         }
         /*
          * Connexion a la base de gestion des droits
@@ -243,6 +234,7 @@ if (!isset($bdd)) {
             /*
              * Positionnement des messages dans la langue courante
              */
+            /*
             switch ($LANG["date"]["locale"]) {
                 case "en":
                     $bdd_gacl->exec("set lc_messages to 'en_US.UTF-8'");
@@ -252,6 +244,7 @@ if (!isset($bdd)) {
                     $bdd_gacl->exec("set lc_messages to 'fr_FR.UTF-8'");
                     break;
             }
+            */
         } else {
             $message->set(_("Echec de connexion à la base de données de gestion des droits (GACL)"),true);
         }

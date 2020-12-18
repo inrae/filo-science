@@ -83,7 +83,7 @@ try {
                 $request_uri = substr($request_uri, 1);
             }
             $uri = explode("/", $request_uri);
-            if (count($uri) > 2 && $uri[1] != $display) {
+            if (count($uri) > 2 && $uri[1] != "display") {
                 /**
                  * Extraction le cas echeant des variables GET
                  */
@@ -155,7 +155,7 @@ try {
          * Recuperation du tableau contenant les attributs du module
          */
         $t_module = $navigation->getModule($module);
-        if (count($t_module) == 0) {
+        if (empty($t_module) ) {
             // traduction: conserver inchangée la chaîne %s
             $message->set(sprintf(_('Le module demandé n\'existe pas (%s)'), $module), true);
             $t_module = $navigation->getModule("default");
@@ -297,6 +297,16 @@ try {
                                 $message->set(_("L'identification par jeton n'a pas abouti"));
                                 $message->setSyslog($e->getMessage());
                                 $log->setLog("unknown", "connexion", "token-ko");
+                                /**
+                                 * Destroy the token
+                                 */
+                                $cookieParam = session_get_cookie_params();
+                                    $cookieParam["lifetime"] = time()-3600;
+                                    if (!$APPLI_modeDeveloppement) {
+                                        $cookieParam["secure"] = true;
+                                    }
+                                    $cookieParam["httponly"] = true;
+                                    setcookie('tokenIdentity', "", $cookieParam["lifetime"], $cookieParam["path"], $cookieParam["domain"], $cookieParam["secure"], $cookieParam["httponly"]);
                             }
                             if (strlen($login) > 0) {
                                 $log->setLog($login, "connexion", "token-ok");
