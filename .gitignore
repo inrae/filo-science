@@ -192,3 +192,4 @@ sympy-plots-for-*.tex/
 /test/*
 /composer.lock
 *.old
+/database/filo_migado.dbm

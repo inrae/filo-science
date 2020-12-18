@@ -6,6 +6,9 @@
 class Detection extends ObjetBDD
 {
 
+  public Antenna $antenna;
+  private $dataAntenna;
+  private $currentDate;
   /**
    * Constructor
    *
@@ -24,7 +27,8 @@ class Detection extends ObjetBDD
       "duration" => array("type" => 1),
       "validity" => array("type" => 1),
       "signal_force" => array("type" => 1),
-      "observation" => array("type" => 0)
+      "observation" => array("type" => 0),
+      "daypart" => array("type"=>0)
     );
     parent::__construct($bdd, $param);
   }
@@ -52,6 +56,9 @@ class Detection extends ObjetBDD
    */
   function importData(array $data, bool $rewriteMode = false)
   {
+    if (!isset($this->antenna)) {
+      $this->antenna = $this->classInstanciate("Antenna", "tracking/antenna.class.php");
+    }
     if ($rewriteMode) {
       $sql = "select detection_id from detection where individual_id = :individual_id
                     and antenna_id = :antenna_id and detection_date = :detection_date";
@@ -64,6 +71,18 @@ class Detection extends ObjetBDD
         $data["detection_id"] = $databefore["detection_id"];
       }
     }
+    if ($this->dataAntenna["antenna_id"]!= $data["antenna_id"]){
+      $this->dataAntenna = $this->antenna->lire($data["antenna_id"]);
+    }
+    if (substr($data["detection_date"],10) != $this->currentDate) {
+      /**
+       * Calculate the sunrise and the sunset
+       */
+
+    }
+
     return parent::ecrire($data);
   }
+
+
 }

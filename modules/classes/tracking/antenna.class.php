@@ -4,6 +4,7 @@ class Antenna extends ObjetBDD
   private $sridAntenna = 4326;
   private $sql = "select antenna_id, a.station_id, technology_type_id, antenna_code, radius
                     ,station_name, station_type_name
+                    ,station_long, station_lat
                     ,technology_type_name
                     from antenna a
                     join station_tracking st on (a.station_id = st.station_id)
