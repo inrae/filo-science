@@ -1,14 +1,16 @@
 <?php
 
 class FunctionTypeException extends Exception
-{ }
+{
+}
 
 /**
  * ORM of table function_type
  */
 class FunctionType extends ObjetBDD
 {
-
+  private $transmitterIndividual = array();
+  private $antennas = array();
   /**
    * Class constructor.
    */
@@ -190,16 +192,20 @@ class FunctionType extends ObjetBDD
    */
   private function getIndividualFromTag(array $columns, array $args)
   {
-    global $individualTracking;
-    if (!isset($individualTracking)) {
-      throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+    $tagId = $columns[$args["columnNumber"]];
+    if (!isset($this->transmitterIndividual[$tagId])) {
+      global $individualTracking;
+      if (!isset($individualTracking)) {
+        throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+      }
+      $dindividual = $individualTracking->getFromTag($tagId);
+      if ($dindividual["individual_id"] > 0) {
+        $this->transmitterIndividual[$tagId] = $dindividual["individual_id"];
+      } else {
+        throw new FunctionTypeException(sprintf(_("Le transmetteur %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
+      }
     }
-    $dindividual = $individualTracking->getFromTag($columns[$args["columnNumber"]]);
-    if ($dindividual["individual_id"] > 0) {
-      return $dindividual["individual_id"];
-    } else {
-      throw new FunctionTypeException(sprintf(_("Le tag %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
-    }
+    return $this->transmitterIndividual[$tagId];
   }
   /**
    * Get the individual_id from the transmitter
@@ -210,16 +216,23 @@ class FunctionType extends ObjetBDD
    */
   private function getIndividualFromTransmitter(array $columns, array $args)
   {
-    global $individualTracking;
-    if (!isset($individualTracking)) {
-      throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+    /**
+     * Search if the transmitter is known
+     */
+    $transmitterId = $columns[$args["columnNumber"]];
+    if (!isset($this->transmitterIndividual[$transmitterId])) {
+      global $individualTracking;
+      if (!isset($individualTracking)) {
+        throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+      }
+      $dindividual = $individualTracking->getFromTransmitter($transmitterId);
+      if ($dindividual["individual_id"] > 0) {
+        $this->transmitterIndividual[$transmitterId] = $dindividual["individual_id"];
+      } else {
+        throw new FunctionTypeException(sprintf(_("Le transmetteur %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
+      }
     }
-    $dindividual = $individualTracking->getFromTransmitter($columns[$args["columnNumber"]]);
-    if ($dindividual["individual_id"] > 0) {
-      return $dindividual["individual_id"];
-    } else {
-      throw new FunctionTypeException(sprintf(_("Le transmetteur %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
-    }
+    return $this->transmitterIndividual[$transmitterId];
   }
   /**
    * Get the individual_id from the individual_code
@@ -230,16 +243,20 @@ class FunctionType extends ObjetBDD
    */
   private function getIndividualFromCode(array $columns, array $args)
   {
-    global $individualTracking;
-    if (!isset($individualTracking)) {
-      throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+    $codeId = $columns[$args["columnNumber"]];
+    if (!isset($this->transmitterIndividual[$codeId])) {
+      global $individualTracking;
+      if (!isset($individualTracking)) {
+        throw new FunctionTypeException(_("Problème technique : la classe IndividualTracking n'a pas été instanciée."));
+      }
+      $dindividual = $individualTracking->getFromCode($codeId);
+      if ($dindividual["individual_id"] > 0) {
+        $this->transmitterIndividual[$codeId] = $dindividual["individual_id"];
+      } else {
+        throw new FunctionTypeException(sprintf(_("Le code %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
+      }
     }
-    $dindividual = $individualTracking->getFromCode($columns[$args["columnNumber"]]);
-    if ($dindividual["individual_id"] > 0) {
-      return $dindividual["individual_id"];
-    } else {
-      throw new FunctionTypeException(sprintf(_("Le code %s ne correspond à aucun poisson connu"), $columns[$args["columnNumber"]]));
-    }
+    return $this->transmitterIndividual[$codeId];
   }
   /**
    * Transform a numeric value to hexadecimal value
@@ -334,14 +351,18 @@ class FunctionType extends ObjetBDD
   private function getAntennaFromCode(array $columns, array $args)
   {
     $value = $columns[$args["columnNumber"]];
-    global $antennaClass;
-    if (!isset($antennaClass)) {
-      throw new FunctionTypeException(_("Problème technique : la classe Antenna n'a pas été instanciée."));
+    if (!isset($this->antennas[$value])) {
+      global $antennaClass;
+      if (!isset($antennaClass)) {
+        throw new FunctionTypeException(_("Problème technique : la classe Antenna n'a pas été instanciée."));
+      }
+      $result = $antennaClass->getIdFromCode($value);
+      if ($result == 0) {
+        throw new FunctionTypeException(sprintf(_("Le code %s ne correspond à aucune antenne"), $value));
+      } else {
+        $this->antennas[$value] = $result;
+      }
     }
-    $result = $antennaClass->getIdFromCode($value);
-    if ($result == 0) {
-      throw new FunctionTypeException(sprintf(_("Le code %s ne correspond à aucune antenne"), $value));
-    }
-    return $result;
+    return $this->antennas[$value];
   }
 }
