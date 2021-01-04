@@ -9,6 +9,8 @@ class Detection extends ObjetBDD
   public Antenna $antenna;
   private $dataAntenna;
   private $currentDate;
+  private $sunset;
+  private $sunrise;
   /**
    * Constructor
    *
@@ -28,7 +30,7 @@ class Detection extends ObjetBDD
       "validity" => array("type" => 1),
       "signal_force" => array("type" => 1),
       "observation" => array("type" => 0),
-      "daypart" => array("type"=>0)
+      "daypart" => array("type" => 0)
     );
     parent::__construct($bdd, $param);
   }
@@ -71,18 +73,24 @@ class Detection extends ObjetBDD
         $data["detection_id"] = $databefore["detection_id"];
       }
     }
-    if ($this->dataAntenna["antenna_id"]!= $data["antenna_id"]){
+    $date = new DateTime($data["detection_date"]);
+    $dateTimestamp = $date->gettimestamp();
+    if ($this->dataAntenna["antenna_id"] != $data["antenna_id"]) {
       $this->dataAntenna = $this->antenna->lire($data["antenna_id"]);
     }
-    if (substr($data["detection_date"],10) != $this->currentDate) {
+    if (substr($data["detection_date"], 10) != $this->currentDate) {
       /**
        * Calculate the sunrise and the sunset
        */
-
+      $this->currentDate = substr($data["detection_date"], 10);
+      $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);;
+      $this->sunrise = date_sunrise($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
     }
-
+    if ($dateTimestamp >= $this->sunset && $dateTimestamp <= $this->sunrise) {
+      $data["daypart"] = "d";
+    } else {
+      $data["daypart"] = "n";
+    }
     return parent::ecrire($data);
   }
-
-
 }
