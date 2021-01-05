@@ -1,6 +1,7 @@
 <?php
 class IndividualTrackingException extends Exception
-{ }
+{
+}
 
 /**
  * individual_tracking ORM class
@@ -145,7 +146,7 @@ class IndividualTracking extends ObjetBDD
    * @param string $orderBy
    * @return array
    */
-  function getListDetection($uid, string $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', string $orderBy = ""): array
+  function getListDetection($uid, string $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', string $orderBy = "individual_id, detection_date", int $limit = 0, int $offset = 0): array
   {
     $param = array("formatDate" => $formatDate);
     if (is_array($uid)) {
@@ -185,8 +186,10 @@ class IndividualTracking extends ObjetBDD
             join taxon using (taxon_id)
             where $where
         ";
-    if (strlen($orderBy) > 0) {
-      $sql = "with req as (" . $sql . ") select * from req order by $orderBy";
+
+    $sql = "with req as (" . $sql . ") select * from req order by $orderBy";
+    if ($limit > 0) {
+      $sql .= " limit $limit offset $offset";
     }
     return $this->getListeParamAsPrepared($sql, $param);
   }
@@ -248,5 +251,26 @@ class IndividualTracking extends ObjetBDD
     $where .= ")";
     $order = " order by scientific_name, individual_code";
     return $this->getListeParam($this->sql . $where . $order);
+  }
+
+  /**
+   * Get the number of detections for a fish, by date and by day part  (night, day)
+   *
+   * @param integer $individual_id
+   * @return array|null
+   */
+  function getDetectionNumberByDate(int $individual_id): ?array
+  {
+    $sql = "select * from crosstab (
+      'select detection_date::date, daypart, count(*) as nb
+      from tracking.detection
+      where individual_id = $individual_id
+      group by detection_date::date, daypart
+      order by detection_date::date',
+      E'select unnest(array[\'d\',\'n\',\'u\'])')
+      as
+      (detection_date date, day int, night int, unknown int)";
+      $this->colonnes["detection_date"]= array("type"=>2);
+    return $this->getListeParam($sql);
   }
 }

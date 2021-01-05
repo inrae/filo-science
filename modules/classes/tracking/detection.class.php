@@ -93,4 +93,6 @@ class Detection extends ObjetBDD
     }
     return parent::ecrire($data);
   }
+
+
 }

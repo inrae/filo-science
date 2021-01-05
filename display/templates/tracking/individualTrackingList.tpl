@@ -190,65 +190,107 @@
 	{if $selectedIndividual > 0}
 	<div class="tab-pane fade" id="nav-detection" role="tabpanel" aria-labelledby="tab-detection">
 		<fieldset class="col-lg-12">
+			<legend>{t}Récapitulatif journalier{/t}</legend>
+			<table id="dailyDetection" class="table table-bordered table-hover datatable-export-paging">
+				<thead>
+					<tr>
+						<th>{t}Date{/t}</th>
+						<th>{t}Jour{/t}</th>
+						<th>{t}Nuit{/t}</th>
+						<th>{t}Non déterminé{/t}</th>
+						<th>{t}Total{/t}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{$total = 0}
+					{foreach $detection_number as $dn}
+						<tr>
+							<td>{$dn.detection_date}</td>
+							<td class="right">{$dn.day}</td>
+							<td class="right">{$dn.night}</td>
+							<td class="right">{$dn.unknown}</td>
+							<td class="right">{$dn.day + $dn.night + $dn.unknown}</td>
+						</tr>
+						{$total = $total + $dn.day + $dn.night + $dn.unknown}
+					{/foreach}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4">{t}Total général :{/t}</td>
+						<td class="right">{$total}</td>
+					</tr>
+				</tfoot>
+			</table>
+		</fieldset>
+		<fieldset class="col-lg-12">
 			<legend>{t}Liste des détections{/t}</legend>
 			<a href="index.php?module=locationChange&location_id=0&individual_id={$selectedIndividual}">
 				{t}Nouvelle détection manuelle{/t}
 			</a>
 			{if count($detections) > 0}
-				<table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
-					<thead>
-						<tr>
-							<th>{t}Id{/t}</th>
-							<th>{t}Date/heure de détection{/t}</th>
-							<th>{t}Type de détection{/t}</th>
-							<th>{t}Station{/t}</th>
-							<th>{t}Nbre d'événements{/t}</th>
-							<th>{t}Durée, en secondes{/t}</th>
-							<th>{t}Force du signal{/t}</th>
-							<th>{t}Longitude{/t}</th>
-							<th>{t}Latitude{/t}</th>
-							<th>{t}Observation{/t}</th>
-							<th>{t}Valide ?{/t}</th>
-						</tr>
-					</thead>
-					<tbody>
-						{foreach $detections as $detection}
+			<form id="detectionListForm" method="GET" action="index.php">
+				<input type="hidden" name="module" value="individualTrackingList">
+				<input type="hidden" name="project_id" value="{$project_id}">
+					<table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
+						<thead>
 							<tr>
-								<td class="center">
-									{if $droits.gestion == 1}
-										{if $detection.detection_type == "stationary"}
-											<a href="index.php?module=detectionChange&detection_id={$detection.id}&individual_id={$detection.individual_id}">
-											{else}
-											<a href="index.php?module=locationChange&location_id={$detection.id}&individual_id={$detection.individual_id}">
-										{/if}
-										{$detection.id}
-										</a>
-									{else}
-										{$detection.id}
-									{/if}
-								</td>
-								<td>{$detection.detection_date}</td>
-								<td>
-									{if $detection.detection_type == "stationary"}
-										{t}Station fixe{/t}
-									{else}
-										{t}Détection mobile{/t}
-									{/if}
-								</td>
-								<td>{$detection.station_name} {$detection.antenna_code}</td>
-								<td class="center">{$detection.nb_events}</td>
-								<td class="center">{$detection.duration}</td>
-								<td class="right">{$detection.signal_force}</td>
-								<td class="right">{$detection.long}</td>
-								<td class="right">{$detection.lat}</td>
-								<td class="textareaDisplay">{$detection.observation}</td>
-								<td class="center">
-									{if $detection.validity == 1}{t}oui{/t}{else}<span class="red">{t}non{/t}</span>{/if}
-								</td>
+								<td id="offset0">{t}Précédent{/t}</td>
+								<td colspan="9"></td>
+								<td id="offset1">{t}Suivant{/t}</td>
 							</tr>
-						{/foreach}
-					</tbody>
-				</table>
+							<tr>
+								<th>{t}Id{/t}</th>
+								<th>{t}Date/heure de détection{/t}</th>
+								<th>{t}Type de détection{/t}</th>
+								<th>{t}Station{/t}</th>
+								<th>{t}Nbre d'événements{/t}</th>
+								<th>{t}Durée, en secondes{/t}</th>
+								<th>{t}Force du signal{/t}</th>
+								<th>{t}Longitude{/t}</th>
+								<th>{t}Latitude{/t}</th>
+								<th>{t}Observation{/t}</th>
+								<th>{t}Valide ?{/t}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $detections as $detection}
+								<tr>
+									<td class="center">
+										{if $droits.gestion == 1}
+											{if $detection.detection_type == "stationary"}
+												<a href="index.php?module=detectionChange&detection_id={$detection.id}&individual_id={$detection.individual_id}">
+												{else}
+												<a href="index.php?module=locationChange&location_id={$detection.id}&individual_id={$detection.individual_id}">
+											{/if}
+											{$detection.id}
+											</a>
+										{else}
+											{$detection.id}
+										{/if}
+									</td>
+									<td>{$detection.detection_date}</td>
+									<td>
+										{if $detection.detection_type == "stationary"}
+											{t}Station fixe{/t}
+										{else}
+											{t}Détection mobile{/t}
+										{/if}
+									</td>
+									<td>{$detection.station_name} {$detection.antenna_code}</td>
+									<td class="center">{$detection.nb_events}</td>
+									<td class="center">{$detection.duration}</td>
+									<td class="right">{$detection.signal_force}</td>
+									<td class="right">{$detection.long}</td>
+									<td class="right">{$detection.lat}</td>
+									<td class="textareaDisplay">{$detection.observation}</td>
+									<td class="center">
+										{if $detection.validity == 1}{t}oui{/t}{else}<span class="red">{t}non{/t}</span>{/if}
+									</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</form>
 			{/if}
 		</fieldset>
 	</div>
