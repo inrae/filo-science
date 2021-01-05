@@ -31,7 +31,7 @@
             })
             .done(function (value) {
                 var val = JSON.parse(value);
-                var options = '<option value="">{t}Sélectionnez{/t}</option>';
+                var options = '<option value="0">{t}Sélectionnez{/t}</option>';
                 val.forEach(function (element) {
                     options += '<option value="'+ element.sensor_id + '"';
                     if (sensor_id == element.sensor_id) {
@@ -65,7 +65,8 @@
                 cookieContent.rewrite = "0";
             }
             Cookies.set ("importExec", JSON.stringify(cookieContent), { expires: 60});
-
+            $("#submit").hide();
+            $("#spinner").show();
         });
 
         /**
@@ -74,7 +75,7 @@
         try {
             cookieContent = JSON.parse(Cookies.get("importExec"));
             if (cookieContent !== undefined) {
-                $("#project option[value="+cookieContent.project_id+"]").prop("selected", "selected");
+                $("#project_id option[value="+cookieContent.project_id+"]").prop("selected", "selected");
                 $("#import_description_id option[value="+cookieContent.import_description_id+"]").prop("selected", "selected");
                 sensorId = cookieContent.sensor_id;
                 if (cookieContent.project_id > 0 && cookieContent.import_description_id > 0) {
@@ -183,7 +184,8 @@
                 </div>
             </div>
             <div class="form-group center">
-                <button type="submit" class="btn btn-primary button-danger">{t}Déclencher l'import{/t}</button>
+                <button id="submit" type="submit" class="btn btn-primary button-danger">{t}Déclencher l'import{/t}</button>
+                <img id="spinner" src="display/images/spinner.gif" hight="25" hidden>
             </div>
         </form>
     </div>

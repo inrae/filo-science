@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,0" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,1021" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -4819,7 +4819,7 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[Request table in database]]></comment>
-	<position x="1020" y="1840"/>
+	<position x="1020" y="1960"/>
 	<column name="request_id" not-null="true" sequence="filo.request_request_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -4887,6 +4887,20 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	 dst-table="filo.protocol"
 	 src-required="false" dst-required="false"
 	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<index name="detection_date_antenna_individual_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="individual_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="antenna_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="detection_date"/>
+		</idxelement>
+</index>
 
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
