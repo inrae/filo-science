@@ -93,9 +93,18 @@ if (isset($_FILES["filename"])) {
         if (!$_REQUEST["testMode"] == 1) {
           $bdd->beginTransaction();
         }
+        $linecount = 0;
+        $lineblock = 1;
+        $errors[]["content"] = sprintf(_("Début d'importation à %s"), date($_SESSION["MASKDATELONG"]));
         while ($continue) {
           $line = $import->readLine();
           if ($line) {
+            $linecount ++;
+            if ($linecount > 10000) {
+              $linecount = 0;
+              $errors[]["content"] = sprintf(_("%1s lignes importées à %2s"), $lineblock * 10000, date($_SESSION["MASKDATELONG"]));
+              $lineblock ++;
+            }
             $numLine++;
             if ($numLine >= $importParam["first_line"]) {
               /**
@@ -155,16 +164,17 @@ if (isset($_FILES["filename"])) {
             $continue = false;
           }
         }
+        $errors[]["content"] =  sprintf(_("Fin de traitement à %s"), date($_SESSION["MASKDATELONG"]));
         if (!$_REQUEST["testMode"] == 1) {
           $bdd->commit();
-          $errors[] = array("content" => _("Id mini généré :") . $idMin);
-          $errors[] = array("content" => _("Id maxi généré :") . $idMax);
+          $errors[]["content"] = sprintf( _("Id mini généré : %s"), $idMin);
+          $errors[]["content"] = sprintf( _("Id maxi généré : %s"), $idMax);
         }
       } catch (ImportException $ie) {
         $errors[]["content"] = $ie->getMessage();
       } catch (ObjetBDDException $oe) {
         if (!$_REQUEST["testMode"] == 1) {
-          $errors[] = array("lineNumber" => $numLine, "content" => _("Erreur d'écriture en table. Message d'erreur de la base de données : ") . $oe->getMessage());
+          $errors[] = array("lineNumber" => $numLine, "content" => sprintf(_("Erreur d'écriture en table. Message d'erreur de la base de données : %s") , $oe->getMessage()));
           $message->set(_("L'importation a échoué. Consultez les messages dans le tableau"), true);
           $message->setSyslog($oe->getMessage());
           $bdd->rollback();

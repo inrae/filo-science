@@ -86,7 +86,7 @@ class Detection extends ObjetBDD
       $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);;
       $this->sunrise = date_sunrise($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
     }
-    if ($dateTimestamp >= $this->sunset && $dateTimestamp <= $this->sunrise) {
+    if ($dateTimestamp >= $this->sunrise && $dateTimestamp <= $this->sunset) {
       $data["daypart"] = "d";
     } else {
       $data["daypart"] = "n";

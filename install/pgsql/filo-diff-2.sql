@@ -128,3 +128,11 @@ COMMENT ON EXTENSION pgcrypto IS '';
 -- ddl-end --
 COMMENT ON COLUMN filo.sequence_point.fish_number IS E'Number of fishes detected at this point';
 -- ddl-end --
+
+CREATE INDEX detection_date_antenna_individual_idx ON tracking.detection
+	USING btree
+	(
+	  individual_id,
+	  antenna_id,
+	  detection_date
+	);
