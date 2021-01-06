@@ -85,6 +85,8 @@ if (isset($_FILES["filename"])) {
       try {
         $import->initFile($fdata["tmp_name"], $importParam["separator"]);
         $numLine = 0;
+        $numberintransaction = 0;
+        $transactionnumber = 1;
         $data = array();
         $_POST["rewrite"] == 1 ? $rewrite_mod = true : $rewrite_mod = false;
         /**
@@ -99,11 +101,19 @@ if (isset($_FILES["filename"])) {
         while ($continue) {
           $line = $import->readLine();
           if ($line) {
-            $linecount ++;
+            $numberintransaction++;
+            if ($numberintransaction == 100000) {
+              $bdd->commit();
+              $errors[] = array("content" => sprintf(_("%s lignes commitées (données stockées de manière pérenne)"), $numberintransaction * $transactionnumber));
+              $transactionnumber++;
+              $bdd->beginTransaction();
+              $numberintransaction = 1;
+            }
+            $linecount++;
             if ($linecount > 10000) {
               $linecount = 0;
               $errors[]["content"] = sprintf(_("%1s lignes importées à %2s"), $lineblock * 10000, date($_SESSION["MASKDATELONG"]));
-              $lineblock ++;
+              $lineblock++;
             }
             $numLine++;
             if ($numLine >= $importParam["first_line"]) {
@@ -152,8 +162,9 @@ if (isset($_FILES["filename"])) {
                   $idGenerate = $importDataClass->importData($row, $rewrite_mod);
                   if ($idGenerate < $idMin) {
                     $idMin = $idGenerate;
-                  }if ($idGenerate > $idMax) {
-                  $idMax = $idGenerate;
+                  }
+                  if ($idGenerate > $idMax) {
+                    $idMax = $idGenerate;
                   }
                 }
               } catch (FunctionTypeException $fte) {
@@ -167,14 +178,15 @@ if (isset($_FILES["filename"])) {
         $errors[]["content"] =  sprintf(_("Fin de traitement à %s"), date($_SESSION["MASKDATELONG"]));
         if (!$_REQUEST["testMode"] == 1) {
           $bdd->commit();
-          $errors[]["content"] = sprintf( _("Id mini généré : %s"), $idMin);
-          $errors[]["content"] = sprintf( _("Id maxi généré : %s"), $idMax);
+          $errors[]["content"] = sprintf(_("Nombre de lignes traitées : %s"), $numLine);
+          $errors[]["content"] = sprintf(_("Id mini généré : %s"), $idMin);
+          $errors[]["content"] = sprintf(_("Id maxi généré : %s"), $idMax);
         }
       } catch (ImportException $ie) {
         $errors[]["content"] = $ie->getMessage();
       } catch (ObjetBDDException $oe) {
         if (!$_REQUEST["testMode"] == 1) {
-          $errors[] = array("lineNumber" => $numLine, "content" => sprintf(_("Erreur d'écriture en table. Message d'erreur de la base de données : %s") , $oe->getMessage()));
+          $errors[] = array("lineNumber" => $numLine, "content" => sprintf(_("Erreur d'écriture en table. Message d'erreur de la base de données : %s"), $oe->getMessage()));
           $message->set(_("L'importation a échoué. Consultez les messages dans le tableau"), true);
           $message->setSyslog($oe->getMessage());
           $bdd->rollback();
