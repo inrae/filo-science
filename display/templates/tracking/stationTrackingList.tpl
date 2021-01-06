@@ -3,7 +3,7 @@
         var projectId = "{$projects[0].project_id}";
         try {
             var projectIdCookie= Cookies.get("projectId");
-        } catch { 
+        } catch {
             Cookies.set("projectId", projectId, { expires: 180, secure: true });
         }
         if (projectIdCookie != '') {
@@ -104,7 +104,7 @@
                         </td>
                         <td>{$station.station_type_name}</td>
                         <td>{$station.station_code}</td>
-                        <td>{$station.station_number}</td>
+                        <td class="right">{$station.station_number}</td>
                         <td>{$station.river_name}</td>
                         <td>{$station.project_name}</td>
                         <td>{$station.station_long}</td>

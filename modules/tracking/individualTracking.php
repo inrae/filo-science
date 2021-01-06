@@ -27,10 +27,37 @@ switch ($t_module["param"]) {
       $dindividual = $dataClass->getDetail($_REQUEST["individual_id"]);
       if ($dindividual["project_id"] == $project_id) {
         $vue->set($dindividual, "individual");
-        $vue->set($dataClass->getListDetection($_REQUEST["individual_id"], 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date asc", 100, 0), "detections");
+        /**
+         * Manage offset
+         */
+        $_REQUEST["offset"] > 0 ? $offset = $_REQUEST["offset"] : $offset = 0;
+        $vue->set($offset);
+        $vue->set($dataClass->getListDetection($_REQUEST["individual_id"], 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date asc", 100, $offset), "detections");
         $vue->set($dataClass->getDetectionNumberByDate($_REQUEST["individual_id"]), "detection_number");
+        /**
+         * Get the detections grouped by station
+         */
+        include_once "modules/classes/tracking/detection.class.php";
+        $detection = new Detection($bdd, $ObjetBDDParam);
+        $vue->set($dataStation = $detection->getStationDetection($_REQUEST["individual_id"]), "stationDetection");
         $vue->set($_REQUEST["individual_id"], "selectedIndividual");
         setParamMap($vue, false);
+        /**
+         * Generate data for graphs
+         */
+        $axisx = array("x");
+        $axisy = array("data");
+        foreach ($dataStation as $row) {
+          $axisx[] = substr($row["date_from"],0, 19);
+          $axisy[] = $row["station_number"];
+        }
+        $chart = array($axisx, $axisy);
+        //printA(json_encode($chart));
+        $vue->set(json_encode($chart), "chartData");
+        /**
+         * Inhibits the encoding of chartData
+         */
+        $vue->htmlVars[] = "chartData";
       }
     }
     break;

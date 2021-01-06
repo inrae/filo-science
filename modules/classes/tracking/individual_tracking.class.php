@@ -168,7 +168,7 @@ class IndividualTracking extends ObjetBDD
                 , nb_events, duration, validity, signal_force, observation
                 ,station_long long, station_lat lat, station_name, station_code, station_number
                 ,'stationary' as detection_type
-                ,antenna_code
+                ,antenna_code, antenna_id
             from detection
             join antenna using (antenna_id)
             join station using (station_id)
@@ -178,9 +178,9 @@ class IndividualTracking extends ObjetBDD
             union
             select location_id as id, individual_id, scientific_name, to_char(detection_date, :formatDate) as detection_date
                 , null nb_events, null duration, true validity, signal_force, observation
-                , location_long, location_lat, null station_name, null station_code, null station_number
+                , location_long long, location_lat lat, null station_name, null station_code, null station_number
                 ,'mobile' as detection_type
-                ,null as antenna_code
+                ,null as antenna_code, null as antenna_id
             from location
             join individual_tracking using (individual_id)
             join taxon using (taxon_id)
@@ -272,5 +272,54 @@ class IndividualTracking extends ObjetBDD
       (detection_date date, day int, night int, unknown int)";
       $this->colonnes["detection_date"]= array("type"=>2);
     return $this->getListeParam($sql);
+  }
+
+  /**
+   * Get the detections grouped by station
+   *
+   * @param integer $individual_id
+   * @return array
+   */
+  function getStationDetection(int $individual_id): array
+  {
+    $data = $this->getListDetection($individual_id, 'YYYY-MM-DD HH24:MI:SS.MS',"detection_date", 0, 0);
+    $result = array();
+    $last_antenna = 0;
+    $current_row = array();
+    $last_date = "";
+    $nb_events = 0;
+    foreach ($data as $row) {
+      if ($row["antenna_id"] != $last_antenna) {
+        if (!empty($current_row)) {
+          $current_row["date_to"] = $last_date;
+          $current_row["nb_events"] = $nb_events;
+          $result[] = $current_row;
+          $current_row = array();
+        }
+        $current_row["individual_id"] = $row["individual_id"];
+        $current_row["antenna_id"] = $row["antenna_id"];
+        $current_row["date_from"] = $row["detection_date"];
+        $current_row["station_id"] = $row["station_id"];
+        $current_row["station_name"] = $row["station_name"];
+        $current_row["antenna_code"] = $row["antenna_code"];
+        $current_row["detection_type"] = $row["detection_type"];
+        $current_row["lat"] = $row["lat"];
+        $current_row["long"] = $row["long"];
+        $last_antenna = $row["antenna_id"];
+        $last_date = $row["detection_date"];
+        $nb_events = 1;
+      } else {
+        $nb_events++;
+      }
+    }
+    /**
+     * Last item
+     */
+    if (!empty($current_row)) {
+      $current_row["date_to"] = $last_date;
+      $current_row["nb_events"] = $nb_events;
+      $result[] = $current_row;
+    }
+    return $result;
   }
 }

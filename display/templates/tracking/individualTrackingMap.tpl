@@ -9,13 +9,13 @@
 	/**
 	 * set the trace and the markers - Smarty code
 	 */
-  {foreach $detections as $detection }
+  {foreach $stationDetection as $detection }
   lat = parseFloat("{$detection.lat}");
   long = parseFloat("{$detection.long}");
   if (lat != latBefore && long != longBefore) {
     var latlong = [lat, long];
     latlngs.push(latlong);
-    var titre= "{if $detection.detection_type == 'stationary'}{$detection.station_number} {$detection.station_name}{else}{t}mobile{/t}{/if}{t} - n° détection :{/t} {$detection.id}";
+    var titre= "{t}du{/t} {$detection.date_from} {t}au{/t} {$detection.date_to} ({$detection.nb_events} {t}événements{/t})";
     var id = "{$detection.id}";
     var marker = L.marker(latlong)
       .bindTooltip(titre,

@@ -44,9 +44,16 @@ class Detection extends ObjetBDD
   function getListFromIndividual(int $id, $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS')
   {
     $this->auto_date = 0;
-    $sql = "select detection_id, individual_id, antenna_id, to_char(detection_date, :formatDate) as detection_date, nb_events, duration, validity, signal_force, observation
-                from detection
-                where individual_id = :individual_id";
+    $sql = "select detection_id, individual_id, antenna_id,
+            to_char(detection_date, :formatDate) as detection_date,
+            nb_events, duration, validity, signal_force, observation,
+            antenna_code, station_id, station_name, station_code, station_number,
+            station_long long, station_lat lat
+            from detection
+            join antenna using (antenna_id)
+            join station using (station_id)
+            where individual_id = :individual_id
+            order by detection_date";
     return $this->getListeParamAsPrepared($sql, array("individual_id" => $id, "formatDate" => $formatDate));
   }
   /**
@@ -93,6 +100,53 @@ class Detection extends ObjetBDD
     }
     return parent::ecrire($data);
   }
-
-
+  /**
+   * Calculate the duration of presence of a fish in each station
+   *
+   * @param integer $individual_id
+   * @return array
+   */
+  function getStationDetection(int $individual_id): array
+  {
+    $data = $this->getListFromIndividual($individual_id);
+    $result = array();
+    $last_antenna = 0;
+    $current_row = array();
+    $last_date = "";
+    $nb_events = 0;
+    foreach ($data as $row) {
+      if ($row["antenna_id"] != $last_antenna) {
+        if (!empty($current_row)) {
+          $current_row["date_to"] = $last_date;
+          $current_row["nb_events"] = $nb_events;
+          $result[] = $current_row;
+          $current_row = array();
+        }
+        $current_row["individual_id"] = $row["individual_id"];
+        $current_row["antenna_id"] = $row["antenna_id"];
+        $current_row["date_from"] = $row["detection_date"];
+        $current_row["station_id"] = $row["station_id"];
+        $current_row["station_name"] = $row["station_name"];
+        $current_row["antenna_code"] = $row["antenna_code"];
+        $current_row["long"] = $row["long"];
+        $current_row["lat"] = $row["lat"];
+        $current_row["station_number"] = $row["station_number"];
+        $last_antenna = $row["antenna_id"];
+        $last_date = $row["detection_date"];
+        $nb_events = 1;
+      } else {
+        $last_date = $row["detection_date"];
+        $nb_events++;
+      }
+    }
+    /**
+     * Last item
+     */
+    if (!empty($current_row)) {
+      $current_row["date_to"] = $last_date;
+      $current_row["nb_events"] = $nb_events;
+      $result[] = $current_row;
+    }
+    return $result;
+  }
 }

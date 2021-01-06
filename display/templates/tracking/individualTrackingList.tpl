@@ -1,7 +1,6 @@
 <script>
 	$(document).ready(function () {
 		var projectId = "{$projects[0].project_id}";
-		console.log("projectId:"+projectId);
 		try {
 			var projectIdCookie = Cookies.get("projectId");
 		} catch {
@@ -41,6 +40,22 @@
 				pj = 0;
 			}
 			Cookies.set("projectId", pj , { expires: 180, secure: true });
+		});
+
+		/* offset for display detections */
+		var offset = "{$offset}";
+		$("#offset0").click(function () {
+			offset = offset - 100;
+			if (offset < 0) {
+				offset = 0;
+			}
+			$("#offset").val(offset);
+			$("#detectionListForm").submit();
+		});
+		$("#offset1").click(function () {
+			offset = offset + 100;
+			$("#offset").val(offset);
+			$("#detectionListForm").submit();
 		});
 
 		/* Tab Management */
@@ -118,8 +133,12 @@
       aria-selected="false">{t}Détections{/t}&nbsp;{$individual.individual_id}&nbsp;<i>{$individual.scientific_name}</i>&nbsp;{$individual.individual_code}</a>
 	</li>
 	<li class="nav-item">
+		<a class="nav-link" id="tab-detaildetection" href="#nav-detaildetection" data-toggle="tab" role="tab" aria-controls="nav-detaildetection"
+      aria-selected="false">{t}Détails{/t}</a>
+	</li>
+	<li class="nav-item">
 		<a class="nav-link" id="tab-map" href="#nav-map" data-toggle="tab" role="tab" aria-controls="nav-detection"
-		aria-selected="false">{t}Carte correspondante{/t}</a>
+		aria-selected="false">{t}Carte des détections par station{/t}</a>
 	</li>
 	{/if}
 </ul>
@@ -190,39 +209,6 @@
 	{if $selectedIndividual > 0}
 	<div class="tab-pane fade" id="nav-detection" role="tabpanel" aria-labelledby="tab-detection">
 		<fieldset class="col-lg-12">
-			<legend>{t}Récapitulatif journalier{/t}</legend>
-			<table id="dailyDetection" class="table table-bordered table-hover datatable-export-paging">
-				<thead>
-					<tr>
-						<th>{t}Date{/t}</th>
-						<th>{t}Jour{/t}</th>
-						<th>{t}Nuit{/t}</th>
-						<th>{t}Non déterminé{/t}</th>
-						<th>{t}Total{/t}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{$total = 0}
-					{foreach $detection_number as $dn}
-						<tr>
-							<td>{$dn.detection_date}</td>
-							<td class="right">{$dn.day}</td>
-							<td class="right">{$dn.night}</td>
-							<td class="right">{$dn.unknown}</td>
-							<td class="right">{$dn.day + $dn.night + $dn.unknown}</td>
-						</tr>
-						{$total = $total + $dn.day + $dn.night + $dn.unknown}
-					{/foreach}
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="4">{t}Total général :{/t}</td>
-						<td class="right">{$total}</td>
-					</tr>
-				</tfoot>
-			</table>
-		</fieldset>
-		<fieldset class="col-lg-12">
 			<legend>{t}Liste des détections{/t}</legend>
 			<a href="index.php?module=locationChange&location_id=0&individual_id={$selectedIndividual}">
 				{t}Nouvelle détection manuelle{/t}
@@ -231,11 +217,16 @@
 			<form id="detectionListForm" method="GET" action="index.php">
 				<input type="hidden" name="module" value="individualTrackingList">
 				<input type="hidden" name="project_id" value="{$project_id}">
+				<input type="hidden" name="offset" id="offset" value="{$offset}">
 					<table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
 						<thead>
 							<tr>
 								<td id="offset0">{t}Précédent{/t}</td>
-								<td colspan="9"></td>
+								<td colspan="9">
+									{t}Aller à la ligne :{/t}&nbsp;
+									<input name="offset" id="offset" value="{$offset}">
+									<button type="submit" class="btn btn-primary">{t}Rechercher{/t}</button>
+								</td>
 								<td id="offset1">{t}Suivant{/t}</td>
 							</tr>
 							<tr>
@@ -293,6 +284,69 @@
 				</form>
 			{/if}
 		</fieldset>
+	</div>
+	<div class="tab-pane fade" id="nav-detaildetection" role="tabpanel" aria-labelledby="tab-detaildetection">
+		<fieldset class="col-lg-6">
+			<legend>{t}Récapitulatif journalier{/t}</legend>
+			<table id="dailyDetection" class="table table-bordered table-hover datatable-export-paging">
+				<thead>
+					<tr>
+						<th>{t}Date{/t}</th>
+						<th>{t}Jour{/t}</th>
+						<th>{t}Nuit{/t}</th>
+						<th>{t}Non déterminé{/t}</th>
+						<th>{t}Total{/t}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{$total = 0}
+					{foreach $detection_number as $dn}
+						<tr>
+							<td>{$dn.detection_date}</td>
+							<td class="right">{$dn.day}</td>
+							<td class="right">{$dn.night}</td>
+							<td class="right">{$dn.unknown}</td>
+							<td class="right">{$dn.day + $dn.night + $dn.unknown}</td>
+						</tr>
+						{$total = $total + $dn.day + $dn.night + $dn.unknown}
+					{/foreach}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4">{t}Total général :{/t}</td>
+						<td class="right">{$total}</td>
+					</tr>
+				</tfoot>
+			</table>
+		</fieldset>
+		<fieldset class="col-lg-6">
+			<legend>{t}Liste des détections par station{/t}</legend>
+			<table id="stationDetection" class="table table-bordered table-hover datatable-export-paging" data-order='[[3,"asc"]]'>
+				<thead>
+					<tr>
+						<th>{t}Station{/t}</th>
+						<th>{t}Antenne{/t}</th>
+						<th>{t}Code station{/t}</th>
+						<th>{t}Début{/t}</th>
+						<th>{t}Fin{/t}</th>
+						<th>{t}Nombre d'événements{/t}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{foreach $stationDetection as $row}
+						<tr>
+							<td>{$row.station_name}</td>
+							<td>{$row.antenna_code}</td>
+							<td>{$row.station_code}</td>
+							<td>{$row.date_from}</td>
+							<td>{$row.date_to}</td>
+							<td>{$row.nb_events}</td>
+						</tr>
+					{/foreach}
+				</tbody>
+			</table>
+		</fieldset>
+		{include file="tracking/individualTrackingGraph.tpl"}
 	</div>
 	<div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="tab-map">
 		<div class="row">
