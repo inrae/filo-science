@@ -45,7 +45,7 @@
 		/* offset for display detections */
 		var offset = "{$offset}";
 		$("#offset0").click(function () {
-			offset = offset - 100;
+			offset = parseInt( offset) - 100;
 			if (offset < 0) {
 				offset = 0;
 			}
@@ -53,7 +53,7 @@
 			$("#detectionListForm").submit();
 		});
 		$("#offset1").click(function () {
-			offset = offset + 100;
+			offset = parseInt(offset) + 100;
 			$("#offset").val(offset);
 			$("#detectionListForm").submit();
 		});

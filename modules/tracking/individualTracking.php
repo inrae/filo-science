@@ -31,7 +31,7 @@ switch ($t_module["param"]) {
          * Manage offset
          */
         $_REQUEST["offset"] > 0 ? $offset = $_REQUEST["offset"] : $offset = 0;
-        $vue->set($offset);
+        $vue->set($offset, "offset");
         $vue->set($dataClass->getListDetection($_REQUEST["individual_id"], 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date asc", 100, $offset), "detections");
         $vue->set($dataClass->getDetectionNumberByDate($_REQUEST["individual_id"]), "detection_number");
         /**
