@@ -29,6 +29,8 @@
 			<item module="parameterMeasureTypeList" label="Paramètres de mesure" tooltip="Paramètres de mesure enregistrés par les sondes"/>
 			<item module="importTypeList" label="Types d'import" tooltip="Liste des types d'import"/>
 			<item module="importDescriptionList" label="Modèles d'import" tooltip="Liste des modèles d'importation de fichiers"/>
+            <item divider="1" droits="param"/>
+            <item module="detectionCalculateSun" label="Recalculer jour/nuit" tooltip="Recalculer la position des détections dans la journée" droits="param"/>
 		</item>
 	</item>
 

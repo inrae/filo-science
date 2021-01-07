@@ -11,6 +11,16 @@ class Detection extends ObjetBDD
   private $currentDate;
   private $sunset;
   private $sunrise;
+
+  private $sql = "select detection_id, individual_id, antenna_id,
+                  to_char(detection_date, :formatDate) as detection_date,
+                  nb_events, duration, validity, signal_force, observation, daypart,
+                  antenna_code, station_id, station_name, station_code, station_number,
+                  station_long long, station_lat lat,
+                  project_id
+                  from detection
+                  join antenna using (antenna_id)
+                  join station using (station_id)";
   /**
    * Constructor
    *
@@ -44,15 +54,7 @@ class Detection extends ObjetBDD
   function getListFromIndividual(int $id, $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS')
   {
     $this->auto_date = 0;
-    $sql = "select detection_id, individual_id, antenna_id,
-            to_char(detection_date, :formatDate) as detection_date,
-            nb_events, duration, validity, signal_force, observation,
-            antenna_code, station_id, station_name, station_code, station_number,
-            station_long long, station_lat lat
-            from detection
-            join antenna using (antenna_id)
-            join station using (station_id)
-            where individual_id = :individual_id
+    $sql = $this->sql. " where individual_id = :individual_id
             order by detection_date";
     return $this->getListeParamAsPrepared($sql, array("individual_id" => $id, "formatDate" => $formatDate));
   }
@@ -152,5 +154,34 @@ class Detection extends ObjetBDD
       $result[] = $current_row;
     }
     return $result;
+  }
+
+  function calculateGlobalSunPeriod(int $project_id) {
+    $sql = $this->sql . " where project_id =:project_id order by antenna_id, detection_date";
+    $data = $this->getListeParamAsPrepared($sql, array("project_id"=>$project_id));
+    if (!isset($this->antenna)) {
+      $this->antenna = $this->classInstanciate("Antenna", "tracking/antenna.class.php");
+    }
+    foreach ($data as $row) {
+      $date = new DateTime($row["detection_date"]);
+      $dateTimestamp = $date->gettimestamp();
+      if ($this->dataAntenna["antenna_id"] != $row["antenna_id"]) {
+        $this->dataAntenna = $this->antenna->lire($row["antenna_id"]);
+      }
+      if (substr($row["detection_date"], 10) != $this->currentDate) {
+        /**
+         * Calculate the sunrise and the sunset
+         */
+        $this->currentDate = substr($row["detection_date"], 10);
+        $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);;
+        $this->sunrise = date_sunrise($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
+      }
+      if ($dateTimestamp >= $this->sunrise && $dateTimestamp <= $this->sunset) {
+        $row["daypart"] = "d";
+      } else {
+        $row["daypart"] = "n";
+      }
+      $this->ecrire($row);
+    }
   }
 }

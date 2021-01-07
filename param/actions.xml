@@ -348,6 +348,8 @@
 	<locationChange action="modules/tracking/location.php" param="change" droits="gestion" retourko="individualTrackingList" type="smarty"/>
 	<locationWrite action="modules/tracking/location.php" param="write" droits="gestion" retourko="locationChange" retourok="individualTrackingList" modulebefore="locationChange" maxCountByHour="120" maxCountByDay="1200" />
 	<locationDelete action="modules/tracking/location.php" param="delete" droits="gestion" retourko="locationChange" retourok="individualTrackingList" modulebefore="locationChange" maxCountByHour="60" maxCountByDay="600"/>
+    <detectionCalculateSun action="modules/tracking/detection.php" param="detectionCalculate" droits="param" type="smarty"/>
+    <detectionCalculateSunExec action="modules/tracking/detection.php" param="detectionRecalculateSunExec" droits="param" retourok="detectionRecalculate" retourko="detectionRecalculate" modulebefore="detectionRecalculate"/>
 
 	<!-- Imports-->
 	<importDescriptionList action="modules/import/importDescription.php" param="list" droits="consult" maxCountByHour="60" maxCountByDay="600" retourlogin="1" type="smarty"/>
