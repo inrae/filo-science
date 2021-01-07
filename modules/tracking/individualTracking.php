@@ -46,11 +46,17 @@ switch ($t_module["param"]) {
          * Generate data for graphs
          */
         $axisx = array("x");
-        $axisy = array("data");
+        $axisy = array("detection");
+        $stations = array();
         foreach ($dataStation as $row) {
           $axisx[] = substr($row["date_from"],0, 19);
           $axisy[] = $row["station_number"];
+          if (!in_array($row["station_number"], $stations)) {
+            $stations[]  = $row["station_number"];
+          }
         }
+        sort($stations);
+        $vue->set(json_encode($stations), "stations");
         $chart = array($axisx, $axisy);
         //printA(json_encode($chart));
         $vue->set(json_encode($chart), "chartData");
@@ -58,6 +64,7 @@ switch ($t_module["param"]) {
          * Inhibits the encoding of chartData
          */
         $vue->htmlVars[] = "chartData";
+        $vue->htmlVars[] = "stations";
       }
     }
     break;

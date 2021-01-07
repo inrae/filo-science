@@ -4,6 +4,7 @@
 <script>
   $(document).ready(function() {
    var chartData = JSON.parse('{$chartData}');
+   var stations = JSON.parse('{$stations}');
     var chart = c3.generate ({
       bindto: "#chart1",
       data: {
@@ -15,13 +16,25 @@
         x: {
           type: 'timeseries',
           tick: {
-            format: '%Y-%m-%d %H:%M:%S'
+            format: '%d/%m/%Y %H:%M',
+            count: 5,
+            fit: false
+          },
+          label: "{t}Date d'arrivée sur la station{/t}"
+        },
+        y: {
+          label: '{t}N° des stations{/t}',
+          tick: {
+            values: stations
           }
+        }
+      },
+      grid: {
+        y: {
+          show: true
         }
       }
     });
   });
 </script>
-<div class="col-lg-12">
   <div id="chart1"></div>
-</div>

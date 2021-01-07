@@ -134,7 +134,10 @@
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" id="tab-detaildetection" href="#nav-detaildetection" data-toggle="tab" role="tab" aria-controls="nav-detaildetection"
-      aria-selected="false">{t}Détails{/t}</a>
+      aria-selected="false">{t}Récapitulatif journalier{/t}</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-recapstation" href="#nav-recapstation" data-toggle="tab" role="tab" aria-controls="nav-recapstation" aria-selected="false">{t}Récapitulatif par station{/t}</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" id="tab-map" href="#nav-map" data-toggle="tab" role="tab" aria-controls="nav-detection"
@@ -217,17 +220,23 @@
 			<form id="detectionListForm" method="GET" action="index.php">
 				<input type="hidden" name="module" value="individualTrackingList">
 				<input type="hidden" name="project_id" value="{$project_id}">
-				<input type="hidden" name="offset" id="offset" value="{$offset}">
+				<input type="hidden" name="individual_id" id="individual_id2" value="{$individual.individual_id}">
+				<input type="hidden" name="selectedIndividual" value="{$individual.individual_id}">
+
 					<table id="detectionList" class="table table-bordered table-hover datatable" data-order='[[ 1,"asc"],[0,"asc"]]'>
 						<thead>
 							<tr>
-								<td id="offset0">{t}Précédent{/t}</td>
+								<td>
+									<button id="offset0" class="btn btn-secondary">{t}Précédent{/t}</button>
+								</td>
 								<td colspan="9">
 									{t}Aller à la ligne :{/t}&nbsp;
 									<input name="offset" id="offset" value="{$offset}">
 									<button type="submit" class="btn btn-primary">{t}Rechercher{/t}</button>
 								</td>
-								<td id="offset1">{t}Suivant{/t}</td>
+								<td >
+									<button id="offset1" class="btn btn-secondary">{t}Suivant{/t}</button>
+								</td>
 							</tr>
 							<tr>
 								<th>{t}Id{/t}</th>
@@ -286,8 +295,7 @@
 		</fieldset>
 	</div>
 	<div class="tab-pane fade" id="nav-detaildetection" role="tabpanel" aria-labelledby="tab-detaildetection">
-		<fieldset class="col-lg-6">
-			<legend>{t}Récapitulatif journalier{/t}</legend>
+		<div class="col-lg-8">
 			<table id="dailyDetection" class="table table-bordered table-hover datatable-export-paging">
 				<thead>
 					<tr>
@@ -299,7 +307,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					{$total = 0}
+					{$total_n = 0}
+					{$total_d = 0}
+					{$total_u = 0}
 					{foreach $detection_number as $dn}
 						<tr>
 							<td>{$dn.detection_date}</td>
@@ -308,25 +318,32 @@
 							<td class="right">{$dn.unknown}</td>
 							<td class="right">{$dn.day + $dn.night + $dn.unknown}</td>
 						</tr>
-						{$total = $total + $dn.day + $dn.night + $dn.unknown}
+						{$total_n = $total_n + $dn.night}
+						{$total_d = $total_d + $dn.day}
+						{$total_u = $total_u + $dn.unknown}
 					{/foreach}
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="4">{t}Total général :{/t}</td>
-						<td class="right">{$total}</td>
+						<td >{t}Total général :{/t}</td>
+						<td class="right">{$total_d}</td>
+						<td class="right">{$total_n}</td>
+						<td class="right">{$total_u}</td>
+						<td class="right">{$total_d + $total_n + $total_u}</td>
 					</tr>
 				</tfoot>
 			</table>
-		</fieldset>
-		<fieldset class="col-lg-6">
-			<legend>{t}Liste des détections par station{/t}</legend>
+		</div>
+
+	</div>
+	<div class="tab-pane fade" id="nav-recapstation" role="tabpanel" aria-labelledby="tab-recapstation">
+		<div class="col-lg-12">
 			<table id="stationDetection" class="table table-bordered table-hover datatable-export-paging" data-order='[[3,"asc"]]'>
 				<thead>
 					<tr>
 						<th>{t}Station{/t}</th>
 						<th>{t}Antenne{/t}</th>
-						<th>{t}Code station{/t}</th>
+						<th>{t}N° station{/t}</th>
 						<th>{t}Début{/t}</th>
 						<th>{t}Fin{/t}</th>
 						<th>{t}Nombre d'événements{/t}</th>
@@ -337,16 +354,18 @@
 						<tr>
 							<td>{$row.station_name}</td>
 							<td>{$row.antenna_code}</td>
-							<td>{$row.station_code}</td>
+							<td class="center">{$row.station_number}</td>
 							<td>{$row.date_from}</td>
 							<td>{$row.date_to}</td>
-							<td>{$row.nb_events}</td>
+							<td class="right">{$row.nb_events}</td>
 						</tr>
 					{/foreach}
 				</tbody>
 			</table>
-		</fieldset>
-		{include file="tracking/individualTrackingGraph.tpl"}
+		</div>
+		<div class="col-lg-12">
+			{include file="tracking/individualTrackingGraph.tpl"}
+		</div>
 	</div>
 	<div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="tab-map">
 		<div class="row">
