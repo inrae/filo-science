@@ -45,14 +45,14 @@ switch ($t_module["param"]) {
         /**
          * Generate data for graphs
          */
-        $axisx = array("x");
-        $axisy = array("detection");
+        /*$axisx = array("x");
+        $axisy = array("detection");*/
         $axisx2 = array("x");
         $axisy2 = array("detection");
         $stations = array();
         foreach ($dataStation as $row) {
-          $axisx[] = substr($row["date_from"],0, 19);
-          $axisy[] = $row["station_number"];
+          /*$axisx[] = substr($row["date_from"],0, 19);
+          $axisy[] = $row["station_number"];*/
           $axisx2[] = substr($row["date_from"],0, 19);
           $axisy2[] = $row["station_number"];
           $axisx2[] = substr($row["date_to"],0, 19);
@@ -63,15 +63,14 @@ switch ($t_module["param"]) {
         }
         sort($stations);
         $vue->set(json_encode($stations), "stations");
-        $chart = array($axisx, $axisy);
-        //printA(json_encode($chart));
-        $vue->set(json_encode($chart), "chartData");
+        /*$chart = array($axisx, $axisy);
+        $vue->set(json_encode($chart), "chartData");*/
         $chart2 = array($axisx2, $axisy2);
         $vue->set(json_encode($chart2), "chartData2");
         /**
          * Inhibits the encoding of chartData
          */
-        $vue->htmlVars[] = "chartData";
+        //$vue->htmlVars[] = "chartData";
         $vue->htmlVars[] = "stations";
         $vue->htmlVars[] = "chartData2";
       }
