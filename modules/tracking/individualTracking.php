@@ -47,10 +47,16 @@ switch ($t_module["param"]) {
          */
         $axisx = array("x");
         $axisy = array("detection");
+        $axisx2 = array("x");
+        $axisy2 = array("detection");
         $stations = array();
         foreach ($dataStation as $row) {
           $axisx[] = substr($row["date_from"],0, 19);
           $axisy[] = $row["station_number"];
+          $axisx2[] = substr($row["date_from"],0, 19);
+          $axisy2[] = $row["station_number"];
+          $axisx2[] = substr($row["date_to"],0, 19);
+          $axisy2[] = $row["station_number"];
           if (!in_array($row["station_number"], $stations)) {
             $stations[]  = $row["station_number"];
           }
@@ -60,11 +66,14 @@ switch ($t_module["param"]) {
         $chart = array($axisx, $axisy);
         //printA(json_encode($chart));
         $vue->set(json_encode($chart), "chartData");
+        $chart2 = array($axisx2, $axisy2);
+        $vue->set(json_encode($chart2), "chartData2");
         /**
          * Inhibits the encoding of chartData
          */
         $vue->htmlVars[] = "chartData";
         $vue->htmlVars[] = "stations";
+        $vue->htmlVars[] = "chartData2";
       }
     }
     break;

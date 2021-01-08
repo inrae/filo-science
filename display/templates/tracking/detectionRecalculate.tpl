@@ -15,7 +15,7 @@
 <div class="row">
 	<div class="col-lg-6 col-md-12">
 		<form class="form-horizontal protoform" id="detectionRecalculate" action="index.php" method="POST">
-			<input id="moduleSearch" type="hidden" name="module" value="detectionRecalculateExec">
+			<input id="moduleSearch" type="hidden" name="module" value="detectionCalculateSunExec">
       <div class="form-group">
 				<label for="project_id" class="col-md-2 control-label">{t}Projet :{/t}</label>
 				<div class="col-md-4">

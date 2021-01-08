@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,1021" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,0" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -4856,7 +4856,7 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 	</initial-data>
 </table>
 
-<table name="ambience_template" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="ambience_template" layer="0" collapse-mode="1" max-obj-count="3" z-value="0">
 	<schema name="filo"/>
 	<role name="filo"/>
 	<comment><![CDATA[List of other measures that can be attached to an ambience]]></comment>

@@ -10,7 +10,7 @@ $id = $_REQUEST[$keyName];
 /**
  * Verifiy the project
  */
-if ($t_module["action"] != "calculateSun" && $t_module["action"] != "calculateSunExec") {
+if ($t_module["param"] != "calculateSunPeriod" && $t_module["param"] != "calculateSunPeriodExec") {
   if ($id > 0) {
     $data = $dataClass->lire($id);
     $individual_id = $data["individual_id"];
@@ -63,8 +63,8 @@ if ($module_coderetour != -1) {
     case "calculateSunPeriodExec":
       if (verifyProject($_REQUEST["project_id"])) {
         try {
-          $dataClass->calculateGlobalSunPeriod($_REQUEST["project_id"]);
-          $message->set(_("Recalcul effectué"));
+          $nb = $dataClass->calculateGlobalSunPeriod($_REQUEST["project_id"]);
+          $message->set(sprintf(_("Recalcul effectué, %s détections traitées"), $nb));
           $module_coderetour = 1;
         } catch (Exception $e) {
           $message->set(_("Une erreur est survenue pendant l'opération"), true);
