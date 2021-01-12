@@ -116,7 +116,7 @@ class Detection extends ObjetBDD
     $current_row = array();
     $last_date = "";
     $nb_events = 0;
-    //$fields = array ("individual_id", "antenna_id", "date_from", "station_id", "station_name", "antenna_code", "long", "lat", "station_number");
+    $fields = array("individual_id", "antenna_id", "station_id", "station_name", "antenna_code", "long", "lat", "station_number", "station_code");
     foreach ($data as $row) {
       if ($row["antenna_id"] != $last_antenna) {
         if (!empty($current_row)) {
@@ -125,18 +125,10 @@ class Detection extends ObjetBDD
           $result[] = $current_row;
           $current_row = array();
         }
-        /*foreach ($fields as $field) {
+        foreach ($fields as $field) {
           $current_row[$field] = $row[$field];
-        }*/
-        $current_row["individual_id"] = $row["individual_id"];
-        $current_row["antenna_id"] = $row["antenna_id"];
+        }
         $current_row["date_from"] = $row["detection_date"];
-        $current_row["station_id"] = $row["station_id"];
-        $current_row["station_name"] = $row["station_name"];
-        $current_row["antenna_code"] = $row["antenna_code"];
-        $current_row["long"] = $row["long"];
-        $current_row["lat"] = $row["lat"];
-        $current_row["station_number"] = $row["station_number"];
         $last_antenna = $row["antenna_id"];
         $last_date = $row["detection_date"];
         $nb_events = 1;

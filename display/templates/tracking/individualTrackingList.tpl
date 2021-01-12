@@ -344,6 +344,7 @@
 						<th>{t}Station{/t}</th>
 						<th>{t}Antenne{/t}</th>
 						<th>{t}N° station{/t}</th>
+						<th>{t}Code station{/t}</th>
 						<th>{t}Début{/t}</th>
 						<th>{t}Fin{/t}</th>
 						<th>{t}Nombre d'événements{/t}</th>
@@ -355,6 +356,7 @@
 							<td>{$row.station_name}</td>
 							<td>{$row.antenna_code}</td>
 							<td class="center">{$row.station_number}</td>
+							<td class="center">{$row.station_code}</td>
 							<td>{$row.date_from}</td>
 							<td>{$row.date_to}</td>
 							<td class="right">{$row.nb_events}</td>
