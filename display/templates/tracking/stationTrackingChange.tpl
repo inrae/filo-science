@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label for="stationNumber"  class="control-label col-md-4">{t}N° métier :{/t}</label>
                 <div class="col-md-8">
-                    <input id="stationNumber" type="text" class="form-control nombre" name="station_number" value="{$data.station_number}">
+                    <input id="stationNumber" type="text" class="form-control taux" name="station_number" value="{$data.station_number}">
                 </div>
             </div>
             <div class="form-group">

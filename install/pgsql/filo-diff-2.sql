@@ -136,3 +136,5 @@ CREATE INDEX detection_date_antenna_individual_idx ON tracking.detection
 	  antenna_id,
 	  detection_date
 	);
+
+ALTER TABLE filo.station ALTER COLUMN station_number type float USING station_number::float;
