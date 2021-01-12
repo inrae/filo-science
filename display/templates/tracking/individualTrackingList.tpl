@@ -154,7 +154,7 @@
 			<div class="row">
 				<button id="exportDetection" class="btn btn-info">{t}Exporter les détections{/t}</button>
 			</div>
-			<table id="individualList" class="table table-bordered table-hover datatable " data-order = '[[2,"asc"]]'>
+			<table id="individualList" class="table table-bordered table-hover datatable-searching " data-order = '[[2,"asc"]]'>
 				<thead>
 					<tr>
 						<th class="center">
