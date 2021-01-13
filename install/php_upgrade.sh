@@ -1,9 +1,9 @@
 #!/bin/bash
 PHPOLDVERSION=`php -v|grep ^PHP|cut -d " " -f 2|cut -d "." -f 1-2`
-PHPVER=7.3
+PHPVER=7.4
 echo "Warning: you must have a backup of your server before run this upgrade."
 read -p "Your actual version of PHP is $PHPOLDVERSION. Do you want to upgrade to $PHPVER [y/n]?" response
-if [ "$response" = "y" ] 
+if [ "$response" = "y" ]
 then
   # installing php repository
   apt -y install lsb-release apt-transport-https ca-certificates
@@ -21,7 +21,7 @@ then
     echo "deb https://packages.sury.org/php/ $DISTRIBCODE main" | tee /etc/apt/sources.list.d/php.list
     apt-get update
   fi
-  apt-get -y install libapache2-mod-php$PHPVER php$PHPVER php$PHPVER-ldap php$PHPVER-pgsql php$PHPVER-mbstring php$PHPVER-xml php$PHPVER-zip php$PHPVER-imagick php$PHPVER-gd
+  apt-get -y install libapache2-mod-php$PHPVER php$PHPVER php$PHPVER-ldap php$PHPVER-pgsql php$PHPVER-mbstring php$PHPVER-xml php$PHPVER-zip php$PHPVER-imagick php$PHPVER-gd php$PHPVER-curl
   a2dismod php$PHPOLDVERSION
   a2enmod php$PHPVER
   # update php.ini

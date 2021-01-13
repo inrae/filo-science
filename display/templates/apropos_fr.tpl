@@ -12,7 +12,7 @@ Version {$version} du {$versiondate}.
     <li>Éric Quinton (INRAE)</li>
 </ul>
 
-    <h3>Copyright © 2019-2020  Eric Quinton pour INRAE</h3>
+    <h3>Copyright © 2019-2021  Eric Quinton pour INRAE</h3>
 <p>
 La version 1.0 du logiciel est en cours de dépôt auprès de l'Agence pour la Protection des Programmes
 <br>
