@@ -32,7 +32,7 @@
                 <dt>{t}Lien d'accès au protocole :{/t}</dt>
                 <dd>
                 {if strlen($data.protocol_url)>0}
-                    <a href="{$data.protocol_url}" target="_blank">
+                    <a href="{$data.protocol_url}" target="_blank" rel="noopener">
                         {$data.protocol_url}
                     </a>
                 {/if}

@@ -50,7 +50,7 @@
                                 {/foreach}
                             {else}
                                 {if substr($value, 0, 5) == "http:" || substr($value, 0, 6) == "https:"}
-                                    <a href="{$value}" target="_blank">{$value}</a>
+                                    <a href="{$value}" target="_blank" rel="noopener">{$value}</a>
                                 {else}
                                     {$value}
                                 {/if}
@@ -61,6 +61,6 @@
                 {/foreach}
             </fieldset>
         {/if}
-        
+
     </div>
 </div>

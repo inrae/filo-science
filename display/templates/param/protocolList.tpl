@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>{t}Id{/t}</th>
-            <th>{t}Nom du protocole{/t}</th>           
+            <th>{t}Nom du protocole{/t}</th>
             <th>{t}Description{/t}</th>
             <th>{t}URL{/t}</th>
             <th>{t}Fichier de description{/t}</th>
@@ -31,7 +31,7 @@
                 <td class="textareaDisplay">{$row["protocol_description"]}</td>
                 <td>
                     {if strlen($row["protocol_url"]) > 0}
-                        <a href='{$row["protocol_url"]}' target="_blank" >{$row["protocol_url"]}</a>
+                        <a href='{$row["protocol_url"]}' target="_blank"  rel="noopener">{$row["protocol_url"]}</a>
                     {/if}
                 </td>
                 <td> </td>
@@ -39,7 +39,7 @@
                    {if $row["measure_default"] == "sl"}{t}Longueur standard{/t}
                     {elseif $row.measure_default == "fl"}{t}Longueur fourche{/t}
                     {elseif $row.measure_default == "tl"}{t}Longueur totale{/t}
-                    {/if} 
+                    {/if}
                 </td>
                 <td>{$row.analysis_template_name}</td>
                 <td>{$row.ambience_template_name}</td>
