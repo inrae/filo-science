@@ -1,4 +1,7 @@
 <?php
+class IndividualException extends Exception
+{
+}
 
 /**
  * ORM for the table individual
@@ -12,16 +15,17 @@ class Individual extends ObjetBDD
                     ,measure_estimated, pathology_codes, tag, tag_posed, transmitter, spaghetti_brand
                     ,pathology_name, pathology_code
                     ,sexe_name, sexe_code
-                    ,other_measures, uuid
+                    ,other_measures, i.uuid
                     ,catching_time, release_time, anesthesia_duration, marking_duration, anesthesia_product, product_concentration
-                    ,release_station_id, transmitter_type_id, project_id
-                    , taxon_id, scientific_name
-                    from individual
-                    left outer join individual_tracking using (individual_id)
+                    ,release_station_id, transmitter_type_id, it.project_id
+                    , s.taxon_id, scientific_name
+                    from individual i
+                    left outer join individual_tracking it using (individual_id)
                     left outer join pathology using (pathology_id)
                     left outer join sexe using (sexe_id)
                     left outer join v_individual_other_measures using (individual_id)
-                    left outer join taxon using (taxon_id)
+                    join sample s using (sample_id)
+                    left outer join taxon t on (s.taxon_id = t.taxon_id)
     ";
   public $individualTracking;
   /**
@@ -161,9 +165,9 @@ class Individual extends ObjetBDD
   {
     $where = " where operation_id = :operation_id";
     $sql = $this->sql . "
-                join sample using (sample_id)
-                join operation using (operation_id)
+                join sequence using (sequence_id)
         ";
+        printA($sql.$where);
     return $this->getListeParamAsPrepared($sql . $where, array("operation_id" => $operation_id));
   }
 
@@ -171,10 +175,9 @@ class Individual extends ObjetBDD
   {
     $where = " where campaign_id = :campaign_id";
     $sql = $this->sql . "
-                join sample using (sample_id)
+                join sequence using (sequence_id)
                 join operation using (operation_id)
-                join campaign using (campaign_id)
         ";
-    return $this->getListeParamAsPrepared($sql . $where, array("operation_id" => $campaign_id));
+    return $this->getListeParamAsPrepared($sql . $where, array("campaign_id" => $campaign_id));
   }
 }

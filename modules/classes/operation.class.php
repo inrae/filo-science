@@ -8,7 +8,7 @@ class Operation extends ObjetBDD
     private $sequence, $ambience;
     private $sql = "select o.*
                     ,operation_id as operation_uid
-                    ,campaign_name
+                    ,campaign_name, c.project_id
                     , station_name, station_code, station_number
                     , protocol_name, measure_default, measure_default_only
                     ,water_regime_name, fishing_strategy_name
@@ -16,7 +16,7 @@ class Operation extends ObjetBDD
                     , taxa_template_name, taxa_model
                     ,ambience_template_id
                     from operation o
-                    join campaign using (campaign_id)
+                    join campaign c using (campaign_id)
                     left outer join station using (station_id)
                     left outer join protocol using (protocol_id)
                     left outer join water_regime using (water_regime_id)

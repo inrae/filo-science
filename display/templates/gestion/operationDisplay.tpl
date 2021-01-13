@@ -71,9 +71,15 @@
 
 </div>
 <div class="row">
-    <h2 class="col-sm-8">{t}Opération{/t} {$data.operation_name}</h2>
-    <div class="col-sm-2 col-sm-offset-2">
-        {if $droits.gestion == 1}
+    <h2 class="col-sm-6">{t}Opération{/t} {$data.operation_name}</h2>
+    {if $droits.gestion == 1}
+        <div class="col-sm-2 col-sm-offset-2">
+            <img src="display/images/fish.png" height="25">
+            <a href="index.php?module=individualGetListFromOperation&operation_id={$data.operation_id}">
+                {t}Exporter les poissons mesurés{/t}
+            </a>
+        </div>
+        <div class="col-sm-2">
             <form id="duplicate" method="post" action="index.php">
                 <input type="hidden" name="moduleBase" value="operation">
                 <input type="hidden" name="action" value="Duplicate">
@@ -81,8 +87,8 @@
                 <input type="hidden" name="operation_id" value="{$data.operation_id}">
                 <button type="submit" class="btn btn-warning">Dupliquer</button>
             </form>
-        {/if}
-    </div>
+        </div>
+    {{/if}}
 </div>
 
 <div class="row">

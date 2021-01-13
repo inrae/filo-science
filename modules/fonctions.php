@@ -12,14 +12,16 @@
  */
 function verifyProject($project_id)
 {
-    $retour = false;
+  $retour = false;
+  if (isset($project_id )) {
     foreach ($_SESSION["projects"] as $value) {
-        if ($project_id == $value["project_id"]) {
-            $retour = true;
-            break;
-        }
+      if ($project_id == $value["project_id"]) {
+        $retour = true;
+        break;
+      }
     }
-    return $retour;
+  }
+  return $retour;
 }
 /**
  * Populate the content of a parameter table to the vue
@@ -30,16 +32,16 @@ function verifyProject($project_id)
  */
 function setParamToVue($vue, $tablename)
 {
-    global $bdd, $message;
-    try {
-        include_once "modules/classes/param.class.php";
-        $iclass = new Param($bdd, $tablename);
-        $vue->set($iclass->getListe(2), $tablename . "s");
-        unset($iclass);
-    } catch (Exception $e) {
-        $message->set(sprintf(_("Problème de récupération des paramètres de la table %s"), $tablename), true);
-        $message->setSyslog($e->getMessage);
-    }
+  global $bdd, $message;
+  try {
+    include_once "modules/classes/param.class.php";
+    $iclass = new Param($bdd, $tablename);
+    $vue->set($iclass->getListe(2), $tablename . "s");
+    unset($iclass);
+  } catch (Exception $e) {
+    $message->set(sprintf(_("Problème de récupération des paramètres de la table %s"), $tablename), true);
+    $message->setSyslog($e->getMessage);
+  }
 }
 /**
  * Set defaults parameters for maps to vue
@@ -50,27 +52,27 @@ function setParamToVue($vue, $tablename)
  */
 function setParamMap($vue, $isChange = false)
 {
-    if (isset($vue)) {
-        foreach (array(
-            "mapDefaultZoom",
-            "mapDefaultLong",
-            "mapDefaultLat",
-            "mapCacheMaxAge",
-            "mapSeedMinZoom",
-            "mapSeedMaxZoom",
-            "mapSeedMaxAge",
-            "mapMinZoom",
-            "mapMaxZoom"
-        ) as $mapParam) {
-            if (isset($_SESSION[$mapParam])) {
-                $vue->set($_SESSION[$mapParam], $mapParam);
-            } else {
-                global $$mapParam;
-                $vue->set($$mapParam, $mapParam);
-            }
-        }
-        if ($isChange) {
-            $vue->set("edit", "mapMode");
-        }
+  if (isset($vue)) {
+    foreach (array(
+      "mapDefaultZoom",
+      "mapDefaultLong",
+      "mapDefaultLat",
+      "mapCacheMaxAge",
+      "mapSeedMinZoom",
+      "mapSeedMaxZoom",
+      "mapSeedMaxAge",
+      "mapMinZoom",
+      "mapMaxZoom"
+    ) as $mapParam) {
+      if (isset($_SESSION[$mapParam])) {
+        $vue->set($_SESSION[$mapParam], $mapParam);
+      } else {
+        global $$mapParam;
+        $vue->set($$mapParam, $mapParam);
+      }
     }
+    if ($isChange) {
+      $vue->set("edit", "mapMode");
+    }
+  }
 }

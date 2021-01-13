@@ -305,6 +305,9 @@
 	<protocolGetTaxonTemplate action="modules/param/protocol.php" param="getTaxonTemplate" droits="gestion" type="ajax"/>
 	<feedCacheMap action="modules/param/feedCacheMap.php" droits="gestion" type="smarty" retourlogin="1"/>
 
+    <individualGetListFromOperation action="modules/gestion/individual.php" droits="gestion" param="listFromOperation" type="csv" maxCountByHour="60" maxCountByDay="600" retourlogin="1" retourko="operationDisplay"/>
+    <individualGetListFromCampaign action="modules/gestion/individual.php" droits="gestion" param="listFromCampaign" type="csv" maxCountByHour="60" maxCountByDay="600" retourlogin="1" retourko="campaignDisplay"/>
+
 	<!-- tracking -->
 	<station_typeList action="modules/param/param.php" param="list" droits="consult" tablename="station_type" tabledescription="Types de stations" type="smarty" retourlogin="1" maxCountByHour="60" maxCountByDay="600"/>
 	<station_typeChange action="modules/param/param.php" param="change" droits="param" tablename="station_type" tabledescription="Types de stations" type="smarty" maxCountByHour="60" maxCountByDay="600"/>

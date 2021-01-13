@@ -43,10 +43,21 @@
     <fieldset class="col-md-12">
         <legend>Opérations réalisées</legend>
         {if $droits.gestion == 1}
-        <img src="display/images/new.png" height="25">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="display/images/new.png" height="25">
         <a href="index.php?module=operationChange&operation_id=0&campaign_id={$data.campaign_id}">
             {t}Nouvelle opération...{/t}
         </a>
+            </div>
+            <div class="col-md-2 col-md-offset-8">
+                <img src="display/images/fish.png" height="25">
+                <a href="index.php?module=individualGetListFromCampaign&campaign_id={$data.campaign_id}">
+                    {t}Exporter les poissons mesurés{/t}
+                </a>
+            </div>
+        </div>
+
         {/if}
         <form id="exportForm" method="post" action="index.php">
             <input type="hidden" name="moduleBase" value="export">
