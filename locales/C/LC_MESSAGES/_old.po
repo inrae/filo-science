@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-06 17:31+0200\n"
+"POT-Creation-Date: 2020-08-07 09:03+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3944,6 +3944,30 @@ msgstr ""
 "parameters)"
 
 #: ../../../display/templates/tracking/individualTrackingImport.tpl:95
+msgid " : heure de capture (format : hh:mm:ss ou hh:mm)"
+msgstr ": catch time (format: hh:mm:ss or hh:mm)"
+
+#: ../../../display/templates/tracking/individualTrackingImport.tpl:96
+msgid " : heure de lâcher (format : hh:mm:ss ou hh:mm)"
+msgstr ": release time (format: hh:mm:ss or hh:mm)"
+
+#: ../../../display/templates/tracking/individualTrackingImport.tpl:97
+msgid " : durée d'anesthésie (format : hh:mm:ss ou hh:mm)"
+msgstr ": anaesthesia duration (format: hh:mm:ss or hh:mm)"
+
+#: ../../../display/templates/tracking/individualTrackingImport.tpl:98
+msgid " : durée de marquage, en secondes"
+msgstr ": marking time, in seconds"
+
+#: ../../../display/templates/tracking/individualTrackingImport.tpl:99
+msgid " : produit utilisé pour l'anesthésie"
+msgstr ":product used for anaesthesia"
+
+#: ../../../display/templates/tracking/individualTrackingImport.tpl:100
+msgid " : concentration du produit utilisé pour l'anesthésie"
+msgstr ": concentration of the product used for anaesthesia"
+
+#: ../../../display/templates/tracking/individualTrackingImport.tpl:101
 msgid ""
 " : identifiant de la station de lâcher (voir la table correspondante dans "
 "les paramètres)"

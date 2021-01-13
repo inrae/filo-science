@@ -1,5 +1,17 @@
 Nouveautés
 ==========
+Version 1.8.0 du 13/01/2021
+---------------------------
+Nouveautés :
+- lors de l'importation des détections, l'indicateur jour/nuit est calculé
+- dans le module télémétrie, l'affichage des détections des poissons a été amélioré (données regroupées, graphiques, etc.)
+- il est possible de numéroter les stations de télémétrie en utilisant une valeur décimale, pour indiquer, par exemple, le PK (le numéro est utilisé pour l'affichage des détections)
+- il est maintenant possible d'exporter en CSV tous les poissons mesurés pendant une campagne ou une opération
+
+Corrections de bugs :
+- l'importation des détections a été optimisée, pour pouvoir traiter des fichiers contenant plusieurs centaines de milliers d'enregistrements
+- dans l'écran d'importation des détections, le projet utilisé précédemment n'était pas conservé
+
 Version 1.7.0 du 07/08/2020
 ---------------------------
 Nouveautés :

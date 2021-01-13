@@ -1,5 +1,17 @@
 News
 ===========
+Version 1.8.0 of 2021-01-13
+---------------------------
+New features :
+- when importing detections, the day/night indicator is calculated
+- in the telemetry module, the display of fish detections has been improved (grouped data, graphs, etc.)
+- it is possible to number the telemetry stations by using a decimal value, to indicate, for example, the PK (the number is used for the display of the detections)
+- it is now possible to export in CSV all the fish measured during a campaign or an operation
+
+Bug corrections :
+- the import of detections has been optimized, to be able to process files containing several hundreds of thousands of records
+- in the import detections screen, the previously used project was not kept
+
 Version 1.7.0 of 2020-08-07
 ---------------------------
 What's New :
@@ -118,3 +130,5 @@ First production version of the application. It does not understand :
 - fish length controls
 - the translation of the labels in English
 - the recording of operators
+
+Translated with www.DeepL.com/Translator (free version)
