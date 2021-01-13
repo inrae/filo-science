@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-13 13:47+0100\n"
+"POT-Creation-Date: 2021-01-13 16:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3886,10 +3886,10 @@ msgstr "original document"
 
 #: ../../../display/templates/enpied.tpl:3
 msgid ""
-"Copyright © 2019-2020 - Tous droits réservés. Auteur : Éric Quinton, pour "
+"Copyright © 2019-2021 - Tous droits réservés. Auteur : Éric Quinton, pour "
 "INRAE - Logiciel diffusé sous licence AGPL"
 msgstr ""
-"Copyright © 2019-2020 - All rights reserved. Author: Eric Quinton, for INRAE "
+"Copyright © 2019-2021 - All rights reserved. Author: Eric Quinton, for INRAE "
 "- Software released under AGPL license"
 
 #: ../../../display/templates/enpied.tpl:5
