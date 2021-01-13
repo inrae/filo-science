@@ -1,26 +1,19 @@
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler  version: 0.9.2
--- PostgreSQL version: 9.6
+-- pgModeler  version: 0.9.3
+-- PostgreSQL version: 10.0
 -- Project Site: pgmodeler.io
 -- Model Author: Eric Quinton
-
-SET check_function_bodies = false;
--- ddl-end --
-
 -- object: filo | type: ROLE --
 -- DROP ROLE IF EXISTS filo;
 
 
--- Database creation must be done outside a multicommand file.
+-- Database creation must be performed outside a multi lined SQL file.
 -- These commands were put in this file only as a convenience.
--- -- object: filo | type: DATABASE --
--- -- DROP DATABASE IF EXISTS filo;
--- CREATE DATABASE filo
--- 	OWNER = filo;
--- -- ddl-end --
--- COMMENT ON DATABASE filo IS E'Recording of measurements taken during scientific fisheries';
--- -- ddl-end --
--- 
+--
+
+
+SET check_function_bodies = false;
+-- ddl-end --
 
 -- object: filo | type: SCHEMA --
 -- DROP SCHEMA IF EXISTS filo CASCADE;
@@ -67,6 +60,7 @@ CREATE SEQUENCE filo.project_project_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.project_project_id_seq OWNER TO filo;
 -- ddl-end --
@@ -81,6 +75,7 @@ CREATE SEQUENCE filo.campaign_campaign_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.campaign_campaign_id_seq OWNER TO filo;
 -- ddl-end --
@@ -145,6 +140,7 @@ CREATE SEQUENCE filo.station_station_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.station_station_id_seq OWNER TO filo;
 -- ddl-end --
@@ -159,6 +155,7 @@ CREATE SEQUENCE filo.operation_operation_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.operation_operation_id_seq OWNER TO filo;
 -- ddl-end --
@@ -173,6 +170,7 @@ CREATE SEQUENCE filo.place_place_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.place_place_id_seq OWNER TO filo;
 -- ddl-end --
@@ -189,7 +187,7 @@ CREATE TABLE filo.station (
 	station_code varchar,
 	river_id integer,
 	geom geometry(POINT, 4326),
-	station_number integer,
+	station_number float,
 	CONSTRAINT station_id_pk PRIMARY KEY (station_id)
 
 );
@@ -223,6 +221,7 @@ CREATE SEQUENCE filo.taxon_taxon_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.taxon_taxon_id_seq OWNER TO filo;
 -- ddl-end --
@@ -237,6 +236,7 @@ CREATE SEQUENCE filo.sample_sample_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.sample_sample_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1417,6 +1417,7 @@ CREATE SEQUENCE filo.item_item_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.item_item_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1517,6 +1518,7 @@ CREATE SEQUENCE filo.measure_template_measure_template_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.measure_template_measure_template_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1547,6 +1549,7 @@ CREATE SEQUENCE filo.operation_template_operation_template_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.operation_template_operation_template_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1561,6 +1564,7 @@ CREATE SEQUENCE filo.item_generated_item_generated_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.item_generated_item_generated_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1575,6 +1579,7 @@ CREATE SEQUENCE filo.gear_gear_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.gear_gear_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1589,6 +1594,7 @@ CREATE SEQUENCE filo.sequence_gear_sequence_gear_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.sequence_gear_sequence_gear_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1659,6 +1665,7 @@ CREATE SEQUENCE filo.engine_engine_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.engine_engine_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1673,6 +1680,7 @@ CREATE SEQUENCE filo.river_river_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.river_river_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1723,6 +1731,7 @@ CREATE SEQUENCE filo.analysis_analysis_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.analysis_analysis_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1819,6 +1828,7 @@ CREATE SEQUENCE filo.pathology_pathology_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.pathology_pathology_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1980,6 +1990,7 @@ CREATE SEQUENCE filo.facies_facies_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.facies_facies_id_seq OWNER TO filo;
 -- ddl-end --
@@ -1994,6 +2005,7 @@ CREATE SEQUENCE filo.ambience_ambience_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.ambience_ambience_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2008,6 +2020,7 @@ CREATE SEQUENCE filo.situation_situation_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.situation_situation_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2168,6 +2181,7 @@ CREATE SEQUENCE filo.localisation_localisation_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.localisation_localisation_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2252,6 +2266,7 @@ CREATE SEQUENCE filo.granulometry_granulometry_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.granulometry_granulometry_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2306,6 +2321,7 @@ CREATE SEQUENCE filo.vegetation_vegetation_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.vegetation_vegetation_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2352,6 +2368,7 @@ CREATE SEQUENCE filo.cache_abundance_cache_abundance_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.cache_abundance_cache_abundance_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2483,6 +2500,7 @@ CREATE SEQUENCE gacl.aclgroup_aclgroup_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.aclgroup_aclgroup_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2524,6 +2542,7 @@ CREATE SEQUENCE gacl.aclaco_aclaco_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.aclaco_aclaco_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2566,6 +2585,7 @@ CREATE SEQUENCE gacl.aclappli_aclappli_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.aclappli_aclappli_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2630,6 +2650,7 @@ CREATE SEQUENCE gacl.acllogin_acllogin_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.acllogin_acllogin_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2683,6 +2704,7 @@ CREATE SEQUENCE gacl.log_log_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.log_log_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2721,6 +2743,7 @@ CREATE SEQUENCE gacl.seq_logingestion_id
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.seq_logingestion_id OWNER TO filo;
 -- ddl-end --
@@ -2735,6 +2758,7 @@ CREATE SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.login_oldpassword_login_oldpassword_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2819,6 +2843,7 @@ CREATE SEQUENCE filo.operator_operator_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.operator_operator_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2887,6 +2912,7 @@ CREATE SEQUENCE filo.analysis_template_analysis_template_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.analysis_template_analysis_template_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2920,6 +2946,7 @@ CREATE SEQUENCE filo.cloggging_clogging_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.cloggging_clogging_id_seq OWNER TO filo;
 -- ddl-end --
@@ -2977,6 +3004,7 @@ CREATE SEQUENCE filo.sinuosity_sinuosity_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.sinuosity_sinuosity_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3022,6 +3050,7 @@ CREATE SEQUENCE filo.flow_trend_flow_trend_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.flow_trend_flow_trend_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3067,6 +3096,7 @@ CREATE SEQUENCE filo.turbidity_id
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.turbidity_id OWNER TO filo;
 -- ddl-end --
@@ -3112,6 +3142,7 @@ CREATE SEQUENCE filo.protocol_protocol_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.protocol_protocol_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3215,6 +3246,7 @@ CREATE SEQUENCE filo.water_regime_water_regime_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.water_regime_water_regime_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3278,6 +3310,7 @@ CREATE SEQUENCE filo.fishing_strategy_fishing_strategy_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.fishing_strategy_fishing_strategy_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3319,6 +3352,7 @@ CREATE SEQUENCE filo.scale_scale_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.scale_scale_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3362,6 +3396,7 @@ CREATE SEQUENCE filo.gear_method_gear_method_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.gear_method_gear_method_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3446,6 +3481,7 @@ CREATE SEQUENCE filo.dbversion_dbversion_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.dbversion_dbversion_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3469,7 +3505,7 @@ COMMENT ON COLUMN filo.dbversion.dbversion_date IS E'Date de la version';
 ALTER TABLE filo.dbversion OWNER TO filo;
 -- ddl-end --
 
-INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.7', E'2020-08-07');
+INSERT INTO filo.dbversion (dbversion_number, dbversion_date) VALUES (E'1.8', E'2021-01-13');
 -- ddl-end --
 
 -- object: filo.taxa_template_taxa_template_id_seq | type: SEQUENCE --
@@ -3482,6 +3518,7 @@ CREATE SEQUENCE filo.taxa_template_taxa_template_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.taxa_template_taxa_template_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3530,6 +3567,7 @@ CREATE SEQUENCE filo.document_document_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.document_document_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3706,6 +3744,7 @@ CREATE SEQUENCE gacl.passwordlost_passwordlost_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE gacl.passwordlost_passwordlost_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3769,11 +3808,11 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 -- object: filo.v_individual_other_measures | type: VIEW --
 -- DROP VIEW IF EXISTS filo.v_individual_other_measures CASCADE;
 CREATE VIEW filo.v_individual_other_measures
-AS 
+AS
 
-select individual_id, 
-string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures 
-from individual, 
+select individual_id,
+string_agg( metadata.key || ':' || metadata.value, ', '::varchar) as other_measures
+from individual,
 json_each_text(individual.other_measure) as metadata
 group by individual_id;
 -- ddl-end --
@@ -3790,6 +3829,7 @@ CREATE SEQUENCE tracking.release_place_release_place_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.release_place_release_place_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3850,6 +3890,7 @@ CREATE SEQUENCE tracking.station_type_station_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.station_type_station_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3890,6 +3931,7 @@ CREATE SEQUENCE tracking.antenna_antenna_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.antenna_antenna_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3933,6 +3975,7 @@ CREATE SEQUENCE tracking.detection_detection_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.detection_detection_id_seq OWNER TO filo;
 -- ddl-end --
@@ -3949,6 +3992,7 @@ CREATE TABLE tracking.detection (
 	validity boolean NOT NULL DEFAULT 't',
 	signal_force smallint,
 	observation varchar,
+	daypart varchar DEFAULT 'u',
 	CONSTRAINT detection_pk PRIMARY KEY (detection_id)
 
 );
@@ -3964,6 +4008,8 @@ COMMENT ON COLUMN tracking.detection.validity IS E'Specifiy if the detection is 
 COMMENT ON COLUMN tracking.detection.signal_force IS E'Force of the signal';
 -- ddl-end --
 COMMENT ON COLUMN tracking.detection.observation IS E'comment';
+-- ddl-end --
+COMMENT ON COLUMN tracking.detection.daypart IS E'Specify if the detection occurred during the day or the night\nd: day\nn: night\nu: unknown';
 -- ddl-end --
 ALTER TABLE tracking.detection OWNER TO filo;
 -- ddl-end --
@@ -3992,6 +4038,7 @@ CREATE SEQUENCE tracking.probe_probe_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.probe_probe_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4030,6 +4077,7 @@ CREATE SEQUENCE tracking.probe_measure_probe_measure_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.probe_measure_probe_measure_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4072,6 +4120,7 @@ CREATE SEQUENCE tracking.transmitter_type_transmitter_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.transmitter_type_transmitter_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4113,6 +4162,7 @@ CREATE SEQUENCE tracking.position_position_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.position_position_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4134,6 +4184,7 @@ CREATE SEQUENCE import.import_description_import_description_id
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.import_description_import_description_id OWNER TO filo;
 -- ddl-end --
@@ -4196,6 +4247,7 @@ CREATE SEQUENCE import.column_er_column_er_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.column_er_column_er_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4210,6 +4262,7 @@ CREATE SEQUENCE import.import_column_import_column_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.import_column_import_column_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4257,7 +4310,6 @@ CREATE INDEX log_ip_idx ON gacl.log
 	);
 -- ddl-end --
 
-
 -- object: taxon_fk | type: CONSTRAINT --
 -- ALTER TABLE tracking.individual_tracking DROP CONSTRAINT IF EXISTS taxon_fk CASCADE;
 ALTER TABLE tracking.individual_tracking ADD CONSTRAINT taxon_fk FOREIGN KEY (taxon_id)
@@ -4282,6 +4334,7 @@ CREATE SEQUENCE import.function_type_function_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.function_type_function_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4350,6 +4403,7 @@ CREATE SEQUENCE import.import_function_import_function_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.import_function_import_function_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4405,6 +4459,7 @@ CREATE SEQUENCE import.import_type_import_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.import_type_import_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4446,6 +4501,7 @@ CREATE SEQUENCE import.technology_technology_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.technology_technology_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4502,6 +4558,7 @@ CREATE SEQUENCE tracking.location_location_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.location_location_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4552,6 +4609,7 @@ CREATE SEQUENCE tracking.antenna_type_antenna_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.antenna_type_antenna_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4585,6 +4643,7 @@ CREATE SEQUENCE tracking.antenna_event_antenna_event_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.antenna_event_antenna_event_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4782,6 +4841,7 @@ CREATE SEQUENCE tracking.parameter_measure_type_parameter_measure_type_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE tracking.parameter_measure_type_parameter_measure_type_id_seq OWNER TO filo;
 -- ddl-end --
@@ -4815,7 +4875,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 -- object: tracking.v_station_tracking | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_station_tracking CASCADE;
 CREATE VIEW tracking.v_station_tracking
-AS 
+AS
 
 SELECT
    station_id, station_name, station_long, station_lat, station_pk, geom
@@ -4836,7 +4896,7 @@ ALTER VIEW tracking.v_station_tracking OWNER TO filo;
 -- object: tracking.v_individual_tracking | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_individual_tracking CASCADE;
 CREATE VIEW tracking.v_individual_tracking
-AS 
+AS
 
 SELECT
    individual_id, scientific_name, taxon_id
@@ -4870,7 +4930,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 CREATE FUNCTION tracking.v_station_tracking_update ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE 
+	VOLATILE
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
@@ -4895,7 +4955,7 @@ CREATE TRIGGER v_station_tracking_update
 	INSTEAD OF UPDATE
 	ON tracking.v_station_tracking
 	FOR EACH ROW
-	EXECUTE PROCEDURE tracking.v_station_tracking_update();
+	EXECUTE PROCEDURE tracking.v_station_tracking_update('');
 -- ddl-end --
 
 -- object: tracking.v_station_tracking_insert | type: FUNCTION --
@@ -4903,7 +4963,7 @@ CREATE TRIGGER v_station_tracking_update
 CREATE FUNCTION tracking.v_station_tracking_insert ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE 
+	VOLATILE
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
@@ -4922,16 +4982,16 @@ ALTER FUNCTION tracking.v_station_tracking_insert() OWNER TO filo;
 -- object: v_station_tracking_insert | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS v_station_tracking_insert ON tracking.v_station_tracking CASCADE;
 CREATE TRIGGER v_station_tracking_insert
-	INSTEAD OF INSERT 
+	INSTEAD OF INSERT
 	ON tracking.v_station_tracking
 	FOR EACH ROW
-	EXECUTE PROCEDURE tracking.v_station_tracking_insert();
+	EXECUTE PROCEDURE tracking.v_station_tracking_insert('');
 -- ddl-end --
 
 -- object: tracking.v_antenna | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_antenna CASCADE;
 CREATE VIEW tracking.v_antenna
-AS 
+AS
 
 SELECT
    antenna_id, station_id, technology_type_id
@@ -4957,16 +5017,16 @@ ALTER VIEW tracking.v_antenna OWNER TO filo;
 CREATE FUNCTION tracking.v_antenna_update ()
 	RETURNS trigger
 	LANGUAGE plpgsql
-	VOLATILE 
+	VOLATILE
 	CALLED ON NULL INPUT
 	SECURITY INVOKER
 	COST 1
 	AS $$
 BEGIN
 if NEW.radius > 0 then
-update tracking.antenna set geom_polygon = 
+update tracking.antenna set geom_polygon =
 st_transform (
-	st_buffer ( 
+	st_buffer (
 		st_transform (
 		  st_setsrid(st_point(new.station_long, new.station_lat),4326)
 		,new.metric_srid)
@@ -4990,13 +5050,13 @@ CREATE TRIGGER v_antenna_update
 	INSTEAD OF UPDATE
 	ON tracking.v_antenna
 	FOR EACH ROW
-	EXECUTE PROCEDURE tracking.v_antenna_update();
+	EXECUTE PROCEDURE tracking.v_antenna_update('');
 -- ddl-end --
 
 -- object: tracking.v_detection_location | type: VIEW --
 -- DROP VIEW IF EXISTS tracking.v_detection_location CASCADE;
 CREATE VIEW tracking.v_detection_location
-AS 
+AS
 
 SELECT
    detection_id as id, individual_id, detection_date
@@ -5016,7 +5076,7 @@ select location_id as id, individual_id, detection_date
 	,null as antenna_code, antenna_type_name as antenna_type
 	,geom
 	,'mobile' as detection_type
-from tracking.location 
+from tracking.location
 	left outer join tracking.antenna_type using (antenna_type_id);
 -- ddl-end --
 COMMENT ON VIEW tracking.v_detection_location IS E'List of all detections and locations for a fish';
@@ -5034,6 +5094,7 @@ CREATE SEQUENCE import.export_model_export_model_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE import.export_model_export_model_id_seq OWNER TO filo;
 -- ddl-end --
@@ -5066,7 +5127,6 @@ INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'export_mo
 INSERT INTO import.export_model (export_model_name, pattern) VALUES (E'campaignOnly', E'[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":false,"businessKey":"uuid","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"project","fieldName":"project_id"}],"istablenn":false},{"tableName":"project","technicalKey":"project_id","isEmpty":true,"businessKey":"project_name","istable11":false,"booleanFields":["is_active"],"children":[],"parameters":[{"aliasName":"protocol","fieldName":"protocol_default_id"}],"istablenn":false},{"tableName":"protocol","technicalKey":"protocol_id","isEmpty":true,"businessKey":"protocol_name","istable11":false,"booleanFields":["measure_default_only"],"children":[{"aliasName":"protocol_measure","isStrict":true}],"parameters":[{"aliasName":"analysis_template","fieldName":"analysis_template_id"}],"istablenn":false},{"tableName":"analysis_template","technicalKey":"analysis_template_id","isEmpty":true,"businessKey":"analysis_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false},{"tableName":"measure_template","technicalKey":"measure_template_id","isEmpty":false,"businessKey":"measure_template_name","istable11":false,"booleanFields":[],"children":[],"parameters":[{"aliasName":"taxon","fieldName":"taxon_id"}],"istablenn":false},{"tableName":"protocol_measure","isEmpty":false,"parentKey":"protocol_id","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":true,"tablenn":{"secondaryParentKey":"measure_template_id","tableAlias":"measure_template"}},{"tableName":"taxon","technicalKey":"taxon_id","isEmpty":true,"businessKey":"scientific_name","istable11":false,"booleanFields":[],"children":[],"parameters":[],"istablenn":false}]');
 -- ddl-end --
 
-
 -- object: filo.sequence_point_sequence_point_id_seq | type: SEQUENCE --
 -- DROP SEQUENCE IF EXISTS filo.sequence_point_sequence_point_id_seq CASCADE;
 CREATE SEQUENCE filo.sequence_point_sequence_point_id_seq
@@ -5077,6 +5137,7 @@ CREATE SEQUENCE filo.sequence_point_sequence_point_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.sequence_point_sequence_point_id_seq OWNER TO filo;
 -- ddl-end --
@@ -5132,6 +5193,7 @@ CREATE SEQUENCE filo.request_request_id_seq
 	CACHE 1
 	NO CYCLE
 	OWNED BY NONE;
+
 -- ddl-end --
 ALTER SEQUENCE filo.request_request_id_seq OWNER TO filo;
 -- ddl-end --
@@ -5196,6 +5258,17 @@ REFERENCES filo.ambience_template (ambience_template_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE DEFERRABLE INITIALLY IMMEDIATE;
 -- ddl-end --
 
+-- object: detection_date_antenna_individual_idx | type: INDEX --
+-- DROP INDEX IF EXISTS tracking.detection_date_antenna_individual_idx CASCADE;
+CREATE INDEX detection_date_antenna_individual_idx ON tracking.detection
+	USING btree
+	(
+	  individual_id,
+	  antenna_id,
+	  detection_date
+	);
+-- ddl-end --
+
 -- object: aclaco_aclacl_fk | type: CONSTRAINT --
 -- ALTER TABLE gacl.aclacl DROP CONSTRAINT IF EXISTS aclaco_aclacl_fk CASCADE;
 ALTER TABLE gacl.aclacl ADD CONSTRAINT aclaco_aclacl_fk FOREIGN KEY (aclaco_id)
@@ -5237,5 +5310,3 @@ ALTER TABLE gacl.acllogingroup ADD CONSTRAINT acllogin_acllogingroup_fk FOREIGN 
 REFERENCES gacl.acllogin (acllogin_id) MATCH SIMPLE
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
-
-

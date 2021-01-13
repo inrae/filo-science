@@ -1,7 +1,7 @@
 #!/bin/bash
 # upgrade an instance 2.2.2 to 2.2.3
 OLDVERSION=filo-1.4.0
-VERSION=filo-1.7.0
+VERSION=filo-1.8.0
 SQLSCRIPT=upgradedb-1.4-1.5.sql
 PHPVER=7.3
 echo "This script will install the release $VERSION"
@@ -47,6 +47,7 @@ cd filo-science/install
 su postgres -c "psql -f $SQLSCRIPT"
 su postgres -c "psql -f upgradedb-1.5-1.6.sql"
 su postgres -c "psql -f upgradedb-1.6-1.7.sql"
+su postgres -c "psql -f upgradedb-1.7-1.8.sql"
 cd ../..
 chmod 750 /var/www/html/filo-science
 
@@ -67,8 +68,7 @@ systemctl restart apache2
 PHPOLDVERSION=`php -v|grep ^PHP|cut -d " " -f 2|cut -d "." -f 1-2`
 echo "Your version of PHP is $PHPOLDVERSION. If it < 7.2, you must upgrade it with the script:"
 echo "./php_upgrade.sh"
-echo "Upgrade completed. Check, in the messages, if unexpected behavior occurred during the process" 
+echo "Upgrade completed. Check, in the messages, if unexpected behavior occurred during the process"
 
 fi
 fi
-
