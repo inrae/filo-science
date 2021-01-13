@@ -28,15 +28,7 @@ COMMENT ON COLUMN tracking.detection.daypart IS E'Specify if the detection occur
 -- ddl-end --
 
 
--- object: tablefunc | type: EXTENSION --
--- DROP EXTENSION IF EXISTS tablefunc CASCADE;
-CREATE EXTENSION tablefunc
-WITH SCHEMA public;
--- ddl-end --
 
--- [ Changed objects ] --
-ALTER ROLE filo
-	ENCRYPTED PASSWORD 'filoScience';
 -- ddl-end --
 COMMENT ON EXTENSION postgis IS '';
 -- ddl-end --
