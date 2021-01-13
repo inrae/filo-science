@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,257" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,1021" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3099,7 +3099,7 @@ Crue•4]]>
 	</constraint>
 	<initial-data>
 <![CDATA[dbversion_number•dbversion_date⸣
-1.7•2020-08-07]]>
+1.8•2021-01-13]]>
 	</initial-data>
 </table>
 
