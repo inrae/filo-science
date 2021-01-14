@@ -338,7 +338,7 @@
 	</div>
 	<div class="tab-pane fade" id="nav-recapstation" role="tabpanel" aria-labelledby="tab-recapstation">
 		<div class="col-lg-12">
-			<table id="stationDetection" class="table table-bordered table-hover datatable-export-paging" data-order='[[3,"asc"]]'>
+			<table id="stationDetection" class="table table-bordered table-hover datatable-export-paging" data-order='[[4,"asc"]]'>
 				<thead>
 					<tr>
 						<th>{t}Station{/t}</th>
