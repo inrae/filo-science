@@ -27,7 +27,8 @@ ALTER TABLE tracking.detection ADD COLUMN daypart varchar DEFAULT 'u';
 COMMENT ON COLUMN tracking.detection.daypart IS E'Specify if the detection occurred during the day or the night\nd: day\nn: night\nu: unknown';
 -- ddl-end --
 
-
+CREATE EXTENSION tablefunc
+WITH SCHEMA public;
 
 -- ddl-end --
 COMMENT ON EXTENSION postgis IS '';

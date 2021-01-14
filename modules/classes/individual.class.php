@@ -9,23 +9,27 @@ class IndividualException extends Exception
 class Individual extends ObjetBDD
 {
   private $sql = "select individual_id, individual_id as individual_uid, sample_id, sexe_id, pathology_id
-                    , sl, fl, tl, wd, ot, weight
-                    ,individual_code
-                    ,other_measure, individual_comment, age
-                    ,measure_estimated, pathology_codes, tag, tag_posed, transmitter, spaghetti_brand
-                    ,pathology_name, pathology_code
-                    ,sexe_name, sexe_code
-                    ,other_measures, i.uuid
-                    ,catching_time, release_time, anesthesia_duration, marking_duration, anesthesia_product, product_concentration
-                    ,release_station_id, transmitter_type_id, it.project_id
-                    , s.taxon_id, scientific_name
-                    from individual i
-                    left outer join individual_tracking it using (individual_id)
-                    left outer join pathology using (pathology_id)
-                    left outer join sexe using (sexe_id)
-                    left outer join v_individual_other_measures using (individual_id)
-                    join sample s using (sample_id)
-                    left outer join taxon t on (s.taxon_id = t.taxon_id)
+                  , sl, fl, tl, wd, ot, weight
+                  ,individual_code
+                  ,other_measure, individual_comment, age
+                  ,measure_estimated, pathology_codes, tag, tag_posed, transmitter, spaghetti_brand
+                  ,pathology_name, pathology_code
+                  ,sexe_name, sexe_code
+                  ,other_measures, i.uuid
+                  ,catching_time, release_time, anesthesia_duration, marking_duration, anesthesia_product, product_concentration
+                  ,release_station_id, transmitter_type_id, it.project_id,
+                  case when s.taxon_id is not null then
+                  s.taxon_id else it.taxon_id end,
+                  case when s.taxon_id is not null then
+                  ts.scientific_name else ti.scientific_name end
+                  from individual i
+                  left outer join individual_tracking it using (individual_id)
+                  left outer join pathology using (pathology_id)
+                  left outer join sexe using (sexe_id)
+                  left outer join v_individual_other_measures using (individual_id)
+                  left outer join sample s using (sample_id)
+                  left outer join taxon ts on (s.taxon_id = ts.taxon_id)
+                  left outer join taxon ti on (it.taxon_id = ti.taxon_id)
     ";
   public $individualTracking;
   /**
@@ -165,9 +169,8 @@ class Individual extends ObjetBDD
   {
     $where = " where operation_id = :operation_id";
     $sql = $this->sql . "
-                join sequence using (sequence_id)
+                left outer join sequence using (sequence_id)
         ";
-        printA($sql.$where);
     return $this->getListeParamAsPrepared($sql . $where, array("operation_id" => $operation_id));
   }
 
@@ -175,8 +178,8 @@ class Individual extends ObjetBDD
   {
     $where = " where campaign_id = :campaign_id";
     $sql = $this->sql . "
-                join sequence using (sequence_id)
-                join operation using (operation_id)
+                left outer join sequence using (sequence_id)
+                left outer join operation using (operation_id)
         ";
     return $this->getListeParamAsPrepared($sql . $where, array("campaign_id" => $campaign_id));
   }

@@ -9,8 +9,6 @@
         $("#tab-sequence").on("shown.bs.tab", function () {
             setTimeout(function () { mapS.invalidateSize(); }, 400);
         });
-
-
         Cookies.set('operation_uid', "{$data.operation_uid}", { expires: 7, secure: true });
 
         /**
