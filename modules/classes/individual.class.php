@@ -17,8 +17,9 @@ class Individual extends ObjetBDD
                   ,sexe_name, sexe_code
                   ,other_measures, i.uuid
                   ,catching_time, release_time, anesthesia_duration, marking_duration, anesthesia_product, product_concentration
-                  ,release_station_id, transmitter_type_id, it.project_id,
-                  case when s.taxon_id is not null then
+                  ,release_station_id, transmitter_type_id, it.project_id
+                  ,array_to_string(year, ',') as year
+                  ,case when s.taxon_id is not null then
                   s.taxon_id else it.taxon_id end,
                   case when s.taxon_id is not null then
                   ts.scientific_name else ti.scientific_name end

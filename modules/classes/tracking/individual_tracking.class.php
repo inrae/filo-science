@@ -16,6 +16,7 @@ class IndividualTracking extends ObjetBDD
                     ,scientific_name
                     ,individual_code
                     ,uuid
+                    ,array_to_string(year, ',') as year
                     from individual_tracking it
                     join individual using (individual_id)
                     join project p on (it.project_id = p.project_id)
@@ -38,10 +39,22 @@ class IndividualTracking extends ObjetBDD
       "release_station_id" => array("type" => 1),
       "transmitter_type_id" => array("type" => 1),
       "project_id" => array("type" => 1, "requis" => 1),
-      "taxon_id" => array("type" => 1, "requis" => 1)
+      "taxon_id" => array("type" => 1, "requis" => 1),
+      "year" => array("type" => 0)
     );
     $this->id_auto = 0;
     parent::__construct($bdd, $param);
+  }
+  /**
+   * Surround of ecrire, to write year in an array
+   *
+   * @param array $data
+   * @return int|null
+   */
+  function ecrire($data)
+  {
+    $data["year"] = "{" . $data["year"] . "}";
+    return parent::ecrire($data);
   }
   /**
    * Get the list of individuals from project
@@ -146,9 +159,12 @@ class IndividualTracking extends ObjetBDD
    * @param string $orderBy
    * @return array
    */
-  function getListDetection($uid, string $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', string $orderBy = "individual_id, detection_date", int $limit = 0, int $offset = 0): array
+  function getListDetection($uid, string $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', string $orderBy = "individual_id, detection_date", int $limit = 0, int $offset = 0, int $year = 0): array
   {
-    $param = array("formatDate" => $formatDate);
+    if (empty($year) || $year == 0) {
+      $year = date('Y');
+    }
+    $param = array("formatDate" => $formatDate, "year" => $year);
     if (is_array($uid)) {
       $where = " individual_id in (";
       $comma = "";
@@ -163,6 +179,7 @@ class IndividualTracking extends ObjetBDD
       $where = " individual_id = :id";
       $param["id"] = $uid;
     }
+    $where .= " and extract(year from detection_date) = :year";
     $sql = "
             select detection_id as id, individual_id, scientific_name, to_char(detection_date, :formatDate) as detection_date
                 , nb_events, duration, validity, signal_force, observation
@@ -205,7 +222,7 @@ class IndividualTracking extends ObjetBDD
   function getIdFromField(string $field, $value, $project_id = 0): int
   {
     $id = 0;
-    if (strlen($value) > 0) {
+    if (!empty($value)) {
       $sql = "select individual_id from individual_tracking
             join individual using (individual_id)
             where $field = :value";
@@ -270,7 +287,7 @@ class IndividualTracking extends ObjetBDD
       E'select unnest(array[\'d\',\'n\',\'u\'])')
       as
       (detection_date date, day int, night int, unknown int)";
-      $this->colonnes["detection_date"]= array("type"=>2);
+    $this->colonnes["detection_date"] = array("type" => 2);
     return $this->getListeParam($sql);
   }
 
@@ -282,7 +299,7 @@ class IndividualTracking extends ObjetBDD
    */
   function getStationDetection(int $individual_id): array
   {
-    $data = $this->getListDetection($individual_id, 'YYYY-MM-DD HH24:MI:SS.MS',"detection_date", 0, 0);
+    $data = $this->getListDetection($individual_id, 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date", 0, 0);
     $result = array();
     $last_antenna = 0;
     $current_row = array();
@@ -321,5 +338,34 @@ class IndividualTracking extends ObjetBDD
       $result[] = $current_row;
     }
     return $result;
+  }
+  /**
+   * Get the list of taxa used in a project
+   *
+   * @param integer $project_id
+   * @return array|null
+   */
+  function getListTaxaFromProject(int $project_id): ?array
+  {
+    $sql = "select distinct taxon_id, scientific_name
+        from individual_tracking
+        where project_id = :project_id
+        order by scientific_name";
+    return $this->getListeParamAsPrepared($sql, array("project_id" => $project_id));
+  }
+  /**
+   * Get the list of years calculating from the individuals from the project
+   *
+   * @param integer $project_id
+   * @return array|null
+   */
+  function getListYearFromProject(int $project_id): ?array
+  {
+    $sql = "select distinct unnest (year) as year
+        from individual_tracking
+        where project_id = :project_id
+        order by unnest(year)
+    ";
+    return $this->getListeParamAsPrepared($sql, array("project_id" => $project_id));
   }
 }

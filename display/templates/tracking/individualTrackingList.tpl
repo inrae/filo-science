@@ -98,7 +98,7 @@
 			<input id="isSearch" type="hidden" name="isSearch" value="1">
 			<div class="form-group">
 				<label for="project_id" class="col-md-2 control-label">{t}Projet :{/t}</label>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<select id="project_id" name="project_id" class="form-control">
 						{foreach $projects as $row}
 						<option id="project{$row.project_id}" value="{$row.project_id}" {if $row.project_id == $project_id}selected{/if}>
@@ -107,16 +107,17 @@
 						{/foreach}
 					</select>
 				</div>
-				<div class="col-md-2 col-md-offset-3">
+				<label for="is_active" class="col-md-2 control-label">{t}actifs ?{/t}</label>
+				<div class="col-md-2">
+					<input type="radio" class="is_active" id="projectActive1" name="is_active" value="1" {if $is_active == 1}checked{/if}>{t}oui{/t}
+					<input type="radio" class="is_active" id="projectActive0" name="is_active" value="0"{if $is_active == 0}checked{/if}>{t}non{/t}
+				</div>
+				<div class="col-md-2">
 					<input type="submit" class="btn btn-success" value="{t}Rechercher{/t}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="is_active" class="col-md-2 control-label">{t}Projets actifs :{/t}</label>
-				<div class="col-md-4">
-					<input type="radio" class="is_active" id="projectActive1" name="is_active" value="1" {if $is_active == 1}checked{/if}>{t}oui{/t}
-					<input type="radio" class="is_active" id="projectActive0" name="is_active" value="0"{if $is_active == 0}checked{/if}>{t}non{/t}
-				</div>
+
 			</div>
 		</form>
 	</div>
@@ -168,6 +169,7 @@
 						<th>{t}Émetteur acoustique ou radio{/t}</th>
 						<th>{t}Modèle d'émetteur{/t}</th>
 						<th>{t}Marque spaghetti{/t}</th>
+						<th>{t}Année(s){/t}</th>
 						<th>{t}Identifiant unique{/t}</th>
 						{if $droits.gestion == 1}
 							<th class="center" title="{t}Modifier{/t}"><img src="display/images/edit.gif" height="25"></th>
@@ -194,6 +196,7 @@
 						<td>{$individual.transmitter}</td>
 						<td>{$individual.transmitter_type_name}</td>
 						<td>{$individual.spaghetti_brand}</td>
+						<td>{$individual.year}</td>
 						<td>{$individual.uuid}</td>
 						{if $droits.gestion == 1}
 						<td class="center" title="{t}Modifier{/t}">

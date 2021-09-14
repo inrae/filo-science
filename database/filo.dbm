@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,1021" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,257" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3461,12 +3461,17 @@ group by individual_id]]></expression>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
 	<position x="640" y="780"/>
+	<column name="year" default-value="array[extract (year from now())::smallint]">
+		<type name="smallint" length="0" dimension="1"/>
+		<comment><![CDATA[Year of detection]]></comment>
+	</column>
 
 	<customidxs object-type="column">
 		<object name="individual_id" index="0"/>
 		<object name="project_id" index="3"/>
 		<object name="release_station_id" index="1"/>
 		<object name="taxon_id" index="2"/>
+		<object name="transmitter_type_id" index="4"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
@@ -3476,6 +3481,7 @@ group by individual_id]]></expression>
 		<object name="project_fk" index="5"/>
 		<object name="station_tracking_fk" index="3"/>
 		<object name="taxon_fk" index="4"/>
+		<object name="transmitter_type_fk" index="6"/>
 	</customidxs>
 </table>
 

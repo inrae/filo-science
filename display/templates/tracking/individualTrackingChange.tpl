@@ -394,12 +394,18 @@
 						<input id="pathology_codes" type="text" class="fish form-control" name="pathology_codes" value="{$data.pathology_codes}">
 					</div>
         </div>
-        	<div class="form-group" id="div-individual-code">
-            <label for="individual_code" class="control-label col-md-4"> {t}Code du poisson :{/t}</label>
-            <div class="col-md-8">
-              <input id="individual_code" type="text" class="fish form-control" name="individual_code" value="{$data.individual_code}" autocomplete="off">
-            </div>
-          </div>
+				<div class="form-group" id="div-individual-code">
+					<label for="individual_code" class="control-label col-md-4"> {t}Code du poisson :{/t}</label>
+					<div class="col-md-8">
+						<input id="individual_code" type="text" class="fish form-control" name="individual_code" value="{$data.individual_code}" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group" id="div-year">
+					<label for="year" class="control-label col-md-4"> {t}Année(s) de suivi (séparées par une virgule, sans espace) :{/t}</label>
+					<div class="col-md-8">
+						<input id="year" type="text" class="fish form-control" name="year" value="{$data.year}" autocomplete="off">
+					</div>
+				</div>
 				<div class="form-group" id="div-tag">
 					<label for="tag" class="control-label col-md-4"> {t}Marque RFID lue :{/t}</label>
 					<div class="col-md-8">

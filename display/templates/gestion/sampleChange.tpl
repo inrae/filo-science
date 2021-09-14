@@ -276,6 +276,14 @@
 		$("#isTracking").change(function () {
 			if (this.checked) {
 				$(".isTracking").attr("hidden", false);
+				var year = $("#year").val();
+				try {
+					if (year.length == 0) {
+						$("#year").val(new Date().getFullYear());
+					}
+				} catch (e){
+					$("#year").val(new Date().getFullYear());
+				}
 			} else {
 				$(".isTracking").attr("hidden", true);
 			}
@@ -612,6 +620,12 @@
 					</div>
 					<fieldset class="isTracking" hidden>
 						<legend>{t}Données de capture et de remise à l'eau{/t}</legend>
+							<div class="form-group" id="div-year">
+							<label for="year" class="control-label col-md-4"> {t}Année(s) de suivi (séparées par une virgule, sans espace) :{/t}</label>
+							<div class="col-md-8">
+								<input id="year" type="text" class="fish form-control" name="year" value="{$data.year}" autocomplete="off">
+							</div>
+						</div>
 						<div class="form-group" id="div-catching_time">
 							<label for="catching_time" class="control-label col-md-4"> {t}Heure de capture :{/t}</label>
 							<div class="col-md-8">
