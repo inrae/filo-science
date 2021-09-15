@@ -15,10 +15,10 @@ $(document).ready(function () {
         } catch {}
     }
     $(".localisation").change(function() {
-        Cookies.set("localisation", $(this).val(), { expires: 7 });
+        Cookies.set("localisation", $(this).val(), { expires: 7, sameSite: "strict", secure: true });
     });
     $(".facies").change(function() {
-        Cookies.set("facies", $(this).val(), { expires: 7 });
+        Cookies.set("facies", $(this).val(), { expires: 7, sameSite: "strict", secure: true });
     });
 });
 </script>

@@ -1,4 +1,4 @@
-<script src="display/node_modules/c3/node_modules/d3/dist/d3.min.js"></script>
+<script src="display/node_modules/d3/dist/d3.min.js"></script>
 <script src="display/node_modules/c3/c3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="display/node_modules/c3/c3.min.css" />
 <script>

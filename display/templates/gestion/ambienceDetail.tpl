@@ -1,6 +1,7 @@
 <script>
 	var mapIsChange = false;
 </script>
+{if $ambience.ambience_id > 0}
 <div class="row">
 
 	<div class="col-md-4 form-display">
@@ -150,4 +151,5 @@
       </fieldset>
     </div>
   </div>
+{/if}
 {/if}

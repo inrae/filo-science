@@ -15,7 +15,7 @@
 		var isAuto = Cookies.get("fishAutoMode");
 		if (isAuto === undefined) {
 			isAuto = 1;
-			Cookies.set("fishAutoMode", 1, { expires: 180 });
+			Cookies.set("fishAutoMode", 1, { expires: 180, sameSite: "strict", secure: true });
 		}
 		if (isAuto == "1") {
 			$("#modeAuto").prop("checked", true);
@@ -107,7 +107,7 @@
 		});
 		function setTaxonId(taxonId) {
 			if (taxonId > 0) {
-				Cookies.set("taxon_id", taxonId, { expires: 7});
+				Cookies.set("taxon_id", taxonId, { expires: 7, sameSite: "strict", secure: true});
 				$("#taxon_id").val(taxonId);
 				setTaxonName(taxonId);
 				getMetadata(taxonId);
@@ -172,14 +172,14 @@
 		$("#modeAuto").on("change", function () {
 			if ($(this).prop("checked")) {
 				isAuto = 1;
-				Cookies.set("fishAutoMode", 1, { expires: 180 });
+				Cookies.set("fishAutoMode", 1, { expires: 180, sameSite: "strict", secure: true });
 			} else {
 				isAuto = 0;
-				Cookies.set("fishAutoMode", 0, { expires: 180 });
+				Cookies.set("fishAutoMode", 0, { expires: 180, sameSite: "strict", secure: true });
 			}
 		});
 		$("#transmitter_type_id").change(function() {
-			Cookies.set("transmitter_type_id",$(this).val(), { expires: 180});
+			Cookies.set("transmitter_type_id",$(this).val(), { expires: 180, sameSite: "strict", secure: true});
 		});
 		$("#individualForm").submit(function (event) {
 			if ($("#action").val() == "Write") {

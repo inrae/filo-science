@@ -64,7 +64,7 @@
             } else {
                 cookieContent.rewrite = "0";
             }
-            Cookies.set ("importExec", JSON.stringify(cookieContent), { expires: 60});
+            Cookies.set ("importExec", JSON.stringify(cookieContent), { expires: 60, sameSite: "strict", secure: true});
             $("#submit").hide();
             $("#spinner").show();
         });

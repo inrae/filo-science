@@ -49,7 +49,7 @@
             }
         });
         $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-            Cookies.set("operationDisplayTab", $(this).attr("id"));
+            Cookies.set("operationDisplayTab", $(this).attr("id"), { sameSite: "strict", secure: true });
         });
         $('a[data-toggle="tab"]').on("click", function () {
             tabHover = 0;

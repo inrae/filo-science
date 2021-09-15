@@ -118,7 +118,7 @@
                          * set cookies
                          */
                         variablesNames.forEach(function (item, index, array) {
-                            Cookies.set(item, mapData[item], { expires: 180 });
+                            Cookies.set(item, mapData[item], { expires: 180, sameSite: "strict", secure: true });
                         });
                         $("#seedMessage").text("{t}Patientez pendant le téléchargement...{/t}");
                         osm.seed(bbox, zmin, zmax);
@@ -130,7 +130,7 @@
         });
 
         $("#ageMax").change(function () {
-            Cookies.set('cacheMaxAge', parseInt($(this).val()) * 24 * 3600 * 1000);
+            Cookies.set('cacheMaxAge', parseInt($(this).val()) * 24 * 3600 * 1000, {sameSite: "strict", secure: true});
         });
         osm.on("seedstart", function (e) {
             $("#seedMessage").text(e.queueLength + " {t}dalles à télécharger{/t}");

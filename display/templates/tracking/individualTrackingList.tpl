@@ -92,7 +92,7 @@
       }
     } catch (Exception) { }
     $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-      Cookies.set(documentName, $(this).attr("id"));
+      Cookies.set(documentName, $(this).attr("id"), { sameSite: "strict", secure: true});
 		});
 		$("#tab-map").on("shown.bs.tab", function () {
 			setTimeout(function () {

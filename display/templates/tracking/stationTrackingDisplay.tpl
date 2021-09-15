@@ -1,7 +1,7 @@
 <script>
     var mapIsChange = false;
     $(document).ready(function () {
-        
+
         /**
         * Tab management
         */
@@ -18,7 +18,7 @@
             } else {
                 tabHover = 0;
             }
-            Cookies.set("tabHover", tabHover, { expires: 365 });
+            Cookies.set("tabHover", tabHover, { expires: 365, sameSite: "strict", secure: true });
         });
         var activeTab = "{$activeTab}";
         if (activeTab.length == 0) {
@@ -39,7 +39,7 @@
             }
         });
         $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-            Cookies.set("stationTrackingDisplayTab", $(this).attr("id"));
+            Cookies.set("stationTrackingDisplayTab", $(this).attr("id"), { sameSite: "strict", secure: true});
         });
         $('a[data-toggle="tab"]').on("click", function () {
             tabHover = 0;
@@ -52,7 +52,7 @@
 <div class="row">
     <div class="col-md-12">
         <a href="index.php?module=stationTrackingList">
-                <img src="display/images/list.png" height="25"> 
+                <img src="display/images/list.png" height="25">
             {t}Retour à la liste{/t}
         </a>
         {if $droits.gestion == 1}

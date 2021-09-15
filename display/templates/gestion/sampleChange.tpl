@@ -17,7 +17,7 @@
 		var defaultField = "{$sequence.measure_default}";
 		if (isAuto === undefined) {
 			isAuto = 1;
-			Cookies.set("fishAutoMode", 1, { expires: 180 });
+			Cookies.set("fishAutoMode", 1, { expires: 180, sameSite: "strict", secure: true });
 		}
 		if (isAuto == "1") {
 			$("#modeAuto").prop("checked", true);
@@ -164,12 +164,12 @@
 			if (isHide) {
 				$(".hideable").show();
 				$("#button-hide").text("{t}Masquer{/t}");
-				Cookies.set("sampleHide", 0, { expires: 180 });
+				Cookies.set("sampleHide", 0, { expires: 180, sameSite: "strict", secure: true });
 				isHide = false;
 			} else {
 				$(".hideable").hide();
 				isHide = true;
-				Cookies.set("sampleHide", 1, { expires: 180 });
+				Cookies.set("sampleHide", 1, { expires: 180, sameSite: "strict", secure: true });
 				$("#button-hide").text("{t}Afficher{/t}");
 			}
 		});
@@ -205,10 +205,10 @@
 		$("#modeAuto").on("change", function () {
 			if ($(this).prop("checked")) {
 				isAuto = 1;
-				Cookies.set("fishAutoMode", 1, { expires: 180 });
+				Cookies.set("fishAutoMode", 1, { expires: 180, sameSite: "strict", secure: true });
 			} else {
 				isAuto = 0;
-				Cookies.set("fishAutoMode", 0, { expires: 180 });
+				Cookies.set("fishAutoMode", 0, { expires: 180, sameSite: "strict", secure: true });
 			}
 		});
 		function getMetadata() {
