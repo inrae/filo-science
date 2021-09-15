@@ -41,6 +41,18 @@
                     <input id="radius" type="text" class="form-control" name="radius" value="{$data.radius}">
                 </div>
             </div>
+             <div class="form-group">
+                <label for="date_from"  class="control-label col-md-4"><span class="red">*</span> {t}Date de mise en service :{/t}</label>
+                <div class="col-md-8">
+                    <input id="date_from" type="text" class="form-control datepicker" name="date_from" value="{$data.date_from}" required>
+                </div>
+            </div>
+             <div class="form-group">
+                <label for="date_to"  class="control-label col-md-4"><span class="red">*</span> {t}Date d'arrêt :{/t}</label>
+                <div class="col-md-8">
+                    <input id="date_to" type="text" class="form-control datepicker" name="date_to" value="{$data.date_to}" required>
+                </div>
+            </div>
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
                 {if $data.antenna_id > 0 }

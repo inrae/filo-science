@@ -6,6 +6,7 @@ class Antenna extends ObjetBDD
                     ,station_name, station_type_name
                     ,station_long, station_lat
                     ,technology_type_name
+                    ,date_from, date_to
                     from antenna a
                     join station_tracking st on (a.station_id = st.station_id)
                     join station s on (st.station_id = s.station_id)
@@ -21,13 +22,17 @@ class Antenna extends ObjetBDD
   function __construct(PDO $bdd, array $param = array())
   {
     $this->table = "antenna";
+    $date = new DateTime();
+    $date->add(new DateInterval('P1Y'));
     $this->colonnes = array(
       "antenna_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
       "station_id" => array("type" => 1, "requis" => 1, "parentAttrib" => 1),
       "technology_type_id" => array("type" => 1),
       "antenna_code" => array("type" => 0, "requis" => 1),
       "radius" => array("type" => 1),
-      "geom_polygon" => array("type" => 4)
+      "geom_polygon" => array("type" => 4),
+       "date_from" => array("type" => 2, "defaultValue" => $this->formatDateDBversLocal(date('Y-m-d'))),
+      "date_to" => array("type" => 2, "defaultValue"=> $this->formatDateDBversLocal($date->format("Y-m-d")))
     );
     parent::__construct($bdd, $param);
   }

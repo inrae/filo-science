@@ -13,6 +13,8 @@
                     <th>{t}Code{/t}</th>
                     <th>{t}Technologie{/t}</th>
                     <th>{t}Rayon de réception (en mètres){/t}</th>
+                    <th>{t}Date de mise en service{/t}</th>
+                    <th>{t}Date de retrait{/t}</th>
                     {if $droits.gestion == 1}
                         <th class="center">
                             <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
@@ -27,6 +29,8 @@
                         <td>{$antenna.antenna_code}</td>
                         <td>{$antenna.technology_type_name}</td>
                         <td>{$antenna.radius}</td>
+                        <td>{$antenna.date_from}</td>
+                        <td>{$antenna.date_to}</td>
                         {if $droits.gestion == 1}
                             <td class="center">
                                 <a href="index.php?module=antennaChange&station_id={$data.station_id}&antenna_id={$antenna.antenna_id}" title="{t}Modifier{/t}">

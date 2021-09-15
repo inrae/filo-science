@@ -3,7 +3,7 @@ class StationTracking extends ObjetBDD
 {
     private $sql = "select station_id, station_name, project_id, project_name, metric_srid,
             station_long, station_lat, station_pk, river_id, river_name,station_code,station_number,
-            station_type_id, station_type_name
+            station_type_id, station_type_name, station_active
             from station_tracking
             join station using (station_id)
             join station_type using (station_type_id)
@@ -21,7 +21,8 @@ class StationTracking extends ObjetBDD
         $this->table = "station_tracking";
         $this->colonnes = array(
             "station_id" => array("type" => 1, "requis" => 1, "key" => 1, "defaultValue" => 0),
-            "station_type_id" => array("type" => 1, "requis" => 1)
+            "station_type_id" => array("type" => 1, "requis" => 1),
+            "station_active" => array("type" => 1)
         );
         $this->id_auto = 0;
         parent::__construct($bdd, $param);
@@ -67,15 +68,19 @@ class StationTracking extends ObjetBDD
      *
      * @param int $project_id
      * @param int $station_type_id
+     * @param bool $is_active
      * @return array
      */
-    function getListFromProject(int $project_id, int $station_type_id = 0)
+    function getListFromProject(int $project_id, int $station_type_id = 0, bool $onlyActive = false)
     {
         $where = " where project_id = :project_id";
         $params = array("project_id" => $project_id);
         if ($station_type_id > 0) {
             $where .= " and station_type_id = :station_type_id";
             $params["station_type_id"] = $station_type_id;
+        }
+        if ($onlyActive) {
+            $where .= " and station_active = true";
         }
         return $this->getListeParamAsPrepared($this->sql . $where, $params);
     }
@@ -113,14 +118,14 @@ class StationTracking extends ObjetBDD
     {
         switch ($import_type_id) {
             case 1:
-                $sql = "select antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code
+                $sql = "select antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code, date_from, date_to
                     from station_tracking
                     join antenna using (station_id)
                     join station using (station_id)
                     where project_id = :project_id";
                 break;
             case 2:
-                $sql = "select probe_id as sensor_id, station_name, station_code, probe_code as sensor_code
+                $sql = "select probe_id as sensor_id, station_name, station_code, probe_code as sensor_code, date_from, date_to
                     from station_tracking
                     join probe using (station_id)
                     join station using (station_id)

@@ -11,6 +11,8 @@
                 <tr>
                     <th>{t}Id{/t}</th>
                     <th>{t}Code{/t}</th>
+                    <th>{t}Date de mise en service{/t}</th>
+                    <th>{t}Date de retrait{/t}</th>
                     <th class="center">{t}Mesures enregistrées{/t}</th>
                     {if $droits.gestion == 1}
                         <th class="center">
@@ -29,6 +31,8 @@
                                 <img src="display/images/result.png" height="25">
                             </a>
                         </td>
+                        <td>{$probe.date_from}</td>
+                        <td>{$probe.date_to}</td>
                         {if $droits.gestion == 1}
                             <td class="center">
                                 <a href="index.php?module=probeChange&station_id={$data.station_id}&probe_id={$probe.probe_id}" title="{t}Modifier{/t}">

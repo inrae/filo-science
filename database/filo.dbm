@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,257" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,255" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3501,6 +3501,10 @@ group by individual_id]]></expression>
 	<role name="filo"/>
 	<tag name="projet"/>
 	<position x="460" y="540"/>
+	<column name="station_active" not-null="true" default-value="true">
+		<type name="bool" length="0"/>
+		<comment><![CDATA[True if the station is used]]></comment>
+	</column>
 </table>
 
 <relationship name="station_tracking_has_one_station" type="rel11" layer="2"
@@ -3555,7 +3559,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="antenna" layer="2" collapse-mode="1" max-obj-count="7" z-value="0">
+<table name="antenna" layer="2" collapse-mode="1" max-obj-count="9" z-value="0">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="projet"/>
@@ -3574,6 +3578,14 @@ Station de lacher]]>
 	<column name="geom_polygon">
 		<type name="geometry" length="0" spatial-type="POLYGON" variation="0" srid="4326"/>
 		<comment><![CDATA[Geometry of the reception zone, in polygonal form, wgs84]]></comment>
+	</column>
+	<column name="date_from">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of installation of the antenna]]></comment>
+	</column>
+	<column name="date_to">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of end of use of the antenna]]></comment>
 	</column>
 	<constraint name="antenna_pk" type="pk-constr" table="tracking.antenna">
 		<columns names="antenna_id" ref-type="src-columns"/>
@@ -3685,7 +3697,7 @@ u: unknown]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="probe" layer="2" collapse-mode="1" max-obj-count="3" z-value="0">
+<table name="probe" layer="2" collapse-mode="1" max-obj-count="6" z-value="0">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<comment><![CDATA[Probe used to record the environmental variables]]></comment>
@@ -3697,6 +3709,14 @@ u: unknown]]></comment>
 	<column name="probe_code" not-null="true">
 		<type name="varchar" length="0"/>
 		<comment><![CDATA[Code of the probe]]></comment>
+	</column>
+	<column name="date_from">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of installation of the probe]]></comment>
+	</column>
+	<column name="date_to">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Date of end of use of the probe]]></comment>
 	</column>
 	<constraint name="probe_pk" type="pk-constr" table="tracking.probe">
 		<columns names="probe_id" ref-type="src-columns"/>
