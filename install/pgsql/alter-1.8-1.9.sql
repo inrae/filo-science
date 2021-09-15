@@ -12,3 +12,5 @@ select * from tracking.individual_tracking  where 2021 = any (year);
 update tracking.individual_tracking set year = '{2020,2021}' where individual_id in (5, 6);
 
 select array_to_string(year, ',') as year from tracking.individual_tracking ;
+
+select distinct unnest(year) from tracking.individual_tracking order by unnest(year);

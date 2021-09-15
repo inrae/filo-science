@@ -17,6 +17,26 @@
 		} catch { }
 		$("#projectActive" + projectActive).attr("checked", "true");
 		$("#project" + projectId).attr("selected", true);
+		var year = "{$year}";
+		try {
+			if (year.length < 4) {
+				year = Cookies.get("year");
+			}
+		}catch { }
+		$("#year").change(function () {
+			Cookies.set("year", $(this).val(), { expires: 180, secure: true });
+		});
+		$("#year" + year).attr("selected", true);
+		var taxon_id = "{$taxon_id}";
+		try {
+			if (taxon_id == 0) {
+				taxon_id = Cookies.get("taxon_id");
+			}
+		}catch { }
+		$("#taxon_id" + taxon_id).attr("selected", true);
+		$("#taxon_id").change(function () {
+			Cookies.set("taxon_id", $(this).val(), { expires: 180, secure: true });
+		});
 		$("#new").attr("href", "index.php?module=individualTrackingChange&individual_id=0&project_id="+projectId);
 		$(".is_active").change(function () {
 			$("#project_id").val("");
@@ -117,7 +137,24 @@
 				</div>
 			</div>
 			<div class="form-group">
-
+				<label for="year" class="col-md-2 control-label">{t}Année :{/t}</label>
+				<div class="col-md-3">
+					<select id="year" name="year" class="form-control">
+						<option id="year0" value="0" {if $year == 0} selected{/if}>{t}Choisissez...{/t}</option>
+						{foreach $years as $y}
+						<option id="year{$y.year}" value="{$y.year}" {if $y.year == $year}selected{/if}>{$y.year}</option>
+						{/foreach}
+					</select>
+				</div>
+				<label for="taxon_id" class="col-md-2 control-label">{t}Espèce : {/t}</label>
+				<div class="col-md-4">
+					<select id="taxon_id" name="taxon_id" class="form-control">
+						<option id="taxon_id0" value="0" {if $taxon_id == 0} selected{/if}>{t}Choisissez...{/t}</option>
+						{foreach $taxa as $taxon}
+						<option id="taxon_id{$taxon.taxon_id}" value="{$taxon.taxon_id}" {if $taxon.taxon_id == $taxon_id}selected{/if}>{$taxon.scientific_name}</option>
+						{/foreach}
+					</select>
+				</div>
 			</div>
 		</form>
 	</div>

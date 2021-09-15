@@ -49,14 +49,20 @@ class Detection extends ObjetBDD
    *
    * @param int $id
    * @param string $formatDate
+   * @param int $year
    * @return array
    */
-  function getListFromIndividual(int $id, $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS')
+  function getListFromIndividual(int $id, $formatDate = 'YYYY-MM-DD HH24:MI:SS.MS', $year = 0)
   {
     $this->auto_date = 0;
-    $sql = $this->sql . " where individual_id = :individual_id
-            order by detection_date";
-    return $this->getListeParamAsPrepared($sql, array("individual_id" => $id, "formatDate" => $formatDate));
+    $where = " where individual_id = :individual_id";
+    $param = array("individual_id" => $id, "formatDate" => $formatDate);
+    $order = " order by detection_date";
+    if ($year > 0) {
+      $where .= " and extract (year from detection_date) = :year";
+      $param["year"] = $year;
+    }
+    return $this->getListeParamAsPrepared($this->sql . $where . $order, $param);
   }
   /**
    * Import data from file
@@ -106,11 +112,12 @@ class Detection extends ObjetBDD
    * Calculate the duration of presence of a fish in each station
    *
    * @param integer $individual_id
+   * @param int $year
    * @return array
    */
-  function getStationDetection(int $individual_id): array
+  function getStationDetection(int $individual_id, $year = 0): array
   {
-    $data = $this->getListFromIndividual($individual_id);
+    $data = $this->getListFromIndividual($individual_id, 'YYYY-MM-DD HH24:MI:SS.MS', $year);
     $result = array();
     $last_antenna = 0;
     $current_row = array();

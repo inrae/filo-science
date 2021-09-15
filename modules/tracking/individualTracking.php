@@ -20,9 +20,16 @@ switch ($t_module["param"]) {
     if (!$project_id > 0) {
       $project_id = $projects[0]["project_id"];
     }
-    $vue->set($dataClass->getListFromProject($project_id), "individuals");
+    isset($_COOKIE["taxon_id"]) ? $taxon_id = $_COOKIE["taxon_id"] : $taxon_id = 0;
+    isset($_COOKIE["year"]) ? $year = $_COOKIE["year"] : $year = 0;
+    $vue->set($dataClass->getListFromProject($project_id, $year, $taxon_id), "individuals");
     $vue->set("tracking/individualTrackingList.tpl", "corps");
     $vue->set($project_id, "project_id");
+    /**
+     * Get list of years and taxa
+     */
+    $vue->set($dataClass->getListYearFromProject($project_id), "years");
+    $vue->set($dataClass->getListTaxaFromProject($project_id), "taxa");
     if ($_REQUEST["individual_id"] > 0) {
       $dindividual = $dataClass->getDetail($_REQUEST["individual_id"]);
       if ($dindividual["project_id"] == $project_id) {
@@ -32,14 +39,14 @@ switch ($t_module["param"]) {
          */
         $_REQUEST["offset"] > 0 ? $offset = $_REQUEST["offset"] : $offset = 0;
         $vue->set($offset, "offset");
-        $vue->set($dataClass->getListDetection($_REQUEST["individual_id"], 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date asc", 100, $offset), "detections");
-        $vue->set($dataClass->getDetectionNumberByDate($_REQUEST["individual_id"]), "detection_number");
+        $vue->set($dataClass->getListDetection($_REQUEST["individual_id"], 'YYYY-MM-DD HH24:MI:SS.MS', "detection_date asc", 100, $offset, $year), "detections");
+        $vue->set($dataClass->getDetectionNumberByDate($_REQUEST["individual_id"], $year), "detection_number");
         /**
          * Get the detections grouped by station
          */
         include_once "modules/classes/tracking/detection.class.php";
         $detection = new Detection($bdd, $ObjetBDDParam);
-        $vue->set($dataStation = $detection->getStationDetection($_REQUEST["individual_id"]), "stationDetection");
+        $vue->set($dataStation = $detection->getStationDetection($_REQUEST["individual_id"], $year), "stationDetection");
         $vue->set($_REQUEST["individual_id"], "selectedIndividual");
         setParamMap($vue, false);
         /**
