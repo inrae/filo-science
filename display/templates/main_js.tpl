@@ -1,6 +1,6 @@
 <!-- Jquery -->
-<!--<script src="display/node_modules/jquery/dist/jquery.min.js"></script>-->
-<script src="display/javascript/jquery-3.3.1.min.js"></script>
+<script src="display/node_modules/jquery/dist/jquery.min.js"></script>
+<!--script src="display/javascript/jquery-3.3.1.min.js"></!--script-->
 <script src="display/node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 <script src="display/node_modules/jquery-ui/ui/widgets/tooltip.js"></script>
 
@@ -32,9 +32,9 @@
 	type="text/javascript"></script>
 
 <!-- Datatables -->
-<script src="display/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="display/node_modules/datatables.net/js/jquery.dataTables.js"></script>
 <script src="display/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-<link rel="stylesheet" type="text/css" href="display/node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="display/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" />
 <script src="display/javascript/intl.js"></script>
 
 <!-- Boutons d'export associes aux datatables - classe datatable-export -->
@@ -46,7 +46,7 @@
 	href="display/node_modules/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
 
 <!-- Rajout du tri sur la date/heure -->
-<script type="text/javascript" src="display/node_modules/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="display/node_modules/moment/moment.js"></script>
 <script type="text/javascript" src="display/node_modules/datetime-moment/datetime-moment.js"></script>
 
 <!-- composant date/heure -->

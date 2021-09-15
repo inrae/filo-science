@@ -196,7 +196,7 @@
         {if $testMode == 1}
             <fieldset class="col-md-6">
                 <legend>{t}Données prêtes à être importées{/t}</legend>
-                <table class="table table-bordered table-hover datatable-nopaging">
+                <table class="table table-bordered table-hover">
                     <thead>
                         {foreach $data[0] as $key=>$value}
                             <th>{$key}</th>
@@ -216,7 +216,7 @@
         {/if}
         <fieldset class="col-md-6">
             <legend>{t}Messages d'information ou d'erreur{/t}</legend>
-            <table class="table table-bordered table-hover datatable-nopaging">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>{t}N° de ligne{/t}</th>

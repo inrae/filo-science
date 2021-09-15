@@ -22,3 +22,8 @@ COMMENT ON COLUMN tracking.probe.date_from IS E'Date of installation of the prob
 COMMENT ON COLUMN tracking.probe.date_to IS E'Date of end of use of the probe';
 update tracking.probe set date_from = '2020-01-01', date_to = now();
 
+update import.function_type 
+set description = 'Récupère l''antenne de détection à partir de son code et de la date de la détection. La colonne contenant la date doit être indiquée dans le champ "argument complémentaire"'
+where function_type_id = 17;
+
+

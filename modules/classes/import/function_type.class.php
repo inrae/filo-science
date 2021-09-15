@@ -356,7 +356,7 @@ class FunctionType extends ObjetBDD
       if (!isset($antennaClass)) {
         throw new FunctionTypeException(_("Problème technique : la classe Antenna n'a pas été instanciée."));
       }
-      $result = $antennaClass->getIdFromCode($value);
+      $result = $antennaClass->getIdFromCode($value, $columns[$args["arg"] - 1]);
       if ($result == 0) {
         throw new FunctionTypeException(sprintf(_("Le code %s ne correspond à aucune antenne"), $value));
       } else {

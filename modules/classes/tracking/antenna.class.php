@@ -104,10 +104,10 @@ class Antenna extends ObjetBDD
    * @param string $code
    * @return integer
    */
-  function getIdFromCode(string $code): int
+  function getIdFromCode(string $code, string $date): int
   {
-    $sql = "select antenna_id from antenna where antenna_code = :code";
-    $data = $this->lireParamAsPrepared($sql, array("code" => $code));
+    $sql = "select antenna_id from antenna where antenna_code = :code and :date::date between date_from and date_to";
+    $data = $this->lireParamAsPrepared($sql, array("code" => $code, "date"=>$date));
     $data["antenna_id"] > 0 ? $id = $data["antenna_id"] : $id = 0;
     return $id;
   }

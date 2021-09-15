@@ -48,7 +48,8 @@
 
 </script>
 
-<h2>{t}station{/t}{if $data.station_number > 0}&nbsp;{$data.station_number}{/if}&nbsp;{$data.station_name}&nbsp;<i>{$data.station_code}</i></h2>
+<h2>{t}station{/t}{if $data.station_number > 0}&nbsp;{$data.station_number}{/if}&nbsp;{$data.station_name}&nbsp;<i>{$data.station_code}</i>{if $data.station_active == 0}<span class="red">&nbsp;{t}Station hors service{/t}</span>{/if}
+</h2>
 <div class="row">
     <div class="col-md-12">
         <a href="index.php?module=stationTrackingList">
