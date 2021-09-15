@@ -92,7 +92,13 @@
                     <input id="station_pk" type="text" class="form-control taux" name="station_pk" value="{$data.station_pk}">
                 </div>
             </div>
-
+            <div class="form-group">
+            <label for="station_active" class="col-md-4 control-label">{t}Station en service ?{/t}</label>
+            <div class="col-md-8">
+                <input type="radio"  id="station_active" name="station_active" value="1" {if $data.station_active == 1} checked{/if}>&nbsp;{t}oui{/t}
+                <input type="radio"  id="station_active0" name="station_active" value="0" {if $data.station_active == 0} checked{/if}>&nbsp;{t}non{/t}
+            </div>
+        </div>
 
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>

@@ -17,7 +17,8 @@ switch ($t_module["param"]) {
         if (!$project_id > 0) {
             $project_id = $projects[0]["project_id"];
         }
-        $vue->set($dataClass->getListFromProject($project_id), "stations");
+        $_COOKIE["stationActive"] == 1 ? $stationActive = true : $stationActive = false;
+        $vue->set($dataClass->getListFromProject($project_id, 0, $stationActive), "stations");
         $vue->set("tracking/stationTrackingList.tpl", "corps");
         break;
     case "display":

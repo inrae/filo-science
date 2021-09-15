@@ -23,6 +23,24 @@
             Cookies.set("projectActive", $(this).val(), { expires: 180, secure: true });
             $("#stationTrackingSearch").submit();
         });
+        var stationActive = 0;
+        try {
+            stationActive = Cookies.get("stationActive");
+        } catch (e) {
+         }
+         try {
+         if (stationActive >= 0) {
+              $("#stationActive" + stationActive).attr("checked", "true");
+         } else {
+             $("#stationActive0").attr("checked", "true");
+         }
+         } catch (e) {
+              $("#stationActive0").attr("checked", "true");
+         }
+        $(".stationActive").change(function () {
+            Cookies.set("stationActive", $(this).val(), { expires: 180, secure: true });
+            $("#stationTrackingSearch").submit();
+        });
         $("#project_id").change(function () {
             Cookies.set("projectId", $(this).val(), { expires: 180, secure: true });
             $("#stationTrackingSearch").submit();
@@ -37,8 +55,8 @@
         <input id="module" type="hidden" name="module" value="stationTrackingList">
         <input id="isSearch" type="hidden" name="isSearch" value="1">
         <div class="form-group">
-            <label for="project_id" class="col-md-2 control-label">{t}Projet :{/t}</label>
-            <div class="col-md-4">
+            <label for="project_id" class="col-md-3 control-label">{t}Projet :{/t}</label>
+            <div class="col-md-3">
                 <select id="project_id" name="project_id" class="form-control">
                     {foreach $projects as $row}
                     <option id="project{$row.project_id}" value="{$row.project_id}">
@@ -47,15 +65,20 @@
                     {/foreach}
                 </select>
             </div>
-            <div class="col-md-2 col-md-offset-3">
+             <label for="is_active" class="col-md-2 control-label">{t}Projets actifs :{/t}</label>
+            <div class="col-md-2">
+                <input type="radio" class="is_active" id="projectActive1" name="is_active" value="1">&nbsp;{t}oui{/t}
+                <input type="radio" class="is_active" id="projectActive0" name="is_active" value="0">&nbsp;{t}non{/t}
+            </div>
+            <div class="col-md-2">
                 <input type="submit" class="btn btn-success" value="{t}Rechercher{/t}">
             </div>
         </div>
         <div class="form-group">
-            <label for="is_active" class="col-md-2 control-label">{t}Projets actifs :{/t}</label>
-            <div class="col-md-4">
-                <input type="radio" class="is_active" id="projectActive1" name="is_active" value="1">{t}oui{/t}
-                <input type="radio" class="is_active" id="projectActive0" name="is_active" value="0">{t}non{/t}
+            <label for="stationActive1" class="col-md-3 control-label">{t}Uniquement les stations en service ?{/t}</label>
+            <div class="col-md-2">
+                <input type="radio" class="stationActive" id="stationActive1" name="station_active" value="1">&nbsp;{t}oui{/t}
+                <input type="radio" class="stationActive" id="stationActive0" name="station_active" value="0">&nbsp;{t}non{/t}
             </div>
         </div>
 
@@ -82,6 +105,7 @@
                     <th>{t}Longitude{/t}</th>
                     <th>{t}Latitude{/t}</th>
                     <th>{t}PK{/t}</th>
+                    <th>{t}En service ?{/t}</th>
                     {if $droits.gestion == 1}
                         <th class="center">
                             <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
@@ -102,7 +126,7 @@
                                 {$station.station_name}
                             {/if}
                         </td>
-                        <td>{$station.station_type_name}</td>
+                        <td {if $station.station_active != 1}class="red"{else}class="green"{/if}>{$station.station_type_name}</td>
                         <td>{$station.station_code}</td>
                         <td class="right">{$station.station_number}</td>
                         <td>{$station.river_name}</td>
@@ -110,6 +134,7 @@
                         <td>{$station.station_long}</td>
                         <td>{$station.station_lat}</td>
                         <td>{$station.station_pk}</td>
+                        <td class="center">{if $station.station_active == 1}{t}Oui{/t}{/if}</td>
                         {if $droits.gestion == 1}
                             <td class="center">
                                 <a href="index.php?module=stationTrackingChange&station_id={$station.station_id}" title="{t}Modifier{/t}">
