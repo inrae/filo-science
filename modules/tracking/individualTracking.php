@@ -89,12 +89,12 @@ switch ($t_module["param"]) {
         $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
         $axisx2 = array("x2");
         $axisy2 = array ("stations");
-        $series = array("detection");
+        $series = array();
+        $regions = array();
         foreach ($stations as $station) {
           if (!empty($station)) {
             $presences = $stationTracking->getPresenceStation($project_id, $station, $datemin, $datemax);
             foreach ($presences as $presence) {
-
               $presence["date_from"] < $datemin ? $datefrom = $datemin : $datefrom = $presence["date_from"];
               $presence["date_to"] > $datemax ? $dateto = $datemax : $dateto = $presence["date_to"];
               $axisx2[] = $datefrom;
@@ -103,12 +103,14 @@ switch ($t_module["param"]) {
               $axisy2[] = $presence["station_number"];
               $graphdata[]=array("date"=>$datefrom, "station".$presence["station_number"]=>$presence["station_number"]);
               $graphdata[]=array("date"=>$dateto, "station".$presence["station_number"]=>$presence["station_number"]);
-
+            $regions["station".$presence["station_number"]][] = array("start"=>$datefrom, "end"=>$dateto/*, "style"=>"dashed"*/);
             }
             $series[]="station".$station;
           }
         }
+        $series[] = "detection";
         $vue->set(json_encode($stations), "stations");
+        $vue->set(json_encode($regions), "regions");
         /*$chart = array($axisx, $axisy);
         $vue->set(json_encode($chart), "chartData");*/
         $chart2 = array($axisx1, $axisx2, $axisy1, $axisy2);
@@ -126,6 +128,7 @@ switch ($t_module["param"]) {
         $vue->htmlVars[] = "chartData2";
         $vue->htmlVars[] = "graphdata";
         $vue->htmlVars[] = "series";
+        $vue->htmlVars[] = "regions";
       }
     }
     break;

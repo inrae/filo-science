@@ -7,7 +7,7 @@
     var stations = JSON.parse('{$stations}');
     var graphdata = JSON.parse('{$graphdata}');
     var series = JSON.parse('{$series}');
-    console.log(graphdata);
+    var regions = JSON.parse('{$regions}');
     var chart2 = c3.generate ({
       bindto: "#chart2",
       data: {
@@ -18,6 +18,7 @@
         "x": "date",
         "value": series
         },
+        regions: regions
       },
       axis: {
         x: {
