@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,255" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,254" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3505,6 +3505,17 @@ group by individual_id]]></expression>
 		<type name="bool" length="0"/>
 		<comment><![CDATA[True if the station is used]]></comment>
 	</column>
+
+	<customidxs object-type="column">
+		<object name="station_id" index="0"/>
+		<object name="station_type_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="station_fk" index="1"/>
+		<object name="station_tracking_pk" index="0"/>
+		<object name="station_type_fk" index="2"/>
+	</customidxs>
 </table>
 
 <relationship name="station_tracking_has_one_station" type="rel11" layer="2"
