@@ -54,32 +54,78 @@ switch ($t_module["param"]) {
          */
         /*$axisx = array("x");
         $axisy = array("detection");*/
-        $axisx2 = array("x");
-        $axisy2 = array("detection");
+        $axisx1 = array("x1");
+        $axisy1 = array("detection");
         $stations = array();
+        $datemin = '2050-12-31 23:59:59';
+        $datemax = '1970-01-01 00:00:00';
+        $graphdata = array();
         foreach ($dataStation as $row) {
           /*$axisx[] = substr($row["date_from"],0, 19);
           $axisy[] = $row["station_number"];*/
-          $axisx2[] = substr($row["date_from"],0, 19);
-          $axisy2[] = $row["station_number"];
-          $axisx2[] = substr($row["date_to"],0, 19);
-          $axisy2[] = $row["station_number"];
+          $date_from = substr($row["date_from"], 0, 19);
+          $axisx1[] = $date_from;
+          $axisy1[] = $row["station_number"];
+          $date_to = substr($row["date_to"], 0, 19);
+          $axisx1[] = $date_to;
+          if ($date_from < $datemin) {
+            $datemin = $date_from;
+          }
+          if ($date_to > $datemax) {
+            $datemax = $date_to;
+          }
+          $graphdata[] = array("date"=>$date_from, "detection"=>$row["station_number"]);
+          $graphdata[] = array("date"=>$date_to, "detection"=>$row["station_number"]);
+          $axisy1[] = $row["station_number"];
           if (!in_array($row["station_number"], $stations)) {
             $stations[]  = $row["station_number"];
           }
         }
         sort($stations);
+        /**
+         * Get the presence of stations between the dates
+         */
+        include_once "modules/classes/tracking/station_tracking.class.php";
+        $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
+        $axisx2 = array("x2");
+        $axisy2 = array ("stations");
+        $series = array("detection");
+        foreach ($stations as $station) {
+          if (!empty($station)) {
+            $presences = $stationTracking->getPresenceStation($project_id, $station, $datemin, $datemax);
+            foreach ($presences as $presence) {
+
+              $presence["date_from"] < $datemin ? $datefrom = $datemin : $datefrom = $presence["date_from"];
+              $presence["date_to"] > $datemax ? $dateto = $datemax : $dateto = $presence["date_to"];
+              $axisx2[] = $datefrom;
+              $axisy2[] = $presence["station_number"];
+              $axisx2[] = $dateto;
+              $axisy2[] = $presence["station_number"];
+              $graphdata[]=array("date"=>$datefrom, "station".$presence["station_number"]=>$presence["station_number"]);
+              $graphdata[]=array("date"=>$dateto, "station".$presence["station_number"]=>$presence["station_number"]);
+
+            }
+            $series[]="station".$station;
+          }
+        }
         $vue->set(json_encode($stations), "stations");
         /*$chart = array($axisx, $axisy);
         $vue->set(json_encode($chart), "chartData");*/
-        $chart2 = array($axisx2, $axisy2);
+        $chart2 = array($axisx1, $axisx2, $axisy1, $axisy2);
         $vue->set(json_encode($chart2), "chartData2");
+        usort($graphdata, function ($a, $b) {
+          return $a["date"] <=> $b["date"];
+        });
+        $vue->set(json_encode(($graphdata)), "graphdata");
+        $vue->set(json_encode($series), "series");
         /**
          * Inhibits the encoding of chartData
          */
         //$vue->htmlVars[] = "chartData";
         $vue->htmlVars[] = "stations";
         $vue->htmlVars[] = "chartData2";
+        $vue->htmlVars[] = "graphdata";
+        $vue->htmlVars[] = "series";
       }
     }
     break;

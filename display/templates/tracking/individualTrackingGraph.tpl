@@ -3,14 +3,21 @@
 <link rel="stylesheet" type="text/css" href="display/node_modules/c3/c3.min.css" />
 <script>
   $(document).ready(function() {
-   var chartData2 = JSON.parse('{$chartData2}');
-   var stations = JSON.parse('{$stations}');
+    var chartData2 = JSON.parse('{$chartData2}');
+    var stations = JSON.parse('{$stations}');
+    var graphdata = JSON.parse('{$graphdata}');
+    var series = JSON.parse('{$series}');
+    console.log(graphdata);
     var chart2 = c3.generate ({
       bindto: "#chart2",
       data: {
-        x: 'x',
+        x: 'date',
         xFormat: '%Y-%m-%d %H:%M:%S',
-        columns: chartData2
+        json: graphdata,
+        keys: {
+        "x": "date",
+        "value": series
+        },
       },
       axis: {
         x: {
@@ -37,7 +44,11 @@
         enabled:true,
         type: 'scroll', /* drag */
         extent: [10, 100]
+      },
+      line: {
+        connectNull: true
       }
+
     });
   });
 </script>

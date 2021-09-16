@@ -137,4 +137,26 @@ class StationTracking extends ObjetBDD
         }
         return $this->getListeParamAsPrepared($sql, array("project_id" => $project_id));
     }
+
+    /**
+     * Get the list of dates of presence of a station between dates
+     *
+     * @param integer $project_id
+     * @param float $station_number
+     * @param string $date_from
+     * @param string $date_to
+     * @return array
+     */
+    function getPresenceStation(int $project_id, float $station_number, string $date_from, string $date_to):?array
+    {
+        $sql = "select station_id, station_number, antenna_id, antenna_code, date_from, date_to
+                from station_tracking
+                join antenna using (station_id)
+                join station using (station_id)
+                where station_number = :station_number
+                and project_id = :project_id
+                and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)
+                order by date_from";
+    return $this->getListeParamAsPrepared($sql, array("project_id"=>$project_id, "station_number" => $station_number/*, "date_from"=>$date_from, "date_to"=>$date_to*/));
+    }
 }
