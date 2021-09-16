@@ -56,3 +56,6 @@
 <div class="row">
   <div id="chart2"></div>
 </div>
+<div class="row center message">
+{t}Les lignes pointillées correspondent aux périodes de fonctionnement des stations, et en continu, au périodes d'inactivité (récepteurs hors service){/t}
+</div>
