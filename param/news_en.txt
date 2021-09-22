@@ -1,5 +1,16 @@
 News
 ===========
+Version 1.9.0 of 2021-09-22
+---------------------------
+New features :
+- in the tracking module, it is possible to search for fish by year or by taxon
+- the tracking stations can be declared active or not, the effective functioning of the receivers can be entered
+- the graph of the effective functioning of the stations (in reception mode) is displayed at the same time as the path of a fish
+- the stations actually working can be visualized on a graph
+
+Bug fixes :
+- there was no interface to create an antenna type for manual detections
+
 Version 1.8.0 of 2021-01-13
 ---------------------------
 New features :
@@ -8,13 +19,13 @@ New features :
 - it is possible to number the telemetry stations by using a decimal value, to indicate, for example, the PK (the number is used for the display of the detections)
 - it is now possible to export in CSV all the fish measured during a campaign or an operation
 
-Bug corrections :
+Bug fixes :
 - the import of detections has been optimized, to be able to process files containing several hundreds of thousands of records
 - in the import detections screen, the previously used project was not kept
 
 Version 1.7.0 of 2020-08-07
 ---------------------------
-What's New :
+New features :
 - addition of information to the fish to specify the conditions of capture, anaesthesia, release, etc.
 - addition of a field dedicated to "spaghetti" mark for fishes
 - it is possible to assign a business code to a station

@@ -1,5 +1,16 @@
 Nouveautés
 ==========
+Version 1.9.0 du 22/09/2021
+---------------------------
+Nouveautés :
+- dans le module tracking, il est possible de rechercher les poissons par année ou par taxon
+- les stations de tracking peuvent être déclarées actives ou non, les fonctionnements effectifs des récepteurs peuvent être saisis
+- le graphique de fonctionnement effectif des stations (en mode réception) est affiché en même temps que le trajet d'un poisson
+- les stations effectivement fonctionnelles peuvent être visualisées sur un graphe
+
+Corrections de bugs :
+- il n'y avait pas d'interface pour créer un type d'antenne pour les détections manuelles
+
 Version 1.8.0 du 13/01/2021
 ---------------------------
 Nouveautés :

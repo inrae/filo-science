@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-13 16:05+0100\n"
+"POT-Creation-Date: 2021-09-22 12:08+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,27 +57,27 @@ msgstr "Display of the last sequence processed recently"
 
 #. (itstool) path: item/item@label
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:14 ../../../param/menu.xml:89
+#: ../../../param/menu.xml:14 ../../../param/menu.xml:91
 msgid "Schéma de la base de données"
 msgstr "Database schema"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:15 ../../../param/menu.xml:90
+#: ../../../param/menu.xml:15 ../../../param/menu.xml:92
 msgid "Structure de la base de données (HTML)"
 msgstr "Database structure (HTML)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:15 ../../../param/menu.xml:90
+#: ../../../param/menu.xml:15 ../../../param/menu.xml:92
 msgid "Liste des tables et des colonnes"
 msgstr "List of tables and columns"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:16 ../../../param/menu.xml:91
+#: ../../../param/menu.xml:16 ../../../param/menu.xml:93
 msgid "Structure de la base de données (Latex)"
 msgstr "Database structure (Latex)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:16 ../../../param/menu.xml:91
+#: ../../../param/menu.xml:16 ../../../param/menu.xml:93
 msgid "Liste des tables et des colonnes sous forme de tableaux Latex"
 msgstr "List of tables and columns in the form of Latex tables"
 
@@ -118,7 +118,7 @@ msgstr "Tracked fish"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:22
-#: ../../../display/templates/tracking/individualTrackingList.tpl:85
+#: ../../../display/templates/tracking/individualTrackingList.tpl:105
 msgid "Liste des poissons suivis"
 msgstr "List of tracked fish"
 
@@ -145,7 +145,7 @@ msgstr "Importing the fish concerned by the telemetry operation"
 
 #. (itstool) path: item/item@label
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:25 ../../../param/menu.xml:37
+#: ../../../param/menu.xml:25 ../../../param/menu.xml:38
 msgid "Paramètres"
 msgstr "Settings"
 
@@ -155,511 +155,521 @@ msgid "Paramètres liés à la télémétrie des poissons"
 msgstr "Parameters related to remote sensing of fish"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:26 ../../../param/menu.xml:78
+#: ../../../param/menu.xml:26 ../../../param/menu.xml:79
 msgid "Types de stations"
 msgstr "Types of stations"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:26 ../../../param/menu.xml:78
+#: ../../../param/menu.xml:26 ../../../param/menu.xml:79
 msgid "Liste des types de station"
 msgstr "List of types of station"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:27 ../../../param/menu.xml:79
+#: ../../../param/menu.xml:27 ../../../param/menu.xml:80
 msgid "Types d'émetteurs"
 msgstr "Types of transmitters"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:27 ../../../param/menu.xml:79
+#: ../../../param/menu.xml:27 ../../../param/menu.xml:80
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:1
 msgid "Liste des types d'émetteurs"
 msgstr "List of types of transmitters"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:28 ../../../param/menu.xml:80
+#: ../../../param/menu.xml:28 ../../../param/menu.xml:81
 msgid "Technologies"
 msgstr "Technologies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:28 ../../../param/menu.xml:80
+#: ../../../param/menu.xml:28 ../../../param/menu.xml:81
 msgid "Technologies employées"
 msgstr "Used technologies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:29 ../../../param/menu.xml:81
+#: ../../../param/menu.xml:29 ../../../param/menu.xml:82
+msgid "Types d'antennes"
+msgstr "Antenna types"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:29 ../../../param/menu.xml:82
+msgid "Types d'antennes (détection individuelle)"
+msgstr "Antenna types (individual detection)"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:30 ../../../param/menu.xml:83
 msgid "Paramètres de mesure"
 msgstr "Measures parameters"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:29 ../../../param/menu.xml:81
+#: ../../../param/menu.xml:30 ../../../param/menu.xml:83
 msgid "Paramètres de mesure enregistrés par les sondes"
 msgstr "Measurement parameters recorded by the probes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:30 ../../../param/menu.xml:82
+#: ../../../param/menu.xml:31 ../../../param/menu.xml:84
 msgid "Types d'import"
 msgstr "Types of import"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:30 ../../../param/menu.xml:82
+#: ../../../param/menu.xml:31 ../../../param/menu.xml:84
 #: ../../../display/templates/import/importTypeList.tpl:1
 msgid "Liste des types d'import"
 msgstr "List of the types of import"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:31 ../../../param/menu.xml:83
+#: ../../../param/menu.xml:32 ../../../param/menu.xml:85
 msgid "Modèles d'import"
 msgstr "Templates of import"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:31 ../../../param/menu.xml:83
+#: ../../../param/menu.xml:32 ../../../param/menu.xml:85
 msgid "Liste des modèles d'importation de fichiers"
 msgstr "List of file import templates"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:33
+#: ../../../param/menu.xml:34
 msgid "Recalculer jour/nuit"
 msgstr "Recalculate day/night"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:33
+#: ../../../param/menu.xml:34
 msgid "Recalculer la position des détections dans la journée"
 msgstr "Recalculate the position of the detections into the day"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:37
+#: ../../../param/menu.xml:38
 msgid "Paramètres généraux et tables de référence"
 msgstr "General parameters and reference tables"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:38
+#: ../../../param/menu.xml:39
 msgid "Projets"
 msgstr "Projects"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:38
+#: ../../../param/menu.xml:39
 #: ../../../display/templates/param/projectList.tpl:1
 msgid "Liste des projets"
 msgstr "List of projects"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:39
+#: ../../../param/menu.xml:40
 msgid "Protocoles"
 msgstr "Protocols"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:39
+#: ../../../param/menu.xml:40
 #: ../../../display/templates/param/protocolList.tpl:1
 msgid "Liste des protocoles"
 msgstr "List of protocols"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:40
+#: ../../../param/menu.xml:41
 #: ../../../display/templates/gestion/operationOperators.tpl:3
-#: ../../../display/templates/gestion/operationDisplay.tpl:110
+#: ../../../display/templates/gestion/operationDisplay.tpl:108
 msgid "Opérateurs"
 msgstr "Operators"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:40
+#: ../../../param/menu.xml:41
 msgid "Liste des opérateurs"
 msgstr "List of operators"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:42
+#: ../../../param/menu.xml:43
 #: ../../../display/templates/param/stationList.tpl:17
-#: ../../../display/templates/tracking/stationTrackingList.tpl:80
+#: ../../../display/templates/tracking/stationTrackingList.tpl:103
 msgid "Cours d'eau"
 msgstr "Watercourse"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:42
+#: ../../../param/menu.xml:43
 msgid "Liste des cours d'eau"
 msgstr "List of watercourses"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:43
+#: ../../../param/menu.xml:44
 #: ../../../display/templates/param/stationList.tpl:1
 msgid "Stations"
 msgstr "Stations"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:43
+#: ../../../param/menu.xml:44
 msgid "Liste des stations"
 msgstr "List of stations"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:45
+#: ../../../param/menu.xml:46
 #: ../../../display/templates/param/protocolDisplay.tpl:77
 #: ../../../display/templates/param/measureTemplateList.tpl:15
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:37
 #: ../../../display/templates/gestion/sampleList.tpl:12
-#: ../../../display/templates/tracking/individualTrackingList.tpl:165
+#: ../../../display/templates/tracking/individualTrackingList.tpl:203
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:270
 msgid "Taxon"
 msgstr "Taxon"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:45 ../../../display/templates/param/taxonList.tpl:1
+#: ../../../param/menu.xml:46 ../../../display/templates/param/taxonList.tpl:1
 msgid "Liste des taxons"
 msgstr "List of taxons"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:46
+#: ../../../param/menu.xml:47
 msgid "Grilles de taxons"
 msgstr "Grid of taxons"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:46
+#: ../../../param/menu.xml:47
 msgid "Modèles de grilles de sélection des taxons"
 msgstr "Templates of taxon selection grid"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:47 ../../../param/menu.xml:70
+#: ../../../param/menu.xml:48 ../../../param/menu.xml:71
 #: ../../../display/templates/param/measureTemplateChange.tpl:103
 #: ../../../display/templates/gestion/sampleList.tpl:18
 #: ../../../display/templates/gestion/ambienceChange.tpl:364
-#: ../../../display/templates/gestion/sampleChange.tpl:706
+#: ../../../display/templates/gestion/sampleChange.tpl:720
 msgid "Mesures complémentaires"
 msgstr "Complementary measures"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:47
+#: ../../../param/menu.xml:48
 msgid "Modèles de mesures complémentaires pour les taxons"
 msgstr "Templates of taxon complementary measures"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:48
+#: ../../../param/menu.xml:49
 msgid "Sexe"
 msgstr "Sexe"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:48 ../../../display/templates/param/sexeList.tpl:1
+#: ../../../param/menu.xml:49 ../../../display/templates/param/sexeList.tpl:1
 msgid "Liste des sexes"
 msgstr "List of sexes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:49
+#: ../../../param/menu.xml:50
 msgid "Pathologies"
 msgstr "Pathologies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:49
+#: ../../../param/menu.xml:50
 msgid "Types de pathologie"
 msgstr "Types of pathologies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:52
+#: ../../../param/menu.xml:53
 msgid "Stratégies"
 msgstr "Strategies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:52
+#: ../../../param/menu.xml:53
 msgid "Stratégies de pêche"
 msgstr "Fishing strategies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:53
+#: ../../../param/menu.xml:54
 msgid "Échelle de pêche"
 msgstr "Fishing scale"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:53
+#: ../../../param/menu.xml:54
 msgid "Échelle spatiale de pêche"
 msgstr "Spatial fishing scale"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:54
+#: ../../../param/menu.xml:55
 msgid "Modèles d'analyse"
 msgstr "Templates of analysis"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:54
+#: ../../../param/menu.xml:55
 msgid "Modèles d'analyse complémentaire"
 msgstr "Templates of complementary analysis"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:57
+#: ../../../param/menu.xml:58
 msgid "Ambiances"
 msgstr "Ambiences"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:57
+#: ../../../param/menu.xml:58
 msgid "Paramètres d'ambiance"
 msgstr "Ambience parameters"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:58
+#: ../../../param/menu.xml:59
 msgid "Caches"
 msgstr "Caches"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:58
+#: ../../../param/menu.xml:59
 msgid "Classes d'abondance des caches"
 msgstr "Cache abundance classes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:59
+#: ../../../param/menu.xml:60
 msgid "Colmatage"
 msgstr "Clogging"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:59
+#: ../../../param/menu.xml:60
 msgid "Types de colmatage du substrat"
 msgstr "Type of substrate clogging"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:60
+#: ../../../param/menu.xml:61
 msgid "Emplacements"
 msgstr "Locations"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:60
+#: ../../../param/menu.xml:61
 msgid "Emplacements particuliers"
 msgstr "Particular locations"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:61
+#: ../../../param/menu.xml:62
 #: ../../../display/templates/gestion/sequencePointList.tpl:12
 msgid "Faciès"
 msgstr "Facies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:61
+#: ../../../param/menu.xml:62
 msgid "Types de faciès"
 msgstr "Types of facies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:62
+#: ../../../param/menu.xml:63
 msgid "Flot"
 msgstr "Flow"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:62
+#: ../../../param/menu.xml:63
 msgid "Caractéristiques du flot"
 msgstr "Flow characteristics"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:63
+#: ../../../param/menu.xml:64
 msgid "Granulométrie"
 msgstr "Granulometry"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:63
+#: ../../../param/menu.xml:64
 msgid "Classes de granulométrie du substrat"
 msgstr "Substrate granulometry classes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:64
+#: ../../../param/menu.xml:65
 #: ../../../display/templates/gestion/sequencePointList.tpl:11
 #: ../../../display/templates/tracking/detectionChange.tpl:38
 msgid "Localisation"
 msgstr "Localisation"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:64
+#: ../../../param/menu.xml:65
 msgid "Localisation du point de mesure"
 msgstr "Measure point localisation"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:65
+#: ../../../param/menu.xml:66
 msgid "Ombrage"
 msgstr "Shading"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:65
+#: ../../../param/menu.xml:66
 msgid "Types d'ombrage"
 msgstr "Types of shading"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:66
+#: ../../../param/menu.xml:67
 msgid "Sinuosité"
 msgstr "Sinuosity"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:66
+#: ../../../param/menu.xml:67
 msgid "Types de sinuosité du cours d'eau"
 msgstr "Types of sinuosity of watercourse"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:67
+#: ../../../param/menu.xml:68
 msgid "Turbidité"
 msgstr "Turbidity"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:67
+#: ../../../param/menu.xml:68
 msgid "Classes de turbidité"
 msgstr "Turbidity classes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:68
+#: ../../../param/menu.xml:69
 msgid "Végétation"
 msgstr "Vegetation"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:68
+#: ../../../param/menu.xml:69
 msgid "Nature de la végétation"
 msgstr "Nature of vegetation"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:69
+#: ../../../param/menu.xml:70
 msgid "Vitesse"
 msgstr "Speed"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:69
+#: ../../../param/menu.xml:70
 msgid "Classes de vitesse"
 msgstr "Speed classes"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:70
+#: ../../../param/menu.xml:71
 msgid "Mesures complémentaires associées à une ambience"
 msgstr "Complementary measures associated to an ambience"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:73
+#: ../../../param/menu.xml:74
 #: ../../../display/templates/gestion/sequenceDisplay.tpl:117
 msgid "Engins de pêche"
 msgstr "Fishing gears"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:73 ../../../display/templates/param/gearList.tpl:1
+#: ../../../param/menu.xml:74 ../../../display/templates/param/gearList.tpl:1
 msgid "Liste des engins de pêche"
 msgstr "List of fishing gears"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:74
+#: ../../../param/menu.xml:75
 msgid "Méthodes de pêche"
 msgstr "Fishing methods"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:74
+#: ../../../param/menu.xml:75
 msgid "Méthodes d'utilisation des engins de pêche"
 msgstr "Methods of using fishing gear"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:75
+#: ../../../param/menu.xml:76
 msgid "Types de courant"
 msgstr "Types of current"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:75
+#: ../../../param/menu.xml:76
 msgid "Types de courant électrique"
 msgstr "Types of electric current"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:77
+#: ../../../param/menu.xml:78
 msgid "Télédétection"
 msgstr "Remote sensing"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:77
+#: ../../../param/menu.xml:78
 msgid "Paramètres liés à la télédétection des poissons"
 msgstr "Parameters related to remote sensing of fish"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:85
+#: ../../../param/menu.xml:87
 msgid "Modèles d'export"
 msgstr "Templates of export"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:85
+#: ../../../param/menu.xml:87
 #: ../../../display/templates/import/exportModelList.tpl:18
 msgid "Liste des modèles d'exportation des données"
 msgstr "List of data export models"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:87
+#: ../../../param/menu.xml:89
 msgid "Mise en cache de la carto"
 msgstr "Caching the cartography"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:87
+#: ../../../param/menu.xml:89
 msgid "Stocker le fonds cartographique pour une utilisation hors Internet"
 msgstr "Store the map collection for offline use"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:94
+#: ../../../param/menu.xml:96
 msgid "Administration"
 msgstr "Administration"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:94
+#: ../../../param/menu.xml:96
 msgid "Administration de l'application"
 msgstr "Application administration"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:95
+#: ../../../param/menu.xml:97
 msgid "Liste des comptes locaux"
 msgstr "local accounts list"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:95
+#: ../../../param/menu.xml:97
 msgid "Liste des logins - identification via la base de données"
 msgstr "List of logins - identification via the database"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:96
+#: ../../../param/menu.xml:98
 msgid "ACL - droits"
 msgstr "ACL - rights"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:96
+#: ../../../param/menu.xml:98
 msgid "applications et droits gérés"
 msgstr "applications and rights managed"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:97
+#: ../../../param/menu.xml:99
 msgid "ACL - logins"
 msgstr "ACL - logins"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:97
+#: ../../../param/menu.xml:99
 msgid "Logins déclarés dans le module de gestion des droits"
 msgstr "Logins declared in the rights management module"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:98
+#: ../../../param/menu.xml:100
 msgid "ACL - groupes de logins"
 msgstr "ACL - login groups"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:98
+#: ../../../param/menu.xml:100
 msgid "Groupes de logins et logins rattachés aux groupes"
 msgstr "Groups of logins and logins attached to groups"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:99
+#: ../../../param/menu.xml:101
 msgid "Paramètres de l'application"
 msgstr "Application Settings"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:99
+#: ../../../param/menu.xml:101
 msgid "Liste des paramètres pérennes de l'application"
 msgstr "List of long-term parameters of the application"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:101
+#: ../../../param/menu.xml:103
 msgid "Logs"
 msgstr "Logs"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:101
+#: ../../../param/menu.xml:103
 msgid "Consultation des logs enregistrées"
 msgstr "Consultation of recorded logs"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:102 ../../../display/templates/phpinfo.tpl:1
+#: ../../../param/menu.xml:104 ../../../display/templates/phpinfo.tpl:1
 msgid "PHP info"
 msgstr "PHP info"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:102
+#: ../../../param/menu.xml:104
 msgid "configuration générale du serveur PHP"
 msgstr "general configuration of the PHP server"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:104 ../../../framework/common.inc.php:286
+#: ../../../param/menu.xml:106 ../../../framework/common.inc.php:286
 #: ../../../framework/identification/disconnect.php:18
 #: ../../../display/templates/entete.tpl:21
 #: ../../../display/templates/entete.tpl:40
@@ -668,96 +678,96 @@ msgid "Connexion"
 msgstr "Sign in"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:104
+#: ../../../param/menu.xml:106
 msgid "S'identifier dans l'application"
 msgstr "Sign in to the app"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:105 ../../../display/templates/entete.tpl:36
+#: ../../../param/menu.xml:107 ../../../display/templates/entete.tpl:36
 #: ../../../display/templates/entete.tpl:37
 msgid "Déconnexion"
 msgstr "Sign out"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:105
+#: ../../../param/menu.xml:107
 msgid "Déconnexion de l'application"
 msgstr "Sign out of the app"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:106
+#: ../../../param/menu.xml:108
 msgid "Dernières connexions"
 msgstr "Last connections"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:106
+#: ../../../param/menu.xml:108
 msgid "Liste des connexions récentes"
 msgstr "List of recently connections"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:107 ../../../display/templates/entete.tpl:32
+#: ../../../param/menu.xml:109 ../../../display/templates/entete.tpl:32
 #: ../../../display/templates/entete.tpl:33
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:86
 msgid "Modifier le mot de passe"
 msgstr "Change your password"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:107
+#: ../../../param/menu.xml:109
 msgid "Modifiez votre mot de passe (identification locale uniquement)"
 msgstr "Change your password (local identification only)"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:109
+#: ../../../param/menu.xml:111
 msgid "?"
 msgstr "?"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:109
+#: ../../../param/menu.xml:111
 msgid "Aide"
 msgstr "Help"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:110
+#: ../../../param/menu.xml:112
 msgid "A propos"
 msgstr "About"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:110
+#: ../../../param/menu.xml:112
 msgid "A propos de Collec-Science"
 msgstr "A propos de"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:111
+#: ../../../param/menu.xml:113
 msgid "Nouveautés"
 msgstr "What's new?"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:111
+#: ../../../param/menu.xml:113
 msgid "Quoi de neuf dans l'application ?"
 msgstr "What's new in the app?"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:112
+#: ../../../param/menu.xml:114
 msgid "Français"
 msgstr "French"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:112
+#: ../../../param/menu.xml:114
 msgid "Libellés en français"
 msgstr "Labels in French"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:113
+#: ../../../param/menu.xml:115
 msgid "English"
 msgstr "English"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:113
+#: ../../../param/menu.xml:115
 msgid "Labels in English"
 msgstr "Labels in English"
 
 #: ../../../param/param.default.inc.php:11
-msgid "13/01/2021"
-msgstr "2021-01-13"
+msgid "22/09/2021"
+msgstr "2021-09-22"
 
 #: ../../../modules/param/station.php:85
 #, php-format
@@ -833,7 +843,7 @@ msgstr "Generation error for image %s"
 msgid "Fichier %s non trouvé ou non lisible"
 msgstr "File %s not found or not readable"
 
-#: ../../../modules/classes/tracking/individual_tracking.class.php:126
+#: ../../../modules/classes/tracking/individual_tracking.class.php:151
 msgid "Le numéro du projet n'est pas conforme"
 msgstr "The project number is not conform"
 
@@ -1021,7 +1031,7 @@ msgid "Suppression effectuée"
 msgstr "Deletion done"
 
 #: ../../../modules/gestion/sample.php:183
-#: ../../../modules/tracking/individualTracking.php:151
+#: ../../../modules/tracking/individualTracking.php:207
 msgid "Problème rencontré lors de la suppression du poisson"
 msgstr "Problem encountered when deleting a fish"
 
@@ -1039,8 +1049,8 @@ msgstr "An error occurred during the operation"
 msgid "La station ne fait partie d'un projet autorisé"
 msgstr "The station is not associated with an authorized project"
 
-#: ../../../modules/tracking/stationTracking.php:90
-#: ../../../modules/tracking/stationTracking.php:113
+#: ../../../modules/tracking/stationTracking.php:137
+#: ../../../modules/tracking/stationTracking.php:160
 msgid ""
 "La station n'est pas associée à un projet pour lequel vous disposez des "
 "droits de modification"
@@ -1048,60 +1058,60 @@ msgstr ""
 "The station is not associated with a project for which you have modification "
 "rights"
 
-#: ../../../modules/tracking/individualTracking.php:112
-#: ../../../modules/tracking/individualTracking.php:139
-#: ../../../modules/tracking/individualTracking.php:157
-#: ../../../modules/tracking/individualTracking.php:177
-#: ../../../modules/tracking/individualTracking.php:288
+#: ../../../modules/tracking/individualTracking.php:168
+#: ../../../modules/tracking/individualTracking.php:195
+#: ../../../modules/tracking/individualTracking.php:213
+#: ../../../modules/tracking/individualTracking.php:233
+#: ../../../modules/tracking/individualTracking.php:344
 msgid ""
 "Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"
 msgstr "This project is not part of the projects authorized for you"
 
-#: ../../../modules/tracking/individualTracking.php:133
+#: ../../../modules/tracking/individualTracking.php:189
 msgid "Problème rencontré lors de l'enregistrement du poisson"
 msgstr "Problem encountered when recording a fish"
 
-#: ../../../modules/tracking/individualTracking.php:174
+#: ../../../modules/tracking/individualTracking.php:230
 msgid "Aucun poisson n'a été sélectionné"
 msgstr "No fish has been selected"
 
-#: ../../../modules/tracking/individualTracking.php:246
+#: ../../../modules/tracking/individualTracking.php:302
 #, php-format
 msgid "Le poisson existe déjà (id : %s)"
 msgstr "The fish already exists (id: %s)"
 
-#: ../../../modules/tracking/individualTracking.php:252
+#: ../../../modules/tracking/individualTracking.php:308
 msgid ""
 "La ligne est vide ou le taxon_id n'a pas été renseigné - ligne non traitée"
 msgstr ""
 "The line is empty or the taxon_id has not been filled in - line not processed"
 
-#: ../../../modules/tracking/individualTracking.php:257
+#: ../../../modules/tracking/individualTracking.php:313
 msgid "Nombre total de poissons créés :"
 msgstr "Total number of created fish:"
 
-#: ../../../modules/tracking/individualTracking.php:259
+#: ../../../modules/tracking/individualTracking.php:315
 msgid "Id mini généré :"
 msgstr "Minimum Id generate:"
 
-#: ../../../modules/tracking/individualTracking.php:260
+#: ../../../modules/tracking/individualTracking.php:316
 msgid "Id maxi généré :"
 msgstr "Max Id generated:"
 
-#: ../../../modules/tracking/individualTracking.php:264
+#: ../../../modules/tracking/individualTracking.php:320
 msgid "L'importation a échoué, le fichier n'a pas été correctement lu"
 msgstr "The importation failed, the file was not read correctly"
 
-#: ../../../modules/tracking/individualTracking.php:270
+#: ../../../modules/tracking/individualTracking.php:326
 msgid "Erreur d'écriture en table. Message d'erreur de la base de données : "
 msgstr "Error when writing in table. Database error message: "
 
-#: ../../../modules/tracking/individualTracking.php:271
+#: ../../../modules/tracking/individualTracking.php:327
 #: ../../../modules/import/importExec.php:190
 msgid "L'importation a échoué. Consultez les messages dans le tableau"
 msgstr "The importation failed. Consult the messages into the table"
 
-#: ../../../modules/tracking/individualTracking.php:284
+#: ../../../modules/tracking/individualTracking.php:340
 msgid "Le fichier fourni est vide ou n'a pu être téléchargé"
 msgstr "The provided file is empty or could not be downloaded"
 
@@ -1626,11 +1636,12 @@ msgstr "List of the complementary analysis models"
 #: ../../../display/templates/param/taxonList.tpl:7
 #: ../../../display/templates/param/taxatemplateList.tpl:7
 #: ../../../display/templates/gestion/campaignList.tpl:25
-#: ../../../display/templates/tracking/individualTrackingList.tpl:90
+#: ../../../display/templates/tracking/individualTrackingList.tpl:110
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:7
-#: ../../../display/templates/tracking/stationTrackingList.tpl:69
+#: ../../../display/templates/tracking/stationTrackingList.tpl:92
 #: ../../../display/templates/tracking/parameterMeasureTypeList.tpl:6
 #: ../../../display/templates/tracking/antennaList.tpl:6
+#: ../../../display/templates/tracking/paramList.tpl:7
 #: ../../../display/templates/tracking/probeList.tpl:6
 #: ../../../display/templates/import/exportModelList.tpl:26
 msgid "Nouveau..."
@@ -1651,13 +1662,14 @@ msgstr "New..."
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:36
 #: ../../../display/templates/gestion/sampleList.tpl:11
 #: ../../../display/templates/gestion/campaignList.tpl:32
-#: ../../../display/templates/gestion/sampleChange.tpl:698
-#: ../../../display/templates/tracking/individualTrackingList.tpl:164
-#: ../../../display/templates/tracking/individualTrackingList.tpl:242
+#: ../../../display/templates/gestion/sampleChange.tpl:712
+#: ../../../display/templates/tracking/individualTrackingList.tpl:202
+#: ../../../display/templates/tracking/individualTrackingList.tpl:282
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:13
-#: ../../../display/templates/tracking/stationTrackingList.tpl:75
+#: ../../../display/templates/tracking/stationTrackingList.tpl:98
 #: ../../../display/templates/tracking/parameterMeasureTypeList.tpl:12
 #: ../../../display/templates/tracking/antennaList.tpl:12
+#: ../../../display/templates/tracking/paramList.tpl:13
 #: ../../../display/templates/tracking/probeList.tpl:12
 #: ../../../display/templates/framework/request/requestList.tpl:9
 #: ../../../display/templates/import/importDescriptionList.tpl:13
@@ -1675,7 +1687,7 @@ msgstr "Id"
 #: ../../../display/templates/gestion/campaignDisplay.tpl:71
 #: ../../../display/templates/gestion/campaignList.tpl:33
 #: ../../../display/templates/gestion/sequenceList.tpl:14
-#: ../../../display/templates/tracking/stationTrackingList.tpl:76
+#: ../../../display/templates/tracking/stationTrackingList.tpl:99
 #: ../../../display/templates/import/importDescriptionList.tpl:14
 #: ../../../display/templates/import/exportModelList.tpl:38
 #: ../../../display/templates/import/importTypeList.tpl:8
@@ -1685,35 +1697,35 @@ msgstr "Name"
 #: ../../../display/templates/param/stationList.tpl:15
 #: ../../../display/templates/param/paramList.tpl:15
 #: ../../../display/templates/gestion/gearList.tpl:12
-#: ../../../display/templates/tracking/stationTrackingList.tpl:78
+#: ../../../display/templates/tracking/stationTrackingList.tpl:101
 msgid "Code métier"
 msgstr "Business code"
 
 #: ../../../display/templates/param/stationList.tpl:16
-#: ../../../display/templates/tracking/stationTrackingList.tpl:79
+#: ../../../display/templates/tracking/stationTrackingList.tpl:102
 msgid "N° métier"
 msgstr "Business number"
 
 #: ../../../display/templates/param/stationList.tpl:18
 #: ../../../display/templates/gestion/campaignList.tpl:34
-#: ../../../display/templates/tracking/stationTrackingList.tpl:81
+#: ../../../display/templates/tracking/stationTrackingList.tpl:104
 msgid "Projet"
 msgstr "Project"
 
 #: ../../../display/templates/param/stationList.tpl:19
-#: ../../../display/templates/tracking/individualTrackingList.tpl:249
-#: ../../../display/templates/tracking/stationTrackingList.tpl:82
+#: ../../../display/templates/tracking/individualTrackingList.tpl:289
+#: ../../../display/templates/tracking/stationTrackingList.tpl:105
 msgid "Longitude"
 msgstr "Longitude"
 
 #: ../../../display/templates/param/stationList.tpl:20
-#: ../../../display/templates/tracking/individualTrackingList.tpl:250
-#: ../../../display/templates/tracking/stationTrackingList.tpl:83
+#: ../../../display/templates/tracking/individualTrackingList.tpl:290
+#: ../../../display/templates/tracking/stationTrackingList.tpl:106
 msgid "Latitude"
 msgstr "Latitude"
 
 #: ../../../display/templates/param/stationList.tpl:21
-#: ../../../display/templates/tracking/stationTrackingList.tpl:84
+#: ../../../display/templates/tracking/stationTrackingList.tpl:107
 msgid "PK"
 msgstr "KP"
 
@@ -1765,6 +1777,8 @@ msgstr "Eventual attached project:"
 #: ../../../display/templates/gestion/ambienceChange.tpl:320
 #: ../../../display/templates/gestion/ambienceChange.tpl:333
 #: ../../../display/templates/gestion/ambienceChange.tpl:346
+#: ../../../display/templates/tracking/individualTrackingList.tpl:143
+#: ../../../display/templates/tracking/individualTrackingList.tpl:152
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:68
 msgid "Choisissez..."
 msgstr "Select..."
@@ -1839,12 +1853,13 @@ msgstr "Create - Edit a model of taxon complementary measures"
 #: ../../../display/templates/gestion/campaignDisplay.tpl:12
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:242
 #: ../../../display/templates/tracking/probeChange.tpl:5
+#: ../../../display/templates/tracking/paramChange.tpl:2
 #: ../../../display/templates/tracking/antennaChange.tpl:5
 #: ../../../display/templates/tracking/detectionChange.tpl:5
 #: ../../../display/templates/tracking/transmitter_typeChange.tpl:2
 #: ../../../display/templates/tracking/parameterMeasureTypeChange.tpl:5
 #: ../../../display/templates/tracking/locationChange.tpl:8
-#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:56
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:57
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:7
 #: ../../../display/templates/import/importTypeChange.tpl:5
 #: ../../../display/templates/import/exportModelDisplay.tpl:5
@@ -1873,7 +1888,7 @@ msgid "Nom à rechercher :"
 msgstr "Name to search:"
 
 #: ../../../display/templates/param/measureTemplateChange.tpl:86
-#: ../../../display/templates/gestion/sampleChange.tpl:373
+#: ../../../display/templates/gestion/sampleChange.tpl:381
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:278
 msgid "Taxon correspondant :"
 msgstr "Corresponding taxon:"
@@ -1900,19 +1915,20 @@ msgstr "Corresponding taxon:"
 #: ../../../display/templates/gestion/operationChange.tpl:66
 #: ../../../display/templates/gestion/operationChange.tpl:246
 #: ../../../display/templates/gestion/sequencePointChange.tpl:84
-#: ../../../display/templates/gestion/sampleChange.tpl:442
-#: ../../../display/templates/gestion/sampleChange.tpl:454
-#: ../../../display/templates/gestion/sampleChange.tpl:684
+#: ../../../display/templates/gestion/sampleChange.tpl:450
+#: ../../../display/templates/gestion/sampleChange.tpl:462
+#: ../../../display/templates/gestion/sampleChange.tpl:698
 #: ../../../display/templates/gestion/analysisChange.tpl:117
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:254
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:513
-#: ../../../display/templates/tracking/probeChange.tpl:27
-#: ../../../display/templates/tracking/antennaChange.tpl:45
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:519
+#: ../../../display/templates/tracking/probeChange.tpl:39
+#: ../../../display/templates/tracking/paramChange.tpl:17
+#: ../../../display/templates/tracking/antennaChange.tpl:57
 #: ../../../display/templates/tracking/detectionChange.tpl:117
 #: ../../../display/templates/tracking/transmitter_typeChange.tpl:30
 #: ../../../display/templates/tracking/parameterMeasureTypeChange.tpl:29
 #: ../../../display/templates/tracking/locationChange.tpl:91
-#: ../../../display/templates/tracking/stationTrackingChange.tpl:98
+#: ../../../display/templates/tracking/stationTrackingChange.tpl:104
 #: ../../../display/templates/framework/dbparamListChange.tpl:24
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:209
 #: ../../../display/templates/framework/ident/loginAdmin.tpl:24
@@ -1949,18 +1965,19 @@ msgstr "Save and return"
 #: ../../../display/templates/gestion/sequenceGearChange.tpl:93
 #: ../../../display/templates/gestion/operationChange.tpl:248
 #: ../../../display/templates/gestion/sequencePointChange.tpl:86
-#: ../../../display/templates/gestion/sampleChange.tpl:444
-#: ../../../display/templates/gestion/sampleChange.tpl:686
+#: ../../../display/templates/gestion/sampleChange.tpl:452
+#: ../../../display/templates/gestion/sampleChange.tpl:700
 #: ../../../display/templates/gestion/analysisChange.tpl:119
 #: ../../../display/templates/gestion/documentList.tpl:49
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:515
-#: ../../../display/templates/tracking/probeChange.tpl:29
-#: ../../../display/templates/tracking/antennaChange.tpl:47
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:521
+#: ../../../display/templates/tracking/probeChange.tpl:41
+#: ../../../display/templates/tracking/paramChange.tpl:19
+#: ../../../display/templates/tracking/antennaChange.tpl:59
 #: ../../../display/templates/tracking/detectionChange.tpl:119
 #: ../../../display/templates/tracking/transmitter_typeChange.tpl:32
 #: ../../../display/templates/tracking/parameterMeasureTypeChange.tpl:31
 #: ../../../display/templates/tracking/locationChange.tpl:93
-#: ../../../display/templates/tracking/stationTrackingChange.tpl:100
+#: ../../../display/templates/tracking/stationTrackingChange.tpl:106
 #: ../../../display/templates/framework/request/requestChange.tpl:85
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:211
 #: ../../../display/templates/framework/droits/appliChange.tpl:27
@@ -1994,13 +2011,14 @@ msgstr "Delete..."
 #: ../../../display/templates/gestion/operationChange.tpl:264
 #: ../../../display/templates/gestion/sequencePointChange.tpl:92
 #: ../../../display/templates/gestion/analysisChange.tpl:125
-#: ../../../display/templates/tracking/probeChange.tpl:35
-#: ../../../display/templates/tracking/antennaChange.tpl:53
+#: ../../../display/templates/tracking/probeChange.tpl:47
+#: ../../../display/templates/tracking/paramChange.tpl:25
+#: ../../../display/templates/tracking/antennaChange.tpl:65
 #: ../../../display/templates/tracking/detectionChange.tpl:126
 #: ../../../display/templates/tracking/transmitter_typeChange.tpl:38
 #: ../../../display/templates/tracking/parameterMeasureTypeChange.tpl:37
 #: ../../../display/templates/tracking/locationChange.tpl:97
-#: ../../../display/templates/tracking/stationTrackingChange.tpl:109
+#: ../../../display/templates/tracking/stationTrackingChange.tpl:115
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:222
 #: ../../../display/templates/framework/droits/appliChange.tpl:35
 #: ../../../display/templates/framework/droits/loginChange.tpl:31
@@ -2094,15 +2112,15 @@ msgstr "New protocol"
 #: ../../../display/templates/gestion/analysisDetail.tpl:2
 #: ../../../display/templates/gestion/ambienceDetailOperation.tpl:5
 #: ../../../display/templates/gestion/ambienceDetailSequence.tpl:4
-#: ../../../display/templates/tracking/individualTrackingList.tpl:173
-#: ../../../display/templates/tracking/individualTrackingList.tpl:199
-#: ../../../display/templates/tracking/stationTrackingList.tpl:87
-#: ../../../display/templates/tracking/stationTrackingList.tpl:115
+#: ../../../display/templates/tracking/individualTrackingList.tpl:212
+#: ../../../display/templates/tracking/individualTrackingList.tpl:239
+#: ../../../display/templates/tracking/stationTrackingList.tpl:111
+#: ../../../display/templates/tracking/stationTrackingList.tpl:140
 #: ../../../display/templates/tracking/parameterMeasureTypeList.tpl:22
-#: ../../../display/templates/tracking/antennaList.tpl:18
-#: ../../../display/templates/tracking/antennaList.tpl:32
-#: ../../../display/templates/tracking/probeList.tpl:17
-#: ../../../display/templates/tracking/probeList.tpl:34
+#: ../../../display/templates/tracking/antennaList.tpl:20
+#: ../../../display/templates/tracking/antennaList.tpl:36
+#: ../../../display/templates/tracking/probeList.tpl:19
+#: ../../../display/templates/tracking/probeList.tpl:38
 #: ../../../display/templates/framework/droits/appliList.tpl:11
 #: ../../../display/templates/import/importDescriptionList.tpl:20
 #: ../../../display/templates/import/importDescriptionList.tpl:41
@@ -2181,12 +2199,14 @@ msgstr "Is only the default length allowed?"
 #: ../../../display/templates/gestion/operationDetail.tpl:60
 #: ../../../display/templates/gestion/campaignSearch.tpl:31
 #: ../../../display/templates/gestion/operationChange.tpl:138
-#: ../../../display/templates/gestion/sampleChange.tpl:502
-#: ../../../display/templates/tracking/individualTrackingList.tpl:117
-#: ../../../display/templates/tracking/individualTrackingList.tpl:287
+#: ../../../display/templates/gestion/sampleChange.tpl:510
+#: ../../../display/templates/tracking/individualTrackingList.tpl:132
+#: ../../../display/templates/tracking/individualTrackingList.tpl:327
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:341
-#: ../../../display/templates/tracking/stationTrackingList.tpl:57
+#: ../../../display/templates/tracking/stationTrackingList.tpl:70
+#: ../../../display/templates/tracking/stationTrackingList.tpl:80
 #: ../../../display/templates/tracking/detectionChange.tpl:107
+#: ../../../display/templates/tracking/stationTrackingChange.tpl:98
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:125
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:201
 #: ../../../display/templates/framework/ident/loginliste.tpl:45
@@ -2209,12 +2229,14 @@ msgstr "yes"
 #: ../../../display/templates/gestion/operationDetail.tpl:60
 #: ../../../display/templates/gestion/campaignSearch.tpl:32
 #: ../../../display/templates/gestion/operationChange.tpl:142
-#: ../../../display/templates/gestion/sampleChange.tpl:499
-#: ../../../display/templates/tracking/individualTrackingList.tpl:118
-#: ../../../display/templates/tracking/individualTrackingList.tpl:287
+#: ../../../display/templates/gestion/sampleChange.tpl:507
+#: ../../../display/templates/tracking/individualTrackingList.tpl:133
+#: ../../../display/templates/tracking/individualTrackingList.tpl:327
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:338
-#: ../../../display/templates/tracking/stationTrackingList.tpl:58
+#: ../../../display/templates/tracking/stationTrackingList.tpl:71
+#: ../../../display/templates/tracking/stationTrackingList.tpl:81
 #: ../../../display/templates/tracking/detectionChange.tpl:110
+#: ../../../display/templates/tracking/stationTrackingChange.tpl:99
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:129
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:204
 msgid "non"
@@ -2246,10 +2268,12 @@ msgid "Liste des documents associés"
 msgstr "List of related documents"
 
 #: ../../../display/templates/param/paramChange.tpl:1
+#: ../../../display/templates/tracking/paramChange.tpl:1
 msgid "Création - Modification d'un paramètre : "
 msgstr "Create - Edit a parameter:"
 
 #: ../../../display/templates/param/paramChange.tpl:10
+#: ../../../display/templates/tracking/paramChange.tpl:10
 msgid ""
 "Libellé\n"
 "          :"
@@ -2281,14 +2305,15 @@ msgstr "Codes available"
 #: ../../../display/templates/param/sexeList.tpl:14
 #: ../../../display/templates/param/paramList.tpl:14
 #: ../../../display/templates/param/pathologyList.tpl:23
+#: ../../../display/templates/tracking/paramList.tpl:14
 msgid "Libellé"
 msgstr "Label"
 
 #: ../../../display/templates/param/sexeList.tpl:15
 #: ../../../display/templates/param/pathologyList.tpl:24
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:38
-#: ../../../display/templates/gestion/sampleChange.tpl:699
-#: ../../../display/templates/tracking/individualTrackingList.tpl:166
+#: ../../../display/templates/gestion/sampleChange.tpl:713
+#: ../../../display/templates/tracking/individualTrackingList.tpl:204
 #: ../../../display/templates/tracking/antennaList.tpl:13
 #: ../../../display/templates/tracking/probeList.tpl:13
 msgid "Code"
@@ -2340,12 +2365,12 @@ msgstr "Protocol used by default:"
 #: ../../../display/templates/gestion/operationChange.tpl:111
 #: ../../../display/templates/gestion/operationChange.tpl:222
 #: ../../../display/templates/gestion/operationChange.tpl:236
-#: ../../../display/templates/gestion/sampleChange.tpl:529
-#: ../../../display/templates/gestion/sampleChange.tpl:540
-#: ../../../display/templates/gestion/sampleChange.tpl:604
+#: ../../../display/templates/gestion/sampleChange.tpl:537
+#: ../../../display/templates/gestion/sampleChange.tpl:548
+#: ../../../display/templates/gestion/sampleChange.tpl:612
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:369
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:380
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:428
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:434
 msgid "Sélectionnez..."
 msgstr "Select..."
 
@@ -2657,6 +2682,7 @@ msgid "Rattachement des modèles de mesure au protocole "
 msgstr "Attachment of measure models to the protocol"
 
 #: ../../../display/templates/param/paramList.tpl:1
+#: ../../../display/templates/tracking/paramList.tpl:1
 msgid "Liste des paramètres : "
 msgstr "List of parameters:"
 
@@ -2707,7 +2733,7 @@ msgstr "Watercourse:"
 
 #: ../../../display/templates/param/stationChange.tpl:62
 #: ../../../display/templates/gestion/ambienceChange.tpl:84
-#: ../../../display/templates/gestion/ambienceDetail.tpl:12
+#: ../../../display/templates/gestion/ambienceDetail.tpl:13
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:28
 #: ../../../display/templates/tracking/locationChange.tpl:67
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:78
@@ -2716,7 +2742,7 @@ msgstr "Longitude:"
 
 #: ../../../display/templates/param/stationChange.tpl:68
 #: ../../../display/templates/gestion/ambienceChange.tpl:90
-#: ../../../display/templates/gestion/ambienceDetail.tpl:16
+#: ../../../display/templates/gestion/ambienceDetail.tpl:17
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:32
 #: ../../../display/templates/tracking/locationChange.tpl:73
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:84
@@ -2801,9 +2827,9 @@ msgstr "Name of the campaign:"
 #: ../../../display/templates/gestion/campaignDisplay.tpl:36
 #: ../../../display/templates/gestion/campaignSearch.tpl:14
 #: ../../../display/templates/tracking/individualTrackingImport.tpl:39
-#: ../../../display/templates/tracking/individualTrackingList.tpl:100
+#: ../../../display/templates/tracking/individualTrackingList.tpl:120
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:257
-#: ../../../display/templates/tracking/stationTrackingList.tpl:40
+#: ../../../display/templates/tracking/stationTrackingList.tpl:58
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:8
 #: ../../../display/templates/tracking/detectionRecalculate.tpl:20
 #: ../../../display/templates/import/importExec.tpl:142
@@ -2823,7 +2849,7 @@ msgid "Nouvelle opération..."
 msgstr "New operation..."
 
 #: ../../../display/templates/gestion/campaignDisplay.tpl:56
-#: ../../../display/templates/gestion/operationDisplay.tpl:79
+#: ../../../display/templates/gestion/operationDisplay.tpl:77
 msgid "Exporter les poissons mesurés"
 msgstr "Export the measured fishes"
 
@@ -2832,8 +2858,8 @@ msgid "Date/heure de début"
 msgstr "Date/time of start"
 
 #: ../../../display/templates/gestion/campaignDisplay.tpl:73
-#: ../../../display/templates/tracking/individualTrackingList.tpl:245
-#: ../../../display/templates/tracking/individualTrackingList.tpl:344
+#: ../../../display/templates/tracking/individualTrackingList.tpl:285
+#: ../../../display/templates/tracking/individualTrackingList.tpl:384
 msgid "Station"
 msgstr "Station"
 
@@ -2875,8 +2901,8 @@ msgstr "Import on or more operations"
 #: ../../../display/templates/gestion/sequenceGearChange.tpl:3
 #: ../../../display/templates/gestion/operationChange.tpl:54
 #: ../../../display/templates/gestion/sequencePointChange.tpl:28
-#: ../../../display/templates/gestion/sampleChange.tpl:302
-#: ../../../display/templates/gestion/operationDisplay.tpl:69
+#: ../../../display/templates/gestion/sampleChange.tpl:310
+#: ../../../display/templates/gestion/operationDisplay.tpl:67
 #: ../../../display/templates/gestion/analysisChange.tpl:37
 msgid "Retour à la campagne"
 msgstr "Back to the campaign"
@@ -2888,7 +2914,7 @@ msgstr "Back to the campaign"
 #: ../../../display/templates/gestion/sequenceGearChange.tpl:7
 #: ../../../display/templates/gestion/operationChange.tpl:56
 #: ../../../display/templates/gestion/sequencePointChange.tpl:32
-#: ../../../display/templates/gestion/sampleChange.tpl:307
+#: ../../../display/templates/gestion/sampleChange.tpl:315
 #: ../../../display/templates/gestion/analysisChange.tpl:42
 msgid "Retour à l'opération"
 msgstr "Back to the operation"
@@ -2898,7 +2924,7 @@ msgstr "Back to the operation"
 #: ../../../display/templates/gestion/ambienceChange.tpl:60
 #: ../../../display/templates/gestion/sequenceGearChange.tpl:10
 #: ../../../display/templates/gestion/sequencePointChange.tpl:35
-#: ../../../display/templates/gestion/sampleChange.tpl:314
+#: ../../../display/templates/gestion/sampleChange.tpl:322
 #: ../../../display/templates/gestion/analysisChange.tpl:47
 msgid "Retour à la séquence"
 msgstr "Back to the sequence"
@@ -2908,38 +2934,38 @@ msgid "Ajout de poissons saisis dans le module de télémétrie"
 msgstr "Adding Fish recorded with the telemetry module"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:39
-#: ../../../display/templates/gestion/sampleChange.tpl:700
+#: ../../../display/templates/gestion/sampleChange.tpl:714
 msgid "standard"
 msgstr "standard"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:40
-#: ../../../display/templates/gestion/sampleChange.tpl:701
+#: ../../../display/templates/gestion/sampleChange.tpl:715
 msgid "Fourche"
 msgstr "Fork"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:41
-#: ../../../display/templates/gestion/sampleChange.tpl:702
+#: ../../../display/templates/gestion/sampleChange.tpl:716
 msgid "Totale"
 msgstr "Total"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:42
-#: ../../../display/templates/gestion/sampleChange.tpl:703
+#: ../../../display/templates/gestion/sampleChange.tpl:717
 msgid "Disque"
 msgstr "Disc"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:43
-#: ../../../display/templates/gestion/sampleChange.tpl:704
+#: ../../../display/templates/gestion/sampleChange.tpl:718
 msgid "Autre"
 msgstr "Other"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:44
-#: ../../../display/templates/gestion/sampleChange.tpl:705
+#: ../../../display/templates/gestion/sampleChange.tpl:719
 msgid "Poids"
 msgstr "Weight"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:45
-#: ../../../display/templates/gestion/sampleChange.tpl:707
-#: ../../../display/templates/tracking/individualTrackingList.tpl:171
+#: ../../../display/templates/gestion/sampleChange.tpl:721
+#: ../../../display/templates/tracking/individualTrackingList.tpl:210
 msgid "Identifiant unique"
 msgstr "Unique identifier"
 
@@ -3096,8 +3122,8 @@ msgid "Ajouter des poissons saisis dans le module de télémétrie"
 msgstr "Adding fish recorded with the telemetry module"
 
 #: ../../../display/templates/gestion/sequenceDisplay.tpl:105
-#: ../../../display/templates/gestion/operationDisplay.tpl:98
-#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:70
+#: ../../../display/templates/gestion/operationDisplay.tpl:96
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:71
 msgid "Détails"
 msgstr "Details"
 
@@ -3119,8 +3145,8 @@ msgid "Points d'échantillonnage"
 msgstr "Sampling points"
 
 #: ../../../display/templates/gestion/sequenceDisplay.tpl:163
-#: ../../../display/templates/gestion/operationDisplay.tpl:147
-#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:105
+#: ../../../display/templates/gestion/operationDisplay.tpl:145
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:106
 msgid "Activer le survol des onglets :"
 msgstr "Enable tab hovering:"
 
@@ -3177,21 +3203,20 @@ msgid "Repérez votre position !"
 msgstr "Locate your position!"
 
 #: ../../../display/templates/gestion/campaignSearch.tpl:25
-#: ../../../display/templates/tracking/individualTrackingList.tpl:111
-#: ../../../display/templates/tracking/individualTrackingList.tpl:235
-#: ../../../display/templates/tracking/stationTrackingList.tpl:51
+#: ../../../display/templates/tracking/individualTrackingList.tpl:136
+#: ../../../display/templates/tracking/individualTrackingList.tpl:275
+#: ../../../display/templates/tracking/stationTrackingList.tpl:74
 #: ../../../display/templates/framework/logList.tpl:38
 msgid "Rechercher"
 msgstr "Search"
 
 #: ../../../display/templates/gestion/campaignSearch.tpl:29
-#: ../../../display/templates/tracking/individualTrackingList.tpl:115
-#: ../../../display/templates/tracking/stationTrackingList.tpl:55
+#: ../../../display/templates/tracking/stationTrackingList.tpl:68
 msgid "Projets actifs :"
 msgstr "Active projects:"
 
 #: ../../../display/templates/gestion/sampleList.tpl:5
-#: ../../../display/templates/gestion/sampleChange.tpl:320
+#: ../../../display/templates/gestion/sampleChange.tpl:328
 msgid "Nouveau lot"
 msgstr "New batch"
 
@@ -3221,43 +3246,43 @@ msgid "Commentaires"
 msgstr "Comments"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:78
-#: ../../../display/templates/gestion/ambienceDetail.tpl:8
+#: ../../../display/templates/gestion/ambienceDetail.tpl:9
 msgid "Nom de l'ambiance :"
 msgstr "Ambience name:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:96
-#: ../../../display/templates/gestion/ambienceDetail.tpl:20
+#: ../../../display/templates/gestion/ambienceDetail.tpl:21
 msgid "Situation :"
 msgstr "Situation:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:109
 #: ../../../display/templates/gestion/sequencePointChange.tpl:58
-#: ../../../display/templates/gestion/ambienceDetail.tpl:24
+#: ../../../display/templates/gestion/ambienceDetail.tpl:25
 msgid "Localisation :"
 msgstr "Localisation:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:122
-#: ../../../display/templates/gestion/ambienceDetail.tpl:28
+#: ../../../display/templates/gestion/ambienceDetail.tpl:29
 msgid "Longueur (en m) :"
 msgstr "Length (in meters):"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:128
-#: ../../../display/templates/gestion/ambienceDetail.tpl:32
+#: ../../../display/templates/gestion/ambienceDetail.tpl:33
 msgid "Largeur (en m) :"
 msgstr "Width (in meters):"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:134
-#: ../../../display/templates/gestion/ambienceDetail.tpl:37
+#: ../../../display/templates/gestion/ambienceDetail.tpl:38
 msgid "Lame d'eau"
 msgstr "Water blade"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:136
-#: ../../../display/templates/gestion/ambienceDetail.tpl:39
+#: ../../../display/templates/gestion/ambienceDetail.tpl:40
 msgid "Classe de vitesse du courant (cm/s) :"
 msgstr "Speed current class (cm/s):"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:149
-#: ../../../display/templates/gestion/ambienceDetail.tpl:43
+#: ../../../display/templates/gestion/ambienceDetail.tpl:44
 msgid "Vitesse du courant : moy / min / max (cm/s)"
 msgstr "Current speed: avg/min/max (cm/s)"
 
@@ -3272,84 +3297,84 @@ msgid "Valeur maxi"
 msgstr "Maximum value"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:157
-#: ../../../display/templates/gestion/ambienceDetail.tpl:47
+#: ../../../display/templates/gestion/ambienceDetail.tpl:48
 msgid "Hauteur d'eau : moy / min / max (cm)"
 msgstr "Water height: avg/min/max (cm)"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:165
-#: ../../../display/templates/gestion/ambienceDetail.tpl:51
+#: ../../../display/templates/gestion/ambienceDetail.tpl:52
 msgid "Régime hydrologique :"
 msgstr "Hydrological regime"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:178
-#: ../../../display/templates/gestion/ambienceDetail.tpl:55
+#: ../../../display/templates/gestion/ambienceDetail.tpl:56
 msgid "Turbidité :"
 msgstr "Turbidity:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:195
-#: ../../../display/templates/gestion/ambienceDetail.tpl:64
+#: ../../../display/templates/gestion/ambienceDetail.tpl:65
 msgid "Caractéristiques du milieu"
 msgstr "Environmental characteristics"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:197
-#: ../../../display/templates/gestion/ambienceDetail.tpl:66
+#: ../../../display/templates/gestion/ambienceDetail.tpl:67
 msgid "Faciès :"
 msgstr "Facies:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:210
 #: ../../../display/templates/gestion/ambienceChange.tpl:317
-#: ../../../display/templates/gestion/ambienceDetail.tpl:70
-#: ../../../display/templates/gestion/ambienceDetail.tpl:105
+#: ../../../display/templates/gestion/ambienceDetail.tpl:71
+#: ../../../display/templates/gestion/ambienceDetail.tpl:106
 msgid "Végétation :"
 msgstr "Vegetation:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:223
-#: ../../../display/templates/gestion/ambienceDetail.tpl:74
+#: ../../../display/templates/gestion/ambienceDetail.tpl:75
 msgid "Sinuosité :"
 msgstr "Sinuosity:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:236
-#: ../../../display/templates/gestion/ambienceDetail.tpl:78
+#: ../../../display/templates/gestion/ambienceDetail.tpl:79
 msgid "Ombrage :"
 msgstr "Shading:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:249
-#: ../../../display/templates/gestion/ambienceDetail.tpl:82
+#: ../../../display/templates/gestion/ambienceDetail.tpl:83
 msgid "Granulométrie principale :"
 msgstr "Main granulometry:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:262
-#: ../../../display/templates/gestion/ambienceDetail.tpl:86
+#: ../../../display/templates/gestion/ambienceDetail.tpl:87
 msgid "Granulométrie secondaire :"
 msgstr "Secondary granulometry:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:275
-#: ../../../display/templates/gestion/ambienceDetail.tpl:90
+#: ../../../display/templates/gestion/ambienceDetail.tpl:91
 msgid "Colmatage :"
 msgstr "Clogging:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:289
-#: ../../../display/templates/gestion/ambienceDetail.tpl:95
+#: ../../../display/templates/gestion/ambienceDetail.tpl:96
 msgid "Abondance des caches"
 msgstr "Cache abundance"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:291
-#: ../../../display/templates/gestion/ambienceDetail.tpl:97
+#: ../../../display/templates/gestion/ambienceDetail.tpl:98
 msgid "Herbiers :"
 msgstr "Herbarium:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:304
-#: ../../../display/templates/gestion/ambienceDetail.tpl:101
+#: ../../../display/templates/gestion/ambienceDetail.tpl:102
 msgid "Branchages :"
 msgstr "Branches:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:330
-#: ../../../display/templates/gestion/ambienceDetail.tpl:109
+#: ../../../display/templates/gestion/ambienceDetail.tpl:110
 msgid "Sous-berge :"
 msgstr "Sub-shelter:"
 
 #: ../../../display/templates/gestion/ambienceChange.tpl:343
-#: ../../../display/templates/gestion/ambienceDetail.tpl:113
+#: ../../../display/templates/gestion/ambienceDetail.tpl:114
 msgid "Cailloux, blocs :"
 msgstr "Pebbles, blocks:"
 
@@ -3525,216 +3550,221 @@ msgid "Confirmez-vous la suppression ?"
 msgstr "Do you confirm the deletion?"
 
 #: ../../../display/templates/gestion/sampleChange.tpl:166
-#: ../../../display/templates/gestion/sampleChange.tpl:446
+#: ../../../display/templates/gestion/sampleChange.tpl:454
 msgid "Masquer"
 msgstr "Hide"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:325
+#: ../../../display/templates/gestion/sampleChange.tpl:333
 msgid "Nouvelle capture"
 msgstr "New capture"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:336
+#: ../../../display/templates/gestion/sampleChange.tpl:344
 msgid "Création d'un nouveau lot"
 msgstr "Create a new batch"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:352
+#: ../../../display/templates/gestion/sampleChange.tpl:360
 msgid "Détail du lot n°"
 msgstr "Detail of the batch #"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:355
+#: ../../../display/templates/gestion/sampleChange.tpl:363
 msgid "Changement de taxon"
 msgstr "Taxon change"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:367
+#: ../../../display/templates/gestion/sampleChange.tpl:375
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:272
 msgid "Code ou nom à rechercher :"
 msgstr "Code or name to find:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:384
+#: ../../../display/templates/gestion/sampleChange.tpl:392
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:289
 msgid "Nom du taxon :"
 msgstr "Taxon name:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:392
+#: ../../../display/templates/gestion/sampleChange.tpl:400
 msgid "Nombre total :"
 msgstr "Total number:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:399
+#: ../../../display/templates/gestion/sampleChange.tpl:407
 msgid "Nombre mesurés :"
 msgstr "Measured number:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:406
+#: ../../../display/templates/gestion/sampleChange.tpl:414
 msgid "Poids total (g) :"
 msgstr "Total weight (g):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:413
+#: ../../../display/templates/gestion/sampleChange.tpl:421
 msgid ""
 "Longueur minimale mesurée (mm)\n"
 "\t\t\t\t\t\t:"
 msgstr "Minimal measured length (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:421
+#: ../../../display/templates/gestion/sampleChange.tpl:429
 msgid ""
 "Longueur maximale mesurée (mm)\n"
 "\t\t\t\t\t\t:"
 msgstr "Maximal measured length (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:429
-#: ../../../display/templates/gestion/sampleChange.tpl:669
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:499
+#: ../../../display/templates/gestion/sampleChange.tpl:437
+#: ../../../display/templates/gestion/sampleChange.tpl:683
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:505
 msgid "Commentaires :"
 msgstr "Comments:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:436
+#: ../../../display/templates/gestion/sampleChange.tpl:444
 msgid "UUID :"
 msgstr "UUID:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:446
+#: ../../../display/templates/gestion/sampleChange.tpl:454
 msgid "Informations complémentaires du lot"
 msgstr "Additional information about the batch"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:453
+#: ../../../display/templates/gestion/sampleChange.tpl:461
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:253
 msgid "Mode automatique :"
 msgstr "Automatic mode:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:460
+#: ../../../display/templates/gestion/sampleChange.tpl:468
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:305
 msgid "Longueur standard (mm) :"
 msgstr "Standard length (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:467
+#: ../../../display/templates/gestion/sampleChange.tpl:475
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:311
 msgid "Longueur fourche (mm) :"
 msgstr "Fork length (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:474
+#: ../../../display/templates/gestion/sampleChange.tpl:482
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:317
 msgid "Longueur totale (mm) :"
 msgstr "Total length (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:481
+#: ../../../display/templates/gestion/sampleChange.tpl:489
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:323
 msgid "Largeur disque (mm) :"
 msgstr "Disc width (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:488
+#: ../../../display/templates/gestion/sampleChange.tpl:496
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:329
 msgid "Autre longueur (mm) :"
 msgstr "Other length (mm):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:495
+#: ../../../display/templates/gestion/sampleChange.tpl:503
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:335
 msgid "Mesure estimée ?"
 msgstr "Estimated measure?"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:504
+#: ../../../display/templates/gestion/sampleChange.tpl:512
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:346
 msgid "Poids (g) :"
 msgstr "Weight (g):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:511
+#: ../../../display/templates/gestion/sampleChange.tpl:519
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:352
 msgid "Age (année) :"
 msgstr "Age (year):"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:518
+#: ../../../display/templates/gestion/sampleChange.tpl:526
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:358
 msgid "Données complémentaires"
 msgstr "Complementary data"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:526
+#: ../../../display/templates/gestion/sampleChange.tpl:534
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:366
 msgid "Sexe :"
 msgstr "Sexe:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:537
+#: ../../../display/templates/gestion/sampleChange.tpl:545
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:377
 msgid "pathologie :"
 msgstr "Pathology:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:551
+#: ../../../display/templates/gestion/sampleChange.tpl:559
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:391
 msgid "Pathologies (suite de codes) ou commentaires sur la pathologie :"
 msgstr "Pathologies (code sequence) or comments on the pathology:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:558
+#: ../../../display/templates/gestion/sampleChange.tpl:566
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:398
 msgid "Code du poisson :"
 msgstr "Fish code:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:564
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:404
+#: ../../../display/templates/gestion/sampleChange.tpl:572
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:410
 msgid "Marque RFID lue :"
 msgstr "RFID tag read:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:571
+#: ../../../display/templates/gestion/sampleChange.tpl:579
 msgid ""
 "Marque RFID posée\n"
 "\t\t\t\t\t\t\t:"
 msgstr "RFID tag installed:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:579
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:416
+#: ../../../display/templates/gestion/sampleChange.tpl:587
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:422
 msgid "Code du transmetteur acoustique ou radio posé ou existant :"
 msgstr "Acoustic or radio transmitter code installed or existing:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:586
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:438
+#: ../../../display/templates/gestion/sampleChange.tpl:594
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:444
 msgid "Marque spaghetti :"
 msgstr "Spaghetti brand:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:593
+#: ../../../display/templates/gestion/sampleChange.tpl:601
 msgid "Poisson utilisé en télédétection ?"
 msgstr "Fish used in remote sensing?"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:600
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:424
+#: ../../../display/templates/gestion/sampleChange.tpl:608
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:430
 msgid "Modèle de transmetteur posé :"
 msgstr "Model of installed transmitter:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:614
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:444
+#: ../../../display/templates/gestion/sampleChange.tpl:622
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:450
 msgid "Données de capture et de remise à l'eau"
 msgstr "Catch and release data"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:616
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:446
+#: ../../../display/templates/gestion/sampleChange.tpl:624
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:404
+msgid "Année(s) de suivi (séparées par une virgule, sans espace) :"
+msgstr "Year(s) of use (separated by a comma, without space):"
+
+#: ../../../display/templates/gestion/sampleChange.tpl:630
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:452
 msgid "Heure de capture :"
 msgstr "Catch time:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:622
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:452
+#: ../../../display/templates/gestion/sampleChange.tpl:636
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:458
 msgid "Durée d'anesthésie :"
 msgstr "Anaesthesia duration:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:628
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:458
+#: ../../../display/templates/gestion/sampleChange.tpl:642
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:464
 msgid "Durée de marquage (secondes) :"
 msgstr "Marking time, in seconds:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:634
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:464
+#: ../../../display/templates/gestion/sampleChange.tpl:648
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:470
 msgid "Produit d'anesthésie utilisé :"
 msgstr "Anaesthesia product used:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:640
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:470
+#: ../../../display/templates/gestion/sampleChange.tpl:654
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:476
 msgid "Concentration du produit :"
 msgstr "Product concentration:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:646
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:476
+#: ../../../display/templates/gestion/sampleChange.tpl:660
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:482
 msgid "Heure de lâcher :"
 msgstr "Release time:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:652
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:482
+#: ../../../display/templates/gestion/sampleChange.tpl:666
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:488
 msgid "Station de lâcher :"
 msgstr "Release station:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:655
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:485
+#: ../../../display/templates/gestion/sampleChange.tpl:669
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:491
 #: ../../../display/templates/tracking/detectionChange.tpl:44
 #: ../../../display/templates/tracking/detectionChange.tpl:59
 #: ../../../display/templates/tracking/locationChange.tpl:44
@@ -3742,25 +3772,25 @@ msgstr "Release station:"
 msgid "Sélectionnez"
 msgstr "Select"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:666
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:496
+#: ../../../display/templates/gestion/sampleChange.tpl:680
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:502
 msgid "Divers"
 msgstr "Miscellaneous"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:677
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:506
+#: ../../../display/templates/gestion/sampleChange.tpl:691
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:512
 msgid "Identifiant unique :"
 msgstr "Unique identifier:"
 
-#: ../../../display/templates/gestion/sampleChange.tpl:695
+#: ../../../display/templates/gestion/sampleChange.tpl:709
 msgid "Poissons mesurés"
 msgstr "Measured fish"
 
-#: ../../../display/templates/gestion/ambienceDetail.tpl:129
+#: ../../../display/templates/gestion/ambienceDetail.tpl:130
 msgid "mesures complémentaires"
 msgstr "Complementary measures"
 
-#: ../../../display/templates/gestion/ambienceDetail.tpl:133
+#: ../../../display/templates/gestion/ambienceDetail.tpl:134
 msgid "%1"
 msgstr "%1"
 
@@ -3788,23 +3818,23 @@ msgstr "Creation date of the document:"
 msgid "Envoyer le fichier"
 msgstr "Send file"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:60
+#: ../../../display/templates/gestion/operationDisplay.tpl:58
 msgid "Confirmez-vous la duplication de l'opération courante ?"
 msgstr "Do you confirm the duplication of the current operation?"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:74
+#: ../../../display/templates/gestion/operationDisplay.tpl:72
 msgid "Opération"
 msgstr "Operation"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:102
+#: ../../../display/templates/gestion/operationDisplay.tpl:100
 msgid "Ambiance générale"
 msgstr "General ambience"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:106
+#: ../../../display/templates/gestion/operationDisplay.tpl:104
 msgid "Séquences de pêche"
 msgstr "Fishing sequences"
 
-#: ../../../display/templates/gestion/operationDisplay.tpl:114
+#: ../../../display/templates/gestion/operationDisplay.tpl:112
 msgid "Documents"
 msgstr "Documents"
 
@@ -3937,12 +3967,12 @@ msgid "Premier"
 msgstr "First"
 
 #: ../../../display/templates/main_js.tpl:94
-#: ../../../display/templates/tracking/individualTrackingList.tpl:230
+#: ../../../display/templates/tracking/individualTrackingList.tpl:270
 msgid "Précédent"
 msgstr "Previous"
 
 #: ../../../display/templates/main_js.tpl:95
-#: ../../../display/templates/tracking/individualTrackingList.tpl:238
+#: ../../../display/templates/tracking/individualTrackingList.tpl:278
 msgid "Suivant"
 msgstr "Next"
 
@@ -4139,144 +4169,160 @@ msgstr ""
 ": identifier of the release station (cf. corresponding table in the "
 "parameters)"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:128
+#: ../../../display/templates/tracking/individualTrackingList.tpl:130
+msgid "actifs ?"
+msgstr "active?"
+
+#: ../../../display/templates/tracking/individualTrackingList.tpl:140
+msgid "Année :"
+msgstr "Year:"
+
+#: ../../../display/templates/tracking/individualTrackingList.tpl:149
+msgid "Espèce : "
+msgstr "Species:"
+
+#: ../../../display/templates/tracking/individualTrackingList.tpl:166
 msgid "Liste"
 msgstr "List"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:133
-#: ../../../display/templates/tracking/individualTrackingList.tpl:163
+#: ../../../display/templates/tracking/individualTrackingList.tpl:171
+#: ../../../display/templates/tracking/individualTrackingList.tpl:201
 msgid "Détections"
 msgstr "Detections"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:137
+#: ../../../display/templates/tracking/individualTrackingList.tpl:175
 msgid "Récapitulatif journalier"
 msgstr "Daily recap"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:140
+#: ../../../display/templates/tracking/individualTrackingList.tpl:178
 msgid "Récapitulatif par station"
 msgstr "Station recap"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:144
+#: ../../../display/templates/tracking/individualTrackingList.tpl:182
 msgid "Carte des détections par station"
 msgstr "Map of detections by station"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:155
+#: ../../../display/templates/tracking/individualTrackingList.tpl:193
 msgid "Exporter les détections"
 msgstr "Export the detections"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:167
+#: ../../../display/templates/tracking/individualTrackingList.tpl:205
 #: ../../../display/templates/tracking/detectionChange.tpl:17
 #: ../../../display/templates/tracking/locationChange.tpl:21
 msgid "Tag RFID"
 msgstr "RFID tag"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:168
+#: ../../../display/templates/tracking/individualTrackingList.tpl:206
 msgid "Émetteur acoustique ou radio"
 msgstr "Acoustic or radio transmitter"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:169
+#: ../../../display/templates/tracking/individualTrackingList.tpl:207
 msgid "Modèle d'émetteur"
 msgstr "Model of transmitter"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:170
+#: ../../../display/templates/tracking/individualTrackingList.tpl:208
 msgid "Marque spaghetti"
 msgstr "Spaghetti brand"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:215
+#: ../../../display/templates/tracking/individualTrackingList.tpl:209
+msgid "Année(s)"
+msgstr "Year(s):"
+
+#: ../../../display/templates/tracking/individualTrackingList.tpl:255
 msgid "Liste des détections"
 msgstr "List of detections"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:217
+#: ../../../display/templates/tracking/individualTrackingList.tpl:257
 msgid "Nouvelle détection manuelle"
 msgstr "New manual detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:233
+#: ../../../display/templates/tracking/individualTrackingList.tpl:273
 msgid "Aller à la ligne :"
 msgstr "Go to the line:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:243
+#: ../../../display/templates/tracking/individualTrackingList.tpl:283
 msgid "Date/heure de détection"
 msgstr "Date/Time of detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:244
+#: ../../../display/templates/tracking/individualTrackingList.tpl:284
 msgid "Type de détection"
 msgstr "Type of detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:246
+#: ../../../display/templates/tracking/individualTrackingList.tpl:286
 msgid "Nbre d'événements"
 msgstr "Number of events"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:247
+#: ../../../display/templates/tracking/individualTrackingList.tpl:287
 msgid "Durée, en secondes"
 msgstr "Duration, in seconds"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:248
+#: ../../../display/templates/tracking/individualTrackingList.tpl:288
 msgid "Force du signal"
 msgstr "Signal strength"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:251
+#: ../../../display/templates/tracking/individualTrackingList.tpl:291
 msgid "Observation"
 msgstr "Observation"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:252
+#: ../../../display/templates/tracking/individualTrackingList.tpl:292
 msgid "Valide ?"
 msgstr "Valid?"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:274
+#: ../../../display/templates/tracking/individualTrackingList.tpl:314
 msgid "Station fixe"
 msgstr "Fixed station"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:276
+#: ../../../display/templates/tracking/individualTrackingList.tpl:316
 msgid "Détection mobile"
 msgstr "Mobile detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:302
+#: ../../../display/templates/tracking/individualTrackingList.tpl:342
 #: ../../../display/templates/framework/logList.tpl:48
 #: ../../../display/templates/framework/lastConnections.tpl:7
 msgid "Date"
 msgstr "Date"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:303
+#: ../../../display/templates/tracking/individualTrackingList.tpl:343
 msgid "Jour"
 msgstr "Day"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:304
+#: ../../../display/templates/tracking/individualTrackingList.tpl:344
 msgid "Nuit"
 msgstr "Night"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:305
+#: ../../../display/templates/tracking/individualTrackingList.tpl:345
 msgid "Non déterminé"
 msgstr "Unknown"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:306
+#: ../../../display/templates/tracking/individualTrackingList.tpl:346
 msgid "Total"
 msgstr "Total"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:328
+#: ../../../display/templates/tracking/individualTrackingList.tpl:368
 msgid "Total général :"
 msgstr "General total:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:345
+#: ../../../display/templates/tracking/individualTrackingList.tpl:385
 msgid "Antenne"
 msgstr "Antenna"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:346
+#: ../../../display/templates/tracking/individualTrackingList.tpl:386
 msgid "N° station"
 msgstr "station #"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:347
+#: ../../../display/templates/tracking/individualTrackingList.tpl:387
 msgid "Code station"
 msgstr "Station code"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:348
+#: ../../../display/templates/tracking/individualTrackingList.tpl:388
 msgid "Début"
 msgstr "Start date:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:349
+#: ../../../display/templates/tracking/individualTrackingList.tpl:389
 msgid "Fin"
 msgstr "End date:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:350
+#: ../../../display/templates/tracking/individualTrackingList.tpl:390
 msgid "Nombre d'événements"
 msgstr "Number of events"
 
@@ -4288,7 +4334,7 @@ msgstr "Measured fish"
 msgid "N° :"
 msgstr "Number:"
 
-#: ../../../display/templates/tracking/individualTrackingChange.tpl:410
+#: ../../../display/templates/tracking/individualTrackingChange.tpl:416
 msgid "Marque RFID posée :"
 msgstr "RFID tag installed:"
 
@@ -4304,6 +4350,16 @@ msgstr "Back to the station"
 #: ../../../display/templates/tracking/probeChange.tpl:21
 msgid "Code de la sonde :"
 msgstr "Probe code:"
+
+#: ../../../display/templates/tracking/probeChange.tpl:27
+#: ../../../display/templates/tracking/antennaChange.tpl:45
+msgid "Date de mise en service :"
+msgstr "Date of start-up:"
+
+#: ../../../display/templates/tracking/probeChange.tpl:33
+#: ../../../display/templates/tracking/antennaChange.tpl:51
+msgid "Date d'arrêt :"
+msgstr "Stop date:"
 
 #: ../../../display/templates/tracking/antennaChange.tpl:1
 msgid "Création/Modification d'une antenne - station"
@@ -4336,13 +4392,38 @@ msgstr "Characteristics"
 msgid "Technologie"
 msgstr "Technology"
 
-#: ../../../display/templates/tracking/stationTrackingList.tpl:34
+#: ../../../display/templates/tracking/stationTrackingList.tpl:52
 msgid "Liste des stations utilisées pour la télédétection"
 msgstr "List of used stations for remote sensing"
 
-#: ../../../display/templates/tracking/stationTrackingList.tpl:77
+#: ../../../display/templates/tracking/stationTrackingList.tpl:78
+msgid "Uniquement les stations en service ?"
+msgstr "Only stations in service?"
+
+#: ../../../display/templates/tracking/stationTrackingList.tpl:100
 msgid "Type de station"
 msgstr "Type of station"
+
+#: ../../../display/templates/tracking/stationTrackingList.tpl:108
+msgid "En service ?"
+msgstr "In use?"
+
+#: ../../../display/templates/tracking/stationTrackingList.tpl:137
+#: ../../../display/templates/import/exportModelDisplay.tpl:55
+#: ../../../display/templates/import/exportModelDisplay.tpl:65
+#: ../../../display/templates/import/exportModelDisplay.tpl:76
+msgid "Oui"
+msgstr "Yes"
+
+#: ../../../display/templates/tracking/stationTrackingList.tpl:155
+#: ../../../display/templates/tracking/individualTrackingGraph.tpl:60
+msgid ""
+"Les lignes pointillées correspondent aux périodes de fonctionnement des "
+"stations, et en continu, au périodes d'inactivité (récepteurs hors service)"
+msgstr ""
+"The dotted lines correspond to the operating periods of the stations, and "
+"the solid lines correspond to the periods of inactivity (receivers out of "
+"service)"
 
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:4
 msgid "Nom de la station :"
@@ -4446,6 +4527,16 @@ msgstr "Characteristics:"
 msgid "Rayon de réception (en mètres)"
 msgstr "Reception radius (meters):"
 
+#: ../../../display/templates/tracking/antennaList.tpl:16
+#: ../../../display/templates/tracking/probeList.tpl:14
+msgid "Date de mise en service"
+msgstr "Date of use start"
+
+#: ../../../display/templates/tracking/antennaList.tpl:17
+#: ../../../display/templates/tracking/probeList.tpl:15
+msgid "Date de retrait"
+msgstr "Date of removal"
+
 #: ../../../display/templates/tracking/parameterMeasureTypeChange.tpl:1
 msgid "Création/Modification d'un paramètre enregistré par les sondes"
 msgstr "Create/Edit a parameter recorded by the probes"
@@ -4486,11 +4577,12 @@ msgstr "Warning: the calculation can be long!"
 msgid "Lancer l'opération"
 msgstr "Perform the operation"
 
-#: ../../../display/templates/tracking/individualTrackingGraph.tpl:22
+#: ../../../display/templates/tracking/individualTrackingGraph.tpl:30
 msgid "Présence sur la station"
 msgstr "presence on the station"
 
-#: ../../../display/templates/tracking/individualTrackingGraph.tpl:25
+#: ../../../display/templates/tracking/individualTrackingGraph.tpl:33
+#: ../../../display/templates/tracking/stationTrackingGraph.tpl:33
 msgid "N° des stations"
 msgstr "Stations numbers"
 
@@ -4510,29 +4602,33 @@ msgstr "kilometric point:"
 msgid "station"
 msgstr "station"
 
-#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:62
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:51
+msgid "Station hors service"
+msgstr "Station out of service"
+
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:63
 #: ../../../display/templates/framework/droits/appliDisplay.tpl:10
 msgid "Modifier..."
 msgstr "Edit"
 
-#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:74
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:75
 msgid "Antennes"
 msgstr "Antennas"
 
-#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:78
+#: ../../../display/templates/tracking/stationTrackingDisplay.tpl:79
 msgid "Sondes"
 msgstr "Probes"
 
-#: ../../../display/templates/tracking/probeList.tpl:14
-#: ../../../display/templates/tracking/probeList.tpl:47
+#: ../../../display/templates/tracking/probeList.tpl:16
+#: ../../../display/templates/tracking/probeList.tpl:51
 msgid "Mesures enregistrées"
 msgstr "Recorded measures"
 
-#: ../../../display/templates/tracking/probeList.tpl:49
+#: ../../../display/templates/tracking/probeList.tpl:53
 msgid "précédent"
 msgstr "previous"
 
-#: ../../../display/templates/tracking/probeList.tpl:53
+#: ../../../display/templates/tracking/probeList.tpl:57
 msgid "suivant"
 msgstr "next"
 
@@ -4543,6 +4639,14 @@ msgstr "Create or modify a station used for remote sensing"
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:13
 msgid "Retour au détail de la station"
 msgstr "Back to the detail of the station"
+
+#: ../../../display/templates/tracking/stationTrackingChange.tpl:96
+msgid "Station en service ?"
+msgstr "Station in use?"
+
+#: ../../../display/templates/tracking/stationTrackingGraph.tpl:30
+msgid "Fonctionnement des stations"
+msgstr "Operating stations"
 
 #: ../../../display/templates/framework/request/requestChange.tpl:4
 msgid "Confirmez la suppression de la requête"
@@ -5287,12 +5391,6 @@ msgstr "Strict relationship?"
 #: ../../../display/templates/import/exportModelDisplay.tpl:45
 msgid "Colonne"
 msgstr "Column"
-
-#: ../../../display/templates/import/exportModelDisplay.tpl:55
-#: ../../../display/templates/import/exportModelDisplay.tpl:65
-#: ../../../display/templates/import/exportModelDisplay.tpl:76
-msgid "Oui"
-msgstr "Yes"
 
 #: ../../../display/templates/import/exportModelDisplay.tpl:102
 msgid "Exportation de l'ensemble des données concernées par le modèle"
