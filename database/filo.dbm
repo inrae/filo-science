@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,254" last-zoom="0.85" max-obj-count="99"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Eric Quinton" last-position="0,253" last-zoom="0.85" max-obj-count="99"
 	 default-schema="import" default-owner="filo"
 	 layers="gacl;tracking;import" active-layers="0;1;2;3">
 <role name="filo"
@@ -3631,7 +3631,7 @@ Station de lacher]]>
 	<role name="filo"/>
 </sequence>
 
-<table name="detection" layer="2" collapse-mode="1" max-obj-count="12" z-value="0">
+<table name="detection" layer="2" collapse-mode="1" rls-enabled="true" max-obj-count="12" z-value="0">
 	<schema name="tracking"/>
 	<role name="filo"/>
 	<tag name="individual_tracking"/>
@@ -4936,6 +4936,22 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 		</idxelement>
 		<idxelement use-sorting="false">
 			<column name="detection_date"/>
+		</idxelement>
+</index>
+
+<index name="detection_year_idx" table="tracking.detection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<expression><![CDATA[extract (year from detection_date)]]></expression>
+		</idxelement>
+</index>
+
+<index name="location_detection_year_idx" table="tracking.location"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<expression><![CDATA[extract (year from detection_date)]]></expression>
 		</idxelement>
 </index>
 

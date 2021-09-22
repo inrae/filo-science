@@ -92,7 +92,7 @@
                 {t}Nouveau...{/t}
             </a>
         {/if}
-        <table id="stationList" class="table table-bordered table-hover datatable-nopaging " >
+        <table id="stationList" class="table table-bordered table-hover datatable-nopaging " data-order='[[4,"asc"]]' >
             <thead>
                 <tr>
                     <th>{t}Id{/t}</th>
@@ -148,3 +148,10 @@
         </table>
     </div>
 </div>
+<div class="row">
+    <div id="chart"></div>
+</div>
+<div class="row center message">
+    {t}Les lignes pointillées correspondent aux périodes de fonctionnement des stations, et en continu, au périodes d'inactivité (récepteurs hors service){/t}
+</div>
+{include file="tracking/stationTrackingGraph.tpl"}

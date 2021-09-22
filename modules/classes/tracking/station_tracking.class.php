@@ -82,7 +82,8 @@ class StationTracking extends ObjetBDD
         if ($onlyActive) {
             $where .= " and station_active = true";
         }
-        return $this->getListeParamAsPrepared($this->sql . $where, $params);
+        $order = " order by station_number";
+        return $this->getListeParamAsPrepared($this->sql . $where . $order, $params);
     }
     /**
      * Get the detail of a station
@@ -147,16 +148,18 @@ class StationTracking extends ObjetBDD
      * @param string $date_to
      * @return array
      */
-    function getPresenceStation(int $project_id, float $station_number, string $date_from, string $date_to):?array
+    function getPresenceStation(int $project_id, float $station_number, string $date_from = "", string $date_to = ""): ?array
     {
         $sql = "select station_id, station_number, antenna_id, antenna_code, date_from, date_to
                 from station_tracking
                 join antenna using (station_id)
                 join station using (station_id)
                 where station_number = :station_number
-                and project_id = :project_id
-                and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)
-                order by date_from";
-    return $this->getListeParamAsPrepared($sql, array("project_id"=>$project_id, "station_number" => $station_number/*, "date_from"=>$date_from, "date_to"=>$date_to*/));
+                and project_id = :project_id";
+        if (!empty($date_from) && !empty($date_to)) {
+            $sql .= "and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)";
+        }
+        $sql .= " order by date_from";
+        return $this->getListeParamAsPrepared($sql, array("project_id" => $project_id, "station_number" => $station_number));
     }
 }

@@ -18,8 +18,54 @@ switch ($t_module["param"]) {
             $project_id = $projects[0]["project_id"];
         }
         $_COOKIE["stationActive"] == 1 ? $stationActive = true : $stationActive = false;
-        $vue->set($dataClass->getListFromProject($project_id, 0, $stationActive), "stations");
+        $stations = $dataClass->getListFromProject($project_id, 0, $stationActive);
+        $vue->set($stations, "stations");
         $vue->set("tracking/stationTrackingList.tpl", "corps");
+        /**
+         * Generate the graph of station working
+         */
+        $graphdata = array();
+        $axisx = array("x");
+        $axisy = array ("stations");
+        $series = array();
+        $regions = array();
+        $graphStations = array();
+        foreach ($stations as $station) {
+            if (!empty($station)) {
+                $presences = $dataClass->getPresenceStation($project_id, $station["station_id"]);
+                $graphStations[] = $station["station_number"];
+                foreach ($presences as $presence) {
+                    $datefrom = substr($presence["date_from"],0, 19);
+                    $dateto = substr($presence["date_to"], 0, 19);
+                    $axisx[] = $datefrom;
+                    $axisy[] = $presence["station_number"];
+                    $axisx[] = $dateto;
+                    $axisy[] = $presence["station_number"];
+                    $graphdata[] = array("date" => $datefrom, $station["station_name"] => $presence["station_number"]);
+                    $graphdata[] = array("date" => $dateto, $station["station_name"] => $presence["station_number"]);
+                    $regions[$station["station_name"]][] = array("start" => $datefrom, "end" => $dateto/*, "style"=>"dashed"*/);
+                }
+                $series[] = $station["station_name"];
+            }
+        }
+        $vue->set(json_encode($graphStations), "graphStations");
+        $vue->set(json_encode($regions), "regions");
+        $chart = array($axisx, $axisy);
+        $vue->set(json_encode($chart), "chartData");
+        usort($graphdata, function ($a, $b) {
+            return $a["date"] <=> $b["date"];
+        });
+        $vue->set(json_encode(($graphdata)), "graphdata");
+        $vue->set(json_encode($series), "series");
+        /**
+         * Inhibits the encoding of chartData
+         */
+        //$vue->htmlVars[] = "chartData";
+        $vue->htmlVars[] = "graphStations";
+        $vue->htmlVars[] = "chartData";
+        $vue->htmlVars[] = "graphdata";
+        $vue->htmlVars[] = "series";
+        $vue->htmlVars[] = "regions";
         break;
     case "display":
         $vue->set($dataClass->getDetail($id), "data");
