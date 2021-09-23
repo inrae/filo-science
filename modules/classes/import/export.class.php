@@ -69,16 +69,16 @@ class Export
     function getTableContent(string $tableAlias, array $keys = array(), int $parentKey = 0): array
     {
         $model = $this->model[$tableAlias];
-        if (count($model) == 0) {
+        if (empty($model)) {
             throw new ExportException(sprintf(_("L'alias %s n'a pas été décrit dans le modèle"), $tableAlias));
         }
         $tableName = $model["tableName"];
         $quote = '"';
         $content  = array();
         $args = array();
-        if (!$model["isEmpty"] || count($keys) > 0) {
+        if (!$model["isEmpty"] || !empty($keys)) {
             $sql = "select * from $quote$tableName$quote";
-            if (count($keys) > 0) {
+            if (!empty($keys)) {
                 $where = " where " . $quote . $model["technicalKey"] . $quote . " in (";
                 $comma = "";
                 foreach ($keys as $k) {
@@ -211,7 +211,7 @@ class Export
         if ($model["istablenn"] == 1) {
             $tableAlias2 = $model["tablenn"]["tableAlias"];
             $model2 = $this->model[$tableAlias2];
-            if (count($model2) == 0) {
+            if (empty($model2)) {
                 throw new ExportException(sprintf(_("Le modèle ne contient pas la description de la table %s"), $model["tablenn"]["tableAlias"]));
             }
             $tableName2 = $model2["tableName"];
@@ -271,7 +271,7 @@ class Export
                  */
                 foreach ($row["parameters"] as $parameterName => $parameter) {
                     $modelParam = $this->model[$parameterName];
-                    if (count($modelParam) == 0) {
+                    if (empty($modelParam)) {
                         throw new ExportException(sprintf(_("L'alias %s n'a pas été décrit dans le modèle"), $parameterName));
                     }
                     /**
@@ -320,7 +320,7 @@ class Export
                 /**
                  * Set values
                  */
-                if (count($setValues) > 0) {
+                if (!empty($setValues)) {
                     foreach ($setValues as $kv => $dv) {
                         if (strlen($dv) == 0) {
                             throw new ExportException(sprintf(_("Une valeur vide a été trouvée pour l'attribut ajouté %s"), $kv));
@@ -340,7 +340,7 @@ class Export
                  */
                 if ($id > 0) {
                     foreach ($children as $tableChield => $child) {
-                        if (count($child) > 0) {
+                        if (!empty($child)) {
                             if (!isset($child["isStrict"])) {
                                 $child["isStrict"] = false;
                             }

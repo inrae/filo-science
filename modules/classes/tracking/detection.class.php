@@ -98,7 +98,7 @@ class Detection extends ObjetBDD
        * Calculate the sunrise and the sunset
        */
       $this->currentDate = substr($data["detection_date"], 10);
-      $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);;
+      $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
       $this->sunrise = date_sunrise($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
     }
     if ($dateTimestamp >= $this->sunrise && $dateTimestamp <= $this->sunset) {
@@ -195,7 +195,7 @@ class Detection extends ObjetBDD
            * Calculate the sunrise and the sunset
            */
           $this->currentDate = substr($row["detection_date"], 10);
-          $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);;
+          $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
           $this->sunrise = date_sunrise($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
         }
         if ($dateTimestamp >= $this->sunrise && $dateTimestamp <= $this->sunset) {

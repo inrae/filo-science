@@ -95,13 +95,13 @@ class Project extends ObjetBDD
     /**
      * Retourne la liste des projects correspondants aux groupes indiques
      *
-     * @param array $groups 
-     * 
+     * @param array $groups
+     *
      * @return array
      */
     function getProjectsFromGroups(array $groups)
     {
-        if (count($groups) > 0) {
+        if (!empty($groups)) {
             /*
              * Preparation de la clause in
              */

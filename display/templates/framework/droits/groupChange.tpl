@@ -8,7 +8,6 @@
 <input type="hidden" name="moduleBase" value="group">
 <input type="hidden" name="action" value="Write">
 <input type="hidden" name="aclgroup_id" value="{$data.aclgroup_id}">
-<!--input type="hidden" name="aclgroup_id_parent" value="{$data.aclgroup_id_parent}"-->
 <div class="form-group center">
       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
       {if $data.aclgroup_id > 0 }

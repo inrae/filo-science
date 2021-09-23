@@ -150,16 +150,15 @@ class Log extends ObjetBDD
             and nom_module like '%connexion' and commentaire like '%-ok' and commentaire <> 'token-ok'
             and log_date > :datefrom
             order by log_id desc";
-            $date = new DateTime(now);
+            $date = new DateTime();
             $date->sub(new DateInterval("PT" . $duration . "S"));
-            $data = $this->getListeParamAsPrepared(
+            return $this->getListeParamAsPrepared(
                 $sql,
                 array(
                     "login" => $_SESSION["login"],
                     "datefrom" => $date->format(DATELONGMASK),
                 )
             );
-            return $data;
         }
     }
 

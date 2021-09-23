@@ -303,7 +303,6 @@ class IndividualTracking extends ObjetBDD
       as
       (detection_date date, day int, night int, unknown int)";
     $this->colonnes["detection_date"] = array("type" => 2);
-    $param = array("individual_id" => $individual_id);
     if ($year > 0) {
       $where .= " and extract(year from detection_date) = $year";
     }

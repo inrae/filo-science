@@ -153,7 +153,7 @@ function dataDelete($dataClass, $id, $isPartOfTransaction = false)
       }
       $message->setSyslog($e->getMessage());
       if ($isPartOfTransaction) {
-        throw new Exception(sprintf("Suppression impossible de l'enregistrement %s"), $id);
+        throw new ObjetBDDException(sprintf("Suppression impossible de l'enregistrement %s"), $id);
       }
       $ret = -1;
     }
@@ -459,7 +459,7 @@ function is_cli()
   if (defined('STDIN')) {
     return true;
   }
-  if (empty($_SERVER['REMOTE_ADDR']) and !isset($_SERVER['HTTP_USER_AGENT']) and count($_SERVER['argv']) > 0) {
+  if (empty($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0) {
     return true;
   }
   return false;
@@ -485,11 +485,4 @@ function getLineFeed()
 function phpeol()
 {
   return getLineFeed();
-  /*
-  if (PHP_SAPI == "cli") {
-    return PHP_EOL;
-  } else {
-    return "<br>";
-  }
-  */
 }

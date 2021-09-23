@@ -7,7 +7,8 @@
  * Classe maîtrisant les aspects identification.
  */
 class IdentificationException extends Exception
-{ }
+{
+}
 
 /**
  * @class Identification
@@ -324,7 +325,7 @@ class Identification
             global $ident_header_vars;
             $headers = getHeaders($ident_header_vars["radical"]);
             $login = $headers[$ident_header_vars["login"]];
-            if (strlen($login) > 0 && count($headers) > 0) {
+            if (strlen($login) > 0 && !empty($headers)) {
                 /**
                  * Verify if the login exists
                  */
@@ -350,14 +351,14 @@ class Identification
                         $createUser = true;
                         if (count($ident_header_vars["organizationGranted"]) > 0 && !in_array($headers[$ident_header_vars["organization"]], $ident_header_vars["organizationGranted"])) {
                             $createUser = false;
-                            $log->setLog($login, "connexion", "HEADER-ko. The ".$headers[$ident_header_vars["organization"]]. " is not authorized to connect to this application");
+                            $log->setLog($login, "connexion", "HEADER-ko. The " . $headers[$ident_header_vars["organization"]] . " is not authorized to connect to this application");
                         }
                         if ($createUser) {
-                            $dlogin = array (
-                            "login"=>$login,
-                            "nom"=>$headers[$ident_header_vars["cn"]],
-                            "mail"=>$headers[$ident_header_vars["mail"]],
-                            "actif"=>0
+                            $dlogin = array(
+                                "login" => $login,
+                                "nom" => $headers[$ident_header_vars["cn"]],
+                                "mail" => $headers[$ident_header_vars["mail"]],
+                                "actif" => 0
                             );
                             $login_id = $loginGestion->ecrire($dlogin);
                             if ($login_id > 0) {
@@ -371,16 +372,16 @@ class Identification
                                  * Send mail to administrators
                                  */
                                 global $APPLI_nom, $APPLI_mail;
-                                $subject = $APPLI_nom." "._("Nouvel utilisateur");
-                                $contents = "<html><body>".sprintf(_("%1$s a créé son compte avec le login %2$s dans l'application %3$s.
+                                $subject = $APPLI_nom . " " . _("Nouvel utilisateur");
+                                $contents = "<html><body>" . sprintf(_("%1$s a créé son compte avec le login %2$s dans l'application %3$s.
                                 <br>Il est rattaché à l'organisation %5$s.
                                 <br>Le compte est inactif jusqu'à ce que vous l'activiez.
                                 <br>Pour activer le compte, connectez-vous à l'application
                                     <a href='%4$s'>%4$s</a>
-                                <br>Ne répondez pas à ce mail, qui est généré automatiquement")."</body></html>",$login,$headers[$ident_header_vars["cn"]],$APPLI_nom, $APPLI_mail, $headers[$ident_header_vars["organization"]]);
+                                <br>Ne répondez pas à ce mail, qui est généré automatiquement") . "</body></html>", $login, $headers[$ident_header_vars["cn"]], $APPLI_nom, $APPLI_mail, $headers[$ident_header_vars["organization"]]);
 
-                                $log->sendMailToAdmin($subject,$contents,"loginCreateByHeader",$login);
-                                $message->set(_("Votre compte a été créé, mais est inactif. Un mail a été adressé aux administrateurs pour son activation") );
+                                $log->sendMailToAdmin($subject, $contents, "loginCreateByHeader", $login);
+                                $message->set(_("Votre compte a été créé, mais est inactif. Un mail a été adressé aux administrateurs pour son activation"));
                             }
                         }
                     }

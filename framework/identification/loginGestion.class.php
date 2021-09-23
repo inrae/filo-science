@@ -248,7 +248,7 @@ class LoginGestion extends ObjetBDD
         if (isset($_SESSION["login"])) {
             $oldData = $this->lireByLogin($_SESSION["login"]);
             if ($log->getLastConnexionType($_SESSION["login"]) == "db") {
-                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"]) == true) {
+                if ($this->_testPassword($_SESSION["login"], $oldpassword, $oldData["password"])) {
                     /*
                      * Verifications de validite du mot de passe
                      */
@@ -279,10 +279,8 @@ class LoginGestion extends ObjetBDD
     public function changePasswordAfterLost($login, $pass1, $pass2)
     {
         $retour = 0;
-        if (strlen($login) > 0) {
-            if ($this->_passwordVerify($pass1, $pass2)) {
-                $retour = $this->writeNewPassword($login, $pass1);
-            }
+        if (strlen($login) > 0 && $this->_passwordVerify($pass1, $pass2)) {
+            $retour = $this->writeNewPassword($login, $pass1);
         }
         return $retour;
     }

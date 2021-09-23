@@ -60,7 +60,6 @@ switch ($t_module["param"]) {
         /**
          * Inhibits the encoding of chartData
          */
-        //$vue->htmlVars[] = "chartData";
         $vue->htmlVars[] = "graphStations";
         $vue->htmlVars[] = "chartData";
         $vue->htmlVars[] = "graphdata";

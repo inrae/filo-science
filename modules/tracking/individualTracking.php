@@ -52,8 +52,6 @@ switch ($t_module["param"]) {
         /**
          * Generate data for graphs
          */
-        /*$axisx = array("x");
-        $axisy = array("detection");*/
         $axisx1 = array("x1");
         $axisy1 = array("detection");
         $stations = array();
@@ -61,8 +59,6 @@ switch ($t_module["param"]) {
         $datemax = '1970-01-01 00:00:00';
         $graphdata = array();
         foreach ($dataStation as $row) {
-          /*$axisx[] = substr($row["date_from"],0, 19);
-          $axisy[] = $row["station_number"];*/
           $date_from = substr($row["date_from"], 0, 19);
           $axisx1[] = $date_from;
           $axisy1[] = $row["station_number"];
@@ -111,8 +107,6 @@ switch ($t_module["param"]) {
         $series[] = "detection";
         $vue->set(json_encode($stations), "stations");
         $vue->set(json_encode($regions), "regions");
-        /*$chart = array($axisx, $axisy);
-        $vue->set(json_encode($chart), "chartData");*/
         $chart2 = array($axisx1, $axisx2, $axisy1, $axisy2);
         $vue->set(json_encode($chart2), "chartData2");
         usort($graphdata, function ($a, $b) {
@@ -123,7 +117,6 @@ switch ($t_module["param"]) {
         /**
          * Inhibits the encoding of chartData
          */
-        //$vue->htmlVars[] = "chartData";
         $vue->htmlVars[] = "stations";
         $vue->htmlVars[] = "chartData2";
         $vue->htmlVars[] = "graphdata";
