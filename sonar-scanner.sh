@@ -4,7 +4,7 @@
  -Dsonar.sources=. \
  -Dsonar.host.url=https://sonarcloud.io \
  -Dsonar.organization=equinton-github \
- -Dsonar.login=4e5c6ec4233894236f4c7e85050c01924fa13453 \
+ -Dsonar.login=../sonar.token \
  -Dsonar.exclusions=display/javascript/**,display/node_modules/**,vendor/**,database/**,install/**,param/**,plugins/**,test/**,doc/**,img/**,temp/** \
  -Dproject.settings=../sonar.properties
 

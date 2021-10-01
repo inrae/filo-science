@@ -31,8 +31,8 @@ switch ($t_module["param"]) {
         $regions = array();
         $graphStations = array();
         foreach ($stations as $station) {
-            if (!empty($station)) {
-                $presences = $dataClass->getPresenceStation($project_id, $station["station_id"]);
+            if (!empty($station)&& !empty($station["station_number"])) {
+                $presences = $dataClass->getPresenceStation($project_id, $station["station_number"]);
                 $graphStations[] = $station["station_number"];
                 foreach ($presences as $presence) {
                     $datefrom = substr($presence["date_from"],0, 19);
