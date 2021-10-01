@@ -84,6 +84,10 @@
 	<requestWriteExec action="framework/request/request.php" param="write" droits="param" modulebefore="requestChange,requestExec,requestWriteExec,requestExecList" retourok="requestExec" retourko="requestChange"/>
 	<requestCopy action="framework/request/request.php" param="copy" droits="param" type="smarty"/>
 
+	<backupDisplay action="framework/utils/backup.php" param="display" retourlogin="1" droits="admin" type="smarty" />
+	<backupExec action="framework/utils/backup.php" param="exec" modulebefore="backupDisplay,backupExec" droits="admin" retourok="backupSend" retourko="backupDisplay" />
+	<backupSend action="framework/utils/backup.php" param="send" modulebefore="backupExec" droits="admin" type="binaire" retourko="backupDisplay" />
+
 	<!-- Parameters of the software -->
 
 	<param action="framework/default.php" type="smarty"/>

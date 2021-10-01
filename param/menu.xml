@@ -101,6 +101,7 @@
 		<item module="dbparamList" droits="admin" label="Paramètres de l'application" tooltip="Liste des paramètres pérennes de l'application" />
 		<item divider='1'/>
 		<item module="logList" droits="admin" label="Logs" tooltip="Consultation des logs enregistrées"/>
+		<item module="backupDisplay" droits="admin" label="Backup" tooltip="Sauvegarde de la base de données" />
 		<item module="phpinfo" droits="admin" label="PHP info" tooltip="configuration générale du serveur PHP"/>
 	</item>
 	<item module="connexion" label="Connexion" tooltip="S'identifier dans l'application" onlynoconnect="1"/>
