@@ -15,7 +15,7 @@ $DEFAULT_formatdate = "fr";
 /*
  * Navigation a partir du fichier xml
  */
-$navigationxml = "param/actions.xml";
+$navigationxml = array("framework/actions.xml", "param/actions.xml");
 /*
  * Duree de la session par defaut
  * @var unknown_type
