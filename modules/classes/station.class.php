@@ -4,9 +4,12 @@ class Station extends ObjetBDD
     private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code, station_number
             ,project_id, project_name, metric_srid
             ,river_id, river_name
+            ,station_type_id, station_type_name
             from station
             left outer join project using (project_id)
             left outer join river using (river_id)
+            left outer join station_tracking using (station_id)
+            left outer join station_type using (station_type_id)
             ";
     /**
      * Constructor
