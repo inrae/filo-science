@@ -34,7 +34,7 @@ function dataRead($dataClass, $id, $smartyPage, $idParent = null)
 
       try {
         $data = $dataClass->lire($id, true, $idParent);
-      } catch (Exception $e) {
+      } catch (FrameworkException | ObjetBDDException | PDOException $e) {
         if ($OBJETBDD_debugmode > 0) {
           foreach ($dataClass->getErrorData(1) as $messageError) {
             $message->set($messageError, true);
@@ -83,7 +83,7 @@ function dataWrite($dataClass, $data, $isPartOfTransaction = false)
       $message->setSyslog(_("La clé n'a pas été retournée lors de l'enregistrement dans ") . get_class($dataClass));
       $module_coderetour = -1;
     }
-  } catch (PDOException |ObjetBDDException $e) {
+  } catch (PDOException | ObjetBDDException $e) {
     if (strpos($e->getMessage(), "nique violation") !== false) {
       $message->set(_("Un enregistrement portant déjà ce nom existe déjà dans la base de données."), true);
     }
@@ -153,7 +153,7 @@ function dataDelete($dataClass, $id, $isPartOfTransaction = false)
       }
       $message->setSyslog($e->getMessage());
       if ($isPartOfTransaction) {
-        throw new Exception(sprintf("Suppression impossible de l'enregistrement %s"), $id);
+        throw new FrameworkException(sprintf("Suppression impossible de l'enregistrement %s"), $id);
       }
       $ret = -1;
     }
@@ -459,7 +459,7 @@ function is_cli()
   if (defined('STDIN')) {
     return true;
   }
-  if (empty($_SERVER['REMOTE_ADDR']) and !isset($_SERVER['HTTP_USER_AGENT']) and count($_SERVER['argv']) > 0) {
+  if (empty($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0) {
     return true;
   }
   return false;
@@ -492,4 +492,64 @@ function phpeol()
     return "<br>";
   }
   */
+}
+class ApiCurlException extends Exception
+{
+};
+/**
+ * call a api with curl
+ * code from
+ * @param string $method
+ * @param string $url
+ * @param array $data
+ * @return void
+ */
+function apiCall($method, $url, $certificate_path = "", $data = array(), $modeDebug = false)
+{
+  $curl = curl_init();
+  if (!$curl) {
+    throw new ApiCurlException(_("Impossible d'initialiser le composant curl"));
+  }
+  switch ($method) {
+    case "POST":
+      curl_setopt($curl, CURLOPT_POST, true);
+      if (!empty($data)) {
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+      }
+      break;
+    case "PUT":
+      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+      if (!empty($data)) {
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+      }
+      break;
+    default:
+      if (!empty($data)) {
+        $url = sprintf("%s?%s", $url, http_build_query($data));
+      }
+  }
+  /**
+   * Set options
+   */
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+  //curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+  if (!empty($certificate_path)) {
+    curl_setopt($curl, CURLOPT_SSLCERT, $certificate_path);
+  }
+  if ($modeDebug) {
+    curl_setopt($curl, CURLOPT_SSL_VERIFYSTATUS, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($curl, CURLOPT_VERBOSE, true);
+  }
+  /**
+   * Execute request
+   */
+  $res = curl_exec($curl);
+  if (!$res) {
+    throw new ApiCurlException(sprintf(_("Une erreur est survenue lors de l'exécution de la requête vers le serveur distant. Code d'erreur CURL : %s"), curl_error($curl)));
+  }
+  curl_close($curl);
+  return $res;
 }

@@ -2,14 +2,15 @@
 
 /**
  * Class for generate a identification token or read id
- * 
+ *
  * Token is crypted with private key of server, and decrypted with public key
  * Token is encoded in JSON format. It contain 2 fields : login and expire (timestamp)
  * @author quinton
  *
  */
 class TokenException extends Exception
-{ }
+{
+}
 
 class Token
 {
@@ -20,7 +21,7 @@ class Token
 
     /**
      * validityDuration : default duration validity of the token
-     * 
+     *
      * @var int
      */
     private $validityDuration = 86400;
@@ -84,7 +85,7 @@ class Token
                         "token" => base64_encode($crypted),
                         "expire" => $expire,
                         "timestamp" => $data["timestamp"],
-                        "ip"=>$data["ip"]
+                        "ip" => $data["ip"]
                     );
                     $token = json_encode($dataToken);
                 } else {
@@ -178,7 +179,7 @@ class Token
             $type == "priv" ? $filename = $this->privateKey : $filename = $this->pubKey;
             if (file_exists($filename)) {
                 $handle = fopen($filename, "r");
-                if ($handle != false) {
+                if ($handle ) {
                     $contents = fread($handle, filesize($filename));
                     if (!$contents) {
                         throw new TokenException("key " . $filename . " is empty");
