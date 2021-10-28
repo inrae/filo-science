@@ -452,10 +452,8 @@ class ObjetBDD
     // Integration cles multiples
     if ($this->cleMultiple == 1) {
       // Verification de la structure de la cle
-      if ($this->verifData == 1) {
-        if (!$this->verifDonnees($id)) {
-          return false;
-        }
+      if ($this->verifData == 1 && !$this->verifDonnees($id)) {
+        return false;
       }
       $where = "";
       foreach ($id as $key => $value) {
@@ -474,10 +472,8 @@ class ObjetBDD
       /*
              * Verification de la cle unique
              */
-      if ($this->verifData == 1) {
-        if (!is_numeric($id)) {
-          return false;
-        }
+      if ($this->verifData == 1 && !is_numeric($id)) {
+        return false;
       }
       if (strlen(preg_replace("#[^A-Z]+#", "", $this->cle)) > 0) {
         $cle = $this->quoteIdentifier . $this->cle . $this->quoteIdentifier;
@@ -610,10 +606,8 @@ class ObjetBDD
     // Integration cles multiples
     if ($this->cleMultiple == 1) {
       // Verification de la structure de la cle
-      if ($this->verifData == 1) {
-        if (!$this->verifDonnees($id)) {
-          return false;
-        }
+      if ($this->verifData == 1 && !$this->verifDonnees($id)) {
+        return false;
       }
       $where = "";
       foreach ($id as $key => $value) {
@@ -632,10 +626,8 @@ class ObjetBDD
       /*
              * Verification de la cle unique
              */
-      if ($this->verifData == 1) {
-        if (!is_numeric($id)) {
-          return false;
-        }
+      if ($this->verifData == 1 && !is_numeric($id)) {
+        return false;
       }
       if (strlen(preg_replace("#[^A-Z]+#", "", $this->cle) > 0)) {
         $cle = $this->quoteIdentifier . $this->cle . $this->quoteIdentifier;
@@ -819,7 +811,7 @@ class ObjetBDD
          */
     if ($this->transformComma) {
       foreach ($data as $key => $value) {
-        if (@$this->types[$key] == 1) {
+        if (@$this->colonnes[$key]["type"] == 1) {
           $data[$key] = str_replace(",", ".", $value);
         }
       }
@@ -1340,33 +1332,29 @@ class ObjetBDD
       /*
              * Verification des longueurs des champs textes
              */
-      if ($this->colonnes[$key]["longueur"] > 0) {
-        if (strlen($value) > $this->colonnes[$key]["longueur"]) {
-          $testok = false;
-          $this->errorData[] = array(
-            "code" => 2,
-            "colonne" => $key,
-            "valeur" => $value,
-            "demande" => $this->colonnes[$key]["longueur"]
-          );
-          throw new ObjetBDDException("string length too height (" . $this->colonnes[$key]["longueur"] . ") - " . $key . ":" . $value);
-        }
+      if ($this->colonnes[$key]["longueur"] > 0 && strlen($value) > $this->colonnes[$key]["longueur"]) {
+        $testok = false;
+        $this->errorData[] = array(
+          "code" => 2,
+          "colonne" => $key,
+          "valeur" => $value,
+          "demande" => $this->colonnes[$key]["longueur"]
+        );
+        throw new ObjetBDDException("string length too height (" . $this->colonnes[$key]["longueur"] . ") - " . $key . ":" . $value);
       }
 
       /*
              * Verification des masques (patterns)
              */
-      if (strlen($this->colonnes[$key]["pattern"]) > 0) {
-        if (strlen($value) > 0 && preg_match($this->colonnes[$key]["pattern"], $value) == 0) {
-          $testok = false;
-          $this->errorData[] = array(
-            "code" => 3,
-            "colonne" => $key,
-            "valeur" => $value,
-            "demande" => $this->colonnes[$key]["pattern"]
-          );
-          throw new ObjetBDDException("pattern not compliant (" . $this->colonnes[$key]["pattern"] . ") - " . $key . ":" . $value);
-        }
+      if (strlen($this->colonnes[$key]["pattern"]) > 0 && strlen($value) > 0 && preg_match($this->colonnes[$key]["pattern"], $value) == 0) {
+        $testok = false;
+        $this->errorData[] = array(
+          "code" => 3,
+          "colonne" => $key,
+          "valeur" => $value,
+          "demande" => $this->colonnes[$key]["pattern"]
+        );
+        throw new ObjetBDDException("pattern not compliant (" . $this->colonnes[$key]["pattern"] . ") - " . $key . ":" . $value);
       }
 
       /*
@@ -1492,6 +1480,16 @@ class ObjetBDD
   private function utf8Encode($data)
   {
     return $data;
+    /*
+         * if (is_array ( $data )) {
+         * foreach ( $data as $key => $value ) {
+         * $data [$key] = $this->utf8Encode ( $value );
+         * }
+         * } else {
+         * $data = utf8_encode ( $data );
+         * }
+         * return $data;
+         */
   }
 
   /**

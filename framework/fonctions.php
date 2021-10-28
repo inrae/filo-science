@@ -137,19 +137,14 @@ function dataDelete($dataClass, $id, $isPartOfTransaction = false)
       foreach ($dataClass->getErrorData(1) as $messageError) {
         $message->setSyslog($messageError);
       }
-      /*
-             * recherche des erreurs liees a une violation de cle etrangere
-             */
-      if (strpos($e->getMessage(), "key violation") !== false) {
+      /**
+       * recherche des erreurs liees a une violation de cle etrangere
+       */
+      if (strpos($e->getMessage(), "[23503]") !== false) {
         $message->set(_("La suppression n'est pas possible : des informations sont référencées par cet enregistrement"), true);
-      }
-      if ($OBJETBDD_debugmode > 0) {
-        $message->set($e->getMessage(), true);
       }
       if ($message->getMessageNumber() == 0) {
         $message->set(_("Problème lors de la suppression"), true);
-      } else {
-        $message->set(_("Suppression non réalisée"));
       }
       $message->setSyslog($e->getMessage());
       if ($isPartOfTransaction) {
@@ -288,10 +283,8 @@ function check_encoding($data)
       }
     }
   } else {
-    if (strlen($data) > 0) {
-      if (!mb_check_encoding($data, "UTF-8")) {
-        $result = false;
-      }
+    if (strlen($data) > 0 && !mb_check_encoding($data, "UTF-8")) {
+      $result = false;
     }
   }
   return $result;
@@ -359,7 +352,8 @@ function htmlDecode($data)
  *         }
  */
 class VirusException extends Exception
-{ }
+{
+}
 
 /**
  * Gestion des exceptions pour les manipulations de fichiers
@@ -367,7 +361,8 @@ class VirusException extends Exception
  * @var mixed
  */
 class FileException extends Exception
-{ }
+{
+}
 
 /**
  * Test antiviral d'un fichier

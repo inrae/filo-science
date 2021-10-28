@@ -79,8 +79,6 @@ class LoginGestion extends ObjetBDD
             $sql = "select login, password, is_expired from LoginGestion where login = :login and actif = 1";
             $data = $this->lireParamAsPrepared($sql, array("login" => $login));
             if ($this->_testPassword($login, $password, $data["password"])) {
-                $data["is_expired"] == 1 ? $comment = "db-ok-expired" : $comment = "db-ok";
-                $log->setLog($login, "connexion", $comment);
                 $retour = true;
             } else {
                 $log->setLog($login, "connection-db", "ko-account expired");
@@ -293,7 +291,7 @@ class LoginGestion extends ObjetBDD
             /*
              * Recherche si un enregistrement existe dans la gestion des droits
              */
-            require_once 'framework/droits/droits.class.php';
+            include_once "framework/droits/acllogin.class.php";
             $acllogin = new Acllogin($this->connection, $this->paramori);
             $datalogin = $acllogin->getFromLogin($data["login"]);
             if ($datalogin["acllogin_id"] > 0) {
@@ -499,6 +497,7 @@ class LoginGestion extends ObjetBDD
      */
     public function lireByLogin($login)
     {
+        $login = strtolower($login);
         $login = $this->encodeData($login);
         $sql = "select * from " . $this->table . "
 				where login = '" . $login . "'";
@@ -540,6 +539,7 @@ class LoginGestion extends ObjetBDD
     {
         global $message, $MAIL_enabled, $APPLI_mail, $GACL_aco, $log;
         $moduleNameComplete = $GACL_aco . "-sendMailForPasswordChange";
+        $login = strtolower($login);
         if ($MAIL_enabled == 1) {
             try {
                 $dataLogin = $this->getFromLogin($login);

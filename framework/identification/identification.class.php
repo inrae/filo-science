@@ -7,7 +7,8 @@
  * Classe maîtrisant les aspects identification.
  */
 class IdentificationException extends Exception
-{ }
+{
+}
 
 /**
  * @class Identification
@@ -92,8 +93,7 @@ class Identification
     public function getLoginCas($modeAdmin = false)
     {
         if ($this->CAS_debug) {
-            global $APPLI_temp;
-            phpCAS::setDebug("$APPLI_temp/casdebug");
+            phpCAS::setDebug();
             phpCAS::setVerbose(true);
         }
         phpCAS::client(CAS_VERSION_2_0, $this->CAS_address, $this->CAS_port, $this->CAS_uri);
@@ -247,41 +247,6 @@ class Identification
         return 1;
     }
 
-    /**
-     * Initialisation de la classe gacl
-     *
-     * @param $gacl :
-     *            instance
-     *            gacl
-     * @param string $aco
-     *            : nom
-     *            de la catégorie de base contenant les objets à tester
-     * @param string $aro
-     *            : nom
-     *            de la catégorie contenant les logins à tester
-     */
-    public function setgacl(&$gacl, $aco, $aro)
-    {
-        $this->gacl = $gacl;
-        $this->aco = $aco;
-        $this->aro = $aro;
-    }
-
-    /**
-     * Teste les droits
-     *
-     * @param string $aco
-     *            : Categorie a tester
-     * @return int : 0 | 1
-     */
-    public function getgacl($aco)
-    {
-        $login = $this->getLogin();
-        if ($login == -1) {
-            return -1;
-        }
-        return $this->gacl->acl_check($this->aco, $aco, $this->aro, $login);
-    }
 
     /**
      * Verifie l'identification
@@ -410,11 +375,6 @@ class Identification
             if (strlen($loginEntered) > 0 && !$log->isAccountBlocked($loginEntered, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
                 $verify = true;
                 /*
-                 * Verification si le nombre de tentatives de connexion n'est pas atteint
-                 */
-                if (!$log->isAccountBlocked($loginEntered, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
-                    $verify = true;
-                    /*
                      * Verification de l'identification aupres du serveur LDAP, ou LDAP puis BDD
                      */
                 if ($ident_type == "LDAP" || $ident_type == "LDAP-BDD") {
