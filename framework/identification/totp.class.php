@@ -50,6 +50,9 @@ class Gacltotp
    */
   function createQrCode()
   {
+    if (empty($_SESSION["otp_issuer"])) {
+      throw new TOTPException(_("La valeur otp_issuer n'a pas été renseignée dans les paramètres de l'application"));
+    }
     $this->otp->setLabel($_SESSION["login"]);
     $this->otp->setIssuer($_SESSION["otp_issuer"]);
     include_once 'plugins/phpqrcode/qrlib.php';
