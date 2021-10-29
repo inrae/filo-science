@@ -193,3 +193,4 @@ sympy-plots-for-*.tex/
 /composer.lock
 *.old
 /database/filo_migado.dbm
+/sonar-scanner.sh

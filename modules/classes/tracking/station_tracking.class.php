@@ -157,7 +157,7 @@ class StationTracking extends ObjetBDD
                 where station_number = :station_number
                 and project_id = :project_id";
         if (!empty($date_from) && !empty($date_to)) {
-            $sql .= "and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)";
+            $sql .= " and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)";
         }
         $sql .= " order by date_from";
         return $this->getListeParamAsPrepared($sql, array("project_id" => $project_id, "station_number" => $station_number));
