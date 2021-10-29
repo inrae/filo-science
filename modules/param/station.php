@@ -54,10 +54,13 @@ switch ($t_module["param"]) {
                     "lat",
                     "pk",
                     "river",
-                    "number"
+                    "number",
+                    "station_type_id"
                 ));
                 require_once 'modules/classes/param.class.php';
                 $river = new Param($bdd, "river");
+                require_once "modules/classes/tracking/station_tracking.class.php";
+                $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
                 $rows = $import->getContentAsArray();
                 foreach ($rows as $row) {
                     if (strlen($row["name"]) > 0) {
@@ -72,12 +75,24 @@ switch ($t_module["param"]) {
                             "station_lat" => $row["lat"],
                             "station_pk" => $row["pk"],
                             "station_number" => $row["number"],
-                            "station_id" => $dataClass->getIdFromName($row["name"])
+                            "station_id" => $dataClass->getIdFromName($row["name"]),
+                            "station_type_id" => $row["station_type_id"]
                         );
-                        if (strlen($row["river"]) > 0) {
+                        if (!empty($row["river"])) {
                             $data["river_id"] = $river->getIdFromName($row["river"], true);
                         }
-                        $dataClass->ecrire($data);
+                        $station_id = $dataClass->ecrire($data);
+                        if (!empty($data["station_type_id"]) && $station_id > 0) {
+                            /**
+                             * Write the type of tracking station
+                             */
+                            $dataTracking = array(
+                                "station_id" => $station_id,
+                                "station_type_id" => $data["station_type_id"],
+                                "station_active" => 1
+                            );
+                            $stationTracking->ecrire($dataTracking);
+                        }
                         $i++;
                     }
                 }

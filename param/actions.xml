@@ -1,88 +1,9 @@
 <navigation>
 
-	<model action="index.php" param="list|display|change|write|delete|..." droits="gestion" retourko="model" retourlogin="1" retourok="model" loginrequis="1" type="html|smarty|ajax|pdf|csv|binaire|file" droitko="droitko" modulebefore="module1,module2" requiredVar="table_id" maxCountByHour="60" maxCountByDay="600" noDelayBeforeCall="1"/>
-	<default action="framework/default.php" type="smarty" noDelayBeforeCall="1"/>
-	<droitko action="framework/droitko.php" type="smarty"/>
-	<droits menudroits="admin" droits="admin" />
-	<gestiondroits action="framework/identification/gestiondroits.php" droits="admin" loginrequis="0" retourlogin="1" droitko="droitko"/>
-
-	<loginList action="framework/identification/login.php" param="list" droits="admin" retourlogin="1" type="smarty"/>
-	<loginChange action="framework/identification/login.php" param="change" droits="admin" type="smarty"/>
-	<loginWrite action="framework/identification/login.php" param="write" droits="admin" retourko="loginChange" retourok="loginList" modulebefore="loginChange" />
-	<loginDelete action="framework/identification/login.php" param="delete" droits="admin" retourko="loginChange" retourok="loginList" modulebefore="loginChange"/>
-	<loginChangePassword action="framework/identification/login.php" param="changePassword" loginrequis="1" type="smarty" />
-	<loginChangePasswordExec action="framework/identification/login.php" param="changePasswordExec" loginrequis="1" retourko="loginChangePassword" retourok="default" modulebefore="loginChangePassword" />
-	<getLastConnections action="framework/log/log.php" param="getLastConnections" loginrequis="1" type="smarty"/>
-
-	<administration action="modules/administration/index.php" droits="admin" retourko="" retourok="" droitko="droitko" type="smarty"></administration>
-	<gestion action="modules/gestion/index.php" droits="gestion" retourko="" retourok="" droitko="droitko" type="smarty">
-	</gestion>
-	<errorbefore action="framework/errorbefore.php" retourlogin="1" type="smarty"></errorbefore>
-	<errorlogin action="framework/errorlogin.php" retourlogin="1" type="smarty"></errorlogin>
-	<test action="test/test.php" retourko="" type="smarty">
-	</test>
-	<connexion loginrequis="1" type="smarty"/>
-	<disconnect action="framework/identification/disconnect.php" type="smarty"/>
-	<apropos action="framework/apropos.php" type="smarty" />
-	<phpinfo action="framework/phpinfo.php" droits="admin" retourlogin="1" type="smarty"/>
-	<news action="framework/news.php" retourlogin="1" type="smarty"/>
-
-	<setlanguage action='framework/setlanguage.php' param="" retourlogin="1" type="smarty" retourok="default" />
-	<setlanguagefr action='framework/setlanguage.php' param="fr" retourlogin="1" type="smarty" retourok="default" />
-	<setlanguageen action='framework/setlanguage.php' param="en" retourlogin="1" type="smarty" retourok="default" />
-
-
-
-	<exampleList action="modules/example/example.php" param="list" droits="consult" type="smarty"/>
-	<exampleDisplay action="modules/example/example.php" param="display" droits="consult" type="smarty" />
-	<exampleChange action="modules/example/example.php" param="change" droits="gestion" type="smarty"/>
-	<exampleWrite action="modules/example/example.php" param="write" droits="gestion" retourok="exampleList" retourko="exampleChange" modulebefore="exampleChange" />
-	<exampleDelete action="modules/example/example.php" param="delete" droits="admin" retourok="exampleList" retourko="exampleChange" />
-
-	<!-- gestion des droits nouvelle formule -->
-	<appliList action="framework/droits/appli.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<appliDisplay action="framework/droits/appli.php" param="display" droits="admin" type="smarty"/>
-	<appliChange action="framework/droits/appli.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<appliWrite action="framework/droits/appli.php" param="write" droits="admin" retourok="appliDisplay" retourko="appliChange" modulebefore="appliChange" maxCountByHour="60" maxCountByDay="600"/>
-	<appliDelete action="framework/droits/appli.php" param="delete" droits="admin" retourok="appliList" retourko="appliChange" modulebefore="appliChange"/>
-
-	<aclloginList action="framework/droits/login.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<aclloginChange action="framework/droits/login.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<aclloginWrite action="framework/droits/login.php" param="write" droits="admin" retourok="aclloginList" retourko="aclloginChange" modulebefore="aclloginChange" maxCountByHour="60" maxCountByDay="600"/>
-	<aclloginDelete action="framework/droits/login.php" param="delete" droits="admin" retourok="aclloginList" retourko="aclloginChange" modulebefore="aclloginChange"/>
-
-	<groupList action="framework/droits/group.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<groupChange action="framework/droits/group.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<groupWrite action="framework/droits/group.php" param="write" droits="admin" retourok="groupList" retourko="groupChange" modulebefore="groupChange" maxCountByHour="60" maxCountByDay="600"/>
-	<groupDelete action="framework/droits/group.php" param="delete" droits="admin" retourok="groupList" retourko="groupChange" modulebefore="groupChange"/>
-
-	<acoDisplay action="framework/droits/aco.php" param="display" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<acoChange action="framework/droits/aco.php" param="change" droits="admin" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<acoWrite action="framework/droits/aco.php" param="write" droits="admin" retourok="appliDisplay" retourko="acoChange" modulebefore="acoChange" maxCountByHour="60" maxCountByDay="600"/>
-	<acoDelete action="framework/droits/aco.php" param="delete" droits="admin" retourok="appliDisplay" retourko="acoChange" modulebefore="acoChange"/>
-
-	<passwordlostIslost action="framework/identification/passwordLost.php" param="isLost" type="smarty"/>
-	<passwordlostSendmail action="framework/identification/passwordLost.php" param="sendMail" retourok="default"/>
-	<passwordlostReinitchange action="framework/identification/passwordLost.php" param="reinitChange" type="smarty" />
-	<passwordlostReinitwrite action="framework/identification/passwordLost.php" param="reinitWrite" modulebefore="passwordlostReinitchange" retourko="default" retourok="connexion"/>
-
-	<dbparamList action="framework/dbparam/dbparam.php" param="list" droits="admin" retourlogin="1" type="smarty" maxCountByHour="60" maxCountByDay="600"/>
-	<dbparamWriteGlobal action="framework/dbparam/dbparam.php" param="writeGlobal" droits="admin" retourok="dbparamList" retourko="dbparamList" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="filo,tracking,import,gacl" droits="gestion" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="gestion" schemas="gacl" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="file" droits="gestion" schemas="filo,tracking,import,gacl" maxCountByHour="60" maxCountByDay="600"/>
-	<dbstructureSchema action="framework/utils/structure.php" param="schema" realfilename="database/filo.png" generatedfilename="filo-science.png" retourlogin="1" type="binaire" maxCountByHour="60" maxCountByDay="600"/>
-
-	<logList action="framework/log/log.php" param="list" retourlogin="1" type="smarty" droits="admin"/>
-
-	<requestList action="framework/request/request.php" param="list" retourlogin="1" droits="param" type="smarty" />
-	<requestChange action="framework/request/request.php" param="change" droits="param" type="smarty"/>
-	<requestWrite action="framework/request/request.php" param="write" droits="param" modulebefore="requestChange,requestCopy,requestExec,requestWriteExec" retourok="requestChange" retourko="requestChange"/>
-	<requestDelete action="framework/request/request.php" param="delete" droits="param" modulebefore="requestChange,requestExec,requestWriteExec,requestExecList" retourok="requestList" retourko="requestChange"/>
-	<requestExec action="framework/request/request.php" param="exec" droits="param" type="html"/>
-	<requestExecList action="framework/request/request.php" param="execList" droits="param" type="html"/>
-	<requestWriteExec action="framework/request/request.php" param="write" droits="param" modulebefore="requestChange,requestExec,requestWriteExec,requestExecList" retourok="requestExec" retourko="requestChange"/>
-	<requestCopy action="framework/request/request.php" param="copy" droits="param" type="smarty"/>
+	<dbstructureHtml action="framework/utils/structure.php" param="html" retourlogin="1" type="smarty" schemas="import,filo,tracking,gacl" droits="gestion" maxCountByHour="60" maxCountByDay="600" />
+	<dbstructureGacl action="framework/utils/structure.php" param="gacl" retourlogin="1" type="smarty" droits="admin" schemas="gacl" maxCountByHour="60" maxCountByDay="600" />
+	<dbstructureLatex action="framework/utils/structure.php" param="latex" retourlogin="1" type="file" droits="collection" schemas="import,filo,tracking,gacl" maxCountByHour="60" maxCountByDay="600" />
+	<dbstructureSchema action="framework/utils/structure.php" param="schema" realfilename="documentation/filo.png" generatedfilename="filo-science-database.png" retourlogin="1" type="binaire" droits="gestion" maxCountByHour="60" maxCountByDay="600" />
 
 	<backupDisplay action="framework/utils/backup.php" param="display" retourlogin="1" droits="admin" type="smarty" />
 	<backupExec action="framework/utils/backup.php" param="exec" modulebefore="backupDisplay,backupExec" droits="admin" retourok="backupSend" retourko="backupDisplay" />

@@ -27,13 +27,13 @@ class Param extends ObjetBDD
     /**
      * Get the id of a record from the name
      *
-     * @param varchar $name
+     * @param string $name
      * @param boolean $withCreate: if true and the record not exists, the parameter is created
      * @return int
      */
     function getIdFromName($name, $withCreate = false)
     {
-        if (strlen($name) > 0) {
+        if (!empty($name)) {
             $sql = "select " . $this->table . "_id  as id
                 from $this->table
                 where " . $this->table . "_name = :name";

@@ -41,7 +41,10 @@
 		<item module="operatorList" label="Opérateurs" tooltip="Liste des opérateurs"/>
 		<item divider="1"/>
 		<item module="riverList" label="Cours d'eau" tooltip="Liste des cours d'eau"/>
-		<item module="stationList" label="Stations" tooltip="Liste des stations"/>
+		<item module="stationList" label="Stations" tooltip="Liste des stations">
+			<item module="stationList" label="Stations" tooltip="Liste des stations"/>
+			<item module="station_typeList" label="Types de stations" tooltip="Types des stations de tracking"/>
+		</item>
 		<item divider="1"/>
 		<item module="taxonList" label="Taxon" tooltip="Liste des taxons"/>
 		<item module="taxatemplateList" label="Grilles de taxons" tooltip="Modèles de grilles de sélection des taxons"/>

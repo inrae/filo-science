@@ -114,33 +114,37 @@ class Token
          */
         if (strlen($token["token"]) > 0) {
             $key = $this->getKey("pub");
-            if (openssl_public_decrypt(base64_decode($token["token"]), $decrypted, $key)) {
-                $data = json_decode($decrypted, true);
+            try {
+                if (openssl_public_decrypt(base64_decode($token["token"]), $decrypted, $key)) {
+                    $data = json_decode($decrypted, true);
 
-                /**
-                 * Verification of token content
-                 */
-                if (strlen($data["login"]) > 0 && strlen($data["expire"]) > 0 && strlen($data["ip"]) > 0) {
                     /**
-                     * Test IP address
+                     * Verification of token content
                      */
-                    if ($data["ip"] == getIPClientAddress()) {
-                        $now = time();
+                    if (strlen($data["login"]) > 0 && strlen($data["expire"]) > 0 && strlen($data["ip"]) > 0) {
                         /**
-                         * test expire date
+                         * Test IP address
                          */
-                        if ($data["expire"] > $now) {
-                            $login = $data["login"];
+                        if ($data["ip"] == getIPClientAddress()) {
+                            $now = time();
+                            /**
+                             * test expire date
+                             */
+                            if ($data["expire"] > $now) {
+                                $login = $data["login"];
+                            } else {
+                                throw new TokenException('token_expired');
+                            }
                         } else {
-                            throw new TokenException('token_expired');
+                            throw new TokenException('IP_address_non_equivalent');
                         }
                     } else {
-                        throw new TokenException('IP_address_non_equivalent');
+                        throw new TokenException("parameter_into_token_absent");
                     }
                 } else {
-                    throw new TokenException("parameter_into_token_absent");
+                    throw new TokenException("token_cannot_be_decrypted");
                 }
-            } else {
+            } catch (Exception $e) {
                 throw new TokenException("token_cannot_be_decrypted");
             }
         } else {
@@ -179,7 +183,11 @@ class Token
             $type == "priv" ? $filename = $this->privateKey : $filename = $this->pubKey;
             if (file_exists($filename)) {
                 $handle = fopen($filename, "r");
+<<<<<<< HEAD
                 if ($handle) {
+=======
+                if ($handle ) {
+>>>>>>> release-1.10.0
                     $contents = fread($handle, filesize($filename));
                     if (!$contents) {
                         throw new TokenException("key " . $filename . " is empty");

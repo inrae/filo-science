@@ -2278,7 +2278,7 @@ By default : total_length and weight]]></comment>
 	<role name="filo"/>
 </sequence>
 
-<table name="acllogin" layer="1" collapse-mode="1" max-obj-count="3" z-value="0">
+<table name="acllogin" layer="1" collapse-mode="1" max-obj-count="4" z-value="0">
 	<schema name="gacl"/>
 	<role name="filo"/>
 	<comment><![CDATA[Table des logins des utilisateurs autorisés]]></comment>
@@ -2293,6 +2293,10 @@ By default : total_length and weight]]></comment>
 	<column name="logindetail" not-null="true">
 		<type name="character varying" length="0"/>
 		<comment><![CDATA[Nom affiché]]></comment>
+	</column>
+	<column name="totp_key">
+		<type name="varchar" length="0"/>
+		<comment><![CDATA[TOTP secret key for the user]]></comment>
 	</column>
 	<constraint name="acllogin_pk" type="pk-constr" table="gacl.acllogin">
 		<columns names="acllogin_id" ref-type="src-columns"/>

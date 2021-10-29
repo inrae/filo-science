@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 12:02+0200\n"
+"POT-Creation-Date: 2021-10-29 16:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,27 +57,27 @@ msgstr "Display of the last sequence processed recently"
 
 #. (itstool) path: item/item@label
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:14 ../../../param/menu.xml:91
+#: ../../../param/menu.xml:14 ../../../param/menu.xml:94
 msgid "Schéma de la base de données"
 msgstr "Database schema"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:15 ../../../param/menu.xml:92
+#: ../../../param/menu.xml:15 ../../../param/menu.xml:95
 msgid "Structure de la base de données (HTML)"
 msgstr "Database structure (HTML)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:15 ../../../param/menu.xml:92
+#: ../../../param/menu.xml:15 ../../../param/menu.xml:95
 msgid "Liste des tables et des colonnes"
 msgstr "List of tables and columns"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:16 ../../../param/menu.xml:93
+#: ../../../param/menu.xml:16 ../../../param/menu.xml:96
 msgid "Structure de la base de données (Latex)"
 msgstr "Database structure (Latex)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:16 ../../../param/menu.xml:93
+#: ../../../param/menu.xml:16 ../../../param/menu.xml:96
 msgid "Liste des tables et des colonnes sous forme de tableaux Latex"
 msgstr "List of tables and columns in the form of Latex tables"
 
@@ -155,74 +155,75 @@ msgid "Paramètres liés à la télémétrie des poissons"
 msgstr "Parameters related to remote sensing of fish"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:26 ../../../param/menu.xml:79
+#: ../../../param/menu.xml:26 ../../../param/menu.xml:46
+#: ../../../param/menu.xml:82
 msgid "Types de stations"
 msgstr "Types of stations"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:26 ../../../param/menu.xml:79
+#: ../../../param/menu.xml:26 ../../../param/menu.xml:82
 msgid "Liste des types de station"
 msgstr "List of types of station"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:27 ../../../param/menu.xml:80
+#: ../../../param/menu.xml:27 ../../../param/menu.xml:83
 msgid "Types d'émetteurs"
 msgstr "Types of transmitters"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:27 ../../../param/menu.xml:80
+#: ../../../param/menu.xml:27 ../../../param/menu.xml:83
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:1
 msgid "Liste des types d'émetteurs"
 msgstr "List of types of transmitters"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:28 ../../../param/menu.xml:81
+#: ../../../param/menu.xml:28 ../../../param/menu.xml:84
 msgid "Technologies"
 msgstr "Technologies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:28 ../../../param/menu.xml:81
+#: ../../../param/menu.xml:28 ../../../param/menu.xml:84
 msgid "Technologies employées"
 msgstr "Used technologies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:29 ../../../param/menu.xml:82
+#: ../../../param/menu.xml:29 ../../../param/menu.xml:85
 msgid "Types d'antennes"
 msgstr "Antenna types"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:29 ../../../param/menu.xml:82
+#: ../../../param/menu.xml:29 ../../../param/menu.xml:85
 msgid "Types d'antennes (détection individuelle)"
 msgstr "Antenna types (individual detection)"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:30 ../../../param/menu.xml:83
+#: ../../../param/menu.xml:30 ../../../param/menu.xml:86
 msgid "Paramètres de mesure"
 msgstr "Measures parameters"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:30 ../../../param/menu.xml:83
+#: ../../../param/menu.xml:30 ../../../param/menu.xml:86
 msgid "Paramètres de mesure enregistrés par les sondes"
 msgstr "Measurement parameters recorded by the probes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:31 ../../../param/menu.xml:84
+#: ../../../param/menu.xml:31 ../../../param/menu.xml:87
 msgid "Types d'import"
 msgstr "Types of import"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:31 ../../../param/menu.xml:84
+#: ../../../param/menu.xml:31 ../../../param/menu.xml:87
 #: ../../../display/templates/import/importTypeList.tpl:1
 msgid "Liste des types d'import"
 msgstr "List of the types of import"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:32 ../../../param/menu.xml:85
+#: ../../../param/menu.xml:32 ../../../param/menu.xml:88
 msgid "Modèles d'import"
 msgstr "Templates of import"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:32 ../../../param/menu.xml:85
+#: ../../../param/menu.xml:32 ../../../param/menu.xml:88
 msgid "Liste des modèles d'importation de fichiers"
 msgstr "List of file import templates"
 
@@ -288,18 +289,23 @@ msgid "Liste des cours d'eau"
 msgstr "List of watercourses"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:44
+#: ../../../param/menu.xml:44 ../../../param/menu.xml:45
 #: ../../../display/templates/param/stationList.tpl:1
 msgid "Stations"
 msgstr "Stations"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:44
+#: ../../../param/menu.xml:44 ../../../param/menu.xml:45
 msgid "Liste des stations"
 msgstr "List of stations"
 
-#. (itstool) path: item/item@label
+#. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:46
+msgid "Types des stations de tracking"
+msgstr "Types of tracking stations"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:49
 #: ../../../display/templates/param/protocolDisplay.tpl:77
 #: ../../../display/templates/param/measureTemplateList.tpl:15
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:37
@@ -310,22 +316,22 @@ msgid "Taxon"
 msgstr "Taxon"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:46 ../../../display/templates/param/taxonList.tpl:1
+#: ../../../param/menu.xml:49 ../../../display/templates/param/taxonList.tpl:1
 msgid "Liste des taxons"
 msgstr "List of taxons"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:47
+#: ../../../param/menu.xml:50
 msgid "Grilles de taxons"
 msgstr "Grid of taxons"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:47
+#: ../../../param/menu.xml:50
 msgid "Modèles de grilles de sélection des taxons"
 msgstr "Templates of taxon selection grid"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:48 ../../../param/menu.xml:71
+#: ../../../param/menu.xml:51 ../../../param/menu.xml:74
 #: ../../../display/templates/param/measureTemplateChange.tpl:103
 #: ../../../display/templates/gestion/sampleList.tpl:18
 #: ../../../display/templates/gestion/ambienceChange.tpl:364
@@ -334,434 +340,433 @@ msgid "Mesures complémentaires"
 msgstr "Complementary measures"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:48
+#: ../../../param/menu.xml:51
 msgid "Modèles de mesures complémentaires pour les taxons"
 msgstr "Templates of taxon complementary measures"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:49
+#: ../../../param/menu.xml:52
 msgid "Sexe"
 msgstr "Sexe"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:49 ../../../display/templates/param/sexeList.tpl:1
+#: ../../../param/menu.xml:52 ../../../display/templates/param/sexeList.tpl:1
 msgid "Liste des sexes"
 msgstr "List of sexes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:50
+#: ../../../param/menu.xml:53
 msgid "Pathologies"
 msgstr "Pathologies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:50
+#: ../../../param/menu.xml:53
 msgid "Types de pathologie"
 msgstr "Types of pathologies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:53
+#: ../../../param/menu.xml:56
 msgid "Stratégies"
 msgstr "Strategies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:53
+#: ../../../param/menu.xml:56
 msgid "Stratégies de pêche"
 msgstr "Fishing strategies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:54
+#: ../../../param/menu.xml:57
 msgid "Échelle de pêche"
 msgstr "Fishing scale"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:54
+#: ../../../param/menu.xml:57
 msgid "Échelle spatiale de pêche"
 msgstr "Spatial fishing scale"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:55
+#: ../../../param/menu.xml:58
 msgid "Modèles d'analyse"
 msgstr "Templates of analysis"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:55
+#: ../../../param/menu.xml:58
 msgid "Modèles d'analyse complémentaire"
 msgstr "Templates of complementary analysis"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:58
+#: ../../../param/menu.xml:61
 msgid "Ambiances"
 msgstr "Ambiences"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:58
+#: ../../../param/menu.xml:61
 msgid "Paramètres d'ambiance"
 msgstr "Ambience parameters"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:59
+#: ../../../param/menu.xml:62
 msgid "Caches"
 msgstr "Caches"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:59
+#: ../../../param/menu.xml:62
 msgid "Classes d'abondance des caches"
 msgstr "Cache abundance classes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:60
+#: ../../../param/menu.xml:63
 msgid "Colmatage"
 msgstr "Clogging"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:60
+#: ../../../param/menu.xml:63
 msgid "Types de colmatage du substrat"
 msgstr "Type of substrate clogging"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:61
+#: ../../../param/menu.xml:64
 msgid "Emplacements"
 msgstr "Locations"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:61
+#: ../../../param/menu.xml:64
 msgid "Emplacements particuliers"
 msgstr "Particular locations"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:62
+#: ../../../param/menu.xml:65
 #: ../../../display/templates/gestion/sequencePointList.tpl:12
 msgid "Faciès"
 msgstr "Facies"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:62
+#: ../../../param/menu.xml:65
 msgid "Types de faciès"
 msgstr "Types of facies"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:63
+#: ../../../param/menu.xml:66
 msgid "Flot"
 msgstr "Flow"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:63
+#: ../../../param/menu.xml:66
 msgid "Caractéristiques du flot"
 msgstr "Flow characteristics"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:64
+#: ../../../param/menu.xml:67
 msgid "Granulométrie"
 msgstr "Granulometry"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:64
+#: ../../../param/menu.xml:67
 msgid "Classes de granulométrie du substrat"
 msgstr "Substrate granulometry classes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:65
+#: ../../../param/menu.xml:68
 #: ../../../display/templates/gestion/sequencePointList.tpl:11
 #: ../../../display/templates/tracking/detectionChange.tpl:38
 msgid "Localisation"
 msgstr "Localisation"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:65
+#: ../../../param/menu.xml:68
 msgid "Localisation du point de mesure"
 msgstr "Measure point localisation"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:66
+#: ../../../param/menu.xml:69
 msgid "Ombrage"
 msgstr "Shading"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:66
+#: ../../../param/menu.xml:69
 msgid "Types d'ombrage"
 msgstr "Types of shading"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:67
+#: ../../../param/menu.xml:70
 msgid "Sinuosité"
 msgstr "Sinuosity"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:67
+#: ../../../param/menu.xml:70
 msgid "Types de sinuosité du cours d'eau"
 msgstr "Types of sinuosity of watercourse"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:68
+#: ../../../param/menu.xml:71
 msgid "Turbidité"
 msgstr "Turbidity"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:68
+#: ../../../param/menu.xml:71
 msgid "Classes de turbidité"
 msgstr "Turbidity classes"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:69
+#: ../../../param/menu.xml:72
 msgid "Végétation"
 msgstr "Vegetation"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:69
+#: ../../../param/menu.xml:72
 msgid "Nature de la végétation"
 msgstr "Nature of vegetation"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:70
+#: ../../../param/menu.xml:73
 msgid "Vitesse"
 msgstr "Speed"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:70
+#: ../../../param/menu.xml:73
 msgid "Classes de vitesse"
 msgstr "Speed classes"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:71
+#: ../../../param/menu.xml:74
 msgid "Mesures complémentaires associées à une ambience"
 msgstr "Complementary measures associated to an ambience"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:74
+#: ../../../param/menu.xml:77
 #: ../../../display/templates/gestion/sequenceDisplay.tpl:117
 msgid "Engins de pêche"
 msgstr "Fishing gears"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:74 ../../../display/templates/param/gearList.tpl:1
+#: ../../../param/menu.xml:77 ../../../display/templates/param/gearList.tpl:1
 msgid "Liste des engins de pêche"
 msgstr "List of fishing gears"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:75
+#: ../../../param/menu.xml:78
 msgid "Méthodes de pêche"
 msgstr "Fishing methods"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:75
+#: ../../../param/menu.xml:78
 msgid "Méthodes d'utilisation des engins de pêche"
 msgstr "Methods of using fishing gear"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:76
+#: ../../../param/menu.xml:79
 msgid "Types de courant"
 msgstr "Types of current"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:76
+#: ../../../param/menu.xml:79
 msgid "Types de courant électrique"
 msgstr "Types of electric current"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:78
+#: ../../../param/menu.xml:81
 msgid "Télédétection"
 msgstr "Remote sensing"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:78
+#: ../../../param/menu.xml:81
 msgid "Paramètres liés à la télédétection des poissons"
 msgstr "Parameters related to remote sensing of fish"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:87
+#: ../../../param/menu.xml:90
 msgid "Modèles d'export"
 msgstr "Templates of export"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:87
+#: ../../../param/menu.xml:90
 #: ../../../display/templates/import/exportModelList.tpl:18
 msgid "Liste des modèles d'exportation des données"
 msgstr "List of data export models"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:89
+#: ../../../param/menu.xml:92
 msgid "Mise en cache de la carto"
 msgstr "Caching the cartography"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:89
+#: ../../../param/menu.xml:92
 msgid "Stocker le fonds cartographique pour une utilisation hors Internet"
 msgstr "Store the map collection for offline use"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:96
+#: ../../../param/menu.xml:99
 msgid "Administration"
 msgstr "Administration"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:96
+#: ../../../param/menu.xml:99
 msgid "Administration de l'application"
 msgstr "Application administration"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:97
+#: ../../../param/menu.xml:100
 msgid "Liste des comptes locaux"
 msgstr "local accounts list"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:97
+#: ../../../param/menu.xml:100
 msgid "Liste des logins - identification via la base de données"
 msgstr "List of logins - identification via the database"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:98
+#: ../../../param/menu.xml:101
 msgid "ACL - droits"
 msgstr "ACL - rights"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:98
+#: ../../../param/menu.xml:101
 msgid "applications et droits gérés"
 msgstr "applications and rights managed"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:99
+#: ../../../param/menu.xml:102
 msgid "ACL - logins"
 msgstr "ACL - logins"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:99
+#: ../../../param/menu.xml:102
 msgid "Logins déclarés dans le module de gestion des droits"
 msgstr "Logins declared in the rights management module"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:100
+#: ../../../param/menu.xml:103
 msgid "ACL - groupes de logins"
 msgstr "ACL - login groups"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:100
+#: ../../../param/menu.xml:103
 msgid "Groupes de logins et logins rattachés aux groupes"
 msgstr "Groups of logins and logins attached to groups"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:101
+#: ../../../param/menu.xml:104
 msgid "Paramètres de l'application"
 msgstr "Application Settings"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:101
+#: ../../../param/menu.xml:104
 msgid "Liste des paramètres pérennes de l'application"
 msgstr "List of long-term parameters of the application"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:103
+#: ../../../param/menu.xml:106
 msgid "Logs"
 msgstr "Logs"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:103
+#: ../../../param/menu.xml:106
 msgid "Consultation des logs enregistrées"
 msgstr "Consultation of recorded logs"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:104 ../../../display/templates/phpinfo.tpl:1
+#: ../../../param/menu.xml:107 ../../../display/templates/phpinfo.tpl:1
 msgid "PHP info"
 msgstr "PHP info"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:104
+#: ../../../param/menu.xml:107
 msgid "configuration générale du serveur PHP"
 msgstr "general configuration of the PHP server"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:106 ../../../framework/common.inc.php:286
-#: ../../../framework/identification/disconnect.php:18
+#: ../../../param/menu.xml:109 ../../../framework/common.inc.php:243
 #: ../../../display/templates/entete.tpl:21
-#: ../../../display/templates/entete.tpl:40
 #: ../../../display/templates/entete.tpl:41
+#: ../../../display/templates/entete.tpl:42
 msgid "Connexion"
 msgstr "Sign in"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:106
+#: ../../../param/menu.xml:109
 msgid "S'identifier dans l'application"
 msgstr "Sign in to the app"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:107 ../../../display/templates/entete.tpl:36
-#: ../../../display/templates/entete.tpl:37
+#: ../../../param/menu.xml:110 ../../../display/templates/entete.tpl:37
+#: ../../../display/templates/entete.tpl:38
 msgid "Déconnexion"
 msgstr "Sign out"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:107
+#: ../../../param/menu.xml:110
 msgid "Déconnexion de l'application"
 msgstr "Sign out of the app"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:108
+#: ../../../param/menu.xml:111
 msgid "Dernières connexions"
 msgstr "Last connections"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:108
+#: ../../../param/menu.xml:111
 msgid "Liste des connexions récentes"
 msgstr "List of recently connections"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:109 ../../../display/templates/entete.tpl:32
+#: ../../../param/menu.xml:112 ../../../display/templates/entete.tpl:32
 #: ../../../display/templates/entete.tpl:33
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:86
 msgid "Modifier le mot de passe"
 msgstr "Change your password"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:109
+#: ../../../param/menu.xml:112
 msgid "Modifiez votre mot de passe (identification locale uniquement)"
 msgstr "Change your password (local identification only)"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:111
+#: ../../../param/menu.xml:114
 msgid "?"
 msgstr "?"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:111
+#: ../../../param/menu.xml:114
 msgid "Aide"
 msgstr "Help"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:112
+#: ../../../param/menu.xml:115
 msgid "A propos"
 msgstr "About"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:112
+#: ../../../param/menu.xml:115
 msgid "A propos de Collec-Science"
 msgstr "A propos de"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:113
+#: ../../../param/menu.xml:116
 msgid "Nouveautés"
 msgstr "What's new?"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:113
+#: ../../../param/menu.xml:116
 msgid "Quoi de neuf dans l'application ?"
 msgstr "What's new in the app?"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:114
+#: ../../../param/menu.xml:117
 msgid "Français"
 msgstr "French"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:114
+#: ../../../param/menu.xml:117
 msgid "Libellés en français"
 msgstr "Labels in French"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:115
+#: ../../../param/menu.xml:118
 msgid "English"
 msgstr "English"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:115
+#: ../../../param/menu.xml:118
 msgid "Labels in English"
 msgstr "Labels in English"
 
@@ -769,16 +774,16 @@ msgstr "Labels in English"
 msgid "13/01/2021"
 msgstr "2021-01-13"
 
-#: ../../../modules/param/station.php:85
+#: ../../../modules/param/station.php:100
 #, php-format
 msgid "%d stations(s) importée(s)"
 msgstr "%d station(s) imported"
 
-#: ../../../modules/param/station.php:89
+#: ../../../modules/param/station.php:104
 msgid "Impossible d'importer les stations"
 msgstr "Could not import stations"
 
-#: ../../../modules/param/station.php:94
+#: ../../../modules/param/station.php:109
 msgid "Impossible de charger le fichier à importer"
 msgstr "Unable to load the file to import"
 
@@ -1205,12 +1210,12 @@ msgstr "Saved"
 msgid "Problème lors de la mise en fichier..."
 msgstr "Writing problem..."
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1438
+#: ../../../framework/objetbdd/ObjetBDD.php:1426
 #, php-format
 msgid "le champ %1$s  n'est pas numerique. Valeur saisie : %2$s"
 msgstr "The field %1$s is not numeric. Entered value: %2$s"
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1442
+#: ../../../framework/objetbdd/ObjetBDD.php:1430
 #, php-format
 msgid ""
 "Le champ %1$s est trop grand. Longueur maximale autorisée : %2$s. Valeur "
@@ -1219,7 +1224,7 @@ msgstr ""
 "The %1$s field is too big. Maximum length allowed: %2$s. Entered value: %3$s "
 "(%4$s characters)"
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1446
+#: ../../../framework/objetbdd/ObjetBDD.php:1434
 #, php-format
 msgid ""
 "Le contenu du champ %1$s ne correspond pas au format attendu. Masque "
@@ -1228,15 +1233,31 @@ msgstr ""
 "The content of the field %1$s does not match the expected format. Authorized "
 "mask: %2$s. Entered value: %3$s"
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1450
+#: ../../../framework/objetbdd/ObjetBDD.php:1438
 #, php-format
 msgid "Le champ %s est obligatoire, mais n'a pas été renseigné."
 msgstr "The field %s is required, but has not been filled out."
+
+#: ../../../framework/objetbdd/ObjetBDD.php:1923
+#, php-format
+msgid ""
+"La connexion à la base de données n'est pas disponible pour instancier la "
+"classe %s"
+msgstr "The database connection is not available to instance the class %s"
 
 #: ../../../framework/utils/markdown.php:9
 #, php-format
 msgid "Le fichier %s n'existe pas"
 msgstr "The file %s don't exist"
+
+#: ../../../framework/utils/file.php:12
+msgid "Aucun nom de fichier n'a été fourni"
+msgstr "No file name has been provided"
+
+#: ../../../framework/utils/file.php:18
+#, php-format
+msgid "Le fichier %s n'existe pas ou n'est pas lisible"
+msgstr "File %s not found or not readable"
 
 #: ../../../framework/utils/backup.php:33
 msgid "Le fichier de backup n'a pas été généré"
@@ -1246,7 +1267,7 @@ msgstr "The backup file was not generated"
 msgid "Le fichier de backup à charger n'a pas été trouvé"
 msgstr "The backup file to download was not found"
 
-#: ../../../framework/controller.php:18
+#: ../../../framework/controller.php:23
 msgid ""
 "Problème dans les données fournies : l'encodage des caractères n'est pas "
 "celui attendu"
@@ -1254,7 +1275,7 @@ msgstr ""
 "Problem in the provided data: the character encoding is not the one expected"
 
 #. traduction: bien conserver inchangées les chaînes %1$s, %2$s
-#: ../../../framework/controller.php:37
+#: ../../../framework/controller.php:42
 #, php-format
 msgid ""
 "La base de données n'est pas dans la version attendue (%1$s). Version "
@@ -1262,36 +1283,45 @@ msgid ""
 msgstr ""
 "The database is not in the expected version (%1$s). Current version: %2$s"
 
-#: ../../../framework/controller.php:44
+#: ../../../framework/controller.php:49
 msgid ""
 "Problème rencontré lors de la vérification de la version de la base de "
 "données"
 msgstr "Problem encountered while checking the version of the database"
 
 #. traduction: conserver inchangée la chaîne %s
-#: ../../../framework/controller.php:160
+#: ../../../framework/controller.php:173
 #, php-format
 msgid "Le module demandé n'existe pas (%s)"
 msgstr "The requested module does not exist (%s)"
 
-#: ../../../framework/controller.php:274
-msgid "Veuillez utiliser votre login du domaine pour vous identifier"
-msgstr "Please use your domain login to login"
+#: ../../../framework/controller.php:255
+msgid ""
+"Message technique : la vue n'a pas été initialisée lors de la création de la "
+"page de login"
+msgstr ""
+"Technical message: the view was not initialized for the creation of the "
+"login page"
 
-#: ../../../framework/controller.php:297
-msgid "L'identification par jeton n'a pas abouti"
-msgstr "Token identification was unsuccessful"
+#: ../../../framework/controller.php:264
+msgid "Veuillez utiliser le login qui vous a été fourni pour vous identifier"
+msgstr ""
+"Please use the login that has been provided to you to identify yourself"
 
 #: ../../../framework/controller.php:329
+msgid "Identification refusée"
+msgstr "Authentication failed"
+
+#: ../../../framework/controller.php:350
 msgid "Identification réussie !"
 msgstr "Authentication successful!"
 
-#: ../../../framework/controller.php:341
+#: ../../../framework/controller.php:361
 msgid "Connexions précédentes récentes :"
 msgstr "Recently connections:"
 
 #. traduction: bien conserver inchangées les chaînes %1$s, %2$s...
-#: ../../../framework/controller.php:353
+#: ../../../framework/controller.php:373
 #, php-format
 msgid ""
 "Dernière connexion le %1$s depuis l'adresse IP %2$s. Si ce n'était pas vous, "
@@ -1300,17 +1330,13 @@ msgstr ""
 "Last connection on %1$s from the IP address %2$s. If it was not you, change "
 "your password or contact the administrator of the application."
 
-#: ../../../framework/controller.php:408
-msgid "Identification refusée"
-msgstr "Authentication failed"
-
 #. traduction: conserver inchangée la chaîne %s
-#: ../../../framework/controller.php:459
+#: ../../../framework/controller.php:464
 #, php-format
 msgid "Module précédent enregistré : %s"
 msgstr "Previous module: %s"
 
-#: ../../../framework/controller.php:509
+#: ../../../framework/controller.php:531
 msgid ""
 "L'accès au module demandé nécessite une ré-identification. Veuillez saisir "
 "votre login et votre mot de passe"
@@ -1318,17 +1344,17 @@ msgstr ""
 "Access to the requested module requires re-identification. Please enter your "
 "login and password"
 
-#: ../../../framework/controller.php:536
+#: ../../../framework/controller.php:549
 msgid "Erreur d'écriture dans le fichier de traces"
 msgstr "Error writing to the log file"
 
 #. traduction: bien conserver inchangées les chaînes %1$s, %2$s
-#: ../../../framework/controller.php:651
+#: ../../../framework/controller.php:673
 #, php-format
 msgid "Mode développement - base de données : %1$s - schema : %2$s"
 msgstr "Development mode - database: %1$s - schema: %2$s"
 
-#: ../../../framework/controller.php:683
+#: ../../../framework/controller.php:706
 msgid ""
 "Une erreur indéterminée s'est produite pendant le traitement de la requête. "
 "Si le problème persiste, consultez l'administrateur de l'application"
@@ -1348,29 +1374,29 @@ msgstr ""
 msgid "Vous n'êtes pas identifié."
 msgstr "You are not signed in."
 
-#: ../../../framework/common.inc.php:249
+#: ../../../framework/common.inc.php:206
 msgid "Echec de connexion à la base de données de gestion des droits (GACL)"
 msgstr "Failed to connect to rights management database (GACL)"
 
-#: ../../../framework/common.inc.php:252
+#: ../../../framework/common.inc.php:209
 msgid "Echec de connexion à la base de données principale"
 msgstr "Failed to connect to the main database"
 
-#: ../../../framework/common.inc.php:266
+#: ../../../framework/common.inc.php:223
 msgid ""
 "Vous avez été déconnecté, votre session était ouverte depuis trop longtemps"
 msgstr "You have been disconnected, your session has been open for too long"
 
-#: ../../../framework/common.inc.php:284
-#: ../../../framework/identification/disconnect.php:10
+#: ../../../framework/common.inc.php:241
+#: ../../../framework/identification/disconnect.php:8
 msgid "Vous êtes maintenant déconnecté"
 msgstr "You are now signed off"
 
-#: ../../../framework/common.inc.php:318
+#: ../../../framework/common.inc.php:275
 msgid "Problème rencontré lors de la lecture de la table des paramètres"
 msgstr "Problem occurred during the reading of the table of parameters"
 
-#: ../../../framework/log/log.class.php:300
+#: ../../../framework/log/log.class.php:310
 msgid ""
 "Le nombre d'accès autorisés pour le module demandé a été atteint. Si vous "
 "considérez que la valeur est trop faible, veuillez contacter "
@@ -1380,13 +1406,37 @@ msgstr ""
 "If you consider that the value is too low, please contact the application "
 "administrator"
 
-#: ../../../framework/vue.class.php:300
+#: ../../../framework/vue.class.php:301
 msgid ""
 "Une erreur a été détectée lors de la création de l'écran. Si le problème "
 "persiste, contactez l'administrateur de l'application."
 msgstr ""
 "an error was detected during the screen creation. If the problem persists, "
 "contact your support."
+
+#: ../../../framework/identification/totp.php:17
+msgid ""
+"Vous avez déjà activé l'identification à double facteur : contactez un "
+"administrateur de l'application pour réinitialiser cette fonction"
+msgstr ""
+"You have already activated the two-factor identification: contact an "
+"application administrator to reset this function."
+
+#: ../../../framework/identification/totp.php:35
+msgid ""
+"Les informations fournies sont insuffisantes pour valider la création de la "
+"double identification"
+msgstr ""
+"The information provided is insufficient to validate the creation of double "
+"identification"
+
+#: ../../../framework/identification/totp.php:45
+msgid "La double authentification est maintenant activée."
+msgstr "The double authentication is activate now."
+
+#: ../../../framework/identification/totp.php:54
+msgid "Le code fourni n'a pu être vérifié"
+msgstr "The code provided could not be verified"
 
 #. traduction: conserver inchangées les chaînes :keyword"
 #: ../../../framework/identification/passwordLost.php:32
@@ -1428,9 +1478,9 @@ msgstr "Could not send email"
 
 #: ../../../framework/identification/passwordLost.php:86
 #: ../../../framework/identification/passwordLost.php:113
-#: ../../../framework/identification/login.php:74
-#: ../../../framework/identification/loginGestion.class.php:264
-#: ../../../framework/identification/loginGestion.class.php:320
+#: ../../../framework/identification/login.php:76
+#: ../../../framework/identification/loginGestion.class.php:340
+#: ../../../framework/identification/loginGestion.class.php:395
 msgid ""
 "Le mode d'identification utilisé pour votre compte n'autorise pas la "
 "modification du mot de passe depuis cette application"
@@ -1442,12 +1492,30 @@ msgstr ""
 msgid "Le jeton fourni n'est pas valide"
 msgstr "Token provided is not valid"
 
-#: ../../../framework/identification/login.php:58
+#: ../../../framework/identification/login.php:60
 msgid ""
 "Problème rencontré lors de l'écriture du login pour la gestion des droits"
 msgstr "Problem encountered when writing the login for the rights management"
 
-#: ../../../framework/identification/loginGestion.class.php:121
+#: ../../../framework/identification/login.php:94
+msgid "Modification du mot de passe"
+msgstr "Password change"
+
+#: ../../../framework/identification/login.php:96
+msgid ""
+"Vous venez de modifier votre mot de passe. Si vous n'êtes pas à l'origine de "
+"cette opération, contactez l'administrateur de l'application, et activez "
+"également la double authentification pour mieux protéger votre compte."
+msgstr ""
+"You have just changed your password. If you did not initiate this operation, "
+"contact the application administrator, and also enable dual authentication "
+"to better protect your account."
+
+#: ../../../framework/identification/login.php:97
+msgid "Ne répondez pas à ce message, il ne sera pas relevé"
+msgstr "Do not reply to this message, il will not readed"
+
+#: ../../../framework/identification/loginGestion.class.php:128
 msgid ""
 "Votre mot de passe a expiré. Veuillez contacter l'administrateur de "
 "l'application pour le renouveler"
@@ -1455,27 +1523,39 @@ msgstr ""
 "Your password has expired. Please contact the application administrator to "
 "renew it"
 
-#: ../../../framework/identification/loginGestion.class.php:124
+#: ../../../framework/identification/loginGestion.class.php:131
 msgid "Votre mot de passe va expirer. Veuillez le changer immédiatement"
-msgstr "Your password is about to expire. Please, change it immediately"
+msgstr ""
+"You have already activated the two-factor identification: contact an "
+"application administrator to reset this function."
 
-#: ../../../framework/identification/loginGestion.class.php:178
+#: ../../../framework/identification/loginGestion.class.php:198
 msgid "Mot de passe insuffisamment complexe ou trop petit"
 msgstr "Password not enough complex or too small"
 
-#: ../../../framework/identification/loginGestion.class.php:258
+#: ../../../framework/identification/loginGestion.class.php:211
+msgid ""
+"Une erreur est survenue pendant le chiffrement du jeton d'identification"
+msgstr "An error occurred during the encryption of the token"
+
+#: ../../../framework/identification/loginGestion.class.php:229
+msgid ""
+"Une erreur est survenue pendant le déchiffrement du jeton d'identification"
+msgstr "An error occurred during the decryption of the token"
+
+#: ../../../framework/identification/loginGestion.class.php:334
 msgid "La modification du mot de passe a échoué"
 msgstr "Password change failed"
 
-#: ../../../framework/identification/loginGestion.class.php:261
+#: ../../../framework/identification/loginGestion.class.php:337
 msgid "L'ancien mot de passe est incorrect"
 msgstr "The old password is incorrect"
 
-#: ../../../framework/identification/loginGestion.class.php:312
+#: ../../../framework/identification/loginGestion.class.php:387
 msgid "Le mot de passe a été modifié"
 msgstr "The password has been changed"
 
-#: ../../../framework/identification/loginGestion.class.php:313
+#: ../../../framework/identification/loginGestion.class.php:388
 msgid ""
 "Votre mot de passe vient d'être modifié.<br>Si vous n'avez pas réalisé cette "
 "opération, veuillez contacter le responsable de l'application"
@@ -1483,11 +1563,11 @@ msgstr ""
 "Your password has just been changed.<br>If you did not perform this "
 "operation, please contact the application manager"
 
-#: ../../../framework/identification/loginGestion.class.php:314
+#: ../../../framework/identification/loginGestion.class.php:389
 msgid "Modification de votre mot de passe"
 msgstr "Change your password"
 
-#: ../../../framework/identification/loginGestion.class.php:317
+#: ../../../framework/identification/loginGestion.class.php:392
 msgid ""
 "Echec de modification du mot de passe pour une raison inconnue. Si le "
 "problème persiste, contactez l'assistance"
@@ -1495,39 +1575,87 @@ msgstr ""
 "Failed to change the password for an unknown reason. If the problem "
 "persists, contact support"
 
-#: ../../../framework/identification/loginGestion.class.php:369
+#: ../../../framework/identification/loginGestion.class.php:444
 msgid "Le mot de passe n'est pas assez fort"
 msgstr "Password not strong enough"
 
-#: ../../../framework/identification/loginGestion.class.php:372
+#: ../../../framework/identification/loginGestion.class.php:447
 msgid "Le mot de passe n'est pas assez complexe"
 msgstr ""
 "The password is not complex enough (mix 3 character sets among lowercase, "
 "uppercase, numbers, and punctuation)"
 
-#: ../../../framework/identification/loginGestion.class.php:375
+#: ../../../framework/identification/loginGestion.class.php:450
 msgid "Le mot de passe est trop court"
 msgstr "The password is too short (minimum: 10 characters)"
 
-#: ../../../framework/identification/loginGestion.class.php:378
+#: ../../../framework/identification/loginGestion.class.php:453
 msgid "Le mot de passe n'est pas identique dans les deux zones"
 msgstr "Passwords don't match in both fields"
 
-#: ../../../framework/identification/loginGestion.class.php:487
+#: ../../../framework/identification/loginGestion.class.php:564
 msgid "Envoi du message de modification du mot de passe par mail en échec"
 msgstr "Sending the password change message by email in failure"
 
-#: ../../../framework/identification/identification.class.php:374
+#: ../../../framework/identification/login.class.php:43
+msgid "L'identification par jeton n'a pas abouti"
+msgstr "Token identification was unsuccessful"
+
+#: ../../../framework/identification/login.class.php:83
+msgid ""
+"L'identification n'a pas abouti. Vérifiez votre login et votre mot de passe"
+msgstr "The identification was not successful. Check your login and password"
+
+#: ../../../framework/identification/login.class.php:136
+#: ../../../framework/identification/identification.class.php:334
 msgid "Nouvel utilisateur"
 msgstr "New user:"
 
-#: ../../../framework/identification/identification.class.php:383
+#: ../../../framework/identification/login.class.php:137
+#, php-format
+msgid ""
+"%1$s a créé son compte avec le login %2$s dans l'application %3$s.\n"
+"                          <br>Il est rattaché à l'organisation %5$s.\n"
+"                          <br>Le compte est inactif jusqu'à ce que vous "
+"l'activiez.\n"
+"                          <br>Pour activer le compte, connectez-vous à "
+"l'application\n"
+"                              <a href=\"%4$s\">%4$s</a>\n"
+"                          <br>Ne répondez pas à ce mail, qui est généré "
+"automatiquement"
+msgstr ""
+"%1$s created his account with the login %2$s in the application %3$s.\n"
+"                          <br>He is attached to the organization %5$s.\n"
+"                          <br>The account is inactive until you activate "
+"it.\n"
+"                          <br>To activate the account, login to the "
+"application\n"
+"                              <a href=\"%4$s\">%4$s</a>\n"
+"                          <br>Don't answer this mail, which is generated "
+"automatically."
+
+#: ../../../framework/identification/login.class.php:145
+#: ../../../framework/identification/identification.class.php:343
 msgid ""
 "Votre compte a été créé, mais est inactif. Un mail a été adressé aux "
 "administrateurs pour son activation"
 msgstr ""
 "Your account was create, but it's inactive. An email was send to the "
 "administrators for its activation"
+
+#: ../../../framework/identification/totp.class.php:54
+msgid ""
+"La valeur otp_issuer n'a pas été renseignée dans les paramètres de "
+"l'application"
+msgstr "The application parameter otp_issuer is empty"
+
+#: ../../../framework/identification/totp.class.php:87
+msgid "Une erreur est survenue pendant le chiffrement de la clé secrète"
+msgstr "An error occurred during the encryption of the secret key"
+
+#: ../../../framework/identification/totp.class.php:102
+msgid "Une erreur est survenue pendant le déchiffrement de la clé secrète"
+msgstr "An error occurred during the decryption of the secret key"
 
 #: ../../../framework/errorbefore.php:2
 msgid ""
@@ -1574,44 +1702,53 @@ msgid ""
 "cet enregistrement"
 msgstr "Deletion is not possible: information is referenced by this record"
 
-#: ../../../framework/fonctions.php:150
+#: ../../../framework/fonctions.php:147
 msgid "Problème lors de la suppression"
 msgstr "Problem when deleting"
 
-#: ../../../framework/fonctions.php:152
-msgid "Suppression non réalisée"
-msgstr "Unrealized deletion"
-
-#: ../../../framework/fonctions.php:161
+#: ../../../framework/fonctions.php:156
 msgid ""
 "Suppression impossible : la clé n'est pas numérique ou n'a pas été fournie"
 msgstr "Deletion impossible: the key is not numeric or is empty"
 
-#: ../../../framework/droits/droits.class.php:219
-msgid ""
-"L'ajout d'un login à la table des comptes (gestion des droits) n'est pas "
-"possible : le login ou le nom ne sont pas fournis"
-msgstr ""
-"Adding a login to the account table (rights management) is not possible: the "
-"login or name is not provided"
+#: ../../../framework/fonctions.php:506
+msgid "Impossible d'initialiser le composant curl"
+msgstr "Unable to initiate the curl component"
 
-#: ../../../framework/droits/droits.class.php:439
+#: ../../../framework/fonctions.php:546
+#, php-format
+msgid ""
+"Une erreur est survenue lors de l'exécution de la requête vers le serveur "
+"distant. Code d'erreur CURL : %s"
+msgstr ""
+"An error occurred while executing the request to the remote server. CURL "
+"error code: %s"
+
+#: ../../../framework/droits/aclgroup.class.php:122
 msgid "Connexion à l'annuaire LDAP impossible"
 msgstr "Cannot connect to the LDAP directory"
 
-#: ../../../framework/droits/droits.class.php:617
+#: ../../../framework/droits/aclgroup.class.php:299
 msgid "Un groupe ne peut être son propre parent"
 msgstr "A group can't be its own parent"
 
-#: ../../../framework/droits/droits.class.php:641
+#: ../../../framework/droits/aclgroup.class.php:323
 msgid "Suppression du groupe impossible : d'autres groupes lui sont rattachés"
 msgstr "Can not delete group: other groups are attached to it"
 
-#: ../../../framework/droits/droits.class.php:657
+#: ../../../framework/droits/aclgroup.class.php:339
 msgid ""
 "La suppression du groupe a échoué. Consultez les logs pour en connaître la "
 "raison"
 msgstr "Deleting the group failed. Check the logs to find out the reason"
+
+#: ../../../framework/droits/acllogin.class.php:108
+msgid ""
+"L'ajout d'un login à la table des comptes (gestion des droits) n'est pas "
+"possible : le login n'est pas fourni"
+msgstr ""
+"Adding a login to the account table (rights management) is not possible: the "
+"login is not provided"
 
 #: ../../../framework/import/import.class.php:73
 #, php-format
@@ -1729,35 +1866,39 @@ msgstr "Latitude"
 msgid "PK"
 msgstr "KP"
 
-#: ../../../display/templates/param/stationList.tpl:54
+#: ../../../display/templates/param/stationList.tpl:22
+msgid "Type de station (tracking)"
+msgstr "Type of station (tracking)"
+
+#: ../../../display/templates/param/stationList.tpl:56
 msgid "Importer des stations depuis un fichier CSV"
 msgstr "Import stations from a CSV file"
 
-#: ../../../display/templates/param/stationList.tpl:59
+#: ../../../display/templates/param/stationList.tpl:61
 msgid "Nom du fichier à importer (CSV) :"
 msgstr "Name of import file (CSV):"
 
-#: ../../../display/templates/param/stationList.tpl:65
+#: ../../../display/templates/param/stationList.tpl:67
 msgid "Séparateur :"
 msgstr "Separator:"
 
-#: ../../../display/templates/param/stationList.tpl:68
+#: ../../../display/templates/param/stationList.tpl:70
 msgid "Point-virgule"
 msgstr "semi-colon"
 
-#: ../../../display/templates/param/stationList.tpl:69
+#: ../../../display/templates/param/stationList.tpl:71
 msgid "Virgule"
 msgstr "colon"
 
-#: ../../../display/templates/param/stationList.tpl:70
+#: ../../../display/templates/param/stationList.tpl:72
 msgid "Tabulation"
 msgstr "Tabulation"
 
-#: ../../../display/templates/param/stationList.tpl:76
+#: ../../../display/templates/param/stationList.tpl:78
 msgid "Projet éventuel de rattachement :"
 msgstr "Eventual attached project:"
 
-#: ../../../display/templates/param/stationList.tpl:79
+#: ../../../display/templates/param/stationList.tpl:81
 #: ../../../display/templates/param/stationChange.tpl:39
 #: ../../../display/templates/param/stationChange.tpl:52
 #: ../../../display/templates/gestion/ambienceChange.tpl:99
@@ -1783,44 +1924,56 @@ msgstr "Eventual attached project:"
 msgid "Choisissez..."
 msgstr "Select..."
 
-#: ../../../display/templates/param/stationList.tpl:89
+#: ../../../display/templates/param/stationList.tpl:91
 msgid "Importer les stations"
 msgstr "Import the stations"
 
-#: ../../../display/templates/param/stationList.tpl:92
+#: ../../../display/templates/param/stationList.tpl:94
 msgid "Description du fichier :"
 msgstr "Description of the file:"
 
-#: ../../../display/templates/param/stationList.tpl:94
+#: ../../../display/templates/param/stationList.tpl:96
 msgid "name : nom du lieu de prélèvement (obligatoire)"
 msgstr "name: name of sampling location (mandatory)"
 
-#: ../../../display/templates/param/stationList.tpl:95
+#: ../../../display/templates/param/stationList.tpl:97
 msgid "code : code métier de la station"
 msgstr "code: business code of the station"
 
-#: ../../../display/templates/param/stationList.tpl:96
+#: ../../../display/templates/param/stationList.tpl:98
 msgid "number : n° métier de la station"
 msgstr "number: business number of the station"
 
-#: ../../../display/templates/param/stationList.tpl:97
+#: ../../../display/templates/param/stationList.tpl:99
 msgid ""
 "long : longitude du point en projection WGS84, sous forme numérique "
 "(séparateur : point)"
 msgstr ""
 "long: longitude of the point in WGS84, in numeric form (separator: point)"
 
-#: ../../../display/templates/param/stationList.tpl:98
+#: ../../../display/templates/param/stationList.tpl:100
 msgid "lat : latitude du point"
 msgstr "lat: latitude of the point"
 
-#: ../../../display/templates/param/stationList.tpl:99
+#: ../../../display/templates/param/stationList.tpl:101
 msgid "pk : point kilométrique de la station"
 msgstr "pk: kilometer point of the station"
 
-#: ../../../display/templates/param/stationList.tpl:100
+#: ../../../display/templates/param/stationList.tpl:102
 msgid "river : nom du cours d'eau"
 msgstr "river: name of watercourse"
+
+#: ../../../display/templates/param/stationList.tpl:103
+msgid ""
+"station_type_id : code du type de station pour celles utilisées en tracking. "
+"Consultez la liste des codes ici :"
+msgstr ""
+"station_type_id: code of the type of station for these used in tracking. "
+"Show the list here:"
+
+#: ../../../display/templates/param/stationList.tpl:103
+msgid "Liste des types de stations"
+msgstr "List of types of station"
 
 #: ../../../display/templates/param/measureTemplateChange.tpl:17
 #: ../../../display/templates/param/ambienceTemplateChange.tpl:17
@@ -1931,12 +2084,13 @@ msgstr "Corresponding taxon:"
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:104
 #: ../../../display/templates/framework/dbparamListChange.tpl:24
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:209
-#: ../../../display/templates/framework/ident/loginAdmin.tpl:24
+#: ../../../display/templates/framework/ident/totp.tpl:21
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:135
 #: ../../../display/templates/framework/droits/appliChange.tpl:25
-#: ../../../display/templates/framework/droits/loginChange.tpl:23
+#: ../../../display/templates/framework/droits/loginChange.tpl:29
 #: ../../../display/templates/framework/droits/groupChange.tpl:13
 #: ../../../display/templates/framework/droits/acoChange.tpl:16
+#: ../../../display/templates/framework/droits/otpCreate.tpl:32
 #: ../../../display/templates/import/importTypeChange.tpl:39
 #: ../../../display/templates/import/importDescriptionChange.tpl:85
 #: ../../../display/templates/import/importColumnChange.tpl:73
@@ -1981,7 +2135,7 @@ msgstr "Save and return"
 #: ../../../display/templates/framework/request/requestChange.tpl:85
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:211
 #: ../../../display/templates/framework/droits/appliChange.tpl:27
-#: ../../../display/templates/framework/droits/loginChange.tpl:25
+#: ../../../display/templates/framework/droits/loginChange.tpl:31
 #: ../../../display/templates/framework/droits/groupChange.tpl:15
 #: ../../../display/templates/framework/droits/acoChange.tpl:18
 #: ../../../display/templates/import/importTypeChange.tpl:41
@@ -2021,7 +2175,7 @@ msgstr "Delete..."
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:115
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:222
 #: ../../../display/templates/framework/droits/appliChange.tpl:35
-#: ../../../display/templates/framework/droits/loginChange.tpl:31
+#: ../../../display/templates/framework/droits/loginChange.tpl:37
 #: ../../../display/templates/framework/droits/groupChange.tpl:60
 #: ../../../display/templates/framework/droits/acoChange.tpl:47
 #: ../../../display/templates/import/importTypeChange.tpl:47
@@ -2212,6 +2366,7 @@ msgstr "Is only the default length allowed?"
 #: ../../../display/templates/framework/ident/loginliste.tpl:45
 #: ../../../display/templates/framework/ident/loginliste.tpl:46
 #: ../../../display/templates/framework/ident/loginliste.tpl:49
+#: ../../../display/templates/framework/droits/loginList.tpl:26
 #: ../../../display/templates/import/importDescriptionDisplay.tpl:144
 #: ../../../display/templates/import/importDescriptionDisplay.tpl:145
 msgid "oui"
@@ -2813,6 +2968,14 @@ msgstr "Sea water"
 #: ../../../display/templates/entete.tpl:34
 msgid "Mot de passe"
 msgstr "Password"
+
+#: ../../../display/templates/entete.tpl:35
+msgid "Activer la double authentification pour votre compte"
+msgstr "Enabling dual authentication for your account"
+
+#: ../../../display/templates/entete.tpl:35
+msgid "Activer la double authentification"
+msgstr "Enable dual authentication"
 
 #: ../../../display/templates/gestion/campaignChange.tpl:1
 msgid "Création - Modification d'une campagne"
@@ -4406,7 +4569,7 @@ msgstr "Type of station"
 
 #: ../../../display/templates/tracking/stationTrackingList.tpl:108
 msgid "En service ?"
-msgstr ""
+msgstr "In use?"
 
 #: ../../../display/templates/tracking/stationTrackingList.tpl:137
 #: ../../../display/templates/import/exportModelDisplay.tpl:55
@@ -4421,6 +4584,9 @@ msgid ""
 "Les lignes pointillées correspondent aux périodes de fonctionnement des "
 "stations, et en continu, au périodes d'inactivité (récepteurs hors service)"
 msgstr ""
+"The dotted lines correspond to the operating periods of the stations, and "
+"the solid lines correspond to the periods of inactivity (receivers out of "
+"service)"
 
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:4
 msgid "Nom de la station :"
@@ -4527,7 +4693,7 @@ msgstr "Reception radius (meters):"
 #: ../../../display/templates/tracking/antennaList.tpl:16
 #: ../../../display/templates/tracking/probeList.tpl:14
 msgid "Date de mise en service"
-msgstr ""
+msgstr "Date of use start"
 
 #: ../../../display/templates/tracking/antennaList.tpl:17
 #: ../../../display/templates/tracking/probeList.tpl:15
@@ -4686,6 +4852,10 @@ msgstr "Save and run"
 msgid "Exécuter"
 msgstr "Run"
 
+#: ../../../display/templates/framework/request/requestChange.tpl:116
+msgid "Aucun résultat n'a été retourné par la requête"
+msgstr "No results were returned by the query"
+
 #: ../../../display/templates/framework/request/requestList.tpl:1
 msgid "Liste des requêtes SQL"
 msgstr "List of SQL requests"
@@ -4762,8 +4932,8 @@ msgid "Retour à la liste des logins"
 msgstr "Back to the list of logins"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:91
-#: ../../../display/templates/framework/ident/login.tpl:25
-#: ../../../display/templates/framework/ident/loginAdmin.tpl:5
+#: ../../../display/templates/framework/ident/login.tpl:26
+#: ../../../display/templates/framework/ident/loginAdmin.tpl:26
 msgid "Login :"
 msgstr "Login:"
 
@@ -4804,8 +4974,8 @@ msgstr ""
 "The account is blocked, the password was not changed after 3 connections"
 
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:153
-#: ../../../display/templates/framework/ident/login.tpl:33
-#: ../../../display/templates/framework/ident/loginAdmin.tpl:13
+#: ../../../display/templates/framework/ident/login.tpl:34
+#: ../../../display/templates/framework/ident/loginAdmin.tpl:34
 msgid "Mot de passe :"
 msgstr "Password:"
 
@@ -4860,7 +5030,7 @@ msgid "Actif"
 msgstr "Active"
 
 #: ../../../display/templates/framework/ident/identMailInput.tpl:2
-#: ../../../display/templates/framework/ident/login.tpl:55
+#: ../../../display/templates/framework/ident/login.tpl:56
 msgid "Mot de passe oublié ?"
 msgstr "Forgot your password?"
 
@@ -4876,17 +5046,35 @@ msgstr "Enter your email address:"
 msgid "Recevoir un mail de récupération"
 msgstr "Receive a recovery email"
 
-#: ../../../display/templates/framework/ident/login.tpl:49
+#: ../../../display/templates/framework/ident/login.tpl:50
 msgid "Conserver la connexion pendant"
 msgstr "Keep me signed in for"
 
-#: ../../../display/templates/framework/ident/login.tpl:49
+#: ../../../display/templates/framework/ident/login.tpl:50
 msgid "heures"
 msgstr "hours"
 
-#: ../../../display/templates/framework/ident/login.tpl:59
+#: ../../../display/templates/framework/ident/login.tpl:60
+#: ../../../display/templates/framework/ident/loginAdmin.tpl:46
 msgid "Se connecter"
 msgstr "Sign in"
+
+#: ../../../display/templates/framework/ident/totp.tpl:1
+msgid "Vérification du compte avec la double authentification"
+msgstr "Account verification with dual authentication"
+
+#: ../../../display/templates/framework/ident/totp.tpl:5
+msgid ""
+"Pour vérifier votre identification, veuillez taper le code TOTP que vous "
+"avez configuré dans votre smartphone"
+msgstr ""
+"To verify your identification, please enter the TOTP code that you have set "
+"up in your smartphone"
+
+#: ../../../display/templates/framework/ident/totp.tpl:15
+#: ../../../display/templates/framework/droits/otpCreate.tpl:26
+msgid "Code généré par le logiciel TOTP :"
+msgstr "TOTP software generated code:"
 
 #: ../../../display/templates/framework/ident/loginliste.tpl:23
 msgid "Liste des logins déclarés dans la base de données"
@@ -4921,7 +5109,7 @@ msgstr "Password waiting to be change"
 msgid "Compte bloqué"
 msgstr "Account blocked"
 
-#: ../../../display/templates/framework/ident/loginliste.tpl:62
+#: ../../../display/templates/framework/ident/loginliste.tpl:63
 msgid "Adresses mails :"
 msgstr "Email address:"
 
@@ -5075,7 +5263,11 @@ msgstr "Username:"
 msgid "Login utilisé :"
 msgstr "Login used:"
 
-#: ../../../display/templates/framework/droits/loginChange.tpl:35
+#: ../../../display/templates/framework/droits/loginChange.tpl:23
+msgid "Désactiver l'identification à double facteur :"
+msgstr "Disable dual-factor identification:"
+
+#: ../../../display/templates/framework/droits/loginChange.tpl:41
 msgid "Droits attribués"
 msgstr "Rights granted"
 
@@ -5127,6 +5319,26 @@ msgstr "Name of the right used in the application:"
 msgid "Groupes disposant du droit :"
 msgstr "Groups with the right:"
 
+#: ../../../display/templates/framework/droits/otpCreate.tpl:1
+msgid "Activation de la double authentification"
+msgstr "Enabling dual authentication"
+
+#: ../../../display/templates/framework/droits/otpCreate.tpl:5
+msgid ""
+"La double identification limite les risques d'usurpation de votre compte."
+msgstr ""
+"The double identification limits the risks of usurpation of your account."
+
+#: ../../../display/templates/framework/droits/otpCreate.tpl:7
+msgid ""
+"Pour l'activer, vous devrez installer dans votre smartphone une application "
+"compatible avec l'identification\n"
+"      TOTP, par exemple FreeOTP, Google Authenticator, etc."
+msgstr ""
+"To activate it, you will need to install in your smartphone an application "
+"that is compatible with the identification\n"
+"      TOTP, e.g. FreeOTP, Google Authenticator, etc."
+
 #: ../../../display/templates/framework/droits/appliList.tpl:2
 msgid "Liste des applications disponibles dans le module de gestion des droits"
 msgstr "List of applications available in the rights management module"
@@ -5174,6 +5386,10 @@ msgstr "User"
 #: ../../../display/templates/framework/droits/loginList.tpl:13
 msgid "Login employé"
 msgstr "Login used"
+
+#: ../../../display/templates/framework/droits/loginList.tpl:14
+msgid "Double identification activée ?"
+msgstr "Dual authentication activate?"
 
 #: ../../../display/templates/framework/lastConnections.tpl:1
 msgid "Dernières connexions enregistrées"
@@ -5733,6 +5949,9 @@ msgstr "Order of execution of the function:"
 #: ../../../display/templates/import/importFunctionChange.tpl:85
 msgid "Argument complémentaire :"
 msgstr "Complementary argument:"
+
+#~ msgid "Suppression non réalisée"
+#~ msgstr "Unrealized deletion"
 
 #~ msgid "Le tag %s ne correspond à aucun poisson connu"
 #~ msgstr "The tag %s does not correspond to a recognized fish"

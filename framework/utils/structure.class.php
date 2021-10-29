@@ -426,10 +426,8 @@ class Structure extends ObjetBDD
   {
     if ($referencedBy) {
       $type = 'y';
-      $schemaType = 'x';
     } else {
       $type = 'x';
-      $schemaType = 'y';
     }
     $sql = "
         select distinct c.constraint_name
@@ -475,9 +473,9 @@ class Structure extends ObjetBDD
             . $view["schemaname"] . $view["viewname"]
             . '">' . $view["viewname"] . "</a></li>";
         }
-        $summary .= "</ul></li></ul>";
+        $summary .= "</ul></li>";
       }
-      $summary .= "</li>";
+      $summary .= "</ul></li>";
     }
     $summary .= "</ul>";
     return ($summary);

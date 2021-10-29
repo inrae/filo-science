@@ -6,15 +6,16 @@
 * Parametres par defaut de l'application
 * Si des modifications doivent etre apportees, faites-les dans le fichier param.inc.php
 */
-$APPLI_version = "1.9.0";
-$APPLI_dbversion = "1.9";
-$APPLI_versiondate = _("22/09/2021");
+$APPLI_version = "1.10.0";
+$APPLI_dbversion = "1.10";
+$APPLI_versiondate = _("29/10/2021");
+//$APPLI_versiondate = "3/7/2018";
 $language = "fr";
 $DEFAULT_formatdate = "fr";
 /*
  * Navigation a partir du fichier xml
  */
-$navigationxml = "param/actions.xml";
+$navigationxml = array("framework/actions.xml", "param/actions.xml");
 /*
  * Duree de la session par defaut
  * @var unknown_type

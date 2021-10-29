@@ -19,6 +19,7 @@
                     <th>{t}Longitude{/t}</th>
                     <th>{t}Latitude{/t}</th>
                     <th>{t}PK{/t}</th>
+                    <th>{t}Type de station (tracking){/t}</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,7 @@
                         <td>{$data[lst].station_long}</td>
                         <td>{$data[lst].station_lat}</td>
                         <td>{$data[lst].station_pk}</td>
+                        <td>{$data[lst].station_type_name}</td>
                     </tr>
                 {/section}
             </tbody>
@@ -98,6 +100,7 @@
                         <li>{t}lat : latitude du point{/t}</li>
                         <li>{t}pk : point kilométrique de la station{/t}</li>
                         <li>{t}river : nom du cours d'eau{/t}</li>
+                        <li>{t}station_type_id : code du type de station pour celles utilisées en tracking. Consultez la liste des codes ici :{/t}&nbsp;<a href="index.php?module=station_typeList">{t}Liste des types de stations{/t}</a></li>
                     </ul>
                 </div>
             </form>

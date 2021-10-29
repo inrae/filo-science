@@ -93,8 +93,7 @@ class Identification
     public function getLoginCas($modeAdmin = false)
     {
         if ($this->CAS_debug) {
-            global $APPLI_temp;
-            phpCAS::setDebug("$APPLI_temp/casdebug");
+            phpCAS::setDebug();
             phpCAS::setVerbose(true);
         }
         phpCAS::client(CAS_VERSION_2_0, $this->CAS_address, $this->CAS_port, $this->CAS_uri);
@@ -123,7 +122,7 @@ class Identification
     public function testLoginLdap($login, $password)
     {
         $loginOk = "";
-        global $log, $LOG_duree, $message;
+        global $log;
         if (strlen($login) > 0 && strlen($password) > 0) {
             $login = str_replace(
                 array(
@@ -228,8 +227,8 @@ class Identification
             } else {
                 phpCAS::setNoCasServerValidation();
             }
-            if (strlen($adresse_retour) > 0) {
-                phpCAS::logoutWithUrl($adresse_retour);
+            if (!empty($adresse_retour)) {
+                phpCAS::logout(array("url" => $adresse_retour));
             } else {
                 phpCAS::logout();
             }
@@ -248,41 +247,6 @@ class Identification
         return 1;
     }
 
-    /**
-     * Initialisation de la classe gacl
-     *
-     * @param $gacl :
-     *            instance
-     *            gacl
-     * @param string $aco
-     *            : nom
-     *            de la catégorie de base contenant les objets à tester
-     * @param string $aro
-     *            : nom
-     *            de la catégorie contenant les logins à tester
-     */
-    public function setgacl(&$gacl, $aco, $aro)
-    {
-        $this->gacl = $gacl;
-        $this->aco = $aco;
-        $this->aro = $aro;
-    }
-
-    /**
-     * Teste les droits
-     *
-     * @param string $aco
-     *            : Categorie a tester
-     * @return int : 0 | 1
-     */
-    public function getgacl($aco)
-    {
-        $login = $this->getLogin();
-        if ($login == -1) {
-            return -1;
-        }
-        return $this->gacl->acl_check($this->aco, $aco, $this->aro, $login);
-    }
 
     /**
      * Verifie l'identification
@@ -304,16 +268,11 @@ class Identification
             $tokenClass = new Token();
             try {
                 $login = $tokenClass->openTokenFromJson($_COOKIE["tokenIdentity"]);
-                if (strlen($login) > 0) {
-                    /*
-                     * Verification si le nombre de tentatives de connexion n'a pas ete atteint
-                     */
-                    if (!$log->isAccountBlocked($login, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
-                        $verify = true;
-                        $log->setLog($login, $module . "-connexion", "token-ok");
-                    }
+                if (!empty($login)  && !$log->isAccountBlocked($login, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
+                    $verify = true;
+                    $log->setLog($login, $module . "-connexion", "token-ok");
                 }
-            } catch (Exception $e) {
+            } catch (FrameworkException $e) {
                 $log->setLog($login, $module . "-connexion", "token-ko");
                 $message->set($e->getMessage(), true);
             }
@@ -324,7 +283,7 @@ class Identification
              */
             global $ident_header_vars;
             $headers = getHeaders($ident_header_vars["radical"]);
-            $login = $headers[$ident_header_vars["login"]];
+            $login = strtolower($headers[$ident_header_vars["login"]]);
             if (strlen($login) > 0 && !empty($headers)) {
                 /**
                  * Verify if the login exists
@@ -413,35 +372,30 @@ class Identification
             /*
              * On verifie si on est en retour de validation du login
              */
-            if (strlen($loginEntered) > 0) {
+            if (strlen($loginEntered) > 0 && !$log->isAccountBlocked($loginEntered, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
+                $verify = true;
                 /*
-                 * Verification si le nombre de tentatives de connexion n'est pas atteint
-                 */
-                if (!$log->isAccountBlocked($loginEntered, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
-                    $verify = true;
-                    /*
                      * Verification de l'identification aupres du serveur LDAP, ou LDAP puis BDD
                      */
-                    if ($ident_type == "LDAP" || $ident_type == "LDAP-BDD") {
+                if ($ident_type == "LDAP" || $ident_type == "LDAP-BDD") {
 
-                        try {
-                            $login = $this->testLoginLdap($loginEntered, $password);
-                            if (strlen($login) == 0 && $ident_type == "LDAP-BDD") {
-                                /*
+                    try {
+                        $login = $this->testLoginLdap($loginEntered, $password);
+                        if (strlen($login) == 0 && $ident_type == "LDAP-BDD") {
+                            /*
                                  * L'identification en annuaire LDAP a echoue : verification en base de donnees
                                  */
-                                $login = $this->testBdd($loginEntered, $password);
-                            }
-                        } catch (Exception $e) {
-                            $message->setSyslog($e->getMessage());
+                            $login = $this->testBdd($loginEntered, $password);
                         }
-                    } elseif ($ident_type == "BDD") {
-                        /*
+                    } catch (Exception $e) {
+                        $message->setSyslog($e->getMessage());
+                    }
+                } elseif ($ident_type == "BDD") {
+                    /*
                          * Verification de l'identification uniquement en base de donnees
                          */
 
-                        $login = $this->testBdd($loginEntered, $password);
-                    }
+                    $login = $this->testBdd($loginEntered, $password);
                 }
             }
         }
@@ -452,7 +406,7 @@ class Identification
         if (!$verify) {
             $login = "";
         }
-        return $login;
+        return strtolower($login);
     }
 
     /**
