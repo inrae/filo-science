@@ -35,6 +35,15 @@ private static $installed = array (
   ),
   'versions' => 
   array (
+    'beberlei/assert' => 
+    array (
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5e721d7e937ca3ba2cdec1e1adf195f9e5188372',
+    ),
     'bjeavons/zxcvbn-php' => 
     array (
       'pretty_version' => '0.4.0',
@@ -61,6 +70,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'ea27d122c4c7114006b33d15668c90f1904d53df',
+    ),
+    'paragonie/constant_time_encoding' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c',
     ),
     'paragonie/random_compat' => 
     array (
@@ -114,6 +132,15 @@ private static $installed = array (
       ),
       'reference' => '9d4f8309ed49702e0d7152f9983c3a9c4b98eb9d',
     ),
+    'spomky-labs/otphp' => 
+    array (
+      'pretty_version' => 'v10.0.1',
+      'version' => '10.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f44cce5a9db4b8da410215d992110482c931232f',
+    ),
     'symfony/polyfill-ctype' => 
     array (
       'pretty_version' => 'v1.23.0',
@@ -122,6 +149,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '46cd95797e9df938fdd2b03693b5fca5e64b01ce',
+    ),
+    'thecodingmachine/safe' => 
+    array (
+      'pretty_version' => 'v1.3.3',
+      'version' => '1.3.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a8ab0876305a4cdaef31b2350fcb9811b5608dbc',
     ),
   ),
 );
