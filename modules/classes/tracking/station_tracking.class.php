@@ -117,6 +117,8 @@ class StationTracking extends ObjetBDD
      */
     function getListSensor(int $project_id, int $import_type_id)
     {
+        $this->colonnes["date_from"] = array("type"=>2);
+        $this->colonnes["date_to"] = array ("type"=>2);
         switch ($import_type_id) {
             case 1:
                 $sql = "select antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code, date_from, date_to

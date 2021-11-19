@@ -37,7 +37,7 @@
                     if (sensor_id == element.sensor_id) {
                         options += ' selected ';
                     }
-                    options += ' >' + element.station_name + ' '+element.station_code + ':'+element.sensor_code+'</option>';
+                    options += ' >' + element.station_name + ' '+element.station_code + ':'+element.sensor_code+ ' '+ element.date_from + ' - '+ element.date_to +'</option>';
                 });
                 $("#sensor_id").html(options);
                 $("#sensor_id option[value"+sensorId+"]").prop("selected", "selected");
