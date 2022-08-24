@@ -196,7 +196,7 @@ class IndividualTracking extends ObjetBDD
       $param["year"] = $year;
     }
     $sql = "
-            select detection_id as id, individual_id, scientific_name, to_char(detection_date, :formatDate) as detection_date
+            select detection_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate) as detection_date
                 , nb_events, duration, validity, signal_force, observation
                 ,station_long long, station_lat lat, station_name, station_code, station_number
                 ,'stationary' as detection_type
@@ -205,16 +205,18 @@ class IndividualTracking extends ObjetBDD
             join antenna using (antenna_id)
             join station using (station_id)
             join individual_tracking using (individual_id)
+            join individual using (individual_id)
             join taxon using (taxon_id)
             where $where
             union
-            select location_id as id, individual_id, scientific_name, to_char(detection_date, :formatDate) as detection_date
+            select location_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate) as detection_date
                 , null nb_events, null duration, true validity, signal_force, observation
                 , location_long long, location_lat lat, null station_name, null station_code, null station_number
                 ,'mobile' as detection_type
                 ,null as antenna_code, null as antenna_id
             from location
             join individual_tracking using (individual_id)
+            join individual using (individual_id)
             join taxon using (taxon_id)
             where $where
         ";
