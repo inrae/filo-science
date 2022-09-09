@@ -40,7 +40,7 @@ switch ($t_module["param"]) {
             $files[] = $fdata;
         }
         foreach ($files as $file) {
-            $id = $dataClass->ecrire($file, $_REQUEST["parent_table"], $_REQUEST["parent_id"], $_REQUEST["document_description"], $_REQUEST["document_creation_date"]);
+            $id = $dataClass->documentEcrire($file, $_REQUEST["parent_table"], $_REQUEST["parent_id"], $_REQUEST["document_description"], $_REQUEST["document_creation_date"]);
             if ($id > 0) {
                 $_REQUEST[$keyName] = $id;
                 $module_coderetour = 1;

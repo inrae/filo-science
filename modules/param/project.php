@@ -30,7 +30,7 @@ switch ($t_module["param"]) {
         $vue->set($dataClass->getAllGroupsFromproject($id), "groupes");
         include_once 'modules/classes/document.class.php';
         $document = new Document($bdd, $ObjetBDDParam);
-        $vue->set($document->getListFromParent("project", $id), "dataDoc");
+        $vue->set($document->documentGetListFromParent("project", $id), "dataDoc");
         $vue->set("project", "moduleParent");
         $vue->set($id, "parent_id");
         break;

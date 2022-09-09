@@ -2,13 +2,14 @@
 require_once 'modules/classes/operation.class.php';
 $dataClass = new Operation($bdd, $ObjetBDDParam);
 $keyName = "operation_id";
-if (empty($_REQUEST[$keyName])){
+if (empty($_REQUEST[$keyName]) && !$_REQUEST[$keyName] == 0 ){
     if ($_COOKIE["operation_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["operation_uid"]) && $t_module["param"] == "display") {
         $id = $_COOKIE["operation_uid"];
     } else {
         $t_module["param"] = "error";
         $t_module["retourko"] = "default";
         $module_coderetour = -1;
+        $message->set(_("L'identifiant de l'opération est manquant"), true);
     }
 } else {
     $origine == "document" ? $id = $_REQUEST[$keyName] : $id = $_SESSION["ti_operation"]->getValue($_REQUEST[$keyName]);
@@ -18,7 +19,6 @@ $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
 if (isset($_REQUEST["activeTab"])) {
     $activeTab = $_REQUEST["activeTab"];
 }
-
 switch ($t_module["param"]) {
     case "display":
         $data = $_SESSION["ti_operation"]->translateRow($dataClass->getDetail($id));
@@ -73,7 +73,7 @@ switch ($t_module["param"]) {
          */
         include_once 'modules/classes/document.class.php';
         $document = new Document($bdd, $ObjetBDDParam);
-        $vue->set($document->getListFromParent("operation", $id), "dataDoc");
+        $vue->set($document->documentGetListFromParent("operation", $id), "dataDoc");
         $vue->set("operation", "moduleParent");
         $vue->set($id, "parent_id");
         break;

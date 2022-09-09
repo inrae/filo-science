@@ -186,7 +186,7 @@ class Project extends ObjetBDD
                 $dataGroup[$value["aclgroup_id"]] = 1;
             }
         }
-        require_once 'framework/droits/droits.class.php';
+        require_once 'framework/droits/aclgroup.class.php';
         $aclgroup = new Aclgroup($this->connection);
         $groupes = $aclgroup->getListe(2);
         foreach ($groupes as $key => $value) {

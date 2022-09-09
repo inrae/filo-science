@@ -2,7 +2,7 @@
 require_once 'modules/classes/sequence.class.php';
 $dataClass = new Sequence($bdd, $ObjetBDDParam);
 $keyName = "sequence_id";
-if (empty($_REQUEST[$keyName]){
+if (empty($_REQUEST[$keyName]) && ! $_REQUEST[$keyName] == 0){
   if ($_COOKIE["sequence_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sequence_uid"]) && $t_module["param"] == "display") {
     $id = $_COOKIE["sequence_uid"];
   } else {
@@ -74,7 +74,7 @@ switch ($t_module["param"]) {
     }
     $vue->set($dataAmbience, "ambience");
     $other_measures = json_decode($dataAmbience["other_measures"], true);
-    if (count($other_measures) > 0) {
+    if (!empty($other_measures)) {
       $vue->set($other_measures, "other_measures");
     }
 
@@ -95,7 +95,7 @@ switch ($t_module["param"]) {
          * Récupération des analyses complementaires dans un tableau pour l'affichage
          */
     $other_analysis = json_decode($dataAnalysis["other_analysis"], true);
-    if (count($other_analysis) > 0) {
+    if (!empty($other_analysis)) {
       $vue->set($other_analysis, "other_analysis");
     }
     $vue->set(

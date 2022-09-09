@@ -123,7 +123,7 @@
 	</div>
 
 </div>
-{if count($other_measures) >0}
+{if !empty($other_measures)}
   <div class="row ">
     <div class="col-md-8 form-display">
       <fieldset>

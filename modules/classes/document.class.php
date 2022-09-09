@@ -245,7 +245,7 @@ class Document extends ObjetBDD
 	 * @param date $document_creation_date
 	 * @return void
 	 */
-	function ecrire($file, $parentTable, $parentId, $description = NULL, $document_creation_date = NULL)
+	function documentEcrire($file, $parentTable, $parentId, $description = NULL, $document_creation_date = NULL)
 	{
 		if ($file["error"] == 0 && $file["size"] > 0) {
 			global $message;
@@ -545,7 +545,7 @@ class Document extends ObjetBDD
 	 * @param int $parentId
 	 * @return array
 	 */
-	function getListFromParent($parentTable, $parentId)
+	function documentGetListFromParent($parentTable, $parentId)
 	{
 		if (in_array($parentTable, $this->parents)) {
 			$sql = "select document_id, document_import_date, document_name, document_description,

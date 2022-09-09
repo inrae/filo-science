@@ -2,7 +2,7 @@
 require_once 'modules/classes/campaign.class.php';
 $dataClass = new Campaign($bdd, $ObjetBDDParam);
 $keyName = "campaign_id";
-if (empty($_REQUEST[$keyName]))&& $t_module["param"] == "display") {
+if (empty($_REQUEST[$keyName])&& $t_module["param"] == "display") {
     if ($_COOKIE["campaign_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["campaign_uid"]) ) {
         $id = $_COOKIE["campaign_uid"];
     } else {

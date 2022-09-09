@@ -6,7 +6,7 @@ if (!isset($ind)) {
 }
 $dataClass = new Sample($bdd, $ObjetBDDParam);
 $keyName = "sample_id";
-if (empty($_REQUEST[$keyName]){
+if (empty($_REQUEST[$keyName])&& !$_REQUEST[$keyName] ==0) {
     if (isset($_COOKIE["sample_uid"]) && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sample_uid"]) && $tmodule["param"] == "change") {
         $id = $_COOKIE["sample_uid"];
     } else {

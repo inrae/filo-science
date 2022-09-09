@@ -339,7 +339,7 @@
 <div class="row col-md-12">
 	<form id="lotform" method="post" action="index.php">
 		<div class="col-md-6 form-horizontal">
-			{if count($grid) > 0}
+			{if !empty($grid) }
 			<fieldset>
 				<legend>{t}Création d'un nouveau lot{/t}</legend>
 				{for $line = 1 to 4}
