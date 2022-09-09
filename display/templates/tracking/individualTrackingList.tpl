@@ -37,6 +37,17 @@
 		$("#taxon_id").change(function () {
 			Cookies.set("taxon_id", $(this).val(), { expires: 180, secure: true });
 		});
+		var delay = "{$delay}";
+		try {
+			if (delay == 0) {
+				delay = Cookies.get("delay");
+			}
+		}catch { }
+		$("#delay").val(delay);
+		$("#delay").change(function () {
+			Cookies.set("delay", $(this).val(), { expires: 180, secure: true });
+		});
+
 		$("#new").attr("href", "index.php?module=individualTrackingChange&individual_id=0&project_id="+projectId);
 		$(".is_active").change(function () {
 			$("#project_id").val("");
@@ -112,7 +123,7 @@
 	{/if}
 </div>
 <div class="row">
-	<div class="col-lg-6 col-md-12">
+	<div class="col-lg-8 col-md-12">
 		<form class="form-horizontal protoform" id="individualTrackingSearch" action="index.php" method="GET">
 			<input id="moduleSearch" type="hidden" name="module" value="individualTrackingList">
 			<input id="isSearch" type="hidden" name="isSearch" value="1">
@@ -138,7 +149,7 @@
 			</div>
 			<div class="form-group">
 				<label for="year" class="col-md-2 control-label">{t}Année :{/t}</label>
-				<div class="col-md-3">
+				<div class="col-md-1">
 					<select id="year" name="year" class="form-control">
 						<option id="year0" value="0" {if $year == 0} selected{/if}>{t}Choisissez...{/t}</option>
 						{foreach $years as $y}
@@ -146,14 +157,18 @@
 						{/foreach}
 					</select>
 				</div>
-				<label for="taxon_id" class="col-md-2 control-label">{t}Espèce : {/t}</label>
-				<div class="col-md-4">
+				<label for="taxon_id" class="col-md-1 control-label">{t}Espèce : {/t}</label>
+				<div class="col-md-3">
 					<select id="taxon_id" name="taxon_id" class="form-control">
 						<option id="taxon_id0" value="0" {if $taxon_id == 0} selected{/if}>{t}Choisissez...{/t}</option>
 						{foreach $taxa as $taxon}
 						<option id="taxon_id{$taxon.taxon_id}" value="{$taxon.taxon_id}" {if $taxon.taxon_id == $taxon_id}selected{/if}>{$taxon.scientific_name}</option>
 						{/foreach}
 					</select>
+				</div>
+				<label for="delay" class="col-md-2 control-label">{t}Intervalle (en secondes) de regroupement des détections :{/t}</label>
+				<div class="col-md-2">
+					<input name="delay" id="delay" value="{$delay}" placeholder="3600" class="nombre form-control">
 				</div>
 			</div>
 		</form>
@@ -208,6 +223,7 @@
 						<th>{t}Marque spaghetti{/t}</th>
 						<th>{t}Année(s){/t}</th>
 						<th>{t}Identifiant unique{/t}</th>
+						<th>{t}Nombre de détections{/t}</th>
 						{if $droits.gestion == 1}
 							<th class="center" title="{t}Modifier{/t}"><img src="display/images/edit.gif" height="25"></th>
 						{/if}
@@ -235,6 +251,7 @@
 						<td>{$individual.spaghetti_brand}</td>
 						<td>{$individual.year}</td>
 						<td>{$individual.uuid}</td>
+						<td class="right">{$individual.nb_detections}</td>
 						{if $droits.gestion == 1}
 						<td class="center" title="{t}Modifier{/t}">
 							<a href="index.php?module=individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}">

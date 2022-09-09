@@ -14,6 +14,7 @@ class Detection extends ObjetBDD
 
   private $sql = "select detection_id, individual_id, antenna_id,
                   to_char(detection_date, :formatDate) as detection_date,
+                  extract (epoch from detection_date) as date_epoch,
                   nb_events, duration, validity, signal_force, observation, daypart,
                   antenna_code, station_id, station_name, station_code, station_number,
                   station_long long, station_lat lat,
@@ -115,7 +116,7 @@ class Detection extends ObjetBDD
    * @param int $year
    * @return array
    */
-  function getStationDetection(int $individual_id, $year = 0): array
+  function getStationDetection(int $individual_id, $time_to_group_detection = 1200, $year = 0): array
   {
     $data = $this->getListFromIndividual($individual_id, 'YYYY-MM-DD HH24:MI:SS.MS', $year);
     $result = array();
@@ -124,33 +125,41 @@ class Detection extends ObjetBDD
     $last_date = "";
     $nb_events = 0;
     $fields = array("individual_id", "antenna_id", "station_id", "station_name", "antenna_code", "long", "lat", "station_number", "station_code");
+    $antennas = array();
+    $current_antenna = 0;
     foreach ($data as $row) {
-      if ($row["antenna_id"] != $last_antenna) {
-        if (!empty($current_row)) {
-          $current_row["date_to"] = $last_date;
-          $current_row["nb_events"] = $nb_events;
-          $result[] = $current_row;
-          $current_row = array();
+      $current_antenna = $row["antenna_id"];
+
+        /**
+         * search for antenna waitings
+         */
+        foreach ($antennas as $ka => $antenna) {
+          if ($ka != $current_antenna) {
+            if ($row["date_epoch"] - $antenna["epoch"] > $time_to_group_detection) {
+              $result[] = $antenna["content"];
+              unset ($antennas[$ka]);
+            }
+          }
         }
+      if (!isset($antennas[$current_antenna])) {
         foreach ($fields as $field) {
-          $current_row[$field] = $row[$field];
+          $antennas[$current_antenna]["content"][$field] = $row[$field];
         }
-        $current_row["date_from"] = $row["detection_date"];
-        $last_antenna = $row["antenna_id"];
-        $last_date = $row["detection_date"];
-        $nb_events = 1;
+        $antennas[$current_antenna]["content"]["date_from"] = $row["detection_date"];
+        $antennas[$current_antenna]["content"]["nb_events"] = 1;
+        $antennas[$current_antenna]["content"]["date_to"] = $row["detection_date"];
+        $antennas[$current_antenna]["epoch"] = $row["date_epoch"];
+        $antennas[$current_antenna]["wait"] = 1;
       } else {
-        $last_date = $row["detection_date"];
-        $nb_events++;
+        $antennas[$current_antenna]["content"]["date_to"] = $row["detection_date"];
+        $antennas[$current_antenna]["content"]["nb_events"] ++;
       }
     }
     /**
-     * Last item
+     * Last items
      */
-    if (!empty($current_row)) {
-      $current_row["date_to"] = $last_date;
-      $current_row["nb_events"] = $nb_events;
-      $result[] = $current_row;
+    foreach ($antennas as $ka => $antenna) {
+      $result[] = $antenna["content"];
     }
     return $result;
   }

@@ -4834,6 +4834,29 @@ campaignOnly•[{"tableName":"campaign","technicalKey":"campaign_id","isEmpty":f
 		</idxelement>
 </index>
 
+<function name="detection_count"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="tracking"/>
+	<role name="filo"/>
+	<comment><![CDATA[Count the number of detections for a fish]]></comment>
+	<language name="sql"/>
+	<return-type>
+	<type name="bigint" length="0"/>
+	</return-type>
+	<parameter name="individu_id">
+		<type name="integer" length="0"/>
+	</parameter>
+	<definition><![CDATA[select count(*) from tracking.detection 
+where individual_id = $1]]></definition>
+</function>
+
 <constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
 	<columns names="aclaco_id" ref-type="src-columns"/>

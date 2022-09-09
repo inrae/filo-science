@@ -17,6 +17,7 @@ class IndividualTracking extends ObjetBDD
                     ,individual_code
                     ,uuid
                     ,array_to_string(year, ',') as year
+                    , detection_count(individual_id) as nb_detections
                     from individual_tracking it
                     join individual using (individual_id)
                     join project p on (it.project_id = p.project_id)
@@ -211,6 +212,7 @@ class IndividualTracking extends ObjetBDD
             where $where
             union
             select location_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate) as detection_date
+                ,extract (epoch from detection_date) as date_epoch
                 , null nb_events, null duration, true validity, signal_force, observation
                 , location_long long, location_lat lat, null station_name, null station_code, null station_number
                 ,'mobile' as detection_type
@@ -336,38 +338,49 @@ class IndividualTracking extends ObjetBDD
     $current_row = array();
     $last_date = "";
     $nb_events = 0;
+    $wait = 0;
+    $waiting = array();
+    $antennas = array();
     foreach ($data as $row) {
-      if ($row["antenna_id"] != $last_antenna) {
-        if (!empty($current_row)) {
-          $current_row["date_to"] = $last_date;
-          $current_row["nb_events"] = $nb_events;
-          $result[] = $current_row;
-          $current_row = array();
+      $current_antenna = $row["antenna_id"];
+
+        /**
+         * search for antenna waitings
+         */
+        foreach ($antennas as $ka => $antenna) {
+          if ($ka != $current_antenna) {
+            if ($row["date_epoch"] - $antenna["epoch"] > 1200) {
+              $result[] = $antenna["content"];
+              unset ($antennas[$ka]);
+            }
+          }
         }
-        $current_row["individual_id"] = $row["individual_id"];
-        $current_row["antenna_id"] = $row["antenna_id"];
-        $current_row["date_from"] = $row["detection_date"];
-        $current_row["station_id"] = $row["station_id"];
-        $current_row["station_name"] = $row["station_name"];
-        $current_row["antenna_code"] = $row["antenna_code"];
-        $current_row["detection_type"] = $row["detection_type"];
-        $current_row["lat"] = $row["lat"];
-        $current_row["long"] = $row["long"];
-        $last_antenna = $row["antenna_id"];
-        $last_date = $row["detection_date"];
-        $nb_events = 1;
+      if (!isset($antennas[$current_antenna])) {
+        $antennas[$current_antenna]["content"]["individual_id"] = $row["individual_id"];
+        $antennas[$current_antenna]["content"]["antenna_id"] = $current_antenna;
+        $antennas[$current_antenna]["content"]["date_from"] = $row["detection_date"];
+        $antennas[$current_antenna]["content"]["station_id"] = $row["station_id"];
+        $antennas[$current_antenna]["content"]["station_name"] = $row["station_name"];
+        $antennas[$current_antenna]["content"]["antenna_code"] = $row["antenna_code"];
+        $antennas[$current_antenna]["content"]["detection_type"] = $row["detection_type"];
+        $antennas[$current_antenna]["content"]["lat"] = $row["lat"];
+        $antennas[$current_antenna]["content"]["long"] = $row["long"];
+        $antennas[$current_antenna]["content"]["nb_events"] = 1;
+        $antennas[$current_antenna]["content"]["last_date"] = $row["detection_date"];
+        $antennas[$current_antenna]["epoch"] = $row["date_epoch"];
+        $antennas[$current_antenna]["wait"] = 1;
       } else {
-        $nb_events++;
+        $antennas[$current_antenna]["content"]["last_date"] = $row["detection_date"];
+        $antennas[$current_antenna]["content"]["nb_events"] ++;
       }
     }
     /**
-     * Last item
+     * Last items
      */
-    if (!empty($current_row)) {
-      $current_row["date_to"] = $last_date;
-      $current_row["nb_events"] = $nb_events;
-      $result[] = $current_row;
+    foreach ($antennas as $ka => $antenna) {
+      $result[] = $antenna["content"];
     }
+
     return $result;
   }
   /**

@@ -12,8 +12,10 @@ switch ($t_module["param"]) {
     $project = new Project($bdd, $ObjetBDDParam);
     isset($_COOKIE["projectId"]) ? $project_id = $_COOKIE["projectId"] : $project_id = 0;
     isset($_COOKIE["projectActive"]) ? $is_active = $_COOKIE["projectActive"] : $is_active = 1;
+    isset($_COOKIE["delay"]) ? $delay = $_COOKIE["delay"] : $delay = 3600;
     $vue->set($projects = $project->getProjectsActive($is_active, $_SESSION["projects"]), "projects");
     $vue->set($is_active, "is_active");
+    $vue->set($delay, "delay");
     if ($project_id > 0 && !verifyProject($project_id)) {
       $project_id = $projects[0]["project_id"];
     }
@@ -46,7 +48,7 @@ switch ($t_module["param"]) {
          */
         include_once "modules/classes/tracking/detection.class.php";
         $detection = new Detection($bdd, $ObjetBDDParam);
-        $vue->set($dataStation = $detection->getStationDetection($_REQUEST["individual_id"], $year), "stationDetection");
+        $vue->set($dataStation = $detection->getStationDetection($_REQUEST["individual_id"], $delay, $year), "stationDetection");
         $vue->set($_REQUEST["individual_id"], "selectedIndividual");
         setParamMap($vue, false);
         /**
