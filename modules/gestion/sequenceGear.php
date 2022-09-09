@@ -2,14 +2,14 @@
 require_once 'modules/classes/sequence_gear.class.php';
 $dataClass = new SequenceGear($bdd, $ObjetBDDParam);
 $keyName = "sequence_gear_id";
-if (strlen($_REQUEST[$keyName]) == 0) {
+if (empty($_REQUEST[$keyName]){
     $t_module["param"] = "error";
     $t_module["retourko"] = "default";
     $module_coderetour = -1;
 }
 $id = $_SESSION["ti_sequenceGear"]->getValue($_REQUEST[$keyName]);
 $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
-if (strlen($id) == 0) {
+if (empty($id) ) {
     $t_module["param"] = "error";
     $t_module["retourko"] = "default";
     $module_coderetour = -1;

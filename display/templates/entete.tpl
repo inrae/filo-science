@@ -48,7 +48,7 @@
 		</div>
 	</div>
 </div>
-{if (strlen($message) > 0) }
+{if !empty($message) }
 <div class="container-fluid">
 <div class="row">
 	<div class="col-xs-12 message{if $messageError == 1}Error{/if}" id="message">

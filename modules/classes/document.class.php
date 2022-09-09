@@ -5,82 +5,82 @@
  * @copyright Copyright (c) 2014, IRSTEA / Eric Quinton
  * @license http://www.cecill.info/licences/Licence_CeCILL-C_V1-fr.html LICENCE DE LOGICIEL LIBRE CeCILL-C
  *  Creation 7 avr. 2014
- *  
+ *
  *  Les classes fonctionnent avec les tables suivantes :
- *  
+ *
  CREATE TABLE mime_type
  (
  mime_type_id  serial     NOT NULL,
  content_type  varchar    NOT NULL,
  extension     varchar    NOT NULL
  );
- 
+
  -- Column mime_type_id is associated with sequence public.mime_type_mime_type_id_seq
- 
- 
+
+
  ALTER TABLE mime_type
  ADD CONSTRAINT mime_type_pk
  PRIMARY KEY (mime_type_id);
- 
+
  COMMENT ON TABLE mime_type IS 'Table des types mime, pour les documents associés';
  COMMENT ON COLUMN mime_type.content_type IS 'type mime officiel';
  COMMENT ON COLUMN mime_type.extension IS 'Extension du fichier correspondant';
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  1,  'application/pdf',  'pdf');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  2,  'application/zip',  'zip');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  3,  'audio/mpeg',  'mp3');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  4,  'image/jpeg',  'jpg');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES(  5,  'image/jpeg',  'jpeg');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  6,  'image/png',  'png');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  7,  'image/tiff',  'tiff');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  9,  'application/vnd.oasis.opendocument.text',  'odt');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  10,  'application/vnd.oasis.opendocument.spreadsheet',  'ods');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  11,  'application/vnd.ms-excel',  'xls');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  12,  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',  'xlsx');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  13,  'application/msword',  'doc');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  14,  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',  'docx');
- 
+
  INSERT INTO mime_type(  mime_type_id,  content_type,  extension)
  VALUES
  (  8,  'text/csv',  'csv');
- 
- 
+
+
  CREATE TABLE document
  (
  document_id           serial     NOT NULL,
@@ -92,20 +92,20 @@
  size                  integer,
  thumbnail             bytea
  );
- 
+
  -- Column document_id is associated with sequence public.document_document_id_seq
- 
- 
+
+
  ALTER TABLE document
  ADD CONSTRAINT document_pk
  PRIMARY KEY (document_id);
- 
+
  ALTER TABLE document
  ADD CONSTRAINT mime_type_document_fk FOREIGN KEY (mime_type_id)
  REFERENCES mime_type (mime_type_id)
  ON UPDATE NO ACTION
  ON DELETE NO ACTION;
- 
+
  COMMENT ON TABLE document IS 'Documents numériques rattachés à un poisson ou à un événement';
  COMMENT ON COLUMN document.document_name IS 'Nom d''origine du document';
  COMMENT ON COLUMN document.document_description IS 'Description libre du document';
@@ -114,7 +114,7 @@
  * ORM de gestion de la table mime_type
  *
  * @author quinton
- *        
+ *
  */
 class DocumentException extends Exception
 { }
@@ -125,7 +125,7 @@ class MimeType extends ObjetBDD
 	/**
 	 * Constructeur de la classe
 	 *
-	 * @param Adodb_instance $bdd
+	 * @param PDO $bdd
 	 * @param array $param
 	 */
 	function __construct($bdd, $param = null)
@@ -158,7 +158,7 @@ class MimeType extends ObjetBDD
 	 */
 	function getTypeMime($extension)
 	{
-		if (strlen($extension) > 0) {
+		if (!empty($extension) ) {
 			$sql = "select mime_type_id from mime_type where extension = :extension";
 			$res = $this->lireParamAsPrepared($sql, array("extension" => strtolower($extension)));
 			return $res["mime_type_id"];
@@ -171,7 +171,7 @@ class MimeType extends ObjetBDD
  * Stockage des pièces jointes
  *
  * @author quinton
- *        
+ *
  */
 class Document extends ObjetBDD
 {
@@ -183,13 +183,13 @@ class Document extends ObjetBDD
 	/**
 	 * Constructeur de la classe
 	 *
-	 * @param Adodb_instance $bdd
+	 * @param PDO $bdd
 	 * @param array $param
 	 */
 	function __construct($bdd, $param = array())
 	{
 		global $APPLI_temp;
-		if (strlen($APPLI_temp) > 0) {
+		if (!empty($APPLI_temp)) {
 			$this->temp = $APPLI_temp;
 		}
 		$this->table = "document";
@@ -319,7 +319,7 @@ class Document extends ObjetBDD
 						 * Generate the relation with the parent table
 						 */
 						if (in_array($parentTable, $this->parents)) {
-							$sql = "insert into " . $parentTable . "_document 
+							$sql = "insert into " . $parentTable . "_document
 									(" . $parentTable . "_id, document_id)
 									values
 									(:parent_id, :document_id)";
@@ -373,7 +373,7 @@ class Document extends ObjetBDD
 		$id = $this->encodeData($id);
 		try {
 			$filename = $this->generateFileName($id, $phototype, $resolution);
-			if (strlen($filename) > 0 && is_numeric($id) && $id > 0) {
+			if (!empty($filename)  && is_numeric($id) && $id > 0) {
 				if (!file_exists($filename)) {
 					$this->writeFileImage($id, $phototype, $resolution);
 				}
@@ -471,7 +471,7 @@ class Document extends ObjetBDD
                  */
 				$phototype == 2 ? $colonne = "thumbnail" : $colonne = "data";
 				$filename = $this->generateFileName($id, $phototype, $resolution);
-				if (strlen($filename) > 0 && !file_exists($filename)) {
+				if (!empty($filename) && !file_exists($filename)) {
 					/*
                      * Recuperation des donnees concernant la photo
                      */
@@ -550,7 +550,7 @@ class Document extends ObjetBDD
 		if (in_array($parentTable, $this->parents)) {
 			$sql = "select document_id, document_import_date, document_name, document_description,
 					size, document_creation_date, mime_type_id
-					from document 
+					from document
 					join " . $parentTable . "_document using (document_id)
 					join " . $parentTable . " using (" . $parentTable . "_id)
 					where " . $parentTable . "_id = :parentId";

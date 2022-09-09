@@ -353,9 +353,9 @@
 					{foreach $detection_number as $dn}
 						<tr>
 							<td>{$dn.detection_date}</td>
-							<td class="right">{$dn.day}</td>
-							<td class="right">{$dn.night}</td>
-							<td class="right">{$dn.unknown}</td>
+							<td class="right">{if $dn.day > 0}{$dn.day}{/if}</td>
+							<td class="right">{if $dn.night > 0}{$dn.night}{/if}</td>
+							<td class="right">{if $dn.unknown > 0}{$dn.unknown}{/if}</td>
 							<td class="right">{$dn.day + $dn.night + $dn.unknown}</td>
 						</tr>
 						{$total_n = $total_n + $dn.night}

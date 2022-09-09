@@ -36,9 +36,9 @@ class Location extends ObjetBDD
    * @param array $data
    * @return int
    */
-  function ecrire(array $data)
+  function ecrire( $data)
   {
-    if (strlen($data["location_long"]) > 0 && strlen($data["location_lat"]) > 0) {
+    if (!empty($data["location_long"]) && !empty($data["location_lat"]) ) {
       $data["geom"] = "POINT(" . $data["location_long"] . " " . $data["location_lat"] . ")";
     } else {
       $data["geom"] = "";

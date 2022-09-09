@@ -129,7 +129,7 @@
       <fieldset>
         <legend>{t}mesures complémentaires{/t}</legend>
         {foreach $other_measures as $key=>$value}
-          {if strlen($value) > 0 || count($value) > 0}
+          {if !empty($value)}
             <dl class="dl-horizontal">
               <dt class="col-md-3 col-md-offset-2 right">{t 1=$key}%1{/t}</dt>
               <dd class="col-md-4">

@@ -7,7 +7,7 @@
  <ul class="nav pull-right scroll-top scrolltotop">
   <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
 </ul>
-{if strlen($developpementMode) > 1}
+{if !empty($developpementMode) }
 <div class="text-warning">{$developpementMode}</div>
 {/if}
   </div>

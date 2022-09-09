@@ -57,7 +57,7 @@ class Antenna extends ObjetBDD
       require_once "modules/classes/station.class.php";
       $station = new Station($this->connection, $this->paramori);
       $dstation = $station->getDetail($data["station_id"]);
-      if (strlen($dstation["station_long"]) > 0 && strlen($dstation["station_lat"]) > 0) {
+      if (!empty($dstation["station_long"])  && !empty($dstation["station_lat"])) {
         $sql = "update antenna set geom_polygon =
                         st_transform(
                             st_buffer (
@@ -81,7 +81,7 @@ class Antenna extends ObjetBDD
   function getListFromParent($parentId, $order = "")
   {
     $where = " where a.station_id = :parentId";
-    strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
+    !empty($order) ? $orderby = " order by $order" : $orderby = "";
     return $this->getListeParamAsPrepared($this->sql . $where . $orderby, array("parentId" => $parentId));
   }
 

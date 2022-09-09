@@ -30,7 +30,7 @@
                 </td>
                 <td class="textareaDisplay">{$row["protocol_description"]}</td>
                 <td>
-                    {if strlen($row["protocol_url"]) > 0}
+                    {if !empty($row["protocol_url"])}
                         <a href='{$row["protocol_url"]}' target="_blank"  rel="noopener">{$row["protocol_url"]}</a>
                     {/if}
                 </td>

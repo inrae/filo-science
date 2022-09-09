@@ -108,7 +108,7 @@ class Project extends ObjetBDD
             $comma = false;
             $in = "(";
             foreach ($groups as $value) {
-                if (strlen($value["groupe"]) > 0) {
+                if (!empty($value["groupe"]) ) {
                     $comma ? $in .= ", " : $comma = true;
                     $in .= "'" . $value["groupe"] . "'";
                 }

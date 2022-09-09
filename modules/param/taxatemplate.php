@@ -52,7 +52,7 @@ switch ($t_module["param"]) {
         for ($row = 1; $row < 5; $row++) {
             for ($col = 1; $col < 7; $col++) {
                 $name = "grid" . $row . "-" . $col;
-                if (strlen($_POST[$name]) > 0) { 
+                if (!empty($_POST[$name]) ) {
                     $grid[] = array(
                         "row"=>$row,
                         "col"=>$col,

@@ -346,7 +346,7 @@
 				<div class="row">
 					{for $column = 1 to 6}
 					<div class="col-sm-2 center">
-						{if strlen($grid[$line][$column]) > 0}
+						{if !empty($grid[$line][$column]) }
 						<button id="grid{$line}-{$column}" type="button" class="btn btn-info taxonselect">{$grid[$line][$column]}</button>
 						{/if}
 					</div>

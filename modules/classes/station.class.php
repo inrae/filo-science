@@ -59,9 +59,9 @@ class Station extends ObjetBDD
      * @param array $data
      * @return int
      */
-    function ecrire(array $data)
+    function ecrire( $data)
     {
-        if (strlen($data["station_long"]) > 0 && strlen($data["station_lat"]) > 0) {
+        if (!empty($data["station_long"]) && !empty($data["station_lat"]) ) {
             $data["geom"] = "POINT(" . $data["station_long"] . " " . $data["station_lat"] . ")";
         } else {
             $data["geom"] = "";
@@ -78,7 +78,7 @@ class Station extends ObjetBDD
     function getIdFromName($name)
     {
         $id = 0;
-        if (strlen($name) > 0) {
+        if (!empty($name)) {
             $sql = "select station_id from station where station_name = :name";
             $data = $this->lireParamAsPrepared($sql, array(
                 "name" => $name

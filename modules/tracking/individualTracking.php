@@ -265,7 +265,7 @@ switch ($t_module["param"]) {
             /**
              * Search if the line is empty (taxon_id empty)
              */
-            if (strlen($line["taxon_id"]) > 0) {
+            if (!empty($line["taxon_id"])) {
               /**
                * Search if the fish exists
                */

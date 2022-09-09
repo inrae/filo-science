@@ -6,7 +6,7 @@ if (!isset($ind)) {
 }
 $dataClass = new Sample($bdd, $ObjetBDDParam);
 $keyName = "sample_id";
-if (strlen($_REQUEST[$keyName]) == 0) {
+if (empty($_REQUEST[$keyName]){
     if (isset($_COOKIE["sample_uid"]) && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sample_uid"]) && $tmodule["param"] == "change") {
         $id = $_COOKIE["sample_uid"];
     } else {
@@ -121,7 +121,7 @@ switch ($t_module["param"]) {
         $data["sequence_id"] = $sequence_id;
         try {
             $bdd->beginTransaction();
-            if (strlen($data["sample_uuid"]) > 0) {
+            if (!empty($data["sample_uuid"])) {
                 $data["uuid"] = $data["sample_uuid"];
             }
             $id = dataWrite($dataClass, $data, true);

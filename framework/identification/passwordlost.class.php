@@ -58,7 +58,7 @@ class Passwordlost extends ObjetBDD
     function createTokenFromMail($mail, $duree_token = 7200)
     {
         $data = array();
-        if (strlen($mail) > 0) {
+        if (!empty($mail)) {
             /*
              * Recherche de l'identifiant correspondant
              */
@@ -76,14 +76,16 @@ class Passwordlost extends ObjetBDD
                         $data["expiration"] = date(DATELONGMASK, time() + $duree_token);
                         $this->ecrire($data);
                     } else {
-                        throw new PasswordException("Account not active");
+                        throw new PasswordException(_("Le compte n'est pas actif"));
                     }
                 } else {
-                    throw new PasswordException("Account not allowed to reset password");
+                    throw new PasswordException(_("Le compte n'est pas autorisé à réinitialiser son mot de passe, la dernière connexion réussie n'ayant pas été réalisée dans un mode compatible"));
                 }
             } else {
-                throw new PasswordException("Account not found from mail");
+                throw new PasswordException(_("Aucun compte n'a été trouvé pour le mail considéré"));
             }
+        }else {
+            throw new PasswordException(_("Le mail n'a pas été renseigné"));
         }
         return $data;
     }
@@ -97,7 +99,7 @@ class Passwordlost extends ObjetBDD
      */
     function verifyToken($token)
     {
-        if (strlen($token) > 0) {
+        if (!empty($token)) {
             $sql = "select passwordlost.*, login, actif ";
             $sql .= " from passwordlost ";
             $sql .= " join logingestion using (id)";
@@ -107,7 +109,7 @@ class Passwordlost extends ObjetBDD
                 "token" => $token,
                 "expiration" => date("Y-m-d H:i:s")
             ));
-            
+
             if ($data["passwordlost_id"] > 0) {
                 if ($data["actif"] == 0) {
                     throw new PasswordException("account desactivated");

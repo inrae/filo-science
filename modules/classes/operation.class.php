@@ -98,15 +98,15 @@ class Operation extends ObjetBDD
      * @param array $data
      * @return int
      */
-    function ecrire(array $data)
+    function ecrire( $data)
     {
         $data["operation_geom"] = "MULTIPOINT(";
         $is_geom = false;
-        if (strlen($data["long_start"]) > 0 && strlen($data["lat_start"]) > 0) {
+        if (!empty($data["long_start"]) && !empty($data["lat_start"]) ) {
             $data["operation_geom"] .= "(" . $data["long_start"] . " " . $data["lat_start"] . ")";
             $is_geom = true;
         }
-        if (strlen($data["long_end"]) > 0 && strlen($data["lat_end"]) > 0) {
+        if (!empty($data["long_end"])  && !empty($data["lat_end"]) ) {
             if ($is_geom) {
                 $data["operation_geom"] .= ",";
             } else {
@@ -183,7 +183,7 @@ class Operation extends ObjetBDD
      * @param int $id
      * @return void
      */
-    function supprimer(int $id)
+    function supprimer( $id)
     {
         if (!isset($this->ambience)) {
             include_once 'modules/classes/ambience.class.php';

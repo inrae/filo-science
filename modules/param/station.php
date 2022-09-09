@@ -63,7 +63,7 @@ switch ($t_module["param"]) {
                 $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
                 $rows = $import->getContentAsArray();
                 foreach ($rows as $row) {
-                    if (strlen($row["name"]) > 0) {
+                    if (!empty($row["name"])) {
                         /*
                          * Ecriture en base, en mode ajout ou modification
                          */

@@ -31,7 +31,7 @@
             <dl class="dl-horizontal">
                 <dt>{t}Lien d'accès au protocole :{/t}</dt>
                 <dd>
-                {if strlen($data.protocol_url)>0}
+                {if !empty($data.protocol_url)}
                     <a href="{$data.protocol_url}" target="_blank" rel="noopener">
                         {$data.protocol_url}
                     </a>

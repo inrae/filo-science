@@ -16,21 +16,21 @@
                     <dt>{t}Poisson :{/t}</dt>
                     <dd>{$individual.individual_id} {$individual.scientific_name}</dd>
                 </dl>
-                {if strlen($individual.tag) > 0}
+                {if !empty($individual.tag) }
                 <dl class="dl-horizontal">
                     <dt>{t}Tag RFID{/t}</dt>
                     <dd>{$individual.tag}</dd>
                 </dl>
                 {/if}
-                {if strlen($individual.transmitter) > 0}
+                {if !empty($individual.transmitter) }
                 <dl class="dl-horizontal">
                     <dt>{t}Transmetteur{/t}</dt>
                     <dd>{$individual.transmitter}</dd>
                 </dl>
                 {/if}
-            </div>    
+            </div>
         </div>
-        <div class="row">   
+        <div class="row">
             <form class="form-horizontal protoform" id="locationForm" method="post" action="index.php">
                 <input type="hidden" name="moduleBase" value="location">
                 <input type="hidden" name="action" value="Write">
@@ -50,7 +50,7 @@
                             {/foreach}
                         </select>
                     </div>
-                </div>     
+                </div>
                 <div class="form-group">
                     <label for="detection_date" class="control-label col-md-4"><span class="red">*</span> {t}Date-heure de détection{/t}</label>
                     <div class="col-md-8">
@@ -95,7 +95,7 @@
                 </div>
             </form>
             <span class="red">*</span><span class="messagebas">{t}Donnée obligatoire{/t}</span>
-        
+
         </div>
     </div>
 
@@ -103,4 +103,3 @@
         {include file="tracking/locationMap.tpl"}
     </div>
 </div>
-

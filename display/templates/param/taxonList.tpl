@@ -31,9 +31,9 @@
                     {$row["scientific_name"]}
                     </a>
                     {else}
-                    {$row["taxon_name"]} 
+                    {$row["taxon_name"]}
                     {/if}
-                    {if strlen($row["author"])>0}&nbsp;({$row["author"]}){/if}
+                    {if !empty($row["author"])}&nbsp;({$row["author"]}){/if}
                 </td>
                 <td>
                     {$row["common_name"]}

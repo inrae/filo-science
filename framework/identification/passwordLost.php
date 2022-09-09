@@ -38,7 +38,7 @@ switch ($t_module["param"]) {
                     );
                     $loginGestion = new LoginGestion($bdd_gacl, $ObjetBDDParam);
                     $dl = $loginGestion->lire($data["id"]);
-                    if (strlen($dl["mail"]) > 0) {
+                    if (!empty($dl["mail"]) ) {
 
                         $mail = new Mail($param);
                         if ($mail->sendMail($dl["mail"], array(
@@ -53,7 +53,7 @@ switch ($t_module["param"]) {
                         } else {
                             $log->setLog("unknown", "passwordlostSendmail-ko", $dl["mail"]);
                             $message->set(_("Impossible d'envoyer le mail"), true);
-                            $message->setSyslog('passwordlost : send mail aborted to' . $dl["mail"]);
+                            $message->setSyslog('passwordlost : send mail aborted to ' . $dl["mail"]);
                         }
                     } else {
                         $log->setLog("unknown", "passwordlostSendmail-ko", "recipient empty");
@@ -63,6 +63,7 @@ switch ($t_module["param"]) {
             } catch (Exception $e) {
                 $log->setLog("unknown", "passwordlostSendmail-ko", "$mail");
                 $message->setSyslog($e->getMessage());
+                $message->set(_("La réinitialisation du mot de passe n'est pas possible, contactez le cas échéant l'administrateur de l'application"), true);
             }
         }
 

@@ -18,14 +18,8 @@ if (empty($_SESSION["login"])) {
         $module_coderetour = -1;
       }
       if (!isset($_SESSION["totpSecret"])) {
-        try {
         $_SESSION["totpSecret"] = $gacltotp->createSecret();
         $gacltotp->createQrCode();
-        }catch (TOTPException $e) {
-          $message->set($e->getMessage(), true);
-          $message->setSyslog($e->getMessage());
-          $module_coderetour = -1;
-        }
       }
       $vue->set("framework/droits/otpCreate.tpl", "corps");
       break;

@@ -12,13 +12,13 @@
                 <dt>{t}Poisson :{/t}</dt>
                 <dd>{$individual.individual_id} {$individual.scientific_name}</dd>
             </dl>
-            {if strlen($individual.tag) > 0}
+            {if !empty($individual.tag)}
             <dl class="dl-horizontal">
                 <dt>{t}Tag RFID{/t}</dt>
                 <dd>{$individual.tag}</dd>
             </dl>
             {/if}
-            {if strlen($individual.transmitter) > 0}
+            {if !empty($individual.transmitter)}
             <dl class="dl-horizontal">
                 <dt>{t}Transmetteur{/t}</dt>
                 <dd>{$individual.transmitter}</dd>
@@ -68,7 +68,7 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>{t}Données de détection{/t}</legend>            
+                <legend>{t}Données de détection{/t}</legend>
                 <div class="form-group">
                     <label for="detection_date" class="control-label col-md-4"><span class="red">*</span> {t}Date-heure de détection{/t}</label>
                     <div class="col-md-8">

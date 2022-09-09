@@ -35,10 +35,10 @@ class ImportFunction extends ObjetBDD
      * @param string $order
      * @return array
      */
-    function getListFromParent(int $parentId, string $order = "")
+    function getListFromParent( $parentId,  $order = "")
     {
         $where = " where import_description_id = :parentId";
-        strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
+        !empty($order)  ? $orderby = " order by $order" : $orderby = "";
         return $this->getListeParamAsPrepared($this->sql . $where . $orderby, array("parentId" => $parentId));
     }
 }

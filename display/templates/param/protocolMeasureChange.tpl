@@ -13,10 +13,10 @@
             {foreach $measures as $measure}
                 <div class="form-group">
                     <label class="control-label col-md-8">
-                        {$measure.measure_template_name} - 
+                        {$measure.measure_template_name} -
                         <i>
                             {$measure.scientific_name}
-                            {if strlen($measure.common_name) > 0}
+                            {if !empty($measure.common_name) }
                                 ({$measure.common_name})
                             {/if}
                         </i>
@@ -24,7 +24,7 @@
                     <div class="col-md-4 center">
                         <input  type="checkbox"  name="measure_template_id[]" value="{$measure.measure_template_id}" {if $measure.protocol_id > 0}checked{/if}>
                     </div>
-                </div>  
+                </div>
             {/foreach}
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>

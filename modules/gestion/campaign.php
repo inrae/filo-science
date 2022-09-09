@@ -2,7 +2,7 @@
 require_once 'modules/classes/campaign.class.php';
 $dataClass = new Campaign($bdd, $ObjetBDDParam);
 $keyName = "campaign_id";
-if (strlen($_REQUEST[$keyName]) == 0 && $t_module["param"] == "display") {
+if (empty($_REQUEST[$keyName]))&& $t_module["param"] == "display") {
     if ($_COOKIE["campaign_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["campaign_uid"]) ) {
         $id = $_COOKIE["campaign_uid"];
     } else {
@@ -31,7 +31,7 @@ switch ($t_module["param"]) {
             include_once "modules/classes/project.class.php";
             $project = new Project($bdd, $ObjetBDDParam);
             $projects = $project->getProjectsActive($params["is_active"], $_SESSION["projects"]);
-            if (strlen($params["project_id"]) == 0) {
+            if (empty($params["project_id"]) ) {
                 $params["project_id"] = $projects[0]["project_id"];
             }
             $_SESSION["searchCampaign"]->setParam($params);

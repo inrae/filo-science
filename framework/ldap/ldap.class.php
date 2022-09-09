@@ -25,7 +25,7 @@ class Ldap
     /**
      * Identifiant de connexion de l'annuaire ldap
      *
-     * @var int
+     * @var LDAP\Connection
      */
     var $idldap;
 
@@ -160,7 +160,7 @@ class Ldap
         } else {
             $a_attribut = $attribut;
         }
-        if (strlen($basedn) == 0) {
+        if (empty($basedn) ) {
             $basedn = $this->LDAP_basedn;
         }
         $sr = ldap_search($this->idldap, $basedn, $filtre, $a_attribut);

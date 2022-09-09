@@ -22,6 +22,8 @@ class Login
   {
     global $APPLI_modeDeveloppement, $privateKey, $pubKey, $CONNEXION_blocking_duration, $CONNEXION_max_attempts;
     $tauth = "";
+    $this->loginGestion->attemptdelay = $CONNEXION_blocking_duration;
+    $this->loginGestion->nbattempts = $CONNEXION_max_attempts;
     /**
      * web service
      */
@@ -47,9 +49,7 @@ class Login
          */
         $cookieParam = session_get_cookie_params();
         $cookieParam["lifetime"] = time() - 3600;
-        if (!$APPLI_modeDeveloppement) {
-          $cookieParam["secure"] = true;
-        }
+        $cookieParam["secure"] = true;
         $cookieParam["httponly"] = true;
         setcookie('tokenIdentity', "", $cookieParam["lifetime"], $cookieParam["path"], $cookieParam["domain"], $cookieParam["secure"], $cookieParam["httponly"]);
       }
@@ -66,17 +66,12 @@ class Login
         $tauth = "db";
         $login = $this->getLoginBDD($_POST["login"], $_POST["password"]);
       }
-    } elseif ($type_authentification == "BDD") {
+    } elseif ($type_authentification == "BDD" || $type_authentification == "CAS-BDD") {
       $tauth = "db";
       $login = $this->getLoginBDD($_POST["login"], $_POST["password"]);
     }
     if (!empty($login)) {
-      if (!$this->log->isAccountBlocked($login, $CONNEXION_blocking_duration, $CONNEXION_max_attempts)) {
-        $this->log->setlog($login, "connection-" . $tauth, "ok");
-      } else {
-        $this->log->setLog($login, "connectionBlocking", "account blocked");
-        $login = null;
-      }
+       $this->log->setlog($login, "connection-" . $tauth, "ok");
     } else {
       isset($_POST["login"]) ? $loginRequired = $_POST["login"] : $loginRequired = "unknown";
       $this->log->setlog($loginRequired, "connection-" . $tauth, "ko");
@@ -91,7 +86,7 @@ class Login
     $headers = getHeaders($ident_header_vars["radical"]);
     $login = $headers[$ident_header_vars["login"]];
     $verify = false;
-    if (!empty($login) && !empty($headers)) {
+    if (!empty($login) && !empty($headers) ) {
       /**
        * Verify if the login exists
        */
@@ -112,7 +107,7 @@ class Login
            * Verify if the structure is authorized
            */
           $createUser = true;
-          if (count($ident_header_vars["organizationGranted"]) > 0 && !in_array($headers[$ident_header_vars["organization"]], $ident_header_vars["organizationGranted"])) {
+          if (!empty($ident_header_vars["organizationGranted"]) && !in_array($headers[$ident_header_vars["organization"]], $ident_header_vars["organizationGranted"])) {
             $createUser = false;
             $this->log->setLog($login, "connection-header", "ko. The " . $headers[$ident_header_vars["organization"]] . " is not authorized to connect to this application");
           }
@@ -179,14 +174,18 @@ class Login
       phpCAS::forceAuthentication();
     }
 
-    return phpCAS::getUser();
+    $user = phpCAS::getUser();
+    if (!empty($user)) {
+      $_SESSION["CAS_attributes"] = phpCAS::getAttributes();
+    }
+    return $user;
   }
 
   public function getLoginLdap($login, $password)
   {
     global $LDAP;
     $loginOk = "";
-    if (strlen($login) > 0 && strlen($password) > 0) {
+    if (!empty($login)  && !empty($password)) {
       $login = str_replace(
         array('\\', '*', '(', ')',),
         array('\5c', '\2a', '\28', '\29',),

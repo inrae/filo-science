@@ -104,8 +104,7 @@ function buildCDNPackage( callback ) {
 
 Release.define( {
 	npmPublish: true,
-	issueTracker: "trac",
-	contributorReportId: 22,
+	issueTracker: "github",
 	changelogShell: function() {
 		var monthNames = [ "January", "February", "March", "April", "May", "June", "July",
 				"August", "September", "October", "November", "December" ],
@@ -132,6 +131,20 @@ Release.define( {
 			shell.mkdir( "-p", "dist/cdn" );
 			shell.cp( tmpFolder + "/jquery-ui*.js", "dist/cdn" );
 			shell.cp( "-r", tmpFolder + "/themes", "dist/cdn" );
+
+			// Copy all the files to be published on the CDN to the dist directory
+			// as well.
+			shell.cp( "dist/cdn/jquery-ui.js", "dist" );
+			shell.cp( "dist/cdn/jquery-ui.min.js", "dist" );
+			shell.cp( "-r", "dist/cdn/themes", "dist" );
+
+			Release.exec( "git add --force dist/jquery-ui.js",
+				"Error adding dist/jquery-ui.js." );
+			Release.exec( "git add --force dist/jquery-ui.min.js",
+				"Error adding dist/jquery-ui.min.js." );
+			Release.exec( "git add --force dist/themes",
+				"Error adding dist/themes." );
+
 			fn( files );
 		} );
 	}

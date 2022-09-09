@@ -10,7 +10,7 @@ switch ($t_module["param"]) {
             $model = array();
             if ($_REQUEST["export_model_id"] > 0) {
                 $model = $exportModel->lire($_REQUEST["export_model_id"]);
-            } else if (strlen($_REQUEST["export_model_name"]) > 0) {
+            } else if (!empty($_REQUEST["export_model_name"]) ) {
                 $model = $exportModel->getModelFromName($_REQUEST["export_model_name"]);
             }
             if ($model["export_model_id"] > 0) {
@@ -22,7 +22,7 @@ switch ($t_module["param"]) {
                          * Specific to Filo-Science to get the real values of the keys
                          */
                         $keys = array();
-                        if (strlen($_REQUEST["translator"]) > 0) {
+                        if (!empty($_REQUEST["translator"]) ) {
                             foreach ($_REQUEST["keys"] as $k) {
                                 $keys[] = $_SESSION[$_REQUEST["translator"]]->getValue($k);
                             }
@@ -74,7 +74,7 @@ switch ($t_module["param"]) {
                 $testProject = false;
             }
         }
-        if (($_REQUEST["export_model_id"] > 0 || strlen($_REQUEST["export_model_name"]) > 0) && $_FILES["filename"]["size"] > 0 && $testProject) {
+        if (($_REQUEST["export_model_id"] > 0 || !empty($_REQUEST["export_model_name"])) && $_FILES["filename"]["size"] > 0 && $testProject) {
             if ($_REQUEST["export_model_id"]) {
                 $model = $exportModel->lire($_REQUEST["export_model_id"]);
             } else {
@@ -96,12 +96,12 @@ switch ($t_module["param"]) {
                     $bdd->beginTransaction();
                     $firstTable = true;
                     foreach ($data as $tableName => $values) {
-                        if ($firstTable && strlen($_REQUEST["parentKeyName"]) > 0) {
+                        if ($firstTable && empty($_REQUEST["parentKeyName"])) {
                             $key = $_REQUEST["parentKey"];
                             /**
                              * Specific to Filo-Science
                              */
-                            if (strlen($_REQUEST["translator"]) > 0) {
+                            if (!empty($_REQUEST["translator"]) ) {
                                 /**
                                  * Get the real value of the parent
                                  */

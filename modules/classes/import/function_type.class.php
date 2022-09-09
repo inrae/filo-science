@@ -268,7 +268,7 @@ class FunctionType extends ObjetBDD
   private function numericToHexa(array $columns, array $args)
   {
     $value = $columns[$args["columnNumber"]];
-    if (is_numeric($value) && strlen($value) > 0) {
+    if (is_numeric($value) && !empty($value) ) {
       $format = "%0" . $args["arg"] . "s";
       return strtoupper(sprintf($format, dechex($value)));
     } else {

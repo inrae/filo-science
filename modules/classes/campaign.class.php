@@ -53,12 +53,12 @@ class Campaign extends ObjetBDD
             $values["project_id"] = $param["project_id"];
             $and = " and ";
         }
-        if (strlen($param["is_active"]) > 0) {
+        if (!empty($param["is_active"]) ) {
             $where .= $and . " is_active = :is_active";
             $and = " and ";
             $values["is_active"] = $param["is_active"];
         }
-        if (strlen($and) > 0) {
+        if (!empty($and) ) {
             return $this->getListeParamAsPrepared($this->sql . $where, $values);
         } else {
             return array();
@@ -71,7 +71,7 @@ class Campaign extends ObjetBDD
      * @param integer $id
      * @return void
      */
-    function supprimer(int $id)
+    function supprimer( $id)
     {
         include_once 'modules/classes/operation.class.php';
         $operation = new Operation($this->connection);

@@ -37,7 +37,7 @@ class Export
             /**
              * Set the tableAlias if not defined
              */
-            if (strlen($m["tableAlias"]) == 0) {
+            if (empty($m["tableAlias"])) {
                 $m["tableAlias"] = $m["tableName"];
             }
             $this->model[$m["tableAlias"]] = $m;
@@ -52,7 +52,7 @@ class Export
     {
         $list = array();
         foreach ($this->model as $table) {
-            if (strlen($table["parentKey"]) == 0 && !$table["isEmpty"]) {
+            if (empty($table["parentKey"]) && !$table["isEmpty"]) {
                 $list[] = $table["tableAlias"];
             }
         }
@@ -88,7 +88,7 @@ class Export
                     }
                 }
                 $where .= ")";
-            } else if (strlen($model["parentKey"]) > 0 && $parentKey > 0) {
+            } else if (!empty($model["parentKey"]) && $parentKey > 0) {
                 /**
                  * Search by parent
                  */
@@ -97,7 +97,7 @@ class Export
             } else {
                 $where = "";
             }
-            if (strlen($model["technicalKey"]) > 0) {
+            if (!empty($model["technicalKey"]) ) {
                 $order = " order by " . $quote . $model["technicalKey"] . $quote;
             } else {
                 $order = " order by 1";
@@ -196,7 +196,7 @@ class Export
         $bkeyName = $model["businessKey"];
         $tkeyName = $model["technicalKey"];
         $pkeyName = $model["parentKey"];
-        if (strlen($bkeyName) > 0) {
+        if (!empty($bkeyName) ) {
             $sqlSearchKey = "select $quote$tkeyName$quote as key
                     from $quote$tableName$quote
                     where $quote$bkeyName$quote = :businessKey";
@@ -225,7 +225,7 @@ class Export
             $this->execute($sqlDelete, array("parentKey" => $parentKey));
         }
         foreach ($data as $row) {
-            if (strlen($row[$tkeyName]) > 0 || ($model["istablenn"] == 1 && strlen($row[$pkeyName])> 0)) {
+            if (!empty($row[$tkeyName]) || ($model["istablenn"] == 1 && !empty($row[$pkeyName]))) {
                 /**
                  * search for preexisting record
                  */
@@ -233,7 +233,7 @@ class Export
                     test($tableName . " key:" . $row[$tkeyName]);
                     test($tableAlias . " tablename:" . $tableName . " businessKey:" . $bkeyName . " technicalKey:" . $tkeyName . " parentKey:" . $pkeyName);
                 }
-                if ($isBusiness && strlen($row[$bkeyName]) > 0) {
+                if ($isBusiness && !empty($row[$bkeyName])) {
                     $previousData = $this->execute($sqlSearchKey, array("businessKey" => $row[$bkeyName]));
                     if ($previousData[0]["key"] > 0) {
                         $row[$tkeyName] = $previousData[0]["key"];
@@ -243,7 +243,7 @@ class Export
                 } else {
                     unset($row[$tkeyName]);
                 }
-                if ($parentKey > 0 && strlen($pkeyName) > 0) {
+                if ($parentKey > 0 && !empty($pkeyName) ) {
                     $row[$pkeyName] = $parentKey;
                 }
                 if ($model["istable11"] == 1 && $parentKey > 0) {
@@ -312,7 +312,7 @@ class Export
                             break;
                         }
                     }
-                    if (strlen($fieldName) == 0) {
+                    if (empty($fieldName) ) {
                         throw new ExportException(sprintf(_("Erreur inattendue : impossible de trouver le nom du champ correspondant à la table de paramètres %s"), $parameterName));
                     }
                     $row[$fieldName] = $pkey;
@@ -322,7 +322,7 @@ class Export
                  */
                 if (!empty($setValues)) {
                     foreach ($setValues as $kv => $dv) {
-                        if (strlen($dv) == 0) {
+                        if (empty($dv)) {
                             throw new ExportException(sprintf(_("Une valeur vide a été trouvée pour l'attribut ajouté %s"), $kv));
                         }
                         $row[$kv] = $dv;
@@ -389,7 +389,7 @@ class Export
                     $dataSql[$field] = $value;
                 }
             }
-            if (strlen($pkeyName) > 0 && strlen($skeyName) > 0) {
+            if (!empty($pkeyName)  && !empty($skeyName) ) {
                 $where = " where $quote$pkeyName$quote = :$pkeyName and $quote$skeyName$quote = :$skeyName";
             } else {
                 $where = " where $quote$tkeyName$quote = :$tkeyName";

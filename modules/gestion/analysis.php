@@ -2,13 +2,13 @@
 require_once 'modules/classes/analysis.class.php';
 $dataClass = new Analysis($bdd, $ObjetBDDParam);
 $keyName = "analysis_id";
-if (strlen($_REQUEST[$keyName]) == 0) {
+if (empty($_REQUEST[$keyName]))) {
     $t_module["param"] = "error";
     $t_module["retourko"] = "default";
     $module_coderetour = -1;
 }
 $id = $_SESSION["ti_analysis"]->getValue($_REQUEST[$keyName]);
-if (strlen($id) == 0) {
+if (empty($id) ) {
     $id = 0;
 }
 
@@ -19,7 +19,7 @@ switch ($t_module["param"]) {
         /*
      * open the form to modify the record
      * If is a new record, generate a new record with default value :
-     * $_REQUEST["idParent"] contains the identifiant of the parent record 
+     * $_REQUEST["idParent"] contains the identifiant of the parent record
      */
         $data = dataRead($dataClass, $id, "gestion/analysisChange.tpl", $sequence_id);
         require_once "modules/classes/sequence.class.php";

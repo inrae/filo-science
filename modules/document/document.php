@@ -17,7 +17,7 @@ switch ($t_module["param"]) {
 	case "display":
 		/*
 		 * Exemple de code a inserer dans le module display de la table parente :
-		 * 	
+		 *
 		 * Gestion des documents
 		 */
 		/*
@@ -59,7 +59,7 @@ switch ($t_module["param"]) {
 		/*
 		 * write record in database
 		 */
-		if (strlen($_REQUEST["parentType"]) > 0) {
+		if (!empty($_REQUEST["parentType"])) {
 			/*
 			 * Preparation de files
 			 */

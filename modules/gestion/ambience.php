@@ -2,7 +2,7 @@
 require_once 'modules/classes/ambience.class.php';
 $dataClass = new Ambience($bdd, $ObjetBDDParam);
 $keyName = "ambience_id";
-if (strlen($_REQUEST[$keyName]) == 0) {
+if (empty($_REQUEST[$keyName]))) {
 	$t_module["param"] = "error";
 	$t_module["retourko"] = "default";
 	$module_coderetour = -1;

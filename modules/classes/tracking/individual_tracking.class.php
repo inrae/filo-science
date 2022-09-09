@@ -129,7 +129,7 @@ class IndividualTracking extends ObjetBDD
    * @param integer $id
    * @return void
    */
-  function supprimer(int $id)
+  function supprimer( $id)
   {
     include_once "modules/classes/tracking/detection.class.php";
     $detection = new Detection($this->connection, $this->paramori);
@@ -197,6 +197,7 @@ class IndividualTracking extends ObjetBDD
     }
     $sql = "
             select detection_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate) as detection_date
+                ,extract (epoch from detection_date) as date_epoch
                 , nb_events, duration, validity, signal_force, observation
                 ,station_long long, station_lat lat, station_name, station_code, station_number
                 ,'stationary' as detection_type
@@ -308,7 +309,16 @@ class IndividualTracking extends ObjetBDD
     if ($year > 0) {
       $where .= " and extract(year from detection_date) = $year";
     }
-    return $this->getListeParam($sql . $where . $group);
+    $list = $this->getListeParam($sql . $where . $group);
+    $cols = array("day","night", "unknown");
+    foreach ($list as $k => $v) {
+      foreach ($cols as $c) {
+        if (empty($v[$c])) {
+          $list[$k][$c] = 0;
+        }
+      }
+    }
+    return $list;
   }
 
   /**

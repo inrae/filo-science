@@ -78,9 +78,9 @@ class MeasureTemplate extends ObjetBDD
             return $this->getDefaultValue($parentValue);
         } else {
             $sql = "select measure_template_id, measure_template_name, measure_template_schema
-                    , taxon_id, scientific_name, common_name 
+                    , taxon_id, scientific_name, common_name
                     from measure_template
-                    join taxon using (taxon_id)                  
+                    join taxon using (taxon_id)
                     where measure_template_id = :id";
             return $this->lireParamAsPrepared($sql, array("id" => $id));
         }
@@ -94,11 +94,11 @@ class MeasureTemplate extends ObjetBDD
      */
     function getListe($order = "")
     {
-        $sql = "select measure_template_id, measure_template_name, measure_template_schema, 
+        $sql = "select measure_template_id, measure_template_name, measure_template_schema,
                 taxon_id, scientific_name
                 from measure_template
                 join taxon using(taxon_id)";
-        if (strlen($order) > 0) {
+        if (!empty($order)) {
             $sql .= " order by " . $order;
         }
         return ($this->getListeParam($sql));

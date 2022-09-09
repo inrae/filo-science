@@ -33,7 +33,7 @@ class StationTracking extends ObjetBDD
      * @param int $id
      * @return array
      */
-    function lire($id)
+    function lire($id,$getDefault = true, $parentValue = 0)
     {
         if ($id == 0) {
             $data = $this->getDefaultValue();
@@ -51,7 +51,7 @@ class StationTracking extends ObjetBDD
      * @param array $data
      * @return int
      */
-    function ecrire(array $data)
+    function ecrire( $data)
     {
         require_once 'modules/classes/station.class.php';
         $station = new Station($this->connection, $this->paramori);

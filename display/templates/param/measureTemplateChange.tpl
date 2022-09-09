@@ -22,7 +22,7 @@
                 }
         	}
         });
-        $("#taxon-search").keyup(function() { 
+        $("#taxon-search").keyup(function() {
             var name = $(this).val();
             if (name.length > 2) {
                 var options = "";
@@ -38,7 +38,7 @@
                 })
                 .done (function(data) {
                     var result = JSON.parse(data);
-                    //options = '<option value="" selected></option>';			
+                    //options = '<option value="" selected></option>';
                     for (var i = 0; i < result.length; i++) {
                         options += '<option value="' + result[i].taxon_id + '">'
                                 + result[i].scientific_name;
@@ -49,7 +49,7 @@
                     }
                     ;
                     $("#taxon_id").html(options);
-                });   
+                });
             }
         });
     });
@@ -89,7 +89,7 @@
                         {if $data.taxon_id > 0}
                             <option value="{$data.taxon_id}" selected>
                                 {$data.scientific_name}
-                                {if strlen($data.common_name) > 0}
+                                {if !empty($data.common_name)}
                                     ({$data.common_name})
                                 {/if}
                             </option>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             </fieldset>
-            
+
             <fieldset>
                 <legend>{t}Mesures complémentaires{/t}</legend>
                 <div id="metadata"></div>

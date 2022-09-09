@@ -18,15 +18,17 @@ require_once "param/param.inc.php";
 /**
  * Protection contre les IFRAMES
  */
-header("X-Frame-Options: SAMEORIGIN");
+//header("X-Frame-Options: SAMEORIGIN");
 
 /*
  * protection de la session
  */
-ini_set("session.use_strict_mode", true);
+/*ini_set("session.use_strict_mode", true);
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_maxlifetime', $APPLI_session_ttl);
-ini_set("session.cookie_samesite", "strict");
+ini_set("session.cookie_samesite", "strict");*/
+
+//session_set_cookie_params( $APPLI_session_ttl, '/', null, true, true);
 /**
  * Integration of external libraries
  */
@@ -65,7 +67,14 @@ require_once "modules/beforesession.inc.php";
 /**
  * Demarrage de la session
  */
-@session_start();
+if (!session_start([
+    'cookie_lifetime' => $APPLI_session_ttl,
+    'cookie_secure' => true,
+    'cookie_httponly'=>true,
+    'cookie_samesite'=>true
+    ])) {
+    echo "enable to start the session";
+}
 DEFINE("DATELONGMASK", "Y-m-d H:i:s");
 
 /*
@@ -84,16 +93,19 @@ if (!isset($_SESSION['CREATED'])) {
     /*
      * La session a demarre depuis plus du temps de la session : cookie regenere
      */
-    session_regenerate_id(true); // change session ID for the current session and invalidate old session ID
+    //session_regenerate_id(true); // change session ID for the current session and invalidate old session ID
     $_SESSION['CREATED'] = time(); // update creation time
 }
 /*
  * Regeneration du cookie de session
  */
-$cookieParam = session_get_cookie_params();
+
+
+/*$cookieParam = session_get_cookie_params();
 $cookieParam["lifetime"] = $APPLI_session_ttl;
 $cookieParam["secure"] = true;
 $cookieParam["httponly"] = true;
+$cookieParam["samesite"] = true;
 setcookie(
     session_name(),
     session_id(),
@@ -101,9 +113,10 @@ setcookie(
     $cookieParam["path"],
     $cookieParam["domain"],
     $cookieParam["secure"],
-    $cookieParam["httponly"]
+    $cookieParam["httponly"],
 );
-
+print_r(session_id());
+print_r($cookieParam);*/
 /*
  * Recuperation des parametres de l'application definis dans un fichier ini
  */
@@ -179,7 +192,7 @@ if (!isset($bdd)) {
         /*
          * Mise en place du schema par defaut
          */
-        if (strlen($BDD_schema) > 0) {
+        if (!empty($BDD_schema)) {
             $bdd->exec("set search_path = " . $BDD_schema);
         }
         /*
@@ -199,7 +212,7 @@ if (!isset($bdd)) {
             /*
              * Mise en place du schema par defaut
              */
-            if (strlen($GACL_schema) > 0) {
+            if (!empty($GACL_schema) ) {
                 $bdd_gacl->exec("set search_path = " . $GACL_schema);
             }
         } else {
@@ -219,7 +232,7 @@ $log = new Log($bdd_gacl, $ObjetBDDParam);
  */
 if (time() - $_SESSION['ABSOLUTE_START'] > $APPLI_absolute_session) {
     $log->setLog($_SESSION["login"], "disconnect-absolute-time");
-    $identification->disconnect($APPLI_address);
+    include "framework/identification/disconnect.php";
     $message->set(_("Vous avez été déconnecté, votre session était ouverte depuis trop longtemps"),true);
     /*
      * Desactivation du cookie d'identification deja charge le cas echeant
@@ -237,11 +250,7 @@ if (isset($_SESSION["remoteIP"])) {
             $_SESSION["login"], "disconnect-ipaddress-changed",
             "old:" . $_SESSION["remoteIP"] . "-new:" . $ipaddress
         );
-        if ($identification->disconnect($APPLI_address) == 1) {
-            $message->set(_("Vous êtes maintenant déconnecté"));
-        } else {
-            $message->set(_("Connexion"));
-        }
+        include "framework/identification/disconnect.php";
     }
 } else {
     $_SESSION["remoteIP"] = $ipaddress;

@@ -115,9 +115,9 @@ class Ambience extends ObjetBDD
      * @param array $data
      * @return int
      */
-    function ecrire(array $data)
+    function ecrire( $data)
     {
-        if (strlen($data["ambience_long"]) > 0 && strlen($data["ambience_lat"]) > 0) {
+        if (!empty($data["ambience_long"]) && !empty($data["ambience_lat"])) {
             $data["ambience_geom"] = "POINT(" . $data["ambience_long"] . " " . $data["ambience_lat"] . ")";
         } else {
             $data["ambience_geom"] = "";

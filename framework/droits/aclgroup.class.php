@@ -72,24 +72,29 @@ class Aclgroup extends ObjetBDD
         if ($ldapParam["groupSupport"]) {
             /*
              * Recuperation des attributs depuis l'annuaire LDAP
-             * Attention : interroge l'annuaire en mode anonyme
-             -             et donc echoue si l'annuaire requiere un login/mot de passe pour une recherche
              */
             include_once "framework/ldap/ldap.class.php";
             $ldap = new Ldap($ldapParam);
             $conn = $ldap->connect();
+
             /**
              * Set the parameters
              */
             ldap_set_option($conn, LDAP_OPT_NETWORK_TIMEOUT, $ldapParam["timeout"]);
             ldap_set_option($conn, LDAP_OPT_TIMELIMIT, $ldapParam["timeout"]);
             ldap_set_option($conn, LDAP_OPT_TIMEOUT, $ldapParam["timeout"]);
+
             if ($conn > 0) {
                 $attribut = array(
                     $ldapParam['commonNameAttrib'],
                     $ldapParam["mailAttrib"],
                     $ldapParam["groupAttrib"]
                 );
+                if ($ldapParam["ldapnoanonymous"]) {
+                    if (! $ldap->login($ldapParam["ldaplogin"], $ldapParam["ldappassword"])) {
+                        throw new LdapException(_("L'identification dans l'annuaire LDAP a échoué pour la récupération des groupes de l'utilisateur"));
+                    }
+                }
                 $filtre =  "(" . $ldapParam["user_attrib"] . "=" . $_SESSION["login"] . ")";
                 /*
                  * Attention : ne gere pas le cas de user_attrib vide lors d'une connexion a un Active Directory
@@ -126,6 +131,25 @@ class Aclgroup extends ObjetBDD
          * Fusion des groupes
          */
         $groupes = array_merge($groupes, $groupesLdap);
+        /**
+         * Récupération des groupes du serveur CAS
+         */
+        global $CAS_group_attribute, $CAS_get_groups;
+        if (isset($_SESSION["CAS_attributes"][$CAS_group_attribute]) && $CAS_get_groups == 1) {
+            $groupesCas = array();
+            if (!is_array($_SESSION["CAS_attributes"][$CAS_group_attribute]) && !empty ($_SESSION["CAS_attributes"][$CAS_group_attribute])) {
+                $_SESSION["CAS_attributes"][$CAS_group_attribute] = array($_SESSION["CAS_attributes"][$CAS_group_attribute]);
+            }
+            foreach ($_SESSION["CAS_attributes"][$CAS_group_attribute] as $value) {
+                $search = $this->getGroupFromName($value);
+                foreach ($search as $value) {
+                    if ($value["aclgroup_id"] > 0) {
+                        $groupesCas[] = $value;
+                    }
+                }
+            }
+            $groupes = array_merge($groupes, $groupesCas);
+        }
         /*
          * Recuperation des groupes parents
          */

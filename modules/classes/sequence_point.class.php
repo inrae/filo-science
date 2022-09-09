@@ -58,7 +58,7 @@ class SequencePoint extends ObjetBDD
      * @param integer|null $sequence_id
      * @return array
      */
-    function lire(int $id, ?bool $getDefault, ?int $sequence_id): array
+    function lire( $id, $getDefault = false,  $sequence_id = ""): array
     {
         $data = array();
         if ($id > 0) {

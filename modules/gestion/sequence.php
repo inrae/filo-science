@@ -2,7 +2,7 @@
 require_once 'modules/classes/sequence.class.php';
 $dataClass = new Sequence($bdd, $ObjetBDDParam);
 $keyName = "sequence_id";
-if (strlen($_REQUEST[$keyName]) == 0) {
+if (empty($_REQUEST[$keyName]){
   if ($_COOKIE["sequence_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sequence_uid"]) && $t_module["param"] == "display") {
     $id = $_COOKIE["sequence_uid"];
   } else {

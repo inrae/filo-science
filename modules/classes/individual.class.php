@@ -112,9 +112,9 @@ class Individual extends ObjetBDD
    * @param array $data
    * @return integer
    */
-  function ecrire(array $data)
+  function ecrire( $data)
   {
-    if (strlen($data["measure_estimated"]) == 0) {
+    if (empty($data["measure_estimated"]) ) {
       $data["measure_estimated"] = 0;
     }
     if (strlen($data["uuid"]) != 36) {
@@ -138,7 +138,7 @@ class Individual extends ObjetBDD
    * @param integer $id
    * @return void
    */
-  function supprimer(int $id)
+  function supprimer( $id)
   {
     include_once 'modules/classes/tracking/individual_tracking.class.php';
     $it = new IndividualTracking($this->connection, $this->paramori);

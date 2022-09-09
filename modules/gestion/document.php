@@ -63,7 +63,7 @@ switch ($t_module["param"]) {
 		 * Generation du nom du document
 		 */
         $tmp_name = $dataClass->prepareDocument($id, $_REQUEST["phototype"]);
-        if (strlen($tmp_name) > 0 && is_file($tmp_name)) {
+        if (!empty($tmp_name) && is_file($tmp_name)) {
             /*
 			 * Recuperation du type mime
 			 */

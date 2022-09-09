@@ -112,7 +112,7 @@ class ObjetBDD
 
   /**
    *
-   * @var $parentAttrib : nom de l'attribut referencant l'enregistrement pere
+   * @var string $parentAttrib : nom de l'attribut referencant l'enregistrement pere
    */
   public $parentAttrib;
 
@@ -922,10 +922,14 @@ class ObjetBDD
           $ds[$key] = $value;
 
           if ($this->colonnes[$key]["type"] == 4) {
-            /*
-                         * Traitement de l'import d'un champ geographique
-                         */
-            $sql .= $cle . " = ST_GeomFromText( :" . $key . " ," . $this->srid . ")";
+            /**
+             * Traitement de l'import d'un champ geographique
+             */
+            if (!empty($value)) {
+              $sql .= $cle . " = ST_GeomFromText( :" . $key . " ," . $this->srid . ")";
+            } else {
+              $sql .= $cle . " = :" . $key;
+            }
           } else {
             $sql .= $cle . " = :" . $key;
           }
@@ -940,8 +944,10 @@ class ObjetBDD
     }
     $rs = $this->executeAsPrepared($sql, $ds);
     if ($mode == "ajout" && $this->id_auto == 1) {
-      if ($this->typeDatabase == 'pgsql' && !empty($rs)) {
-        $ret = $rs[0][$this->cle];
+      if ($this->typeDatabase == 'pgsql') {
+        if (count($rs) > 0) {
+          $ret = $rs[0][$this->cle];
+        }
       } else {
         $last_id = $this->execute('SELECT LAST_INSERT_ID() as last_id');
         $ret = $last_id[0]['last_id'];
@@ -1046,12 +1052,12 @@ class ObjetBDD
    * a partir de la cle du parent
    *
    * @param int $parentId
-   * @param number $order
-   * @return tableau|NULL
+   * @param string $order
+   * @return array|null
    */
   function getListFromParent($parentId, $order = "")
   {
-    if ($parentId > 0 && strlen($this->parentAttrib) > 0) {
+    if ($parentId > 0 && !empty($this->parentAttrib) ) {
       $sql = "select * from " . $this->table;
       /*
              * Preparation du where

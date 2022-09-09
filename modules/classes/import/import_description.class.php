@@ -36,7 +36,7 @@ class ImportDescription extends ObjetBDD
      */
     public function getListe($order = "")
     {
-        strlen($order) > 0 ? $orderby = " order by $order" : $orderby = "";
+        !empty($order)  ? $orderby = " order by $order" : $orderby = "";
         return $this->getListeParam($this->sql . $orderby);
     }
 
@@ -58,7 +58,7 @@ class ImportDescription extends ObjetBDD
      * @param int $id
      * @return array
      */
-    public function supprimer(int $id)
+    public function supprimer( $id)
     {
         include_once "modules/classes/import/import_function.class.php";
         $function = new ImportFunction($this->connection);
