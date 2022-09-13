@@ -1,5 +1,11 @@
 Nouveautés
 ==========
+Version 1.11.0 du 13/09/2022
+----------------------------
+Nouveautés :
+- dans le module tracking, l'affichage des détections par poisson est maintenant regroupé par période de temps, pour limiter le nombre de données renvoyées vers le navigateur
+- mise à niveau de l'application pour supporter php 8.1
+
 Version 1.9.0 du 22/09/2021
 ---------------------------
 Nouveautés :

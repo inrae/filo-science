@@ -1,5 +1,11 @@
 News
 ===========
+Version 1.11.0 of 2022-09-13
+----------------------------
+New features:
+- in the tracking module, the display of detections by fish is now grouped by time period, to limit the amount of data sent back to the browser
+- upgrade of the application to support php 8.1
+
 Version 1.9.0 of 2021-09-22
 ---------------------------
 New features :

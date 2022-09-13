@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-29 16:50+0200\n"
+"POT-Creation-Date: 2022-09-13 10:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. (itstool) path: menu/item@label
@@ -118,7 +118,7 @@ msgstr "Tracked fish"
 
 #. (itstool) path: item/item@tooltip
 #: ../../../param/menu.xml:22
-#: ../../../display/templates/tracking/individualTrackingList.tpl:105
+#: ../../../display/templates/tracking/individualTrackingList.tpl:116
 msgid "Liste des poissons suivis"
 msgstr "List of tracked fish"
 
@@ -310,7 +310,7 @@ msgstr "Types of tracking stations"
 #: ../../../display/templates/param/measureTemplateList.tpl:15
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:37
 #: ../../../display/templates/gestion/sampleList.tpl:12
-#: ../../../display/templates/tracking/individualTrackingList.tpl:203
+#: ../../../display/templates/tracking/individualTrackingList.tpl:218
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:270
 msgid "Taxon"
 msgstr "Taxon"
@@ -665,114 +665,124 @@ msgid "Consultation des logs enregistrées"
 msgstr "Consultation of recorded logs"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:107 ../../../display/templates/phpinfo.tpl:1
+#: ../../../param/menu.xml:107
+msgid "Backup"
+msgstr "Backup"
+
+#. (itstool) path: item/item@tooltip
+#: ../../../param/menu.xml:107
+#: ../../../display/templates/framework/backup.tpl:1
+msgid "Sauvegarde de la base de données"
+msgstr "Backup of the database"
+
+#. (itstool) path: item/item@label
+#: ../../../param/menu.xml:108 ../../../display/templates/phpinfo.tpl:1
 msgid "PHP info"
 msgstr "PHP info"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:107
+#: ../../../param/menu.xml:108
 msgid "configuration générale du serveur PHP"
 msgstr "general configuration of the PHP server"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:109 ../../../framework/common.inc.php:243
-#: ../../../display/templates/entete.tpl:21
+#: ../../../param/menu.xml:110 ../../../display/templates/entete.tpl:21
 #: ../../../display/templates/entete.tpl:41
 #: ../../../display/templates/entete.tpl:42
 msgid "Connexion"
 msgstr "Sign in"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:109
+#: ../../../param/menu.xml:110
 msgid "S'identifier dans l'application"
 msgstr "Sign in to the app"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:110 ../../../display/templates/entete.tpl:37
+#: ../../../param/menu.xml:111 ../../../display/templates/entete.tpl:37
 #: ../../../display/templates/entete.tpl:38
 msgid "Déconnexion"
 msgstr "Sign out"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:110
+#: ../../../param/menu.xml:111
 msgid "Déconnexion de l'application"
 msgstr "Sign out of the app"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:111
+#: ../../../param/menu.xml:112
 msgid "Dernières connexions"
 msgstr "Last connections"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:111
+#: ../../../param/menu.xml:112
 msgid "Liste des connexions récentes"
 msgstr "List of recently connections"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:112 ../../../display/templates/entete.tpl:32
+#: ../../../param/menu.xml:113 ../../../display/templates/entete.tpl:32
 #: ../../../display/templates/entete.tpl:33
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:86
 msgid "Modifier le mot de passe"
 msgstr "Change your password"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:112
+#: ../../../param/menu.xml:113
 msgid "Modifiez votre mot de passe (identification locale uniquement)"
 msgstr "Change your password (local identification only)"
 
 #. (itstool) path: menu/item@label
-#: ../../../param/menu.xml:114
+#: ../../../param/menu.xml:115
 msgid "?"
 msgstr "?"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../../param/menu.xml:114
+#: ../../../param/menu.xml:115
 msgid "Aide"
 msgstr "Help"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:115
+#: ../../../param/menu.xml:116
 msgid "A propos"
 msgstr "About"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:115
+#: ../../../param/menu.xml:116
 msgid "A propos de Collec-Science"
 msgstr "A propos de"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:116
+#: ../../../param/menu.xml:117
 msgid "Nouveautés"
 msgstr "What's new?"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:116
+#: ../../../param/menu.xml:117
 msgid "Quoi de neuf dans l'application ?"
 msgstr "What's new in the app?"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:117
+#: ../../../param/menu.xml:118
 msgid "Français"
 msgstr "French"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:117
+#: ../../../param/menu.xml:118
 msgid "Libellés en français"
 msgstr "Labels in French"
 
 #. (itstool) path: item/item@label
-#: ../../../param/menu.xml:118
+#: ../../../param/menu.xml:119
 msgid "English"
 msgstr "English"
 
 #. (itstool) path: item/item@tooltip
-#: ../../../param/menu.xml:118
+#: ../../../param/menu.xml:119
 msgid "Labels in English"
 msgstr "Labels in English"
 
 #: ../../../param/param.default.inc.php:11
-msgid "29/10/2021"
-msgstr "2021-10-29"
+msgid "13/09/2022"
+msgstr "2022-09-13"
 
 #: ../../../modules/param/station.php:100
 #, php-format
@@ -848,7 +858,7 @@ msgstr "Generation error for image %s"
 msgid "Fichier %s non trouvé ou non lisible"
 msgstr "File %s not found or not readable"
 
-#: ../../../modules/classes/tracking/individual_tracking.class.php:151
+#: ../../../modules/classes/tracking/individual_tracking.class.php:152
 msgid "Le numéro du projet n'est pas conforme"
 msgstr "The project number is not conform"
 
@@ -985,7 +995,11 @@ msgstr ""
 msgid "Une erreur est survenue pendant la duplication de la séquence"
 msgstr "An error occurred during the duplication of the sequence"
 
-#: ../../../modules/gestion/sequence.php:250
+#: ../../../modules/gestion/sequence.php:228
+msgid "Opération non permise"
+msgstr "Operation not allowed"
+
+#: ../../../modules/gestion/sequence.php:253
 msgid ""
 "Il n'y a pas de poissons saisis dans le module de télémétrie qui ne soient "
 "pas associés avec une séquence"
@@ -993,17 +1007,21 @@ msgstr ""
 "There are no fish recorded in the telemetry module that are not associated "
 "with a sequence"
 
-#: ../../../modules/gestion/sequence.php:303
+#: ../../../modules/gestion/sequence.php:306
 msgid "Opération effectuée"
 msgstr "Done"
 
-#: ../../../modules/gestion/sequence.php:306
+#: ../../../modules/gestion/sequence.php:309
 msgid "Une erreur est survenue pendant la mise à jour des informations"
 msgstr "An error occurred during the recording"
 
-#: ../../../modules/gestion/sequence.php:313
+#: ../../../modules/gestion/sequence.php:316
 msgid "Aucun poisson sélectionné"
 msgstr "No fish has been selected"
+
+#: ../../../modules/gestion/operation.php:12
+msgid "L'identifiant de l'opération est manquant"
+msgstr ""
 
 #: ../../../modules/gestion/operation.php:147
 msgid "Problème rencontré lors de l'enregistrement des opérateurs"
@@ -1031,21 +1049,21 @@ msgid "Problème lors de l'enregistrement de l'échantillon ou de l'individu"
 msgstr ""
 "Problem occurred during the registration of the sample or the individual"
 
-#: ../../../modules/gestion/sample.php:180 ../../../framework/fonctions.php:131
+#: ../../../modules/gestion/sample.php:180 ../../../framework/fonctions.php:133
 msgid "Suppression effectuée"
 msgstr "Deletion done"
 
 #: ../../../modules/gestion/sample.php:183
-#: ../../../modules/tracking/individualTracking.php:207
+#: ../../../modules/tracking/individualTracking.php:202
 msgid "Problème rencontré lors de la suppression du poisson"
 msgstr "Problem encountered when deleting a fish"
 
-#: ../../../modules/tracking/detection.php:67
+#: ../../../modules/tracking/detection.php:64
 #, php-format
 msgid "Recalcul effectué, %s détections traitées"
 msgstr "Calculation done, %s treated detections"
 
-#: ../../../modules/tracking/detection.php:70
+#: ../../../modules/tracking/detection.php:67
 msgid "Une erreur est survenue pendant l'opération"
 msgstr "An error occurred during the operation"
 
@@ -1054,8 +1072,8 @@ msgstr "An error occurred during the operation"
 msgid "La station ne fait partie d'un projet autorisé"
 msgstr "The station is not associated with an authorized project"
 
-#: ../../../modules/tracking/stationTracking.php:137
-#: ../../../modules/tracking/stationTracking.php:160
+#: ../../../modules/tracking/stationTracking.php:136
+#: ../../../modules/tracking/stationTracking.php:159
 msgid ""
 "La station n'est pas associée à un projet pour lequel vous disposez des "
 "droits de modification"
@@ -1063,60 +1081,60 @@ msgstr ""
 "The station is not associated with a project for which you have modification "
 "rights"
 
-#: ../../../modules/tracking/individualTracking.php:168
-#: ../../../modules/tracking/individualTracking.php:195
-#: ../../../modules/tracking/individualTracking.php:213
-#: ../../../modules/tracking/individualTracking.php:233
-#: ../../../modules/tracking/individualTracking.php:344
+#: ../../../modules/tracking/individualTracking.php:163
+#: ../../../modules/tracking/individualTracking.php:190
+#: ../../../modules/tracking/individualTracking.php:208
+#: ../../../modules/tracking/individualTracking.php:228
+#: ../../../modules/tracking/individualTracking.php:339
 msgid ""
 "Le projet indiqué ne fait pas partie des projets qui vous sont autorisés"
 msgstr "This project is not part of the projects authorized for you"
 
-#: ../../../modules/tracking/individualTracking.php:189
+#: ../../../modules/tracking/individualTracking.php:184
 msgid "Problème rencontré lors de l'enregistrement du poisson"
 msgstr "Problem encountered when recording a fish"
 
-#: ../../../modules/tracking/individualTracking.php:230
+#: ../../../modules/tracking/individualTracking.php:225
 msgid "Aucun poisson n'a été sélectionné"
 msgstr "No fish has been selected"
 
-#: ../../../modules/tracking/individualTracking.php:302
+#: ../../../modules/tracking/individualTracking.php:297
 #, php-format
 msgid "Le poisson existe déjà (id : %s)"
 msgstr "The fish already exists (id: %s)"
 
-#: ../../../modules/tracking/individualTracking.php:308
+#: ../../../modules/tracking/individualTracking.php:303
 msgid ""
 "La ligne est vide ou le taxon_id n'a pas été renseigné - ligne non traitée"
 msgstr ""
 "The line is empty or the taxon_id has not been filled in - line not processed"
 
-#: ../../../modules/tracking/individualTracking.php:313
+#: ../../../modules/tracking/individualTracking.php:308
 msgid "Nombre total de poissons créés :"
 msgstr "Total number of created fish:"
 
-#: ../../../modules/tracking/individualTracking.php:315
+#: ../../../modules/tracking/individualTracking.php:310
 msgid "Id mini généré :"
 msgstr "Minimum Id generate:"
 
-#: ../../../modules/tracking/individualTracking.php:316
+#: ../../../modules/tracking/individualTracking.php:311
 msgid "Id maxi généré :"
 msgstr "Max Id generated:"
 
-#: ../../../modules/tracking/individualTracking.php:320
+#: ../../../modules/tracking/individualTracking.php:315
 msgid "L'importation a échoué, le fichier n'a pas été correctement lu"
 msgstr "The importation failed, the file was not read correctly"
 
-#: ../../../modules/tracking/individualTracking.php:326
+#: ../../../modules/tracking/individualTracking.php:321
 msgid "Erreur d'écriture en table. Message d'erreur de la base de données : "
 msgstr "Error when writing in table. Database error message: "
 
-#: ../../../modules/tracking/individualTracking.php:327
+#: ../../../modules/tracking/individualTracking.php:322
 #: ../../../modules/import/importExec.php:190
 msgid "L'importation a échoué. Consultez les messages dans le tableau"
 msgstr "The importation failed. Consult the messages into the table"
 
-#: ../../../modules/tracking/individualTracking.php:340
+#: ../../../modules/tracking/individualTracking.php:335
 msgid "Le fichier fourni est vide ou n'a pu être téléchargé"
 msgstr "The provided file is empty or could not be downloaded"
 
@@ -1210,12 +1228,18 @@ msgstr "Saved"
 msgid "Problème lors de la mise en fichier..."
 msgstr "Writing problem..."
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1426
+#: ../../../framework/request/request.class.php:60
+msgid ""
+"La requête ne peut pas contenir d'ordres de modification de la base de "
+"données"
+msgstr "The query cannot contain database change orders"
+
+#: ../../../framework/objetbdd/ObjetBDD.php:1432
 #, php-format
 msgid "le champ %1$s  n'est pas numerique. Valeur saisie : %2$s"
 msgstr "The field %1$s is not numeric. Entered value: %2$s"
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1430
+#: ../../../framework/objetbdd/ObjetBDD.php:1436
 #, php-format
 msgid ""
 "Le champ %1$s est trop grand. Longueur maximale autorisée : %2$s. Valeur "
@@ -1224,7 +1248,7 @@ msgstr ""
 "The %1$s field is too big. Maximum length allowed: %2$s. Entered value: %3$s "
 "(%4$s characters)"
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1434
+#: ../../../framework/objetbdd/ObjetBDD.php:1440
 #, php-format
 msgid ""
 "Le contenu du champ %1$s ne correspond pas au format attendu. Masque "
@@ -1233,12 +1257,12 @@ msgstr ""
 "The content of the field %1$s does not match the expected format. Authorized "
 "mask: %2$s. Entered value: %3$s"
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1438
+#: ../../../framework/objetbdd/ObjetBDD.php:1444
 #, php-format
 msgid "Le champ %s est obligatoire, mais n'a pas été renseigné."
 msgstr "The field %s is required, but has not been filled out."
 
-#: ../../../framework/objetbdd/ObjetBDD.php:1923
+#: ../../../framework/objetbdd/ObjetBDD.php:1929
 #, php-format
 msgid ""
 "La connexion à la base de données n'est pas disponible pour instancier la "
@@ -1249,6 +1273,11 @@ msgstr "The database connection is not available to instance the class %s"
 #, php-format
 msgid "Le fichier %s n'existe pas"
 msgstr "The file %s don't exist"
+
+#: ../../../framework/utils/markdown.php:15
+#, php-format
+msgid "Le fichier %s est vide ou ne peut être lu"
+msgstr "The file %1s is empty or not readable"
 
 #: ../../../framework/utils/file.php:12
 msgid "Aucun nom de fichier n'a été fourni"
@@ -1267,7 +1296,7 @@ msgstr "The backup file was not generated"
 msgid "Le fichier de backup à charger n'a pas été trouvé"
 msgstr "The backup file to download was not found"
 
-#: ../../../framework/controller.php:23
+#: ../../../framework/controller.php:22
 msgid ""
 "Problème dans les données fournies : l'encodage des caractères n'est pas "
 "celui attendu"
@@ -1275,7 +1304,7 @@ msgstr ""
 "Problem in the provided data: the character encoding is not the one expected"
 
 #. traduction: bien conserver inchangées les chaînes %1$s, %2$s
-#: ../../../framework/controller.php:42
+#: ../../../framework/controller.php:41
 #, php-format
 msgid ""
 "La base de données n'est pas dans la version attendue (%1$s). Version "
@@ -1283,19 +1312,19 @@ msgid ""
 msgstr ""
 "The database is not in the expected version (%1$s). Current version: %2$s"
 
-#: ../../../framework/controller.php:49
+#: ../../../framework/controller.php:48
 msgid ""
 "Problème rencontré lors de la vérification de la version de la base de "
 "données"
 msgstr "Problem encountered while checking the version of the database"
 
 #. traduction: conserver inchangée la chaîne %s
-#: ../../../framework/controller.php:173
+#: ../../../framework/controller.php:172
 #, php-format
 msgid "Le module demandé n'existe pas (%s)"
 msgstr "The requested module does not exist (%s)"
 
-#: ../../../framework/controller.php:255
+#: ../../../framework/controller.php:259
 msgid ""
 "Message technique : la vue n'a pas été initialisée lors de la création de la "
 "page de login"
@@ -1303,25 +1332,25 @@ msgstr ""
 "Technical message: the view was not initialized for the creation of the "
 "login page"
 
-#: ../../../framework/controller.php:264
+#: ../../../framework/controller.php:271
 msgid "Veuillez utiliser le login qui vous a été fourni pour vous identifier"
 msgstr ""
 "Please use the login that has been provided to you to identify yourself"
 
-#: ../../../framework/controller.php:329
+#: ../../../framework/controller.php:344
 msgid "Identification refusée"
 msgstr "Authentication failed"
 
-#: ../../../framework/controller.php:350
+#: ../../../framework/controller.php:368
 msgid "Identification réussie !"
 msgstr "Authentication successful!"
 
-#: ../../../framework/controller.php:361
+#: ../../../framework/controller.php:379
 msgid "Connexions précédentes récentes :"
 msgstr "Recently connections:"
 
 #. traduction: bien conserver inchangées les chaînes %1$s, %2$s...
-#: ../../../framework/controller.php:373
+#: ../../../framework/controller.php:391
 #, php-format
 msgid ""
 "Dernière connexion le %1$s depuis l'adresse IP %2$s. Si ce n'était pas vous, "
@@ -1331,12 +1360,12 @@ msgstr ""
 "your password or contact the administrator of the application."
 
 #. traduction: conserver inchangée la chaîne %s
-#: ../../../framework/controller.php:464
+#: ../../../framework/controller.php:480
 #, php-format
 msgid "Module précédent enregistré : %s"
 msgstr "Previous module: %s"
 
-#: ../../../framework/controller.php:531
+#: ../../../framework/controller.php:547
 msgid ""
 "L'accès au module demandé nécessite une ré-identification. Veuillez saisir "
 "votre login et votre mot de passe"
@@ -1344,17 +1373,17 @@ msgstr ""
 "Access to the requested module requires re-identification. Please enter your "
 "login and password"
 
-#: ../../../framework/controller.php:549
+#: ../../../framework/controller.php:564
 msgid "Erreur d'écriture dans le fichier de traces"
 msgstr "Error writing to the log file"
 
 #. traduction: bien conserver inchangées les chaînes %1$s, %2$s
-#: ../../../framework/controller.php:673
+#: ../../../framework/controller.php:690
 #, php-format
 msgid "Mode développement - base de données : %1$s - schema : %2$s"
 msgstr "Development mode - database: %1$s - schema: %2$s"
 
-#: ../../../framework/controller.php:706
+#: ../../../framework/controller.php:726
 msgid ""
 "Une erreur indéterminée s'est produite pendant le traitement de la requête. "
 "Si le problème persiste, consultez l'administrateur de l'application"
@@ -1374,29 +1403,24 @@ msgstr ""
 msgid "Vous n'êtes pas identifié."
 msgstr "You are not signed in."
 
-#: ../../../framework/common.inc.php:206
+#: ../../../framework/common.inc.php:219
 msgid "Echec de connexion à la base de données de gestion des droits (GACL)"
 msgstr "Failed to connect to rights management database (GACL)"
 
-#: ../../../framework/common.inc.php:209
+#: ../../../framework/common.inc.php:222
 msgid "Echec de connexion à la base de données principale"
 msgstr "Failed to connect to the main database"
 
-#: ../../../framework/common.inc.php:223
+#: ../../../framework/common.inc.php:236
 msgid ""
 "Vous avez été déconnecté, votre session était ouverte depuis trop longtemps"
 msgstr "You have been disconnected, your session has been open for too long"
 
-#: ../../../framework/common.inc.php:241
-#: ../../../framework/identification/disconnect.php:8
-msgid "Vous êtes maintenant déconnecté"
-msgstr "You are now signed off"
-
-#: ../../../framework/common.inc.php:275
+#: ../../../framework/common.inc.php:284
 msgid "Problème rencontré lors de la lecture de la table des paramètres"
 msgstr "Problem occurred during the reading of the table of parameters"
 
-#: ../../../framework/log/log.class.php:310
+#: ../../../framework/log/log.class.php:313
 msgid ""
 "Le nombre d'accès autorisés pour le module demandé a été atteint. Si vous "
 "considérez que la valeur est trop faible, veuillez contacter "
@@ -1406,13 +1430,17 @@ msgstr ""
 "If you consider that the value is too low, please contact the application "
 "administrator"
 
-#: ../../../framework/vue.class.php:301
+#: ../../../framework/vue.class.php:313
 msgid ""
 "Une erreur a été détectée lors de la création de l'écran. Si le problème "
 "persiste, contactez l'administrateur de l'application."
 msgstr ""
 "an error was detected during the screen creation. If the problem persists, "
 "contact your support."
+
+#: ../../../framework/vue.class.php:649
+msgid "Problème rencontré lors de l'ouverture de finfo"
+msgstr "Problem encountered when opened finfo"
 
 #: ../../../framework/identification/totp.php:17
 msgid ""
@@ -1422,7 +1450,7 @@ msgstr ""
 "You have already activated the two-factor identification: contact an "
 "application administrator to reset this function."
 
-#: ../../../framework/identification/totp.php:35
+#: ../../../framework/identification/totp.php:29
 msgid ""
 "Les informations fournies sont insuffisantes pour valider la création de la "
 "double identification"
@@ -1430,11 +1458,11 @@ msgstr ""
 "The information provided is insufficient to validate the creation of double "
 "identification"
 
-#: ../../../framework/identification/totp.php:45
+#: ../../../framework/identification/totp.php:39
 msgid "La double authentification est maintenant activée."
 msgstr "The double authentication is activate now."
 
-#: ../../../framework/identification/totp.php:54
+#: ../../../framework/identification/totp.php:48
 msgid "Le code fourni n'a pu être vérifié"
 msgstr "The code provided could not be verified"
 
@@ -1476,11 +1504,19 @@ msgstr ""
 msgid "Impossible d'envoyer le mail"
 msgstr "Could not send email"
 
-#: ../../../framework/identification/passwordLost.php:86
-#: ../../../framework/identification/passwordLost.php:113
+#: ../../../framework/identification/passwordLost.php:66
+msgid ""
+"La réinitialisation du mot de passe n'est pas possible, contactez le cas "
+"échéant l'administrateur de l'application"
+msgstr ""
+"Resetting the password is not possible, contact the application "
+"administrator if necessary"
+
+#: ../../../framework/identification/passwordLost.php:87
+#: ../../../framework/identification/passwordLost.php:114
 #: ../../../framework/identification/login.php:76
-#: ../../../framework/identification/loginGestion.class.php:340
-#: ../../../framework/identification/loginGestion.class.php:395
+#: ../../../framework/identification/loginGestion.class.php:390
+#: ../../../framework/identification/loginGestion.class.php:445
 msgid ""
 "Le mode d'identification utilisé pour votre compte n'autorise pas la "
 "modification du mot de passe depuis cette application"
@@ -1488,9 +1524,13 @@ msgstr ""
 "The login method used for your account does not allow changing the password "
 "from this app"
 
-#: ../../../framework/identification/passwordLost.php:89
+#: ../../../framework/identification/passwordLost.php:90
 msgid "Le jeton fourni n'est pas valide"
 msgstr "Token provided is not valid"
+
+#: ../../../framework/identification/disconnect.php:7
+msgid "Vous êtes maintenant déconnecté"
+msgstr "You are now signed off"
 
 #: ../../../framework/identification/login.php:60
 msgid ""
@@ -1515,7 +1555,7 @@ msgstr ""
 msgid "Ne répondez pas à ce message, il ne sera pas relevé"
 msgstr "Do not reply to this message, il will not readed"
 
-#: ../../../framework/identification/loginGestion.class.php:128
+#: ../../../framework/identification/loginGestion.class.php:171
 msgid ""
 "Votre mot de passe a expiré. Veuillez contacter l'administrateur de "
 "l'application pour le renouveler"
@@ -1523,39 +1563,39 @@ msgstr ""
 "Your password has expired. Please contact the application administrator to "
 "renew it"
 
-#: ../../../framework/identification/loginGestion.class.php:131
+#: ../../../framework/identification/loginGestion.class.php:174
 msgid "Votre mot de passe va expirer. Veuillez le changer immédiatement"
 msgstr ""
 "You have already activated the two-factor identification: contact an "
 "application administrator to reset this function."
 
-#: ../../../framework/identification/loginGestion.class.php:198
+#: ../../../framework/identification/loginGestion.class.php:239
 msgid "Mot de passe insuffisamment complexe ou trop petit"
 msgstr "Password not enough complex or too small"
 
-#: ../../../framework/identification/loginGestion.class.php:211
+#: ../../../framework/identification/loginGestion.class.php:253
 msgid ""
 "Une erreur est survenue pendant le chiffrement du jeton d'identification"
 msgstr "An error occurred during the encryption of the token"
 
-#: ../../../framework/identification/loginGestion.class.php:229
+#: ../../../framework/identification/loginGestion.class.php:279
 msgid ""
 "Une erreur est survenue pendant le déchiffrement du jeton d'identification"
 msgstr "An error occurred during the decryption of the token"
 
-#: ../../../framework/identification/loginGestion.class.php:334
+#: ../../../framework/identification/loginGestion.class.php:384
 msgid "La modification du mot de passe a échoué"
 msgstr "Password change failed"
 
-#: ../../../framework/identification/loginGestion.class.php:337
+#: ../../../framework/identification/loginGestion.class.php:387
 msgid "L'ancien mot de passe est incorrect"
 msgstr "The old password is incorrect"
 
-#: ../../../framework/identification/loginGestion.class.php:387
+#: ../../../framework/identification/loginGestion.class.php:437
 msgid "Le mot de passe a été modifié"
 msgstr "The password has been changed"
 
-#: ../../../framework/identification/loginGestion.class.php:388
+#: ../../../framework/identification/loginGestion.class.php:438
 msgid ""
 "Votre mot de passe vient d'être modifié.<br>Si vous n'avez pas réalisé cette "
 "opération, veuillez contacter le responsable de l'application"
@@ -1563,11 +1603,11 @@ msgstr ""
 "Your password has just been changed.<br>If you did not perform this "
 "operation, please contact the application manager"
 
-#: ../../../framework/identification/loginGestion.class.php:389
+#: ../../../framework/identification/loginGestion.class.php:439
 msgid "Modification de votre mot de passe"
 msgstr "Change your password"
 
-#: ../../../framework/identification/loginGestion.class.php:392
+#: ../../../framework/identification/loginGestion.class.php:442
 msgid ""
 "Echec de modification du mot de passe pour une raison inconnue. Si le "
 "problème persiste, contactez l'assistance"
@@ -1575,43 +1615,43 @@ msgstr ""
 "Failed to change the password for an unknown reason. If the problem "
 "persists, contact support"
 
-#: ../../../framework/identification/loginGestion.class.php:444
+#: ../../../framework/identification/loginGestion.class.php:494
 msgid "Le mot de passe n'est pas assez fort"
 msgstr "Password not strong enough"
 
-#: ../../../framework/identification/loginGestion.class.php:447
+#: ../../../framework/identification/loginGestion.class.php:497
 msgid "Le mot de passe n'est pas assez complexe"
 msgstr ""
 "The password is not complex enough (mix 3 character sets among lowercase, "
 "uppercase, numbers, and punctuation)"
 
-#: ../../../framework/identification/loginGestion.class.php:450
+#: ../../../framework/identification/loginGestion.class.php:500
 msgid "Le mot de passe est trop court"
 msgstr "The password is too short (minimum: 10 characters)"
 
-#: ../../../framework/identification/loginGestion.class.php:453
+#: ../../../framework/identification/loginGestion.class.php:503
 msgid "Le mot de passe n'est pas identique dans les deux zones"
 msgstr "Passwords don't match in both fields"
 
-#: ../../../framework/identification/loginGestion.class.php:564
+#: ../../../framework/identification/loginGestion.class.php:614
 msgid "Envoi du message de modification du mot de passe par mail en échec"
 msgstr "Sending the password change message by email in failure"
 
-#: ../../../framework/identification/login.class.php:43
+#: ../../../framework/identification/login.class.php:45
 msgid "L'identification par jeton n'a pas abouti"
 msgstr "Token identification was unsuccessful"
 
-#: ../../../framework/identification/login.class.php:83
+#: ../../../framework/identification/login.class.php:78
 msgid ""
 "L'identification n'a pas abouti. Vérifiez votre login et votre mot de passe"
 msgstr "The identification was not successful. Check your login and password"
 
-#: ../../../framework/identification/login.class.php:136
+#: ../../../framework/identification/login.class.php:131
 #: ../../../framework/identification/identification.class.php:334
 msgid "Nouvel utilisateur"
 msgstr "New user:"
 
-#: ../../../framework/identification/login.class.php:137
+#: ../../../framework/identification/login.class.php:132
 #, php-format
 msgid ""
 "%1$s a créé son compte avec le login %2$s dans l'application %3$s.\n"
@@ -1634,7 +1674,7 @@ msgstr ""
 "                          <br>Don't answer this mail, which is generated "
 "automatically."
 
-#: ../../../framework/identification/login.class.php:145
+#: ../../../framework/identification/login.class.php:140
 #: ../../../framework/identification/identification.class.php:343
 msgid ""
 "Votre compte a été créé, mais est inactif. Un mail a été adressé aux "
@@ -1643,17 +1683,29 @@ msgstr ""
 "Your account was create, but it's inactive. An email was send to the "
 "administrators for its activation"
 
-#: ../../../framework/identification/totp.class.php:54
-msgid ""
-"La valeur otp_issuer n'a pas été renseignée dans les paramètres de "
-"l'application"
-msgstr "The application parameter otp_issuer is empty"
+#: ../../../framework/identification/passwordlost.class.php:79
+msgid "Le compte n'est pas actif"
+msgstr "The account is not active"
 
-#: ../../../framework/identification/totp.class.php:87
+#: ../../../framework/identification/passwordlost.class.php:82
+msgid ""
+"Le compte n'est pas autorisé à réinitialiser son mot de passe, la dernière "
+"connexion réussie n'ayant pas été réalisée dans un mode compatible"
+msgstr ""
+
+#: ../../../framework/identification/passwordlost.class.php:85
+msgid "Aucun compte n'a été trouvé pour le mail considéré"
+msgstr "No account has been found for the considered mail"
+
+#: ../../../framework/identification/passwordlost.class.php:88
+msgid "Le mail n'a pas été renseigné"
+msgstr "The email has not been filled in"
+
+#: ../../../framework/identification/totp.class.php:84
 msgid "Une erreur est survenue pendant le chiffrement de la clé secrète"
 msgstr "An error occurred during the encryption of the secret key"
 
-#: ../../../framework/identification/totp.class.php:102
+#: ../../../framework/identification/totp.class.php:99
 msgid "Une erreur est survenue pendant le déchiffrement de la clé secrète"
 msgstr "An error occurred during the decryption of the secret key"
 
@@ -1692,30 +1744,30 @@ msgid ""
 "Un enregistrement portant déjà ce nom existe déjà dans la base de données."
 msgstr "A record with this name already exists into the database."
 
-#: ../../../framework/fonctions.php:95
+#: ../../../framework/fonctions.php:97
 msgid "Problème lors de l'enregistrement..."
 msgstr "Problem when saving ..."
 
-#: ../../../framework/fonctions.php:144
+#: ../../../framework/fonctions.php:149
 msgid ""
 "La suppression n'est pas possible : des informations sont référencées par "
 "cet enregistrement"
 msgstr "Deletion is not possible: information is referenced by this record"
 
-#: ../../../framework/fonctions.php:147
+#: ../../../framework/fonctions.php:152
 msgid "Problème lors de la suppression"
 msgstr "Problem when deleting"
 
-#: ../../../framework/fonctions.php:156
+#: ../../../framework/fonctions.php:161
 msgid ""
 "Suppression impossible : la clé n'est pas numérique ou n'a pas été fournie"
 msgstr "Deletion impossible: the key is not numeric or is empty"
 
-#: ../../../framework/fonctions.php:506
+#: ../../../framework/fonctions.php:511
 msgid "Impossible d'initialiser le composant curl"
 msgstr "Unable to initiate the curl component"
 
-#: ../../../framework/fonctions.php:546
+#: ../../../framework/fonctions.php:551
 #, php-format
 msgid ""
 "Une erreur est survenue lors de l'exécution de la requête vers le serveur "
@@ -1724,19 +1776,25 @@ msgstr ""
 "An error occurred while executing the request to the remote server. CURL "
 "error code: %s"
 
-#: ../../../framework/droits/aclgroup.class.php:122
+#: ../../../framework/droits/aclgroup.class.php:95
+msgid ""
+"L'identification dans l'annuaire LDAP a échoué pour la récupération des "
+"groupes de l'utilisateur"
+msgstr ""
+
+#: ../../../framework/droits/aclgroup.class.php:127
 msgid "Connexion à l'annuaire LDAP impossible"
 msgstr "Cannot connect to the LDAP directory"
 
-#: ../../../framework/droits/aclgroup.class.php:299
+#: ../../../framework/droits/aclgroup.class.php:323
 msgid "Un groupe ne peut être son propre parent"
 msgstr "A group can't be its own parent"
 
-#: ../../../framework/droits/aclgroup.class.php:323
+#: ../../../framework/droits/aclgroup.class.php:347
 msgid "Suppression du groupe impossible : d'autres groupes lui sont rattachés"
 msgstr "Can not delete group: other groups are attached to it"
 
-#: ../../../framework/droits/aclgroup.class.php:339
+#: ../../../framework/droits/aclgroup.class.php:363
 msgid ""
 "La suppression du groupe a échoué. Consultez les logs pour en connaître la "
 "raison"
@@ -1773,7 +1831,7 @@ msgstr "List of the complementary analysis models"
 #: ../../../display/templates/param/taxonList.tpl:7
 #: ../../../display/templates/param/taxatemplateList.tpl:7
 #: ../../../display/templates/gestion/campaignList.tpl:25
-#: ../../../display/templates/tracking/individualTrackingList.tpl:110
+#: ../../../display/templates/tracking/individualTrackingList.tpl:121
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:7
 #: ../../../display/templates/tracking/stationTrackingList.tpl:92
 #: ../../../display/templates/tracking/parameterMeasureTypeList.tpl:6
@@ -1800,8 +1858,8 @@ msgstr "New..."
 #: ../../../display/templates/gestion/sampleList.tpl:11
 #: ../../../display/templates/gestion/campaignList.tpl:32
 #: ../../../display/templates/gestion/sampleChange.tpl:712
-#: ../../../display/templates/tracking/individualTrackingList.tpl:202
-#: ../../../display/templates/tracking/individualTrackingList.tpl:282
+#: ../../../display/templates/tracking/individualTrackingList.tpl:217
+#: ../../../display/templates/tracking/individualTrackingList.tpl:299
 #: ../../../display/templates/tracking/transmitter_typeList.tpl:13
 #: ../../../display/templates/tracking/stationTrackingList.tpl:98
 #: ../../../display/templates/tracking/parameterMeasureTypeList.tpl:12
@@ -1850,13 +1908,13 @@ msgid "Projet"
 msgstr "Project"
 
 #: ../../../display/templates/param/stationList.tpl:19
-#: ../../../display/templates/tracking/individualTrackingList.tpl:289
+#: ../../../display/templates/tracking/individualTrackingList.tpl:306
 #: ../../../display/templates/tracking/stationTrackingList.tpl:105
 msgid "Longitude"
 msgstr "Longitude"
 
 #: ../../../display/templates/param/stationList.tpl:20
-#: ../../../display/templates/tracking/individualTrackingList.tpl:290
+#: ../../../display/templates/tracking/individualTrackingList.tpl:307
 #: ../../../display/templates/tracking/stationTrackingList.tpl:106
 msgid "Latitude"
 msgstr "Latitude"
@@ -1918,8 +1976,8 @@ msgstr "Eventual attached project:"
 #: ../../../display/templates/gestion/ambienceChange.tpl:320
 #: ../../../display/templates/gestion/ambienceChange.tpl:333
 #: ../../../display/templates/gestion/ambienceChange.tpl:346
-#: ../../../display/templates/tracking/individualTrackingList.tpl:143
-#: ../../../display/templates/tracking/individualTrackingList.tpl:152
+#: ../../../display/templates/tracking/individualTrackingList.tpl:154
+#: ../../../display/templates/tracking/individualTrackingList.tpl:163
 #: ../../../display/templates/tracking/stationTrackingChange.tpl:68
 msgid "Choisissez..."
 msgstr "Select..."
@@ -2088,7 +2146,7 @@ msgstr "Corresponding taxon:"
 #: ../../../display/templates/framework/ident/loginChangePassword.tpl:135
 #: ../../../display/templates/framework/droits/appliChange.tpl:25
 #: ../../../display/templates/framework/droits/loginChange.tpl:29
-#: ../../../display/templates/framework/droits/groupChange.tpl:13
+#: ../../../display/templates/framework/droits/groupChange.tpl:12
 #: ../../../display/templates/framework/droits/acoChange.tpl:16
 #: ../../../display/templates/framework/droits/otpCreate.tpl:32
 #: ../../../display/templates/import/importTypeChange.tpl:39
@@ -2136,7 +2194,7 @@ msgstr "Save and return"
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:211
 #: ../../../display/templates/framework/droits/appliChange.tpl:27
 #: ../../../display/templates/framework/droits/loginChange.tpl:31
-#: ../../../display/templates/framework/droits/groupChange.tpl:15
+#: ../../../display/templates/framework/droits/groupChange.tpl:14
 #: ../../../display/templates/framework/droits/acoChange.tpl:18
 #: ../../../display/templates/import/importTypeChange.tpl:41
 #: ../../../display/templates/import/importDescriptionChange.tpl:87
@@ -2176,7 +2234,7 @@ msgstr "Delete..."
 #: ../../../display/templates/framework/ident/loginsaisie.tpl:222
 #: ../../../display/templates/framework/droits/appliChange.tpl:35
 #: ../../../display/templates/framework/droits/loginChange.tpl:37
-#: ../../../display/templates/framework/droits/groupChange.tpl:60
+#: ../../../display/templates/framework/droits/groupChange.tpl:59
 #: ../../../display/templates/framework/droits/acoChange.tpl:47
 #: ../../../display/templates/import/importTypeChange.tpl:47
 #: ../../../display/templates/import/importExec.tpl:193
@@ -2266,8 +2324,8 @@ msgstr "New protocol"
 #: ../../../display/templates/gestion/analysisDetail.tpl:2
 #: ../../../display/templates/gestion/ambienceDetailOperation.tpl:5
 #: ../../../display/templates/gestion/ambienceDetailSequence.tpl:4
-#: ../../../display/templates/tracking/individualTrackingList.tpl:212
-#: ../../../display/templates/tracking/individualTrackingList.tpl:239
+#: ../../../display/templates/tracking/individualTrackingList.tpl:228
+#: ../../../display/templates/tracking/individualTrackingList.tpl:256
 #: ../../../display/templates/tracking/stationTrackingList.tpl:111
 #: ../../../display/templates/tracking/stationTrackingList.tpl:140
 #: ../../../display/templates/tracking/parameterMeasureTypeList.tpl:22
@@ -2354,8 +2412,8 @@ msgstr "Is only the default length allowed?"
 #: ../../../display/templates/gestion/campaignSearch.tpl:31
 #: ../../../display/templates/gestion/operationChange.tpl:138
 #: ../../../display/templates/gestion/sampleChange.tpl:510
-#: ../../../display/templates/tracking/individualTrackingList.tpl:132
-#: ../../../display/templates/tracking/individualTrackingList.tpl:327
+#: ../../../display/templates/tracking/individualTrackingList.tpl:143
+#: ../../../display/templates/tracking/individualTrackingList.tpl:344
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:341
 #: ../../../display/templates/tracking/stationTrackingList.tpl:70
 #: ../../../display/templates/tracking/stationTrackingList.tpl:80
@@ -2385,8 +2443,8 @@ msgstr "yes"
 #: ../../../display/templates/gestion/campaignSearch.tpl:32
 #: ../../../display/templates/gestion/operationChange.tpl:142
 #: ../../../display/templates/gestion/sampleChange.tpl:507
-#: ../../../display/templates/tracking/individualTrackingList.tpl:133
-#: ../../../display/templates/tracking/individualTrackingList.tpl:327
+#: ../../../display/templates/tracking/individualTrackingList.tpl:144
+#: ../../../display/templates/tracking/individualTrackingList.tpl:344
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:338
 #: ../../../display/templates/tracking/stationTrackingList.tpl:71
 #: ../../../display/templates/tracking/stationTrackingList.tpl:81
@@ -2468,7 +2526,7 @@ msgstr "Label"
 #: ../../../display/templates/param/pathologyList.tpl:24
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:38
 #: ../../../display/templates/gestion/sampleChange.tpl:713
-#: ../../../display/templates/tracking/individualTrackingList.tpl:204
+#: ../../../display/templates/tracking/individualTrackingList.tpl:219
 #: ../../../display/templates/tracking/antennaList.tpl:13
 #: ../../../display/templates/tracking/probeList.tpl:13
 msgid "Code"
@@ -2990,7 +3048,7 @@ msgstr "Name of the campaign:"
 #: ../../../display/templates/gestion/campaignDisplay.tpl:36
 #: ../../../display/templates/gestion/campaignSearch.tpl:14
 #: ../../../display/templates/tracking/individualTrackingImport.tpl:39
-#: ../../../display/templates/tracking/individualTrackingList.tpl:120
+#: ../../../display/templates/tracking/individualTrackingList.tpl:131
 #: ../../../display/templates/tracking/individualTrackingChange.tpl:257
 #: ../../../display/templates/tracking/stationTrackingList.tpl:58
 #: ../../../display/templates/tracking/stationTrackingDetail.tpl:8
@@ -3021,8 +3079,8 @@ msgid "Date/heure de début"
 msgstr "Date/time of start"
 
 #: ../../../display/templates/gestion/campaignDisplay.tpl:73
-#: ../../../display/templates/tracking/individualTrackingList.tpl:285
-#: ../../../display/templates/tracking/individualTrackingList.tpl:384
+#: ../../../display/templates/tracking/individualTrackingList.tpl:302
+#: ../../../display/templates/tracking/individualTrackingList.tpl:401
 msgid "Station"
 msgstr "Station"
 
@@ -3128,7 +3186,7 @@ msgstr "Weight"
 
 #: ../../../display/templates/gestion/sequenceAddTelemetryFish.tpl:45
 #: ../../../display/templates/gestion/sampleChange.tpl:721
-#: ../../../display/templates/tracking/individualTrackingList.tpl:210
+#: ../../../display/templates/tracking/individualTrackingList.tpl:225
 msgid "Identifiant unique"
 msgstr "Unique identifier"
 
@@ -3366,8 +3424,8 @@ msgid "Repérez votre position !"
 msgstr "Locate your position!"
 
 #: ../../../display/templates/gestion/campaignSearch.tpl:25
-#: ../../../display/templates/tracking/individualTrackingList.tpl:136
-#: ../../../display/templates/tracking/individualTrackingList.tpl:275
+#: ../../../display/templates/tracking/individualTrackingList.tpl:147
+#: ../../../display/templates/tracking/individualTrackingList.tpl:292
 #: ../../../display/templates/tracking/stationTrackingList.tpl:74
 #: ../../../display/templates/framework/logList.tpl:38
 msgid "Rechercher"
@@ -3708,7 +3766,7 @@ msgstr "Display"
 
 #: ../../../display/templates/gestion/sampleChange.tpl:112
 #: ../../../display/templates/gestion/documentList.tpl:78
-#: ../../../display/templates/main_js.tpl:241
+#: ../../../display/templates/main_js.tpl:243
 msgid "Confirmez-vous la suppression ?"
 msgstr "Do you confirm the deletion?"
 
@@ -4079,89 +4137,94 @@ msgstr "original document"
 
 #: ../../../display/templates/enpied.tpl:3
 msgid ""
-"Copyright © 2019-2021 - Tous droits réservés. Auteur : Éric Quinton, pour "
+"Copyright © 2019-2022 - Tous droits réservés. Auteur : Éric Quinton, pour "
 "INRAE - Logiciel diffusé sous licence AGPL"
 msgstr ""
-"Copyright © 2019-2021 - All rights reserved. Author: Eric Quinton, for INRAE "
+"Copyright © 2019-2022 - All rights reserved. Author: Eric Quinton, for INRAE "
 "- Software released under AGPL license"
 
 #: ../../../display/templates/enpied.tpl:5
 msgid "Pour tout problème :"
 msgstr "For any problem:"
 
-#: ../../../display/templates/main_js.tpl:82
+#: ../../../display/templates/main_js.tpl:87
 msgid "Traitement en cours..."
 msgstr "Processing..."
 
-#: ../../../display/templates/main_js.tpl:83
+#: ../../../display/templates/main_js.tpl:88
 msgid "Rechercher :"
 msgstr "Search:"
 
-#: ../../../display/templates/main_js.tpl:84
+#: ../../../display/templates/main_js.tpl:89
 msgid "Afficher _MENU_ éléments"
 msgstr "Show _MENU_ entries"
 
-#: ../../../display/templates/main_js.tpl:85
+#: ../../../display/templates/main_js.tpl:90
 msgid "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments"
 msgstr "Showing _START_ to _END_ of _TOTAL_ entries"
 
-#: ../../../display/templates/main_js.tpl:86
+#: ../../../display/templates/main_js.tpl:91
 msgid "Affichage de l'élément 0 à 0 sur 0 élément"
 msgstr "Showing 0 to 0 of 0 entries"
 
-#: ../../../display/templates/main_js.tpl:87
+#: ../../../display/templates/main_js.tpl:92
 msgid "(filtré de _MAX_ éléments au total)"
 msgstr "(filtered from _MAX_ total entries)"
 
-#: ../../../display/templates/main_js.tpl:89
+#: ../../../display/templates/main_js.tpl:94
 msgid "Chargement en cours..."
 msgstr "Loading..."
 
-#: ../../../display/templates/main_js.tpl:90
+#: ../../../display/templates/main_js.tpl:95
 msgid "Aucun élément à afficher"
 msgstr "No matching records found"
 
-#: ../../../display/templates/main_js.tpl:91
+#: ../../../display/templates/main_js.tpl:96
 msgid "Aucune donnée disponible dans le tableau"
 msgstr "No data available in table"
 
-#: ../../../display/templates/main_js.tpl:93
+#: ../../../display/templates/main_js.tpl:98
 msgid "Premier"
 msgstr "First"
 
-#: ../../../display/templates/main_js.tpl:94
-#: ../../../display/templates/tracking/individualTrackingList.tpl:270
+#: ../../../display/templates/main_js.tpl:99
+#: ../../../display/templates/tracking/individualTrackingList.tpl:287
 msgid "Précédent"
 msgstr "Previous"
 
-#: ../../../display/templates/main_js.tpl:95
-#: ../../../display/templates/tracking/individualTrackingList.tpl:278
+#: ../../../display/templates/main_js.tpl:100
+#: ../../../display/templates/tracking/individualTrackingList.tpl:295
 msgid "Suivant"
 msgstr "Next"
 
-#: ../../../display/templates/main_js.tpl:96
+#: ../../../display/templates/main_js.tpl:101
 msgid "Dernier"
 msgstr "Last"
 
-#: ../../../display/templates/main_js.tpl:99
+#: ../../../display/templates/main_js.tpl:104
 msgid ": activer pour trier la colonne par ordre croissant"
 msgstr ": activate to sort column ascending"
 
-#: ../../../display/templates/main_js.tpl:100
+#: ../../../display/templates/main_js.tpl:105
 msgid ": activer pour trier la colonne par ordre décroissant"
 msgstr ": activate to sort column descending"
 
-#: ../../../display/templates/main_js.tpl:104
+#: ../../../display/templates/main_js.tpl:109
 msgid "Afficher %d éléments"
 msgstr "Show %d items"
 
-#: ../../../display/templates/main_js.tpl:105
+#: ../../../display/templates/main_js.tpl:110
 msgid "Tout afficher"
 msgstr "Display All"
 
-#: ../../../display/templates/main_js.tpl:210
+#: ../../../display/templates/main_js.tpl:212
 msgid "Valeur numérique..."
 msgstr "Numerical value..."
+
+#: ../../../display/templates/main_js.tpl:267
+#: ../../../display/templates/tracking/detectionRecalculate.tpl:4
+msgid "Confirmez-vous l'opération ?"
+msgstr "Do you confirm the operation?"
 
 #: ../../../display/templates/tracking/individualTrackingImport.tpl:8
 #: ../../../display/templates/import/importExec.tpl:222
@@ -4332,160 +4395,168 @@ msgstr ""
 ": identifier of the release station (cf. corresponding table in the "
 "parameters)"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:130
+#: ../../../display/templates/tracking/individualTrackingList.tpl:141
 msgid "actifs ?"
 msgstr "active?"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:140
+#: ../../../display/templates/tracking/individualTrackingList.tpl:151
 msgid "Année :"
 msgstr "Year:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:149
+#: ../../../display/templates/tracking/individualTrackingList.tpl:160
 msgid "Espèce : "
 msgstr "Species:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:166
+#: ../../../display/templates/tracking/individualTrackingList.tpl:169
+msgid "Intervalle (en secondes) de regroupement des détections :"
+msgstr ""
+
+#: ../../../display/templates/tracking/individualTrackingList.tpl:181
 msgid "Liste"
 msgstr "List"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:171
-#: ../../../display/templates/tracking/individualTrackingList.tpl:201
+#: ../../../display/templates/tracking/individualTrackingList.tpl:186
+#: ../../../display/templates/tracking/individualTrackingList.tpl:216
 msgid "Détections"
 msgstr "Detections"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:175
+#: ../../../display/templates/tracking/individualTrackingList.tpl:190
 msgid "Récapitulatif journalier"
 msgstr "Daily recap"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:178
+#: ../../../display/templates/tracking/individualTrackingList.tpl:193
 msgid "Récapitulatif par station"
 msgstr "Station recap"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:182
+#: ../../../display/templates/tracking/individualTrackingList.tpl:197
 msgid "Carte des détections par station"
 msgstr "Map of detections by station"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:193
+#: ../../../display/templates/tracking/individualTrackingList.tpl:208
 msgid "Exporter les détections"
 msgstr "Export the detections"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:205
+#: ../../../display/templates/tracking/individualTrackingList.tpl:220
 #: ../../../display/templates/tracking/detectionChange.tpl:17
 #: ../../../display/templates/tracking/locationChange.tpl:21
 msgid "Tag RFID"
 msgstr "RFID tag"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:206
+#: ../../../display/templates/tracking/individualTrackingList.tpl:221
 msgid "Émetteur acoustique ou radio"
 msgstr "Acoustic or radio transmitter"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:207
+#: ../../../display/templates/tracking/individualTrackingList.tpl:222
 msgid "Modèle d'émetteur"
 msgstr "Model of transmitter"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:208
+#: ../../../display/templates/tracking/individualTrackingList.tpl:223
 msgid "Marque spaghetti"
 msgstr "Spaghetti brand"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:209
+#: ../../../display/templates/tracking/individualTrackingList.tpl:224
 msgid "Année(s)"
 msgstr "Year(s):"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:255
+#: ../../../display/templates/tracking/individualTrackingList.tpl:226
+msgid "Nombre de détections"
+msgstr "Number of detections"
+
+#: ../../../display/templates/tracking/individualTrackingList.tpl:272
 msgid "Liste des détections"
 msgstr "List of detections"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:257
+#: ../../../display/templates/tracking/individualTrackingList.tpl:274
 msgid "Nouvelle détection manuelle"
 msgstr "New manual detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:273
+#: ../../../display/templates/tracking/individualTrackingList.tpl:290
 msgid "Aller à la ligne :"
 msgstr "Go to the line:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:283
+#: ../../../display/templates/tracking/individualTrackingList.tpl:300
 msgid "Date/heure de détection"
 msgstr "Date/Time of detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:284
+#: ../../../display/templates/tracking/individualTrackingList.tpl:301
 msgid "Type de détection"
 msgstr "Type of detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:286
+#: ../../../display/templates/tracking/individualTrackingList.tpl:303
 msgid "Nbre d'événements"
 msgstr "Number of events"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:287
+#: ../../../display/templates/tracking/individualTrackingList.tpl:304
 msgid "Durée, en secondes"
 msgstr "Duration, in seconds"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:288
+#: ../../../display/templates/tracking/individualTrackingList.tpl:305
 msgid "Force du signal"
 msgstr "Signal strength"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:291
+#: ../../../display/templates/tracking/individualTrackingList.tpl:308
 msgid "Observation"
 msgstr "Observation"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:292
+#: ../../../display/templates/tracking/individualTrackingList.tpl:309
 msgid "Valide ?"
 msgstr "Valid?"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:314
+#: ../../../display/templates/tracking/individualTrackingList.tpl:331
 msgid "Station fixe"
 msgstr "Fixed station"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:316
+#: ../../../display/templates/tracking/individualTrackingList.tpl:333
 msgid "Détection mobile"
 msgstr "Mobile detection"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:342
+#: ../../../display/templates/tracking/individualTrackingList.tpl:359
 #: ../../../display/templates/framework/logList.tpl:48
 #: ../../../display/templates/framework/lastConnections.tpl:7
 msgid "Date"
 msgstr "Date"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:343
+#: ../../../display/templates/tracking/individualTrackingList.tpl:360
 msgid "Jour"
 msgstr "Day"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:344
+#: ../../../display/templates/tracking/individualTrackingList.tpl:361
 msgid "Nuit"
 msgstr "Night"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:345
+#: ../../../display/templates/tracking/individualTrackingList.tpl:362
 msgid "Non déterminé"
 msgstr "Unknown"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:346
+#: ../../../display/templates/tracking/individualTrackingList.tpl:363
 msgid "Total"
 msgstr "Total"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:368
+#: ../../../display/templates/tracking/individualTrackingList.tpl:385
 msgid "Total général :"
 msgstr "General total:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:385
+#: ../../../display/templates/tracking/individualTrackingList.tpl:402
 msgid "Antenne"
 msgstr "Antenna"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:386
+#: ../../../display/templates/tracking/individualTrackingList.tpl:403
 msgid "N° station"
 msgstr "station #"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:387
+#: ../../../display/templates/tracking/individualTrackingList.tpl:404
 msgid "Code station"
 msgstr "Station code"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:388
+#: ../../../display/templates/tracking/individualTrackingList.tpl:405
 msgid "Début"
 msgstr "Start date:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:389
+#: ../../../display/templates/tracking/individualTrackingList.tpl:406
 msgid "Fin"
 msgstr "End date:"
 
-#: ../../../display/templates/tracking/individualTrackingList.tpl:390
+#: ../../../display/templates/tracking/individualTrackingList.tpl:407
 msgid "Nombre d'événements"
 msgstr "Number of events"
 
@@ -4723,10 +4794,6 @@ msgstr "to"
 #: ../../../display/templates/tracking/individualTrackingMap.tpl:18
 msgid "événements"
 msgstr "events"
-
-#: ../../../display/templates/tracking/detectionRecalculate.tpl:4
-msgid "Confirmez-vous l'opération ?"
-msgstr "Do you confirm the operation?"
 
 #: ../../../display/templates/tracking/detectionRecalculate.tpl:13
 msgid "Calcul du jour/nuit pour les détections"
@@ -5175,10 +5242,6 @@ msgstr ""
 msgid "Liste des nouveautés"
 msgstr "List of news"
 
-#: ../../../display/templates/framework/backup.tpl:1
-msgid "Sauvegarde de la base de données"
-msgstr "Backup of the database"
-
 #: ../../../display/templates/framework/backup.tpl:2
 msgid ""
 "Ce module est destiné à réaliser une sauvegarde exceptionnelle de la base de "
@@ -5291,15 +5354,15 @@ msgstr "Edit the group and its attachments to the logins"
 msgid "Retour à la liste des groupes"
 msgstr "Back to the list of groups"
 
-#: ../../../display/templates/framework/droits/groupChange.tpl:20
+#: ../../../display/templates/framework/droits/groupChange.tpl:19
 msgid "Nom du groupe :"
 msgstr "Name of the group:"
 
-#: ../../../display/templates/framework/droits/groupChange.tpl:26
+#: ../../../display/templates/framework/droits/groupChange.tpl:25
 msgid "Groupe de rattachement"
 msgstr "Group of attachment"
 
-#: ../../../display/templates/framework/droits/groupChange.tpl:42
+#: ../../../display/templates/framework/droits/groupChange.tpl:41
 msgid "Logins rattachés"
 msgstr "Logins attached"
 
@@ -5949,6 +6012,11 @@ msgstr "Order of execution of the function:"
 #: ../../../display/templates/import/importFunctionChange.tpl:85
 msgid "Argument complémentaire :"
 msgstr "Complementary argument:"
+
+#~ msgid ""
+#~ "La valeur otp_issuer n'a pas été renseignée dans les paramètres de "
+#~ "l'application"
+#~ msgstr "The application parameter otp_issuer is empty"
 
 #~ msgid "Suppression non réalisée"
 #~ msgstr "Unrealized deletion"
