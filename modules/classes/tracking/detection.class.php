@@ -1,5 +1,7 @@
 <?php
 
+use function Safe\date_sunset;
+
 /**
  * ORM of table detection
  */
@@ -99,10 +101,12 @@ class Detection extends ObjetBDD
        * Calculate the sunrise and the sunset
        */
       $this->currentDate = substr($data["detection_date"], 10);
-      $this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
+      $sun = date_sun_info($dateTimestamp, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
+      /*$this->sunset = date_sunset($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
       $this->sunrise = date_sunrise($dateTimestamp, SUNFUNCS_RET_TIMESTAMP, $this->dataAntenna["station_lat"], $this->dataAntenna["station_long"]);
+    */
     }
-    if ($dateTimestamp >= $this->sunrise && $dateTimestamp <= $this->sunset) {
+    if ($dateTimestamp >= $sun["sunrise"] && $dateTimestamp <= $sun["sunset"]) {
       $data["daypart"] = "d";
     } else {
       $data["daypart"] = "n";
