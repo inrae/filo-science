@@ -2,7 +2,7 @@
 require_once 'modules/classes/sequence.class.php';
 $dataClass = new Sequence($bdd, $ObjetBDDParam);
 $keyName = "sequence_id";
-if (empty($_REQUEST[$keyName]) && ! $_REQUEST[$keyName] == 0){
+if (empty($_REQUEST[$keyName]) && $t_module["param"] == "display") {
   if ($_COOKIE["sequence_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["sequence_uid"]) && $t_module["param"] == "display") {
     $id = $_COOKIE["sequence_uid"];
   } else {
@@ -217,12 +217,15 @@ switch ($t_module["param"]) {
          * Set the new key for opening the new sequence
          */
         $_COOKIE["sequence_uid"] = $newid;
-        unset($_REQUEST["sequence_id"]);
+        $_REQUEST["sequence_id"] = $_SESSION["ti_sequence"]->setValue($newid);;
         $module_coderetour = 1;
       } else {
         $message->set(_("Une erreur est survenue pendant la duplication de la séquence"), true);
         $module_coderetour = -1;
       }
+    } else {
+      $module_coderetour = -1;
+      $message->set(_("Opération non permise"), true);
     }
     break;
   case "addTelemetryFish":

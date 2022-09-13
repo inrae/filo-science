@@ -165,13 +165,12 @@
 	<operationDelete action="modules/gestion/operation.php" param="delete" droits="gestion" retourok="campaignDisplay" retourko="operationChange" modulebefore="operationChange" maxCountByHour="60" maxCountByDay="600" />
 	<operationOperatorsChange action="modules/gestion/operation.php" param="operatorsChange" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByHour="60" maxCountByDay="600" />
 	<operationDuplicate action="modules/gestion/operation.php" param="duplicate" droits="gestion" retourok="operationDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
->
 
 	<sequenceDisplay action="modules/gestion/sequence.php" param="display" droits="consult" type="smarty" requiredVar="sequence_id,sequence_uid" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceChange action="modules/gestion/sequence.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceWrite action="modules/gestion/sequence.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceDelete action="modules/gestion/sequence.php" param="delete" droits="gestion" retourok="operationDisplay" retourko="sequenceChange" modulebefore="sequenceChange" maxCountByHour="60" maxCountByDay="600" />
-	ll<sequenceDuplicate action="modules/gestion/sequence.php" param="duplicate" droits="gestion" retourok="sequenceDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
+	<sequenceDuplicate action="modules/gestion/sequence.php" param="duplicate" droits="gestion" retourok="sequenceDisplay" retourko="operationDisplay" maxCountByDay="600" maxCountByHour="60"/>
 	<sequenceGearChange action="modules/gestion/sequenceGear.php" param="change" droits="gestion" type="smarty" requiredVar="sequence_gear_id" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearWrite action="modules/gestion/sequenceGear.php" param="write" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />
 	<sequenceGearDelete action="modules/gestion/sequenceGear.php" param="delete" droits="gestion" retourok="sequenceDisplay" retourko="sequenceGearChange" modulebefore="sequenceGearChange" maxCountByHour="60" maxCountByDay="600" />

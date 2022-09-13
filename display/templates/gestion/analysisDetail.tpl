@@ -36,11 +36,11 @@
             <dt>{t}Secchi, en mètre :{/t}</dt>
             <dd>{$analysis.secchi}</dd>
         </dl>
-        {if count($other_analysis) >0}
+        {if !empty($other_analysis) }
             <fieldset>
                 <legend>{t}Analyses complémentaires{/t}</legend>
                 {foreach $other_analysis as $key=>$value}
-                    {if strlen($value) > 0 || count($value) > 0}
+                    {if !empty($value) }
                         <dl class="dl-horizontal">
                             <dt>{t 1=$key}%1 :{/t}</dt>
                             <dd>

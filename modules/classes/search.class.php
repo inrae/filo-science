@@ -110,7 +110,7 @@ class SearchParam
 	/**
 	 * Encode les donnees avant de les envoyer au navigateur
 	 *
-	 * @param unknown $data        	
+	 * @param string|array $data
 	 * @return string|array
 	 */
 	function encodeData($data)
@@ -127,9 +127,9 @@ class SearchParam
 }
 /**
  * Exemple d'instanciation
- * 
+ *
  * @author Eric Quinton
- *        
+ *
  */
 class SearchExample extends SearchParam
 {

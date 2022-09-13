@@ -2,7 +2,7 @@
 require_once 'modules/classes/analysis.class.php';
 $dataClass = new Analysis($bdd, $ObjetBDDParam);
 $keyName = "analysis_id";
-if (empty($_REQUEST[$keyName]))) {
+if (empty($_REQUEST[$keyName]) && ! $_REQUEST[$keyName] == 0 ) {
     $t_module["param"] = "error";
     $t_module["retourko"] = "default";
     $module_coderetour = -1;

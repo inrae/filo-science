@@ -2,7 +2,7 @@
 require_once 'modules/classes/operation.class.php';
 $dataClass = new Operation($bdd, $ObjetBDDParam);
 $keyName = "operation_id";
-if (empty($_REQUEST[$keyName]) && !$_REQUEST[$keyName] == 0 ){
+if (empty($_REQUEST[$keyName]) && $t_module["param"] == "display"){
     if ($_COOKIE["operation_uid"] > 0 && $dataClass->isGranted($_SESSION["projects"], $_COOKIE["operation_uid"]) && $t_module["param"] == "display") {
         $id = $_COOKIE["operation_uid"];
     } else {

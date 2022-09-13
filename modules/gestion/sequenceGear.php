@@ -10,7 +10,7 @@ if (empty($_REQUEST[$keyName]) && !$_REQUEST[$keyName]== 0){
 
 $id = $_SESSION["ti_sequenceGear"]->getValue($_REQUEST[$keyName]);
 $sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
-if (empty($id) ) {
+if (empty($id) && ! $id == 0) {
     $t_module["param"] = "error";
     $t_module["retourko"] = "default";
     $module_coderetour = -1;
