@@ -30,7 +30,7 @@
     "minimist": "^1.2.5",
     "moment": "^2.29.1",
     "neo-async": "^2.6.2",
-    "npm": "^8.5.3",
+    "npm": "^9.7.2",
     "optimist": "^0.6.1",
     "pouchdb": "^7.2.2",
     "smartmenus": "^1.1.1",
