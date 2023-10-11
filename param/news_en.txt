@@ -1,5 +1,9 @@
 News
 ===========
+Version 23.0.0 of 11/10/2023
+----------------------------
+Upgrading the framework and third-party libraries
+
 Version 1.11.0 of 2022-09-13
 ----------------------------
 New features:

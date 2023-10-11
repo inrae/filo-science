@@ -1,5 +1,9 @@
 Nouveautés
 ==========
+Version 23.0.0 du 11/10/2023
+----------------------------
+Mise à niveau du framework et des bibliothèques tierces
+
 Version 1.11.0 du 13/09/2022
 ----------------------------
 Nouveautés :
