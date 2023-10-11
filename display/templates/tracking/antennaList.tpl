@@ -6,7 +6,7 @@
                 {t}Nouveau...{/t}
             </a>
         {/if}
-        <table id="stationList" class="table table-bordered table-hover datatable-nopaging " >
+        <table id="antennaList" class="table table-bordered table-hover datatable-nopaging " >
             <thead>
                 <tr>
                     <th>{t}Id{/t}</th>
