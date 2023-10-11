@@ -146,7 +146,7 @@ class Vue
   /**
    * Donnees a envoyer (cas hors html)
    *
-   * @var array
+   * @var string|array
    */
   protected $data;
 
@@ -182,7 +182,7 @@ class Vue
    */
   function get($variable = "")
   {
-    if (!empty($variable) ) {
+    if (!empty($variable)) {
       return $this->data[$variable];
     } else {
       return $this->data;
@@ -197,14 +197,18 @@ class Vue
    * @return string
    */
   function encodehtml($data)
-  {
+  {if (!is_object($data)) {
     if (is_array($data)) {
       foreach ($data as $key => $value) {
+
         $data[$key] = $this->encodehtml($value);
       }
     } else {
       $data = htmlspecialchars($data, ENT_QUOTES);
     }
+  } else {
+    $data = null;
+  }
     return $data;
   }
 }
@@ -300,6 +304,7 @@ class VueSmarty extends Vue
         $this->smarty->assign($key, $this->encodehtml($value));
       }
     }
+
     /*
          * Rrecuperation des messages
          */
@@ -315,6 +320,7 @@ class VueSmarty extends Vue
       $message->setSyslog($e->getMessage());
     }
   }
+
 
   /**
    * Return the content of a variable
@@ -424,7 +430,7 @@ class VueCsv extends Vue
    */
   function send($filename = "", $delimiter = "")
   {
-    if (count($this->data) > 0) {
+    if (!empty($this->data)) {
       if (empty($filename)) {
         $filename = $this->filename;
       }
@@ -445,9 +451,9 @@ class VueCsv extends Vue
              * Traitement de l'entete
              */
       fputcsv($fp, array_keys($this->data[0]), $delimiter);
-      /*
-             * Traitement des lignes
-             */
+      /**
+       * Traitement des lignes
+       */
       foreach ($this->data as $value) {
         fputcsv($fp, $value, $delimiter);
       }
@@ -639,7 +645,7 @@ class VueBinaire extends Vue
   {
     //printr($this->param);
 
-    empty($this->param["tmp_name"]) ? $isReference = true : $isReference = false;
+    !empty($this->param["tmp_name"]) ? $isReference = false : $isReference = true;
     /*
              * Recuperation du content-type s'il n'a pas ete fourni
              */
@@ -700,7 +706,8 @@ class VueFile extends Vue
   private $param = array(
     "filename" => "export.txt", /* nom du fichier tel qu'il apparaitra dans le navigateur */
     "disposition" => "attachment", /* attachment : le fichier est telecharge, inline : le fichier est affiche */
-    "content_type" => "text/plain" /* type mime */
+    "content_type" => "",/* type mime */
+    "tmp_name" => "", /* Name of the file to send */
   );
 
   /**
@@ -727,10 +734,12 @@ class VueFile extends Vue
     if (count($param) > 0) {
       $this->setParam($param);
     }
-    if(empty($this->param["content_type"])) {
-      $finfo = finfo_open(FILEINFO_MIME_TYPE);
-      $this->param["content_type"] = finfo_file($finfo, $this->param["tmp_name"]);
-      finfo_close($finfo);
+    if (empty($this->param["content_type"])) {
+      $finfo = new finfo(FILEINFO_MIME_TYPE);
+      $this->param["content_type"] = $finfo->file($this->param["tmp_name"]);
+    }
+    if (empty($this->data)) {
+      $this->data = file_get_contents($this->param["tmp_name"]);
     }
     ob_clean();
     header('Content-Type: ' . $this->param["content_type"]);

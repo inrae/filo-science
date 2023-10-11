@@ -16,11 +16,11 @@ use Safe\Exceptions\CurlException;
 function curl_copy_handle(\CurlHandle $handle): \CurlHandle
 {
     error_clear_last();
-    $result = \curl_copy_handle($handle);
-    if ($result === false) {
+    $safeResult = \curl_copy_handle($handle);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($handle);
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -37,11 +37,11 @@ function curl_copy_handle(\CurlHandle $handle): \CurlHandle
 function curl_escape(\CurlHandle $handle, string $string): string
 {
     error_clear_last();
-    $result = \curl_escape($handle, $string);
-    if ($result === false) {
+    $safeResult = \curl_escape($handle, $string);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($handle);
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -62,11 +62,11 @@ function curl_escape(\CurlHandle $handle, string $string): string
 function curl_exec(\CurlHandle $handle)
 {
     error_clear_last();
-    $result = \curl_exec($handle);
-    if ($result === false) {
+    $safeResult = \curl_exec($handle);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($handle);
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -536,14 +536,14 @@ function curl_getinfo(\CurlHandle $handle, int $option = null)
 {
     error_clear_last();
     if ($option !== null) {
-        $result = \curl_getinfo($handle, $option);
+        $safeResult = \curl_getinfo($handle, $option);
     } else {
-        $result = \curl_getinfo($handle);
+        $safeResult = \curl_getinfo($handle);
     }
-    if ($result === false) {
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($handle);
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -566,14 +566,14 @@ function curl_init(string $url = null): \CurlHandle
 {
     error_clear_last();
     if ($url !== null) {
-        $result = \curl_init($url);
+        $safeResult = \curl_init($url);
     } else {
-        $result = \curl_init();
+        $safeResult = \curl_init();
     }
-    if ($result === false) {
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError();
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -625,11 +625,11 @@ function curl_init(string $url = null): \CurlHandle
 function curl_multi_info_read(\CurlMultiHandle $multi_handle, ?int &$queued_messages = null): array
 {
     error_clear_last();
-    $result = \curl_multi_info_read($multi_handle, $queued_messages);
-    if ($result === false) {
+    $safeResult = \curl_multi_info_read($multi_handle, $queued_messages);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($multi_handle);
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -643,11 +643,11 @@ function curl_multi_info_read(\CurlMultiHandle $multi_handle, ?int &$queued_mess
 function curl_multi_init(): \CurlMultiHandle
 {
     error_clear_last();
-    $result = \curl_multi_init();
-    if ($result === false) {
+    $safeResult = \curl_multi_init();
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError();
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -789,8 +789,8 @@ function curl_multi_init(): \CurlMultiHandle
 function curl_multi_setopt(\CurlMultiHandle $multi_handle, int $option, $value): void
 {
     error_clear_last();
-    $result = \curl_multi_setopt($multi_handle, $option, $value);
-    if ($result === false) {
+    $safeResult = \curl_multi_setopt($multi_handle, $option, $value);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($multi_handle);
     }
 }
@@ -1576,9 +1576,8 @@ function curl_multi_setopt(\CurlMultiHandle $multi_handle, int $option, $value):
  * CURLOPT_MAXCONNECTS
  *
  * The maximum amount of persistent connections that are allowed.
- * When the limit is reached,
- * CURLOPT_CLOSEPOLICY is used to determine
- * which connection to close.
+ * When the limit is reached, the oldest one in the cache is closed
+ * to prevent increasing the number of open connections.
  *
  *
  *
@@ -3110,6 +3109,17 @@ function curl_multi_setopt(\CurlMultiHandle $multi_handle, int $option, $value):
  *
  *
  *
+ * CURLOPT_XFERINFOFUNCTION
+ *
+ * A callback accepting two parameters.
+ * Has a similar purpose as CURLOPT_PROGRESSFUNCTION but is more modern
+ * and the preferred option from cURL.
+ *
+ *
+ * Added in 7.32.0. Available as of PHP 8.2.0.
+ *
+ *
+ *
  *
  *
  *
@@ -3153,8 +3163,8 @@ function curl_multi_setopt(\CurlMultiHandle $multi_handle, int $option, $value):
 function curl_setopt(\CurlHandle $handle, int $option, $value): void
 {
     error_clear_last();
-    $result = \curl_setopt($handle, $option, $value);
-    if ($result === false) {
+    $safeResult = \curl_setopt($handle, $option, $value);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($handle);
     }
 }
@@ -3172,11 +3182,11 @@ function curl_setopt(\CurlHandle $handle, int $option, $value): void
 function curl_share_errno(\CurlShareHandle $share_handle): int
 {
     error_clear_last();
-    $result = \curl_share_errno($share_handle);
-    if ($result === false) {
+    $safeResult = \curl_share_errno($share_handle);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($share_handle);
     }
-    return $result;
+    return $safeResult;
 }
 
 
@@ -3249,8 +3259,8 @@ function curl_share_errno(\CurlShareHandle $share_handle): int
 function curl_share_setopt(\CurlShareHandle $share_handle, int $option, $value): void
 {
     error_clear_last();
-    $result = \curl_share_setopt($share_handle, $option, $value);
-    if ($result === false) {
+    $safeResult = \curl_share_setopt($share_handle, $option, $value);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($share_handle);
     }
 }
@@ -3269,9 +3279,35 @@ function curl_share_setopt(\CurlShareHandle $share_handle, int $option, $value):
 function curl_unescape(\CurlHandle $handle, string $string): string
 {
     error_clear_last();
-    $result = \curl_unescape($handle, $string);
-    if ($result === false) {
+    $safeResult = \curl_unescape($handle, $string);
+    if ($safeResult === false) {
         throw CurlException::createFromPhpError($handle);
     }
-    return $result;
+    return $safeResult;
+}
+
+
+/**
+ * Available if built against libcurl &gt;= 7.62.0.
+ *
+ * Some protocols have "connection upkeep" mechanisms.
+ * These mechanisms usually send some traffic on existing connections in order to keep them alive;
+ * this can prevent connections from being closed due to overzealous firewalls, for example.
+ *
+ * Connection upkeep is currently available only for HTTP/2 connections.
+ * A small amount of traffic is usually sent to keep a connection alive.
+ * HTTP/2 maintains its connection by sending a HTTP/2 PING frame.
+ *
+ * @param \CurlHandle $handle A cURL handle returned by
+ * curl_init.
+ * @throws CurlException
+ *
+ */
+function curl_upkeep(\CurlHandle $handle): void
+{
+    error_clear_last();
+    $safeResult = \curl_upkeep($handle);
+    if ($safeResult === false) {
+        throw CurlException::createFromPhpError($handle);
+    }
 }

@@ -112,7 +112,7 @@ class Token
         /*
          * decrypt token
          */
-        if (!empty($token["token"]) ) {
+        if (!empty($token["token"])) {
             $key = $this->getKey("pub");
             try {
                 if (openssl_public_decrypt(base64_decode($token["token"]), $decrypted, $key)) {
@@ -121,7 +121,7 @@ class Token
                     /**
                      * Verification of token content
                      */
-                    if (!empty($data["login"]) && !empty($data["expire"]) && !empty($data["ip"])) {
+                    if (!empty($data["login"]) > 0 && !empty($data["expire"]) && !empty($data["ip"])) {
                         /**
                          * Test IP address
                          */

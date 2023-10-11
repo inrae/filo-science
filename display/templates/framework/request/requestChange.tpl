@@ -18,13 +18,17 @@ $(document).ready(function() {
 		$("#exec").prop("disabled", true);
 	});
 
+	$("#requestForm").submit(function() { 
+		$("#body").val( btoa ($("#body").val() ) );
+	});
+
 });
 </script>
 <div class="row">
 	<div class="col-lg-8 col-md-12">
 		<a href="index.php?module=requestList">
 			<img src="display/images/list.png" height="25">
-			Retour à la liste
+			{t}Retour à la liste{/t}
 		</a>
 		&nbsp;
 		<a href="index.php?module=dbstructureSchema" target="_blank">
@@ -38,7 +42,7 @@ $(document).ready(function() {
 			<input type="hidden" name="request_id" value="{$data.request_id}">
 			<div class="form-group">
 				<label for="title" class="control-label col-md-4">
-					Description de la requête <span class="red">*</span> :
+					{t}Description de la requête :{/t} <span class="red">*</span>
 				</label>
 				<div class="col-md-8">
 					<input class="form-control modif" id="title" name="title" type="text" value="{$data.title}" required autofocus/>
@@ -46,8 +50,7 @@ $(document).ready(function() {
 			</div>
 			<div class="form-group">
 				<label for="body" class="control-label col-md-4"><span class="red">*</span> {t}Code SQL :{/t}</label>
-				<div class="col-md-1"><b>SELECT</b></div>
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<textarea id="body" class="form-control modif" name="body" cols="70" rows="10" wrap="soft" required>{$data.body}</textarea>
 				</div>
 			</div>
@@ -89,10 +92,10 @@ $(document).ready(function() {
 		</form>
 	</div>
 </div>
-{if count($result) > 0}
+{if !empty($result)}
 	<div class="row">
 		<div class="col-lg-12">
-			<table id="crequestList" class="table table-bordered table-hover datatable-export-paging ">
+			<table id="crequestList" class="table table-bordered table-hover datatable-export">
 				<thead>
 					<tr>
 					{foreach $result[0] as $key=>$value}

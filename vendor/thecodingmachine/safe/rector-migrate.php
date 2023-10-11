@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
+use Rector\Config\RectorConfig;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 // This file configures rector/rector to replace all PHP functions with their equivalent "safe" functions.
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-
-    $services->set(RenameFunctionRector::class)
-        ->call('configure', [[ RenameFunctionRector::OLD_FUNCTION_TO_NEW_FUNCTION => [
-            'apache_getenv' => 'Safe\apache_getenv',
+return static function (RectorConfig $rectorConfig): void {
+	$rectorConfig->ruleWithConfiguration(
+		RenameFunctionRector::class,[            'apache_getenv' => 'Safe\apache_getenv',
             'apache_get_version' => 'Safe\apache_get_version',
             'apache_lookup_uri' => 'Safe\apache_lookup_uri',
             'apache_request_headers' => 'Safe\apache_request_headers',
@@ -116,6 +113,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'curl_share_errno' => 'Safe\curl_share_errno',
             'curl_share_setopt' => 'Safe\curl_share_setopt',
             'curl_unescape' => 'Safe\curl_unescape',
+            'curl_upkeep' => 'Safe\curl_upkeep',
             'date' => 'Safe\date',
             'date_parse' => 'Safe\date_parse',
             'date_parse_from_format' => 'Safe\date_parse_from_format',
@@ -530,7 +528,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'md5_file' => 'Safe\md5_file',
             'mime_content_type' => 'Safe\mime_content_type',
             'mkdir' => 'Safe\mkdir',
-            'mktime' => 'Safe\mktime',
             'msg_get_queue' => 'Safe\msg_get_queue',
             'msg_queue_exists' => 'Safe\msg_queue_exists',
             'msg_receive' => 'Safe\msg_receive',
@@ -649,6 +646,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'opendir' => 'Safe\opendir',
             'openlog' => 'Safe\openlog',
             'openssl_cipher_iv_length' => 'Safe\openssl_cipher_iv_length',
+            'openssl_cipher_key_length' => 'Safe\openssl_cipher_key_length',
             'openssl_cms_decrypt' => 'Safe\openssl_cms_decrypt',
             'openssl_cms_encrypt' => 'Safe\openssl_cms_encrypt',
             'openssl_cms_read' => 'Safe\openssl_cms_read',
@@ -677,6 +675,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'openssl_pkey_derive' => 'Safe\openssl_pkey_derive',
             'openssl_pkey_export' => 'Safe\openssl_pkey_export',
             'openssl_pkey_export_to_file' => 'Safe\openssl_pkey_export_to_file',
+            'openssl_pkey_get_details' => 'Safe\openssl_pkey_get_details',
             'openssl_pkey_get_private' => 'Safe\openssl_pkey_get_private',
             'openssl_pkey_get_public' => 'Safe\openssl_pkey_get_public',
             'openssl_pkey_new' => 'Safe\openssl_pkey_new',
@@ -924,7 +923,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'simplexml_import_dom' => 'Safe\simplexml_import_dom',
             'simplexml_load_file' => 'Safe\simplexml_load_file',
             'simplexml_load_string' => 'Safe\simplexml_load_string',
-            'sleep' => 'Safe\sleep',
             'socket_accept' => 'Safe\socket_accept',
             'socket_addrinfo_bind' => 'Safe\socket_addrinfo_bind',
             'socket_addrinfo_connect' => 'Safe\socket_addrinfo_connect',
@@ -966,6 +964,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'sodium_crypto_secretbox_open' => 'Safe\sodium_crypto_secretbox_open',
             'sodium_crypto_sign_open' => 'Safe\sodium_crypto_sign_open',
             'sodium_crypto_sign_verify_detached' => 'Safe\sodium_crypto_sign_verify_detached',
+            'sodium_crypto_stream_xchacha20_xor_ic' => 'Safe\sodium_crypto_stream_xchacha20_xor_ic',
             'solr_get_version' => 'Safe\solr_get_version',
             'spl_autoload_register' => 'Safe\spl_autoload_register',
             'spl_autoload_unregister' => 'Safe\spl_autoload_unregister',
@@ -1101,5 +1100,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'zip_entry_open' => 'Safe\zip_entry_open',
             'zip_entry_read' => 'Safe\zip_entry_read',
             'zlib_decode' => 'Safe\zlib_decode',
-        ]]]);
+        ]);
 };

@@ -88,7 +88,7 @@ class Acllogin extends ObjetBDD
       $nameisnull = false;
     }
     $name = $this->encodeData($name);
-    if (!empty($login) ) {
+    if (!empty($login)) {
       /**
        * Recherche d'un login correspondant
        */
@@ -131,7 +131,7 @@ class Acllogin extends ObjetBDD
   function getListDroits($login, $appli, $ldapParam = array())
   {
     $droits = array();
-    if (!empty($login) && !empty($appli)) {
+    if (!empty($login) && !empty($appli) ) {
       $login = strtolower($this->encodeData($login));
       $appli = $this->encodeData($appli);
       /**

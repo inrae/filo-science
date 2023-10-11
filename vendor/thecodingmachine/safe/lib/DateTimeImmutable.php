@@ -232,11 +232,22 @@ class DateTimeImmutable extends \DateTimeImmutable
      * @param \DateTime $dateTime
      * @return DateTimeImmutable
      */
+    #[\ReturnTypeWillChange]
     public static function createFromMutable($dateTime): self
     {
         $date = \DateTimeImmutable::createFromMutable($dateTime);
 
         return self::createFromRegular($date);
+    }
+
+    public static function createFromInterface(\DateTimeInterface $object): self
+    {
+        if ($object instanceof \DateTime) {
+            $object = self::createFromMutable($object);
+        } elseif ($object instanceof DateTimeImmutable) {
+            $object = $object->getInnerDateTime();
+        }
+        return self::createFromRegular($object);
     }
 
     /**

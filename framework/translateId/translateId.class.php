@@ -50,7 +50,7 @@ class TranslateId
      */
     function __construct($fieldname)
     {
-        if (!empty($fieldname) ) {
+        if (!empty($fieldname)) {
             $this->fieldname = $fieldname;
         }
     }

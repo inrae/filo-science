@@ -45,7 +45,7 @@ class Request extends ObjetBDD
                 "type" => 0
             )
         );
-        if (! is_array($param)) {
+        if (!is_array($param)) {
             $param = array();
         }
         parent::__construct($bdd, $param);
@@ -56,8 +56,8 @@ class Request extends ObjetBDD
         /**
          * Search the terms forbiden into the request
          */
-        if (preg_match("/(insert)|(update)|(delete)|(grant)|(revoke)|(create)|(drop)|(alter)/i", $data["body"]) == 1) {
-            throw new ObjetBDDException(_("La requête ne peut pas contenir d'ordres de modification de la base de données"));
+        if (preg_match("/(insert)|(update)|(delete)|(grant)|(revoke)|(create)|(drop)|(alter)|(log)|(logingestion)|(passwordlost)|(acllogin)|(truncate)|(cascade)/i", $data["body"]) == 1) {
+            throw new ObjetBDDException(_("La requête ne peut pas contenir d'ordres de modification de la base de données ni porter sur des tables contenant des informations confidentielles"));
         }
         /*
          * Suppression des contenus dangereux dans la commande SQL
@@ -74,9 +74,10 @@ class Request extends ObjetBDD
      * @param int $request_id
      * @return array
      */
-    function exec($request_id)
+    function exec(int $request_id)
     {
-        if ($request_id > 0 && is_numeric($request_id)) {
+        $result = array();
+        if ($request_id > 0) {
             $req = $this->lire($request_id);
             if (!empty($req["body"])) {
                 /*
@@ -91,8 +92,9 @@ class Request extends ObjetBDD
                  */
                 $req["last_exec"] = $this->getDateHeure();
                 $this->ecrire($req);
-                return $this->getListeParam($req["body"]);
+                $result = $this->getListeParam($req["body"]);
             }
         }
+        return $result;
     }
 }

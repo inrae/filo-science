@@ -19,7 +19,10 @@ try {
    * Codage UTF-8
    */
   if (!check_encoding($_REQUEST)) {
-    $message->set(_("Problème dans les données fournies : l'encodage des caractères n'est pas celui attendu"), true);
+    $message->set(
+      _("Problème dans les données fournies : l'encodage des caractères n'est pas celui attendu"),
+      true
+    );
     $_REQUEST["module"] = "default";
     unset($_REQUEST["moduleBase"]);
     unset($_REQUEST["action"]);
@@ -38,7 +41,14 @@ try {
           unset($_SESSION["dbversion"]);
         }
         // traduction: bien conserver inchangées les chaînes %1$s, %2$s
-        $message->set(sprintf(_('La base de données n\'est pas dans la version attendue (%1$s). Version actuelle : %2$s'), $APPLI_dbversion, $dbversion->getLastVersion()["dbversion_number"]), true);
+        $message->set(
+          sprintf(
+            _('La base de données n\'est pas dans la version attendue (%1$s). Version actuelle : %2$s'),
+            $APPLI_dbversion,
+            $dbversion->getLastVersion()["dbversion_number"]
+          ),
+          true
+        );
         $_REQUEST["module"] = "default";
         unset($_REQUEST["moduleBase"]);
         unset($_REQUEST["action"]);
@@ -241,7 +251,12 @@ try {
       $t_module["loginrequis"] = 1;
       $_REQUEST["cas_required"] = 1;
     }
-    if ((!empty($_REQUEST["login"]) || !empty($t_module["droits"]) || $t_module["loginrequis"] == 1) && !$_SESSION["is_authenticated"]) {
+    if (
+      (!empty($_REQUEST["login"]) ||
+        !empty($t_module["droits"]) ||
+        $t_module["loginrequis"] == 1) &&
+      !$_SESSION["is_authenticated"]
+    ) {
       /**
        * Affichage de l'ecran de saisie du login si necessaire
        */
@@ -256,7 +271,9 @@ try {
          * Gestion de la saisie du login
          */
         if (!$vue) {
-          throw new FrameworkException(_("Message technique : la vue n'a pas été initialisée lors de la création de la page de login"));
+          throw new FrameworkException(
+            _("Message technique : la vue n'a pas été initialisée lors de la création de la page de login")
+          );
         }
         $vue->set("framework/ident/login.tpl", "corps");
         $vue->set($tokenIdentityValidity, "tokenIdentityValidity");
@@ -268,7 +285,9 @@ try {
         if ($t_module["retourlogin"] == 1) {
           $vue->set($_REQUEST["module"], "moduleCalled");
         }
-        $message->set(_("Veuillez utiliser le login qui vous a été fourni pour vous identifier"));
+        $message->set(
+          _("Veuillez utiliser le login qui vous a été fourni pour vous identifier")
+        );
       } else {
         /**
          * Verify the login
@@ -300,7 +319,11 @@ try {
               include_once "framework/identification/totp.class.php";
               $totp = new Gacltotp($privateKey, $pubKey);
               try {
-                if ($totp->verifyOtp($totp->decodeTotpKey($acllogin->getTotpKey($_SESSION["login"])), $_POST["otpcode"])) {
+                if (
+                  $totp->verifyOtp(
+                    $totp->decodeTotpKey($acllogin->getTotpKey($_SESSION["login"])), $_POST["otpcode"]
+                  )
+                ) {
                   $_SESSION["is_authenticated"] = true;
                   $log->setlog($_SESSION["login"], "totpVerifyExec", "ok");
                 } else {
@@ -332,7 +355,11 @@ try {
              * Verify that the login used as admin is the same as login
              */
             if (isset($_POST["loginAdmin"]) && $_POST["login"] != $_SESSION["login"]) {
-              $log->setLog($_SESSION["login"], "admin-reauthenticate", "Error: the used account (" . $_POST["login"] . ") is not the same of the current account");
+              $log->setLog(
+                $_SESSION["login"],
+                "admin-reauthenticate",
+                "Error: the used account (" . $_POST["login"] . ") is not the same of the current account"
+              );
               $login->disconnect();
             } else {
               $_SESSION["is_authenticated"] = true;
@@ -388,7 +415,9 @@ try {
           $lastConnect = $log->getLastConnexion();
           if (isset($lastConnect["log_date"])) {
             // traduction: bien conserver inchangées les chaînes %1$s, %2$s...
-            $texte = _('Dernière connexion le %1$s depuis l\'adresse IP %2$s. Si ce n\'était pas vous, modifiez votre mot de passe ou contactez l\'administrateur de l\'application.');
+            $texte = _(
+              'Dernière connexion le %1$s depuis l\'adresse IP %2$s. Si ce n\'était pas vous, modifiez votre mot de passe ou contactez l\'administrateur de l\'application.'
+            );
             $message->set(sprintf($texte, $lastConnect["log_date"], $lastConnect["ipaddress"]));
           }
         }
@@ -413,7 +442,7 @@ try {
         /**
          * Preparation de l'identification par token
          */
-        if ($_POST["loginByTokenRequested"] == 1 || $ident_type == "HEADER") {
+        if ($_POST["loginByTokenRequested"] == 1) {
           include_once 'framework/identification/token.class.php';
           $tokenClass = new Token($privateKey, $pubKey);
           try {
@@ -425,7 +454,14 @@ try {
             $cookieParam["lifetime"] = $tokenIdentityValidity;
             $cookieParam["secure"] = true;
             $cookieParam["httponly"] = true;
-            setcookie('tokenIdentity', $token, time() + $tokenIdentityValidity, $cookieParam["path"], $cookieParam["domain"], $cookieParam["secure"], $cookieParam["httponly"]);
+            setcookie(
+              'tokenIdentity',
+              $token, time() + $tokenIdentityValidity,
+              $cookieParam["path"],
+              $cookieParam["domain"],
+              $cookieParam["secure"],
+              $cookieParam["httponly"]
+            );
           } catch (Exception $e) {
             $message->set($e->getMessage(), true);
           }
@@ -508,8 +544,8 @@ try {
     if (in_array("admin", $droits_array)) {
       $moduleAdmin = true;
       /*
-         * Verification si la duree de connexion en mode admin est depassee
-         */
+       * Verification si la duree de connexion en mode admin est depassee
+       */
       if (isset($_SESSION["last_activity_admin"]) && (time() - $_SESSION["last_activity_admin"]) < $APPLI_admin_ttl) {
         /**
          * L'acces est dans le laps de temps autorise
@@ -535,7 +571,7 @@ try {
         }
         if ($acllogin->isTotp() && !empty($_SESSION["login"])) {
           $vue->set("framework/ident/totp.tpl", "corps");
-        } else if (in_array($ident_type, array("BDD", "LDAP", "LDAP-BDD"))) {
+        } else if (in_array($_SESSION["realIdentificationMode"], array("BDD", "LDAP"))) {
           /**
            * saisie du login en mode admin
            */
@@ -544,7 +580,9 @@ try {
           if ($t_module["retourlogin"] == 1) {
             $vue->set($module, "moduleCalled");
           }
-          $message->set(_("L'accès au module demandé nécessite une ré-identification. Veuillez saisir votre login et votre mot de passe"));
+          $message->set(
+            _("L'accès au module demandé nécessite une ré-identification. Veuillez saisir votre login et votre mot de passe")
+          );
         }
       }
     }
@@ -617,17 +655,35 @@ try {
        */
       switch ($motifErreur) {
         case "droitko":
+          if (!isset($acllogin)) {
+            include_once "framework/droits/acllogin.class.php";
+            $acllogin = new Acllogin($bdd_gacl, $ObjetBDDParam);
+          }
+          if (!$acllogin->isTotp() || !$moduleAdmin) {
+            /**
+             * Send mail to administrators
+             */
+            $subject = "SECURITY REPORTING - " .
+              $_SESSION["APPLI_title"] . " - The user " .
+              $_SESSION["login"] . "  has attempted to access an unauthorized module";
+            $log->sendMailToAdmin(
+              $subject,
+              "framework/mail/noRights.tpl",
+              array(
+                "login" => $_SESSION["login"],
+                "module" => $module,
+                "date" => $date,
+                "APPLI_address" => $APPLI_address
+              ),
+              $module,
+              $login
+            );
+          }
           if (!empty($t_module["droitko"])) {
             $module = $t_module["droitko"];
           } else {
             $module = $APPLI_moduleDroitKO;
           }
-          /**
-           * Send mail to administrators
-           */
-          $subject = "SECURITY REPORTING - " . $GACL_aco . " - The user " . $_SESSION["login"] . "  has attempted to access an unauthorized module";
-          $contents = "<html><body>" . "The account <b>" . $_SESSION["login"] . "<b> has attempted at $date the user has tried to access at the module $module without having the necessary rights" . '<br>Software : <a href="' . $APPLI_address . '">' . $APPLI_address . "</a>" . '</body></html>';
-          $log->sendMailToAdmin($subject, $contents, $module, $_SESSION["login"]);
           break;
         case "nologin":
           $module = $APPLI_moduleErrorLogin;
@@ -687,7 +743,11 @@ try {
      */
     if ($APPLI_modeDeveloppement) {
       // traduction: bien conserver inchangées les chaînes %1$s, %2$s
-      $texteDeveloppement = sprintf(_('Mode développement - base de données : %1$s - schema : %2$s'), $BDD_dsn, $BDD_schema);
+      $texteDeveloppement = sprintf(
+        _('Mode développement - base de données : %1$s - schema : %2$s'),
+        $BDD_dsn,
+        $BDD_schema
+      );
       $vue->set($texteDeveloppement, "developpementMode");
     }
     $vue->set($_SESSION["moduleListe"], "moduleListe");
@@ -706,7 +766,7 @@ try {
    */
   if (isset($vue)) {
     try {
-      if (!isset ($paramSend)) {
+      if (!isset($paramSend)) {
         $paramSend = array();
       }
       $vue->send($paramSend);

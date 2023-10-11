@@ -292,7 +292,7 @@ class Structure extends ObjetBDD
           $val .= $this->el($column["field"]) . " & "
             . $this->el($column["type"]) . " & ";
           ($column["notnull"] == 1) ? $val .= "X & " : $val .= " & ";
-          !empty($column["key"]) ? $val .= "X & " : $val .= " & ";
+          !empty($column["key"])  ? $val .= "X & " : $val .= " & ";
           $val .= $this->el($column["comment"])
             . "\\\\" . PHP_EOL;
           if ($hline) {

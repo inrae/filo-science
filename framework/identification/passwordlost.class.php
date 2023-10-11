@@ -58,7 +58,7 @@ class Passwordlost extends ObjetBDD
     function createTokenFromMail($mail, $duree_token = 7200)
     {
         $data = array();
-        if (!empty($mail)) {
+        if (!empty($mail) ) {
             /*
              * Recherche de l'identifiant correspondant
              */

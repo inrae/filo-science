@@ -33,7 +33,6 @@ function test($content = "")
  *
  * @param any $arr
  * @param integer $level
- * @param array $exclude
  * @return void
  */
 function printA($arr, $level = 0, $exclude = array())
@@ -65,3 +64,5 @@ function printA($arr, $level = 0, $exclude = array())
     echo "$arr".$nl;
   }
 }
+
+

@@ -59,7 +59,7 @@ class Aclgroup extends ObjetBDD
         if (!empty($login)) {
 
             $sql = "select g.aclgroup_id, groupe, aclgroup_id_parent
-					from " . $this->table . " g
+					from aclgroup g
 					join acllogingroup lg on (g.aclgroup_id = lg.aclgroup_id)
 					join acllogin l on (lg.acllogin_id = l.acllogin_id)
 					where login = :login";
@@ -68,11 +68,11 @@ class Aclgroup extends ObjetBDD
         /*
          * Recherche des groupes LDAP
          */
-        $groupesLdap = array();
         if ($ldapParam["groupSupport"]) {
             /*
              * Recuperation des attributs depuis l'annuaire LDAP
              */
+            $groupesLdap = array();
             include_once "framework/ldap/ldap.class.php";
             $ldap = new Ldap($ldapParam);
             $conn = $ldap->connect();
@@ -80,22 +80,24 @@ class Aclgroup extends ObjetBDD
             /**
              * Set the parameters
              */
-            ldap_set_option($conn, LDAP_OPT_NETWORK_TIMEOUT, $ldapParam["timeout"]);
-            ldap_set_option($conn, LDAP_OPT_TIMELIMIT, $ldapParam["timeout"]);
-            ldap_set_option($conn, LDAP_OPT_TIMEOUT, $ldapParam["timeout"]);
+            if ($conn) {
+                ldap_set_option($conn, LDAP_OPT_NETWORK_TIMEOUT, $ldapParam["timeout"]);
+                ldap_set_option($conn, LDAP_OPT_TIMELIMIT, $ldapParam["timeout"]);
+                ldap_set_option($conn, LDAP_OPT_TIMEOUT, $ldapParam["timeout"]);
 
-            if ($conn > 0) {
                 $attribut = array(
                     $ldapParam['commonNameAttrib'],
                     $ldapParam["mailAttrib"],
                     $ldapParam["groupAttrib"]
                 );
                 if ($ldapParam["ldapnoanonymous"]) {
-                    if (! $ldap->login($ldapParam["ldaplogin"], $ldapParam["ldappassword"])) {
-                        throw new LdapException(_("L'identification dans l'annuaire LDAP a échoué pour la récupération des groupes de l'utilisateur"));
+                    if (!$ldap->login($ldapParam["ldaplogin"], $ldapParam["ldappassword"])) {
+                        throw new LdapException(
+                            _("L'identification dans l'annuaire LDAP a échoué pour la récupération des groupes de l'utilisateur")
+                        );
                     }
                 }
-                $filtre =  "(" . $ldapParam["user_attrib"] . "=" . $_SESSION["login"] . ")";
+                $filtre = "(" . $ldapParam["user_attrib"] . "=" . $_SESSION["login"] . ")";
                 /*
                  * Attention : ne gere pas le cas de user_attrib vide lors d'une connexion a un Active Directory
                  *             avec le userPrincipalName (et eventuellement l'UPN Suffix defini)
@@ -123,21 +125,27 @@ class Aclgroup extends ObjetBDD
                         }
                     }
                 }
+                /**
+                 * Fusion des groupes
+                 */
+                $groupes = array_merge($groupes, $groupesLdap);
             } else {
                 throw new LdapException(_("Connexion à l'annuaire LDAP impossible"));
             }
         }
-        /*
-         * Fusion des groupes
-         */
-        $groupes = array_merge($groupes, $groupesLdap);
         /**
          * Récupération des groupes du serveur CAS
          */
         global $CAS_group_attribute, $CAS_get_groups;
         if (isset($_SESSION["CAS_attributes"][$CAS_group_attribute]) && $CAS_get_groups == 1) {
             $groupesCas = array();
-            if (!is_array($_SESSION["CAS_attributes"][$CAS_group_attribute]) && !empty ($_SESSION["CAS_attributes"][$CAS_group_attribute])) {
+            if (
+                !is_array(
+                    $_SESSION["CAS_attributes"][$CAS_group_attribute]
+                ) &&
+                !empty($_SESSION["CAS_attributes"][$CAS_group_attribute]
+            )
+            ) {
                 $_SESSION["CAS_attributes"][$CAS_group_attribute] = array($_SESSION["CAS_attributes"][$CAS_group_attribute]);
             }
             foreach ($_SESSION["CAS_attributes"][$CAS_group_attribute] as $value) {
@@ -153,23 +161,35 @@ class Aclgroup extends ObjetBDD
         /*
          * Recuperation des groupes parents
          */
-        foreach ($groupes as $key => $value) {
-            if ($value["aclgroup_id_parent"] > 0) {
-                $dataParent = $this->getParentGroups($value["aclgroup_id_parent"]);
-                if (count($dataParent) > 0) {
-                    $groupes = array_merge($groupes, $dataParent);
-                }
-            }
+        $in = "";
+        $comma = "";
+        foreach ($groupes as $groupe) {
+            $in .= $comma . $groupe["aclgroup_id"];
+            $comma = ",";
         }
-
-        $_SESSION["groupes"] = $groupes;
-        return $groupes;
+        if (!empty($in)) {
+            $sql = "with recursive groupsearch as
+            (
+            select aclgroup_id, groupe, aclgroup_id_parent
+            from aclgroup
+            where aclgroup_id in ($in)
+            union all
+            select a.aclgroup_id, a.groupe, a.aclgroup_id_parent
+            from aclgroup a
+            join groupsearch gs on (a.aclgroup_id = gs.aclgroup_id_parent)
+            )
+            select distinct * from groupsearch order by groupe";
+            $_SESSION["groupes"] = $this->getListeParam($sql);
+        } else {
+            $_SESSION["groupes"] = array();
+        }
+        return $_SESSION["groupes"];
     }
 
     /**
      * Fonction retournant tous les logins appartenant a un groupe
      *
-     * @param unknown $groupe
+     * @param string $groupe
      */
     function getLogins($groupe)
     {
@@ -190,31 +210,6 @@ class Aclgroup extends ObjetBDD
 					order by login";
             return $this->getListeParamAsPrepared($sql, array("groupe" => $groupe));
         }
-    }
-
-    /**
-     * Retourne les groupes parents du groupe considere
-     *
-     * @param int $id
-     * @return array
-     */
-    function getParentGroups($id)
-    {
-        $data = array();
-        if ($id > 0) {
-            $sql = "select aclgroup_id, aclgroup_id_parent, groupe from aclgroup
-					where aclgroup_id = " . $id;
-            $data = $this->getListeParam($sql);
-            foreach ($data as $value) {
-                if ($value["aclgroup_id_parent"] > 0) {
-                    $dataParent = $this->getParentGroups($value["aclgroup_id_parent"]);
-                    if (count($dataParent) > 0) {
-                        $data = array_merge($data, $dataParent);
-                    }
-                }
-            }
-        }
-        return $data;
     }
 
     /**
@@ -327,6 +322,26 @@ class Aclgroup extends ObjetBDD
             $this->ecrireTableNN("acllogingroup", "aclgroup_id", "acllogin_id", $id, $data["logins"]);
         }
         return $id;
+    }
+
+    /**
+     * Add a login to a group
+     *
+     * @param integer $group_id
+     * @param integer $login_id
+     * @return void
+     */
+    function addLoginToGroup(int $group_id, int $login_id)
+    {
+        if ($group_id > 0 && $login_id > 0) {
+            $sql = "select count(*) as nb from acllogingroup where acllogin_id =:login_id and aclgroup_id =:group_id";
+            $param = array("login_id" => $login_id, "group_id" => $group_id);
+            $result = $this->lireParamAsPrepared($sql, $param);
+            if ($result["nb"] != 1) {
+                $sql = "insert into acllogingroup (acllogin_id, aclgroup_id) values (:login_id, :group_id)";
+                $this->executeAsPrepared($sql, $param, true);
+            }
+        }
     }
 
     /**

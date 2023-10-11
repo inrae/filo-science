@@ -83,6 +83,7 @@ export var Layers = Control.extend({
 		this._layers = [];
 		this._lastZIndex = 0;
 		this._handlingClick = false;
+		this._preventClick = false;
 
 		for (var i in baseLayers) {
 			this._addLayer(baseLayers[i], i);
@@ -187,13 +188,7 @@ export var Layers = Control.extend({
 			this._map.on('click', this.collapse, this);
 
 			DomEvent.on(container, {
-				mouseenter: function () {
-					DomEvent.on(section, 'click', DomEvent.preventDefault);
-					this.expand();
-					setTimeout(function () {
-						DomEvent.off(section, 'click', DomEvent.preventDefault);
-					});
-				},
+				mouseenter: this._expandSafely,
 				mouseleave: this.collapse
 			}, this);
 		}
@@ -203,8 +198,18 @@ export var Layers = Control.extend({
 		link.title = 'Layers';
 		link.setAttribute('role', 'button');
 
-		DomEvent.on(link, 'click', DomEvent.preventDefault); // prevent link function
-		DomEvent.on(link, 'focus', this.expand, this);
+		DomEvent.on(link, {
+			keydown: function (e) {
+				if (e.keyCode === 13) {
+					this._expandSafely();
+				}
+			},
+			// Certain screen readers intercept the key event and instead send a click event
+			click: function (e) {
+				DomEvent.preventDefault(e);
+				this._expandSafely();
+			}
+		}, this);
 
 		if (!collapsed) {
 			this.expand();
@@ -354,6 +359,11 @@ export var Layers = Control.extend({
 	},
 
 	_onInputClick: function () {
+		// expanding the control on mobile with a click can cause adding a layer - we don't want this
+		if (this._preventClick) {
+			return;
+		}
+
 		var inputs = this._layerControlInputs,
 		    input, layer;
 		var addedLayers = [],
@@ -409,6 +419,18 @@ export var Layers = Control.extend({
 			this.expand();
 		}
 		return this;
+	},
+
+	_expandSafely: function () {
+		var section = this._section;
+		this._preventClick = true;
+		DomEvent.on(section, 'click', DomEvent.preventDefault);
+		this.expand();
+		var that = this;
+		setTimeout(function () {
+			DomEvent.off(section, 'click', DomEvent.preventDefault);
+			that._preventClick = false;
+		});
 	}
 
 });
