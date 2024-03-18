@@ -17,6 +17,9 @@ switch ($t_module["param"]) {
         if (!$project_id > 0) {
             $project_id = $projects[0]["project_id"];
         }
+        if (empty($project_id)) {
+            $project_id = 0;
+        }
         $_COOKIE["stationActive"] == 1 ? $stationActive = true : $stationActive = false;
         $stations = $dataClass->getListFromProject($project_id, 0, $stationActive);
         $vue->set($stations, "stations");
