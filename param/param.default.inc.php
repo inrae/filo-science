@@ -26,6 +26,27 @@ $APPLI_session_ttl = 14400;
 $APPLI_cookie_ttl = 7776000;
 // 10 heures
 $APPLI_absolute_session = 36000;
+$ident_header_vars = array(
+	"login" => "MELLON_MAIL",
+	"mail" => "MELLON_MAIL",
+	"name" => "MELLON_cn",
+	"firstname"=>"MELLON_givenname",
+	"lastname" => "MELLON_sn",
+	"organization" => "MELLON_supannentiteaffectationprincipale",
+	"organizationGranted" => array(),
+	"createUser" => true,
+	"groupAttribute" => "MELLON_supannentiteaffectation",
+	"groupsGranted" => array()
+);
+$user_attributes = array (
+	"mail" => "mail",
+	"firstname"=>"givenName",
+	"lastname"=>"sn",
+	"name"=>"cn",
+	"groups"=>"supannentiteaffectation"
+);
+$ident_header_logout_address = "";
+
 /*
  *
  * Nom du chemin de stockage des sessions
