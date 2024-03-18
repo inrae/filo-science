@@ -241,7 +241,7 @@ class Project extends ObjetBDD
          */
         $in = "";
         $comma = "";
-        if (count($projects) > 0) {
+        if (!empty($projects)) {
             foreach ($projects as $project) {
                 $in .= $comma . $project["project_id"];
                 $comma = ", ";
