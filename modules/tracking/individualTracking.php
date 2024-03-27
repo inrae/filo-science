@@ -32,8 +32,10 @@ switch ($t_module["param"]) {
     /**
      * Get list of years and taxa
      */
-    $vue->set($dataClass->getListYearFromProject($project_id), "years");
-    $vue->set($dataClass->getListTaxaFromProject($project_id), "taxa");
+    if ($project_id > 0) {
+      $vue->set($dataClass->getListYearFromProject($project_id), "years");
+      $vue->set($dataClass->getListTaxaFromProject($project_id), "taxa");
+    }
     if ($_REQUEST["individual_id"] > 0) {
       $dindividual = $dataClass->getDetail($_REQUEST["individual_id"]);
       if ($dindividual["project_id"] == $project_id) {
@@ -74,11 +76,11 @@ switch ($t_module["param"]) {
           if ($date_to > $datemax) {
             $datemax = $date_to;
           }
-          $graphdata[] = array("date"=>$date_from, "detection"=>$row["station_number"]);
-          $graphdata[] = array("date"=>$date_to, "detection"=>$row["station_number"]);
+          $graphdata[] = array("date" => $date_from, "detection" => $row["station_number"]);
+          $graphdata[] = array("date" => $date_to, "detection" => $row["station_number"]);
           $axisy1[] = $row["station_number"];
           if (!in_array($row["station_number"], $stations)) {
-            $stations[]  = $row["station_number"];
+            $stations[] = $row["station_number"];
           }
         }
         sort($stations);
@@ -88,7 +90,7 @@ switch ($t_module["param"]) {
         include_once "modules/classes/tracking/station_tracking.class.php";
         $stationTracking = new StationTracking($bdd, $ObjetBDDParam);
         $axisx2 = array("x2");
-        $axisy2 = array ("stations");
+        $axisy2 = array("stations");
         $series = array();
         $regions = array();
         foreach ($stations as $station) {
@@ -101,11 +103,11 @@ switch ($t_module["param"]) {
               $axisy2[] = $presence["station_number"];
               $axisx2[] = $dateto;
               $axisy2[] = $presence["station_number"];
-              $graphdata[]=array("date"=>$datefrom, "station".$presence["station_number"]=>$presence["station_number"]);
-              $graphdata[]=array("date"=>$dateto, "station".$presence["station_number"]=>$presence["station_number"]);
-            $regions["station".$presence["station_number"]][] = array("start"=>$datefrom, "end"=>$dateto/*, "style"=>"dashed"*/);
+              $graphdata[] = array("date" => $datefrom, "station" . $presence["station_number"] => $presence["station_number"]);
+              $graphdata[] = array("date" => $dateto, "station" . $presence["station_number"] => $presence["station_number"]);
+              $regions["station" . $presence["station_number"]][] = array("start" => $datefrom, "end" => $dateto/*, "style"=>"dashed"*/);
             }
-            $series[]="station".$station;
+            $series[] = "station" . $station;
           }
         }
         $series[] = "detection";
