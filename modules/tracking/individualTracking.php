@@ -24,7 +24,9 @@ switch ($t_module["param"]) {
     }
     isset($_COOKIE["taxon_id"]) ? $taxon_id = $_COOKIE["taxon_id"] : $taxon_id = 0;
     isset($_COOKIE["year"]) ? $year = $_COOKIE["year"] : $year = 0;
-    $vue->set($dataClass->getListFromProject($project_id, $year, $taxon_id), "individuals");
+    if ($project_id > 0) {
+      $vue->set($dataClass->getListFromProject($project_id, $year, $taxon_id), "individuals");
+    }
     $vue->set("tracking/individualTrackingList.tpl", "corps");
     $vue->set($project_id, "project_id");
     /**
