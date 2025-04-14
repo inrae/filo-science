@@ -1,0 +1,25 @@
+{
+  "name": "datetime-moment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "datetime-moment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandobhz/datetime-moment.git"
+  },
+  "keywords": [
+    "datatable",
+    "sort",
+    "plugin",
+    "datetime-moment"
+  ],
+  "author": "Fernando Reis Guimaraes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fernandobhz/datetime-moment/issues"
+  },
+  "homepage": "https://github.com/fernandobhz/datetime-moment#readme"
+}
