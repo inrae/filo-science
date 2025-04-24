@@ -1,10 +1,13 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 class Sample extends PpciModel
 {
     private $individual;
-    private $sql = "select sample_id, sample_id as sample_uid, sequence_id, taxon_id
+    private $sql = "SELECT sample_id, sample_id as sample_uid, sequence_id, taxon_id
                     ,taxon_name, total_number, total_measured, total_weight
                     ,sample_size_min, sample_size_max, sample_comment
                     ,scientific_name, common_name, taxon_code, fresh_code, sea_code, length_max, weight_max
@@ -37,7 +40,7 @@ class Sample extends PpciModel
             "sample_size_min" => array("type" => 1),
             "sample_size_max" => array("type" => 1),
             "sample_comment" => array("type" => 0),
-            "uuid" => array("type" => 0, "defaultValue"=>"getUUID")
+            "uuid" => array("type" => 0, "defaultValue" => "getUUID")
         );
         parent::__construct();
     }
@@ -49,7 +52,7 @@ class Sample extends PpciModel
      */
     function getDetail($sample_id)
     {
-        $where = " where sample_id = :sample_id";
+        $where = " where sample_id = :sample_id:";
         return ($this->lireParamAsPrepared($this->sql . $where, array("sample_id" => $sample_id)));
     }
     /**
@@ -60,7 +63,7 @@ class Sample extends PpciModel
      */
     function getListFromSequence($sequence_id)
     {
-        $where = " where sequence_id = :sequence_id";
+        $where = " where sequence_id = :sequence_id:";
         return ($this->getListeParamAsPrepared($this->sql . $where, array("sequence_id" => $sequence_id)));
     }
 
@@ -76,7 +79,6 @@ class Sample extends PpciModel
          * Get the list of individuals
          */
         $data = $this->getDetail($sample_id);
-        require_once 'modules/classes/individual.class.php';
         $ind = new Individual;
         $individuals = $ind->getListFromSample($sample_id);
         $nb = 0;
@@ -118,13 +120,12 @@ class Sample extends PpciModel
     /**
      * Rewrite Delete function for delete individuals
      */
-    function delete($id)
+    function delete($id = null, $purge = false)
     {
         /**
          * Delete individuals
          */
         if (!isset($this->individual)) {
-            require_once 'modules/classes/individual.class.php';
             $this->individual = new Individual;
         }
         /**
@@ -144,12 +145,12 @@ class Sample extends PpciModel
      */
     function getProject($uid)
     {
-        $sql = "select project_id
+        $sql = "SELECT project_id
                 from sample
                 join sequence using (sequence_id)
                 join operation using (operation_id)
                 join campaign using (campaign_id)
-                where sample_id = :id";
+                where sample_id = :id:";
         $res = $this->lireParamAsPrepared($sql, array("id" => $uid));
         return ($res["project_id"]);
     }

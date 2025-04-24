@@ -1,5 +1,8 @@
-<?php 
+<?php
+
 namespace App\Models;
+
+use Ppci\Libraries\PpciException;
 use Ppci\Models\PpciModel;
 
 /**
@@ -7,7 +10,7 @@ use Ppci\Models\PpciModel;
  */
 class Sequence extends PpciModel
 {
-    private $sql = "select sequence_id, sequence_number, s.date_start, s.date_end, fishing_duration
+    private $sql = "SELECT sequence_id, sequence_number, s.date_start, s.date_end, fishing_duration
                     , operation.operation_id, operation_name, freshwater, long_start, lat_start, long_end, lat_end, taxa_template_id
                     ,sequence_id as sequence_uid, sequence_name
                     ,campaign_id, campaign_name
@@ -23,7 +26,11 @@ class Sequence extends PpciModel
                     join protocol using (protocol_id)
                     left outer join ambience a using (sequence_id)
                     ";
-    private $ambience, $analysis, $sequenceGear, $sequencePoint, $sample;
+    private Ambience $ambience;
+    private Analysis $analysis;
+    private SequenceGear $sequenceGear;
+    private SequencePoint $sequencePoint;
+    private Sample $sample;
     /**
      * Constructor
      *
@@ -54,7 +61,9 @@ class Sequence extends PpciModel
     function getLastSequenceNumber($operation_id)
     {
         $newVal = 1;
-        $sql = "select max(sequence_number) as sequence_number from sequence where operation_id = :operation_id";
+        $sql = "SELECT max(sequence_number) as sequence_number 
+        from sequence 
+        where operation_id = :operation_id:";
         $data = $this->lireParamAsPrepared($sql, array("operation_id" => $operation_id));
         if ($data["sequence_number"] > 0) {
             $newVal = $data["sequence_number"] + 1;
@@ -69,7 +78,7 @@ class Sequence extends PpciModel
      */
     function getDetail($sequence_id)
     {
-        $where = " where sequence_id = :sequence_id";
+        $where = " where sequence_id = :sequence_id:";
         return $this->lireParamAsPrepared($this->sql . $where, array("sequence_id" => $sequence_id));
     }
     /**
@@ -80,11 +89,11 @@ class Sequence extends PpciModel
      */
     function getProject($uid)
     {
-        $sql = "select project_id
+        $sql = "SELECT project_id
                 from sequence
                 join operation using (operation_id)
                 join campaign using (campaign_id)
-                where sequence_id = :id";
+                where sequence_id = :id:";
         $res = $this->lireParamAsPrepared($sql, array("id" => $uid));
         return ($res["project_id"]);
     }
@@ -108,24 +117,19 @@ class Sequence extends PpciModel
         return $retour;
     }
 
-    function delete($id)
+    function delete($id = null, $purge = false)
     {
         if (!isset($this->ambience)) {
-            include_once 'modules/classes/analysis.class.php';
-            include_once 'modules/classes/ambience.class.php';
-            include_once 'modules/classes/sequence_gear.class.php';
-            include_once 'modules/classes/sample.class.php';
-            include_once 'modules/classes/sequence_point.class.php';
             $this->analysis = new Analysis;
             $this->sequenceGear = new SequenceGear;
             $this->sequencePoint = new SequencePoint;
             $this->ambience = new Ambience;
             $this->sample = new Sample;
         }
-        $this->analysis->deleteChamp($id, "sequence_id");
-        $this->ambience->deleteChamp($id, "sequence_id");
-        $this->sequenceGear->deleteChamp($id, "sequence_id");
-        $this->sequencePoint->deleteChamp($id, "sequence_id");
+        $this->analysis->deleteFromField($id, "sequence_id");
+        $this->ambience->deleteFromField($id, "sequence_id");
+        $this->sequenceGear->deleteFromField($id, "sequence_id");
+        $this->sequencePoint->deleteFromField($id, "sequence_id");
         /**
          * Get the list of samples
          */
@@ -164,7 +168,6 @@ class Sequence extends PpciModel
                     /**
                      * Duplicate the ambience (sequence)
                      */
-                    include_once "modules/classes/ambience.class.php";
                     $ambience = new Ambience;
                     $dambience = $ambience->getFromSequence($id);
                     if ($dambience["ambience_id"] > 0) {
@@ -178,7 +181,6 @@ class Sequence extends PpciModel
                     /**
                      * Duplicate the gears
                      */
-                    include_once "modules/classes/sequence_gear.class.php";
                     $sequenceGear = new SequenceGear;
                     foreach ($sequenceGear->getListFromParent($id) as $row) {
                         $row["uuid"] = "";
@@ -188,17 +190,17 @@ class Sequence extends PpciModel
                     }
                 }
             } else {
-                throw new ObjetBDDException(_("Impossible de lire la séquence à dupliquer"));
+                throw new PpciException(_("Impossible de lire la séquence à dupliquer"));
             }
         } else {
-            throw new ObjetBDDException(_("La sequence à dupliquer n'existe pas ou l'opération de rattachement n'est pas indiquée"));
+            throw new PpciException(_("La sequence à dupliquer n'existe pas ou l'opération de rattachement n'est pas indiquée"));
         }
     }
 
     function getListFromOperation($id)
     {
         if ($id > 0) {
-            $where = " where operation.operation_id = :id";
+            $where = " where operation.operation_id = :id:";
             return $this->getListeParamAsPrepared($this->sql . $where, array("id" => $id));
         }
     }

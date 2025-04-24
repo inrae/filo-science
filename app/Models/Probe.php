@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 /**
@@ -13,11 +15,11 @@ class Probe extends PpciModel
      * @param 
      * @param array $param
      */
-    function __construct(PDO )
+    function __construct()
     {
         $this->table = "probe";
         $date = new \DateTime();
-        $date->add(new DateInterval('P1Y'));
+        $date->add(new \DateInterval('P1Y'));
         $this->fields = array(
             "probe_id" => array("type" => 1, "key" => 1, "requis" => 1, "defaultValue" => 0),
             "station_id" => array("type" => 0, "requis" => 1, "parentAttrib" => 1),

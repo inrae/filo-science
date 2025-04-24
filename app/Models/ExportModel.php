@@ -31,7 +31,7 @@ class ExportModel extends PpciModel
      */
     function getModelFromName(string $name): ?array
     {
-        $sql = "select export_model_id, export_model_name, pattern from export_model
+        $sql = "SELECT export_model_id, export_model_name, pattern from export_model
                 where export_model_name = :name:";
         return $this->lireParamAsPrepared($sql, array("name" => $name));
     }

@@ -34,7 +34,7 @@ class FunctionType extends PpciModel
      */
     function getDescription(int $function_type_id): array
     {
-        $sql = "select description from function_type where function_type_id = :id:";
+        $sql = "SELECT description from function_type where function_type_id = :id:";
         return $this->lireParamAsPrepared($sql, array("id" => $function_type_id));
     }
 

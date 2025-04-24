@@ -1,5 +1,8 @@
-<?php 
+<?php
+
 namespace App\Models;
+
+use Ppci\Libraries\PpciException;
 use Ppci\Models\PpciModel;
 
 /**
@@ -7,8 +10,10 @@ use Ppci\Models\PpciModel;
  */
 class Operation extends PpciModel
 {
-    private $sequence, $ambience;
-    private $sql = "select o.*
+    private Sequence $sequence;
+    private Ambience $ambience;
+
+    private $sql = "SELECT o.*
                     ,operation_id as operation_uid
                     ,campaign_name, c.project_id
                     , station_name, station_code, station_number
@@ -85,11 +90,11 @@ class Operation extends PpciModel
      * @param integer $parent_id
      * @return array
      */
-    function read($id, $getDefault = true, $parent_id = 0)
+    function read($id, $getDefault = true, $parent_id = 0): array
     {
         $data = parent::lire($id, $getDefault, $parent_id);
         /* Recovery of campaign_name */
-        $sql = "select campaign_name from campaign where campaign_id = :campaign_id";
+        $sql = "SELECT campaign_name from campaign where campaign_id = :campaign_id:";
         $dcamp = $this->lireParamAsPrepared($sql, array("campaign_id" => $data["campaign_id"]));
         $data["campaign_name"] = $dcamp["campaign_name"];
         return $data;
@@ -100,15 +105,15 @@ class Operation extends PpciModel
      * @param array $data
      * @return int
      */
-    function write( $data): int
+    function write($data): int
     {
         $data["operation_geom"] = "MULTIPOINT(";
         $is_geom = false;
-        if (!empty($data["long_start"]) && !empty($data["lat_start"]) ) {
+        if (!empty($data["long_start"]) && !empty($data["lat_start"])) {
             $data["operation_geom"] .= "(" . $data["long_start"] . " " . $data["lat_start"] . ")";
             $is_geom = true;
         }
-        if (!empty($data["long_end"])  && !empty($data["lat_end"]) ) {
+        if (!empty($data["long_end"])  && !empty($data["lat_end"])) {
             if ($is_geom) {
                 $data["operation_geom"] .= ",";
             } else {
@@ -131,7 +136,7 @@ class Operation extends PpciModel
      */
     function getListFromCampaign($campaign_id)
     {
-        $where = " where campaign_id = :campaign_id";
+        $where = " where campaign_id = :campaign_id:";
         return $this->getListeParamAsPrepared($this->sql . $where, array("campaign_id" => $campaign_id));
     }
     /**
@@ -142,7 +147,7 @@ class Operation extends PpciModel
      */
     function getDetail($operation_id)
     {
-        $where = " where operation_id = :operation_id";
+        $where = " where operation_id = :operation_id:";
         return $this->lireParamAsPrepared($this->sql . $where, array("operation_id" => $operation_id));
     }
     /**
@@ -153,10 +158,10 @@ class Operation extends PpciModel
      */
     function getProject($uid)
     {
-        $sql = "select project_id
+        $sql = "SELECT project_id
                 from operation
                 join campaign using (campaign_id)
-                where operation_id = :id";
+                where operation_id = :id:";
         $res = $this->lireParamAsPrepared($sql, array("id" => $uid));
         return ($res["project_id"]);
     }
@@ -188,12 +193,10 @@ class Operation extends PpciModel
     function delete($id = null, $purge = false)
     {
         if (!isset($this->ambience)) {
-            include_once 'modules/classes/ambience.class.php';
-            include_once 'modules/classes/sequence.class.php';
             $this->ambience = new Ambience;
             $this->sequence = new Sequence;
         }
-        $this->ambience->deleteChamp($id, "operation_id");
+        $this->ambience->deleteFromField($id, "operation_id");
         /**
          * Get the list of sequences
          */
@@ -205,7 +208,7 @@ class Operation extends PpciModel
          * Delete the operators attached to the operation
          */
         $sql = "delete from operation_operator
-                where operation_id = :operation_id";
+                where operation_id = :operation_id:";
         $this->executeAsPrepared($sql, array("operation_id" => $id), true);
         /**
          * delete the operation
@@ -225,25 +228,24 @@ class Operation extends PpciModel
         $newid = 0;
         $data = $this->lire($id);
         if ($data["operation_id"] > 0) {
-            foreach (array( "date_end","debit", "tidal_coef", "water_regime_id", "uuid") as $field) {
+            foreach (array("date_end", "debit", "tidal_coef", "water_regime_id", "uuid") as $field) {
                 $data[$field] = "";
             }
             $data["operation_id"] = 0;
-            $data["operation_name"].= " - copy";
+            $data["operation_name"] .= " - copy";
             $data["date_start"] = $this->getDateHeure();
-            if ($data["freshwater"] ) {
+            if ($data["freshwater"]) {
                 $data["freshwater"] = 1;
             } else {
                 $data["freshwater"] = 0;
             }
-            $newid = $this->ecrire($data);
+            $newid = $this->write($data);
             if ($newid > 0) {
                 /**
                  * Recopy the list of operators
                  */
-                include_once "modules/classes/operator.class.php";
                 $operator = new Operator;
-                $operators=array();
+                $operators = array();
                 $isResponsible = 0;
                 foreach ($operator->getListFromOperation($id, false) as $row) {
                     $operators[] = $row["operator_id"];
@@ -251,11 +253,10 @@ class Operation extends PpciModel
                         $isResponsible = $row["operator_id"];
                     }
                 }
-                $operator->setOperatorsToOperation($newid,$operators,$isResponsible);
+                $operator->setOperatorsToOperation($newid, $operators, $isResponsible);
                 /**
                  * Duplicate the ambience (operation)
                  */
-                include_once "modules/classes/ambience.class.php";
                 $ambience = new Ambience;
                 $dambience = $ambience->getFromOperation($id);
                 if ($dambience["ambience_id"] > 0) {
@@ -269,15 +270,14 @@ class Operation extends PpciModel
                 /**
                  * Duplicate the sequences
                  */
-                include_once "modules/classes/sequence.class.php";
                 $sequence = new Sequence;
                 $sequences = $sequence->getListFromParent($id);
-                foreach ( $sequences as $row) {
+                foreach ($sequences as $row) {
                     $sequence->duplicate($row["sequence_id"], $newid);
                 }
             }
         } else {
-            throw new ObjetBDDException(_("L'opération à dupliquer n'existe pas"));
+            throw new PpciException(_("L'opération à dupliquer n'existe pas"));
         }
         return $newid;
     }

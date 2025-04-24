@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 /**
@@ -31,7 +33,8 @@ class ImportColumn extends PpciModel
      * @param integer $importDescriptionId
      * @return array
      */
-    function getListByColumnNumber(int $importDescriptionId):array {
+    function getListByColumnNumber(int $importDescriptionId): array
+    {
         $data = array();
         $dataRaw = $this->getListFromParent($importDescriptionId);
         foreach ($dataRaw as $value) {

@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 /**
@@ -7,7 +9,7 @@ use Ppci\Models\PpciModel;
  */
 class ImportDescription extends PpciModel
 {
-    private $sql = "select import_description_id, import_type_id, csv_type_id
+    private $sql = "SELECT import_description_id, import_type_id, csv_type_id
                     ,import_description_name, separator, first_line
                     ,csv_type_name, import_type_name, tablename, column_list
                     from import_description
@@ -36,7 +38,7 @@ class ImportDescription extends PpciModel
      * @param string $order
      * @return array
      */
-    public function getListe($order = "")
+    public function getListe($order = ""): array
     {
         !empty($order)  ? $orderby = " order by $order" : $orderby = "";
         return $this->getListeParam($this->sql . $orderby);
@@ -50,7 +52,7 @@ class ImportDescription extends PpciModel
      */
     function getDetail(int $id)
     {
-        $where = " where import_description_id = :id";
+        $where = " where import_description_id = :id:";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
     }
 
@@ -62,12 +64,10 @@ class ImportDescription extends PpciModel
      */
     public function delete($id = null, $purge = false)
     {
-        include_once "modules/classes/import/import_function.class.php";
         $function = new ImportFunction;
-        $function->deleteChamp($id, "import_description_id");
-        include_once "modules/classes/import/import_column.class.php";
+        $function->deleteFromField($id, "import_description_id");
         $column = new ImportColumn;
-        $column->deleteChamp($id, "import_description_id");
+        $column->deleteFromField($id, "import_description_id");
         return parent::delete($id);
     }
     /**
@@ -87,8 +87,6 @@ class ImportDescription extends PpciModel
                 /**
                  * Prepare the children records
                  */
-                include_once "modules/classes/import/import_function.class.php";
-                include_once "modules/classes/import/import_column.class.php";
                 $importFunction = new ImportFunction;
                 $list = $importFunction->getListFromParent($id);
                 foreach ($list as $row) {

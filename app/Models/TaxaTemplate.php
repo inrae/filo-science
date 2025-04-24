@@ -1,9 +1,12 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 class TaxaTemplate extends PpciModel
 {
-function __construct()
+    function __construct()
     {
         $this->table = "taxa_template";
         $this->fields = array(
@@ -18,12 +21,12 @@ function __construct()
                 "requis" => 1
             ),
             "freshwater" => array(
-                "type"=>1,
-                "requis"=>1,
-                "defaultValue"=>1
+                "type" => 1,
+                "requis" => 1,
+                "defaultValue" => 1
             ),
-            "taxa_model"=>array(
-                "type"=>0
+            "taxa_model" => array(
+                "type" => 0
             )
         );
         parent::__construct();

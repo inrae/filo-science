@@ -1,5 +1,8 @@
-<?php 
+<?php
+
 namespace App\Models;
+
+use Ppci\Models\Aclgroup;
 use Ppci\Models\PpciModel;
 
 /**
@@ -10,7 +13,7 @@ use Ppci\Models\PpciModel;
  */
 class Project extends PpciModel
 {
-    private $sql = "select project_id, project_name, is_active, metric_srid
+    private $sql = "SELECT project_id, project_name, is_active, metric_srid
     ,protocol_default_id, protocol_id
     ,array_to_string(array_agg(groupe),', ') as groupe
     ,protocol_name, measure_default, measure_default_only
@@ -61,12 +64,14 @@ class Project extends PpciModel
      *
      * @see ObjetBDD::getListe()
      */
-    function getListe($order = 0, $is_active = -1)
+    function getListe($order = 0, $is_active = -1): array
     {
-        $orderSql = " order by $order";
+        $orderSql = " order by :order:";
+        $param["order"] = $order;
         if ($is_active > -1) {
-            $where = " where is_active = :is_active";
-            return $this->getListeParamAsPrepared($this->sql . $where . $this->group . $orderSql, array("is_active" => $is_active));
+            $where = " where is_active = :is_active:";
+            $param["is_active"] = $is_active;
+            return $this->getListeParamAsPrepared($this->sql . $where . $this->group . $orderSql, $param);
         } else {
             return $this->getListeParam($this->sql . $this->group . $orderSql);
         }
@@ -79,7 +84,7 @@ class Project extends PpciModel
      */
     function getDetail($project_id)
     {
-        $where = " where project_id = :project_id";
+        $where = " where project_id = :project_id:";
 
         return $this->lireParamAsPrepared($this->sql . $where . $this->group, array("project_id" => $project_id));
     }
@@ -110,13 +115,13 @@ class Project extends PpciModel
             $comma = false;
             $in = "(";
             foreach ($groups as $value) {
-                if (!empty($value["groupe"]) ) {
+                if (!empty($value["groupe"])) {
                     $comma ? $in .= ", " : $comma = true;
                     $in .= "'" . $value["groupe"] . "'";
                 }
             }
             $in .= ")";
-            $sql = "select distinct project_id, project_name
+            $sql = "SELECT distinct project_id, project_name
 					from project
 					join project_group using (project_id)
 					join aclgroup using (aclgroup_id)
@@ -142,7 +147,7 @@ class Project extends PpciModel
             /*
              * Ecriture des groupes
              */
-            $this->ecrireTableNN("project_group", "project_id", "aclgroup_id", $id, $data["groupes"]);
+            $this->writeTableNN("project_group", "project_id", "aclgroup_id", $id, $data["groupes"]);
         }
         return $id;
     }
@@ -154,20 +159,18 @@ class Project extends PpciModel
      *
      * @see ObjetBDD::supprimer()
      */
-    function delete($id)
+    function delete($id = null, $purge = false)
     {
         if ($id > 0 && is_numeric($id)) {
 
-            $sql = "delete from project_group where project_id = :project_id";
+            $sql = "delete from project_group where project_id = :project_id:";
             $data["project_id"] = $id;
             $this->executeAsPrepared($sql, $data);
             /**
              * delete documents
              */
-            include_once "modules/classes/document.class.php";
             $doc = new Document;
             $doc->deleteAllFromParent("project", $id);
-
             return parent::delete($id);
         }
     }
@@ -188,7 +191,6 @@ class Project extends PpciModel
                 $dataGroup[$value["aclgroup_id"]] = 1;
             }
         }
-        require_once 'framework/droits/aclgroup.class.php';
         $aclgroup = new Aclgroup;
         $groupes = $aclgroup->getListe(2);
         foreach ($groupes as $key => $value) {
@@ -207,9 +209,9 @@ class Project extends PpciModel
     {
         $data = array();
         if ($project_id > 0 && is_numeric($project_id)) {
-            $sql = "select aclgroup_id, groupe from project_group
+            $sql = "SELECT aclgroup_id, groupe from project_group
 					join aclgroup using (aclgroup_id)
-					where project_id = :project_id";
+					where project_id = :project_id:";
             $var["project_id"] = $project_id;
             $data = $this->getListeParamAsPrepared($sql, $var);
         }

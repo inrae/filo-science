@@ -54,10 +54,10 @@ class Operator extends PpciModel
                     AND   is_active = TRUE
                     ";
         } else {
-            $sql = "select operator_id, firstname, name, is_active, operation_id, is_responsible
+            $sql = "SELECT operator_id, firstname, name, is_active, operation_id, is_responsible
                 from operator
                 join operation_operator using (operator_id)
-                where operation_id = :operation_id";
+                where operation_id = :operation_id:";
         }
         return $this->getListeParamAsPrepared($sql, array("operation_id" => $operation_id));
     }
@@ -75,7 +75,7 @@ class Operator extends PpciModel
          * Delete pre-existant data
          */
         $sql = "delete from operation_operator
-                where operation_id = :operation_id";
+                where operation_id = :operation_id:";
         $this->executeAsPrepared($sql, array("operation_id" => $operation_id), true);
         foreach ($operators as $value) {
             $data = array(
@@ -88,7 +88,7 @@ class Operator extends PpciModel
                 $data["is_responsible"] = 0;
             }
             $sql = "insert into operation_operator (operation_id, operator_id, is_responsible)
-                    values (:operation_id, :operator_id, :is_responsible)";
+                    values (:operation_id:, :operator_id:, :is_responsible:)";
             $this->executeAsPrepared($sql, $data);
         }
     }

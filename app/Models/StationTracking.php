@@ -1,9 +1,12 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 class StationTracking extends PpciModel
 {
-    private $sql = "select station_id, station_name, project_id, project_name, metric_srid,
+    private $sql = "SELECT station_id, station_name, project_id, project_name, metric_srid,
             station_long, station_lat, station_pk, river_id, river_name,station_code,station_number,
             station_type_id, station_type_name, station_active
             from station_tracking
@@ -18,7 +21,7 @@ class StationTracking extends PpciModel
      * @param 
      * @param array $param
      */
-    function __construct($bdd, array $param = array())
+    function __construct()
     {
         $this->table = "station_tracking";
         $this->fields = array(
@@ -35,12 +38,12 @@ class StationTracking extends PpciModel
      * @param int $id
      * @return array
      */
-    function read($id,$getDefault = true, $parentValue = 0)
+    function read($id, $getDefault = true, $parentValue = 0): array
     {
         if ($id == 0) {
             $data = $this->getDefaultValue();
         } else {
-            $where = " where station_id = :id";
+            $where = " where station_id = :id:";
             $data = $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
         }
         return $data;
@@ -53,11 +56,10 @@ class StationTracking extends PpciModel
      * @param array $data
      * @return int
      */
-    function write( $data): int
+    function write($data): int
     {
-        require_once 'modules/classes/station.class.php';
         $station = new Station;
-        $id = $station->ecrire($data);
+        $id = $station->write($data);
         if ($id > 0) {
             $data["station_id"] = $id;
             return parent::write($data);
@@ -75,10 +77,10 @@ class StationTracking extends PpciModel
      */
     function getListFromProject(int $project_id, int $station_type_id = 0, bool $onlyActive = false)
     {
-        $where = " where project_id = :project_id";
+        $where = " where project_id = :project_id:";
         $params = array("project_id" => $project_id);
         if ($station_type_id > 0) {
-            $where .= " and station_type_id = :station_type_id";
+            $where .= " and station_type_id = :station_type_id:";
             $params["station_type_id"] = $station_type_id;
         }
         if ($onlyActive) {
@@ -95,7 +97,7 @@ class StationTracking extends PpciModel
      */
     function getDetail(int $station_id)
     {
-        $where = " where station_id = :id";
+        $where = " where station_id = :id:";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $station_id));
     }
 
@@ -107,7 +109,8 @@ class StationTracking extends PpciModel
      */
     function verifyProject(int $station_id): bool
     {
-        $data = $this->lire($station_id);
+        $data = $this->read($station_id);
+        helper("filo");
         return (verifyProject($data["project_id"]));
     }
     /**
@@ -119,22 +122,22 @@ class StationTracking extends PpciModel
      */
     function getListSensor(int $project_id, int $import_type_id)
     {
-        $this->fields["date_from"] = array("type"=>2);
-        $this->fields["date_to"] = array ("type"=>2);
+        $this->fields["date_from"] = array("type" => 2);
+        $this->fields["date_to"] = array("type" => 2);
         switch ($import_type_id) {
             case 1:
-                $sql = "select antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code, date_from, date_to
+                $sql = "SELECT antenna_id as sensor_id, station_name, station_code, antenna_code as sensor_code, date_from, date_to
                     from station_tracking
                     join antenna using (station_id)
                     join station using (station_id)
-                    where project_id = :project_id";
+                    where project_id = :project_id:";
                 break;
             case 2:
-                $sql = "select probe_id as sensor_id, station_name, station_code, probe_code as sensor_code, date_from, date_to
+                $sql = "SELECT probe_id as sensor_id, station_name, station_code, probe_code as sensor_code, date_from, date_to
                     from station_tracking
                     join probe using (station_id)
                     join station using (station_id)
-                    where project_id = :project_id";
+                    where project_id = :project_id:";
                 break;
 
             default:
@@ -154,12 +157,12 @@ class StationTracking extends PpciModel
      */
     function getPresenceStation(int $project_id, float $station_number, string $date_from = "", string $date_to = ""): ?array
     {
-        $sql = "select station_id, station_number, antenna_id, antenna_code, date_from, date_to
+        $sql = "SELECT station_id, station_number, antenna_id, antenna_code, date_from, date_to
                 from station_tracking
                 join antenna using (station_id)
                 join station using (station_id)
                 where station_number = :station_number
-                and project_id = :project_id";
+                and project_id = :project_id:";
         if (!empty($date_from) && !empty($date_to)) {
             $sql .= " and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)";
         }

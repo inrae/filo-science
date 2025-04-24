@@ -161,7 +161,7 @@ class MimeType extends PpciModel
 	function getTypeMime($extension)
 	{
 		if (!empty($extension) ) {
-			$sql = "select mime_type_id from mime_type where extension = :extension";
+			$sql = "SELECT mime_type_id from mime_type where extension = :extension";
 			$res = $this->lireParamAsPrepared($sql, array("extension" => strtolower($extension)));
 			return $res["mime_type_id"];
 		}
@@ -346,7 +346,7 @@ class Document extends PpciModel
 	function getData($id)
 	{
 		if ($id > 0 && is_numeric($id)) {
-			$sql = "select document_id, document_name, content_type, mime_type_id, extension,
+			$sql = "SELECT document_id, document_name, content_type, mime_type_id, extension,
 					document_import_date, document_creation_date
 				from document
 				join mime_type using (mime_type_id)
@@ -550,7 +550,7 @@ class Document extends PpciModel
 	function documentGetListFromParent($parentTable, $parentId)
 	{
 		if (in_array($parentTable, $this->parents)) {
-			$sql = "select document_id, document_import_date, document_name, document_description,
+			$sql = "SELECT document_id, document_import_date, document_name, document_description,
 					size, document_creation_date, mime_type_id
 					from document
 					join " . $parentTable . "_document using (document_id)

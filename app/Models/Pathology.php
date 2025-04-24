@@ -1,6 +1,9 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 /**
  * ORM for the table pathology
  */

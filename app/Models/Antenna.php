@@ -7,7 +7,7 @@ use Ppci\Models\PpciModel;
 class Antenna extends PpciModel
 {
     private $sridAntenna = 4326;
-    private $sql = "select antenna_id, a.station_id, technology_type_id, antenna_code, radius
+    private $sql = "SELECT antenna_id, a.station_id, technology_type_id, antenna_code, radius
                     ,station_name, station_type_name
                     ,station_long, station_lat
                     ,technology_type_name
@@ -110,7 +110,7 @@ class Antenna extends PpciModel
      */
     function getIdFromCode(string $code, string $date): int
     {
-        $sql = "select antenna_id from antenna where antenna_code = :code: and :date:::date between date_from and date_to";
+        $sql = "SELECT antenna_id from antenna where antenna_code = :code: and :date:::date between date_from and date_to";
         $data = $this->lireParamAsPrepared($sql, array("code" => $code, "date" => $date));
         $data["antenna_id"] > 0 ? $id = $data["antenna_id"] : $id = 0;
         return $id;

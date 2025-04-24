@@ -71,7 +71,7 @@ class Export
         $content  = array();
         $args = array();
         if (!$model["isEmpty"] || !empty($keys)) {
-            $sql = "select * from $quote$tableName$quote";
+            $sql = "SELECT * from $quote$tableName$quote";
             if (!empty($keys)) {
                 $where = " where " . $quote . $model["technicalKey"] . $quote . " in (";
                 $comma = "";
@@ -131,7 +131,7 @@ class Export
                     /**
                      * Get the record associated with the current record
                      */
-                    $sql = "select * from $quote" . $model2["tableName"] . "$quote where $quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = :secKey";
+                    $sql = "SELECT * from $quote" . $model2["tableName"] . "$quote where $quote" . $model["tablenn"]["secondaryParentKey"] . "$quote = :secKey";
                     $data = $this->execute($sql, array("secKey" => $row[$model["tablenn"]["secondaryParentKey"]]));
                     $content[$k][$model["tablenn"]["tableAlias"]] = $data[0];
                 }
@@ -191,7 +191,7 @@ class Export
         $tkeyName = $model["technicalKey"];
         $pkeyName = $model["parentKey"];
         if (!empty($bkeyName) ) {
-            $sqlSearchKey = "select $quote$tkeyName$quote as key
+            $sqlSearchKey = "SELECT $quote$tkeyName$quote as key
                     from $quote$tableName$quote
                     where $quote$bkeyName$quote = :businessKey";
             $isBusiness = true;
@@ -247,7 +247,7 @@ class Export
                     /**
                      * Search id of secondary table
                      */
-                    $sqlSearchSecondary = "select $quote$tkeyName2$quote as key
+                    $sqlSearchSecondary = "SELECT $quote$tkeyName2$quote as key
                     from $quote$tableName2$quote
                     where $quote$bkey2$quote = :businessKey";
                     $sdata = $this->execute($sqlSearchSecondary, array("businessKey" => $row[$tableAlias2][$model2["businessKey"]]));
@@ -274,7 +274,7 @@ class Export
                     $paramKey = $modelParam["technicalKey"];
                     $paramBusinessKey = $modelParam["businessKey"];
                     $paramTablename = $modelParam["tableName"];
-                    $sqlSearchParam = "select $quote$paramKey$quote as key
+                    $sqlSearchParam = "SELECT $quote$paramKey$quote as key
                     from $quote$paramTablename$quote
                     where $quote$paramBusinessKey$quote = :businessKey";
                     $pdata = $this->execute($sqlSearchParam, array("businessKey" => $parameter[$modelParam["businessKey"]]));

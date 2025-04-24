@@ -1,9 +1,12 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 class Station extends PpciModel
 {
-    private $sql = "select station_id, station_name, station_long, station_lat, station_pk, station_code, station_number
+    private $sql = "SELECT station_id, station_name, station_long, station_lat, station_pk, station_code, station_number
             ,project_id, project_name, metric_srid
             ,river_id, river_name
             ,station_type_id, station_type_name
@@ -61,9 +64,9 @@ class Station extends PpciModel
      * @param array $data
      * @return int
      */
-    function write( $data): int
+    function write($data): int
     {
-        if (!empty($data["station_long"]) && !empty($data["station_lat"]) ) {
+        if (!empty($data["station_long"]) && !empty($data["station_lat"])) {
             $data["geom"] = "POINT(" . $data["station_long"] . " " . $data["station_lat"] . ")";
         } else {
             $data["geom"] = "";
@@ -81,7 +84,7 @@ class Station extends PpciModel
     {
         $id = 0;
         if (!empty($name)) {
-            $sql = "select station_id from station where station_name = :name";
+            $sql = "SELECT station_id from station where station_name = :name:";
             $data = $this->lireParamAsPrepared($sql, array(
                 "name" => $name
             ));
@@ -116,7 +119,7 @@ class Station extends PpciModel
             if ($where == "") {
                 $where = " where ";
             }
-            $where .= " project_id = :project_id";
+            $where .= " project_id = :project_id:";
             return $this->getListeParamAsPrepared($this->sql . $where . $order, array(
                 "project_id" => $project_id
             ));
@@ -133,8 +136,8 @@ class Station extends PpciModel
     function getCoordinates($station_id)
     {
         if ($station_id > 0) {
-            $sql = "select station_long, station_lat from station
-                    where station_id = :station_id";
+            $sql = "SELECT station_long, station_lat from station
+                    where station_id = :station_id:";
             return $this->lireParamAsPrepared($sql, array("station_id" => $station_id));
         }
     }
@@ -146,7 +149,7 @@ class Station extends PpciModel
      */
     function getDetail(int $station_id): array
     {
-        $where = " where station_id = :id";
+        $where = " where station_id = :id:";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $station_id));
     }
 }

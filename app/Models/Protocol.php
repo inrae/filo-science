@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 /**
@@ -33,7 +35,7 @@ class Protocol extends PpciModel
             "measure_default_only" => array("type" => 1, "requis" => 1),
             "analysis_template_id" => array("type" => 1),
             "existing_taxon_only" => array("type" => 1, "requis" => 1, "defaultValue" => 1),
-            "ambience_template_id" => array("type"=>1)
+            "ambience_template_id" => array("type" => 1)
         );
         parent::__construct();
     }
@@ -45,7 +47,7 @@ class Protocol extends PpciModel
      */
     function getListProtocol()
     {
-        $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
+        $sql = "SELECT protocol_id, protocol_name, protocol_url, protocol_description
         ,measure_default, measure_default_only, existing_taxon_only
         ,analysis_template_id, analysis_template_name
         ,ambience_template_id, ambience_template_name
@@ -64,14 +66,14 @@ class Protocol extends PpciModel
      */
     function getDetail($protocol_id)
     {
-        $sql = "select protocol_id, protocol_name, protocol_url, protocol_description
+        $sql = "SELECT protocol_id, protocol_name, protocol_url, protocol_description
                 , measure_default, measure_default_only, existing_taxon_only
                 ,analysis_template_id, analysis_template_name, analysis_template_schema
                 ,ambience_template_id, ambience_template_name, ambience_template_schema
                 from protocol
                 left outer join analysis_template using (analysis_template_id)
                 left outer join ambience_template using (ambience_template_id)
-                where protocol_id = :protocol_id";
+                where protocol_id = :protocol_id:";
         return $this->lireParamAsPrepared($sql, array("protocol_id" => $protocol_id));
     }
 
@@ -84,10 +86,10 @@ class Protocol extends PpciModel
      */
     function getTaxonTemplate($protocol_id, $taxon_id)
     {
-        $sql = "select measure_template_schema
+        $sql = "SELECT measure_template_schema
                 from measure_template
                 join protocol_measure using (measure_template_id)
-                where protocol_id = :protocol_id and taxon_id = :taxon_id";
+                where protocol_id = :protocol_id and taxon_id = :taxon_id:";
         $data = $this->lireParamAsPrepared($sql, array("protocol_id" => $protocol_id, "taxon_id" => $taxon_id));
         return ($data["measure_template_schema"]);
     }

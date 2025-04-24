@@ -1,6 +1,9 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 /**
  * ORM of table parameter_measure_type
  */
@@ -12,7 +15,7 @@ class ParameterMeasureType extends PpciModel
      * @param 
      * @param array $param
      */
-    function __construct(PDO )
+    function __construct()
     {
         $this->table = "parameter_measure_type";
         $this->fields = array(

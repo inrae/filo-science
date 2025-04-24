@@ -7,7 +7,7 @@ use Ppci\Models\PpciModel;
  */
 class Campaign extends PpciModel
 {
-    private $sql = "select campaign_id, campaign_id as campaign_uid, campaign_name
+    private $sql = "SELECT campaign_id, campaign_id as campaign_uid, campaign_name
     , project_id, project_name, metric_srid, protocol_default_id
     from campaign
     join project using (project_id)";

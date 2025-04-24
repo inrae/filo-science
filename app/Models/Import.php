@@ -1,9 +1,8 @@
-<?php 
+<?php
+
 namespace App\Models;
-use Ppci\Models\PpciModel;
-class ImportException extends Exception
-{
-}
+
+use Ppci\Libraries\PpciException;
 
 /**
  * Classe de gestion des imports csv
@@ -15,13 +14,9 @@ class Import
 {
 
     private $separator = ",";
-
     private $utf8_encode = false;
-
     private $handle;
-
     private $header = array();
-
     public $minuid, $maxuid;
 
     /**
@@ -61,15 +56,15 @@ class Import
             /*
              * Headers preparation
              */
-            for ($range = 0; $range < count($data); $range ++) {
+            for ($range = 0; $range < count($data); $range++) {
                 if (in_array($data[$range], $fields) || substr($data[$range], 0, 3) == "md_") {
-                    $this->header[$range] = $data[$range] ;
+                    $this->header[$range] = $data[$range];
                 } else {
-                    throw new ImportException(sprintf(_("L'entête de colonne %1\$s n'est pas reconnue (%2\$s)"),$range,$data[$range]));
+                    throw new PpciException(sprintf(_("L'entête de colonne %1\$s n'est pas reconnue (%2\$s)"), $range, $data[$range]));
                 }
             }
         } else {
-            throw new ImportException(sprintf(_("%s non trouvé ou non lisible"),$filename));
+            throw new PpciException(sprintf(_("%s non trouvé ou non lisible"), $filename));
         }
     }
 
@@ -104,7 +99,7 @@ class Import
         $nb = count($this->header);
         while (($line = $this->readLine()) !== false) {
             $dl = array();
-            for ($i = 0; $i < $nb; $i ++) {
+            for ($i = 0; $i < $nb; $i++) {
                 $dl[$this->header[$i]] = $line[$i];
             }
             $data[] = $dl;
@@ -122,4 +117,3 @@ class Import
         }
     }
 }
-?>

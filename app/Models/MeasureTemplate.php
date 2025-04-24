@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 /**
@@ -41,12 +43,12 @@ class MeasureTemplate extends PpciModel
      */
     function getListFromProtocol($protocol_id)
     {
-        $sql = "select measure_template_id, measure_template_name
+        $sql = "SELECT measure_template_id, measure_template_name
                 , taxon_id, scientific_name, common_name
                 from protocol_measure
                 join measure_template using(measure_template_id)
                 join taxon using (taxon_id)
-                where protocol_id = :protocol_id
+                where protocol_id = :protocol_id:
                 order by measure_template_name";
         return $this->getListeParamAsPrepared($sql, array("protocol_id" => $protocol_id));
     }
@@ -56,15 +58,16 @@ class MeasureTemplate extends PpciModel
      * @param [type] $protocol_id
      * @return void
      */
-    function getTotalListForProtocol ($protocol_id) {
-        $sql = "select m. measure_template_id, m.measure_template_name,
+    function getTotalListForProtocol($protocol_id)
+    {
+        $sql = "SELECT m. measure_template_id, m.measure_template_name,
                 taxon_id, scientific_name, common_name
                 , protocol_id
                 from measure_template m
                 join taxon using (taxon_id)
-                left outer join protocol_measure p on (m.measure_template_id = p.measure_template_id and p.protocol_id = :protocol_id)
+                left outer join protocol_measure p on (m.measure_template_id = p.measure_template_id and p.protocol_id = :protocol_id:)
                 order by measure_template_name";
-        return $this->getListeParamAsPrepared($sql, array("protocol_id"=>$protocol_id));
+        return $this->getListeParamAsPrepared($sql, array("protocol_id" => $protocol_id));
     }
 
     /**
@@ -74,16 +77,16 @@ class MeasureTemplate extends PpciModel
      * @param integer $parentValue
      * @return array
      */
-    function read($id, $parentValue = 0)
+    function read(int $id, bool $getDefault = true, $parentValue = 0): array
     {
         if ($id == 0) {
             return $this->getDefaultValue($parentValue);
         } else {
-            $sql = "select measure_template_id, measure_template_name, measure_template_schema
+            $sql = "SELECT measure_template_id, measure_template_name, measure_template_schema
                     , taxon_id, scientific_name, common_name
                     from measure_template
                     join taxon using (taxon_id)
-                    where measure_template_id = :id";
+                    where measure_template_id = :id:";
             return $this->lireParamAsPrepared($sql, array("id" => $id));
         }
     }
@@ -94,9 +97,9 @@ class MeasureTemplate extends PpciModel
      * @param string $order
      * @return array
      */
-    function getListe($order = "")
+    function getListe($order = ""): array
     {
-        $sql = "select measure_template_id, measure_template_name, measure_template_schema,
+        $sql = "SELECT measure_template_id, measure_template_name, measure_template_schema,
                 taxon_id, scientific_name
                 from measure_template
                 join taxon using(taxon_id)";

@@ -16,7 +16,7 @@ class Detection extends PpciModel
     private $sunset;
     private $sunrise;
 
-    private $sql = "select detection_id, individual_id, antenna_id,
+    private $sql = "SELECT detection_id, individual_id, antenna_id,
                   to_char(detection_date, :formatDate) as detection_date,
                   extract (epoch from detection_date) as date_epoch,
                   nb_events, duration, validity, signal_force, observation, daypart,
@@ -82,7 +82,7 @@ class Detection extends PpciModel
             $this->antenna = new Antenna;
         }
         if ($rewriteMode) {
-            $sql = "select detection_id from detection where individual_id = :individual_id:
+            $sql = "SELECT detection_id from detection where individual_id = :individual_id:
                     and antenna_id = :antenna_id: and detection_date = :detection_date:";
             $databefore = $this->lireParamAsPrepared($sql, array(
                 "individual_id" => $data["individual_id"],
@@ -177,7 +177,7 @@ class Detection extends PpciModel
         /**
          * Calculate the total number of items
          */
-        $sql = "select count(*) as nb
+        $sql = "SELECT count(*) as nb
             from detection
             join antenna using (antenna_id)
             join station using (station_id)

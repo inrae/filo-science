@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 /**
@@ -16,7 +18,7 @@ class Param extends PpciModel
      * @param 
      * @param string $tablename
      */
-    function __construct($bdd, $tablename)
+    function __construct($tablename)
     {
         $this->table = $tablename;
         $this->fields = array(
@@ -36,9 +38,9 @@ class Param extends PpciModel
     function getIdFromName($name, $withCreate = false)
     {
         if (!empty($name)) {
-            $sql = "select " . $this->table . "_id  as id
+            $sql = "SELECT " . $this->table . "_id  as id
                 from $this->table
-                where " . $this->table . "_name = :name";
+                where " . $this->table . "_name = :name:";
             $data = $this->lireParamAsPrepared($sql, array("name" => $name));
             if ($withCreate && !$data["id"]) {
                 $data["id"] = $this->ecrire(array($this->table . "_name" => $name));

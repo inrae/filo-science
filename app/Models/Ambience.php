@@ -7,7 +7,7 @@ use Ppci\Models\PpciModel;
 class Ambience extends PpciModel
 {
 
-    private $sql = "select a.*
+    private $sql = "SELECT a.*
                     ,o.operation_name, sequence_number
                     ,speed_name, shady_name, clogging_name, facies_name, sinuosity_name
                     ,localisation_name, turbidity_name, situation_name, flow_trend_name

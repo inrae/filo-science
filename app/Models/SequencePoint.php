@@ -1,18 +1,20 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
 
 class SequencePoint extends PpciModel
 {
 
-    private $sql = "select sequence_point_id, sequence_id, localisation_id, facies_id
+    private $sql = "SELECT sequence_point_id, sequence_id, localisation_id, facies_id
                     , fish_number, sequence_point_number
                     ,localisation_name, facies_name
                     from sequence_point
                     left outer join localisation using (localisation_id)
                     left outer join facies using (facies_id)";
 
-    function __construct(, ?array $param = array())
+    function __construct()
     {
         $this->table = "sequence_point";
         $this->fields = array(
@@ -34,7 +36,7 @@ class SequencePoint extends PpciModel
      */
     function getListFromSequence($sequence_id)
     {
-        $where = " where sequence_id = :sequence_id";
+        $where = " where sequence_id = :sequence_id:";
         return ($this->getListeParamAsPrepared($this->sql . $where, array("sequence_id" => $sequence_id)));
     }
 
@@ -46,8 +48,8 @@ class SequencePoint extends PpciModel
      */
     function getLastNumberForSequence(int $sequence_id): int
     {
-        $sql = "select max(sequence_point_number) as sequence_point_number from sequence_point
-                where sequence_id = :id";
+        $sql = "SELECT max(sequence_point_number) as sequence_point_number from sequence_point
+                where sequence_id = :id:";
         $data = $this->lireParamAsPrepared($sql, array("id" => $sequence_id));
         $data["sequence_point_number"] > 0 ? $spn = $data["sequence_point_number"] : $spn = 0;
         return $spn;
@@ -60,7 +62,7 @@ class SequencePoint extends PpciModel
      * @param integer|null $sequence_id
      * @return array
      */
-    function read( $id, $getDefault = false,  $sequence_id = ""): array
+    function read($id, $getDefault = false,  $sequence_id = ""): array
     {
         $data = array();
         if ($id > 0) {

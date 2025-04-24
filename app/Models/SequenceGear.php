@@ -1,9 +1,12 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use Ppci\Models\PpciModel;
+
 class SequenceGear extends PpciModel
 {
-    private $sql = "select sequence_gear_id, voltage, amperage, gear_nb, depth
+    private $sql = "SELECT sequence_gear_id, voltage, amperage, gear_nb, depth
                     ,sequence_id ,sequence_name
                     ,gear_id, gear_name
                     ,gear_method_id, gear_method_name, business_code
@@ -36,8 +39,8 @@ class SequenceGear extends PpciModel
             "voltage" => array("type" => 1),
             "amperage" => array("type" => 1),
             "depth" => array("type" => 1),
-            "uuid" => array("type"=>0),
-            "business_code"=>array("type"=>0)
+            "uuid" => array("type" => 0),
+            "business_code" => array("type" => 0)
         );
         parent::__construct();
     }
@@ -49,7 +52,7 @@ class SequenceGear extends PpciModel
      */
     function getListFromSequence($sequence_id)
     {
-        $where = " where sequence_id = :sequence_id";
+        $where = " where sequence_id = :sequence_id:";
         return ($this->getListeParamAsPrepared($this->sql . $where, array("sequence_id" => $sequence_id)));
     }
 }

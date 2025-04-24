@@ -1,5 +1,7 @@
 <?php 
 namespace App\Models;
+
+use Ppci\Libraries\PpciException;
 use Ppci\Models\PpciModel;
 /**
  * Execute the import
@@ -49,7 +51,7 @@ class ImportExec {
                 }
                 $dataParse[] = $row;
                 $this->validLines ++;
-            } catch (FunctionTypeException $fe) {
+            } catch (PpciException $fe) {
                 $this->message[] = array("lineNumber"=>$this->readLines, "content"=>$fe->getMessage());
             }
         }
