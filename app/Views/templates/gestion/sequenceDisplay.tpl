@@ -67,12 +67,12 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<a href="campaignDisplay&campaign_id={$data.campaign_id}">
+		<a href="campaignDisplay?campaign_id={$data.campaign_id}">
 			<img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$data.campaign_name}
 		</a>
 		&nbsp;
 
-		<a href="operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
+		<a href="operationDisplay?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
 			<img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t} &nbsp;{$data.operation_name}
 		</a>
 	</div>
@@ -80,8 +80,7 @@
 <div class="row">
 	<h2 class="col-sm-4">{t}Séquence{/t}&nbsp;{$data.sequence_number}</h2>
   <div class="col-sm-2 col-sm-offset-2">
-		<form id="seq_duplicate" method="POST" action="index.php">
-      <input type="hidden" name="module" value="sequenceDuplicate">
+		<form id="seq_duplicate" method="POST" action="sequenceDuplicate">
       <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
       <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
       <input type="hidden" name="operation_id" value="{$data.operation_id}">
@@ -89,8 +88,7 @@
 		{$csrf}</form>
 	</div>
 	<div class="col-sm-2 ">
-		<form id="seq_attach" method="POST" action="index.php">
-      <input type="hidden" name="module" value="sequenceAddTelemetryFish">
+		<form id="seq_attach" method="POST" action="sequenceAddTelemetryFish">
       <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
       <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
       <input type="hidden" name="operation_id" value="{$data.operation_id}">

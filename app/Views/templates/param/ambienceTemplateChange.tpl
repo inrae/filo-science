@@ -26,10 +26,9 @@
 <div class="row">
   <div class="col-md-6">
     <a href="ambienceTemplateList">{t}Retour à la liste{/t}</a>
-    <form class="form-horizontal protoform" id="metadataForm" method="post" action="index.php"
+    <form class="form-horizontal " id="metadataForm" method="post" action="ambienceTemplateWrite"
       enctype="multipart/form-data">
       <input type="hidden" name="moduleBase" value="ambienceTemplate">
-      <input type="hidden" id="action" name="action" value="Write">
       <input type="hidden" name="ambience_template_id" value="{$data.ambience_template_id}">
       <input type="hidden" name="ambience_template_schema" id="metadataField" value="{$data.ambience_template_schema}">
       <div class="form-group">

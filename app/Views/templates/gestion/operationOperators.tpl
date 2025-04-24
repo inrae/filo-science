@@ -1,8 +1,7 @@
 <div class="col-md-12">
     <fieldset>
         <legend>{t}Opérateurs{/t}</legend>
-        <form id="operators" method="post" action="index.php">
-            <input type="hidden" name="module" value="operationOperatorsChange">
+        <form id="operators" method="post" action="operationOperatorsChange">
             <input type="hidden" name="activeTab" value="tab-operator">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
             <input type="hidden" name="campaign_id" value="{$data.campaign_id}">

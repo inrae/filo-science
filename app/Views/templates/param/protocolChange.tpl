@@ -1,16 +1,15 @@
 <h2>{t}Création - Modification d'un protocole{/t}</h2>
 <a href="protocolList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
 {if $data.protocol_id > 0}
-	&nbsp;<a href="protocolDisplay&protocol_id={$data.protocol_id}">
+	&nbsp;<a href="protocolDisplay?protocol_id={$data.protocol_id}">
 			<img src="display/images/display.png" height="25">{t}Retour au détail{/t}
 		</a>
 {/if}
 <div class="row">
 	<div class="col-md-6">
 
-		<form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+		<form class="form-horizontal " id="paramForm" method="post" action="protocolWrite">
 			<input type="hidden" name="moduleBase" value="protocol">
-			<input type="hidden" name="action" value="Write">
 			<input type="hidden" name="protocol_id" value="{$data.protocol_id}">
 			<div class="form-group">
 				<label for="paramName"  class="control-label col-md-4"><span class="red">*</span> {t}Libellé :{/t}</label>

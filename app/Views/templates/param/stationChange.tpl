@@ -10,9 +10,8 @@
     <div class="col-md-6">
 
 
-        <form class="form-horizontal protoform" id="stationForm" method="post" action="index.php">
+        <form class="form-horizontal " id="stationForm" method="post" action="stationWrite">
             <input type="hidden" name="moduleBase" value="station">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="station_id" value="{$data.station_id}">
             <div class="form-group">
                 <label for="stationName"  class="control-label col-md-4"><span class="red">*</span> {t}Nom :{/t}</label>

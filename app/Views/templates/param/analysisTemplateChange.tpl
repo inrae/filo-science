@@ -27,7 +27,7 @@
     <div class="col-md-6">
         <a href="analysisTemplateList">{t}Retour à la liste{/t}</a>
 
-        <form class="form-horizontal protoform" id="metadataForm" method="post" action="index.php" enctype="multipart/form-data">
+        <form class="form-horizontal " id="metadataForm" method="post" action="" enctype="multipart/form-data">
             <input type="hidden" name="moduleBase" value="analysisTemplate">
             <input type="hidden" id="action" name="action" value="Write">
             <input type="hidden" name="analysis_template_id" value="{$data.analysis_template_id}">

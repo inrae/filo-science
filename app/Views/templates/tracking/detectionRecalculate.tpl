@@ -14,8 +14,7 @@
 <div class="bg-info">{t}Attention : le calcul peut être long !{/t}</div>
 <div class="row">
 	<div class="col-lg-6 col-md-12">
-		<form class="form-horizontal protoform" id="detectionRecalculate" action="index.php" method="POST">
-			<input id="moduleSearch" type="hidden" name="module" value="detectionCalculateSunExec">
+		<form class="form-horizontal " id="detectionRecalculate" action="detectionCalculateSunExec" method="POST">
       <div class="form-group">
 				<label for="project_id" class="col-md-2 control-label">{t}Projet :{/t}</label>
 				<div class="col-md-4">

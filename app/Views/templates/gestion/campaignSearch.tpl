@@ -7,8 +7,7 @@ $(document).ready(function(){
 });
 </script>
 <div class="row">
-    <form class="form-horizontal protoform" id="campaignSearch" action="index.php" method="GET">
-        <input id="module" type="hidden" name="module" value="campaignList">
+    <form class="form-horizontal " id="campaignSearch" action="campaignList" method="GET">
         <input id="isSearch" type="hidden" name="isSearch" value="1">
         <div class="form-group">
             <label for="project_id" class="col-md-2 control-label">{t}Projet :{/t}</label>

@@ -25,7 +25,7 @@
                     {if $rights.param == 1}
                     <td class="center">
                         <a
-                            href="importTypeChange&import_type_id={$import.import_type_id}">
+                            href="importTypeChange?import_type_id={$import.import_type_id}">
                             <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
                         </a>
                     </td>

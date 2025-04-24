@@ -1,6 +1,6 @@
 <h2>{t}Modification manuelle d'une détection{/t}</h2>
 <div class="row">
-    <a href="individualTrackingList&individual_id={$data.individual_id}">
+    <a href="individualTrackingList?individual_id={$data.individual_id}">
         <img src="display/images/list.png" height="25">
         {t}Retour à la liste{/t}
     </a>
@@ -29,9 +29,8 @@
 </div>
 <div class="row">
     <div class="col-md-8">
-        <form class="form-horizontal protoform" id="probe_parameterForm" method="post" action="index.php">
+        <form class="form-horizontal " id="probe_parameterForm" method="post" action="detectionWrite">
             <input type="hidden" name="moduleBase" value="detection">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="detection_id" value="{$data.detection_id}">
             <input type="hidden" name="individual_id" value="{$data.individual_id}">
             <fieldset>

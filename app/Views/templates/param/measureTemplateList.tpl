@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-6">
         {if $rights.param == 1}
-            <a href="measureTemplateChange&measure_template_id=0">
+            <a href="measureTemplateChange?measure_template_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau...{/t}
             </a>
@@ -21,7 +21,7 @@
                         <td class="center">{$row["measure_template_id"]}</td>
                         <td>
                             {if $rights.param == 1}
-                                <a href="measureTemplateChange&measure_template_id={$row.measure_template_id}">
+                                <a href="measureTemplateChange?measure_template_id={$row.measure_template_id}">
                                 {$row["measure_template_name"]}
                             {else}
                                 {$row["measure_template_name"]}

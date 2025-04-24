@@ -11,9 +11,8 @@
         {include file="gestion/campaignSearch.tpl" }
     </div>
 </div>
-<form id="exportForm" method="post" action="index.php">
+<form id="exportForm" method="post" action="exportExec">
     <input type="hidden" name="moduleBase" value="export">
-    <input type="hidden" name="action" value="Exec">
     <input type="hidden" name="returnko" value="campaignList">
     <input type="hidden" name="translator" value="ti_campaign">
 
@@ -21,7 +20,7 @@
         <div class="col-md-6">
             {if $rights.manage == 1}
                 <img src="display/images/new.png" height="25">
-                <a href="campaignChange&campaign_id=0">
+                <a href="campaignChange?campaign_id=0">
                     {t}Nouveau...{/t}
                 </a>
             {/if}
@@ -42,7 +41,7 @@
                             <tr>
                                 <td class="center">{$row["campaign_id"]}</td>
                                 <td>
-                                    <a href="campaignDisplay&campaign_id={$row["campaign_id"]}">
+                                    <a href="campaignDisplay?campaign_id={$row["campaign_id"]}">
                                         {$row["campaign_name"]}
                                 </a>
                                 </td>
@@ -60,7 +59,7 @@
         </div>
     </div>
     <div class="row  col-md-6">
-        <div class="form-horizontal protoform">
+        <div class="form-horizontal ">
             <div class="form-group">
                 <label for="export_model_name1" class="control-label col-md-4">
                     {t}Modèle d'export :{/t}
@@ -85,10 +84,9 @@
     <div class="row">
         <fieldset class="col-md-6">
             <legend>{t}Importation de campagnes précédemment exportées{/t}</legend>
-            <form class="form-horizontal protoform" id="importExecForm" method="post" action="index.php"
+            <form class="form-horizontal " id="importExecForm" method="post" action="exportImportExec"
             enctype="multipart/form-data">
                 <input type="hidden" name="moduleBase" value="export">
-                <input type="hidden" name="action" value="ImportExec">
                 <input type="hidden" name="project_id" value="{$searchCampaign.project_id}">
                 <input type="hidden" name="returnko" value="campaignList">
                 <input type="hidden" name="returnok" value="campaignList">

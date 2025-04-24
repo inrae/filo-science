@@ -5,16 +5,15 @@
         {t}Retour à la liste{/t}
     </a>
     &nbsp;
-    <a href="stationTrackingDisplay&station_id={$station.station_id}">
+    <a href="stationTrackingDisplay?station_id={$station.station_id}">
         <img src="display/images/display.png" height="25">
         {t}Retour à la station{/t}
     </a>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="probeForm" method="post" action="index.php">
+        <form class="form-horizontal " id="probeForm" method="post" action="probeWrite">
             <input type="hidden" name="moduleBase" value="probe">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="station_id" value="{$data.station_id}">
             <input type="hidden" name="probe_id" value="{$data.probe_id}">
             <div class="form-group">

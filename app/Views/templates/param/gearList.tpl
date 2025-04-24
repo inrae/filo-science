@@ -2,7 +2,7 @@
 	<div class="row">
 	<div class="col-md-6">
 {if $rights.param == 1}
-<a href="gearChange&gear_id=0">
+<a href="gearChange?gear_id=0">
 <img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
@@ -23,7 +23,7 @@
                 <td class="center">{$row["gear_id"]}</td>
                 <td>
                     {if $rights.param == 1}
-                    <a href="gearChange&gear_id={$row["gear_id"]}">
+                    <a href="gearChange?gear_id={$row["gear_id"]}">
                     {$row["gear_name"]}
                     {else}
                     {$row["gear_name"]}

@@ -32,26 +32,25 @@ $(document).ready(function() {
 });
 </script>
 <div class="row">
-    <a href="campaignDisplay&campaign_id={$dataParent.campaign_id}">
+    <a href="campaignDisplay?campaign_id={$dataParent.campaign_id}">
         <img src="display/images/display-red.png" height="25">
         {t}Retour à la campagne{/t}&nbsp;{$sequence.campaign_name}
     </a>
     &nbsp;
-    <a href="operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
+    <a href="operationDisplay?campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
             <img src="display/images/display-green.png" height="25">
             {t}Retour à l'opération{/t} {$sequence.operation_name}
     </a>
     &nbsp;
-    <a href="sequenceDisplay&sequence_id={$sequence.sequence_id}&activeTab=tab-analysis">
+    <a href="sequenceDisplay?sequence_id={$sequence.sequence_id}&activeTab=tab-analysis">
         <img src="display/images/display.png" height="25">
         {t}Retour à la séquence{/t}&nbsp;{$sequence.sequence_number}
     </a>
 </div>
 
 <div class="row">
-    <form class="form-horizontal protoform col-md-6" id="paramForm" method="post" action="index.php">
+    <form class="form-horizontal  col-md-6" id="paramForm" method="post" action="analysisWrite">
         <input type="hidden" name="moduleBase" value="analysis">
-        <input type="hidden" id="action" name="action" value="Write">
         <input type="hidden" name="analysis_id" value="{$data.analysis_id}">
         <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
         <input type="hidden" name="activeTab" value="tab-analysis">

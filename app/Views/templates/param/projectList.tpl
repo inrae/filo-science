@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-6">
 		{if $rights.param == 1}
-			<a href="projectChange&project_id=0">
+			<a href="projectChange?project_id=0">
 				<img src="display/images/new.png" height="25">
 				{t}Nouveau...{/t}
 			</a>
@@ -26,7 +26,7 @@
 				{section name=lst loop=$data}
 					<tr>
 						<td>
-							<a href="projectDisplay&project_id={$data[lst].project_id}">
+							<a href="projectDisplay?project_id={$data[lst].project_id}">
 								{$data[lst].project_name}
 							</a>
 						</td>
@@ -36,7 +36,7 @@
 						<td>{$data[lst].groupe}</td>
 						{if $rights.param == 1}
 							<td class="center">
-								<a href="projectChange&project_id={$data[lst].project_id}" title="{t}Modifier{/t}">
+								<a href="projectChange?project_id={$data[lst].project_id}" title="{t}Modifier{/t}">
 									<img src="display/images/edit.gif" height="25">
 								</a>
 							</td>

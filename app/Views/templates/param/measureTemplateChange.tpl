@@ -26,14 +26,12 @@
             var name = $(this).val();
             if (name.length > 2) {
                 var options = "";
-                var url = "index.php";
-                var data = { "module": "taxonSearchAjax",
-                            "name":name,
+                var data = { "name":name,
                             "freshwater" : false,
                             "noFreshcode" : 1
                         };
                 $.ajax( {
-                    url: "index.php",
+                    url: "taxonSearchAjax",
                     data: data
                 })
                 .done (function(data) {
@@ -63,9 +61,8 @@
             {t}Retour à la liste{/t}
         </a>
 
-        <form class="form-horizontal protoform" id="metadataForm" method="post" action="index.php" enctype="multipart/form-data">
+        <form class="form-horizontal " id="metadataForm" method="post" action="measureTemplateWrite" enctype="multipart/form-data">
             <input type="hidden" name="moduleBase" value="measureTemplate">
-            <input type="hidden" id="action" name="action" value="Write">
             <input type="hidden" name="measure_template_id" value="{$data.measure_template_id}">
             <input type="hidden" name="measure_template_schema" id="metadataField" value="{$data.measure_template_schema}">
             <div class="form-group">

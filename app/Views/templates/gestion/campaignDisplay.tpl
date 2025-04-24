@@ -12,12 +12,12 @@
         <a href="campaignList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
         {if $rights.manage == 1}
         &nbsp;
-        <a href="campaignChange&campaign_id=0">
+        <a href="campaignChange?campaign_id=0">
             <img src="display/images/new.png" height="25">
             {t}Nouvelle campagne{/t}
         </a>
         &nbsp;
-        <a href="campaignChange&campaign_id={$data.campaign_id}">
+        <a href="campaignChange?campaign_id={$data.campaign_id}">
             <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
         {/if}
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-md-2">
                 <img src="display/images/new.png" height="25">
-        <a href="operationChange&operation_id=0&campaign_id={$data.campaign_id}">
+        <a href="operationChange?operation_id=0&campaign_id={$data.campaign_id}">
             {t}Nouvelle opération...{/t}
         </a>
             </div>
@@ -59,9 +59,8 @@
         </div>
 
         {/if}
-        <form id="exportForm" method="post" action="index.php">
+        <form id="exportForm" method="post" action="exportExec">
             <input type="hidden" name="moduleBase" value="export">
-            <input type="hidden" name="action" value="Exec">
             <input type="hidden" name="export_model_name" value="operation">
             <input type="hidden" name="returnko" value="campaignDisplay">
             <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
@@ -83,7 +82,7 @@
                     {foreach $operations as $row}
                         <tr>
                             <td>
-                                <a href="operationDisplay&operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
+                                <a href="operationDisplay?operation_id={$row.operation_id}&campaign_id={$data.campaign_id}">
                                     {$row.operation_name}
                                 </a>
 
@@ -113,10 +112,9 @@
 </div>
 {if $rights.manage == 1}
     <div class="row">
-        <form class="form-horizontal protoform col-md-6" id="importExecForm" method="post" action="index.php"
+        <form class="form-horizontal  col-md-6" id="importExecForm" method="post" action="exportImportExec"
         enctype="multipart/form-data">
             <input type="hidden" name="moduleBase" value="export">
-            <input type="hidden" name="action" value="ImportExec">
             <input type="hidden" name="export_model_name" value="operation">
             <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
             <input type="hidden" name="returnko" value="campaignDisplay">

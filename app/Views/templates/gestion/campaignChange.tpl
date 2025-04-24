@@ -3,9 +3,8 @@
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="campaignWrite">
             <input type="hidden" name="moduleBase" value="campaign">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
             <div class="form-group">
                 <label for="paramName"  class="control-label col-md-4"><span class="red">*</span> {t}Nom de la campagne :{/t}</label>

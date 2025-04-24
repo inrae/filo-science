@@ -1,20 +1,19 @@
 <h2>{t}Rattachement d'un engin à une séquence{/t}</h2>
-<a href="campaignDisplay&campaign_id={$sequence.campaign_id}"><img
+<a href="campaignDisplay?campaign_id={$sequence.campaign_id}"><img
     src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$sequence.campaign_name}</a>
 &nbsp;
 <a
-href="operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
+href="operationDisplay?campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
 <img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t}&nbsp;{$sequence.operation_name}</a>
 
-<a href="sequenceDisplay&sequence_id={$sequence.sequence_id}&activeTab=tab-gear">
+<a href="sequenceDisplay?sequence_id={$sequence.sequence_id}&activeTab=tab-gear">
     <img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}
 </a>
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="sequenceGearWrite">
             <input type="hidden" name="moduleBase" value="sequenceGear">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="sequence_gear_id" value="{$data.sequence_gear_id}">
             <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
             <div class="form-group">

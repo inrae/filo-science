@@ -6,15 +6,14 @@
     </a>
     &nbsp;
     <img src="display/images/display.png" height="25">
-    <a href="importDescriptionDisplay&import_description_id={$data.import_description_id}">
+    <a href="importDescriptionDisplay?import_description_id={$data.import_description_id}">
         {t}Retour au détail{/t}
     </a>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="importColumnForm" method="post" action="index.php">
+        <form class="form-horizontal " id="importColumnForm" method="post" action="importColumnWrite">
             <input type="hidden" name="moduleBase" value="importColumn">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="import_description_id" value="{$data.import_description_id}">
             <input type="hidden" name="import_column_id" value="{$data.import_column_id}">
             <div class="form-group">

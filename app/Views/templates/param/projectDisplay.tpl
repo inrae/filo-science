@@ -2,7 +2,7 @@
 <a href="projectList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
 {if $rights.param == 1}
     &nbsp;
-    <a href="projectChange&project_id={$data.project_id}">
+    <a href="projectChange?project_id={$data.project_id}">
         <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
     </a>
 {/if}

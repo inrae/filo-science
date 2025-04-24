@@ -17,18 +17,17 @@
 
 <h2>{t}Liste des modèles d'exportation des données{/t}</h2>
 
-<form id="exportForm" method="post" action="index.php">
+<form id="exportForm" method="post" action="exportExec">
     <div class="row">
         <div class="col-md-6">
             {if $rights.param == 1}
-                <a href="exportModelChange&export_model_id=0">
+                <a href="exportModelChange?export_model_id=0">
                     <img src="display/images/new.png" height="25">
                     {t}Nouveau...{/t}
                 </a>
             {/if}
 
             <input type="hidden" name="moduleBase" value="export">
-            <input type="hidden" name="action" value="Exec">
             <input type="hidden" name="export_model_name" value="export_model">
             <input type="hidden" name="returnko" value="exportModelList">
             <table id="paramList" class="table table-bordered table-hover datatable-nopaging display" data-order='[["1","asc"]]'>
@@ -51,7 +50,7 @@
                             <td class="center">{$row["export_model_id"]}</td>
                             <td>
                                 {if $rights.param == 1}
-                                    <a href="exportModelDisplay&export_model_id={$row.export_model_id}">
+                                    <a href="exportModelDisplay?export_model_id={$row.export_model_id}">
                                     {$row["export_model_name"]}
                                 {else}
                                     {$row["export_model_name"]}
@@ -59,7 +58,7 @@
                             </td>
                             {if $rights.param == 1}
                                 <td class="center">
-                                    <a href="exportModelChange&export_model_id={$row.export_model_id}">
+                                    <a href="exportModelChange?export_model_id={$row.export_model_id}">
                                         <img src="display/images/edit.gif" height="25">
                                     </a>
                                 </td>
@@ -88,8 +87,8 @@
 <div class="row">
     <fieldset class="col-md-6">
         <legend>{t}Importer des modèles depuis un fichier JSON{/t}</legend>
-        <form id="importForm" class="form-horizontal protoform" method="post"
-        action="index.php" enctype="multipart/form-data">
+        <form id="importForm" class="form-horizontal " method="post"
+        action="" enctype="multipart/form-data">
         <input type="hidden" name="export_model_name" value="export_model">
         <div class="form-group">
             <label for="fileName" class="control-label col-md-4">

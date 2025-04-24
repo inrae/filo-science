@@ -7,16 +7,15 @@
     {if $data.import_description_id > 0}
     &nbsp;
     <img src="display/images/display.png" height="25">
-    <a href="importDescriptionDisplay&import_description_id={$data.import_description_id}">
+    <a href="importDescriptionDisplay?import_description_id={$data.import_description_id}">
         {t}Retour au détail{/t}
     </a>
     {/if}
 </div>
 <div class="row">
         <div class="col-md-6">
-            <form class="form-horizontal protoform" id="importForm" method="post" action="index.php">
+            <form class="form-horizontal " id="importForm" method="post" action="importDescriptionWrite">
                 <input type="hidden" name="moduleBase" value="importDescription">
-                <input type="hidden" name="action" value="Write">
                 <input type="hidden" name="import_description_id" value="{$data.import_description_id}">
                 <div class="form-group">
                     <label for="import_type_id" class="control-label col-md-4">

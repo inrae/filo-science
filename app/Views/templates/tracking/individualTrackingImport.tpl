@@ -24,9 +24,8 @@
 {/if}
 <div class="row">
   <div class="col-md-6">
-    <form class="form-horizontal protoform" id="importForm" method="post" action="index.php"
+    <form class="form-horizontal " id="importForm" method="post" action="individualTrackingImportExec"
       enctype="multipart/form-data">
-      <input type="hidden" name="module" value="individualTrackingImportExec">
       <div class="form-group">
         <label for="FileName" class="control-label col-md-4">
           <span class="red">*</span> {t}Fichier à importer :{/t}

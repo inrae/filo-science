@@ -58,7 +58,7 @@
         </a>
         {if $rights.manage == 1}
             &nbsp;
-            <a href="stationTrackingChange&station_id={$data.station_id}">
+            <a href="stationTrackingChange?station_id={$data.station_id}">
                 <img src="display/images/edit.gif" height="25">
                 {t}Modifier...{/t}
             </a>

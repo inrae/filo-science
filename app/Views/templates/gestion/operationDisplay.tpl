@@ -63,7 +63,7 @@
 </script>
 <div class="row">
      <div class="col-md-8">
-            <a href="campaignDisplay&campaign_id={$data.campaign_id}"><img
+            <a href="campaignDisplay?campaign_id={$data.campaign_id}"><img
                     src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t} {$data.campaign_name}</a>
         </div>
 
@@ -78,9 +78,8 @@
             </a>
         </div>
         <div class="col-sm-2">
-            <form id="duplicate" method="post" action="index.php">
+            <form id="duplicate" method="post" action="Duplicate">
                 <input type="hidden" name="moduleBase" value="operation">
-                <input type="hidden" name="action" value="Duplicate">
                 <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
                 <input type="hidden" name="operation_id" value="{$data.operation_id}">
                 <button type="submit" class="btn btn-warning">Dupliquer</button>

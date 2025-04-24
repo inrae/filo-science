@@ -1,6 +1,6 @@
 <div class="row">
         <fieldset class="col-md-12">
-            <a href="sequencePointChange&sequence_id={$data.sequence_id}&sequence_point_id=0">
+            <a href="sequencePointChange?sequence_id={$data.sequence_id}&sequence_point_id=0">
                 <img src="display/images/new.png" height="25">{t}Nouveau point de prélèvement{/t}
             </a>
             <div class="col-md-12">
@@ -17,7 +17,7 @@
                         {foreach $points as $point}
                         <tr>
                             <td class="center">
-                                <a href="sequencePointChange&sequence_id={$point.sequence_id}&sequence_point_id={$point.sequence_point_id}">
+                                <a href="sequencePointChange?sequence_id={$point.sequence_id}&sequence_point_id={$point.sequence_point_id}">
                                     {$point.sequence_point_number}
                                 </a>
                             </td>

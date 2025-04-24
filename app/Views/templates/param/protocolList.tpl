@@ -2,7 +2,7 @@
 	<div class="row">
 	<div class="col-md-6">
 {if $rights.manage == 1}
-<a href="protocolChange&protocol_id=0">
+<a href="protocolChange?protocol_id=0">
 <img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
@@ -25,7 +25,7 @@
             <tr>
                 <td class="center">{$row["protocol_id"]}</td>
                 <td>
-                    <a href="protocolDisplay&protocol_id={$row["protocol_id"]}">
+                    <a href="protocolDisplay?protocol_id={$row["protocol_id"]}">
                     {$row["protocol_name"]}
                 </td>
                 <td class="textareaDisplay">{$row["protocol_description"]}</td>

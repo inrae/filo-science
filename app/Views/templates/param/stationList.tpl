@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-12">
         {if $rights.manage == 1}
-            <a href="stationChange&station_id=0">
+            <a href="stationChange?station_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau...{/t}
             </a>
@@ -28,7 +28,7 @@
                         <td>{$data[lst].station_id}</td>
                         <td>
                             {if $rights.manage == 1}
-                                <a href="stationChange&station_id={$data[lst].station_id}">
+                                <a href="stationChange?station_id={$data[lst].station_id}">
                                 {$data[lst].station_name}
                             </a>
                             {else}
@@ -54,9 +54,7 @@
     <div class="row col-md-6">
         <fieldset>
             <legend>{t}Importer des stations depuis un fichier CSV{/t}</legend>
-            <form class="form-horizontal protoform" id="metadataImport" method="post" action="index.php" enctype="multipart/form-data">
-
-                <input type="hidden" name="module" value="stationImport">
+            <form class="form-horizontal " id="metadataImport" method="post" action="stationImport" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="upfile" class="control-label col-md-4"><span class="red">*</span> {t}Nom du fichier à importer (CSV) :{/t}</label>
                     <div class="col-md-8">

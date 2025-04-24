@@ -1,6 +1,6 @@
 
 <div class="row">
-    <a href="sequenceChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id=0">
+    <a href="sequenceChange?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id=0">
         <img src="display/images/new.png" height="25">{t}Nouvelle séquence{/t}
     </a>
 </div>
@@ -26,7 +26,7 @@
                         {foreach $sequences as $sequence}
                         <tr>
                             <td class="center">
-                                <a href="sequenceDisplay&sequence_id={$sequence.sequence_id}&operation_id={$data.operation_id}&campaign_id={$data.campaign_id}">
+                                <a href="sequenceDisplay?sequence_id={$sequence.sequence_id}&operation_id={$data.operation_id}&campaign_id={$data.campaign_id}">
                                     {$sequence.sequence_number}
                                 </a>
                             </td>

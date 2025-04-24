@@ -1,7 +1,7 @@
 
 <div class="row">
     <fieldset class="col-md-12">
-        <a href="sampleChange&sequence_id={$data.sequence_id}&sample_id=0">
+        <a href="sampleChange?sequence_id={$data.sequence_id}&sample_id=0">
             <img src="display/images/new.png" height="25">{t}Nouveau lot{/t}
         </a>
         <div class="col-md-12">
@@ -24,7 +24,7 @@
                     <tr>
                         <td class="center">{$sample.sample_uid}</td>
                         <td class="center">
-                            <a href="sampleChange&sequence_id={$sample.sequence_id}&sample_id={$sample.sample_id}">
+                            <a href="sampleChange?sequence_id={$sample.sequence_id}&sample_id={$sample.sample_id}">
                                 {$sample.taxon_name}
                             </a>
                         </td>

@@ -1,7 +1,7 @@
 <h2>{t}Liste des paramètres enregistrés par les sondes{/t}</h2>
 <div class="col-md-6">
         {if $rights.manage == 1}
-        <a href="parameterMeasureTypeChange&parameter_measure_type_id=0">
+        <a href="parameterMeasureTypeChange?parameter_measure_type_id=0">
             <img src="display/images/new.png" height="25">
             {t}Nouveau...{/t}
         </a>
@@ -19,7 +19,7 @@
                 <tr>
                     <td class="center">
                         {if $rights.manage == 1}
-                            <a href="parameterMeasureTypeChange&parameter_measure_type_id={$parameter.parameter_measure_type_id}" title="{t}Modifier{/t}">
+                            <a href="parameterMeasureTypeChange?parameter_measure_type_id={$parameter.parameter_measure_type_id}" title="{t}Modifier{/t}">
                                 {$parameter.parameter_measure_type_id}
                             </a>
                         {else}

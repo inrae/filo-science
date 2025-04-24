@@ -9,8 +9,8 @@
         function getDescription() { 
             var function_type_id = $("#function_type_id").val();
             $.ajax({
-                url: "index.php",
-                data: { "module": "functionTypeGetDescription", "function_type_id": function_type_id }
+                url: "functionTypeGetDescription",
+                data: { "function_type_id": function_type_id }
             })
             .done(function (value) {
                 var val = JSON.parse(value);
@@ -29,15 +29,14 @@
     </a>
     &nbsp;
     <img src="display/images/display.png" height="25">
-    <a href="importDescriptionDisplay&import_description_id={$data.import_description_id}">
+    <a href="importDescriptionDisplay?import_description_id={$data.import_description_id}">
         {t}Retour au détail{/t}
     </a>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="importFunctionForm" method="post" action="index.php">
+        <form class="form-horizontal " id="importFunctionForm" method="post" action="importFunctionWrite">
             <input type="hidden" name="moduleBase" value="importFunction">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="import_description_id" value="{$data.import_description_id}">
             <input type="hidden" name="import_function_id" value="{$data.import_function_id}">
             <div class="form-group">

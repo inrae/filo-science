@@ -6,7 +6,7 @@
     </a>
     {if $rights.param == 1}
         &nbsp;
-        <a href="exportModelChange&export_model_id={$data.export_model_id}">
+        <a href="exportModelChange?export_model_id={$data.export_model_id}">
             <img src="display/images/edit.gif" height="25">
             {t}Modifier{/t}
         </a>
@@ -100,9 +100,8 @@
     <div class="row">
         <fieldset class="col-md-6">
             <legend>{t}Exportation de l'ensemble des données concernées par le modèle{/t}</legend>
-            <form class="form-horizontal protoform" id="exportModelExec" method="post" action="index.php">
+            <form class="form-horizontal " id="exportModelExec" method="post" action="exportExec">
                 <input type="hidden" name="moduleBase" value="export">
-                <input type="hidden" name="action" value="Exec">
                 <input type="hidden" name="export_model_name" value="{$data.export_model_name}">
                 <input type="hidden" name="returnko" value="exportModelDisplay">
                 <div class="row">
@@ -116,10 +115,9 @@
     <div class="row">
         <fieldset class="col-md-6">
             <legend>{t}Importation de données précédemment exportées{/t}</legend>
-            <form class="form-horizontal protoform col-md-12" id="importExecForm" method="post" action="index.php"
+            <form class="form-horizontal  col-md-12" id="importExecForm" method="post" action="exportImportExec"
         enctype="multipart/form-data">
                 <input type="hidden" name="moduleBase" value="export">
-                <input type="hidden" name="action" value="ImportExec">
                 <input type="hidden" name="export_model_id" value="{$data.export_model_id}">
                 <input type="hidden" name="export_model_name" value="{$data.export_model_name}">
                 <input type="hidden" name="returnko" value="exportModelDisplay">

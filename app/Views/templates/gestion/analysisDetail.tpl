@@ -1,4 +1,4 @@
-<a href="analysisChange&sequence_id={$data.sequence_id}&analysis_id={$analysis.analysis_id}">
+<a href="analysisChange?sequence_id={$data.sequence_id}&analysis_id={$analysis.analysis_id}">
         <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
     </a>
 <div class="row">

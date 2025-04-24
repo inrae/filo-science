@@ -31,14 +31,12 @@
 			var name = $(this).val();
 			if (name.length > 2) {
 				var options = "";
-				var url = "index.php";
 				var data = {
-					"module": "taxonSearchAjax",
 					"name": name,
 					"freshwater": freshwater
 				};
 				$.ajax({
-					url: "index.php",
+					url: "taxonSearchAjax",
 					data: data
 				})
 					.done(function (data) {
@@ -77,8 +75,8 @@
 		 */
 		function setTaxonName(taxonId) {
 			$.ajax({
-				url: "index.php",
-				data: { "module": "taxonGetName", "taxon_id": taxonId }
+				url: "taxonGetName",
+				data: { "taxon_id": taxonId }
 			})
 				.done(function (value) {
 					if (value) {
@@ -131,8 +129,8 @@
 			 */
 			var code = $(this).text();
 			$.ajax({
-				url: "index.php",
-				data: { "module": "taxonGetFromCode", "freshwater": freshwater, "code": code }
+				url: "taxonGetFromCode",
+				data: { "freshwater": freshwater, "code": code }
 			})
 				.done(function (value) {
 					if (value) {
@@ -226,8 +224,8 @@
 			var taxonId = $("#taxon_id").val();
 			if (taxonId) {
 				$.ajax({
-					url: "index.php",
-					data: { "module": "protocolGetTaxonTemplate", "protocol_id": protocolId, "taxon_id": taxonId }
+					url: "protocolGetTaxonTemplate",
+					data: {  "protocol_id": protocolId, "taxon_id": taxonId }
 				})
 					.done(function (value) {
 						if (value.length > 2) {
@@ -305,31 +303,31 @@
 <div class="row">
 	<div class="col-md-12">
 		<span class="hidden-xs hidden-sm">
-			<a href="campaignDisplay&campaign_id={$sequence.campaign_id}"><img
+			<a href="campaignDisplay?campaign_id={$sequence.campaign_id}"><img
 					src="display/images/display-red.png" height="25">
 				{t}Retour à la campagne{/t} {$sequence.campaign_name}
 			</a>
 			&nbsp;
 			<a
-				href="operationDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
+				href="operationDisplay?campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&activeTab=tab-sequence">
 				<img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t}
 				{$sequence.operation_name}
 			</a>
 			&nbsp;
 		</span>
 		<a
-			href="sequenceDisplay&campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$sequence.sequence_id}&activeTab=tab-sample">
+			href="sequenceDisplay?campaign_id={$sequence.campaign_id}&operation_id={$sequence.operation_id}&sequence_id={$sequence.sequence_id}&activeTab=tab-sample">
 			<img src="display/images/display.png" height="25">{t}Retour à la séquence{/t} {$sequence.sequence_number}
 		</a>
 		<div class="hidden-xs hidden-sm"><br></div>
 		&nbsp;
 		<a
-			href="sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id=0">
+			href="sampleChange?sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id=0">
 			<img src="display/images/new.png" height="25">{t}Nouveau lot{/t}
 		</a>
 		&nbsp;
 		<a
-			href="sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id={$data.sample_id}&individual_id=0">
+			href="sampleChange?sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id={$data.sample_id}&individual_id=0">
 			<img src="display/images/fish.png" height="25">{t}Nouvelle capture{/t}
 		</a>
 
@@ -337,7 +335,7 @@
 
 </div>
 <div class="row col-md-12">
-	<form id="lotform" method="post" action="index.php">
+	<form id="lotform" method="post" action="sampleWrite">
 		<div class="col-md-6 form-horizontal">
 			{if !empty($grid) }
 			<fieldset>
@@ -364,7 +362,6 @@
 					</span>
 				</legend>
 				<input type="hidden" name="moduleBase" value="sample">
-				<input type="hidden" id="action" name="action" value="Write">
 				<input type="hidden" name="sequence_id" value="{$sequence.sequence_id}">
 				<input type="hidden" id="sample_id" name="sample_id" value="{$data.sample_id}">
 				<input type="hidden" name="taxon_id_new" value="0" id="taxon_id_new">
@@ -725,7 +722,7 @@
 				<tr>
 					<td class="center">
 						<a
-							href="sampleChange&sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id={$individual.sample_id}&individual_id={$individual.individual_id}">
+							href="sampleChange?sequence_id={$sequence.sequence_id}&operation_id={$sequence.operation_id}&sample_id={$individual.sample_id}&individual_id={$individual.individual_id}">
 							{$individual.individual_uid}
 						</a>
           </td>

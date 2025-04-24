@@ -3,9 +3,8 @@
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="pathologyWrite">
             <input type="hidden" name="moduleBase" value="pathology">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="pathology_id" value="{$data.pathology_id}">
             <div class="form-group">
                 <label for="paramName"  class="control-label col-md-4"><span class="red">*</span> {t}Libellé :{/t}</label>

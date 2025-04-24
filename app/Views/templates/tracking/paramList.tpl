@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-6">
 		{if $rights.param == 1}
-		<a href="{$tablename}Change&{$tablename}_id=0">
+		<a href="{$tablename}Change?{$tablename}_id=0">
 			<img src="display/images/new.png" height="25">
 			{t}Nouveau...{/t}
 		</a>
@@ -20,7 +20,7 @@
 					<td class="center">{$row[$fieldid]}</td>
 					<td>
 						{if $rights.param == 1}
-						<a href="{$tablename}Change&{$tablename}_id={$row[$fieldid]}">
+						<a href="{$tablename}Change?{$tablename}_id={$row[$fieldid]}">
 							{$row[$fieldname]}
 						</a>
 						{else}

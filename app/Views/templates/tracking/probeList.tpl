@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         {if $rights.manage == 1}
-            <a href="probeChange&station_id={$data.station_id}&probe_id=0">
+            <a href="probeChange?station_id={$data.station_id}&probe_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau...{/t}
             </a>
@@ -29,13 +29,13 @@
                         <td>{$probe.date_from}</td>
                         <td>{$probe.date_to}</td>
                         <td class="center">
-                            <a href="stationTrackingDisplay&station_id={$data.station_id}&probe_id={$probe.probe_id}">
+                            <a href="stationTrackingDisplay?station_id={$data.station_id}&probe_id={$probe.probe_id}">
                                 <img src="display/images/result.png" height="25">
                             </a>
                         </td>
                         {if $rights.manage == 1}
                             <td class="center">
-                                <a href="probeChange&station_id={$data.station_id}&probe_id={$probe.probe_id}" title="{t}Modifier{/t}">
+                                <a href="probeChange?station_id={$data.station_id}&probe_id={$probe.probe_id}" title="{t}Modifier{/t}">
                                     <img src="display/images/edit.gif" height="25">
                                 </a>
                             </td>
@@ -49,11 +49,11 @@
         {if isset($measures)}
             <fieldset>
                 <legend>{t}Mesures enregistrées{/t}</legend>
-                <a href="stationTrackingDisplay&station_id={$data.station_id}&probe_id={$probe.probe_id}&offset={$offset - 30}">
+                <a href="stationTrackingDisplay?station_id={$data.station_id}&probe_id={$probe.probe_id}&offset={$offset - 30}">
                     &lt;{t}précédent{/t}
                 </a>
                 &nbsp;
-                <a href="stationTrackingDisplay&station_id={$data.station_id}&probe_id={$probe.probe_id}&offset={$offset + 30}">
+                <a href="stationTrackingDisplay?station_id={$data.station_id}&probe_id={$probe.probe_id}&offset={$offset + 30}">
                     {t}suivant{/t}&gt;
                 </a>
 

@@ -1,15 +1,14 @@
 <h2>{t}Création - Modification d'une séquence{/t}</h2>
-<a href="campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
-<a href="operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}"><img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t}</a>
+<a href="campaignDisplay?campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
+<a href="operationDisplay?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}"><img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t}</a>
 {if $data.sequence_id > 0}
-<a href="sequenceDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id={$data.sequence_id}"><img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}</a>
+<a href="sequenceDisplay?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id={$data.sequence_id}"><img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}</a>
 {/if}
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="sequenceWrite">
             <input type="hidden" name="moduleBase" value="sequence">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
             <div class="form-group">

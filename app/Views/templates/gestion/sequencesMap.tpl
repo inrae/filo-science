@@ -15,7 +15,7 @@
             var sequenceDate = "{$sequence.date_start}";
             var marker = L.marker(latlong, {
                 /*title:  sequenceNumber+ ": " + sequenceDate,*/
-            }).bindPopup('<a href="index.php&module=sequenceDisplay&sequence_id='+id+'">' + sequenceNumber + ": " + sequenceDate + "<a/>")
+            }).bindPopup('<a href="&module=sequenceDisplay?sequence_id='+id+'">' + sequenceNumber + ": " + sequenceDate + "<a/>")
             .bindTooltip(sequenceNumber, {
                 permanent: true,
                  });

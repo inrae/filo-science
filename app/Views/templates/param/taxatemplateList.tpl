@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-6">
         {if $rights.manage == 1}
-            <a href="taxatemplateChange&taxa_template_id=0">
+            <a href="taxatemplateChange?taxa_template_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau...{/t}
             </a>
@@ -19,7 +19,7 @@
                     <tr>
                         <td>
                             {if $rights.manage == 1}
-                                <a href="taxatemplateChange&taxa_template_id={$line.taxa_template_id}">
+                                <a href="taxatemplateChange?taxa_template_id={$line.taxa_template_id}">
                                     {$line.taxa_template_name}
                                 </a>
                             {else}

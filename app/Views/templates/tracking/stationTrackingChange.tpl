@@ -8,16 +8,15 @@
 </a>
 {if $data.station_id > 0}
     &nbsp;
-    <a href="stationTrackingDisplay&station_id={$data.station_id}">
+    <a href="stationTrackingDisplay?station_id={$data.station_id}">
         <img src="display/images/display.png" height="25">
         {t}Retour au détail de la station{/t}
     </a>
 {/if}
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="stationForm" method="post" action="index.php">
+        <form class="form-horizontal " id="stationForm" method="post" action="stationTrackingWrite">
             <input type="hidden" name="moduleBase" value="stationTracking">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="station_id" value="{$data.station_id}">
             <div class="form-group">
                 <label for="stationName"  class="control-label col-md-4"><span class="red">*</span> {t}Nom :{/t}</label>

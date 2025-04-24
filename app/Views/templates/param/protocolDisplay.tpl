@@ -4,12 +4,12 @@
         <a href="protocolList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
         {if $rights.manage == 1}
             &nbsp;
-            <a href="protocolChange&protocol_id=0">
+            <a href="protocolChange?protocol_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau protocole{/t}
             </a>
             &nbsp;
-            <a href="protocolChange&protocol_id={$data.protocol_id}">
+            <a href="protocolChange?protocol_id={$data.protocol_id}">
                 <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
             </a>
         {/if}
@@ -69,7 +69,7 @@
 
     <fieldset class="col-md-6">
         <legend>Modèles de mesure rattachés</legend>
-        <a href="protocolMeasureChange&protocol_id={$data.protocol_id}">
+        <a href="protocolMeasureChange?protocol_id={$data.protocol_id}">
             <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
         <table class="datatable table table-bordered table-hover" data-order='[[0,"asc"]]'>

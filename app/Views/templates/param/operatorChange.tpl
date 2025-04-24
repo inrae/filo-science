@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="operatorWrite">
             <input type="hidden" name="moduleBase" value="operator">
             <input type="hidden" name="action" value="Write">
             <input type="hidden" name="operator_id" value="{$data.operator_id}">

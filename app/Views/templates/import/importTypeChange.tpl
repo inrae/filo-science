@@ -7,9 +7,8 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="importForm" method="post" action="index.php">
+        <form class="form-horizontal " id="importForm" method="post" action="importTypeWrite">
             <input type="hidden" name="moduleBase" value="importType">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="import_type_id" value="{$data.import_type_id}">
             <div class="form-group">
                 <label for="import_type_name" class="control-label col-md-4">

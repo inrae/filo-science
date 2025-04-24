@@ -3,7 +3,7 @@
 </script>
 <h2>{t}Création - Modification d'une localisation manuelle{/t}</h2>
 <div class="row">
-    <a href="individualTrackingList&individual_id={$data.individual_id}">
+    <a href="individualTrackingList?individual_id={$data.individual_id}">
         <img src="display/images/list.png" height="25">
         {t}Retour à la liste{/t}
     </a>
@@ -31,9 +31,8 @@
             </div>
         </div>
         <div class="row">
-            <form class="form-horizontal protoform" id="locationForm" method="post" action="index.php">
+            <form class="form-horizontal " id="locationForm" method="post" action="locationWrite">
                 <input type="hidden" name="moduleBase" value="location">
-                <input type="hidden" name="action" value="Write">
                 <input type="hidden" name="location_id" value="{$data.location_id}">
                 <input type="hidden" name="individual_id" value="{$data.individual_id}">
                 <div class="form-group">

@@ -49,13 +49,13 @@ $(document).ready(function(){
 });
 </script>
 <div class="row">
-	<a href="campaignDisplay&campaign_id={$dataParent.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$dataParent.campaign_name}</a>
+	<a href="campaignDisplay?campaign_id={$dataParent.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$dataParent.campaign_name}</a>
 		&nbsp;
 
-	<a href="operationDisplay&campaign_id={$dataParent.campaign_id}&operation_id={$dataParent.operation_id}&activeTab=tab-ambience">
+	<a href="operationDisplay?campaign_id={$dataParent.campaign_id}&operation_id={$dataParent.operation_id}&activeTab=tab-ambience">
 				<img src="display/images/display-green.png" height="25">   {t}Retour à l'opération{/t} {$dataParent.operation_name}</a>
 	{if $origin=="sequence"}
-		<a href="sequenceDisplay&sequence_id={$dataParent.sequence_id}&activeTab=tab-ambience">
+		<a href="sequenceDisplay?sequence_id={$dataParent.sequence_id}&activeTab=tab-ambience">
 			<img src="display/images/display.png" height="25">
 			{t}Retour à la séquence{/t}&nbsp;{$dataParent.sequence_number}
 		</a>
@@ -64,9 +64,8 @@ $(document).ready(function(){
 <div class="row form-display">
 
 
-	<form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+	<form class="form-horizontal " id="paramForm" method="post" action="ambience{$origin}Write">
 		<input type="hidden" name="moduleBase" value="ambience{$origin}">
-		<input type="hidden" name="action" id="action" value="Write">
 		<input type="hidden" name="ambience_id" value="{$data.ambience_id}">
 		<input type="hidden" name="operation_id" value="{$data.operation_id}">
 		<input type="hidden" name="sequence_id" value="{$data.sequence_id}">

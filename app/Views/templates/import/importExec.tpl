@@ -22,9 +22,8 @@
 
         function setStations(import_description_id, project_id, sensor_id = 0) {
             $.ajax({
-                url: "index.php",
+                url: "stationTrackingGetSensors",
                 data: {
-                    "module": "stationTrackingGetSensors",
                     "import_description_id": import_description_id,
                     "project_id": project_id
                     }
@@ -112,10 +111,8 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="importForm" method="post" action="index.php"
+        <form class="form-horizontal " id="importForm" method="post" action="importExec"
             enctype="multipart/form-data">
-            <input type="hidden" name="module" value="importExec">
-
             <div class="form-group">
                 <label for="FileName" class="control-label col-md-4">
                     <span class="red">*</span> {t}Fichier à importer :{/t}

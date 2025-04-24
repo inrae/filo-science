@@ -7,13 +7,11 @@ $(document).ready(function() {
     $("#station_id").change(function() {
         var stationId = $(this).val();
         if (stationId > 0) {
-            var options = "";
-            var url = "index.php";
-            var data = { "module": "stationGetCoordinate",
+            var data = {
                         "station_id":stationId
                     };
             $.ajax( {
-                url: "index.php",
+                url: "stationGetCoordinate",
                 data: data
             })
             .done (function(data) {
@@ -51,16 +49,15 @@ $(document).ready(function() {
 </script>
 
 <h2>{t}Création - Modification d'une opération{/t}</h2>
-<a href="campaignDisplay&campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
+<a href="campaignDisplay?campaign_id={$data.campaign_id}"><img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}</a>
 {if $data.operation_id > 0}
-    <a href="operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}"><img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t}</a>
+    <a href="operationDisplay?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}"><img src="display/images/display-green.png" height="25">{t}Retour à l'opération{/t}</a>
 {/if}
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="operationWrite">
             <input type="hidden" name="moduleBase" value="operation">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="operation_id" value="{$data.operation_id}">
             <div class="form-group center">
                 <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>

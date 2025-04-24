@@ -1,7 +1,7 @@
 
 <div class="row">
     <fieldset class="col-md-12">
-        <a href="sequenceGearChange&sequence_id={$data.sequence_id}&sequence_gear_id=0">
+        <a href="sequenceGearChange?sequence_id={$data.sequence_id}&sequence_gear_id=0">
             <img src="display/images/new.png" height="25">{t}Nouvel engin de pêche{/t}
         </a>
         <div class="col-md-12">
@@ -22,7 +22,7 @@
                     {foreach $gears as $gear}
                     <tr>
                         <td class="center">
-                            <a href="sequenceGearChange&sequence_id={$gear.sequence_id}&sequence_gear_id={$gear.sequence_gear_id}">
+                            <a href="sequenceGearChange?sequence_id={$gear.sequence_id}&sequence_gear_id={$gear.sequence_gear_id}">
                                 {$gear.gear_name}
                             </a>
                         </td>

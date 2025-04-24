@@ -3,9 +3,8 @@
 <div class="row">
     <div class="col-md-6">
 
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="transmitter_typeWrite">
             <input type="hidden" name="moduleBase" value="transmitter_type">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="transmitter_type_id" value="{$data.transmitter_type_id}">
             <div class="form-group">
                 <label for="paramName"  class="control-label col-md-4"><span class="red">*</span> {t}Nom ou modèle de l'émetteur :{/t}</label>

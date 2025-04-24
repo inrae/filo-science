@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-6">
     {if $rights.param == 1}
-    <a href="ambienceTemplateChange&ambience_template_id=0">
+    <a href="ambienceTemplateChange?ambience_template_id=0">
       <img src="display/images/new.png" height="25">
       {t}Nouveau...{/t}
     </a>
@@ -20,7 +20,7 @@
           <td class="center">{$row["ambience_template_id"]}</td>
           <td>
             {if $rights.param == 1}
-            <a href="ambienceTemplateChange&ambience_template_id={$row.ambience_template_id}">
+            <a href="ambienceTemplateChange?ambience_template_id={$row.ambience_template_id}">
               {$row["ambience_template_name"]}
               {else}
               {$row["ambience_template_name"]}

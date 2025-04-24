@@ -48,7 +48,7 @@
 			Cookies.set("delay", $(this).val(), { expires: 180, secure: true });
 		});
 
-		$("#new").attr("href", "individualTrackingChange&individual_id=0&project_id="+projectId);
+		$("#new").attr("href", "individualTrackingChange?individual_id=0&project_id="+projectId);
 		$(".is_active").change(function () {
 			$("#project_id").val("");
 			Cookies.set("projectActive", $(this).val(), { expires: 180, secure: true });
@@ -116,7 +116,7 @@
 <h2>{t}Liste des poissons suivis{/t}</h2>
 <div class="row">
 	{if $rights.manage == 1}
-		<a id="new" href="individualTrackingChange&individual_id=0">
+		<a id="new" href="individualTrackingChange?individual_id=0">
 			<img src="display/images/new.png" height="25">
 			{t}Nouveau...{/t}
 		</a>
@@ -124,8 +124,7 @@
 </div>
 <div class="row">
 	<div class="col-lg-8 col-md-12">
-		<form class="form-horizontal protoform" id="individualTrackingSearch" action="index.php" method="GET">
-			<input id="moduleSearch" type="hidden" name="module" value="individualTrackingList">
+		<form class="form-horizontal " id="individualTrackingSearch" action="individualTrackingList" method="GET">
 			<input id="isSearch" type="hidden" name="isSearch" value="1">
 			<div class="form-group">
 				<label for="project_id" class="col-md-2 control-label">{t}Projet :{/t}</label>
@@ -201,8 +200,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane active in" id="nav-list" role="tabpanel" aria-labelledby="tab-list">
 	<div class="col-md-12 col-lg-8">
-		<form id="findividualList" method="POST" action="index.php">
-			<input type="hidden" name="module" id="module" value="individualTrackingList">
+		<form id="findividualList" method="POST" action="individualTrackingList">
 			<input type="hidden" name="project_id" value="{$project_id}">
 			<div class="row">
 				<button id="exportDetection" class="btn btn-info">{t}Exporter les détections{/t}</button>
@@ -236,7 +234,7 @@
 							<input type="checkbox" class="checkId" name="uids[]" value="{$individual.individual_id}" checked>
 						</td>
 						<td class="center {if $individual.individual_id == $selectedIndividual}itemSelected{/if}">
-							<a href="individualTrackingList&individual_id={$individual.individual_id}">
+							<a href="individualTrackingList?individual_id={$individual.individual_id}">
 									<img src="display/images/result.png" height="25">
 								</a>
 					</td>
@@ -254,7 +252,7 @@
 						<td class="right">{$individual.nb_detections}</td>
 						{if $rights.manage == 1}
 						<td class="center" title="{t}Modifier{/t}">
-							<a href="individualTrackingChange&individual_id={$individual.individual_id}&project_id={$individual.project_id}">
+							<a href="individualTrackingChange?individual_id={$individual.individual_id}&project_id={$individual.project_id}">
 								<img src="display/images/edit.gif" height="25">
 							</a>
 							</td>
@@ -270,12 +268,11 @@
 	<div class="tab-pane fade" id="nav-detection" role="tabpanel" aria-labelledby="tab-detection">
 		<fieldset class="col-lg-12">
 			<legend>{t}Liste des détections{/t}</legend>
-			<a href="locationChange&location_id=0&individual_id={$selectedIndividual}">
+			<a href="locationChange?location_id=0&individual_id={$selectedIndividual}">
 				{t}Nouvelle détection manuelle{/t}
 			</a>
 			{if count($detections) > 0}
-			<form id="detectionListForm" method="GET" action="index.php">
-				<input type="hidden" name="module" value="individualTrackingList">
+			<form id="detectionListForm" method="GET" action="individualTrackingList">
 				<input type="hidden" name="project_id" value="{$project_id}">
 				<input type="hidden" name="individual_id" id="individual_id2" value="{$individual.individual_id}">
 				<input type="hidden" name="selectedIndividual" value="{$individual.individual_id}">
@@ -315,9 +312,9 @@
 									<td class="center">
 										{if $rights.manage == 1}
 											{if $detection.detection_type == "stationary"}
-												<a href="detectionChange&detection_id={$detection.id}&individual_id={$detection.individual_id}">
+												<a href="detectionChange?detection_id={$detection.id}&individual_id={$detection.individual_id}">
 												{else}
-												<a href="locationChange&location_id={$detection.id}&individual_id={$detection.individual_id}">
+												<a href="locationChange?location_id={$detection.id}&individual_id={$detection.individual_id}">
 											{/if}
 											{$detection.id}
 											</a>

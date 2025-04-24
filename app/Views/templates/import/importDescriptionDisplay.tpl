@@ -27,7 +27,7 @@
   </a>
   {if $rights.param == 1}
   &nbsp;
-  <a href="importDescriptionChange&import_description_id={$data.import_description_id}">
+  <a href="importDescriptionChange?import_description_id={$data.import_description_id}">
     <img src="display/images/edit.gif" height="25">
     {t}Modifier{/t}
   </a>
@@ -70,7 +70,7 @@
       <legend>{t}Liste des contrôles et mises en formes réalisés pour chaque ligne à traiter{/t}</legend>
       {if $rights.param == 1}
       <a
-        href="importFunctionChange&import_description_id={$data.import_description_id}&import_function_id=0">
+        href="importFunctionChange?import_description_id={$data.import_description_id}&import_function_id=0">
         <img src="display/images/new.png" height="25">
         {t}Nouvelle fonction à exécuter{/t}
       </a>
@@ -90,7 +90,7 @@
           <tr>
             <td>
               <a
-                href="importFunctionChange&import_description_id={$function.import_description_id}&import_function_id={$function.import_function_id}">
+                href="importFunctionChange?import_description_id={$function.import_description_id}&import_function_id={$function.import_function_id}">
                 {$function.function_name}
               </a>
             </td>
@@ -117,7 +117,7 @@
       <legend>{t}Table d'équivalence entre les colonnes et la table de la base de données{/t}</legend>
       {if $rights.param == 1}
       <a
-        href="importColumnChange&import_description_id={$data.import_description_id}&import_column_id=0">
+        href="importColumnChange?import_description_id={$data.import_description_id}&import_column_id=0">
         <img src="display/images/new.png" height="25">
         {t}Nouvelle colonne{/t}
       </a>
@@ -136,7 +136,7 @@
           <tr>
             <td class="center">
               <a
-                href="importColumnChange&import_description_id={$column.import_description_id}&import_column_id={$column.import_column_id}">
+                href="importColumnChange?import_description_id={$column.import_description_id}&import_column_id={$column.import_column_id}">
                 {$column.column_order}
               </a>
             </td>

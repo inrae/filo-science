@@ -3,9 +3,8 @@
       <div class="col-md-6">
             <a href="projectList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
 
-            <form class="form-horizontal protoform" id="projectForm" method="post" action="index.php">
+            <form class="form-horizontal " id="projectForm" method="post" action="projectWrite">
                   <input type="hidden" name="moduleBase" value="project">
-                  <input type="hidden" name="action" value="Write">
                   <input type="hidden" name="project_id" value="{$data.project_id}">
                   <div class="form-group">
                         <label for="projectName"  class="control-label col-md-4"><span class="red">*</span> {t}Nom :{/t}</label>

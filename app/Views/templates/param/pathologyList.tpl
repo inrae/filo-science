@@ -11,7 +11,7 @@ $(document).ready(function() {
 	<div class="row">
 	<div class="col-md-6">
 {if $rights.param == 1}
-<a href="pathologyChange&pathology_id=0">
+<a href="pathologyChange?pathology_id=0">
 <img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
@@ -31,7 +31,7 @@ $(document).ready(function() {
                 <td class="center">{$row["pathology_id"]}</td>
                 <td>
                     {if $rights.param == 1}
-                    <a href="pathologyChange&pathology_id={$row["pathology_id"]}">
+                    <a href="pathologyChange?pathology_id={$row["pathology_id"]}">
                     {$row["pathology_name"]}
                     {else}
                     {$row["pathology_name"]}

@@ -7,7 +7,7 @@
 </script>
 <div class="row">
     <div class="col-md-1">
-        <a href="operationChange&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
+        <a href="operationChange?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}">
             <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
         </a>
     </div>

@@ -26,13 +26,12 @@
             {t}Retour à la liste{/t}
         </a>
         {if $data.export_model_id > 0}
-            <a href="exportModelDisplay&export_model_id={$data.export_model_id}">
+            <a href="exportModelDisplay?export_model_id={$data.export_model_id}">
                 <img src="display/images/display.png" height="25">{t}Retour au détail{/t}
             </a>
         {/if}
-        <form class="form-horizontal protoform" id="exportModelForm" method="post" action="index.php">
+        <form class="form-horizontal " id="exportModelForm" method="post" action="exportModelWrite">
             <input type="hidden" name="moduleBase" value="exportModel">
-            <input type="hidden" id="action" name="action" value="Write">
             <input type="hidden" name="export_model_id" value="{$data.export_model_id}">
             <input type="hidden" name="pattern" id="pattern" value="{$data.pattern}">
             <div class="form-group center">

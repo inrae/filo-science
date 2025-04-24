@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-6">
         {if $rights.param == 1}
-        <a href="transmitter_typeChange&transmitter_type_id=0">
+        <a href="transmitter_typeChange?transmitter_type_id=0">
             <img src="display/images/new.png" height="25">
             {t}Nouveau...{/t}
         </a>
@@ -23,7 +23,7 @@
                     <td>
                         {if $rights.param == 1}
                         <a
-                            href='transmitter_typeChange&transmitter_type_id={$row["transmitter_type_id"]}'>
+                            href='transmitter_typeChange?transmitter_type_id={$row["transmitter_type_id"]}'>
                             {$row["transmitter_type_name"]}
                             {else}
                             {$row["transmitter_type_name"]}

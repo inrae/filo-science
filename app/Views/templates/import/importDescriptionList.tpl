@@ -1,6 +1,6 @@
 <h2>{t}Liste des modèles d'import{/t}</h2>
 {if $rights.param == 1}
-    <a href="importDescriptionChange&import_description_id=0">
+    <a href="importDescriptionChange?import_description_id=0">
         <img src="display/images/new.png" height="25">
         {t}Nouveau modèle{/t}
     </a>
@@ -27,7 +27,7 @@
                     <tr>
                         <td class="center">{$import.import_description_id}</td>
                         <td>
-                            <a href="importDescriptionDisplay&import_description_id={$import.import_description_id}" title="{t}Afficher le détail{/t}">
+                            <a href="importDescriptionDisplay?import_description_id={$import.import_description_id}" title="{t}Afficher le détail{/t}">
                                 {$import.import_description_name}
                             </a>
                         </td>
@@ -37,7 +37,7 @@
                         <td class="center">{$import.first_line}</td>
                         {if $rights.param == 1}
                             <td class="center">
-                                <a href="importDescriptionChange&import_description_id={$import.import_description_id}">
+                                <a href="importDescriptionChange?import_description_id={$import.import_description_id}">
                                     <img src="display/images/edit.gif" height="25" title="{t}Modifier{/t}">
                                 </a>
                             </td>

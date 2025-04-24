@@ -55,16 +55,16 @@ de création{/t}</th>
 <tr>
 <td class="center">
 {if in_array($dataDoc[lst].mime_type_id, array(4, 5, 6)) }
-<a class="image-popup-no-margins" href="documentGet&document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].photo_preview}&attached=0&phototype=1">
-<img src="documentGet&document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" height="30">
+<a class="image-popup-no-margins" href="documentGet?document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].photo_preview}&attached=0&phototype=1">
+<img src="documentGet?document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" height="30">
 </a>
 {elseif  $dataDoc[lst].mime_type_id == 1}
-<a class="image-popup-no-margins" href="documentGet&document_id={$dataDoc[lst].document_id}&&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" title="{t}aperçu du document :{/t} {substr($dataDoc[lst].thumbnail_name, strrpos($dataDoc[lst].thumbnail_name, '/') + 1)}">
-<img src="documentGet&document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" height="30">
+<a class="image-popup-no-margins" href="documentGet?document_id={$dataDoc[lst].document_id}&&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" title="{t}aperçu du document :{/t} {substr($dataDoc[lst].thumbnail_name, strrpos($dataDoc[lst].thumbnail_name, '/') + 1)}">
+<img src="documentGet?document_id={$dataDoc[lst].document_id}&document_name={$dataDoc[lst].thumbnail_name}&attached=0&phototype=2" height="30">
 </a>
 {/if}
 <td>
-<a href="documentGet&document_id={$dataDoc[lst].document_id}&attached=1&phototype=0" title="{t}document original{/t}">
+<a href="documentGet?document_id={$dataDoc[lst].document_id}&attached=1&phototype=0" title="{t}document original{/t}">
 {$dataDoc[lst].document_name}
 </a>
 </td>
@@ -75,7 +75,7 @@ de création{/t}</th>
 {if $rights["gestion"] == 1}
 <td>
 <div class="center">
-<a href="{$moduleParent}documentDelete&document_id={$dataDoc[lst].document_id}&activeTab=tab-document&{$moduleParent}_id={$parent_id}" onclick="return confirm('{t}Confirmez-vous la suppression ?{/t}');">
+<a href="{$moduleParent}documentDelete?document_id={$dataDoc[lst].document_id}&activeTab=tab-document&{$moduleParent}_id={$parent_id}" onclick="return confirm('{t}Confirmez-vous la suppression ?{/t}');">
 <img src="display/images/trash.png" height="25">
 </a>
 </div>

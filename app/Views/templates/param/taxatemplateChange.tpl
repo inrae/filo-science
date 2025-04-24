@@ -3,12 +3,10 @@
 $(document).ready(function() { 
     $(".freshwater").on("change", function () {
         var freshwater = $(this).val();
-        var url = "index.php";
-        var data = { "module": "taxonGetListCode",
-                    "freshwater" : freshwater
-                };
+        var url = "";
+        var data = { "freshwater" : freshwater };
         $.ajax( {
-            url: "index.php",
+            url: "taxonGetListCode",
             data: data
         })
         .done (function(data) {
@@ -70,12 +68,11 @@ $(document).ready(function() {
         {t}Retour à la liste{/t}
     </a>
 </div>
-<form  id="taxatemplatelist" method="post" action="index.php">
+<form  id="taxatemplatelist" method="post" action="taxatemplateWrite">
     <div class="row">
         <div class="col-md-4">
-            <div class="form-horizontal protoform">
+            <div class="form-horizontal ">
                 <input type="hidden" name="moduleBase" value="taxatemplate">
-                <input type="hidden" name="action" value="Write">
                 <input type="hidden" name="taxa_template_id" value="{$data.taxa_template_id}">
                 <div class="form-group">
                     <label for="taxa_template_name"  class="control-label col-md-4"><span class="red">*</span> {t}Nom du modèle :{/t}</label>

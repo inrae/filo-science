@@ -47,8 +47,8 @@
 			var protocolId = $("#protocol_id").val();
 			if (taxonId && taxonId > 0) {
 				$.ajax({
-					url: "index.php",
-					data: { "module": "protocolGetTaxonTemplate", "protocol_id": protocolId, "taxon_id": taxonId }
+					url: "protocolGetTaxonTemplate",
+					data: { "protocol_id": protocolId, "taxon_id": taxonId }
 				})
 					.done(function (value) {
 						if (value.length > 2) {
@@ -70,14 +70,13 @@
 			var name = $(this).val();
 			if (name.length > 2) {
 				var options = "";
-				var url = "index.php";
+				var url = "";
 				var data = {
-					"module": "taxonSearchAjax",
 					"name": name,
 					"noFreshcode": 1
 				};
 				$.ajax({
-					url: "index.php",
+					url: "taxonSearchAjax",
 					data: data
 				})
 					.done(function (data) {
@@ -118,8 +117,8 @@
 		 */
 		function setTaxonName(taxonId) {
 			$.ajax({
-				url: "index.php",
-				data: { "module": "taxonGetName", "taxon_id": taxonId }
+				url: "taxonGetName",
+				data: { "taxon_id": taxonId }
 			})
 				.done(function (value) {
 					if (value) {
@@ -211,8 +210,8 @@
 				console.log("taxon_id:"+taxon_id);
 				if (taxon_id != undefined) {
 					$.ajax({
-						url: "index.php",
-						data: { "module": "taxonGetName", "taxon_id": taxon_id }
+						url: "taxonGetName",
+						data: { "taxon_id": taxon_id }
 					})
 					.done(function (value) {
 						if (value) {
@@ -245,9 +244,8 @@
 </div>
 
 <div class="col-md-6 form-horizontal">
-	<form id="individualForm" method="post" action="index.php">
+	<form id="individualForm" method="post" action="individualTrackingWrite">
 			<input type="hidden" name="moduleBase" value="individualTracking">
-			<input type="hidden" id="action" name="action" value="Write">
 			<input type="hidden" id="isTracking" name="isTracking" value="1">
 			<div class="row">
 				<div class="col-md-4 center">{t}Mode automatique :{/t}&nbsp;<input type="checkbox" id="modeAuto"></div>

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         {if $rights.manage == 1}
-            <a href="antennaChange&station_id={$data.station_id}&antenna_id=0">
+            <a href="antennaChange?station_id={$data.station_id}&antenna_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau...{/t}
             </a>
@@ -33,7 +33,7 @@
                         <td>{$antenna.date_to}</td>
                         {if $rights.manage == 1}
                             <td class="center">
-                                <a href="antennaChange&station_id={$data.station_id}&antenna_id={$antenna.antenna_id}" title="{t}Modifier{/t}">
+                                <a href="antennaChange?station_id={$data.station_id}&antenna_id={$antenna.antenna_id}" title="{t}Modifier{/t}">
                                     <img src="display/images/edit.gif" height="25">
                                 </a>
                             </td>

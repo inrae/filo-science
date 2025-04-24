@@ -1,14 +1,13 @@
 <h2>{t}Rattachement des modèles de mesure au protocole {/t}<i>{$data.protocol_name}</i></h2>
 <a href="protocolList"><img src="display/images/list.png" height="25">{t}Retour à la liste{/t}</a>
-&nbsp;<a href="protocolDisplay&protocol_id={$data.protocol_id}">
+&nbsp;<a href="protocolDisplay?protocol_id={$data.protocol_id}">
     <img src="display/images/display.png" height="25">{t}Retour au détail{/t}
 </a>
 
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal protoform" id="paramForm" method="post" action="index.php">
+        <form class="form-horizontal " id="paramForm" method="post" action="protocolMeasureWrite">
             <input type="hidden" name="moduleBase" value="protocolMeasure">
-            <input type="hidden" name="action" value="Write">
             <input type="hidden" name="protocol_id" value="{$data.protocol_id}">
             {foreach $measures as $measure}
                 <div class="form-group">

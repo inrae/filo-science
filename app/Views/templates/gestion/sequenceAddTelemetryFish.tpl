@@ -7,23 +7,22 @@
 </script>
 <div class="row">
 	<div class="col-md-8">
-		<a href="campaignDisplay&campaign_id={$data.campaign_id}">
+		<a href="campaignDisplay?campaign_id={$data.campaign_id}">
 			<img src="display/images/display-red.png" height="25">{t}Retour à la campagne{/t}&nbsp;{$data.campaign_name}
 		</a>
 		&nbsp;
 
-		<a href="operationDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
+		<a href="operationDisplay?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&activeTab=tab-sequence">
 			<img src="display/images/display-green.png" height="25"> {t}Retour à l'opération{/t} &nbsp;{$data.operation_name}
 		</a>
   &nbsp;
-  <a href="sequenceDisplay&campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id={$data.sequence_id}"><img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}&nbsp;{$data.sequence_number} </a>
+  <a href="sequenceDisplay?campaign_id={$data.campaign_id}&operation_id={$data.operation_id}&sequence_id={$data.sequence_id}"><img src="display/images/display.png" height="25">{t}Retour à la séquence{/t}&nbsp;{$data.sequence_number} </a>
   </div>
 </div>
 <div class="row">
   <h2 class="col-sm-4">{t}Ajout de poissons saisis dans le module de télémétrie{/t}</h2>
 </div>
-  <form id="formAddFish" method="POST" action="index.php">
-      <input type="hidden" name="module" value="sequenceAddTelemetryFishExec">
+  <form id="formAddFish" method="POST" action="sequenceAddTelemetryFishExec">
       <input type="hidden" name="sequence_id" value="{$data.sequence_id}">
       <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
       <input type="hidden" name="operation_id" value="{$data.operation_id}">

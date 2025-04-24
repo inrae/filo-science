@@ -1,7 +1,7 @@
 <div class="row">
     <fieldset class="col-md-6">
         <legend>{t}Informations générales{/t}</legend>
-        <a href="sequenceChange&campaign_id={$data.campaign_id}&sequence_id={$data.sequence_id}">
+        <a href="sequenceChange?campaign_id={$data.campaign_id}&sequence_id={$data.sequence_id}">
                 <img src="display/images/edit.gif" height="25">{t}Modifier{/t}
             </a>
         <div class="form-display">

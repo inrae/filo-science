@@ -51,8 +51,7 @@
 </script>
 <h2>{t}Liste des stations utilisées pour la télédétection{/t}</h2>
 <div class="row">
-    <form class="form-horizontal protoform" id="stationTrackingSearch" action="index.php" method="GET">
-        <input id="module" type="hidden" name="module" value="stationTrackingList">
+    <form class="form-horizontal " id="stationTrackingSearch" action="stationTrackingList" method="GET">
         <input id="isSearch" type="hidden" name="isSearch" value="1">
         <div class="form-group">
             <label for="project_id" class="col-md-3 control-label">{t}Projet :{/t}</label>
@@ -87,7 +86,7 @@
 <div class="row">
     <div class="col-md-12">
         {if $rights.manage == 1}
-            <a href="stationTrackingChange&station_id=0">
+            <a href="stationTrackingChange?station_id=0">
                 <img src="display/images/new.png" height="25">
                 {t}Nouveau...{/t}
             </a>
@@ -119,7 +118,7 @@
                         <td>{$station.station_id}</td>
                         <td>
                             {if $rights.manage == 1}
-                                <a href="stationTrackingDisplay&station_id={$station.station_id}">
+                                <a href="stationTrackingDisplay?station_id={$station.station_id}">
                                 {$station.station_name}
                             </a>
                             {else}
@@ -137,7 +136,7 @@
                         <td class="center">{if $station.station_active == 1}{t}Oui{/t}{/if}</td>
                         {if $rights.manage == 1}
                             <td class="center">
-                                <a href="stationTrackingChange&station_id={$station.station_id}" title="{t}Modifier{/t}">
+                                <a href="stationTrackingChange?station_id={$station.station_id}" title="{t}Modifier{/t}">
                                     <img src="display/images/edit.gif" height="25">
                                 </a>
                             </td>

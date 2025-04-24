@@ -2,7 +2,7 @@
 	<div class="row">
 	<div class="col-md-12">
 {if $rights.param == 1}
-<a href="taxonChange&taxon_id=0">
+<a href="taxonChange?taxon_id=0">
 <img src="display/images/new.png" height="25">
 {t}Nouveau...{/t}
 </a>
@@ -27,7 +27,7 @@
                 <td class="center">{$row["taxon_id"]}</td>
                 <td>
                     {if $rights.param == 1}
-                    <a href="taxonChange&taxon_id={$row["taxon_id"]}">
+                    <a href="taxonChange?taxon_id={$row["taxon_id"]}">
                     {$row["scientific_name"]}
                     </a>
                     {else}
