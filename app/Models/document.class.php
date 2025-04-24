@@ -112,61 +112,7 @@ use Ppci\Models\PpciModel;
  COMMENT ON COLUMN document.document_name IS 'Nom d''origine du document';
  COMMENT ON COLUMN document.document_description IS 'Description libre du document';
  */
-/**
- * ORM de gestion de la table mime_type
- *
- * @author quinton
- *
- */
-class DocumentException extends Exception
-{ }
 
-class MimeType extends PpciModel
-{
-
-	/**
-	 * Constructeur de la classe
-	 *
-	 * @param 
-	 * @param array $param
-	 */
-	function __construct($bdd, $param = null)
-	{
-		$this->table = "mime_type";
-		$this->fields = array(
-			"mime_type_id" => array(
-				"type" => 1,
-				"key" => 1,
-				"requis" => 1,
-				"defaultValue" => 0
-			),
-			"extension" => array(
-				"type" => 0,
-				"requis" => 1
-			),
-			"content_type" => array(
-				"type" => 0,
-				"requis" => 1
-			)
-		);
-		parent::__construct();
-	}
-
-	/**
-	 * Retourne le numero de type mime correspondant a l'extension
-	 *
-	 * @param string $extension
-	 * @return int
-	 */
-	function getTypeMime($extension)
-	{
-		if (!empty($extension) ) {
-			$sql = "SELECT mime_type_id from mime_type where extension = :extension";
-			$res = $this->lireParamAsPrepared($sql, array("extension" => strtolower($extension)));
-			return $res["mime_type_id"];
-		}
-	}
-}
 
 /**
  * Orm de gestion de la table document :
@@ -245,7 +191,7 @@ class Document extends PpciModel
 	 * @param int $parentId
 	 * @param string $description
 	 * @param date $document_creation_date
-	 * @return void
+	 * @return int
 	 */
 	function documentEcrire($file, $parentTable, $parentId, $description = NULL, $document_creation_date = NULL)
 	{
@@ -255,7 +201,7 @@ class Document extends PpciModel
              * Recuperation de l'extension
              */
 			$extension = $this->encodeData(substr($file["name"], strrpos($file["name"], ".") + 1));
-			$mimeType = new MimeType;
+			$mimeType = new MimeType();
 			$mime_type_id = $mimeType->getTypeMime($extension);
 			if ($mime_type_id > 0) {
 				$data = array();
@@ -268,18 +214,7 @@ class Document extends PpciModel
 					$data["document_creation_date"] = $document_creation_date;
 				}
 				$dataDoc = array();
-				/*
-                 * Recherche antivirale
-                 */
-				$virus = false;
-				try {
-					testScan($file["tmp_name"]);
-				} catch (VirusException $ve) {
-					$message->set($ve->getMessage());
-					$virus = true;
-				} catch (FileException $fe) {
-					$message->set($fe->getMessage());
-				}
+				
 
 				/*
                  * Recherche pour savoir s'il s'agit d'une image ou d'un pdf pour créer une vignette
@@ -288,7 +223,7 @@ class Document extends PpciModel
 				/*
                  * Ecriture du document
                  */
-				if (!$virus) {
+				
 					$dataBinaire = fread(fopen($file["tmp_name"], "r"), $file["size"]);
 
 					$dataDoc["data"] = pg_escape_bytea($dataBinaire);
@@ -332,7 +267,7 @@ class Document extends PpciModel
 						}
 					}
 					return $id;
-				}
+				
 			}
 		}
 	}
