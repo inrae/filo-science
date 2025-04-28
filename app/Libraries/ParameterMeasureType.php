@@ -1,69 +1,60 @@
-<?php 
+<?php
+
 namespace App\Libraries;
 
+use App\Models\ParameterMeasureType as ModelsParameterMeasureType;
 use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\PpciModel;
 
-class  extends PpciLibrary { 
+class ParameterMeasureType extends PpciLibrary
+{
     /**
-     * @var Models
-*/
+     * @var ModelsParameterMeasureType
+     */
     protected PpciModel $dataclass;
-    
+
 
     function __construct()
     {
         parent::__construct();
-        $this->dataclass = new ;
-        $this->keyName = "";
+        $this->dataclass = new ModelsParameterMeasureType;
+        $this->keyName = "parameter_measure_type_id";
         if (isset($_REQUEST[$this->keyName])) {
             $this->id = $_REQUEST[$this->keyName];
         }
     }
-include_once 'modules/classes/tracking/parameter_measure_type.class.php';
-$this->dataclass = new ParameterMeasureType;
-$this->keyName = "parameter_measure_type_id";
-$this->id = $_REQUEST[$this->keyName];
-
-
     function list()
-{
-$this->vue=service('Smarty');
+    {
+        $this->vue = service('Smarty');
         $this->vue->set($this->dataclass->getListe(), "parameters");
         $this->vue->set("tracking/parameterMeasureTypeList.tpl", "corps");
-        }
+        return $this->vue->send();
+    }
     function change()
-{
-$this->vue=service('Smarty');
-        $this->dataRead( $this->id, "tracking/parameterMeasureTypeChange.tpl");
-        }
+    {
+        $this->vue = service('Smarty');
+        $this->dataRead($this->id, "tracking/parameterMeasureTypeChange.tpl");
+        return $this->vue->send();
+    }
     function write()
-{
-try {
-            
+    {
+        try {
+
             $this->id = $this->dataWrite($_REQUEST);
             $_REQUEST[$this->keyName] = $this->id;
             return true;
         } catch (PpciException $e) {
             return false;
         }
-           
-        /**
-         * write record in database
-         */
-        
-        }
+    }
     function delete()
-{
-        /**
-         * delete record
-         */
-                try {
+    {
+        try {
             $this->dataDelete($this->id);
             return true;
         } catch (PpciException $e) {
             return false;
         };
-        }
+    }
 }

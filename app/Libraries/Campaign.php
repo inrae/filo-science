@@ -83,11 +83,7 @@ class Campaign extends PpciLibrary
     function change()
     {
         $this->vue = service('Smarty');
-        /*
-         * open the form to modify the record
-         * If is a new record, generate a new record with default value :
-         * $_REQUEST["idParent"] contains the identifiant of the parent record
-         */
+
         $data = $this->dataRead($this->id, "gestion/campaignChange.tpl");
         $this->vue->set($_SESSION["ti_campaign"]->translateRow($data), "data");
         $this->vue->set($_SESSION["projects"], "projects");

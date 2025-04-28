@@ -1,52 +1,42 @@
-<?php 
+<?php
+
 namespace App\Libraries;
 
+use App\Models\Sequence;
+use App\Models\SequencePoint as ModelsSequencePoint;
 use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\PpciModel;
 
-class  extends PpciLibrary { 
+class SequencePoint extends PpciLibrary
+{
     /**
-     * @var Models
-*/
+     * @var ModelsSequencePoint
+     */
     protected PpciModel $dataclass;
-    
+    private int $sequence_id;
+    private $activeTab;
 
     function __construct()
     {
         parent::__construct();
-        $this->dataclass = new ;
-        $this->keyName = "";
+        $this->dataclass = new ModelsSequencePoint;
+        $this->keyName = "sequence_point_id";
         if (isset($_REQUEST[$this->keyName])) {
-            $this->id = $_REQUEST[$this->keyName];
+            $this->id = $_SESSION["ti_sequencePoint"]->getValue($_REQUEST[$this->keyName]);
         }
+        $this->sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
     }
-require_once 'modules/classes/sequence_point.class.php';
-$this->dataclass = new SequencePoint;
-$this->keyName = "sequence_point_id";
-if (empty($_REQUEST[$this->keyName]) && ! $_REQUEST[$this->keyName] == 0){
-    $t_module["param"] = "error";
-    $t_module["retourko"] = "default";
-    return false;
-}
-$this->id = $_SESSION["ti_sequencePoint"]->getValue($_REQUEST[$this->keyName]);
-$sequence_id = $_SESSION["ti_sequence"]->getValue($_REQUEST["sequence_id"]);
-if (empty($this->id) && ! $this->id == 0) {
-    $t_module["param"] = "error";
-    $t_module["retourko"] = "default";
-    return false;
-}
 
     function change()
-{
-$this->vue=service('Smarty');
+    {
+        $this->vue = service('Smarty');
         $this->vue->set("gestion/sequencePointChange.tpl", "corps");
-        $data = $this->dataclass->lire($this->id, true, $sequence_id);
-        $data["sequence_id"] = $_SESSION["ti_sequence"]->setValue($sequence_id);
+        $data = $this->dataclass->lire($this->id, true, $this->sequence_id);
+        $data["sequence_id"] = $_SESSION["ti_sequence"]->setValue($this->sequence_id);
         $this->vue->set($data = $_SESSION["ti_sequencePoint"]->translateRow($data), "data");
-        require_once 'modules/classes/sequence.class.php';
         $sequence = new Sequence;
-        $dsequence = $sequence->getDetail($sequence_id);
+        $dsequence = $sequence->getDetail($this->sequence_id);
         $dsequence = $_SESSION["ti_sequence"]->translateRow($dsequence);
         $dsequence = $_SESSION["ti_operation"]->translateRow($dsequence);
         $dsequence = $_SESSION["ti_campaign"]->translateRow($dsequence);
@@ -58,45 +48,40 @@ $this->vue=service('Smarty');
         foreach ($params as $tablename) {
             setParamToVue($this->vue, $tablename);
         }
+        if (!empty($this->activeTab)) {
+            $this->vue->set($this->activeTab, "activeTab");
         }
+        return $this->vue->send();
+    }
     function write()
-{
-try {
-            
-            $this->id = $this->dataWrite($_REQUEST);
-            $_REQUEST[$this->keyName] = $this->id;
+    {
+        try {
+            $data = $_SESSION["ti_sequence"]->getDbkeyFromRow($_REQUEST);
+            $data = $_SESSION["ti_sequencePoint"]->getDbkeyFromRow($data);
+            $data["sequence_point_id"] = $this->id;
+            $this->dataWrite($data);
+            /**
+             * Treatment of a new record
+             */
+            $_REQUEST[$this->keyName] = 0;
+            $this->activeTab = "tab-point";
             return true;
         } catch (PpciException $e) {
             return false;
         }
-           
-        /*
-         * write record in database
-         */
-        $data = $_SESSION["ti_sequence"]->getDbkeyFromRow($_REQUEST);
-        $data = $_SESSION["ti_sequencePoint"]->getDbkeyFromRow($data);
-        $data["sequence_point_id"] = $this->id;
-        dataWrite($this->dataclass, $data);
-        /**
-         * Treatment of a new record
-         */
-        if ($module_coderetour == 1) {
-            $_REQUEST[$this->keyName] = 0;
-        }
-        $activeTab = "tab-point";
-        }
+    }
     function delete()
-{
+    {
         /*
          * delete record
          */
 
-                try {
+        try {
             $this->dataDelete($this->id);
+            $this->activeTab = "tab-point";
             return true;
         } catch (PpciException $e) {
             return false;
         };
-        $activeTab = "tab-point";
-        }
+    }
 }

@@ -1,92 +1,85 @@
-<?php 
+<?php
+
 namespace App\Libraries;
 
+use App\Models\Import;
+use App\Models\Param;
+use App\Models\Station as ModelsStation;
+use App\Models\StationTracking;
 use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\PpciModel;
 
-class  extends PpciLibrary { 
+class Station extends PpciLibrary
+{
     /**
-     * @var Models
-*/
+     * @var ModelsStation
+     */
     protected PpciModel $dataclass;
-    
+
 
     function __construct()
     {
         parent::__construct();
-        $this->dataclass = new ;
-        $this->keyName = "";
+        $this->dataclass = new ModelsStation;
+        $this->keyName = "station_id";
         if (isset($_REQUEST[$this->keyName])) {
             $this->id = $_REQUEST[$this->keyName];
         }
     }
-require_once 'modules/classes/station.class.php';
-$this->dataclass = new station;
-$this->keyName = "station_id";
-$this->id = $_REQUEST[$this->keyName];
-
-
     function list()
-{
-$this->vue=service('Smarty');
+    {
+        $this->vue = service('Smarty');
         /*
          * Display the list of all records of the table
          */
         $this->vue->set($this->dataclass->getListFromproject(0, false), "data");
         $this->vue->set("param/stationList.tpl", "corps");
         $this->vue->set($_SESSION["projects"], "projects");
-        }
+        return $this->vue->send();
+    }
     function change()
-{
-$this->vue=service('Smarty');
-        /*
-         * open the form to modify the record
-         * If is a new record, generate a new record with default value :
-         * $_REQUEST["idParent"] contains the identifiant of the parent record
-         */
-        $this->dataRead( $this->id, "param/stationChange.tpl");
+    {
+        $this->vue = service('Smarty');
+
+        $this->dataRead($this->id, "param/stationChange.tpl");
         setParamMap($this->vue);
         $this->vue->set($_SESSION["projects"], "projects");
-        require_once 'modules/classes/param.class.php';
-        $river = new Param( "river");
+        $river = new Param("river");
         $this->vue->set($river->getListe("river_name"), "rivers");
-        }
+        return $this->vue->send();
+    }
     function write()
-{
-try {
-            
+    {
+        try {
+
             $this->id = $this->dataWrite($_REQUEST);
             $_REQUEST[$this->keyName] = $this->id;
             return true;
         } catch (PpciException $e) {
             return false;
         }
-           
-        /*
-         * write record in database
-         */
-        
-        }
+    }
     function delete()
-{
+    {
         /*
          * delete record
          */
-                try {
+        try {
             $this->dataDelete($this->id);
             return true;
         } catch (PpciException $e) {
             return false;
         };
-        }
-    function import() {
+    }
+    function import()
+    {
         if (file_exists($_FILES['upfile']['tmp_name'])) {
             require_once 'modules/classes/import.class.php';
             $i = 0;
             try {
                 $db = $this->dataclass->db;
-$db->transBegin();
+                $db->transBegin();
                 $import = new Import($_FILES['upfile']['tmp_name'], $_POST["separator"], false, array(
                     "name",
                     "code",
@@ -97,9 +90,7 @@ $db->transBegin();
                     "number",
                     "station_type_id"
                 ));
-                require_once 'modules/classes/param.class.php';
-                $river = new Param( "river");
-                require_once "modules/classes/tracking/station_tracking.class.php";
+                $river = new Param("river");
                 $stationTracking = new StationTracking;
                 $rows = $import->getContentAsArray();
                 foreach ($rows as $row) {
@@ -139,10 +130,10 @@ $db->transBegin();
                 $db->transCommit();
                 $this->message->set(sprintf(_("%d stations(s) importée(s)"), $i));
                 return true;
-            } catch (Exception $e) {
+            } catch (PpciException $e) {
                 if ($db->transEnabled) {
-    $db->transRollback();
-}
+                    $db->transRollback();
+                }
                 $this->message->set(_("Impossible d'importer les stations"));
                 $this->message->set($e->getMessage());
                 return false;
@@ -151,11 +142,17 @@ $db->transBegin();
             $this->message->set(_("Impossible de charger le fichier à importer"));
             return false;
         }
-        }
-    function getFromProject() {
+    }
+    function getFromProject()
+    {
+        $this->vue = service("AjaxView");
         $this->vue->set($this->dataclass->getListFromproject($_REQUEST["project_id"]));
-        }
-    function getCoordinate() {
+        return $this->vue->send();
+    }
+    function getCoordinate()
+    {
+        $this->vue = service("AjaxView");
         $this->vue->set($this->dataclass->getCoordinates($_REQUEST["station_id"]));
-        }
+        return $this->vue->send();
+    }
 }

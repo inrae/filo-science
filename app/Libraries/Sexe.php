@@ -1,71 +1,63 @@
-<?php 
+<?php
+
 namespace App\Libraries;
 
+use App\Models\Sexe as ModelsSexe;
 use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\PpciModel;
 
-class  extends PpciLibrary { 
+class Sexe extends PpciLibrary
+{
     /**
-     * @var Models
-*/
+     * @var ModelsSexe
+     */
     protected PpciModel $dataclass;
-    
+
 
     function __construct()
     {
         parent::__construct();
-        $this->dataclass = new ;
-        $this->keyName = "";
+        $this->dataclass = new ModelsSexe;
+        $this->keyName = "sexe_id";
         if (isset($_REQUEST[$this->keyName])) {
             $this->id = $_REQUEST[$this->keyName];
         }
     }
-include_once 'modules/classes/sexe.class.php';
-$this->dataclass = new Sexe;
-$this->keyName = "sexe_id";
-$this->id = $_REQUEST[$this->keyName];
+    function list()
+    {
+        $this->vue = service('Smarty');
+        $this->vue->set($this->dataclass->getListe(1), "data");
+        $this->vue->set("param/sexeList.tpl", "corps");
+        return $this->vue->send();
+    }
+    function change()
+    {
+        $this->vue = service('Smarty');
+        $this->dataRead($this->id, "param/sexeChange.tpl");
+        return $this->vue->send();
+    }
+    function write()
+    {
+        try {
 
-
-
-	function list()
-{
-$this->vue=service('Smarty');
-		$this->vue->set($this->dataclass->getListe(1), "data");
-		$this->vue->set("param/sexeList.tpl", "corps");
-		}
-	function change()
-{
-$this->vue=service('Smarty');
-		/*
-		 * open the form to modify the record
-		 * If is a new record, generate a new record with default value :
-		 * $_REQUEST["idParent"] contains the identifiant of the parent record 
-		 */
-		$this->dataRead( $this->id, "param/sexeChange.tpl");
-		}
-	function write()
-{
-try {
-            
             $this->id = $this->dataWrite($_REQUEST);
             $_REQUEST[$this->keyName] = $this->id;
             return true;
         } catch (PpciException $e) {
             return false;
         }
-
-		}
-	function delete()
-{
-		/*
+    }
+    function delete()
+    {
+        /*
 		 * delete record
 		 */
-		        try {
+        try {
             $this->dataDelete($this->id);
             return true;
         } catch (PpciException $e) {
             return false;
         };
-		}
+    }
 }

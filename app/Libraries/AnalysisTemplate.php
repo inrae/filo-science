@@ -35,11 +35,7 @@ class AnalysisTemplate extends PpciLibrary
 	function change()
 	{
 		$this->vue = service('Smarty');
-		/*
-		 * open the form to modify the record
-		 * If is a new record, generate a new record with default value :
-		 * $_REQUEST["idParent"] contains the identifiant of the parent record 
-		 */
+		
 		$this->dataRead($this->id, "param/analysisTemplateChange.tpl");
 		return $this->vue->send();
 	}
