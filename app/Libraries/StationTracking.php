@@ -101,7 +101,8 @@ class StationTracking extends PpciLibrary
         $this->vue = service('Smarty');
         $this->vue->set($this->dataclass->getDetail($this->id), "data");
         $this->vue->set("tracking/stationTrackingDisplay.tpl", "corps");
-        setParamMap($this->vue, false);
+        helper("filo");
+		setParamMap($this->vue, false);
         /**
          * Get antennas
          */
@@ -144,7 +145,8 @@ class StationTracking extends PpciLibrary
         $this->vue->set($stationType->getListe(1), "stationsType");
         $river = new Param("river");
         $this->vue->set($river->getListe("river_name"), "rivers");
-        setParamMap($this->vue, true);
+        helper("filo");
+		setParamMap($this->vue, true);
         return $this->vue->send();
     }
     function write()

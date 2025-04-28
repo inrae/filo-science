@@ -80,7 +80,7 @@ class MeasureTemplate extends PpciModel
     function read(int $id, bool $getDefault = true, $parentValue = 0): array
     {
         if ($id == 0) {
-            return $this->getDefaultValue($parentValue);
+            return $this->getDefaultValues($parentValue);
         } else {
             $sql = "SELECT measure_template_id, measure_template_name, measure_template_schema
                     , taxon_id, scientific_name, common_name

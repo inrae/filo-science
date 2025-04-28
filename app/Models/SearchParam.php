@@ -127,38 +127,5 @@ class SearchParam
 		return $data;
 	}
 }
-/**
- * Exemple d'instanciation
- *
- * @author Eric Quinton
- *
- */
-class SearchExample extends SearchParam
-{
-	function __construct()
-	{
-		$this->param = array(
-			"comment" => "",
-			"numero" => 0,
-			"numero1" => "",
-			"dateExample" => date('d/m/Y')
-		);
-		$this->paramNum = array(
-			"numero",
-			"numero1"
-		);
-		parent::__construct();
-	}
-}
 
-class SearchCampaign extends SearchParam
-{
-	function __construct()
-	{
-		$this->param = array(
-			"project_id" => "",
-			"is_active" => 1
-		);
-		$this->paramNum = array("project_id", "is_active");
-	}
-}
+

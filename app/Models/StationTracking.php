@@ -41,7 +41,7 @@ class StationTracking extends PpciModel
     function read($id, $getDefault = true, $parentValue = 0): array
     {
         if ($id == 0) {
-            $data = $this->getDefaultValue();
+            $data = $this->getDefaultValues();
         } else {
             $where = " where station_id = :id:";
             $data = $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));

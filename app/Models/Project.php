@@ -66,8 +66,7 @@ class Project extends PpciModel
      */
     function getListe($order = 0, $is_active = -1): array
     {
-        $orderSql = " order by :order:";
-        $param["order"] = $order;
+        $orderSql = " order by $order";
         if ($is_active > -1) {
             $where = " where is_active = :is_active:";
             $param["is_active"] = $is_active;
@@ -250,7 +249,7 @@ class Project extends PpciModel
                 $in .= $comma . $project["project_id"];
                 $comma = ", ";
             }
-            $where = " where is_active = :is_active and project_id in (" . $in . ")";
+            $where = " where is_active = :is_active: and project_id in (" . $in . ")";
             $order = " order by project_name";
             return ($this->getListeParamAsPrepared($this->sql . $where . $this->group . $order, array("is_active" => $is_active)));
         } else {

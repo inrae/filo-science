@@ -43,7 +43,8 @@ class Station extends PpciLibrary
         $this->vue = service('Smarty');
 
         $this->dataRead($this->id, "param/stationChange.tpl");
-        setParamMap($this->vue);
+        helper("filo");
+		setParamMap($this->vue);
         $this->vue->set($_SESSION["projects"], "projects");
         $river = new Param("river");
         $this->vue->set($river->getListe("river_name"), "rivers");

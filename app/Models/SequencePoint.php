@@ -68,7 +68,7 @@ class SequencePoint extends PpciModel
         if ($id > 0) {
             $data = parent::lire($id, $getDefault, $sequence_id);
         } else {
-            $data = $this->getDefaultValue($sequence_id);
+            $data = $this->getDefaultValues($sequence_id);
             $data["sequence_point_number"] = $this->getLastNumberForSequence($sequence_id) + 1;
         }
         return $data;

@@ -31,7 +31,7 @@
                         </td>
                         <td>{$row["firstname"]}</td>
                         <td class="center">
-                            {if $row["is_active"] == 1}{t}oui{/t}{else}{t}non{/t}{/if}
+                            {if $row["is_active"] == 't'}{t}oui{/t}{else}{t}non{/t}{/if}
                         </td>
                     </tr>
                 {/foreach}

@@ -84,11 +84,11 @@ $(document).ready(function() {
                     <label for="freshwater"  class="control-label col-md-4"> <span class="red">*</span>&nbsp;{t}Opération réalisée en eau douce ?{/t}</label>
                     <div class="col-md-8">
                             <label class="radio-inline">
-                            <input  class="freshwater" type="radio" name="freshwater" id="freshwater1" value="1" {if $data.freshwater == 1}checked{/if}>
+                            <input  class="freshwater" type="radio" name="freshwater" id="freshwater1" value="1" {if $data.freshwater == 't'}checked{/if}>
                             {t}oui{/t}
                         </label>
                         <label class="radio-inline">
-                            <input  type="radio" class="freshwater" name="freshwater" id="freshwater2" value="0" {if $data.freshwater == 0}checked{/if}>
+                            <input  type="radio" class="freshwater" name="freshwater" id="freshwater2" value="0" {if $data.freshwater != 't'}checked{/if}>
                             {t}non{/t}
                         </label>
                     </div>   

@@ -32,7 +32,7 @@ class Detection extends PpciLibrary
         $this->vue = service('Smarty');
         if ($this->id == 0) {
             $individual_id = $_REQUEST["individual_id"];
-            $data = $this->dataclass->getDefaultValue($individual_id);
+            $data = $this->dataclass->getDefaultValues($individual_id);
         } else {
             $data = $this->dataclass->lire($this->id);
             $individual_id = $data["individual_id"];

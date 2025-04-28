@@ -100,7 +100,7 @@ class Individual extends PpciModel
             $where = " where individual_id = :id:";
             $data = $this->lireParamAsPrepared($this->sql . $where, array("id" => $id));
         } else {
-            $data = $this->getDefaultValue($parentValue);
+            $data = $this->getDefaultValues($parentValue);
         }
         if ($data["individual_id"] > 0) {
             $data["individual_uid"] = $data["individual_id"];

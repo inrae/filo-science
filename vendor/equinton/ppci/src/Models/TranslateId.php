@@ -1,4 +1,5 @@
 <?php
+namespace Ppci\Models;
 
 /**
  * Classe permettant de gerer les remplacements d'identifiants par des cles locales

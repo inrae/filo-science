@@ -4,11 +4,12 @@ namespace App\Libraries;
 
 use App\Models\SearchCampaign;
 use Ppci\Libraries\PpciLibrary;
-use TranslateId;
+use Ppci\Models\TranslateId;
 
 class PostLogin extends PpciLibrary
 {
-    static function index() {
+    static function index()
+    {
         $translators = array(
             array("name" => "ti_campaign", "attr" => "campaign_id"),
             array("name" => "ti_operation", "attr" => "operation_id"),
@@ -28,6 +29,5 @@ class PostLogin extends PpciLibrary
         if (!isset($_SESSION["searchCampaign"])) {
             $_SESSION["searchCampaign"] = new SearchCampaign();
         }
-        
     }
 }

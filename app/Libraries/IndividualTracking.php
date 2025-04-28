@@ -81,7 +81,8 @@ class IndividualTracking extends PpciLibrary
                 $detection = new Detection;
                 $this->vue->set($dataStation = $detection->getStationDetection($_REQUEST["individual_id"], $delay, $year), "stationDetection");
                 $this->vue->set($_REQUEST["individual_id"], "selectedIndividual");
-                setParamMap($this->vue, false);
+                helper("filo");
+		setParamMap($this->vue, false);
                 /**
                  * Generate data for graphs
                  */

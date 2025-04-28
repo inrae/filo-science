@@ -23,10 +23,10 @@
                 <label for="is_active" class="col-md-4 control-label">{t}Actif ?{/t}</label>
                 <span id="is_active">
                     <label class="radio-inline">
-                        <input type="radio" name="is_active" value="1" {if $data.is_active == 1}checked{/if}>{t}oui{/t}
+                        <input type="radio" name="is_active" value="1" {if $data.is_active == 't'}checked{/if}>{t}oui{/t}
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="is_active" value="0" {if $data.is_active == 0}checked{/if}>{t}non{/t}
+                        <input type="radio" name="is_active" value="0" {if $data.is_active != 't'}checked{/if}>{t}non{/t}
                     </label>
                 </span>
             </div>

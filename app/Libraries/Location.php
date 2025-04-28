@@ -46,14 +46,15 @@ class Location extends PpciLibrary
         }
         $this->vue = service('Smarty');
         if ($this->id == 0) {
-            $data = $this->dataclass->getDefaultValue($individual_id);
+            $data = $this->dataclass->getDefaultValues($individual_id);
         }
         $this->vue->set($data, "data");
         $this->vue->set("tracking/locationChange.tpl", "corps");
         $this->vue->set($dindividual, "individual");
         $param = new Param("antenna_type");
         $this->vue->set($param->getListe("antenna_type_name"), "antennas");
-        setParamMap($this->vue, true);
+        helper("filo");
+		setParamMap($this->vue, true);
         return $this->vue->send();
     }
     function write()

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Libraries;
+
 use App\Models\Param;
 use Ppci\Libraries\PpciException;
 

@@ -91,7 +91,8 @@ class Operation extends PpciLibrary
         /**
          * Map
          */
-        setParamMap($this->vue);
+        helper("filo");
+		setParamMap($this->vue);
         /**
          * Documents
          */
@@ -131,7 +132,8 @@ class Operation extends PpciLibrary
         /**
          * Map
          */
-        setParamMap($this->vue);
+        helper("filo");
+		setParamMap($this->vue);
         return $this->vue->send();
     }
     function write()

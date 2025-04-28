@@ -252,7 +252,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $GACL_aco = "app";
+    public $GACL_aco = "filo";
     /**
      * Generic mail used to send messages to the administrators
      *

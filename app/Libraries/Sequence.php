@@ -146,7 +146,8 @@ class Sequence extends PpciLibrary
         /**
          * Map
          */
-        setParamMap($this->vue);
+        helper("filo");
+		setParamMap($this->vue);
         return $this->vue->send();
     }
 
