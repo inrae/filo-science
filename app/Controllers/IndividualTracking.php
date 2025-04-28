@@ -20,14 +20,10 @@ class IndividualTracking extends PpciController
     {
         return $this->lib->change();
     }
-    function display()
-    {
-        return $this->lib->display();
-    }
     function write()
     {
         if ($this->lib->write()) {
-            return $this->display();
+            return $this->list();
         } else {
             return $this->change();
         }

@@ -3,14 +3,14 @@
 namespace App\Controllers;
 
 use \Ppci\Controllers\PpciController;
-use App\Libraries\Taxatemplate as LibrariesTaxatemplate;
+use App\Libraries\ParameterMeasureType as LibrariesParameterMeasureType;
 
-class Taxatemplate extends PpciController
+class Parameter_measure_type extends PpciController
 {
     protected $lib;
     function __construct()
     {
-        $this->lib = new LibrariesTaxatemplate();
+        $this->lib = new LibrariesParameterMeasureType;
     }
     function list()
     {

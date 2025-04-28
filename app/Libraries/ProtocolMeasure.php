@@ -8,10 +8,10 @@ use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\PpciModel;
 
-class Protocol extends PpciLibrary
+class ProtocolMeasure extends PpciLibrary
 {
     /**
-     * @var Models
+     * @var ModelsProtocol
      */
     protected PpciModel $dataclass;
     protected MeasureTemplate $measureTemplate;
