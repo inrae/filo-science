@@ -18,6 +18,7 @@
     "datatables.net-fixedheader": "^4.0.1",
     "datetime-moment": "^1.0.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.49",
+    "handlebars": "^4.7.8",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
     "js.cookie": "0.0.4",
