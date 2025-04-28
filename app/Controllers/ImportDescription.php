@@ -42,6 +42,10 @@ class ImportDescription extends PpciController
     }
     function duplicate()
     {
-        return $this->lib->duplicate();
+       if( $this->lib->duplicate()) {
+        return $this->lib->change();
+       } else {
+        return $this->lib->list();
+       }
     }
 }

@@ -89,7 +89,6 @@ class ImportDescription extends PpciLibrary
             $newId = $this->dataclass->duplicate($this->id);
             if ($newId > 0) {
                 $_REQUEST[$this->keyName] = $newId;
-                return true;
                 $db->transCommit();
                 $this->message->set(_("Duplication effectuée"));
                 return true;

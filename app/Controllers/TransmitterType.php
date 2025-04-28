@@ -2,15 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Libraries\TransmitterType as LibrariesTransmitterType;
 use \Ppci\Controllers\PpciController;
-use App\Libraries\ParameterMeasureType as LibrariesParameterMeasureType;
 
-class ParameterMeasureType extends PpciController
+
+class TransmitterType extends PpciController
 {
     protected $lib;
     function __construct()
     {
-        $this->lib = new LibrariesParameterMeasureType;
+        $this->lib = new LibrariesTransmitterType;
     }
     function list()
     {

@@ -42,7 +42,7 @@
                                 </a>
                             </td>
                             <td class="center">
-                                <a href="importDescriptionDuplicate&import_description_id={$import.import_description_id}">
+                                <a href="importDescriptionDuplicate?import_description_id={$import.import_description_id}">
                                         <img src="display/images/copy.png" height="25" title="{t}Dupliquer{/t}">
                                 </a>
                             </td>

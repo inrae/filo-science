@@ -40,7 +40,7 @@ class Taxon extends PpciModel
      */
     function search($val, $isFreshcode = 0, $noFreshcode = 0)
     {
-        $val = strtoupper($this->encodeData($val));
+        $val = strtoupper($val);
         $sql = "SELECT taxon_id, scientific_name, common_name, fresh_code, sea_code, length_max, weight_max
                 from taxon";
         $param = [];

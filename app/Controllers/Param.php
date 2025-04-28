@@ -31,7 +31,7 @@ class Param extends PpciController
             "gear_method" => _("Méthodes d'utilisation des engins"),
             "river" => _("Cours d'eau"),
             "station_type" => _("Types de stations"),
-            "antenna_type" => _("Types d'antennes (détection individuelle"),
+            "antenna_type" => _("Types d'antennes (détection individuelle)"),
             "technology_type" => _("Méthodes d'utilisation des engins"),
         ];
     }

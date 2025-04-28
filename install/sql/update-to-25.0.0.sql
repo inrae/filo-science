@@ -21,3 +21,7 @@ alter table gacl.logingestion add column if not exists lastattempt timestamp;
 update gacl.aclgroup set groupe = 'manage' where groupe = 'gestion';
 update gacl.aclaco set aco = 'manage' where aco = 'gestion';
 insert into filo.dbversion (dbversion_date, dbversion_number) values ('2025-05-12', '25.0');
+
+select setval('filo.pathology_pathology_id_seq', (select max(pathology_id) from filo.pathology));
+select setval('filo.fishing_strategy_fishing_strategy_id_seq', (select max(fishing_strategy_id) from filo.fishing_strategy));
+select setval('filo.gear_method_gear_method_id_seq', (select max(gear_method_id) from filo.gear_method));
