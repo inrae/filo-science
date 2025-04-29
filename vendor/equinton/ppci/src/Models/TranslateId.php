@@ -125,7 +125,7 @@ class TranslateId
      */
     function getValue($id)
     {
-        if ($id > 0) {
+        if ($id > 0 && $this->corresp[$id] > 0) {
             return $this->corresp[$id];
         } else {
             return 0;

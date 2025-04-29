@@ -26,14 +26,20 @@ class Operation extends PpciLibrary
         parent::__construct();
         $this->dataclass = new ModelsOperation;
         $this->keyName = "operation_id";
-        if (isset($_REQUEST[$this->keyName])) {
-            $_SESSION["origine"] == "document" ? $this->id = $_REQUEST[$this->keyName] : $this->id = $_SESSION["ti_operation"]->getValue($_REQUEST[$this->keyName]);
+        if (!empty($_REQUEST[$this->keyName])) {
+            if ($_SESSION["origine"] == "document") {
+                $this->id = $_REQUEST[$this->keyName];
+            } else {
+                $this->id = $_SESSION["ti_operation"]->getValue($_REQUEST[$this->keyName]);
+            } 
+        } else {
+            $this->id = 0;
         }
-        if (isset($_REQUEST["campaign_id"])) {
+        if (!empty($_REQUEST["campaign_id"])) {
             $this->campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
         }
 
-        if (isset($_REQUEST["activeTab"])) {
+        if (!empty($_REQUEST["activeTab"])) {
             $this->activeTab = $_REQUEST["activeTab"];
         }
     }
@@ -121,6 +127,7 @@ class Operation extends PpciLibrary
          * Preparation of the parameters tables
          */
         $params = array("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
+        helper("filo");
         foreach ($params as $tablename) {
             setParamToVue($this->vue, $tablename);
         }
@@ -132,7 +139,6 @@ class Operation extends PpciLibrary
         /**
          * Map
          */
-        helper("filo");
 		setParamMap($this->vue);
         return $this->vue->send();
     }

@@ -92,7 +92,7 @@ class Operation extends PpciModel
      */
     function read($id, $getDefault = true, $parent_id = 0): array
     {
-        $data = parent::lire($id, $getDefault, $parent_id);
+        $data = parent::read($id, $getDefault, $parent_id);
         /* Recovery of campaign_name */
         $sql = "SELECT campaign_name from campaign where campaign_id = :campaign_id:";
         $dcamp = $this->lireParamAsPrepared($sql, array("campaign_id" => $data["campaign_id"]));

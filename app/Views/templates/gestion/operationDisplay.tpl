@@ -4,7 +4,9 @@
             setTimeout(function () { map.invalidateSize(); }, 400);
         });
         $("#tab-ambience").on("shown.bs.tab", function () {
+            if ( mapA ) {
             setTimeout(function () { mapA.invalidateSize(); }, 400);
+            }
         });
         $("#tab-sequence").on("shown.bs.tab", function () {
             setTimeout(function () { mapS.invalidateSize(); }, 400);

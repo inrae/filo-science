@@ -39,7 +39,7 @@ class Operator extends PpciModel
                             is_responsible
                     FROM operator
                     JOIN operation_operator USING (operator_id)
-                    WHERE operation_id = :operation_id
+                    WHERE operation_id = :operation_id:
                     UNION
                     SELECT operator_id,
                             firstname,
@@ -50,7 +50,7 @@ class Operator extends PpciModel
                     FROM operator
                     WHERE operator_id NOT IN (SELECT operator_id
                                             FROM operation_operator
-                                            WHERE operation_id = :operation_id)
+                                            WHERE operation_id = :operation_id:)
                     AND   is_active = TRUE
                     ";
         } else {

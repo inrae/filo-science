@@ -132,7 +132,7 @@ class IndividualTracking extends PpciModel
     function delete($id = null, $purge = false)
     {
         $detection = new Detection;
-        $detection->deleteChamp($id, "individual_id");
+        $detection->deleteFromField($id, "individual_id");
         parent::delete($id);
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Libraries;
 
+use App\Models\Project;
 use App\Models\SearchCampaign;
+use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\TranslateId;
 
@@ -28,6 +30,17 @@ class PostLogin extends PpciLibrary
         }
         if (!isset($_SESSION["searchCampaign"])) {
             $_SESSION["searchCampaign"] = new SearchCampaign();
+        }
+        /**
+         * Recuperation des projets attaches directement au login
+         */
+        $project = new Project;
+        try {
+            $project->initprojects();
+        } catch (PpciException $e) {
+            $message = service ("MessagePpci");
+            $message->set($e->getMessage());
+            $message->setSyslog($e->getMessage());
         }
     }
 }

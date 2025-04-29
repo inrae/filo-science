@@ -141,7 +141,7 @@ $routes->post('sequencePointDelete', 'SequencePoint::delete');
 $routes->add('sampleChange', 'Sample::change');
 $routes->post('sampleWrite', 'Sample::write');
 $routes->post('sampleDelete', 'Sample::delete');
-$routes->add('sampleDeleteIndividual', 'Sample::deleteIndividual');
+$routes->post('DeleteIndividual', 'Sample::deleteIndividual');
 $routes->add('ambienceChange', 'Ambience::change');
 $routes->post('ambiencesequenceWrite', 'Ambience::write/sequence');
 $routes->post('ambiencesequenceDelete', 'Ambience::delete/sequence');

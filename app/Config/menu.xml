@@ -10,10 +10,7 @@
 		<item module="campaignDisplay" label="Dernière campagne" tooltip="Affichage de la dernière campagne traitée récemment"/>
 		<item module="operationDisplay" label="Dernière opération" tooltip="Affichage de la dernière opération traitée récemment"/>
 		<item module="sequenceDisplay" label="Dernière séquence" tooltip="Affichage de la dernière séquence traitée récemment"/>
-		<item divider="1" droits="gestion"/>
-		<item module="dbstructureSchema" droits="gestion" label="Schéma de la base de données" tooltip="Schéma de la base de données"/>
-		<item module="dbstructureHtml" droits='gestion' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes"/>
-		<item module="dbstructureLatex" droits='gestion' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex"/>
+		<item divider="1" droits="manage"/>
 		<item module="requestList" label="Requêtes SQL" tooltip="Exécution de requêtes SQL dans la base de données" droits="param"/>
 	</item>
 
@@ -97,9 +94,9 @@
 	</item>
 
 	<item module="administration" label="Administration" tooltip="Administration de l'application" droits="admin">
-		<item module="loginGestionList" droits="admin" label="Liste des comptes locaux" tooltip="Liste des logins - identification via la base de données" />
+		<item module="loginmanageList" droits="admin" label="Liste des comptes locaux" tooltip="Liste des logins - identification via la base de données" />
 		<item module="appliList" drsoits="admin" label="ACL - droits" tooltip="applications et droits gérés" />
-		<item module="aclloginList" droits="admin" label="ACL - logins" tooltip="Logins déclarés dans le module de gestion des droits" />
+		<item module="aclloginList" droits="admin" label="ACL - logins" tooltip="Logins déclarés dans le module de manage des droits" />
 		<item module="groupList" droits="admin" label="ACL - groupes de logins" tooltip="Groupes de logins et logins rattachés aux groupes" />
 		<item module="dbparamList" droits="admin" label="Paramètres de l'application" tooltip="Liste des paramètres pérennes de l'application" />
 		<item divider="1" />

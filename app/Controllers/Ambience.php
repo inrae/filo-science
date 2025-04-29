@@ -43,6 +43,6 @@ class Ambience extends PpciController
         } else {
             $this->back = new Operation;
         }
-        return $this->back->list();
+        return $this->back->display();
     }
 }

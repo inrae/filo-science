@@ -168,6 +168,7 @@ class Sequence extends PpciLibrary
         /**
          * Preparation of the parameters tables
          */
+        helper("filo");
         $params = array("water_regime", "fishing_strategy", "scale", "taxa_template", "protocol");
         foreach ($params as $tablename) {
             setParamToVue($this->vue, $tablename);

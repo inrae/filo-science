@@ -109,7 +109,7 @@ class Ambience extends PpciModel
      */
     function getFromSequence($sequence_id)
     {
-        $where = " where sequence_id = :id";
+        $where = " where sequence_id = :id:";
         return $this->lireParamAsPrepared($this->sql . $where, array("id" => $sequence_id));
     }
 

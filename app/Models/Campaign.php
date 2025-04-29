@@ -58,7 +58,7 @@ class Campaign extends PpciModel
         if (!empty($param["is_active"]) ) {
             $where .= $and . " is_active = :is_active:";
             $and = " and ";
-            $values["is_active"] = $param["is_active"];
+            $param ["is_active"] == 1 ? $values["is_active"] = true: $values["is_active"] = false;
         }
         if (!empty($and) ) {
             return $this->getListeParamAsPrepared($this->sql . $where, $values);

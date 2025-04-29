@@ -87,6 +87,7 @@ class Ambience extends PpciLibrary
 		 * Treatment of parameters
 		 */
 		$tables = array("granulometry", "speed", "shady", "clogging", "facies", "sinuosity", "localisation", "turbidity", "situation", "flow_trend", "vegetation", "cache_abundance");
+		helper("filo");
 		foreach ($tables as $tablename) {
 			setParamToVue($this->vue, $tablename);
 		}

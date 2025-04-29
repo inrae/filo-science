@@ -45,6 +45,7 @@ class SequencePoint extends PpciLibrary
          * Preparation of the parameters tables
          */
         $params = array("localisation", "facies");
+        helper("filo");
         foreach ($params as $tablename) {
             setParamToVue($this->vue, $tablename);
         }

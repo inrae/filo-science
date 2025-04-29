@@ -211,9 +211,11 @@ class Sample extends PpciLibrary
             try {
                 $db = $this->dataclass->db;
                 $db->transBegin();
-                $this->datadelete($this->individual, $individual_id, true);
+                $individual = new Individual;
+                $individual->delete($individual_id);
+                unset($_REQUEST["individual_id"]);
                 $this->dataclass->setCalculatedData($this->id);
-                $db->transCommit();
+                 $db->transCommit();
                 $this->message->set(_("Suppression effectuée"));
                 return true;
             } catch (PpciException $e) {

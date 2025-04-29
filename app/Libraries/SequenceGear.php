@@ -46,6 +46,7 @@ class SequenceGear extends PpciLibrary
          * Preparation of the parameters tables
          */
         $params = array("electric_current_type", "gear_method", "gear");
+        helper("filo");
         foreach ($params as $tablename) {
             setParamToVue($this->vue, $tablename);
         }

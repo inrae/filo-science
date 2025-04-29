@@ -251,7 +251,8 @@ class Project extends PpciModel
             }
             $where = " where is_active = :is_active: and project_id in (" . $in . ")";
             $order = " order by project_name";
-            return ($this->getListeParamAsPrepared($this->sql . $where . $this->group . $order, array("is_active" => $is_active)));
+            $is_active == 1 ? $param["is_active"] = true: $param["is_active"] = false;
+            return ($this->getListeParamAsPrepared($this->sql . $where . $this->group . $order, $param));
         } else {
             return array();
         }

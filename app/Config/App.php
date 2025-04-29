@@ -200,7 +200,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public string $databaseSchemaFile = ROOTPATH . "documentation/schema.png";
+    public string $databaseSchemaFile = ROOTPATH . "documentation/dbstructure.png";
     /**
      * Duration of conservation of logs in table log
      *
@@ -315,7 +315,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $copyright = "Copyright © 2024 - All rights reserved. Author : Éric Quinton - Software distributed under AGPL license";
+    public $copyright = "Copyright © 2025 - All rights reserved. Author : Éric Quinton - Software distributed under AGPL license";
 
     /**
      * Max duration of a session

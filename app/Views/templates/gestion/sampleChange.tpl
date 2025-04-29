@@ -109,7 +109,7 @@
 		$("#delete-individual").on('keyup click', function () {
 			var lib = "{t}Confirmez-vous la suppression ?{/t}";
 			if (confirm(lib) == true) {
-				$(this.form).find("input[name='action']").val("DeleteIndividual");
+				$(this.form).attr("action","DeleteIndividual");
 				$(this.form).submit();
 			} else {
 				return false;
