@@ -17,7 +17,7 @@ class Detection extends PpciModel
     private $sunrise;
 
     private $sql = "SELECT detection_id, individual_id, antenna_id,
-                  to_char(detection_date, :formatDate) as detection_date,
+                  to_char(detection_date, :formatDate:) as detection_date,
                   extract (epoch from detection_date) as date_epoch,
                   nb_events, duration, validity, signal_force, observation, daypart,
                   antenna_code, station_id, station_name, station_code, station_number,

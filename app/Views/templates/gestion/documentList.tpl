@@ -45,7 +45,7 @@ $(document).ready(function() {
 d'import{/t}</th>
 <th>{t}Date
 de création{/t}</th>
-{if $rights["gestion"] == 1}
+{if $rights["manage"] == 1}
 <th>{t}Supprimer{/t}</th>
 {/if}
 </tr>
@@ -72,7 +72,7 @@ de création{/t}</th>
 <td>{$dataDoc[lst].size}</td>
 <td>{$dataDoc[lst].document_import_date}</td>
 <td>{$dataDoc[lst].document_creation_date}</td>
-{if $rights["gestion"] == 1}
+{if $rights["manage"] == 1}
 <td>
 <div class="center">
 <a href="{$moduleParent}documentDelete?document_id={$dataDoc[lst].document_id}&activeTab=tab-document&{$moduleParent}_id={$parent_id}" onclick="return confirm('{t}Confirmez-vous la suppression ?{/t}');">

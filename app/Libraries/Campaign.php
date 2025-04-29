@@ -25,6 +25,7 @@ class Campaign extends PpciLibrary
         if (isset($_REQUEST[$this->keyName])) {
             $this->id = $_SESSION["ti_campaign"]->getValue($_REQUEST[$this->keyName]);
         }
+        helper("filo");
     }
     function list()
     {

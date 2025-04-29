@@ -195,7 +195,7 @@ class IndividualTracking extends PpciModel
             $param["year"] = $year;
         }
         $sql = "
-            select detection_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate) as detection_date
+            select detection_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate:) as detection_date
                 ,extract (epoch from detection_date) as date_epoch
                 , nb_events, duration, validity, signal_force, observation
                 ,station_long long, station_lat lat, station_name, station_code, station_number
@@ -209,7 +209,7 @@ class IndividualTracking extends PpciModel
             join taxon using (taxon_id)
             where $where
             union
-            select location_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate) as detection_date
+            select location_id as id, individual_id, individual_code, scientific_name, to_char(detection_date, :formatDate:) as detection_date
                 ,extract (epoch from detection_date) as date_epoch
                 , null nb_events, null duration, true validity, signal_force, observation
                 , location_long long, location_lat lat, null station_name, null station_code, null station_number

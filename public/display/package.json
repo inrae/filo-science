@@ -11,6 +11,7 @@
   "dependencies": {
     "alpaca": "^1.5.27",
     "bootstrap": "^3.4.1",
+    "c3": "^0.7.20",
     "combobox": "^1.0.1",
     "datatables.net": "^2.1.8",
     "datatables.net-bs": "^2.1.8",

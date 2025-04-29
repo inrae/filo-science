@@ -227,7 +227,7 @@ class Project extends PpciModel
          * Attribution des droits de gestion si attache a un projet
          */
         if (count($_SESSION["projects"]) > 0) {
-            $_SESSION["droits"]["gestion"] = 1;
+            $_SESSION["droits"]["manage"] = 1;
         }
     }
     /**

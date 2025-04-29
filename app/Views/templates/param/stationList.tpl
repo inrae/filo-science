@@ -50,7 +50,7 @@
     </div>
 </div>
 
-{if $rights["gestion"] == 1}
+{if $rights["manage"] == 1}
     <div class="row col-md-6">
         <fieldset>
             <legend>{t}Importer des stations depuis un fichier CSV{/t}</legend>

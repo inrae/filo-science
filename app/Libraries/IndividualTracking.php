@@ -31,6 +31,7 @@ class IndividualTracking extends PpciLibrary
             $this->id = $_REQUEST[$this->keyName];
         }
         $this->individual = new Individual;
+        helper("filo");
     }
 
 

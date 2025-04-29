@@ -111,7 +111,7 @@ class StationTracking extends PpciModel
     {
         $data = $this->read($station_id);
         helper("filo");
-        return (verifyProject($data["project_id"]));
+        return (\App\Libraries\verifyProject($data["project_id"]));
     }
     /**
      * Get the list of antennas or probes according to the type of import
@@ -161,7 +161,7 @@ class StationTracking extends PpciModel
                 from station_tracking
                 join antenna using (station_id)
                 join station using (station_id)
-                where station_number = :station_number
+                where station_number = :station_number:
                 and project_id = :project_id:";
         if (!empty($date_from) && !empty($date_to)) {
             $sql .= " and (TIMESTAMP '$date_from', TIMESTAMP '$date_to') overlaps (date_from, date_to)";
