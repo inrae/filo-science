@@ -31,6 +31,7 @@ class Individual extends PpciLibrary
                 if (!verifyProject($dcampaign["project_id"])) {
                     throw new PpciException(_("Vous ne disposez pas des droits suffisants pour réaliser l'opération"));
                 }
+                $this->vue = service ("CsvView");
                 $this->vue->set($this->dataclass->getListFromCampaign($campaign_id));
                 return $this->vue->send();
             } else {

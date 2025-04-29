@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-2 col-md-offset-8">
                 <img src="display/images/fish.png" height="25">
-                <a href="individualGetListFromCampaign&campaign_id={$data.campaign_id}">
+                <a href="individualGetListFromCampaign?campaign_id={$data.campaign_id}">
                     {t}Exporter les poissons mesurés{/t}
                 </a>
             </div>
