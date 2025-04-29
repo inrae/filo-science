@@ -22,6 +22,7 @@ class IndividualTracking extends PpciLibrary
     protected PpciModel $dataclass;
     public Individual $individual;
     private int $idExistent, $idMin, $idMax;
+    public array $errors;
     function __construct()
     {
         parent::__construct();
@@ -279,8 +280,8 @@ class IndividualTracking extends PpciLibrary
         $this->vue = service('Smarty');
         $this->vue->set("tracking/individualTrackingImport.tpl", "corps");
         $this->vue->set($_SESSION["projects"], "projects");
-        if (isset($errors)) {
-            $this->vue->set($errors, "errors");
+        if (isset($this->errors)) {
+            $this->vue->set($this->errors, "errors");
             $this->vue->set(1, "error");
         }
         return $this->vue->send();
@@ -291,10 +292,10 @@ class IndividualTracking extends PpciLibrary
             $fdata = $_FILES['filename'];
             if ($fdata["error"] == 0 && $fdata["size"] > 0) {
                 /**
-                 * $errors: list of errors
+                 * $this->errors: list of errors
                  * Structure: array ["lineNumber", "content"]
                  */
-                $errors = array();
+                $this->errors = array();
                 $numLine = 1;
                 $this->idMin = 999999999;
                 $this->idMax = 0;
@@ -321,6 +322,7 @@ class IndividualTracking extends PpciLibrary
                                 $this->idExistent = $this->dataclass->getIdFromField($field, $line[$field], $_POST["project_id"]);
                                 if ($this->idExistent > 0) {
                                     $isNew = false;
+                                    break;
                                 }
                             }
                             if ($isNew) {
@@ -336,29 +338,29 @@ class IndividualTracking extends PpciLibrary
                                 }
                                 $totalNumber++;
                             } else {
-                                $errors[] = array(
+                                $this->errors[] = array(
                                     "lineNumber" => $numLine,
                                     "content" => sprintf(_("Le poisson existe déjà (id : %s)"), $this->idExistent)
                                 );
                             }
                         } else {
-                            $errors[] = array(
+                            $this->errors[] = array(
                                 "lineNumber" => $numLine,
                                 "content" => _("La ligne est vide ou le taxon_id n'a pas été renseigné - ligne non traitée")
                             );
                         }
                     }
                     $db->transCommit();
-                    $errors[] = array("content" => _("Nombre total de poissons créés :") . $totalNumber);
+                    $this->errors[] = array("content" => _("Nombre total de poissons créés : ") . $totalNumber);
                     if ($totalNumber > 0) {
-                        $errors[] = array("content" => _("Id mini généré :") . $this->idMin);
-                        $errors[] = array("content" => _("Id maxi généré :") . $this->idMax);
+                        $this->errors[] = array("content" => _("Id mini généré : ") . $this->idMin);
+                        $this->errors[] = array("content" => _("Id maxi généré : ") . $this->idMax);
                     }
                     $import->fileClose();
                     return true;
                 } catch (PpciException $oe) {
                     if (!$_REQUEST["testMode"] == 1) {
-                        $errors[] = array("lineNumber" => $numLine, "content" => _("Erreur d'écriture en table. Message d'erreur de la base de données : ") . $oe->getMessage());
+                        $this->errors[] = array("lineNumber" => $numLine, "content" => _("Erreur d'écriture en table. Message d'erreur de la base de données : ") . $oe->getMessage());
                         $this->message->set(_("L'importation a échoué. Consultez les messages dans le tableau"), true);
                         $this->message->setSyslog($oe->getMessage());
                         if ($db->transEnabled) {

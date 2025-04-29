@@ -245,8 +245,8 @@ class IndividualTracking extends PpciModel
         if (!empty($value)) {
             $sql = "SELECT individual_id from individual_tracking
             join individual using (individual_id)
-            where $field = :value:";
-            $param = array("value" => $value);
+            where $field = :val:";
+            $param = array("val" => $value);
             if ($project_id > 0 && $field != "uuid") {
                 $sql .= " and project_id = :project_id:";
                 $param["project_id"] = $project_id;
