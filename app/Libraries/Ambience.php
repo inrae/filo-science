@@ -112,13 +112,12 @@ class Ambience extends PpciLibrary
 				$data["sequence_id"] = $this->sequence_id;
 			} else {
 				unset($data["sequence_id"]);
-				$this->id = $this->dataWrite($data);
-				$_REQUEST[$this->keyName] = $this->id;
-				if ($this->id > 0) {
-					$_REQUEST[$this->keyName] = $_SESSION["ti_ambience"]->setValue($this->id);
-				}
-				return true;
 			}
+			$this->id = $this->dataWrite($data);
+			if ($this->id > 0) {
+				$_REQUEST[$this->keyName] = $_SESSION["ti_ambience"]->setValue($this->id);
+			}
+			return true;
 		} catch (PpciException) {
 			return false;
 		}

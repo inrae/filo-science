@@ -25,7 +25,6 @@ class Individual extends PpciLibrary
     {
         try {
             if ($_REQUEST["campaign_id"] > 0) {
-                require_once "modules/classes/campaign.class.php";
                 $campaign = new Campaign;
                 $campaign_id = $_SESSION["ti_campaign"]->getValue($_REQUEST["campaign_id"]);
                 $dcampaign = $campaign->read($campaign_id);
@@ -46,6 +45,7 @@ class Individual extends PpciLibrary
     {
         try {
             if ($_REQUEST["operation_id"] > 0) {
+                $this->vue=service("CsvView");
                 $operation = new Operation;
                 $operation_id = $_SESSION["ti_operation"]->getValue($_REQUEST["operation_id"]);
                 $doperation = $operation->getDetail($operation_id);

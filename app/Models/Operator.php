@@ -76,7 +76,7 @@ class Operator extends PpciModel
          */
         $sql = "delete from operation_operator
                 where operation_id = :operation_id:";
-        $this->executeAsPrepared($sql, array("operation_id" => $operation_id), true);
+        $this->executeQuery($sql, array("operation_id" => $operation_id), true);
         foreach ($operators as $value) {
             $data = array(
                 "operation_id" => $operation_id,
@@ -89,7 +89,7 @@ class Operator extends PpciModel
             }
             $sql = "insert into operation_operator (operation_id, operator_id, is_responsible)
                     values (:operation_id:, :operator_id:, :is_responsible:)";
-            $this->executeAsPrepared($sql, $data);
+            $this->executeQuery($sql, $data);
         }
     }
 }

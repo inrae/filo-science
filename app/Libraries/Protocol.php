@@ -41,7 +41,6 @@ class Protocol extends PpciLibrary
         $this->dataRead($this->id, "param/protocolChange.tpl");
         $at = new AnalysisTemplate;
         $this->vue->set($at->getListe(1), "dataat");
-        require_once "modules/classes/ambience_template.class.php";
         $ambienceTemplate = new AmbienceTemplate;
         $this->vue->set($ambienceTemplate->getListe(1), "ambiences");
         return $this->vue->send();
@@ -55,7 +54,7 @@ class Protocol extends PpciLibrary
          * Get the associated documents
          */
         $document = new Document;
-        $this->vue->set($document->getListFromParent("protocol", $this->id), "dataDoc");
+        $this->vue->set($document->documentgetListFromParent("protocol", $this->id), "dataDoc");
         $this->vue->set("protocol", "moduleParent");
         $this->vue->set($this->id, "parent_id");
 

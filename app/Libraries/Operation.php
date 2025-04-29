@@ -179,8 +179,8 @@ class Operation extends PpciLibrary
         try {
             $db->transBegin();
             $operator->setOperatorsToOperation($this->id, $_POST["operators"], $_POST["operator_responsible"]);
-            return true;
             $db->transCommit();
+            return true;
         } catch (PpciException $e) {
             if ($db->transEnabled) {
                 $db->transRollback();
@@ -198,9 +198,10 @@ class Operation extends PpciLibrary
             $newid = $this->dataclass->duplicate($this->id);
             if ($newid > 0) {
                 $_REQUEST[$this->keyName] = $_SESSION["ti_operation"]->setValue($newid);
+                $this->id = $newid;
             }
-            return true;
             $db->transCommit();
+            return true;
         } catch (PpciException $e) {
             if ($db->transEnabled) {
                 $db->transRollback();

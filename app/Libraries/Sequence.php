@@ -254,6 +254,7 @@ class Sequence extends PpciLibrary
                  */
                 $_COOKIE["sequence_uid"] = $newid;
                 $_REQUEST["sequence_id"] = $_SESSION["ti_sequence"]->setValue($newid);
+                $this->id = $newid;
                 return true;
             } else {
                 $this->message->set(_("Une erreur est survenue pendant la duplication de la séquence"), true);
@@ -284,10 +285,10 @@ class Sequence extends PpciLibrary
             $this->vue->set($data, "data");
             $this->vue->set("gestion/sequenceAddTelemetryFish.tpl", "corps");
             $this->vue->set($individuals, "individuals");
-            return true;
+            return $this->vue->send();
         } else {
             $this->message->set(_("Il n'y a pas de poissons saisis dans le module de télémétrie qui ne soient pas associés avec une séquence"), true);
-            return false;
+            return $this->display();
         }
     }
     function addTelemetryFishExec()

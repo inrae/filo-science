@@ -39,8 +39,6 @@ class ProtocolMeasure extends PpciLibrary
         $db = $this->dataclass->db;
         try {
             $db->transBegin();
-            $this->id = $this->dataWrite($_REQUEST);
-            $_REQUEST[$this->keyName] = $this->id;
             $this->dataclass->ecrireTableNN("protocol_measure", "protocol_id", "measure_template_id", $this->id, $_POST["measure_template_id"]);
             $db->transCommit();
             return true;

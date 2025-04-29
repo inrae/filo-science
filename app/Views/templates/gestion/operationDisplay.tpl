@@ -57,7 +57,7 @@
             tabHover = 0;
         });
         $("#duplicate").submit(function(event) {
-            if (! confirm( "{t}Confirmez-vous la duplication de l'opération courante ?{/t}")) {
+            if (! confirm( "{t}Confirmez-vous la duplication de cette opération ?{/t}")) {
                 event.preventDefault();
             }
         });
@@ -75,12 +75,12 @@
     {if $rights.manage == 1}
         <div class="col-sm-2 col-sm-offset-2">
             <img src="display/images/fish.png" height="25">
-            <a href="individualGetListFromOperation&operation_id={$data.operation_id}">
+            <a href="individualGetListFromOperation?operation_id={$data.operation_id}">
                 {t}Exporter les poissons mesurés{/t}
             </a>
         </div>
         <div class="col-sm-2">
-            <form id="duplicate" method="post" action="Duplicate">
+            <form id="duplicate" method="post" action="operationDuplicate">
                 <input type="hidden" name="moduleBase" value="operation">
                 <input type="hidden" name="campaign_id" value="{$data.campaign_id}">
                 <input type="hidden" name="operation_id" value="{$data.operation_id}">

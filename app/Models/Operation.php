@@ -209,7 +209,7 @@ class Operation extends PpciModel
          */
         $sql = "delete from operation_operator
                 where operation_id = :operation_id:";
-        $this->executeAsPrepared($sql, array("operation_id" => $id), true);
+        $this->executeQuery($sql, array("operation_id" => $id), true);
         /**
          * delete the operation
          */

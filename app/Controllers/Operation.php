@@ -44,6 +44,10 @@ class Operation extends PpciController
     }
     function duplicate()
     {
-        return $this->lib->duplicate();
+        if( $this->lib->duplicate()) {
+            return $this->lib->change();
+        }else {
+            return $this->lib->display();
+        }
     }
 }

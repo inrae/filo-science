@@ -164,7 +164,7 @@ class Project extends PpciModel
 
             $sql = "delete from project_group where project_id = :project_id:";
             $data["project_id"] = $id;
-            $this->executeAsPrepared($sql, $data);
+            $this->executeQuery($sql, $data);
             /**
              * delete documents
              */

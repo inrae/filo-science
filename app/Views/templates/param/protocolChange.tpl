@@ -12,7 +12,9 @@
 			<input type="hidden" name="moduleBase" value="protocol">
 			<input type="hidden" name="protocol_id" value="{$data.protocol_id}">
 			<div class="form-group">
-				<label for="paramName"  class="control-label col-md-4"><span class="red">*</span> {t}Libellé :{/t}</label>
+				<label for="paramName"  class="control-label col-md-4"><span class="red">*</span> 
+					{t}Libellé :{/t}
+				</label>
 				<div class="col-md-8">
 					<input id="paramName" type="text" class="form-control" name="protocol_name" value="{$data.protocol_name}" autofocus required>
 				</div>
@@ -30,46 +32,62 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="measure_default"  class="control-label col-md-4"><span class="red">*</span> {t}Mesure de longueur réalisée par défaut :{/t}</label>
+				<label for="measure_default"  class="control-label col-md-4"><span class="red">*</span> 
+					{t}Mesure de longueur réalisée par défaut :{/t}
+				</label>
 				<div class="col-md-8">
 					<select id="measure_default" name="measure_default" class="form-control">
-						<option value="sl" {if $data.measure_default == "sl"}selected{/if}>{t}Longueur standard{/t}</option>
-						<option value="fl" {if $data.measure_default == "fl"}selected{/if}>{t}Longueur fourche{/t}</option>
-						<option value="tl" {if $data.measure_default == "tl"}selected{/if}>{t}Longueur totale{/t}</option>
+						<option value="sl" {if $data.measure_default == "sl"}selected{/if}>
+							{t}Longueur standard{/t}
+						</option>
+						<option value="fl" {if $data.measure_default == "fl"}selected{/if}>
+							{t}Longueur fourche{/t}
+						</option>
+						<option value="tl" {if $data.measure_default == "tl"}selected{/if}>
+							{t}Longueur totale{/t}
+						</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="measure_default_only"  class="control-label col-md-4">{t}Seule la longueur par défaut est autorisée ?{/t}</label>
+				<label for="measure_default_only"  class="control-label col-md-4">
+					{t}Seule la longueur par défaut est autorisée ?{/t}
+				</label>
 				<div class="col-md-8" id="measure_default_only">
 					<label class="radio-inline">
-						<input  type="radio" name="measure_default_only" id="measure_default_only1" value="1" {if $data.measure_default_only == 1}checked{/if}>
+						<input  type="radio" name="measure_default_only" id="measure_default_only1" value="1" {if $data.measure_default_only == 't'}checked{/if}>
 						{t}oui{/t}
 					</label>
 					<label class="radio-inline">
-						<input  type="radio" name="measure_default_only" id="measure_default_only2" value="0" {if $data.measure_default_only == 0}checked{/if}>
+						<input  type="radio" name="measure_default_only" id="measure_default_only2" value="0" {if $data.measure_default_only != 't'}checked{/if}>
 						{t}non{/t}
 					</label>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="existing_taxon_only"  class="control-label col-md-4">{t}Seuls les taxons existants sont autorisés ?{/t}</label>
+				<label for="existing_taxon_only"  class="control-label col-md-4">
+					{t}Seuls les taxons existants sont autorisés ?{/t}
+				</label>
 				<div class="col-md-8" id="measure_default_only">
 					<label class="radio-inline">
-						<input  type="radio" name="existing_taxon_only" id="existing_taxon_only1" value="1" {if $data.existing_taxon_only == 1}checked{/if}>
+						<input  type="radio" name="existing_taxon_only" id="existing_taxon_only1" value="1" {if $data.existing_taxon_only == 't'}checked{/if}>
 						{t}oui{/t}
 					</label>
 					<label class="radio-inline">
-						<input  type="radio" name="existing_taxon_only" id="existing_taxon_only2" value="0" {if $data.existing_taxon_only == 0}checked{/if}>
+						<input  type="radio" name="existing_taxon_only" id="existing_taxon_only2" value="0" {if $data.existing_taxon_only != 't'}checked{/if}>
 						{t}non{/t}
 					</label>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="analysis_template_id" class="control-label col-md-4">{t}Modèle d'analyse complémentaire :{/t}</label>
+				<label for="analysis_template_id" class="control-label col-md-4">
+					{t}Modèle d'analyse complémentaire :{/t}
+				</label>
 				<div class="col-md-8">
 					<select id="analysis_template_id" name="analysis_template_id" class="form-control">
-						<option value="" {if $data.analysis_template_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
+						<option value="" {if $data.analysis_template_id == ""}selected{/if}>
+							{t}Sélectionnez...{/t}
+						</option>
 						{foreach $dataat as $row}
 							<option value="{$row.analysis_template_id}" {if $row.analysis_template_id == $data.analysis_template_id}selected{/if}>
 								{$row.analysis_template_name}
@@ -79,10 +97,14 @@
 				</div>
 			</div>
       <div class="form-group">
-				<label for="ambience_template_id" class="control-label col-md-4">{t}Modèle de mesures complémentaires d'ambiance :{/t}</label>
+				<label for="ambience_template_id" class="control-label col-md-4">
+					{t}Modèle de mesures complémentaires d'ambiance :{/t}
+				</label>
 				<div class="col-md-8">
 					<select id="ambience_template_id" name="ambience_template_id" class="form-control">
-						<option value="" {if $data.ambience_template_id == ""}selected{/if}>{t}Sélectionnez...{/t}</option>
+						<option value="" {if $data.ambience_template_id == ""}selected{/if}>
+							{t}Sélectionnez...{/t}
+						</option>
 						{foreach $ambiences as $row}
 							<option value="{$row.ambience_template_id}" {if $row.ambience_template_id == $data.ambience_template_id}selected{/if}>
 								{$row.ambience_template_name}
