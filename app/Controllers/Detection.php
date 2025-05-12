@@ -41,6 +41,7 @@ class Detection extends PpciController
     }
     function calculateSunPeriodExec()
     {
-        return $this->lib->calculateSunPeriodExec();
+        $this->lib->calculateSunPeriodExec();
+        return $this->lib->calculateSunPeriod();
     }
 }

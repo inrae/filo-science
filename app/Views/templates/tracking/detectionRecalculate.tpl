@@ -1,7 +1,7 @@
 <script>
   $(document).ready(function(){
     $("#detectionRecalculate").submit(function(event){
-      if(confirm("{t}Confirmez-vous l'opération ?{/t}")){
+      if(confirm("{t}Confirmez-vous cette opération ?{/t}")){
         $("#submit").hide();
         $("#spinner").show();
       } else {

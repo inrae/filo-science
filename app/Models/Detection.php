@@ -191,7 +191,7 @@ class Detection extends PpciModel
         }
         $this->fields["validity"]["type"] = 0;
         for ($i = 0; $i <= $nbOccurs; $i++) {
-            $this->connection->beginTransaction();
+            $this->db->transBegin();
             $offset = ($i * 100000) + 1;
             $data = $this->getListeParamAsPrepared($sql, array("project_id" => $project_id, "formatDate" => $formatDate, "offset" => $offset));
             foreach ($data as $row) {
@@ -217,7 +217,7 @@ class Detection extends PpciModel
                 }
                 $this->ecrire($row);
             }
-            $this->connection->commit();
+            $this->db->transCommit();
         }
         return $nbItems;
     }
