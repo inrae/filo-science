@@ -125,7 +125,7 @@ class Individual extends PpciModel
         $id = parent::write($data);
         if ($id > 0 && $data["isTracking"]) {
             $data["individual_id"] = $id;
-            if (!$this->individualTracking) {
+            if (!isset($this->individualTracking)) {
                 $this->individualTracking = new IndividualTracking;
             }
             $this->individualTracking->write($data);

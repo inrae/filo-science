@@ -171,7 +171,7 @@ class IndividualTracking extends PpciLibrary
             $_REQUEST["project_id"] = $_COOKIE["projectId"];
         }
         if (verifyProject($_REQUEST["project_id"])) {
-            $data = $this->dataRead($this->individual, $this->id, "tracking/individualTrackingChange.tpl", $_REQUEST["project_id"]);
+            $this->dataRead( $this->id, "tracking/individualTrackingChange.tpl", $_REQUEST["project_id"]);
             $sexe = new Sexe;
             $this->vue->set($sexe->getListe(1), "sexes");
             $pathology = new Pathology;
@@ -197,13 +197,13 @@ class IndividualTracking extends PpciLibrary
     }
     function write()
     {
-
         if (verifyProject($_REQUEST["project_id"])) {
             try {
                 $this->id == 0 ? $isNew = true : $isNew = false;
                 $db = $this->dataclass->db;
                 $db->transBegin();
-                $this->id = $this->dataWrite($_REQUEST, true);
+                $individual = new Individual;
+                $this->id = $individual->write($_REQUEST);
                 if ($this->id > 0) {
                     if ($isNew) {
                         $_REQUEST[$this->keyName] = 0;

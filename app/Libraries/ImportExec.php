@@ -2,7 +2,6 @@
 
 namespace App\Libraries;
 
-use App\Models\Antenna;
 use App\Models\Detection;
 use App\Models\FunctionType;
 use App\Models\ImportColumn;
@@ -12,6 +11,7 @@ use App\Models\IndividualTracking;
 use App\Models\Location;
 use App\Models\ProbeMeasure;
 use App\Models\Project;
+use App\Models\TelemetryImportInterface;
 use Ppci\Libraries\PpciException;
 use Ppci\Libraries\PpciLibrary;
 use Ppci\Models\PpciModel;
@@ -36,12 +36,20 @@ class ImportExec extends PpciLibrary
         $this->vue->set("import/importExec.tpl", "corps");
     }
 
+    function display() {
+        return $this->vue->send();
+    }
+
     function exec()
     {
         /**
          * Treatment of the import
          */
 
+        /**
+         * @var TelemetryImportInterface
+         */
+        $importDataClass = null;
         if (isset($_FILES["filename"])) {
             /**
              * Verify the project_id
@@ -174,7 +182,7 @@ class ImportExec extends PpciLibrary
                                             $row["antenna_id"] = $_POST["sensor_id"];
                                         }
                                         $row["probe_id"] = $_POST["sensor_id"];
-                                        $this->idGenerate = $this->importDataClass->importData($row, $rewrite_mod);
+                                        $this->idGenerate = $importDataClass->importData($row, $rewrite_mod);
                                         if ($this->idGenerate < $this->idMin) {
                                             $this->idMin = $this->idGenerate;
                                         }
@@ -218,8 +226,7 @@ class ImportExec extends PpciLibrary
                 $this->message->set(_("L'import ne peut être effectué, des paramètres sont manquants ou le fichier est vide"), true);
             }
         } else {
-            $this->message->set(_("L'import ne peut être effectué, le projet indiqué n'est pas autorisé"));
+            $this->message->set(_("L'import ne peut être effectué, le projet indiqué n'est pas autorisé"),true);
         }
-        return $this->vue->send();
     }
 }

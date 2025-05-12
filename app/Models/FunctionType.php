@@ -13,6 +13,7 @@ class FunctionType extends PpciModel
     private $transmitterIndividual = array();
     private $antennas = array();
     public IndividualTracking $individualTracking;
+    public Antenna $antennaClass;
     /**
      * Class constructor.
      */
@@ -350,11 +351,10 @@ class FunctionType extends PpciModel
     {
         $value = $columns[$args["columnNumber"]];
         if (!isset($this->antennas[$value])) {
-            global $antennaClass;
-            if (!isset($antennaClass)) {
-                throw new PpciException(_("Problème technique : la classe Antenna n'a pas été instanciée."));
+            if (!isset($this->antennaClass)) {
+                $this->antennaClass = new Antenna;
             }
-            $result = $antennaClass->getIdFromCode($value, $columns[$args["arg"] - 1]);
+            $result = $this->antennaClass->getIdFromCode($value, $columns[$args["arg"] - 1]);
             if ($result == 0) {
                 throw new PpciException(sprintf(_("Le code %s ne correspond à aucune antenne"), $value));
             } else {

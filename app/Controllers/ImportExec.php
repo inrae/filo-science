@@ -12,8 +12,12 @@ class ImportExec extends PpciController
     {
         $this->lib = new LibrariesImportExec();
     }
+    function index() {
+        return $this->lib->display();
+    }
     function exec()
     {
-        return $this->lib->exec();
+        $this->lib->exec();
+        return $this->lib->display();
     }
 }

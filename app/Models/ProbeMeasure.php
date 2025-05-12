@@ -7,7 +7,7 @@ use Ppci\Models\PpciModel;
 /**
  * ORM of the table probe_measure
  */
-class ProbeMeasure extends PpciModel
+class ProbeMeasure extends PpciModel implements TelemetryImportInterface
 {
     /**
      * Constructor

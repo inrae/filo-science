@@ -11,8 +11,8 @@ use Ppci\Models\PpciModel;
 class IndividualTracking extends PpciModel
 {
     private $sql = "SELECT individual_id, release_station_id, transmitter_type_id, it.project_id, taxon_id
-                    ,tag, transmitter, spaghetti_brand
-                    , transmitter_type_name
+                    ,tag, tag_posed, transmitter, spaghetti_brand
+                    , transmitter_type_name,transmitter_type_id
                     , individual_id as individual_uid
                     ,project_name
                     ,scientific_name
@@ -28,6 +28,7 @@ class IndividualTracking extends PpciModel
                     left outer join station_tracking on (station_id = release_station_id)
                     left outer join station using (station_id)";
     public $project_id;
+    public Individual $individual;
     /**
      * Constructor
      *
@@ -47,6 +48,15 @@ class IndividualTracking extends PpciModel
         );
         $this->useAutoIncrement = false;
         parent::__construct();
+    }
+
+    function read(int $id, $getDefault = true, $parentId = null): array {
+        if ($id == 0 ) {
+            return $this->getDefaultValues($parentId) ;
+        } else {
+            $where = " where individual_id = :id:";
+            return $this->readParam($this->sql.$where, ["id"=>$id]);
+        }
     }
     /**
      * Surround of ecrire, to write year in an array
@@ -82,8 +92,11 @@ class IndividualTracking extends PpciModel
 
     private function _getFromField(string $fieldname, string $value, int $project_id = 0)
     {
-        if ($project_id == 0) {
+        if (empty($project_id) && !empty($this->project_id)) {
             $project_id = $this->project_id;
+        }
+        if (empty($project_id)) {
+            throw new PpciException (sprintf(_("IndividualTracking-getFromField %s: le numéro de projet n'a pas été fourni"),$fieldname));
         }
         $where = " where $fieldname = :value: and it.project_id = :project_id:";
         return $this->lireParamAsPrepared(

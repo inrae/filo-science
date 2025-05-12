@@ -7,7 +7,7 @@ use Ppci\Models\PpciModel;
 /**
  * ORM of table detection
  */
-class Detection extends PpciModel
+class Detection extends PpciModel implements TelemetryImportInterface
 {
 
     public Antenna $antenna;

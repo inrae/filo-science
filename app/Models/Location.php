@@ -7,7 +7,7 @@ use Ppci\Models\PpciModel;
 /**
  * ORM of the table location
  */
-class Location extends PpciModel
+class Location extends PpciModel implements TelemetryImportInterface
 {
     /**
      * Constructor
