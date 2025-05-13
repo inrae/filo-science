@@ -415,8 +415,9 @@
 					</div>
 				</div>
 				<div class="form-group hideable">
-					<label for="sample_size_min" class="control-label col-md-4"> {t}Longueur minimale mesurée (mm)
-						:{/t}</label>
+					<label for="sample_size_min" class="control-label col-md-4">
+						{t}Longueur minimale mesurée (mm):{/t}
+					</label>
 					<div class="col-md-8">
 						<input id="sample_size_min" type="text" class="form-control taux" name="sample_size_min"
 							value="{$data.sample_size_min}">

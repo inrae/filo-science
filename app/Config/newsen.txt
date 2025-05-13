@@ -1,2 +1,159 @@
 News
-====================
+===========
+Version 25.0.0 of 12/5/2025
+---------------------------
+Upgrading to the framework CodeIgniter
+
+Version 23.0.0 of 11/10/2023
+----------------------------
+Upgrading the framework and third-party libraries
+
+Version 1.11.0 of 2022-09-13
+----------------------------
+New features:
+- in the tracking module, the display of detections by fish is now grouped by time period, to limit the amount of data sent back to the browser
+- upgrade of the application to support php 8.1
+
+Version 1.9.0 of 2021-09-22
+---------------------------
+New features :
+- in the tracking module, it is possible to search for fish by year or by taxon
+- the tracking stations can be declared active or not, the effective functioning of the receivers can be entered
+- the graph of the effective functioning of the stations (in reception mode) is displayed at the same time as the path of a fish
+- the stations actually working can be visualized on a graph
+
+Bug fixes :
+- there was no interface to create an antenna type for manual detections
+
+Version 1.8.0 of 2021-01-13
+---------------------------
+New features :
+- when importing detections, the day/night indicator is calculated
+- in the telemetry module, the display of fish detections has been improved (grouped data, graphs, etc.)
+- it is possible to number the telemetry stations by using a decimal value, to indicate, for example, the PK (the number is used for the display of the detections)
+- it is now possible to export in CSV all the fish measured during a campaign or an operation
+
+Bug fixes :
+- the import of detections has been optimized, to be able to process files containing several hundreds of thousands of records
+- in the import detections screen, the previously used project was not kept
+
+Version 1.7.0 of 2020-08-07
+---------------------------
+New features :
+- addition of information to the fish to specify the conditions of capture, anaesthesia, release, etc.
+- addition of a field dedicated to "spaghetti" mark for fishes
+- it is possible to assign a business code to a station
+- fishing sequences can be given a name
+- if fish have been entered only in the telemetry module, it is now possible to link them to a fishing sequence at a later date.
+- in importing detections (telemetry module), it is possible to use a file containing all antennas (previously, import was done antenna by antenna). It is also possible to activate an "overwrite" mode, which will rewrite the already imported detections without duplicating them.
+
+Bug fixes :
+- in the telemetry module, on the fish movement map, the information of the stations displayed when the mouse is hovering was not clear.
+- in some cases, changing the password may not be successful.
+- in the SQL query module, the export of results in CSV format did not work properly
+
+Version 1.6.0 of 2020-05-25
+---------------------------
+News :
+Telemetry module :
+- it's now possible to import fish from a CSV file
+- the display of the list of tracked fishes has been revised, with a switch to a tab box
+- the description of the models for importing remote sensing or probe analysis has been reviewed
+- it is now possible to enter a business code for a fish. This code can be used to retrieve it when importing remote detections.
+Fishing module :
+- all the parameter tables can receive a business code
+- it is now possible to duplicate a sequence
+- it is possible to define specific measures to describe the environments (same operation as for complementary fish measurements or water analyses)
+
+Bug fixes :
+- when entering additional information, multiple choice lists were not saved.
+- The procedure for exporting the database structure has been corrected.
+- the term "remote sensing" has been replaced by "Telemetry".
+- the modification of a location was not successful
+- some English translations were not done
+- when modifying a fish, the acoustic transmitter code was not displayed.
+
+Version 1.5.0 of 2020-04-14
+---------------------------
+News:
+- it is now possible to inhibit the manual entry of the taxon when it does not exist in the database (parameter of the protocol)
+- when importing CSV files containing the detections, it is possible to define one or more header lines not to be processed
+- it is now possible to export all detections of all (selected) fishes of a tracking campaign
+- Users with param permission can create and execute SQL queries directly in the database.
+
+Version 1.4.0 of 2019-12-17
+---------------------------
+News:
+- addition of the table sequence_point, to manage inventories by collection points
+- addition of the geom attribute on the operation and ambience tables to facilitate cartographic representation with third party software
+- a business code can be indicated for an installed machine
+- it is now possible to duplicate an operation, at least the general information
+- the last processed campaign can now be recalled from the menu
+- in the detail of an operation, the location of the sequences is displayed on a map
+
+Bug fixes:
+- entering the total weight of a sample did not support decimals
+- the display of the database table structure has been improved to facilitate its reading
+- importing files in Json format failed in some cases
+
+Release 1.3.0 of 2019-11-18
+---------------------------
+News:
+- integration of the radiotracking management module: fish monitoring, definition of listening stations or physico-chemical analysis, field entry from QField (Android component for Qgis), display of movements on a map
+- integration of modules allowing the import of probe data or listening stations and data exchange between two databases
+- addition of the UUID to safely identify the different records managed by the fishing module
+- caching of OpenStreetMap tiles to be able to work in offline mode
+
+Release 1.2.0 of 2019-08-29
+---------------------------
+Bug fixes:
+- it was not possible to enter the total weight of the batch
+- the map display now works without resizing the window
+
+News :
+- the batch number is now displayed when entering fish
+- when there is a taxon change, an alert signal is displayed
+- the tabs are displayed when hovering (a click on a tab disables this mechanism). The last tab used is displayed by default
+- it is possible to add parts to a project, protocol or operation
+- it is possible to define a grid of buttons, which allows to quickly select the most frequent taxa
+- it is possible to define specific analyses associated with a protocol
+- it is possible to define complementary measures for a taxon, associated with a protocol
+- campaigns are now systematically displayed in relation to the first project in the list. Projects can be positioned "inactive" to avoid viewing them during the search
+- when capturing fish, the overflight of the current measurement fields allows to define the focus
+- to allow automatic size entry from calipers, the + sign is systematically removed
+- the entry by caliper leading by default to the validation of the current sheet and the creation of a new fish sheet, a button deactivates this automatic call. You must then click on the validation buttons to save the information
+- upgrading the framework to integrate current security requirements
+
+
+Release 1.1.0 of 2019-06-05
+---------------------------
+Bug fixes:
+- in some cases, navigation was not carried out correctly, especially for returns to previous pages
+- connection feedback with empty identifiers was poorly managed
+
+News:
+- added operator entry
+- added entry of water analyses (standard parameters)
+- writing administration documentation
+
+Release v1.0.1 of 2019-05-14
+------------
+Bug fixes:
+- the transformation of the identifiers did not work in certain cases, resulting in the impossibility of seizing the gear attached to a sequence
+- the display of the minimum measured size of a lot did not work
+- corrections of the installation script
+
+News:
+- display of structure of the database (admin access)
+
+Release v1.0
+------------
+First production version of the application. It does not understand :
+- seizure of other measurements (ocular diameters, p. e.)
+- seizure of chemical analyzes of water
+- typing in tablet mode
+- fish length controls
+- the translation of the labels in English
+- the recording of operators
+
+Translated with www.DeepL.com/Translator (free version)

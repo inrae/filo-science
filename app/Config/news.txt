@@ -1,2 +1,160 @@
 Nouveautés
-============
+==========
+Version 25.0.0 du 12/5/2025
+----------------------------
+Basculement vers le framework CodeIgniter
+
+Version 23.0.0 du 11/10/2023
+----------------------------
+Mise à niveau du framework et des bibliothèques tierces
+
+Version 1.11.0 du 13/09/2022
+----------------------------
+Nouveautés :
+- dans le module tracking, l'affichage des détections par poisson est maintenant regroupé par période de temps, pour limiter le nombre de données renvoyées vers le navigateur
+- mise à niveau de l'application pour supporter php 8.1
+
+Version 1.9.0 du 22/09/2021
+---------------------------
+Nouveautés :
+- dans le module tracking, il est possible de rechercher les poissons par année ou par taxon
+- les stations de tracking peuvent être déclarées actives ou non, les fonctionnements effectifs des récepteurs peuvent être saisis
+- le graphique de fonctionnement effectif des stations (en mode réception) est affiché en même temps que le trajet d'un poisson
+- les stations effectivement fonctionnelles peuvent être visualisées sur un graphe
+
+Corrections de bugs :
+- il n'y avait pas d'interface pour créer un type d'antenne pour les détections manuelles
+
+Version 1.8.0 du 13/01/2021
+---------------------------
+Nouveautés :
+- lors de l'importation des détections, l'indicateur jour/nuit est calculé
+- dans le module télémétrie, l'affichage des détections des poissons a été amélioré (données regroupées, graphiques, etc.)
+- il est possible de numéroter les stations de télémétrie en utilisant une valeur décimale, pour indiquer, par exemple, le PK (le numéro est utilisé pour l'affichage des détections)
+- il est maintenant possible d'exporter en CSV tous les poissons mesurés pendant une campagne ou une opération
+
+Corrections de bugs :
+- l'importation des détections a été optimisée, pour pouvoir traiter des fichiers contenant plusieurs centaines de milliers d'enregistrements
+- dans l'écran d'importation des détections, le projet utilisé précédemment n'était pas conservé
+
+Version 1.7.0 du 07/08/2020
+---------------------------
+Nouveautés :
+- ajout d'informations aux poissons pour préciser les conditions de capture, d'anesthésie, de lâcher, etc.
+- ajout d'un champ dédié à marque "spaghetti" pour les poissons
+- il est possible d'attribuer un code métier à une station
+- les séquences de pêche peuvent se voir attribuer un nom
+- si des poissons ont été saisis uniquement dans le module de télémétrie, il est maintenant possible de les rattacher ultérieurement à une séquence de pêche
+- en importation des détections (module télémétrie), il est possible d'utiliser un fichier contenant toutes les antennes (auparavant, l'importation était réalisée antenne par antenne). On peut également activer un mode "écrasement", qui réécrira les détections déjà importées sans les dupliquer
+
+Corrections de bugs :
+- dans le module télémétrie, sur la carte de visualisation des déplacements des poissons, les informations des stations affichées au survol de la souris n'étaient pas claires
+- dans certains cas de figure, la modification du mot de passe pouvait ne pas aboutir
+- dans le module de requêtes SQL, l'exportation des résultats au format CSV ne fonctionnait pas correctement
+
+Version 1.6.0 du 25/05/2020
+---------------------------
+Nouveautés :
+Module de télémétrie :
+- il est maintenant possible d'importer les poissons à partir d'un fichier CSV
+- l'affichage de la liste des poissons suivis a été revu, avec bascule vers une boite d'onglets
+- la description des modèles d'importation des télé-détections ou des analyses de sondes a été revu
+- il est maintenant possible de saisir un code métier pour un poisson. Ce code peut être utilisé pour le retrouver lors des importations des télé-détections
+Module de pêche :
+- toutes les tables de paramètres peuvent recevoir un code métier
+- il est maintenant possible de dupliquer une séquence
+- il est possible de définir des mesures particulières pour décrire les ambiances (même fonctionnement que pour les mesures complémentaires des poissons ou des analyses d'eau)
+
+Corrections de bugs :
+- lors de la saisie des informations complémentaires, les listes à choix multiples n'étaient pas enregistrées
+- la procédure d'exportation de la structure de la base de données a été corrigée
+- le terme "télédétection" a été remplacé par "Télémétrie"
+- la modification d'une localisation n'aboutissait pas
+- certaines traductions en anglais n'étaient pas réalisées
+- en modification d'un poisson, le code de l'émetteur acoustique n'était pas affiché
+
+Version 1.5.0 du 14/04/2020
+---------------------------
+Nouveautés :
+- il est maintenant possible d'inhiber la saisie manuelle du taxon quand celui-ci n'existe pas dans la base (paramètre du protocole)
+- lors de l'importation des fichiers CSV contenant les détections, il est possible de définir une ou plusieurs lignes d'entête à ne pas traiter
+- il est maintenant possible d'exporter toutes les détections de tous les poissons (sélectionnés) d'une campagne de tracking
+- les utilisateurs disposant du droit param peuvent créer et exécuter directement des requêtes SQL dans la base de données
+
+Version 1.4.0 du 17/12/2019
+---------------------------
+Nouveautés :
+- ajout de la table sequence_point, pour gérer les inventaires par points de rélèvement
+- ajout de l'attribut geom sur les tables operation et ambience pour faciliter la représentation cartographique avec des logiciels tiers
+- un code métier peut être indiqué pour un engin posé
+- il est maintenant possible de dupliquer une opération, au moins les informations générales
+- la dernière campagne traitée peut maintenant être rappelée depuis le menu
+- dans le détail d'une opération, l'emplacement des séquences est affiché sur une carte
+
+Correction de bugs :
+- la saisie du poids total d'un échantillon ne supportait pas les décimales
+- l'affichage de la structure des tables de la base de données a été amélioré pour faciliter sa lecture
+- l'importation de dossiers au format Json échouait dans certains cas de figure
+
+Version 1.3.0 du 18/11/2019
+---------------------------
+Version majeure.
+
+Nouveautés :
+- intégration du module de gestion du radiotracking : suivi des poissons, définition des stations d'écoute ou d'analyse physico-chimiques, saisie sur le terrain depuis QField (composant Android pour Qgis), affichage des déplacements sur une carte
+- intégration de modules permettant l'importation des données de sonde ou de stations d'écoute et l'échange de données entre deux bases
+- ajout de l'UUID pour identifier de manière sûre les différents enregistrements gérés par le module pêche
+- stockage des tuiles OpenStreetMap en cache pour pouvoir travailler en mode déconnecté
+
+
+Version 1.2.0 du 29/08/2019
+---------------------------
+Correction de bugs :
+- il n'était pas possible de saisir le poids total du lot
+- l'affichage des cartes fonctionne maintenant sans avoir à redimensionner la fenêtre
+
+Nouveautés :
+- le numéro du lot est maintenant affiché lors de la saisie des poissons
+- lorsqu'il y a un changement de taxon, un signal d'alerte est affiché
+- les onglets sont affichés au survol (un clic sur un onglet inactive ce mécanisme). Le dernier onglet utilisé est affiché par défaut
+- il est possible de rajouter des pièces à un projet, un protocole ou une opération
+- il est possible de définir une grille de boutons, qui permet de sélectionner rapidement les taxons les plus fréquents
+- il est possible de définir des analyses particulières associées à un protocole
+- il est possible de définir des mesures complémentaires pour un taxon, associées à un protocole
+- les campagnes sont maintenant affichées systématiquement par rapport au premier projet de la liste. Les projets peuvent être positionnés "inactifs" pour éviter de les visualiser lors de la recherche
+- lors de la saisie des poissons, le survol des champs courants de mesure permet de définir le focus
+- pour permettre la saisie automatique des tailles à partir de pieds à coulisse, le signe + est systématiquement enlevé
+- la saisie par pied à coulisse entraînant par défaut la validation de la fiche courante et la création d'une nouvelle fiche de poisson, un bouton permet de désactiver cet appel automatique. Il faut alors cliquer sur les boutons de validation pour enregistrer les informations
+- mise à niveau du framework pour intégrer les exigences de sécurité actuelles
+
+
+Version 1.1.0 du 05/06/2019
+--------------
+Correction de bugs :
+- dans certains cas, la navigation ne s'effectuait pas correctement, notamment pour les retours vers les pages précédentes
+- le retour de connexion avec des identifiants vides était mal géré
+
+Nouveautés :
+- ajout de la saisie des opérateurs
+- ajout de la saisie des analyses d'eau (paramètres standards)
+- écriture de la documentation d'administration
+
+Version 1.0.1 du 14/05/2019
+--------------
+Correction de bugs :
+- la transformation des identifiants ne fonctionnait pas dans certains cas, entraînant l'impossibilité de saisir les engins rattachés à une séquence
+- l'affichage de la taille minimale mesurée d'un lot ne fonctionnait pas
+- corrections du script d'installation
+
+Nouveautés :
+- affichage de la structure de la base de données (en mode admin)
+
+Version 1.0 du 13/05/2019
+--------------
+Première version de production de l'application. Elle ne comprend pas :
+- la saisie des autres mesures (diamètres occulaires, p. e.)
+- la saisie des analyses chimiques de l'eau
+- la saisie en mode tablette
+- les contrôles de longueur des poissons
+- la traduction des libellés en anglais
+- la saisie des opérateurs
