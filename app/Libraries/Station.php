@@ -76,7 +76,6 @@ class Station extends PpciLibrary
     function import()
     {
         if (file_exists($_FILES['upfile']['tmp_name'])) {
-            require_once 'modules/classes/import.class.php';
             $i = 0;
             try {
                 $db = $this->dataclass->db;
@@ -113,7 +112,7 @@ class Station extends PpciLibrary
                         if (!empty($row["river"])) {
                             $data["river_id"] = $river->getIdFromName($row["river"], true);
                         }
-                        $station_id = $this->dataclass->ecrire($data);
+                        $station_id = $this->dataclass->write($data);
                         if (!empty($data["station_type_id"]) && $station_id > 0) {
                             /**
                              * Write the type of tracking station
@@ -121,9 +120,10 @@ class Station extends PpciLibrary
                             $dataTracking = array(
                                 "station_id" => $station_id,
                                 "station_type_id" => $data["station_type_id"],
-                                "station_active" => 1
+                                "station_active" => 1,
+                                "station_name" => $row["name"]
                             );
-                            $stationTracking->ecrire($dataTracking);
+                            $stationTracking->write($dataTracking);
                         }
                         $i++;
                     }
