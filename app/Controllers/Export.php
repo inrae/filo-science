@@ -20,6 +20,7 @@ class Export extends PpciController
     }
     function importExec()
     {
-        return $this->lib->importExec();
+        $this->lib->importExec();
+        return defaultPage();
     }
 }

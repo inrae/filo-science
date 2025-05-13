@@ -10,7 +10,7 @@ use Ppci\Models\PpciModel;
 class Export extends PpciLibrary
 {
     /**
-     * @var ModelsExport
+     * @var ExportModel
      */
     protected PpciModel $dataclass;
 
@@ -19,6 +19,7 @@ class Export extends PpciLibrary
         parent::__construct();
         $this->dataclass = new ExportModel;
         $this->dataclass->modeDebug = false;
+        helper("filo");
     }
 
     function exec()
@@ -30,8 +31,10 @@ class Export extends PpciLibrary
             } else if (!empty($_REQUEST["export_model_name"])) {
                 $model = $this->dataclass->getModelFromName($_REQUEST["export_model_name"]);
             }
+            //$this->dataclass->modeDebug=true;
             if ($model["export_model_id"] > 0) {
-                $this->dataclass->initModel(json_decode($model["pattern"],true));
+                $this->dataclass->initModel(json_decode($model["pattern"], true));
+                $this->dataclass->generateStructure();
                 $data = array();
                 foreach ($this->dataclass->getListPrimaryTables() as $key => $table) {
                     if ($key == 0 && count($_REQUEST["keys"]) > 0) {
@@ -97,7 +100,8 @@ class Export extends PpciLibrary
             } else {
                 $model = $this->dataclass->getModelFromName($_REQUEST["export_model_name"]);
             }
-            $this->dataclass->initModel($model["pattern"]);
+            $this->dataclass->initModel(json_decode($model["pattern"], true));
+            $this->dataclass->generateStructure();
             $filename = $_FILES["filename"]["tmp_name"];
             $realFilename = $_FILES["filename"]["name"];
             $filename = str_replace("../", "", $filename);
@@ -113,6 +117,9 @@ class Export extends PpciLibrary
                     $db = $this->dataclass->db;
                     $db->transBegin();
                     $firstTable = true;
+                    if (!is_array($data[0])) {
+                        $data = json_decode($data[0], true);
+                    }
                     foreach ($data as $tableName => $values) {
                         if ($firstTable && empty($_REQUEST["parentKeyName"])) {
                             $key = $_REQUEST["parentKey"];

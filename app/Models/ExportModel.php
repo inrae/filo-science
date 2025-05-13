@@ -336,8 +336,7 @@ class ExportModel extends PpciModel
 
         $content = array();
         $args = array();
-        if (!$model["isEmpty"] || count($keys) > 0) {
-            printA($model);
+        if ($model["isEmpty"]!=true || count($keys) > 0) {
             $cols = $this->generateListColumns($tableName);
             $sql = "select $cols from " . $this->qi . $tableName . $this->qi;
             if (count($keys) > 0) {
@@ -370,7 +369,7 @@ class ExportModel extends PpciModel
              * export the binary data in files
              */
             $binaryFields = $this->structure[$tableName]["binaryFields"];
-            if (!empty($binaryFields) && count($binaryFields) > 0) {
+            if (!empty($binaryFields)) {
                 /**
                  * Verifiy if a business key is defined
                  */
@@ -427,7 +426,7 @@ class ExportModel extends PpciModel
             /**
              * Search the parents
              */
-            if (!empty($model["parents"]) && count($model["parents"]) > 0) {
+            if (!empty($model["parents"])) {
                 foreach ($content as $k => $row) {
                     foreach ($model["parents"] as $parent) {
                         $id = $row[$parent["fieldName"]];
