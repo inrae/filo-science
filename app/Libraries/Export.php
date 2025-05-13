@@ -62,7 +62,7 @@ class Export extends PpciLibrary
                 }
                 $this->vue = service("JsonFileView");
                 $this->vue->setParam(array("filename" => $_SESSION["dbparams"]["APPLI_code"] . '-' . date('YmdHis') . ".json"));
-                $this->vue->set(json_encode($data));
+                $this->vue->set($data);
                 return $this->vue->send();
             } else {
                 throw new PpciException(_("Le modèle d'export n'est pas défini ou n'a pas été trouvé"));
@@ -76,15 +76,6 @@ class Export extends PpciLibrary
 
     function importExec()
     {
-        /**
-         * set the return values
-         */
-        if (isset($_REQUEST["returnok"])) {
-            $t_module["retourok"] = $_REQUEST["returnok"];
-        }
-        if (isset($_REQUEST["returnko"])) {
-            $t_module["retourko"] = $_REQUEST["returnok"];
-        }
         /**
          * Verify the project, if it's specified
          */
@@ -113,13 +104,12 @@ class Export extends PpciLibrary
                 $contents = fread($handle, filesize($filename));
                 fclose($handle);
                 $data = json_decode($contents, true);
+                
+                $data = $data[0];
                 try {
                     $db = $this->dataclass->db;
                     $db->transBegin();
                     $firstTable = true;
-                    if (!is_array($data[0])) {
-                        $data = json_decode($data[0], true);
-                    }
                     foreach ($data as $tableName => $values) {
                         if ($firstTable && empty($_REQUEST["parentKeyName"])) {
                             $key = $_REQUEST["parentKey"];
@@ -150,8 +140,8 @@ class Export extends PpciLibrary
                 }
             }
         } else {
-            return false;
             $this->message->set(_("Paramètres d'importation manquants ou droits insuffisants"), true);
+            return false;
         }
     }
 }

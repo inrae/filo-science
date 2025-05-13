@@ -203,7 +203,7 @@ class ExportModel extends PpciModel
              * Add the comment on the column
              */
             if (!empty($attr["comment"])) {
-                $comment .= "comment on column " . $this->qi . $tableName . $this->qi . "." . $this->qi . $attr["field"] . $this->qi . " is " . pg_escape_string($this->db->connID,$attr["comment"]) . ";" . PHP_EOL;
+                $comment .= "comment on column " . $this->qi . $tableName . $this->qi . "." . $this->qi . $attr["field"] . $this->qi . " is " . pg_escape_string($this->db->connID, $attr["comment"]) . ";" . PHP_EOL;
             }
             $script .= PHP_EOL;
         }
@@ -336,7 +336,7 @@ class ExportModel extends PpciModel
 
         $content = array();
         $args = array();
-        if ($model["isEmpty"]!=true || count($keys) > 0) {
+        if ($model["isEmpty"] != true || count($keys) > 0) {
             $cols = $this->generateListColumns($tableName);
             $sql = "select $cols from " . $this->qi . $tableName . $this->qi;
             if (count($keys) > 0) {
@@ -658,10 +658,12 @@ class ExportModel extends PpciModel
              */
             if (count($setValues) > 0) {
                 foreach ($setValues as $kv => $dv) {
-                    if (strlen($dv) == 0) {
-                        throw new PpciException(sprintf("An empty value has been found for the added attribute %s", $kv));
+                    if (strlen($kv) > 0) {
+                        if (strlen($dv) == 0) {
+                            throw new PpciException(sprintf("An empty value has been found for the added attribute %s", $kv));
+                        }
+                        $row[$kv] = $dv;
                     }
-                    $row[$kv] = $dv;
                 }
             }
             /**
@@ -693,180 +695,180 @@ class ExportModel extends PpciModel
             }
         }
     }
-      /**
-   * Get the list of specific fields for a table
-   *
-   * @param array $tableName
-   * @param string $fieldType
-   * @return array
-   */
-  function getSpecificFields(array $attributes, string $fieldType): array
-  {
-    $fields = array();
-    foreach ($attributes as $col) {
-      if ($col["type"] == $fieldType) {
-        $fields[] = $col["field"];
-      }
-    }
-    return $fields;
-  }
-   /**
-   * Get the list of the tables which are not children
-   *
-   * @return array
-   */
-  function getListPrimaryTables(): array
-  {
-    $list = array();
-    foreach ($this->model as $table) {
-      if (empty($table["parentKey"]) && !$table["isEmpty"]) {
-        $list[] = $table["tableAlias"];
-      }
-    }
-    return $list;
-  }
-  /**
-   * insert or update a record
-   *
-   * @param string $tableName: name of the table
-   * @param array $data: data of the record
-   * @return int|null: technical key generated or updated
-   */
-  function writeData(string $tableAlias, $data): ?int
-  {
-    if (!$data) {
-      throw new PpciException("data are empty for $tableAlias");
-    }
-    $model = $this->model[$tableAlias];
-    $tableName = $model["tableName"];
-    $structure = $this->structure[$tableName];
-    if (!is_array($structure) || count($structure) == 0) {
-      throw new PpciException("The structure of the table $tableName is unknown");
-    }
-    $tkeyName = $model["technicalKey"];
-    $pkeyName = $model["parentKey"];
-    $bkeyName = $model["businessKey"];
-    $skeyName = $model["tablenn"]["secondaryParentKey"];
-    $newKey = null;
-    $dataSql = array();
-    $comma = "";
-    $mode = "insert";
-    if ($data[$tkeyName] > 0) {
-      /**
-       * Search if the record exists
-       */
-      $sql = "select " . $this->qi . $tkeyName . $this->qi
-        . " as key from " . $this->qi . $tableName . $this->qi
-        . " where " . $this->qi . $tkeyName . $this->qi
-        . " = :key:";
-      $result = $this->getListeParam($sql, array("key" => $data[$tkeyName]));
-      if (!empty($result[0]["key"])) {
-        $mode = "update";
-      }
-    }
-    $model["istablenn"] == 1 ? $returning = "" : $returning = " RETURNING $tkeyName";
     /**
-     * update
+     * Get the list of specific fields for a table
+     *
+     * @param array $tableName
+     * @param string $fieldType
+     * @return array
      */
-    if ($mode == "update") {
-      $sql = "update $this->qi$tableName$this->qi set ";
-      foreach ($data as $field => $value) {
+    function getSpecificFields(array $attributes, string $fieldType): array
+    {
+        $fields = array();
+        foreach ($attributes as $col) {
+            if ($col["type"] == $fieldType) {
+                $fields[] = $col["field"];
+            }
+        }
+        return $fields;
+    }
+    /**
+     * Get the list of the tables which are not children
+     *
+     * @return array
+     */
+    function getListPrimaryTables(): array
+    {
+        $list = array();
+        foreach ($this->model as $table) {
+            if (empty($table["parentKey"]) && !$table["isEmpty"]) {
+                $list[] = $table["tableAlias"];
+            }
+        }
+        return $list;
+    }
+    /**
+     * insert or update a record
+     *
+     * @param string $tableName: name of the table
+     * @param array $data: data of the record
+     * @return int|null: technical key generated or updated
+     */
+    function writeData(string $tableAlias, $data): ?int
+    {
+        if (!$data) {
+            throw new PpciException("data are empty for $tableAlias");
+        }
+        $model = $this->model[$tableAlias];
+        $tableName = $model["tableName"];
+        $structure = $this->structure[$tableName];
+        if (!is_array($structure) || count($structure) == 0) {
+            throw new PpciException("The structure of the table $tableName is unknown");
+        }
+        $tkeyName = $model["technicalKey"];
+        $pkeyName = $model["parentKey"];
+        $bkeyName = $model["businessKey"];
+        $skeyName = $model["tablenn"]["secondaryParentKey"];
+        $newKey = null;
+        $dataSql = array();
+        $comma = "";
+        $mode = "insert";
+        if ($data[$tkeyName] > 0) {
+            /**
+             * Search if the record exists
+             */
+            $sql = "select " . $this->qi . $tkeyName . $this->qi
+                . " as key from " . $this->qi . $tableName . $this->qi
+                . " where " . $this->qi . $tkeyName . $this->qi
+                . " = :key:";
+            $result = $this->getListeParam($sql, array("key" => $data[$tkeyName]));
+            if (!empty($result[0]["key"])) {
+                $mode = "update";
+            }
+        }
+        $model["istablenn"] == 1 ? $returning = "" : $returning = " RETURNING $tkeyName";
+        /**
+         * update
+         */
+        if ($mode == "update") {
+            $sql = "update $this->qi$tableName$this->qi set ";
+            foreach ($data as $field => $value) {
+                if (
+                    is_array($structure["booleanFields"])
+                    && in_array($field, $structure["booleanFields"]) && !$value
+                ) {
+                    $value = "false";
+                }
+                if ($field != $tkeyName) {
+                    $sql .= "$comma$this->qi$field$this->qi = :$field:";
+                    $comma = ", ";
+                    $dataSql[$field] = $value;
+                }
+            }
+            if (!empty($pkeyName) && !empty($skeyName)) {
+                $where = " where $this->qi$pkeyName$this->qi = :$pkeyName: and $this->qi$skeyName$this->qi = :$skeyName:";
+            } else {
+                $where = " where $this->qi$tkeyName$this->qi = :$tkeyName:";
+                $dataSql[$tkeyName] = $data[$tkeyName];
+            }
+            if (!isset($where)) {
+                throw new PpciException(
+                    "The where clause can't be construct for the table $tableName"
+                );
+            }
+            $sql .= $where;
+        } else {
+            /**
+             * insert
+             */
+            $mode = "insert";
+            $cols = "(";
+            $values = "(";
+            foreach ($data as $field => $value) {
+                if (!($field == $tkeyName && $bkeyName != $tkeyName)) {
+                    if (
+                        is_array($structure["booleanFields"])
+                        && in_array($field, $structure["booleanFields"]) && !$value
+                    ) {
+                        $value = "false";
+                    }
+                    if (!($model["istablenn"] == 1 && $field == $model["tablenn"]["tableAlias"])) {
+                        $cols .= $comma . $this->qi . $field . $this->qi;
+                        $values .= $comma . ":$field:";
+                        $dataSql[$field] = $value;
+                        $comma = ", ";
+                    }
+                }
+            }
+            $cols .= ")";
+            $values .= ")";
+            //$sql = "insert into $this->qi$tableName$this->qi $cols values $values $returning";
+            $sql = "insert into $this->qi$tableName$this->qi $cols values $values";
+        }
+        $result = $this->executeQuery($sql, $dataSql, true);
+        if ($model["istablenn"] == 1) {
+            $newKey = null;
+        } else if ($mode == "insert") {
+            //$newKey = $result[0][$tkeyName];
+            $newKey = $this->getInsertID();
+        } else {
+            $newKey = $data[$tkeyName];
+        }
+        if ($this->modeDebug) {
+            printA("newkey: " . $newKey);
+        }
+        /**
+         * Get the binary data
+         */
         if (
-          is_array($structure["booleanFields"])
-          && in_array($field, $structure["booleanFields"]) && !$value
+            !empty($newKey)
+            && is_array($structure["binaryFields"])
+            && count($structure["binaryFields"]) > 0
         ) {
-          $value = "false";
+            if (empty($data[$bkeyName])) {
+                throw new PpciException(
+                    "The businessKey is empty for the table $tableName and the binary data can't be imported"
+                );
+            }
+            if (!is_dir($this->binaryFolder)) {
+                throw new PpciException(
+                    "The folder that contains binary files don't exists (" . $this->binaryFolder . ")"
+                );
+            }
+            foreach ($structure["binaryFields"] as $binaryField) {
+                $filename = $this->binaryFolder . "/" . $tableName . "-" . $binaryField . "-" . $data[$bkeyName] . ".bin";
+                if (file_exists($filename)) {
+                    $fp = fopen($filename, 'rb');
+                    if (!$fp) {
+                        throw new PpciException("The file $filename can't be opened");
+                    }
+                    $sql = "update  $this->qi$tableName$this->qi set ";
+                    $sql .= "$this->qi$binaryField$this->qi = :binaryFile:";
+                    $sql .= " where $this->qi$tkeyName$this->qi = :key:";
+                    $this->executeSQL($sql, ["key" => $newKey, "binaryFile" => pg_escape_bytea($this->db->connID, fread($fp, filesize($filename)))], true);
+                }
+            }
         }
-        if ($field != $tkeyName) {
-          $sql .= "$comma$this->qi$field$this->qi = :$field:";
-          $comma = ", ";
-          $dataSql[$field] = $value;
-        }
-      }
-      if (!empty($pkeyName) && !empty($skeyName)) {
-        $where = " where $this->qi$pkeyName$this->qi = :$pkeyName: and $this->qi$skeyName$this->qi = :$skeyName:";
-      } else {
-        $where = " where $this->qi$tkeyName$this->qi = :$tkeyName:";
-        $dataSql[$tkeyName] = $data[$tkeyName];
-      }
-      if (!isset($where)) {
-        throw new PpciException(
-          "The where clause can't be construct for the table $tableName"
-        );
-      }
-      $sql .= $where;
-    } else {
-      /**
-       * insert
-       */
-      $mode = "insert";
-      $cols = "(";
-      $values = "(";
-      foreach ($data as $field => $value) {
-        if (!($field == $tkeyName && $bkeyName != $tkeyName)) {
-          if (
-            is_array($structure["booleanFields"])
-            && in_array($field, $structure["booleanFields"]) && !$value
-          ) {
-            $value = "false";
-          }
-          if (!($model["istablenn"] == 1 && $field == $model["tablenn"]["tableAlias"])) {
-            $cols .= $comma . $this->qi . $field . $this->qi;
-            $values .= $comma . ":$field:";
-            $dataSql[$field] = $value;
-            $comma = ", ";
-          }
-        }
-      }
-      $cols .= ")";
-      $values .= ")";
-      //$sql = "insert into $this->qi$tableName$this->qi $cols values $values $returning";
-      $sql = "insert into $this->qi$tableName$this->qi $cols values $values";
+        return $newKey;
     }
-    $result = $this->executeQuery($sql, $dataSql,true);
-    if ($model["istablenn"] == 1) {
-      $newKey = null;
-    } else if ($mode == "insert") {
-      //$newKey = $result[0][$tkeyName];
-      $newKey = $this->getInsertID();
-    } else {
-      $newKey = $data[$tkeyName];
-    }
-    if ($this->modeDebug) {
-      printA("newkey: " . $newKey);
-    }
-    /**
-     * Get the binary data
-     */
-    if (
-      !empty($newKey)
-      && is_array($structure["binaryFields"])
-      && count($structure["binaryFields"]) > 0
-    ) {
-      if (empty($data[$bkeyName])) {
-        throw new PpciException(
-          "The businessKey is empty for the table $tableName and the binary data can't be imported"
-        );
-      }
-      if (!is_dir($this->binaryFolder)) {
-        throw new PpciException(
-          "The folder that contains binary files don't exists (" . $this->binaryFolder . ")"
-        );
-      }
-      foreach ($structure["binaryFields"] as $binaryField) {
-        $filename = $this->binaryFolder . "/" . $tableName . "-" . $binaryField . "-" . $data[$bkeyName] . ".bin";
-        if (file_exists($filename)) {
-          $fp = fopen($filename, 'rb');
-          if (!$fp) {
-            throw new PpciException("The file $filename can't be opened");
-          }
-          $sql = "update  $this->qi$tableName$this->qi set ";
-          $sql .= "$this->qi$binaryField$this->qi = :binaryFile:";
-          $sql .= " where $this->qi$tkeyName$this->qi = :key:";
-          $this->executeSQL($sql, ["key"=>$newKey, "binaryFile"=>pg_escape_bytea($this->db->connID,fread($fp, filesize($filename)))],true);
-        }
-      }
-    }
-    return $newKey;
-  }
 }

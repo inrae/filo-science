@@ -65,7 +65,7 @@
                                 <td class="center">
                                     <a href="exportModelDuplicate&export_model_id={$row.export_model_id}">
                                         <img src="display/images/copy.png" height="25">
-                                    </a
+                                    </a>
                                 </td>
                                 <td class="center">
                                     <input type="checkbox" id="export{$row.export_model_id}" name="keys[]" value={$row.export_model_id} class="check" checked>
@@ -88,15 +88,15 @@
     <fieldset class="col-md-6">
         <legend>{t}Importer des modèles depuis un fichier JSON{/t}</legend>
         <form id="importForm" class="form-horizontal " method="post"
-        action="" enctype="multipart/form-data">
+        action="exportImportExec" enctype="multipart/form-data">
         <input type="hidden" name="export_model_name" value="export_model">
         <div class="form-group">
-            <label for="fileName" class="control-label col-md-4">
+            <label for="filename" class="control-label col-md-4">
                 {t}Fichier JSON à importer :{/t}
             </label>
             <div class="col-md-8">
-                <input id="fileName" type="file" class="form-control"
-                    name="fileName" size="40" required>
+                <input id="filename" type="file" class="form-control"
+                    name="filename" required>
             </div>
         </div>
         <div class="form-group center">
