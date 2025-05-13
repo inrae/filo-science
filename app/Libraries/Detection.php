@@ -25,6 +25,7 @@ class Detection extends PpciLibrary
         if (isset($_REQUEST[$this->keyName])) {
             $this->id = $_REQUEST[$this->keyName];
         }
+        $this->individualTracking = new IndividualTracking;
         helper("filo");
     }
 

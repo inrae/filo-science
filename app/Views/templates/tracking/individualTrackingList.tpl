@@ -139,8 +139,8 @@
 				</div>
 				<label for="is_active" class="col-md-2 control-label">{t}actifs ?{/t}</label>
 				<div class="col-md-2">
-					<input type="radio" class="is_active" id="projectActive1" name="is_active" value="1" {if $is_active == 1}checked{/if}>{t}oui{/t}
-					<input type="radio" class="is_active" id="projectActive0" name="is_active" value="0"{if $is_active == 0}checked{/if}>{t}non{/t}
+					<input type="radio" class="is_active" id="projectActive1" name="is_active" value="1" {if $is_active == 't'}checked{/if}>{t}oui{/t}
+					<input type="radio" class="is_active" id="projectActive0" name="is_active" value="0"{if $is_active != 't'}checked{/if}>{t}non{/t}
 				</div>
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-success" value="{t}Rechercher{/t}">
@@ -338,7 +338,7 @@
 									<td class="right">{$detection.lat}</td>
 									<td class="textareaDisplay">{$detection.observation}</td>
 									<td class="center">
-										{if $detection.validity == 1}{t}oui{/t}{else}<span class="red">{t}non{/t}</span>{/if}
+										{if $detection.validity == 't'}{t}oui{/t}{else}<span class="red">{t}non{/t}</span>{/if}
 									</td>
 								</tr>
 							{/foreach}

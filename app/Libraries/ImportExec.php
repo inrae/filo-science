@@ -76,6 +76,7 @@ class ImportExec extends PpciLibrary
                             $individualTracking->project_id = $_POST["project_id"];
                             $importDataClass = new Detection;
                             $importDataClass->autoFormatDate = false;
+                            break;
                         case 3:
                             /**
                              * Manual detection
@@ -84,15 +85,20 @@ class ImportExec extends PpciLibrary
                             $individualTracking->project_id = $_POST["project_id"];
                             $importDataClass = new Location;
                             $importDataClass->autoFormatDate = false;
+                            break;
                         case 2:
                             /**
                              * Probe data
                              */
                             $importDataClass = new ProbeMeasure;
                             $importDataClass->autoFormatDate = false;
+                            break;
                     }
                 }
                 $functionType = new FunctionType;
+                if (isset ($individualTracking)) {
+                    $functionType->individualTracking = $individualTracking;
+                }
                 $importFunction = new ImportFunction;
                 $importColumn = new ImportColumn;
                 $columns = $importColumn->getListByColumnNumber($importParam["import_description_id"]);
@@ -108,13 +114,12 @@ class ImportExec extends PpciLibrary
                     $numLine = 0;
                     $numberintransaction = 0;
                     $transactionnumber = 1;
-                    $data = array();
                     $_POST["rewrite"] == 1 ? $rewrite_mod = true : $rewrite_mod = false;
                     /**
                      * Treatment of each line
                      */
                     if (!$_REQUEST["testMode"] == 1) {
-                        $db = $this->dataclass->db;
+                        $db = $this->project->db;
                         $db->transBegin();
                     }
                     $linecount = 0;
@@ -128,7 +133,6 @@ class ImportExec extends PpciLibrary
                                 $db->transCommit();
                                 $errors[] = array("content" => sprintf(_("%s lignes commitées (données stockées de manière pérenne)"), $numberintransaction * $transactionnumber));
                                 $transactionnumber++;
-                                $db = $this->dataclass->db;
                                 $db->transBegin();
                                 $numberintransaction = 1;
                             }
