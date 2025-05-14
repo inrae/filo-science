@@ -310,12 +310,12 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $APP_help_address = "https://github.com/equinton/ppci/issues/new";
+    public $APP_help_address = "https://github.com/inrae/filo-science/issues/new";
     /**
      *
      * @var string
      */
-    public $copyright = "Copyright © 2025 - All rights reserved. Author : Éric Quinton - Software distributed under AGPL license";
+    public $copyright = "Copyright © 2019-2025 - All rights reserved. Author : Éric Quinton for INRAE-EABX - Software distributed under AGPL license";
 
     /**
      * Max duration of a session
